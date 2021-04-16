@@ -14,6 +14,11 @@ simuls-own [
   RiskofDeath ;; the overall risk of deth for the person if they contract the illness based on their age
   Pace ;; the speed that pthe person moves around the environment
 
+  ;; Cohort parameters
+  spanMult
+  gatherFreqMult
+  homeRegion
+  
   ownIllnessPeriod ;; unique illness period associated with the individual
   ownIncubationPeriod ;; unique incubation pd for the person - related to IncubationPd so can probably be cleaned up - IncubationPd is a legacy var as previously all incubation periods were identical
   ownIllnessPeriod_raw ;; without vaccination
@@ -207,7 +212,7 @@ to simul_resetSomeRandomParams
 end
 
 to simul_updateIsolationResponse
-  set pace span
+  set pace span * spanMult
   set isolateCompliant 0
   
   if (Case_Isolation and (isolating = 1 or tracked = 1)) or (isolate_on_inf_notice and noticeOwnInfection = 1)[
@@ -391,7 +396,7 @@ end
 to simul_visitDestination
   ;; sets up destinations where people might gather and set off superspreader events
   ;; reduces large gatherings by stage
-  if inQuarantine = 0 and isolateCompliant = 0 and Visit_Frequency > random-float 1  [
+  if inQuarantine = 0 and isolateCompliant = 0 and Visit_Frequency * gatherFreqMult > random-float 1  [
     let movePatch one-of destination_patches in-radius Visit_Radius
     if is-patch? movePatch [
       move-to movePatch

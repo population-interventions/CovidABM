@@ -97,9 +97,22 @@ to loadPopDivisionTable
   ]
 end
 
+to loadRegionTable
+  let regionFileData remove-item 0 csv:from-file "input/region.csv"
+  set regionTable table:make
+  set regionTable_keys []
+  let i 0
+  foreach regionFileData [ x -> 
+    table:put regionTable i x
+    set regionTable_keys lput i regionTable_keys
+    set i i + 1
+  ]
+end
 
-to processPopulationWorkerData
+
+to processPopulationData
   let tableData table:values popDivisionTable
+  let regionPopulation table:make
   
   set totalWorkers 0
   set totalEssentialWorkers 0
@@ -108,10 +121,32 @@ to processPopulationWorkerData
     if item 4 data = 1 [
       set totalEssentialWorkers totalEssentialWorkers + item 5 data
     ]
+    let region item 10 data
+    let pop item 0 data
+    if not table:has-key? regionPopulation region [
+      table:put regionPopulation region 0
+    ]
+    table:put regionPopulation region ((table:get regionPopulation region) + pop)
   ]
   
   set essentialWorkerRange 100 * totalEssentialWorkers / totalWorkers
   set otherWorkerRange 100 * (totalWorkers - totalEssentialWorkers) / totalWorkers
+  
+  ;; Set the house index range used by each region
+  set regionHouseMin table:make
+  set regionHouseMax table:make
+  set regionHouseRedBarrier table:make
+  
+  let regionTableData table:values regionTable
+  let curHouseIndex 0
+  foreach regionTableData [ data -> 
+    let region item 0 data
+    ;; Houses in the region is population / house size
+    let houses ceiling ((table:get regionPopulation region) / (item 3 data))
+    table:put regionHouseMin region curHouseIndex
+    table:put regionHouseMax region curHouseIndex + houses
+    set curHouseIndex curHouseIndex + houses
+  ]
 end
 
 to createSimulants
@@ -124,6 +159,17 @@ to createSimulants
     ; Iterate over cohort data to get each set of simul parameters.
     let cohortData table:get popDivisionTable pop_index
     set agentsOfThisIndex agentsOfThisIndex + 1
+    
+    let cohort_age item 1 cohortData
+    let cohort_asti item 2 cohortData
+    let cohort_disability item 3 cohortData
+    let cohort_essential item 4 cohortData
+    let cohort_workerCount item 5 cohortData
+    let cohort_phase item 6 cohortData
+    let cohort_subPhase item 7 cohortData
+    let cohort_spanMult item 8 cohortData
+    let cohort_gatherFreqMult item 9 cohortData
+    let cohort_region item 10 cohortData
     
     sprout-simuls 1 [
       set size 2
@@ -141,13 +187,16 @@ to createSimulants
       set isolating 0
 
       set cohortIndex pop_index
-      set agerange item 1 cohortData
-      set atsi item 2 cohortData
-      set comorbidityState item 3 cohortData
-      set essentialJob item 4 cohortData = 1
-      set isWorker item 5 cohortData <= agentsOfThisIndex
-      set VaccPhase item 6 cohortData
-      set VaccSubPhase item 7 cohortData
+      set agerange cohort_age
+      set atsi cohort_asti
+      set comorbidityState cohort_disability
+      set essentialJob (cohort_essential = 1)
+      set isWorker (cohort_workerCount <= agentsOfThisIndex)
+      set VaccPhase cohort_phase
+      set VaccSubPhase cohort_subPhase
+      set spanMult cohort_spanMult
+      set gatherFreqMult cohort_gatherFreqMult
+      set homeRegion cohort_region
 
       move-to one-of patches with [ pcolor = black ]
 
@@ -193,7 +242,7 @@ to createSimulants
       simul_resetPersonalVirulence
     ]
     
-    if agentsOfThisIndex >= item 0 cohortData [ ; item 0 cohortData = cohort size
+    if agentsOfThisIndex >= item 0 cohortData [
       set pop_index pop_index + 1
       set agentsOfThisIndex 0
     ]
@@ -487,7 +536,8 @@ to setup
   set days 0 ; used to count days
 
   loadPopDivisionTable
-  processPopulationWorkerData
+  loadRegionTable
+  processPopulationData
   setup_vaccineData
   setup_vaccineData
   setup_incursionData

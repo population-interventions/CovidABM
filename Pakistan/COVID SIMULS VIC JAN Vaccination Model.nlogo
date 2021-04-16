@@ -4,6 +4,7 @@
 
 __includes[
   "globals.nls"
+  "housing.nls"
   "main.nls"
   "simul.nls"
   "setup.nls"
@@ -144,10 +145,10 @@ NIL
 HORIZONTAL
 
 PLOT
-2717
-99
-3122
-272
+2727
+75
+3132
+248
 Susceptible, Infected and Recovered - 000's
 Days from March 10th
 Numbers of people
@@ -304,7 +305,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+10.0
 .5
 1
 NIL
@@ -319,7 +320,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+10.0
 .5
 1
 NIL
@@ -355,10 +356,10 @@ PENS
 "default" 1.0 1 -2674135 true "" "Histogram [ agerange ] of simuls with [ color = black ] "
 
 PLOT
-1839
-212
-2107
-361
+1865
+210
+2133
+359
 Infection Proportional Growth Rate
 Time
 Growth rate
@@ -432,10 +433,10 @@ NIL
 HORIZONTAL
 
 PLOT
-1838
-39
-2107
-201
+1864
+38
+2133
+200
 Age (black), Vaccinated (green)
 NIL
 NIL
@@ -647,10 +648,10 @@ PotentialContacts
 11
 
 PLOT
-2114
-42
-2403
-204
+2140
+40
+2429
+202
 Distribution of Illness pd
 NIL
 NIL
@@ -687,10 +688,10 @@ se_incubation
 Number
 
 PLOT
-2417
-129
-2657
-254
+2452
+112
+2692
+237
 Dist_Incubation_Pd
 NIL
 NIL
@@ -1488,7 +1489,7 @@ stage
 MONITOR
 1713
 549
-1842
+1837
 594
 Interaction Infectivity
 transmission_average
@@ -1698,10 +1699,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot transmission_average"
 
 MONITOR
-1709
-598
+1717
+599
 1839
-643
+644
 Expected New Cases
 transmission_count_metric * transmission_average
 6
@@ -1761,10 +1762,10 @@ NIL
 HORIZONTAL
 
 PLOT
-2419
-264
-2698
-384
+2454
+247
+2733
+367
 Distribution of currentVirulence
 NIL
 NIL
@@ -1843,7 +1844,7 @@ End_Day
 End_Day
 -1
 365
-365.0
+-1.0
 1
 1
 NIL
@@ -1891,10 +1892,10 @@ totalOverseasIncursions
 11
 
 PLOT
-2117
-213
-2407
-362
+2143
+212
+2433
+361
 OverseasIncursions
 NIL
 NIL
@@ -2293,7 +2294,7 @@ param_recovered_prop
 param_recovered_prop
 0
 1
-0.5
+0.3
 0.1
 1
 NIL
@@ -2308,7 +2309,7 @@ param_virulence_inc
 param_virulence_inc
 0
 0.05
-0.0027
+0.05
 0.0001
 1
 NIL

@@ -151,6 +151,12 @@ globals [
   popDivisionTable_keys ; length of table.
   populationCohortCache ; Filters for the population
 
+  regionTable
+  regionTable_keys ; length of table.
+  regionHouseMin
+  regionHouseMax
+  regionHouseRedBarrier
+
   totalEndR
   totalEndCount
   endR_sum
