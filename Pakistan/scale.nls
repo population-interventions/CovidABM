@@ -13,8 +13,6 @@ to scaleup
   ask n-of ( count simuls with [ color = yellow ] * (1 - 1 / Scale_Factor) ) simuls with [ color = yellow ] [
     simul_do_scaleup
   ]
-
-  ;set contact_Radius Contact_Radius + (90 / 4)
 end
 
 to scaleup_try_to_maintain_cohort
@@ -86,8 +84,6 @@ to scaleup_try_to_maintain_cohort
       ]
     ]
   ]
-  
-  ;set contact_Radius Contact_Radius + (90 / 4)
 end
 
 to scaledown_try_to_maintain_cohort
@@ -130,8 +126,6 @@ to scaledown_try_to_maintain_cohort
       simul_resampleHouse_not_infected
     ]
   ]
-  
-  ;set contact_Radius Contact_radius - (90 / 4)
   set scalephase scalephase - 1
 end
 
@@ -157,6 +151,12 @@ to scaledown_no_hatch
   
   ;set contact_Radius Contact_radius - (90 / 4)
   set scalephase scalephase - 1
+end
+
+to-report GetInitialScale [cases]
+  let caseScale floor log cases Scale_Factor
+  let scaleRangeInThreshold floor log Scale_Threshold Scale_Factor
+  report caseScale - scaleRangeInThreshold
 end
 
 to CheckScale

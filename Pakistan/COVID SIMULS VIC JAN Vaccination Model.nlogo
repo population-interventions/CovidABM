@@ -384,7 +384,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -496,7 +496,7 @@ superspreaders
 superspreaders
 0
 1
-0.008
+0.01
 0.01
 1
 NIL
@@ -551,7 +551,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-50.0
+10.0
 .5
 1
 NIL
@@ -566,7 +566,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-50.0
+10.0
 .5
 1
 NIL
@@ -636,7 +636,7 @@ INPUTBOX
 310
 393
 initial_cases
-2.0
+4000.0
 1
 0
 Number
@@ -647,7 +647,7 @@ INPUTBOX
 313
 525
 total_population
-6359000.0
+2.166E8
 1
 0
 Number
@@ -785,10 +785,10 @@ count simuls with [ color = red ]
 11
 
 SWITCH
-1594
-959
-1687
-992
+1595
+915
+1688
+948
 scale
 scale
 0
@@ -986,7 +986,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -1027,7 +1027,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+15.0
 1
 1
 NIL
@@ -1040,7 +1040,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -1266,7 +1266,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -1382,16 +1382,6 @@ ICUBedsRequired
 0
 1
 15
-
-CHOOSER
-1589
-909
-1682
-954
-InitialScale
-InitialScale
-0 1 2 3 4
-0
 
 PLOT
 1039
@@ -1520,7 +1510,7 @@ SWITCH
 593
 Vaccine_Available
 Vaccine_Available
-0
+1
 1
 -1000
 
@@ -1798,7 +1788,7 @@ INPUTBOX
 310
 457
 secondary_cases
-4.0
+7000.0
 1
 0
 Number
@@ -2011,7 +2001,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -2522,6 +2512,21 @@ param_vac_wane
 0.05
 0.01
 0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+13
+233
+188
+267
+param_vac_rate_mult
+param_vac_rate_mult
+0.1
+4
+1.1
+1
 1
 NIL
 HORIZONTAL
