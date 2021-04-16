@@ -172,15 +172,15 @@ nameStr = 'headless MainCalibrate-table' + nameNumber
 #namePath = 'R regress'
 #nameStr = '55566792746ada8e5fd4b6c8efe14d2c736ad9f1_change'
 
-ProcessVariableEnd('Output/' + namePath + '/', [nameStr])
+ProcessVariableEnd('output/' + namePath + '/', [nameStr])
 
-#MakePlot('Output/' + namePath + '/', nameStr + '_process', 'slopeAverage',
+#MakePlot('output/' + namePath + '/', nameStr + '_process', 'slopeAverage',
 #    yDomain=(-0.3, 0.3),
 #    ymajticks=[i/10 - 0.3 for i in range(7)],
 #    yminticks=[i/50 - 0.3 for i in range(35)]
 #)
 #MakePlot(ProcessToPlot(
-#        'Output/' + namePath + '/', nameStr + '_process',
+#        'output/' + namePath + '/', nameStr + '_process',
 #        'average_R',
 #        indexDepth=5,
 #        indexReorder=[0, 2, 1, 3, 4],
@@ -192,7 +192,7 @@ ProcessVariableEnd('Output/' + namePath + '/', [nameStr])
 #    #='1100',
 #)
 MakePlot(ProcessToPlot(
-        'Output/' + namePath + '/', nameStr + '_process',
+        'output/' + namePath + '/', nameStr + '_process',
         'average_R',
         indexDepth=4,
     ),
@@ -201,12 +201,12 @@ MakePlot(ProcessToPlot(
     hlines=[1, 2.5, 2.5*1.25, 2.5*1.5],
     width=70,
 )
-#MakePlot('Output/' + namePath + '/', nameStr + '_process', 'trackAverage',
+#MakePlot('output/' + namePath + '/', nameStr + '_process', 'trackAverage',
 #    yDomain=(0, 1),
 #    ymajticks=[i/5 for i in range(5)],
 #    yminticks=[i/25 for i in range(25)]
 #)
-#MakePlot('Output/' + namePath + '/', nameStr + '_process', 'infectedTrackAverage',
+#MakePlot('output/' + namePath + '/', nameStr + '_process', 'infectedTrackAverage',
 #    yDomain=(0, 1),
 #    ymajticks=[i/5 for i in range(5)],
 #    yminticks=[i/25 for i in range(25)]

@@ -1,6 +1,6 @@
 
 to setup_vaccineData
-  let vaccineFileData remove-item 0 csv:from-file "vaccine.csv"
+  let vaccineFileData remove-item 0 csv:from-file "input/vaccine.csv"
   set vaccineTable table:make
   let i 0
   foreach vaccineFileData [ x -> 
@@ -53,10 +53,10 @@ end
 
 to vaccine_brand_update
   if global_vaccineType = "Pfizer" [
-    set global_vaccine_eff (1 - param_vac1_tran_reduct / 100) ^ (1 / 3)
+    set global_vaccine_eff param_vac1_tran_reduct / 100
   ]
   if global_vaccineType = "Other" [
-    set global_vaccine_eff (1 - param_vac2_tran_reduct / 100) ^ (1 / 3)
+    set global_vaccine_eff param_vac2_tran_reduct / 100
   ]
 end
 
@@ -100,13 +100,7 @@ to simul_vaccinate_me
     if vacWaitDays = 0 [
       set shape "person"
       set vaccinated 1
-      
-      ;; Reduce illness length
-      ;; This creates a similar triangle with its left corner at Non_Infective_Time and base length scaled by selfVaccEffMultiplier.
-      ;show (word "incBefore " ownincubationperiod ", " ownillnessperiod)
-      set ownincubationperiod ((ownincubationperiod - Non_Infective_Time) * selfVaccEffMultiplier) + Non_Infective_Time
-      set ownillnessperiod ((ownillnessperiod - Non_Infective_Time) * selfVaccEffMultiplier) + Non_Infective_Time
-      ;show (word "inc " ownincubationperiod ", " ownillnessperiod)
+      simul_updateVacEffMult
     ]
   ]
   
@@ -115,7 +109,7 @@ to simul_vaccinate_me
       ;; TODO for some reason people use up a vaccine even if they refuse it, but if this wasn't the case then param_vac_uptake
       ;; would mean very little. Figure out what is going on here conceptually.
       set vaccineOffered 1
-      set selfVaccEffMultiplier global_vaccine_eff
+      set selfVaccEff_raw global_vaccine_eff
       set global_vaccineAvailible global_vaccineAvailible - 1
       if sm_vac_uptake < param_vac_uptake [
         set vacWaitDays param_vacEffDays

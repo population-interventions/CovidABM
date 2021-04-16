@@ -52,6 +52,11 @@ to go
   ;; Update vaccine stage and parameters related to vaccines.
   vaccine_update
   
+  ;; Vaccine loses effectiveness over time
+  ask simuls [
+    simul_waneVacEff
+  ]
+  
   ;;reset-timer
   ;; All the simulants independently either move outside or back to home
   ask simuls [

@@ -16,6 +16,8 @@ simuls-own [
 
   ownIllnessPeriod ;; unique illness period associated with the individual
   ownIncubationPeriod ;; unique incubation pd for the person - related to IncubationPd so can probably be cleaned up - IncubationPd is a legacy var as previously all incubation periods were identical
+  ownIllnessPeriod_raw ;; without vaccination
+  ownIncubationPeriod_raw ;; without vaccination
   personalVirulence ;; the infectivity of the person
 
   timenow ;; the number of days since initial infection
@@ -48,7 +50,8 @@ simuls-own [
   vaccinated ;; is the person vaccinated?
   vaccineOffered ;; Has the vaccine been offered?
   vacWaitDays ;; Timer for the delay in vaccine coming into effect.
-  selfVaccEffMultiplier ;; Multiplier for disease effects, (1 - vaccine efficacy)
+  selfVaccEff_raw ;; Raw vaccine effect, eg 0.75 or 0.90 transmissibility reduction
+  selfVaccEff_mult ;; Multiplier for disease effects, (1 - selfVaccEff)^(1/3)
 
   wearsMask ;; for use in determining if the person wears a face mask
   wearingMask ;; identifies if the person is wearing a mask or not
@@ -178,10 +181,29 @@ to simul_move_to_empty_patch
   ]
 end
 
+to simul_updateVacEffMult
+  if vaccinated = 1 [
+    set selfVaccEff_mult (1 - selfVaccEff_raw) ^ (1 / 3)
+    ;show (word "eff_mult " selfVaccEff_mult ", raw " selfVaccEff_raw)
+    set ownIllnessPeriod ownIllnessPeriod_raw * selfVaccEff_mult
+    set ownIncubationPeriod ownIncubationPeriod_raw * selfVaccEff_mult
+  ]
+end
+
+to simul_waneVacEff
+  if vaccinated = 1 [
+    set selfVaccEff_raw selfVaccEff_raw * (1 - param_vac_wane)
+    simul_updateVacEffMult
+  ]
+end
+
 to simul_resetSomeRandomParams
-  set ownIllnessPeriod ( exp random-normal M S ) ;; log transform of illness period
-  set ownIncubationPeriod ( exp random-normal Minc Sinc ) ;;; log transform of incubation period
+  set ownIllnessPeriod_raw ( exp random-normal M S ) ;; log transform of illness period
+  set ownIncubationPeriod_raw ( exp random-normal Minc Sinc ) ;;; log transform of incubation period
+  set ownIllnessPeriod ownIllnessPeriod_raw
+  set ownIncubationPeriod ownIncubationPeriod_raw
   set proportion_people_avoid_draw random 100
+  simul_updateVacEffMult
 end
 
 to simul_updateIsolationResponse
@@ -261,8 +283,8 @@ to simul_record_patch_infectiveness
       set localInfectiveness (localInfectiveness * Asymptomatic_Trans)
     ]
     if vaccinated = 1 [
-      set localInfectiveness (localInfectiveness * selfVaccEffMultiplier)
-      ;show (word "infect " selfVaccEffMultiplier)
+      set localInfectiveness (localInfectiveness * selfVaccEff_mult)
+      ;show (word "infect " selfVaccEff_mult)
     ]
     if isolateCompliant = 1 [
      set localInfectiveness (localInfectiveness * Isolation_Transmission )
@@ -303,8 +325,8 @@ to simul_infect
       set mySucceptibility (mySucceptibility * (1 - draw_maskWearEfficacy)) * Mask_Efficacy_Mult
     ]
     if vaccinated = 1 [
-      set mySucceptibility (mySucceptibility * selfVaccEffMultiplier)
-      ;show (word "succ " selfVaccEffMultiplier)
+      set mySucceptibility (mySucceptibility * selfVaccEff_mult)
+      ;show (word "succ " selfVaccEff_mult)
     ]
     let myPatch patch-here
     let localInfectionList 0
@@ -429,13 +451,10 @@ to simul_settime
 end
 
 to simul_end_infection
-  ;; Recover or die at the end of infectious period.
-  if timenow > ownillnessperiod and color != black [
+  if color = red and timenow > ownillnessperiod [
     if track_R [
       simul_setEndR 
     ]
-  ]
-  if color = red and timenow > ownillnessperiod [
     ifelse (vaccinated = 0 and RiskofDeath > random-float 1) or (vaccinated = 1 and RiskofDeath * draw_vacc_death_risk_mult > random-float 1)
     [
       set deathcount deathcount + Scale_Factor ^ scalephase

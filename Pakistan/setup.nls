@@ -86,7 +86,7 @@ end
 
 
 to loadPopDivisionTable
-  let populationFileData remove-item 0 csv:from-file "population.csv"
+  let populationFileData remove-item 0 csv:from-file "input/population.csv"
   set popDivisionTable table:make
   set popDivisionTable_keys []
   let i 0
