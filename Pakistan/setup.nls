@@ -249,6 +249,7 @@ to setGlobals
   set InitialReserves            0
   set AverageContacts            0
   set AverageFinancialContacts   0
+  set dynamicVirulenceMult       0
   set ScalePhase                 0
   set Days                       0
   set CaseFatalityRate           0
@@ -492,6 +493,7 @@ to setup
   setup_incursionData
   setup_DataOut
   
+  set dynamicVirulenceMult 1
   set resetdate 7
   
   ;; illness period estimation using ln transform

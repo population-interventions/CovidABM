@@ -19,6 +19,7 @@ globals [
   eightyfive
   ninetyfive
   InitialReserves
+  dynamicVirulenceMult
   AverageContacts
   AverageFinancialContacts
   ScalePhase

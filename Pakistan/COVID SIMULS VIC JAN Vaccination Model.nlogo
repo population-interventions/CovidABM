@@ -304,7 +304,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-0.0
+5.0
 .5
 1
 NIL
@@ -319,7 +319,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-0.0
+5.0
 .5
 1
 NIL
@@ -716,10 +716,10 @@ mean [ personalvirulence] of simuls
 11
 
 SLIDER
-12
-448
-189
-481
+10
+410
+187
+443
 Global_Transmissibility
 Global_Transmissibility
 0
@@ -780,7 +780,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-0.0
+15.0
 1
 1
 NIL
@@ -866,7 +866,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
@@ -1263,7 +1263,7 @@ SWITCH
 593
 Vaccine_Available
 Vaccine_Available
-1
+0
 1
 -1000
 
@@ -1364,10 +1364,10 @@ Vaccine rollout and vaccine used per phase set in vaccine.csv.
 1
 
 SLIDER
-12
-189
-187
-222
+10
+152
+185
+185
 param_vac_uptake
 param_vac_uptake
 60
@@ -1379,10 +1379,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-12
-314
-189
-348
+10
+277
+187
+311
 param_vac_tran_reduct
 param_vac_tran_reduct
 0.5
@@ -1547,14 +1547,14 @@ secondary_cases
 Number
 
 CHOOSER
-13
-399
-186
-444
+12
+362
+185
+407
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-4
+3
 
 SLIDER
 1589
@@ -1754,7 +1754,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-0.0
+5.0
 1
 1
 NIL
@@ -2008,10 +2008,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-13
-357
-187
-390
+12
+319
+186
+352
 param_trigger_loosen
 param_trigger_loosen
 1
@@ -2255,10 +2255,10 @@ track_slope
 -1000
 
 SLIDER
-12
-274
-187
-307
+10
+237
+185
+270
 param_vac_wane
 param_vac_wane
 0
@@ -2270,10 +2270,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-13
-233
-188
-267
+10
+194
+185
+228
 param_vac_rate_mult
 param_vac_rate_mult
 0.1
@@ -2285,16 +2285,31 @@ NIL
 HORIZONTAL
 
 SLIDER
-12
-143
-191
-177
+9
+104
+188
+138
 param_recovered_prop
 param_recovered_prop
 0
 1
 0.5
 0.1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+12
+452
+194
+486
+param_virulence_inc
+param_virulence_inc
+0
+0.05
+0.0027
+0.0001
 1
 NIL
 HORIZONTAL

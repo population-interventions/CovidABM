@@ -141,6 +141,9 @@ to go
   ;show ( word " Simul Stuff " timer " seconds ")
   ;reset-timer
   
+  ; Increase R0 as simulation progresses
+  set dynamicVirulenceMult dynamicVirulenceMult + param_virulence_inc
+  
   if proportion_people_avoid > Complacency_Bound [
     set proportion_people_avoid proportion_people_avoid - 1
   ]
