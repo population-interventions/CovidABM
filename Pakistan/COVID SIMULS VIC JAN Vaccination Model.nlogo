@@ -2278,8 +2278,8 @@ param_vac_rate_mult
 param_vac_rate_mult
 0.1
 4
-1.1
-1
+2.1
+0.1
 1
 NIL
 HORIZONTAL
