@@ -266,13 +266,13 @@ patches-own [
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-343
+339
 65
-852
-575
+978
+705
 -1
 -1
-8.213115
+8.25
 1
 10
 1
@@ -384,7 +384,7 @@ Span
 Span
 0
 30
-10.0
+5.0
 1
 1
 NIL
@@ -496,7 +496,7 @@ superspreaders
 superspreaders
 0
 1
-0.01
+0.008
 0.01
 1
 NIL
@@ -551,7 +551,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+50.0
 .5
 1
 NIL
@@ -566,7 +566,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+50.0
 .5
 1
 NIL
@@ -971,7 +971,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.34
+0.54
 0.01
 1
 NIL
@@ -986,7 +986,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+35.0
 1
 1
 NIL
@@ -1027,7 +1027,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+60.0
 1
 1
 NIL
@@ -1040,7 +1040,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -1266,7 +1266,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+5.0
 1
 1
 NIL
@@ -1629,7 +1629,7 @@ param_vac_uptake
 param_vac_uptake
 60
 90
-75.0
+90.0
 15
 1
 NIL
@@ -1637,45 +1637,15 @@ HORIZONTAL
 
 SLIDER
 12
-232
-186
-265
-param_vac2_morb_eff
-param_vac2_morb_eff
-60
-80
-70.0
-10
-1
-NIL
-HORIZONTAL
-
-SLIDER
-12
-274
-186
-307
-param_vac1_tran_reduct
-param_vac1_tran_reduct
-50
-90
-90.0
-5
-1
-NIL
-HORIZONTAL
-
-SLIDER
-12
 314
-185
-347
-param_vac2_tran_reduct
-param_vac2_tran_reduct
-50
-90
-50.0
-5
+189
+348
+param_vac_tran_reduct
+param_vac_tran_reduct
+0.5
+0.9
+0.9
+0.05
 1
 NIL
 HORIZONTAL
@@ -1841,7 +1811,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-0
+3
 
 SLIDER
 1589
@@ -2041,7 +2011,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+50.0
 1
 1
 NIL
@@ -2301,7 +2271,7 @@ SWITCH
 390
 param_trigger_loosen
 param_trigger_loosen
-0
+1
 1
 -1000
 
@@ -2540,6 +2510,21 @@ track_slope
 1
 1
 -1000
+
+SLIDER
+12
+274
+187
+307
+param_vac_wane
+param_vac_wane
+0
+0.05
+0.01
+0.001
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

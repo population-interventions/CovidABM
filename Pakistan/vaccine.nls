@@ -52,11 +52,8 @@ to vaccine_do_incursion_based_on_phase
 end
 
 to vaccine_brand_update
-  if global_vaccineType = "Pfizer" [
-    set global_vaccine_eff param_vac1_tran_reduct / 100
-  ]
-  if global_vaccineType = "Other" [
-    set global_vaccine_eff param_vac2_tran_reduct / 100
+  if global_vaccineType = "generic" [
+    set global_vaccine_eff param_vac_tran_reduct
   ]
 end
 
@@ -71,11 +68,14 @@ to vaccine_update
       ;print count simuls with [VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase]
       ;print count simuls with [VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase and vaccinated = 0]
       
-      set vaccinePhaseEndDay (vaccinePhaseEndDay + item 2 phaseData)
+      let phasePop (item 3 phaseData)
+      let phaseDays (item 2 phaseData) / param_vac_rate_mult
+      
+      set vaccinePhaseEndDay (vaccinePhaseEndDay + phaseDays)
       set global_vaccineAvailible 0
       set global_vaccinePhase item 0 phaseData
       set global_vaccineSubPhase item 1 phaseData
-      set global_vaccinePerDay (item 3 phaseData)/(item 2 phaseData) + 0.00001 ; Floats
+      set global_vaccinePerDay phasePop / phaseDays + 0.00001 ; Floats
       set global_vaccineType item 4 phaseData
       set global_incursionScale item 5 phaseData
       set global_incursionArrivals item 6 phaseData
@@ -105,7 +105,7 @@ to simul_vaccinate_me
   ]
   
   if Vaccine_Available = true and global_vaccineAvailible >= 1 [
-    if VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase and vaccinated = 0 and color != black and vaccineOffered = 0 [
+    if VaccPhase <= global_vaccinePhase and VaccSubPhase <= global_vaccineSubPhase and vaccinated = 0 and color != black and vaccineOffered = 0 [
       ;; TODO for some reason people use up a vaccine even if they refuse it, but if this wasn't the case then param_vac_uptake
       ;; would mean very little. Figure out what is going on here conceptually.
       set vaccineOffered 1
