@@ -392,6 +392,9 @@ to setGlobals
   set global_vaccinePerDay 0
   
   set incursionsSeedID 0
+  set incursionPhaseIndex 0
+  set incursionPhaseEndDay 0
+  
   set totalOverseasIncursions 0
   set vaccinePhaseEndDay 0
   set vaccinePhaseIndex 0
@@ -485,7 +488,8 @@ to setup
   loadPopDivisionTable
   processPopulationWorkerData
   setup_vaccineData
-  setup_overseasArrivals
+  setup_vaccineData
+  setup_incursionData
   setup_DataOut
   
   set resetdate 7
@@ -525,11 +529,10 @@ to setup
   let popPerSimul Scale_Factor ^ scalephase
   ;; sets up the initial date for looking at policy-changes
 
-  print scalephase
-  print popPerSimul
+  
   createSimulants
   
-  ask n-of ( initial_cases / scalephase ) simuls [
+  ask n-of ( initial_cases / popPerSimul ) simuls [
     set color red
     set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
     simul_updatepersonalvirulence
@@ -562,6 +565,10 @@ to setup
     ]
   ]
 
+  set recovercount param_recovered_prop * total_population
+  ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
+    set color yellow
+  ]
   ;;set tracking false ;; ensures this is set to false each time the model starts
   ;;set link_switch false ;; ensures this is set to false each timme the model starts
   ;;set schoolsOpen false ;; ensures that the schools settings don't begin before the policy trigger starts

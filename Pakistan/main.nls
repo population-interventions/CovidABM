@@ -130,7 +130,7 @@ to go
   ]
   
   ;; Randomly turn suceptible agents into infected ones. Percentage chance = IncursionRate.
-  vaccine_do_incursion_based_on_phase
+  incursion_update
   
   ;show ( word " Simul Stuff " timer " seconds ")
   ;reset-timer

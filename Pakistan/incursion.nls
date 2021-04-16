@@ -1,0 +1,57 @@
+
+to setup_incursionData
+  let incursionFileData remove-item 0 csv:from-file "input/incursion.csv"
+  set incursionTable table:make
+  let i 0
+  foreach incursionFileData [ x -> 
+    table:put incursionTable i x
+    set i i + 1
+  ]
+  
+  set incursionPhaseIndex -1 ; Not yet initialised
+  set incursionPhaseEndDay 0
+  
+  set global_incursionScale 0
+  set global_incursionArrivals 0
+  
+  set incursionsSeedID 2
+  rngs:set-seed incursionsSeedID random-float 999
+end
+
+to incursion_update
+  ;; Happens at the start of the first 'go', since days = 0
+  if days >= incursionPhaseEndDay [
+    if table:has-key? incursionTable (incursionPhaseIndex + 1) [
+      set incursionPhaseIndex incursionPhaseIndex + 1
+      let phaseData table:get incursionTable incursionPhaseIndex
+      let phaseDays (item 0 phaseData) / param_vac_rate_mult
+      
+      set incursionPhaseEndDay (incursionPhaseEndDay + phaseDays)
+      set global_incursionScale item 1 phaseData
+      set global_incursionArrivals item 2 phaseData
+    ]
+  ]
+  
+  if Vaccine_Available [
+    let peoplePerSimul ( Scale_Factor ^ scalephase )
+    set global_incursionRisk ( draw_borderIncursionRisk * global_incursionScale )
+    ask n-of global_incursionArrivals simuls with [color != red and color != black] [
+      if global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
+        set color red
+        set timenow 0
+        set isolating 0
+        set noticeOwnInfection 0
+        set new_case_real_counter new_case_real_counter + peoplePerSimul
+        set totalOverseasIncursions totalOverseasIncursions + peoplePerSimul
+        ifelse vaccinated = 1
+        [
+          array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + peoplePerSimul
+        ]
+        [
+          array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + peoplePerSimul
+        ]
+      ]
+    ]
+  ]
+end
+

@@ -2,244 +2,8 @@
 ;; The intent of the model is for it to be used as a guide for considering differences in potential patterns of infection under various policy futures
 ;; As with any model, it's results should be interpreted with caution and placed alongside other evidence when interpreting results
 
-extensions [ rngs profiler csv table array matrix ]
-
-globals [
-  anxietyFactor
-  InfectionChange
-  infectionsToday
-  infectionsToday_acc ; Accumulator for infectionsToday
-  infectionsYesterday
-  five
-  fifteen
-  twentyfive
-  thirtyfive
-  fortyfive
-  fiftyfive
-  sixtyfive
-  seventyfive
-  eightyfive
-  ninetyfive
-  InitialReserves
-  AverageContacts
-  AverageFinancialContacts
-  ScalePhase
-  Days
-  CaseFatalityRate
-  DeathCount
-  recovercount
-  recoverProportion ; Proportion of the living population that has recovered.
-  casesReportedToday
-  casesReportedToday_acc ; Accumulator for casesReportedToday
-  Scaled_Population
-  ICUBedsRequired
-  scaled_Bed_Capacity
-  currentInfections
-  eliminationDate
-  PotentialContacts
-  yellowcount
-  redcount
-  cumulativeInfected
-  scaledPopulation
-  MeanR
-  EWInfections
-  StudentInfections
-  meanDaysInfected
-  lasttransday
-  lastPeriod
-  casesinperiod28
-  casesinperiod14
-  casesinperiod7
-  resetDate ;; days after today that the policy is reviewed
-  cashposition
-  Objfunction ;; seeks to minimise the damage - totalinfection * stage * currentInfections
-  decisionDate ;; a date (ticks) when policy decsions were made
-  policyTriggerScale
-  prior0
-  prior1
-  prior2
-  prior3
-  prior4
-  prior5
-  prior6
-  prior7
-  prior8
-  prior9
-  prior10
-  prior11
-  prior12
-  prior13
-  prior14
-  prior15
-  prior16
-  prior17
-  prior18
-  prior19
-  prior20
-  prior21
-  prior22
-  prior23
-  prior24
-  prior25
-  prior26
-  prior27
-  prior28
-
-  real_prior0
-  real_prior1
-  real_prior2
-  real_prior3
-  real_prior4
-  real_prior5
-  real_prior6
-
-  slope_prior0
-  slope_prior1
-  slope_prior2
-  slope_prior3
-  slope_prior4
-  slope_prior5
-  slope_prior6
-
-  slope
-  slopeCount
-  slopeSum
-  slopeAverage
-
-  testName
-  traceMult
-
-  trackCount
-  trackSum
-  trackAverage
-  infectedTrackCount
-  infectedTrackSum
-  infectedTrackAverage
-
-  new_case_real
-  new_case_real_counter
-
-  test_acc
-
-  ;; These used to be dynamic controls with conflicting variable names.
-  reduce_contact
-  spatial_distance
-  case_isolation
-  quarantine
-  contact_radius
-  Track_and_Trace_Efficiency
-  stage
-  prev_stage ; Last stage, so that stage settting are not reset to often
-
-  stageHasChanged
-  stageToday
-  stageYesterday
-
-  houseTrackedCaseTimeTable
-  houseLocationTable
-  destination_patches
-
-  houseStudentMoveCache ;; Cache of agentset that a student from household N can move to as part of school.
-  houseStudentMoveCache_lastUpdate ;; When each agentset was last updated, or set to -1 to indicate it needs an update.
-  houseStudentMoveCache_staleTime ;; If an agentset was updated before staleTime, regenerate it.
-
-  PrimaryUpper
-  SecondaryLower
-
-  meanIDTime
-
-  popDivisionTable ; Table of population cohort data
-  popDivisionTable_keys ; length of table.
-  populationCohortCache ; Filters for the population
-
-  totalEndR
-  totalEndCount
-  endR_sum
-  endR_count
-  endR_mean_metric
-  average_R
-
-  ; Number of agents that are workers and essential workers respectively.
-  totalWorkers
-  totalEssentialWorkers
-  essentialWorkerRange
-  otherWorkerRange
-
-  transmission_count
-  transmission_count_metric ; For output, not dynamic change
-  transmission_sum
-  transmission_average
-
-  avoidSuccess
-  avoidAttempts
-
-  draw_ppa_modifier
-  draw_pta_modifier
-  draw_isolationCompliance
-  draw_maskWearEfficacy
-  draw_borderIncursionRisk
-  draw_vacc_death_risk_mult
-
-  ; Vaccine phase and subphase, as well as internal index and data table.
-  global_vaccinePhase
-  global_vaccineSubPhase
-  global_vaccineAvailible
-  global_vaccineType
-  global_vaccinePerDay
-  global_incursionScale ;; Scale applied to the underlying probability, from the csv
-  global_incursionArrivals ;; Number of arrivals, read from csv
-  global_incursionRisk ;; Scale multiplied by the underlying probability.
-
-  incursionsSeedID
-  totalOverseasIncursions
-  vaccinePhaseEndDay
-  vaccinePhaseIndex
-  vaccineTable
-  global_vaccine_eff ;; Effectiveness of the vaccine along the three dimensions (infection rate, transmition rate, duration)
-
-  global_schoolActive ;; Whether students ignore avoiding each other to go to school
-
-  ;; log transform illness period variables
-  Illness_PeriodVariance
-  M
-  BetaillnessPd
-  S
-
-  ;; log transform incubation period variables
-  Incubation_PeriodVariance
-  MInc
-  BetaIncubationPd
-  SInc
-
-  ;; log transform compliance period variables
-  Compliance_PeriodVariance
-  MComp
-  BetaCompliance
-  SComp
-
-  ;; file reading and draw handling
-  drawNumber
-  drawRandomSeed
-  drawList
-
-  ;; Data output
-  cohortLengthListOfZeros
-  infectNoVacArray
-  infectVacArray
-  dieArray
-  infectNoVacArray_listOut
-  infectVacArray_listOut
-  dieArray_listOut
-  age_listOut
-  atsi_listOut
-  morbid_listOut
-  stage_listOut
-
-  R_measure_time
-]
-
-
 __includes[
+  "globals.nls"
   "main.nls"
   "simul.nls"
   "setup.nls"
@@ -249,20 +13,9 @@ __includes[
   "trace.nls"
   "count.nls"
   "vaccine.nls"
+  "incursion.nls"
   "debug.nls"
   "dataOut.nls"
-]
-
-
-patches-own [
-  destination ;; indicator of whether this location is a place that people might gather
-  houseIndex ;; indicator that the patch is a house.
-  lastInfectionUpdate ;; Update indicator for stale simulantCount data
-  infectionList ;; List of infectivities of simulants on the patch
-  infectionCulprit ;; List of agents that cause infection. Only used of track_R is enabled.
-  lastUtilTime ;; Last tick that the patch was occupied
-  lastHouseGatherTime ;; Last tick that a house gathered here.
-  houseGatherIndex ;; Last house that gathered here. -1 indicates more than one house.
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -293,10 +46,10 @@ ticks
 30.0
 
 BUTTON
-220
-94
-284
-128
+234
+97
+298
+131
 NIL
 setup
 NIL
@@ -310,10 +63,10 @@ NIL
 1
 
 BUTTON
-185
-142
-249
-176
+199
+144
+263
+178
 Go
 ifelse (count simuls ) = (count simuls with [ color = blue ])  [ stop ] [ Go ]
 T
@@ -427,10 +180,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-249
-142
-313
-176
+264
+144
+328
+178
 Go Once
 go
 NIL
@@ -1510,7 +1263,7 @@ SWITCH
 593
 Vaccine_Available
 Vaccine_Available
-1
+0
 1
 -1000
 
@@ -2037,10 +1790,10 @@ new_case_real
 11
 
 BUTTON
-14
-102
-119
-136
+492
+13
+597
+47
 Profile Stop
 profiler:stop \nprint profiler:report
 NIL
@@ -2054,10 +1807,10 @@ NIL
 1
 
 SWITCH
+609
 13
-140
-120
-173
+716
+46
 profile_on
 profile_on
 1
@@ -2065,10 +1818,10 @@ profile_on
 -1000
 
 BUTTON
-17
-63
-121
-98
+379
+13
+483
+48
 Profile Start
 profiler:start
 NIL
@@ -2527,6 +2280,21 @@ param_vac_rate_mult
 4
 1.1
 1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+12
+143
+191
+177
+param_recovered_prop
+param_recovered_prop
+0
+1
+0.5
+0.1
 1
 NIL
 HORIZONTAL
