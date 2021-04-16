@@ -1,0 +1,45 @@
+Why is (yellowcount > redcount) a condition for scaledown?
+Maybe remove the sliders and inputboxes that have no impact, to reduce the size of output sheets.
+
+Speedup:
+ * Replace "any? other simuls-here with [ householdUnit != [ householdUnit ] of myself" in general with a "am I at my house" check?
+ * simul_visitDestination is particularly slow.
+ * SIMUL_AVOID_STUDENT and SIMUL_AVOID are a bit slow.
+
+Questions
+ * Ask questions about how essential workers should behave.
+ * Ask questions about schools.
+ * Should people be able to be reinfected? What is the assumption here?
+
+Make a document tracking the use of randomness. Overseas incursions currently has a dedicated random stream.
+
+Remember to unstack to make draws. Pivot for summaries.
+Think about how avoiding works. The chance of someone being left alone is higher than their personal chance of trying to avoid people (since others may avoid them).
+Think about how isolating people no longer avoid, so may well have a higher chance to interact with people. This seems wrong.
+
+== Calibration ==
+
+Stage 4 R_0 of reduction of 8%-9% per day
+Stage 3 and stage 2 straddle R_0 = 1
+Stage 0 at R_0 equal to 2.5
+Stages 1, 1b and 2 spaced between 0 and 3.
+
+Change avoidance parameter as first call.
+Reduce usage or percentage effect?
+
+== Yellow and Black Scaling ==
+The way that recovered and dead people are handled seems problematic. 
+ * Recovered people are scaled on scaleUp but not scaleDown
+ * Dead people are not scaled at all.
+Run the 'LooseSupress' policy. The result is often around 0.3% of the population being infected, but 50% of the simulants are yellow for the last 180 days (which are spent at scale zero). This makes the population significantly more resistent to reinfection and overseas infection. The Elim policies are "worse" for overseas infection because they don't have a large pool of yellow simulants to block it. 
+
+Every time the model goes down through a scale (at factor 4) the following approximately happens:
+ * 60 red turn into 240 red.
+ * N yellow stay as N yellow.
+ * 180 red turn into 180 yellow until 60 red remain.
+ * The cycle repeats with the next scale.
+So 180 yellow are gained each scale down.
+
+A simple workaround is to set a high rate of yellow people turning back into cyan people, as was done with reinfection rate. I think it is better to view this as the rate at which people diffuse around the wider population (replacing recovered people with succeptible people) rather than a single person becoming succeptible again. The number of yellow people couldbe bounded below by the total proportion of people who have recovered in the overall population. The model is meant to be simulating the pandemic around the active spots, the cases, so it makes sense for recovered people to filter out into the wider community (and out of the current slice).
+
+If one person dies it doesn't make sense for the population to be permanently smaller when the model scales up through three scales. Maybe dead people should be replaced with live ones after some time as well.

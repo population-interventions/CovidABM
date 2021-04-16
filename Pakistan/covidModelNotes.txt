@@ -1,0 +1,25 @@
+
+We only care about:
+ - Stage: A list of numbers indicating which stage the model is in on each day.
+ - Daily transitions between succeptible/infected/dead/recovered per agent type (age, strata, disabled, atsi etc..)
+ - Draw number
+
+These are turned into
+ - dead_table: Number of people who go from being alive to being dead per month per age range (per cohort?).
+ - dr_table: Number of people who go from being fine to being infected per month per age range (per cohort?), converted into YLD elsewhere.
+ - popcost_table: The cost of the transitions per etc.
+
+Four types of files:
+ - base disease
+ - bau file
+ - covid file
+ - pif files?
+ 
+ 0.42        0.56        0.67
+
+Questions on Monday
+ - Mask wearing.
+ - Propper data for workers-per-age.
+
+Stage 1b - Average R 1.05 for 0.42 tansmiss
+Stage 2  - Average R 1.0  for 0.67 transmiss
