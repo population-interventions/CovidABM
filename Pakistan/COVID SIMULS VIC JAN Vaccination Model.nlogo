@@ -20,13 +20,13 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-339
-65
-978
-705
+344
+62
+958
+677
 -1
 -1
-8.25
+7.4815
 1
 10
 1
@@ -36,10 +36,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--30
-30
--30
-30
+0
+80
+0
+80
 1
 1
 1
@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-10.0
+3.0
 1
 1
 NIL
@@ -250,7 +250,7 @@ superspreaders
 superspreaders
 0
 1
-0.01
+0.0
 0.01
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-10.0
+78.0
 .5
 1
 NIL
@@ -320,7 +320,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-10.0
+78.0
 .5
 1
 NIL
@@ -740,7 +740,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+20.0
 1
 1
 NIL
@@ -781,7 +781,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+85.0
 1
 1
 NIL
@@ -794,7 +794,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -1020,7 +1020,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+3.6
 1
 1
 NIL
@@ -1319,7 +1319,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-1011768.0
+3671498.0
 1
 1
 NIL
@@ -1383,7 +1383,7 @@ SLIDER
 10
 277
 187
-311
+310
 param_vac_tran_reduct
 param_vac_tran_reduct
 0.5
@@ -1740,7 +1740,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 2000
-200.0
+400.0
 50
 1
 NIL
@@ -1755,7 +1755,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+78.0
 1
 1
 NIL
@@ -2238,7 +2238,7 @@ Track_Iso_Factor
 Track_Iso_Factor
 0
 1
-1.0
+0.95
 0.05
 1
 NIL
@@ -2274,7 +2274,7 @@ SLIDER
 10
 194
 185
-228
+227
 param_vac_rate_mult
 param_vac_rate_mult
 0.1
@@ -2289,7 +2289,7 @@ SLIDER
 9
 104
 188
-138
+137
 param_recovered_prop
 param_recovered_prop
 0
@@ -2304,7 +2304,7 @@ SLIDER
 12
 452
 194
-486
+485
 param_virulence_inc
 param_virulence_inc
 0

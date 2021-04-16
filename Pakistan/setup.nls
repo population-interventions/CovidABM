@@ -135,7 +135,8 @@ to processPopulationData
   ;; Set the house index range used by each region
   set regionHouseMin table:make
   set regionHouseMax table:make
-  set regionHouseRedBarrier table:make
+  set regionPosMin table:make
+  set regionPosMax table:make
   
   let regionTableData table:values regionTable
   let curHouseIndex 0
@@ -146,6 +147,8 @@ to processPopulationData
     table:put regionHouseMin region curHouseIndex
     table:put regionHouseMax region curHouseIndex + houses
     set curHouseIndex curHouseIndex + houses
+    table:put regionPosMin region (item 1 data) * world-height
+    table:put regionPosMax region (item 2 data) * world-height
   ]
 end
 
@@ -253,30 +256,6 @@ to createSimulants
   foreach popDivisionTable_keys [ index ->
     table:put populationCohortCache index simuls with [ cohortIndex = index ]
   ]
-end
-
-to setup_households
-  ;; setting households up
-  ask simuls [
-      set householdUnit random houseTotal
-  ]
-  
-  ask simuls [
-    simul_resetlanding
-  ]
-  
-  ;; Enter values in household isolation table to save O(N) existence checks per tick
-  ask simuls [
-    table:put houseTrackedCaseTimeTable householdunit -1
-  ]
-  
-  let houseNumber 0
-  repeat houseTotal [
-    table:put houseStudentMoveCache_lastUpdate houseNumber -1
-    set houseNumber houseNumber + 1
-  ]
-  set houseStudentMoveCache_staleTime 0
-  
 end
 
 to setGlobals
@@ -603,7 +582,7 @@ to setup
   set spatial_distance false
   set case_isolation false
 
-  setup_households
+  reset_housing
   
   ;; this ensures that half the people in households with existing infections have also have an infection and prevents a big spike early-on
   let init_secondry_infect secondary_cases

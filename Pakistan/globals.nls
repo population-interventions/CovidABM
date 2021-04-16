@@ -155,7 +155,8 @@ globals [
   regionTable_keys ; length of table.
   regionHouseMin
   regionHouseMax
-  regionHouseRedBarrier
+  regionPosMin
+  regionPosMax
 
   totalEndR
   totalEndCount

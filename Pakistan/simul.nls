@@ -119,12 +119,14 @@ end
 
 to simul_resetlanding
   ;; now working so home locations are not in green space
+  let region homeRegion
   ifelse table:has-key? houseLocationTable householdUnit 
   [
     set homeLocation table:get houseLocationTable householdUnit
   ]
   [
-    move-to one-of patches with [ pcolor = black and houseIndex = -1 ]
+    move-to one-of patches with [ pcolor = black and houseIndex = -1 and
+      pycor >= table:get regionPosMin region and pycor <= table:get regionPosMax region]
     let houseNumber householdUnit
     ask patch-here [
       set houseIndex houseNumber
@@ -133,49 +135,9 @@ to simul_resetlanding
     table:put houseLocationTable householdUnit patch-here
   ]
   
-  ifelse 50 > random 100 
-  [
-    move-to one-of patches with [ pcolor = black ]
-  ]
-  [
-     move-to homeLocation
-  ]
-  ;; iterates / sorts people into households
+  move-to homeLocation
 end
 
-to simul_resampleHouse
-  table:put houseStudentMoveCache_lastUpdate householdunit -1
-  
-  set householdUnit random houseTotal
-  
-  table:put houseStudentMoveCache_lastUpdate householdunit -1
-  table:put houseTrackedCaseTimeTable householdunit -1
-  
-  simul_resetlanding
-end
-
-to simul_resampleHouse_infected
-  table:put houseStudentMoveCache_lastUpdate householdunit -1
-  
-  set householdUnit random floor (houseTotal * 0.1125)
-  
-  table:put houseStudentMoveCache_lastUpdate householdunit -1
-  table:put houseTrackedCaseTimeTable householdunit -1
-  
-  simul_resetlanding
-end
-  
-to simul_resampleHouse_not_infected
-  table:put houseStudentMoveCache_lastUpdate householdunit -1
-  
-  set householdUnit floor (houseTotal * 0.1) + random floor (houseTotal * 0.9) 
-  
-  table:put houseStudentMoveCache_lastUpdate householdunit -1
-  table:put houseTrackedCaseTimeTable householdunit -1
-  
-  simul_resetlanding
-end
-  
 to simul_move_to_empty_patch
   let movePatch one-of neighbors with [ lastUtilTime < ticks ]
   if is-patch? movePatch [
@@ -269,7 +231,6 @@ to simul_do_scaleup
   
   move-to one-of patches with [ pcolor = black ]
   simul_resetSomeRandomParams
-  simul_resampleHouse ;; Check that this makes sense.
   
   set returntoschool random 100
 end

@@ -1,0 +1,45 @@
+
+to reset_housing
+  let regionTableData table:values regionTable
+  foreach regionTableData [ data -> 
+    let region item 0 data
+    let houseSize item 3 data
+    let regionRed simuls with [color = red and homeRegion = region]
+    let regionNotRed simuls with [color != red and homeRegion = region]
+    
+    let curHouse table:get regionHouseMin region
+    let simulInHouse 0
+    ask regionRed [
+      set householdUnit curHouse
+      set simulInHouse simulInHouse + 1
+      if simulInHouse >= houseSize [
+        set simulInHouse 0
+        set curHouse curHouse + 1
+      ]
+    ]
+    ask regionNotRed [
+      set householdUnit curHouse
+      set simulInHouse simulInHouse + 1
+      if simulInHouse >= houseSize [
+        set simulInHouse 0
+        set curHouse curHouse + 1
+      ]
+    ]
+  ]
+
+  ask simuls [
+    simul_resetlanding
+  ]
+
+  ;; Enter values in household isolation table to save O(N) existence checks per tick
+  ask simuls [
+    table:put houseTrackedCaseTimeTable householdunit -1
+  ]
+  
+  let houseNumber 0
+  repeat houseTotal [
+    table:put houseStudentMoveCache_lastUpdate houseNumber -1
+    set houseNumber houseNumber + 1
+  ]
+  set houseStudentMoveCache_staleTime 0
+end
