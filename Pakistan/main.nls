@@ -11,6 +11,12 @@ to ShiftRecoveredTowardsTotalProportion
         set isolating 0
       ]
     ]
+    if repYellowCount > yellowSetCount [
+      ask n-of (Recovered_Match_Rate * (repYellowCount - yellowSetCount) + random-float 1) simuls with [ color = cyan ] [
+        set color yellow
+        set isolating 0
+      ]
+    ]
   ]
 end
 

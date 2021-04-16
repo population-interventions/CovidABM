@@ -304,7 +304,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-10.0
+0.0
 .5
 1
 NIL
@@ -319,7 +319,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-10.0
+0.0
 .5
 1
 NIL
@@ -724,7 +724,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.54
+0.59
 0.01
 1
 NIL
@@ -780,7 +780,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+0.0
 1
 1
 NIL
@@ -866,7 +866,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -1263,7 +1263,7 @@ SWITCH
 593
 Vaccine_Available
 Vaccine_Available
-0
+1
 1
 -1000
 
@@ -1554,7 +1554,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-3
+4
 
 SLIDER
 1589
@@ -1754,7 +1754,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+0.0
 1
 1
 NIL
@@ -2000,8 +2000,8 @@ SLIDER
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
-0.1
-0.042
+0.5
+0.078
 0.001
 1
 NIL

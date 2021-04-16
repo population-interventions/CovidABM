@@ -37,6 +37,17 @@ to scaleup_try_to_maintain_cohort
     ]
   ]
   
+  ;; Don't scale all yellows if a high proportion of the population has recovered.
+  let yellowScaleFactor Scale_Factor
+  set recoverProportion recoverCount / (total_population - deathCount)
+  print yellowScaleFactor
+  if recoverProportion > localYellowCount / (Population * yellowScaleFactor) [
+    set yellowScaleFactor localYellowCount / (Population * recoverProportion)
+    if yellowScaleFactor < 1 [
+      set yellowScaleFactor 1
+    ]
+  ]
+  
   foreach popDivisionTable_keys [ index ->
     let cohort table:get populationCohortCache index
     
@@ -47,7 +58,7 @@ to scaleup_try_to_maintain_cohort
     ]
     
     set localFilter cohort with [ color = yellow ]
-    ask n-of (((count localFilter + random-float 1) * (1 - 1 / Scale_Factor))) localFilter [
+    ask n-of (((count localFilter + random-float 1) * (1 - 1 / yellowScaleFactor))) localFilter [
       simul_do_scaleup
     ]
   ]
@@ -62,8 +73,8 @@ to scaleup_try_to_maintain_cohort
   
   set localFilter simuls with [ color = yellow ]
   let localYellowCount_after count localFilter
-  if localYellowCount_after * Scale_Factor > localYellowCount [
-    ask n-of (localYellowCount_after - localYellowCount / Scale_Factor + random-float 1) localFilter [
+  if localYellowCount_after * yellowScaleFactor > localYellowCount [
+    ask n-of (localYellowCount_after - localYellowCount / yellowScaleFactor + random-float 1) localFilter [
       simul_do_scaleup
     ]
   ]
