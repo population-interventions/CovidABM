@@ -37,7 +37,6 @@ This file configures the phase structure of the simulation. Currently the popula
  - phase            is the phase.
  - subPhase         is the letter after the phase, but as a number.
  - days             is the number of days spent in this phase.
- - population       had better match population.csv, as noted above.
  - name             is the name of the vaccine in this phase. It is used by the model to change the non-static parameters in the model.
 
 The comment column is for human consumption. It does nothing in the model.

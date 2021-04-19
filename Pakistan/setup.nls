@@ -531,7 +531,6 @@ to setup
 
   processPopulationData
   setup_vaccineData
-  setup_vaccineData
   setup_incursionData
   setup_DataOut
   
