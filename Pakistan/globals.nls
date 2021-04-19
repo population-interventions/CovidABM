@@ -27,6 +27,7 @@ globals [
   CaseFatalityRate
   DeathCount
   recovercount
+  dailyRecoverMult
   recoverProportion ; Proportion of the living population that has recovered.
   casesReportedToday
   casesReportedToday_acc ; Accumulator for casesReportedToday

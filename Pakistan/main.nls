@@ -18,6 +18,7 @@ to ShiftRecoveredTowardsTotalProportion
       ]
     ]
   ]
+  set recoverCount recoverCount * dailyRecoverMult
 end
 
 ;;;;;;;;;;;;*********END OF TTI FUNCTIONS******* ;;;;;;;;;;;;;
