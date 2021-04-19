@@ -1555,7 +1555,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-3
+2
 
 SLIDER
 1610
@@ -2245,10 +2245,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-790
-739
-907
-772
+793
+750
+910
+783
 track_slope
 track_slope
 1
@@ -2344,6 +2344,17 @@ false
 PENS
 "default" 1.0 0 -16777216 true "" "ifelse table:get totalEndCount 1 > 0 [plot table:get totalEndR 1 / table:get totalEndCount 1][plot 0]"
 "pen-1" 1.0 0 -7500403 true "" "plot table:get endR_mean_metric 1"
+
+INPUTBOX
+205
+542
+319
+602
+preSimDailyCases
+1000.0
+1
+0
+Number
 
 @#$#@#$#@
 ## WHAT IS IT?

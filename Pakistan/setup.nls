@@ -166,25 +166,46 @@ end
 to createSimulants
   let pop_index 0
   let agentsOfThisIndex 0
+  let oldCohortIndex -1
+  
+  let cohort_pop 0
+  let cohort_age 0
+  let cohort_asti 0
+  let cohort_disability 0
+  let cohort_essential 0
+  let cohort_workerCount 0
+  let cohort_phase 0
+  let cohort_subPhase 0
+  let cohort_spanMult 0
+  let cohort_gatherFreqMult 0
+  let cohort_region 0
+  let cohort_succeptMult 0
+  let cohort_asymptomPropMult 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of Population patches with [ pcolor = black ] [
     
-    ; Iterate over cohort data to get each set of simul parameters.
-    let cohortData table:get popDivisionTable pop_index
+    if oldCohortIndex != pop_index [
+      ; Iterate over cohort data to get each set of simul parameters.
+      let cohortData table:get popDivisionTable pop_index
+      
+      set cohort_pop item 0 cohortData
+      set cohort_age item 1 cohortData
+      set cohort_asti item 2 cohortData
+      set cohort_disability item 3 cohortData
+      set cohort_essential item 4 cohortData
+      set cohort_workerCount item 5 cohortData
+      set cohort_phase item 6 cohortData
+      set cohort_subPhase item 7 cohortData
+      set cohort_spanMult item 8 cohortData
+      set cohort_gatherFreqMult item 9 cohortData
+      set cohort_region item 10 cohortData
+      set cohort_succeptMult item 11 cohortData
+      set cohort_asymptomPropMult item 12 cohortData
+      
+      set oldCohortIndex pop_index
+    ]
     set agentsOfThisIndex agentsOfThisIndex + 1
-    
-    let cohort_age item 1 cohortData
-    let cohort_asti item 2 cohortData
-    let cohort_disability item 3 cohortData
-    let cohort_essential item 4 cohortData
-    let cohort_workerCount item 5 cohortData
-    let cohort_phase item 6 cohortData
-    let cohort_subPhase item 7 cohortData
-    let cohort_spanMult item 8 cohortData
-    let cohort_gatherFreqMult item 9 cohortData
-    let cohort_region item 10 cohortData
-    let cohort_succeptMult item 11 cohortData
     
     sprout-simuls 1 [
       set size 2
@@ -228,7 +249,7 @@ to createSimulants
 
       set asymptomatic_draw random-float 1
       set asymptomaticFlag 0
-      if asymptomatic_draw < Asymptom_Prop [
+      if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
         set asymptomaticFlag 1
       ]
       
@@ -258,7 +279,7 @@ to createSimulants
       simul_resetPersonalVirulence
     ]
     
-    if agentsOfThisIndex >= item 0 cohortData [
+    if agentsOfThisIndex >= cohort_pop [
       set pop_index pop_index + 1
       set agentsOfThisIndex 0
     ]
@@ -323,35 +344,35 @@ to setGlobals
   set Objfunction                0
   set decisionDate               0
   set policyTriggerScale         1
-  set prior0                     0
-  set prior1                     0
-  set prior2                     0
-  set prior3                     0
-  set prior4                     0
-  set prior5                     0
-  set prior6                     0
-  set prior7                     0
-  set prior8                     0
-  set prior9                     0
-  set prior10                    0
-  set prior11                    0
-  set prior12                    0
-  set prior13                    0
-  set prior14                    0
-  set prior15                    0
-  set prior16                    0
-  set prior17                    0
-  set prior18                    0
-  set prior19                    0
-  set prior20                    0
-  set prior21                    0
-  set prior22                    0
-  set prior23                    0
-  set prior24                    0
-  set prior25                    0
-  set prior26                    0
-  set prior27                    0
-  set prior28                    0
+  set prior0                     preSimDailyCases
+  set prior1                     preSimDailyCases
+  set prior2                     preSimDailyCases
+  set prior3                     preSimDailyCases
+  set prior4                     preSimDailyCases
+  set prior5                     preSimDailyCases
+  set prior6                     preSimDailyCases
+  set prior7                     preSimDailyCases
+  set prior8                     preSimDailyCases
+  set prior9                     preSimDailyCases
+  set prior10                    preSimDailyCases
+  set prior11                    preSimDailyCases
+  set prior12                    preSimDailyCases
+  set prior13                    preSimDailyCases
+  set prior14                    preSimDailyCases
+  set prior15                    preSimDailyCases
+  set prior16                    preSimDailyCases
+  set prior17                    preSimDailyCases
+  set prior18                    preSimDailyCases
+  set prior19                    preSimDailyCases
+  set prior20                    preSimDailyCases
+  set prior21                    preSimDailyCases
+  set prior22                    preSimDailyCases
+  set prior23                    preSimDailyCases
+  set prior24                    preSimDailyCases
+  set prior25                    preSimDailyCases
+  set prior26                    preSimDailyCases
+  set prior27                    preSimDailyCases
+  set prior28                    preSimDailyCases
   
   set real_prior0                0
   set real_prior1                0

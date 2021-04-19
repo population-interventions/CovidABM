@@ -15,6 +15,7 @@ Many parameters are a boolean, which should be indicated by a value of 1 or 0.
  - gatherFreqMult   is a multiplier to how often the cohort gathers at central locations.
  - region           is the region index of the cohort. See region.csv
  - succeptibleMult  is a multiplier for the chance of being infected.
+ - asymptomPropMult is a multiplier to the base proportion of the population that is asymptomatic.
 
 A worker being essential causes the cohort to have the highest priority for going to work during a lockdown. For example, say we are in a lockdown where the policy sets 25% of workers to be regarded as essential. If only 15% of the total workers are in an 'essential' cohort, then all of the essential cohort works, with the remaining 10% made up of other workers.
 
