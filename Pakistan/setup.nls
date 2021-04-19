@@ -184,6 +184,7 @@ to createSimulants
     let cohort_spanMult item 8 cohortData
     let cohort_gatherFreqMult item 9 cohortData
     let cohort_region item 10 cohortData
+    let cohort_succeptMult item 11 cohortData
     
     sprout-simuls 1 [
       set size 2
@@ -211,6 +212,7 @@ to createSimulants
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
+      set succeptMult cohort_succeptMult
 
       move-to one-of patches with [ pcolor = black ]
 

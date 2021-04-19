@@ -475,8 +475,8 @@ PENS
 MONITOR
 1474
 512
-1638
-561
+1599
+562
 Reported Inf Today
 casesReportedToday
 0
@@ -528,10 +528,10 @@ objFunction
 14
 
 MONITOR
-1762
-883
-1846
-928
+1760
+909
+1842
+954
 Red (raw)
 count simuls with [ color = red ]
 0
@@ -539,10 +539,10 @@ count simuls with [ color = red ]
 11
 
 SWITCH
-1614
-969
-1707
-1002
+1477
+993
+1570
+1026
 scale
 scale
 0
@@ -604,10 +604,10 @@ Leave Freewheel to 'on' to manipulate policy on the fly
 1
 
 MONITOR
-1762
-983
-1842
-1028
+1612
+988
+1692
+1033
 NIL
 count simuls
 17
@@ -1116,9 +1116,9 @@ currentinfections
 11
 
 MONITOR
-1787
+1788
 450
-1841
+1842
 495
 Average Illness time
 mean [ timenow ] of simuls with [ color = red ]
@@ -1200,9 +1200,9 @@ casesinperiod7
 
 MONITOR
 1762
-933
+963
 1844
-978
+1008
 Yellow (raw)
 count simuls with [ color = yellow ]
 0
@@ -1410,10 +1410,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1644
-448
-1695
-493
+1645
+449
+1696
+494
 NIL
 contact_radius
 17
@@ -1487,10 +1487,10 @@ stage
 11
 
 MONITOR
-1699
-502
-1786
-547
+1643
+500
+1746
+545
 Interaction Infectivity
 transmission_average
 6
@@ -1498,10 +1498,10 @@ transmission_average
 11
 
 MONITOR
-1703
-449
-1783
-494
+1704
+450
+1784
+495
 Virulent Interactions
 transmission_count_metric
 17
@@ -1558,10 +1558,10 @@ param_policy
 3
 
 SLIDER
-1608
-888
-1745
-921
+1610
+909
+1747
+942
 Scale_Threshold
 Scale_Threshold
 50
@@ -1573,10 +1573,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1608
-926
-1746
-959
+1610
+947
+1748
+980
 Scale_Factor
 Scale_Factor
 2
@@ -1699,10 +1699,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot transmission_average"
 
 MONITOR
-1793
-502
-1853
-547
+1750
+500
+1842
+545
 Expected New Cases
 transmission_count_metric * transmission_average
 6
@@ -1780,10 +1780,10 @@ PENS
 "default" 0.05 1 -16777216 true "" "histogram [ currentVirulence ] of simuls with [ color = red ]"
 
 MONITOR
-1760
-562
-1849
-607
+1752
+552
+1841
+597
 Real New Cases
 new_case_real
 17
@@ -1883,7 +1883,7 @@ HORIZONTAL
 MONITOR
 1474
 463
-1631
+1603
 508
 NIL
 totalOverseasIncursions
@@ -1923,11 +1923,11 @@ track_R
 -1000
 
 PLOT
-1601
-752
-1831
-872
-Average R (black), New R (grey)
+1610
+782
+1840
+902
+Average R 2
 NIL
 NIL
 0.0
@@ -1942,12 +1942,12 @@ PENS
 "pen-1" 1.0 0 -7500403 true "" "plot table:get endR_mean_metric 2"
 
 MONITOR
-1469
-779
-1577
-824
-NIL
-average_R
+1732
+730
+1841
+775
+average_R 2
+table:get average_R 2
 6
 1
 11
@@ -2088,10 +2088,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot slope_prior0 / 20"
 
 MONITOR
-1628
-563
-1750
-608
+1643
+552
+1746
+597
 Tracked Infection %
 100 * (count simuls with [color = red and tracked = 1]) / (count simuls with [color = red])
 2
@@ -2314,6 +2314,36 @@ param_virulence_inc
 1
 NIL
 HORIZONTAL
+
+MONITOR
+1614
+730
+1724
+775
+average_R 1
+table:get average_R 1
+6
+1
+11
+
+PLOT
+1613
+605
+1841
+725
+Average R 1
+NIL
+NIL
+0.0
+10.0
+0.0
+2.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "ifelse table:get totalEndCount 1 > 0 [plot table:get totalEndR 1 / table:get totalEndCount 1][plot 0]"
+"pen-1" 1.0 0 -7500403 true "" "plot table:get endR_mean_metric 1"
 
 @#$#@#$#@
 ## WHAT IS IT?

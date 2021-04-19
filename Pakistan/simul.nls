@@ -18,6 +18,7 @@ simuls-own [
   spanMult
   gatherFreqMult
   homeRegion
+  succeptMult
   
   ownIllnessPeriod ;; unique illness period associated with the individual
   ownIncubationPeriod ;; unique incubation pd for the person - related to IncubationPd so can probably be cleaned up - IncubationPd is a legacy var as previously all incubation periods were identical
@@ -286,7 +287,7 @@ end
 
 to simul_infect
   if color = cyan [
-    let mySucceptibility 1
+    let mySucceptibility succeptMult
     if wearingMask = 1 [
       set mySucceptibility (mySucceptibility * (1 - draw_maskWearEfficacy)) * Mask_Efficacy_Mult
     ]
