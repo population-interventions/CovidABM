@@ -150,7 +150,6 @@ to processPopulationData
   set regionPosMax table:make
   
   let regionTableData table:values regionTable
-  print regionTable_list
   let curHouseIndex 0
   foreach regionTableData [ data -> 
     let region item 0 data
