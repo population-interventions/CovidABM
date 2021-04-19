@@ -152,7 +152,8 @@ globals [
   populationCohortCache ; Filters for the population
 
   regionTable
-  regionTable_keys ; length of table.
+  regionTable_list ; list of region indicies
+  regionTable_keys
   regionHouseMin
   regionHouseMax
   regionPosMin

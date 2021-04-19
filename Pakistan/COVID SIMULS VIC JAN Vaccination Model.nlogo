@@ -528,10 +528,10 @@ objFunction
 14
 
 MONITOR
-1743
-829
-1827
-874
+1762
+883
+1846
+928
 Red (raw)
 count simuls with [ color = red ]
 0
@@ -539,10 +539,10 @@ count simuls with [ color = red ]
 11
 
 SWITCH
-1595
-915
-1688
-948
+1614
+969
+1707
+1002
 scale
 scale
 0
@@ -604,10 +604,10 @@ Leave Freewheel to 'on' to manipulate policy on the fly
 1
 
 MONITOR
-1743
-929
-1823
-974
+1762
+983
+1842
+1028
 NIL
 count simuls
 17
@@ -1116,10 +1116,10 @@ currentinfections
 11
 
 MONITOR
-1713
-449
-1838
-494
+1787
+450
+1841
+495
 Average Illness time
 mean [ timenow ] of simuls with [ color = red ]
 1
@@ -1199,10 +1199,10 @@ casesinperiod7
 11
 
 MONITOR
-1743
-879
-1825
-924
+1762
+933
+1844
+978
 Yellow (raw)
 count simuls with [ color = yellow ]
 0
@@ -1410,10 +1410,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1597
-600
-1685
-645
+1644
+448
+1695
+493
 NIL
 contact_radius
 17
@@ -1487,10 +1487,10 @@ stage
 11
 
 MONITOR
-1713
-549
-1837
-594
+1699
+502
+1786
+547
 Interaction Infectivity
 transmission_average
 6
@@ -1498,10 +1498,10 @@ transmission_average
 11
 
 MONITOR
-1713
-499
-1838
-544
+1703
+449
+1783
+494
 Virulent Interactions
 transmission_count_metric
 17
@@ -1558,10 +1558,10 @@ param_policy
 3
 
 SLIDER
-1589
-834
-1726
-867
+1608
+888
+1745
+921
 Scale_Threshold
 Scale_Threshold
 50
@@ -1573,10 +1573,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1589
-872
-1727
-905
+1608
+926
+1746
+959
 Scale_Factor
 Scale_Factor
 2
@@ -1699,10 +1699,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot transmission_average"
 
 MONITOR
-1717
-599
-1839
-644
+1793
+502
+1853
+547
 Expected New Cases
 transmission_count_metric * transmission_average
 6
@@ -1780,10 +1780,10 @@ PENS
 "default" 0.05 1 -16777216 true "" "histogram [ currentVirulence ] of simuls with [ color = red ]"
 
 MONITOR
-1724
-650
-1832
-695
+1760
+562
+1849
+607
 Real New Cases
 new_case_real
 17
@@ -1918,15 +1918,15 @@ SWITCH
 772
 track_R
 track_R
-1
+0
 1
 -1000
 
 PLOT
-1598
-700
-1828
-820
+1601
+752
+1831
+872
 Average R (black), New R (grey)
 NIL
 NIL
@@ -1938,8 +1938,8 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "ifelse totalEndCount > 0 [plot totalEndR / totalEndCount][plot 0]"
-"pen-1" 1.0 0 -7500403 true "" "plot endR_mean_metric"
+"default" 1.0 0 -16777216 true "" "ifelse table:get totalEndCount 2 > 0 [plot table:get totalEndR 2 / table:get totalEndCount 2][plot 0]"
+"pen-1" 1.0 0 -7500403 true "" "plot table:get endR_mean_metric 2"
 
 MONITOR
 1469
@@ -2088,10 +2088,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot slope_prior0 / 20"
 
 MONITOR
-1599
-649
-1721
-694
+1628
+563
+1750
+608
 Tracked Infection %
 100 * (count simuls with [color = red and tracked = 1]) / (count simuls with [color = red])
 2

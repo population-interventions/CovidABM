@@ -210,10 +210,10 @@ end
 to simul_setEndR
   ;print R_measure_time
   if R_measure_time < ticks [
-    set totalEndR totalEndR + R
-    set totalEndCount totalEndCount + 1
-    set endR_sum endR_sum + R
-    set endR_count endR_count + 1
+    table:put totalEndR homeRegion (table:get totalEndR homeRegion) + R
+    table:put totalEndCount homeRegion (table:get totalEndCount homeRegion) + 1
+    table:put endR_sum homeRegion (table:get endR_sum homeRegion) + R
+    table:put endR_count homeRegion (table:get endR_count homeRegion) + 1
   ]
 end
 

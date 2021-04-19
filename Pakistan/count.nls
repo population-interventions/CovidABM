@@ -56,20 +56,23 @@ to resetAccumulators
   
   set new_case_real new_case_real_counter
   set new_case_real_counter 0
- 
-  if endR_count > 0 [
-    set endR_mean_metric endR_sum / endR_count
-    set endR_sum 0
-    set endR_count 0
+  
+  foreach regionTable_list [ region ->
+    if table:get endR_count region > 0 [
+      table:put endR_mean_metric region table:get endR_sum region / table:get endR_count region
+      table:put endR_sum region 0
+      table:put endR_count region 0
+    ]
+  
+    ifelse table:get totalEndCount region > 0
+    [
+      table:put average_R region table:get totalEndR region / table:get totalEndCount region
+    ]
+    [
+      table:put average_R region 0
+    ]
   ]
   
-  ifelse totalEndCount > 0
-  [
-    set average_R totalEndR / totalEndCount
-  ]
-  [
-    set average_R 0
-  ]
   ;show ( word " avoidFails " (avoidAttempts - avoidSuccess) ", avoidSuccess " avoidSuccess)
   ;set avoidSuccess 0
   ;set avoidAttempts 0

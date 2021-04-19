@@ -17,8 +17,8 @@ Many parameters are a boolean, which should be indicated by a value of 1 or 0.
 
 A worker being essential causes the cohort to have the highest priority for going to work during a lockdown. For example, say we are in a lockdown where the policy sets 25% of workers to be regarded as essential. If only 15% of the total workers are in an 'essential' cohort, then all of the essential cohort works, with the remaining 10% made up of other workers.
 
-alreadyVaccinated does nothing for the moment, but will be used to let cohorts start vaccinated.
-The comment column is for human consumption. It does nothing in the model.
+alreadyVaccinated does nothing for the moment, but will be used to set the number of initially vacciated members of the cohort.
+The comment column does nothing in the model.
 
 === region.csv ===
 This file configures the properties of cohorts from different regions. Simulants only live together if they are from the same region.

@@ -101,10 +101,21 @@ to loadRegionTable
   let regionFileData remove-item 0 csv:from-file "input/region.csv"
   set regionTable table:make
   set regionTable_keys []
+  set regionTable_list []
   let i 0
   foreach regionFileData [ x -> 
+    let region (item 0 x)
     table:put regionTable i x
     set regionTable_keys lput i regionTable_keys
+    
+    set regionTable_list lput region regionTable_list
+    table:put endR_count region 0
+    table:put endR_mean_metric region 0
+    table:put endR_sum region 0
+    table:put totalEndCount region 0
+    table:put totalEndR region 0
+    table:put average_R region 0
+    
     set i i + 1
   ]
 end
@@ -139,6 +150,7 @@ to processPopulationData
   set regionPosMax table:make
   
   let regionTableData table:values regionTable
+  print regionTable_list
   let curHouseIndex 0
   foreach regionTableData [ data -> 
     let region item 0 data
@@ -430,12 +442,12 @@ to setGlobals
   set vaccineTable 0
   set global_vaccine_eff 0 ;; Effectiveness of the vaccine along the three dimensions (infection rate, transmition rate, duration)
 
-  set totalEndR 0
-  set totalEndCount 0
-  set endR_sum 0
-  set endR_count 0
-  set endR_mean_metric 0
-  set average_R 0
+  set totalEndR table:make
+  set totalEndCount table:make
+  set endR_sum table:make
+  set endR_count table:make
+  set endR_mean_metric table:make
+  set average_R table:make
   
   ;; log transform illness period variables
   set Illness_PeriodVariance 0
@@ -507,6 +519,8 @@ to setup
   if profile_on [
     profiler:start
   ]
+  loadPopDivisionTable
+  loadRegionTable
   resetAccumulators
 
   rngs:init
@@ -514,8 +528,6 @@ to setup
   ;;import-drawing "Background1.png" ;; imports MSD image
   set days 0 ; used to count days
 
-  loadPopDivisionTable
-  loadRegionTable
   processPopulationData
   setup_vaccineData
   setup_vaccineData
