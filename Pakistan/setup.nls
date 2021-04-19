@@ -632,7 +632,6 @@ to setup
 
   set recovercount param_recovered_prop * total_population
   set dailyRecoverMult exp(ln(1 - yearly_recover_prop_loss) / 365)
-  print dailyRecoverMult
   ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
     set color yellow
   ]
