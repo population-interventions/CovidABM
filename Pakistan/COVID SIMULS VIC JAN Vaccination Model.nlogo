@@ -20,13 +20,13 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-338
-58
-961
-682
+342
+60
+962
+681
 -1
 -1
-6.05
+7.56
 1
 10
 1
@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-50.0
+10.0
 .5
 1
 NIL
@@ -320,7 +320,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-50.0
+10.0
 .5
 1
 NIL
@@ -550,9 +550,9 @@ scale
 -1000
 
 MONITOR
-890
+917
 13
-948
+975
 58
 NIL
 Days
@@ -740,7 +740,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -781,7 +781,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+15.0
 1
 1
 NIL
@@ -794,14 +794,14 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
 MONITOR
-804
+832
 13
-876
+904
 58
 Household
 mean [ householdunit ] of simuls
@@ -1020,7 +1020,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -1264,7 +1264,7 @@ SWITCH
 526
 Vaccine_Available
 Vaccine_Available
-1
+0
 1
 -1000
 
@@ -1319,7 +1319,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-4637681.0
+3574879.0
 1
 1
 NIL
@@ -1372,9 +1372,9 @@ SLIDER
 param_vac_uptake
 param_vac_uptake
 60
-90
-90.0
-15
+100
+100.0
+10
 1
 NIL
 HORIZONTAL
@@ -1555,7 +1555,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-8
+3
 
 SLIDER
 1610
@@ -1755,7 +1755,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -2279,7 +2279,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0.1
 4
-0.8
+3.0
 0.1
 1
 NIL
