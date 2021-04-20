@@ -74,9 +74,9 @@ to simul_vaccinate_me
   if vacWaitDays > 0 [
     set vacWaitDays vacWaitDays - 1
     if vacWaitDays = 0 [
-      set shape "person"
+      ;set shape "person"
       set vaccinated 1
-      simul_updateVacEffMult
+      simul_updateVacAndReinfectMult
     ]
   ]
   

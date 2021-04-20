@@ -19,7 +19,6 @@ globals [
   eightyfive
   ninetyfive
   InitialReserves
-  dynamicVirulenceMult
   AverageContacts
   AverageFinancialContacts
   ScalePhase
@@ -27,6 +26,7 @@ globals [
   CaseFatalityRate
   DeathCount
   recovercount
+  recoverCountByVariant
   dailyRecoverMult
   recoverProportion ; Proportion of the living population that has recovered.
   casesReportedToday
@@ -202,6 +202,8 @@ globals [
   global_incursionScale ;; Scale applied to the underlying probability, from the csv
   global_incursionArrivals ;; Number of arrivals, read from csv
   global_incursionRisk ;; Scale multiplied by the underlying probability.
+  global_incursionVariant
+  global_incursionReplaceChance
   
   totalOverseasIncursions
   vaccinePhaseEndDay

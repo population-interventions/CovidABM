@@ -68,12 +68,6 @@ to setEssentialWorkerPriority
   ]
 end
 
-to calculatedailyrisk
-  ;; estimates risk of death per day for the duration of the period of illness
-  ;; used for stats more than calibrated to real world given most people die late in the illness period
-  set dailyrisk ( riskofDeath / Illness_period )
-end
-
 to simul_resetPersonalVirulence
   ;; ensures that personalVirulence is within bounds
   if personalVirulence > 100 [
@@ -266,7 +260,7 @@ to createSimulants
       set requireICU 0
       set requireICU_draw random-float 1
 
-      set wearsMask random 100 ;; resethealth resetincome calculateincomeperday calculateexpenditureperday resettrust
+      set wearsMask random 100 ;; resethealth resetincome immune_from_reinfect calculateexpenditureperday resettrust
       set returntoschool random 100
 
       ;;set ownComplianceWithIsolation ( exp random-normal Mcomp SComp ) ;; log transform of compliance with isolation
@@ -311,12 +305,12 @@ to setGlobals
   set InitialReserves            0
   set AverageContacts            0
   set AverageFinancialContacts   0
-  set dynamicVirulenceMult       0
   set ScalePhase                 0
   set Days                       0
   set CaseFatalityRate           0
   set DeathCount                 0
   set recovercount               0
+  set recoverCountByVariant      table:make
   set dailyRecoverMult           0
   set recoverProportion          0
   set casesReportedToday         0
@@ -556,7 +550,6 @@ to setup
   setup_incursionData
   setup_DataOut
   
-  set dynamicVirulenceMult 1
   set resetdate 7
   
   ;; illness period estimation using ln transform
@@ -571,9 +564,6 @@ to setup
   set MInc (ln incubation_period) - (BetaincubationPd / 2)
   set SInc sqrt BetaIncubationPd
 
-  ask red-links [
-    set color red
-  ]
   ask patches [
     set pcolor black
     set houseIndex -1
@@ -599,15 +589,13 @@ to setup
   
   ask n-of ( initial_cases / popPerSimul ) simuls [
     set color red
+    set infectVariant 1
+    simul_updateVacAndReinfectMult
+
     set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
     simul_updatepersonalvirulence
     set infectionsToday_acc infectionsToday_acc + popPerSimul
     array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + Scale_Factor ^ scalephase
-  ]
-
-  ;; spend CalculateIncomePerday
-  ask simuls [
-    calculateDailyrisk
   ]
 
   set contact_radius 0 ;; sets contact radius of people
@@ -623,6 +611,9 @@ to setup
   ask simuls [
     if init_secondry_infect > 0 and any? other simuls in-radius 2 with [ color = red ] [
       set color red
+      set infectVariant 1
+      simul_updateVacAndReinfectMult
+
       set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
       set init_secondry_infect init_secondry_infect - popPerSimul
       set infectionsToday_acc infectionsToday_acc + popPerSimul
@@ -631,9 +622,12 @@ to setup
   ]
 
   set recovercount param_recovered_prop * total_population
+  table:put recoverCountByVariant 1 recovercount
   set dailyRecoverMult exp(ln(1 - yearly_recover_prop_loss) / 365)
   ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
     set color yellow
+    set recoveryVariant 1
+    simul_updateVacAndReinfectMult
   ]
   ;;set tracking false ;; ensures this is set to false each time the model starts
   ;;set link_switch false ;; ensures this is set to false each timme the model starts

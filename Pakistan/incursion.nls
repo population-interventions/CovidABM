@@ -5,6 +5,9 @@ to setup_incursionData
   let i 0
   foreach incursionFileData [ x -> 
     table:put incursionTable i x
+    
+    table:put recoverCountByVariant (item 3 x) 0
+    
     set i i + 1
   ]
   
@@ -13,6 +16,8 @@ to setup_incursionData
   
   set global_incursionScale 0
   set global_incursionArrivals 0
+  set global_incursionVariant 0
+  set global_incursionReplaceChance 0
   
   set incursionsSeedID 2
   rngs:set-seed incursionsSeedID random-float 999
@@ -29,6 +34,8 @@ to incursion_update
       set incursionPhaseEndDay (incursionPhaseEndDay + phaseDays)
       set global_incursionScale item 1 phaseData
       set global_incursionArrivals item 2 phaseData
+      set global_incursionVariant item 3 phaseData
+      set global_incursionReplaceChance item 4 phaseData
     ]
   ]
   
@@ -37,6 +44,10 @@ to incursion_update
   ask n-of global_incursionArrivals simuls with [color != red and color != black] [
     if global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
       set color red
+      set infectVariant global_incursionVariant
+      set variantTransMult variant_transmiss_growth ^ (infectVariant - 1)
+      simul_updateVacAndReinfectMult
+
       set timenow 0
       set isolating 0
       set noticeOwnInfection 0

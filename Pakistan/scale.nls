@@ -3,18 +3,6 @@
 ;;** Scale Modification **
 ;;*******************************************************************************************************************************
 
-to scaleup
-  set scalephase scalephase + 1
-  
-  ask n-of ( count simuls with [ color = red ] * (1 - 1 / Scale_Factor) ) simuls with [ color = red ] [
-    simul_do_scaleup
-  ]
-
-  ask n-of ( count simuls with [ color = yellow ] * (1 - 1 / Scale_Factor) ) simuls with [ color = yellow ] [
-    simul_do_scaleup
-  ]
-end
-
 to scaleup_try_to_maintain_cohort
   set scalephase scalephase + 1
   let localRedCount count simuls with [ color = red ]
@@ -105,6 +93,8 @@ to scaledown_try_to_maintain_cohort
       let my_tracked tracked
       let my_inQuarantine inQuarantine
       let my_R R
+      let my_infectVariant infectVariant
+      let my_variantTransMult variantTransMult
       
       let eligible cohort with [ color != red or color != black ]
       if count eligible < (Scale_Factor - 1) [
@@ -113,6 +103,10 @@ to scaledown_try_to_maintain_cohort
       
       ask n-of (Scale_Factor - 1) eligible [
         set color red
+        set infectVariant my_infectVariant
+        set variantTransMult my_variantTransMult
+        simul_updateVacAndReinfectMult
+
         set isolating 0
         set timenow my_timenow
         set caseReportTime my_caseReportTime
@@ -128,30 +122,6 @@ to scaledown_try_to_maintain_cohort
   
   ;; Reset all houses so infective people are together.
   reset_housing
-  set scalephase scalephase - 1
-end
-
-to scaledown_no_hatch
-  ask simuls with [ color = red ] [
-    let my_timenow timenow
-    let my_caseReportTime caseReportTime
-    let my_tracked tracked
-    let my_inQuarantine inQuarantine
-
-    ask n-of (Scale_Factor - 1) simuls with [ color != red or color != black ] [
-      set color red
-      set isolating 0
-      set timenow my_timenow
-      set caseReportTime my_caseReportTime
-      set tracked my_tracked
-      set inQuarantine my_inQuarantine
-      if inQuarantine = 1 [
-        move-to one-of patches with [ pcolor = white ] 
-      ]
-    ]
-  ]
-  
-  ;set contact_Radius Contact_radius - (90 / 4)
   set scalephase scalephase - 1
 end
 

@@ -198,10 +198,10 @@ NIL
 1
 
 MONITOR
-19
-705
-168
-762
+17
+638
+166
+695
 Deaths
 Deathcount
 0
@@ -257,10 +257,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-19
-767
-168
-824
+17
+700
+166
+757
 % Total Infections
 cumulativeInfected / Total_Population * 100
 2
@@ -476,7 +476,7 @@ MONITOR
 1474
 512
 1599
-562
+561
 Reported Inf Today
 casesReportedToday
 0
@@ -717,10 +717,10 @@ mean [ personalvirulence] of simuls
 11
 
 SLIDER
-10
-410
-187
-443
+14
+342
+191
+375
 Global_Transmissibility
 Global_Transmissibility
 0
@@ -747,10 +747,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-555
-825
-752
-858
+553
+855
+750
+888
 Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
@@ -872,10 +872,10 @@ MaskPolicy
 -1000
 
 SLIDER
-332
-989
-527
-1022
+328
+933
+523
+966
 Case_Reporting_Delay
 Case_Reporting_Delay
 0
@@ -1049,10 +1049,10 @@ sum [ R ] of simuls with [ color != 85 and R > 2] / sum [ R ] of simuls with [ c
 11
 
 SLIDER
-332
-907
-530
-940
+328
+850
+526
+883
 Asymptomatic_Trans
 Asymptomatic_Trans
 0
@@ -1258,10 +1258,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-20
-560
-192
-593
+17
+493
+189
+526
 Vaccine_Available
 Vaccine_Available
 0
@@ -1355,20 +1355,20 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count simuls with [ shape = \"person\" ]"
 
 TEXTBOX
-22
+19
+433
+187
 500
-190
-567
 Vaccine rollout and vaccine used per phase set in vaccine.csv.
 14
 0.0
 1
 
 SLIDER
-10
-152
-185
-185
+18
+112
+193
+145
 param_vac_uptake
 param_vac_uptake
 60
@@ -1380,10 +1380,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-10
-277
-187
-310
+17
+220
+194
+253
 param_vac_tran_reduct
 param_vac_tran_reduct
 0.5
@@ -1395,10 +1395,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-19
-598
-191
-631
+17
+532
+189
+565
 param_vacEffDays
 param_vacEffDays
 0
@@ -1548,14 +1548,14 @@ secondary_cases
 Number
 
 CHOOSER
-12
-362
-185
-407
+17
+294
+190
+339
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-2
+3
 
 SLIDER
 1610
@@ -1651,10 +1651,10 @@ Permanent yet straightforward variables
 1
 
 SLIDER
-332
-827
-527
-860
+325
+970
+520
+1003
 Asymptom_Prop
 Asymptom_Prop
 0
@@ -1666,10 +1666,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-332
-867
-527
-900
+325
+1010
+520
+1043
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
 0
@@ -1732,10 +1732,10 @@ PENS
 "Recovered" 1.0 0 -1184463 true "" "plot count simuls with [color = yellow]"
 
 SLIDER
-557
-785
-754
-818
+554
+814
+751
+847
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1851,10 +1851,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-554
-865
-752
-898
+553
+895
+751
+928
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -1866,10 +1866,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-332
-949
-529
-982
+328
+893
+525
+926
 Non_Infective_Time
 Non_Infective_Time
 0
@@ -1972,10 +1972,10 @@ PENS
 "pen-1" 1.0 0 -5298144 true "" "histogram [ cohortIndex ] of simuls with [ color = red ]"
 
 MONITOR
-19
-645
-169
-702
+17
+578
+167
+635
 Total Infected
 cumulativeInfected
 17
@@ -1983,10 +1983,10 @@ cumulativeInfected
 14
 
 MONITOR
-19
-835
-174
-892
+17
+768
+172
+825
 % Living Recovered
 recoverProportion * 100
 2
@@ -1994,25 +1994,25 @@ recoverProportion * 100
 14
 
 SLIDER
-557
-745
-752
-778
+555
+723
+750
+756
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
 0.5
-0.078
+0.28
 0.001
 1
 NIL
 HORIZONTAL
 
 SWITCH
-12
-319
-186
-352
+17
+257
+191
+290
 param_trigger_loosen
 param_trigger_loosen
 1
@@ -2057,10 +2057,10 @@ totalEndCount
 11
 
 MONITOR
-923
-743
-1028
-788
+922
+722
+1027
+767
 slopeAverage %
 slopeAverage * 100
 3
@@ -2068,10 +2068,10 @@ slopeAverage * 100
 11
 
 PLOT
-768
-792
-1025
-942
+767
+770
+1024
+920
 slope %
 NIL
 NIL
@@ -2099,10 +2099,10 @@ Tracked Infection %
 11
 
 SLIDER
-22
-910
-212
-943
+14
+964
+204
+997
 calibrate_stage_switch
 calibrate_stage_switch
 0
@@ -2114,10 +2114,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-24
-952
-304
-985
+17
+1005
+297
+1038
 stage_test_index
 stage_test_index
 0
@@ -2129,10 +2129,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-552
-908
-725
-941
+555
+935
+728
+968
 sympt_present_prop
 sympt_present_prop
 0
@@ -2144,10 +2144,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-552
-948
-725
-981
+557
+973
+730
+1006
 sympt_present_min
 sympt_present_min
 0
@@ -2159,10 +2159,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-735
-947
-908
-980
+557
+1012
+730
+1045
 sympt_present_max
 sympt_present_max
 0
@@ -2185,10 +2185,10 @@ isolate_on_inf_notice
 -1000
 
 SLIDER
-334
-710
-534
-743
+777
+685
+977
+718
 Household_Iso_Factor
 Household_Iso_Factor
 0
@@ -2200,10 +2200,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-334
-787
-531
-820
+780
+1002
+977
+1035
 Infect_Iso_Factor
 Infect_Iso_Factor
 0
@@ -2215,10 +2215,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-559
-708
-759
-741
+553
+687
+753
+720
 houseTotal
 houseTotal
 100
@@ -2230,10 +2230,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-335
-752
-533
-785
+780
+967
+978
+1000
 Track_Iso_Factor
 Track_Iso_Factor
 0
@@ -2245,10 +2245,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-793
-750
-910
-783
+792
+728
+909
+761
 track_slope
 track_slope
 1
@@ -2256,10 +2256,10 @@ track_slope
 -1000
 
 SLIDER
-10
-237
-185
-270
+17
+184
+192
+217
 param_vac_wane
 param_vac_wane
 0
@@ -2271,10 +2271,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-10
-194
-185
-227
+18
+147
+193
+180
 param_vac_rate_mult
 param_vac_rate_mult
 0.1
@@ -2286,10 +2286,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-9
-104
-188
-137
+18
+75
+197
+108
 param_recovered_prop
 param_recovered_prop
 0
@@ -2301,10 +2301,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-12
-452
-194
-485
+14
+379
+189
+412
 param_virulence_inc
 param_virulence_inc
 0
@@ -2346,15 +2346,145 @@ PENS
 "pen-1" 1.0 0 -7500403 true "" "plot table:get endR_mean_metric 1"
 
 INPUTBOX
-205
-542
-319
-602
+203
+535
+317
+595
 preSimDailyCases
 1000.0
 1
 0
 Number
+
+SLIDER
+297
+688
+522
+721
+yearly_recover_prop_loss
+yearly_recover_prop_loss
+0
+0.999
+0.15
+0.001
+1
+NIL
+HORIZONTAL
+
+SLIDER
+295
+807
+525
+840
+variant_transmiss_growth
+variant_transmiss_growth
+1
+3
+1.3
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+297
+765
+522
+798
+immune_from_reinfect
+immune_from_reinfect
+0
+1
+0.95
+0.05
+1
+NIL
+HORIZONTAL
+
+SLIDER
+298
+727
+522
+760
+immune_from_prev_variant
+immune_from_prev_variant
+0
+1
+0.1
+0.05
+1
+NIL
+HORIZONTAL
+
+MONITOR
+19
+830
+173
+888
+% Recovered First
+recoverProportion * 100 * (table:get recoverCountByVariant 1) / (table:get recoverCountByVariant 1 + table:get recoverCountByVariant 2)
+2
+1
+14
+
+MONITOR
+19
+895
+173
+953
+% Recovered Second
+recoverProportion * 100 * (table:get recoverCountByVariant 2) / (table:get recoverCountByVariant 1 + table:get recoverCountByVariant 2)
+2
+1
+14
+
+MONITOR
+182
+780
+247
+825
+% Yellow
+100 * (count simuls with [color = yellow]) / 2500
+2
+1
+11
+
+MONITOR
+182
+844
+275
+889
+% Yellow First
+100 * (count simuls with [color = yellow and recoveryVariant = 1]) / 2500
+2
+1
+11
+
+MONITOR
+180
+895
+289
+940
+% Yellow Second
+100 * (count simuls with [color = yellow and recoveryVariant = 2]) / 2500
+2
+1
+11
+
+SLIDER
+554
+765
+752
+799
+Recov_Var_Match_Rate
+Recov_Var_Match_Rate
+0
+1
+0.85
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

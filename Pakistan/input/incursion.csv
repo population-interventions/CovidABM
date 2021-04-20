@@ -1,6 +1,6 @@
-days,incursionScale,infectedArrivals
-10,0,2
-81,0,2
-91,0,4
-91,0,8
-77,0,16
+days,incursionScale,infectedArrivals,variant,varReplaceChance
+10,0,2,1,0
+81,0,2,1,0
+91,0,4,2,0.01
+91,0,8,2,0.02
+300,0,16,2,0.04

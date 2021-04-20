@@ -50,3 +50,7 @@ This file sets the rate of incursions.
  - days             is how long this phase of incursion settings lasts
  - incursionScale   is a multiplier for the probability of any given infected arrival infecting someone in the community.
  - infectedArrivals is the number of oppotunities availible to infect a member of the community, per day.
+ - variant          is the variant (a number 1, 2 etc) that is brought in by incursions.
+ - varReplaceChance is the probability of the new variant being spontaneously created when a simulant infects another simulant.
+
+The purpose of varReplaceChance is to introduce the new variant at a set time without worrying about the scale issues around incursions.
