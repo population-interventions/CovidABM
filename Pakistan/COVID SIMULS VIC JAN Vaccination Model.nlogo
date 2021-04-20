@@ -22,11 +22,11 @@ __includes[
 GRAPHICS-WINDOW
 338
 58
-958
-680
+961
+682
 -1
 -1
-6.025
+6.05
 1
 10
 1
@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-3.0
+5.0
 1
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-78.0
+50.0
 .5
 1
 NIL
@@ -320,7 +320,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-78.0
+50.0
 .5
 1
 NIL
@@ -740,7 +740,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-20.0
+35.0
 1
 1
 NIL
@@ -781,7 +781,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-85.0
+60.0
 1
 1
 NIL
@@ -844,7 +844,7 @@ MONITOR
 3566
 295
 EW Infection %
-EWInfections / 2500
+EWInfections / Population
 1
 1
 11
@@ -855,7 +855,7 @@ MONITOR
 3428
 292
 Student Infections %
-studentInfections / 2500
+studentInfections / Population
 1
 1
 11
@@ -1020,7 +1020,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+5.0
 1
 1
 NIL
@@ -1264,7 +1264,7 @@ SWITCH
 526
 Vaccine_Available
 Vaccine_Available
-0
+1
 1
 -1000
 
@@ -1305,7 +1305,7 @@ MONITOR
 1329
 58
 Vaccinated %
-( count simuls with [ shape = \"person\" ] / 2500 )* 100
+( count simuls with [ vaccinated = 1 ] / Population )* 100
 2
 1
 11
@@ -1319,7 +1319,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-6231884.0
+4637681.0
 1
 1
 NIL
@@ -1331,7 +1331,7 @@ MONITOR
 1429
 58
 Vaccinated
-count simuls with [ shape = \"person\" ]
+count simuls with [ vaccinated = 1 ]
 17
 1
 11
@@ -1555,7 +1555,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-3
+8
 
 SLIDER
 1610
@@ -1755,7 +1755,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-78.0
+50.0
 1
 1
 NIL
@@ -1843,8 +1843,8 @@ SLIDER
 End_Day
 End_Day
 -1
-365
--1.0
+548
+548.0
 1
 1
 NIL
@@ -2264,7 +2264,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-0.01
+0.002
 0.001
 1
 NIL
@@ -2279,7 +2279,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0.1
 4
-0.5
+0.8
 0.1
 1
 NIL
@@ -2444,7 +2444,7 @@ MONITOR
 247
 825
 % Yellow
-100 * (count simuls with [color = yellow]) / 2500
+100 * (count simuls with [color = yellow]) / Population
 2
 1
 11
@@ -2455,7 +2455,7 @@ MONITOR
 275
 889
 % Yellow First
-100 * (count simuls with [color = yellow and recoveryVariant = 1]) / 2500
+100 * (count simuls with [color = yellow and recoveryVariant = 1]) / Population
 2
 1
 11
@@ -2466,7 +2466,7 @@ MONITOR
 289
 940
 % Yellow Second
-100 * (count simuls with [color = yellow and recoveryVariant = 2]) / 2500
+100 * (count simuls with [color = yellow and recoveryVariant = 2]) / Population
 2
 1
 11
@@ -2490,7 +2490,7 @@ SWITCH
 689
 17
 799
-51
+50
 set_shape
 set_shape
 0
