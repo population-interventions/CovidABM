@@ -20,13 +20,13 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-344
-62
+338
+58
 958
-677
+680
 -1
 -1
-7.4815
+6.025
 1
 10
 1
@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-5.0
+3.0
 1
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-50.0
+78.0
 .5
 1
 NIL
@@ -320,7 +320,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-50.0
+78.0
 .5
 1
 NIL
@@ -740,7 +740,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+20.0
 1
 1
 NIL
@@ -781,7 +781,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+85.0
 1
 1
 NIL
@@ -1020,7 +1020,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+3.6
 1
 1
 NIL
@@ -1319,7 +1319,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3671498.0
+6231884.0
 1
 1
 NIL
@@ -1755,7 +1755,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+78.0
 1
 1
 NIL
@@ -1791,10 +1791,10 @@ new_case_real
 11
 
 BUTTON
-492
-13
-597
-47
+458
+17
+563
+51
 Profile Stop
 profiler:stop \nprint profiler:report
 NIL
@@ -1808,10 +1808,10 @@ NIL
 1
 
 SWITCH
-609
-13
-716
-46
+575
+17
+682
+50
 profile_on
 profile_on
 1
@@ -1819,10 +1819,10 @@ profile_on
 -1000
 
 BUTTON
-379
-13
-483
-48
+345
+17
+449
+52
 Profile Start
 profiler:start
 NIL
@@ -2279,7 +2279,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0.1
 4
-2.1
+0.5
 0.1
 1
 NIL
@@ -2380,7 +2380,7 @@ variant_transmiss_growth
 variant_transmiss_growth
 1
 3
-1.3
+1.6
 0.01
 1
 NIL
@@ -2420,7 +2420,7 @@ MONITOR
 19
 830
 173
-888
+887
 % Recovered First
 recoverProportion * 100 * (table:get recoverCountByVariant 1) / (table:get recoverCountByVariant 1 + table:get recoverCountByVariant 2)
 2
@@ -2431,7 +2431,7 @@ MONITOR
 19
 895
 173
-953
+952
 % Recovered Second
 recoverProportion * 100 * (table:get recoverCountByVariant 2) / (table:get recoverCountByVariant 1 + table:get recoverCountByVariant 2)
 2
@@ -2475,7 +2475,7 @@ SLIDER
 554
 765
 752
-799
+798
 Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
@@ -2485,6 +2485,17 @@ Recov_Var_Match_Rate
 1
 NIL
 HORIZONTAL
+
+SWITCH
+689
+17
+799
+51
+set_shape
+set_shape
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?

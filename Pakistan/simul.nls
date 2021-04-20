@@ -153,12 +153,44 @@ to simul_move_to_empty_patch
 end
 
 to simul_updateVacAndReinfectMult
-  ifelse recoveryVariant > 1 or infectVariant > 1
-  [
-    set shape "person" 
-  ]
-  [
-    set shape "dot" 
+  if set_shape [
+    ifelse recoveryVariant > 1 or infectVariant > 1
+    [
+      ifelse recoveryVariant > 2 or infectVariant > 2
+      [
+        ifelse vaccinated = 0
+        [
+          set shape "airplane" 
+          set size 2.2
+        ]
+        [
+          set shape "car"  
+          set size 2.1
+        ]
+      ]
+      [
+        ifelse vaccinated = 0
+        [
+          set shape "star" 
+          set size 1.5
+        ]
+        [
+          set shape "person"  
+          set size 2
+        ]
+      ]
+    ]
+    [
+      ifelse vaccinated = 0
+      [
+        set shape "circle" 
+        set size 1
+      ]
+      [
+        set shape "face happy" 
+        set size 1.3
+      ]
+    ]
   ]
   
   set variantTransMult variant_transmiss_growth ^ (infectVariant - 1)

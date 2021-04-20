@@ -29,7 +29,7 @@ to incursion_update
     if table:has-key? incursionTable (incursionPhaseIndex + 1) [
       set incursionPhaseIndex incursionPhaseIndex + 1
       let phaseData table:get incursionTable incursionPhaseIndex
-      let phaseDays (item 0 phaseData) / param_vac_rate_mult
+      let phaseDays (item 0 phaseData)
       
       set incursionPhaseEndDay (incursionPhaseEndDay + phaseDays)
       set global_incursionScale item 1 phaseData
