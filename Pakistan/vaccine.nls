@@ -51,6 +51,7 @@ to vaccine_update
           set phasePop phasePop + item 0 cohortData
         ]
       ]
+      ;print phasePop
       
       set vaccinePhaseEndDay (vaccinePhaseEndDay + phaseDays)
       set global_vaccineAvailible 0

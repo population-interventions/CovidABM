@@ -138,17 +138,17 @@ Span
 Span
 0
 30
-10.0
+3.0
 1
 1
 NIL
 HORIZONTAL
 
 PLOT
-2727
-75
-3132
-248
+2350
+852
+2755
+1025
 Susceptible, Infected and Recovered - 000's
 Days from March 10th
 Numbers of people
@@ -166,10 +166,10 @@ PENS
 "New Infections" 1.0 0 -11221820 true "" "plot count simuls with [ color = red and timenow = Incubation_Period ] * ( Total_Population / 100 / count Simuls )"
 
 SLIDER
-40
-1202
-240
-1235
+1190
+1002
+1390
+1035
 Illness_period
 Illness_period
 0
@@ -220,17 +220,6 @@ count simuls * (Total_Population / population)
 14
 
 MONITOR
-2333
-1044
-2591
-1089
-Bed Capacity Scaled for Australia at 65,000k
-count patches with [ pcolor = white ]
-0
-1
-11
-
-MONITOR
 2283
 467
 2452
@@ -250,7 +239,7 @@ superspreaders
 superspreaders
 0
 1
-0.0
+5.0E-4
 0.01
 1
 NIL
@@ -305,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-10.0
+78.0
 .5
 1
 NIL
@@ -320,17 +309,17 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-10.0
+78.0
 .5
 1
 NIL
 HORIZONTAL
 
 MONITOR
-3242
-320
-3301
-365
+2638
+722
+2697
+767
 R0
 mean [ R ] of simuls with [ color = red and timenow = int Illness_Period ]
 2
@@ -338,10 +327,10 @@ mean [ R ] of simuls with [ color = red and timenow = int Illness_Period ]
 11
 
 PLOT
-2778
-283
-3185
-405
+2345
+718
+2752
+840
 Estimated count of deceased across age ranges (not scaled)
 NIL
 NIL
@@ -374,10 +363,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "if ticks > 1 [ plot ( InfectionChange ) * 10 ]"
 
 MONITOR
-2438
-633
-2570
-678
+2285
+634
+2417
+679
 Infection Growth %
 infectionchange
 2
@@ -418,10 +407,10 @@ AverageContacts
 11
 
 SLIDER
-40
-1248
-242
-1281
+1400
+1002
+1602
+1035
 Incubation_Period
 Incubation_Period
 0
@@ -473,10 +462,10 @@ PENS
 "ICU Beds Required" 1.0 0 -16777216 true "" "plot ICUBedsRequired "
 
 MONITOR
-1474
-512
-1599
-561
+1473
+569
+1598
+618
 Reported Inf Today
 casesReportedToday
 0
@@ -517,17 +506,6 @@ NIL
 HORIZONTAL
 
 MONITOR
-3348
-847
-3423
-904
-Growth
-objFunction
-2
-1
-14
-
-MONITOR
 1760
 909
 1842
@@ -539,10 +517,10 @@ count simuls with [ color = red ]
 11
 
 SWITCH
-1477
-993
-1570
-1026
+1470
+797
+1563
+830
 scale
 scale
 0
@@ -571,38 +549,6 @@ scalePhase
 1
 12
 
-SWITCH
-1380
-1389
-1504
-1422
-lockdown_off
-lockdown_off
-0
-1
--1000
-
-SWITCH
-1379
-1304
-1488
-1337
-freewheel
-freewheel
-1
-1
--1000
-
-TEXTBOX
-1378
-1257
-1555
-1295
-Leave Freewheel to 'on' to manipulate policy on the fly
-12
-0.0
-1
-
 MONITOR
 1612
 988
@@ -615,32 +561,10 @@ count simuls
 11
 
 MONITOR
-2494
-824
-2648
-873
-ICU Beds Needed
-ICUBedsRequired
-0
-1
-12
-
-MONITOR
-2612
-742
-2676
-791
-Links
-count links / count simuls with [ color = red ]
-0
-1
-12
-
-MONITOR
-2868
-418
-2982
-463
+2360
+384
+2474
+429
 Potential contacts
 PotentialContacts
 0
@@ -666,10 +590,10 @@ PENS
 "default" 1.0 1 -16777216 true "" "histogram [ ownIllnessPeriod ] of simuls "
 
 INPUTBOX
-2864
-474
-3020
-535
+2777
+714
+2933
+775
 se_illnesspd
 4.0
 1
@@ -677,10 +601,10 @@ se_illnesspd
 Number
 
 INPUTBOX
-2864
-535
-3020
-596
+2777
+774
+2933
+835
 se_incubation
 2.25
 1
@@ -706,10 +630,10 @@ PENS
 "default" 1.0 1 -16777216 true "" "histogram [ ownIncubationPeriod ] of simuls"
 
 MONITOR
-1469
-618
-1534
-663
+1537
+674
+1602
+719
 Virulence
 mean [ personalvirulence] of simuls
 1
@@ -740,7 +664,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+20.0
 1
 1
 NIL
@@ -781,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+85.0
 1
 1
 NIL
@@ -794,7 +718,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -810,10 +734,10 @@ mean [ householdunit ] of simuls
 11
 
 PLOT
-3100
-82
-3380
-230
+2577
+417
+2857
+565
 Infections by age range
 NIL
 NIL
@@ -828,21 +752,10 @@ PENS
 "default" 1.0 1 -16777216 true "" "Histogram [ agerange ] of simuls with [ color != 85  ]"
 
 MONITOR
-2479
-754
-2595
-799
-Link Proportion
-count links with [ color = blue ] / count links with [ color = red ]
-1
-1
-11
-
-MONITOR
-3434
-250
-3566
-295
+2724
+582
+2856
+627
 EW Infection %
 EWInfections / Population
 1
@@ -850,10 +763,10 @@ EWInfections / Population
 11
 
 MONITOR
-3295
-247
-3428
-292
+2584
+579
+2717
+624
 Student Infections %
 studentInfections / Population
 1
@@ -886,116 +799,6 @@ Case_Reporting_Delay
 NIL
 HORIZONTAL
 
-MONITOR
-3198
-663
-3248
-708
->3
-sum [ r ] of simuls with [ color != 85  and R = 3]
-17
-1
-11
-
-MONITOR
-3145
-663
-3195
-708
-=2
-sum [ r ] of simuls with [ color != 85  and R = 2]
-17
-1
-11
-
-MONITOR
-3249
-663
-3299
-708
-=4
-sum [ r ] of simuls with [ color != 85  and R = 4]
-17
-1
-11
-
-MONITOR
-3299
-663
-3349
-708
->4
-sum [ r ] of simuls with [ color != 85  and R > 4]
-17
-1
-11
-
-MONITOR
-3199
-712
-3249
-757
-C3
-count simuls with [ color != 85 and R = 3]
-17
-1
-11
-
-MONITOR
-3145
-712
-3195
-757
-C2
-count simuls with [ color != 85 and R = 2]
-17
-1
-11
-
-MONITOR
-3252
-713
-3302
-758
-c4
-count simuls with [ color != 85 and R = 4]
-17
-1
-11
-
-MONITOR
-3302
-713
-3352
-758
-C>4
-count simuls with [ color != 85 and R > 4 ]
-17
-1
-11
-
-MONITOR
-3092
-712
-3142
-757
-C1
-count simuls with [ color != 85 and R = 1]
-17
-1
-11
-
-MONITOR
-3035
-712
-3085
-757
-C0
-count simuls with [ color != 85 and R = 0]
-17
-1
-11
-
 SLIDER
 1629
 373
@@ -1020,33 +823,11 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+3.6
 1
 1
 NIL
 HORIZONTAL
-
-MONITOR
-3345
-795
-3403
-840
-%>3
-count simuls with [ color != 85 and R > 2] / count simuls with [ color != 85 and R > 0 ] * 100
-2
-1
-11
-
-MONITOR
-3413
-795
-3471
-840
-% R
-sum [ R ] of simuls with [ color != 85 and R > 2] / sum [ R ] of simuls with [ color != 85 and R > 0 ] * 100
-2
-1
-11
 
 SLIDER
 328
@@ -1078,17 +859,6 @@ OS_Import_Proportion
 NIL
 HORIZONTAL
 
-MONITOR
-2499
-683
-2571
-728
-OS %
-( count simuls with [  imported = 1 ] / count simuls with [ color != 85 ]) * 100
-2
-1
-11
-
 SLIDER
 1629
 219
@@ -1105,10 +875,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1474
-567
-1576
-612
+1473
+624
+1575
+669
 NIL
 currentinfections
 17
@@ -1125,17 +895,6 @@ mean [ timenow ] of simuls with [ color = red ]
 1
 1
 11
-
-MONITOR
-2494
-889
-2599
-950
-ICU Beds
-ICUBedsRequired
-0
-1
-15
 
 PLOT
 1039
@@ -1156,17 +915,6 @@ PENS
 "7" 1.0 0 -16777216 true "" "plot casesinperiod7"
 "14" 1.0 0 -7500403 true "" "plot casesinperiod14"
 "28" 1.0 0 -2674135 true "" "plot casesinperiod28"
-
-SWITCH
-1379
-1344
-1491
-1377
-SelfGovern
-SelfGovern
-0
-1
--1000
 
 PLOT
 1040
@@ -1210,10 +958,10 @@ count simuls with [ color = yellow ]
 11
 
 MONITOR
-3314
-322
-3387
-367
+2485
+383
+2558
+428
 Time = 1 
 count simuls with [ timenow = 2 ]
 0
@@ -1221,32 +969,21 @@ count simuls with [ timenow = 2 ]
 11
 
 MONITOR
-2494
-959
-2559
-1004
+2277
+387
+2342
+432
 Students
 count simuls with [ studentFlag = 1 ]
 0
 1
 11
 
-SWITCH
-1528
-1328
-1632
-1361
-Isolate
-Isolate
-0
-1
--1000
-
 SLIDER
-39
-1158
-227
-1191
+992
+1000
+1180
+1033
 Mask_Efficacy_Mult
 Mask_Efficacy_Mult
 0
@@ -1268,16 +1005,6 @@ Vaccine_Available
 1
 -1000
 
-CHOOSER
-1665
-1160
-1804
-1205
-BaseStage
-BaseStage
-0 1 2 3 4
-0
-
 MONITOR
 182
 645
@@ -1289,23 +1016,13 @@ meanIDTime
 1
 11
 
-CHOOSER
-1665
-1215
-1804
-1260
-MaxStage
-MaxStage
-0 1 2 3 4
-4
-
 MONITOR
 1239
 13
-1329
+1358
 58
-Vaccinated %
-( count simuls with [ vaccinated = 1 ] / Population )* 100
+Vaccine Offered %
+( count simuls with [ vaccineOffered = 1 ] / Population )* 100
 2
 1
 11
@@ -1326,10 +1043,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1339
-13
-1429
-58
+1369
+14
+1459
+59
 Vaccinated
 count simuls with [ vaccinated = 1 ]
 17
@@ -1341,7 +1058,7 @@ PLOT
 64
 1438
 203
-Vaccinated
+Vaccine Offered
 NIL
 NIL
 0.0
@@ -1352,7 +1069,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot count simuls with [ vaccinated = 1 ]"
+"default" 1.0 0 -16777216 true "" "plot count simuls with [ vaccineOffered = 1 ]"
 
 TEXTBOX
 19
@@ -1454,10 +1171,10 @@ quarantine
 11
 
 MONITOR
-1382
-1163
-1540
-1208
+2453
+654
+2611
+699
 NIL
 Asymptom_Prop
 17
@@ -1630,26 +1347,6 @@ PENS
 "Reported" 1.0 0 -2674135 true "" "plot count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks] * Scale_Factor ^ scalephase"
 "Qr'tine" 1.0 0 -13840069 true "" "plot count simuls with [ color = red and inQuarantine = 1] * Scale_Factor ^ scalephase"
 
-TEXTBOX
-772
-1120
-1160
-1148
------ Everything below this line should (hopefully) be ignored. -----
-11
-0.0
-1
-
-TEXTBOX
-37
-1133
-259
-1152
-Permanent yet straightforward variables
-11
-0.0
-1
-
 SLIDER
 325
 970
@@ -1755,7 +1452,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+78.0
 1
 1
 NIL
@@ -1881,10 +1578,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1474
-463
-1603
-508
+1473
+457
+1602
+502
 NIL
 totalOverseasIncursions
 17
@@ -2274,13 +1971,13 @@ SLIDER
 18
 147
 193
-180
+181
 param_vac_rate_mult
 param_vac_rate_mult
-0.1
+0
 4
-3.0
-0.1
+1.5
+0.05
 1
 NIL
 HORIZONTAL
@@ -2380,7 +2077,7 @@ variant_transmiss_growth
 variant_transmiss_growth
 1
 3
-1.6
+1.5
 0.01
 1
 NIL
@@ -2496,6 +2193,17 @@ set_shape
 0
 1
 -1000
+
+MONITOR
+1475
+515
+1562
+560
+Incursion Var
+global_incursionVariant
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
