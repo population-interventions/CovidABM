@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-3.0
+5.0
 1
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-78.0
+50.0
 .5
 1
 NIL
@@ -320,7 +320,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-78.0
+50.0
 .5
 1
 NIL
@@ -740,7 +740,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-20.0
+35.0
 1
 1
 NIL
@@ -781,7 +781,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-85.0
+60.0
 1
 1
 NIL
@@ -1020,7 +1020,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+5.0
 1
 1
 NIL
@@ -1352,7 +1352,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot count simuls with [ shape = \"person\" ]"
+"default" 1.0 0 -16777216 true "" "plot count simuls with [ vaccinated = 1 ]"
 
 TEXTBOX
 19
@@ -1755,7 +1755,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-78.0
+50.0
 1
 1
 NIL
