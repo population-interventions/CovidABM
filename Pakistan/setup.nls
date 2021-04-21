@@ -215,6 +215,7 @@ to createSimulants
       set R 0
       set vacWaitDays 0
       set isolating 0
+      set succeptibilityTable table:make
 
       set cohortIndex pop_index
       set agerange cohort_age
@@ -284,6 +285,19 @@ to createSimulants
   foreach popDivisionTable_keys [ index ->
     table:put populationCohortCache index simuls with [ cohortIndex = index ]
   ]
+end
+
+to setupInitialVaccination
+  foreach popDivisionTable_keys [ index ->
+    let cohort table:get populationCohortCache index
+    let cohortData table:get popDivisionTable index
+    
+    let cohort_vaccinated item 13 cohortData
+    ask n-of cohort_vaccinated cohort [
+      simul_vaccinate_me_force
+    ]
+  ]
+  
 end
 
 to setGlobals
@@ -584,8 +598,8 @@ to setup
   let popPerSimul Scale_Factor ^ scalephase
   ;; sets up the initial date for looking at policy-changes
 
-  
   createSimulants
+  setupInitialVaccination
   
   ask n-of ( initial_cases / popPerSimul ) simuls [
     set color red

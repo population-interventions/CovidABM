@@ -205,6 +205,8 @@ globals [
   global_incursionVariant
   global_incursionReplaceChance
   
+  variantList ;; List of variant indicies
+  
   totalOverseasIncursions
   vaccinePhaseEndDay
   vaccinePhaseIndex

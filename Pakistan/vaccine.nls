@@ -93,3 +93,13 @@ to simul_vaccinate_me
     ]
   ]
 end
+
+
+to simul_vaccinate_me_force
+  if Vaccine_Available = true [
+    set vaccineOffered 1
+    set selfVaccEff_raw global_vaccine_eff
+    set vaccinated 1
+    simul_updateVacAndReinfectMult
+  ]
+end

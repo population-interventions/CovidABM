@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-3.0
+10.0
 1
 1
 NIL
@@ -239,7 +239,7 @@ superspreaders
 superspreaders
 0
 1
-5.0E-4
+0.001
 0.01
 1
 NIL
@@ -294,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-78.0
+10.0
 .5
 1
 NIL
@@ -309,7 +309,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-78.0
+10.0
 .5
 1
 NIL
@@ -518,9 +518,9 @@ count simuls with [ color = red ]
 
 SWITCH
 1470
-797
+791
 1563
-830
+824
 scale
 scale
 0
@@ -540,9 +540,9 @@ Days
 
 MONITOR
 1469
-832
+829
 1576
-881
+878
 Scale Exponent
 scalePhase
 17
@@ -664,7 +664,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-20.0
+100.0
 1
 1
 NIL
@@ -705,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-85.0
+15.0
 1
 1
 NIL
@@ -718,7 +718,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -785,10 +785,10 @@ MaskPolicy
 -1000
 
 SLIDER
-328
-933
-523
-966
+335
+975
+530
+1008
 Case_Reporting_Delay
 Case_Reporting_Delay
 0
@@ -823,17 +823,17 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+8.8
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-328
-850
-526
-883
+335
+892
+533
+925
 Asymptomatic_Trans
 Asymptomatic_Trans
 0
@@ -1306,9 +1306,9 @@ HORIZONTAL
 
 MONITOR
 1469
-889
+886
 1577
-934
+931
 Person per Simul
 (Scale_Factor ^ scalephase)
 17
@@ -1317,9 +1317,9 @@ Person per Simul
 
 MONITOR
 1469
-943
+940
 1579
-988
+985
 People in Model
 (Population * Scale_Factor ^ scalephase)
 17
@@ -1348,10 +1348,10 @@ PENS
 "Qr'tine" 1.0 0 -13840069 true "" "plot count simuls with [ color = red and inQuarantine = 1] * Scale_Factor ^ scalephase"
 
 SLIDER
-325
-970
-520
-1003
+334
+1014
+529
+1047
 Asymptom_Prop
 Asymptom_Prop
 0
@@ -1363,10 +1363,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-325
-1010
-520
-1043
+555
+1018
+750
+1051
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
 0
@@ -1452,7 +1452,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-78.0
+5.0
 1
 1
 NIL
@@ -1541,17 +1541,17 @@ End_Day
 End_Day
 -1
 548
-548.0
+271.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-553
-895
-751
-928
+786
+926
+984
+959
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -1563,10 +1563,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-328
-893
-525
-926
+335
+935
+532
+968
 Non_Infective_Time
 Non_Infective_Time
 0
@@ -1609,10 +1609,10 @@ PENS
 "% Chance" 1.0 0 -2674135 true "" "plot global_incursionRisk * 100"
 
 SWITCH
-1469
-739
-1573
-772
+1470
+751
+1574
+784
 track_R
 track_R
 0
@@ -1754,9 +1754,9 @@ totalEndCount
 11
 
 MONITOR
-922
+908
 722
-1027
+1013
 767
 slopeAverage %
 slopeAverage * 100
@@ -1819,17 +1819,17 @@ stage_test_index
 stage_test_index
 0
 60
-0.0
+1.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-555
-935
-728
-968
+553
+900
+726
+933
 sympt_present_prop
 sympt_present_prop
 0
@@ -1841,10 +1841,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-557
-973
-730
-1006
+555
+939
+728
+972
 sympt_present_min
 sympt_present_min
 0
@@ -1856,10 +1856,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-557
-1012
-730
-1045
+555
+978
+728
+1011
 sympt_present_max
 sympt_present_max
 0
@@ -1942,9 +1942,9 @@ NIL
 HORIZONTAL
 
 SWITCH
-792
+778
 728
-909
+895
 761
 track_slope
 track_slope
@@ -1971,7 +1971,7 @@ SLIDER
 18
 147
 193
-181
+180
 param_vac_rate_mult
 param_vac_rate_mult
 0
@@ -2054,10 +2054,10 @@ preSimDailyCases
 Number
 
 SLIDER
-297
-688
-522
-721
+300
+687
+525
+720
 yearly_recover_prop_loss
 yearly_recover_prop_loss
 0
@@ -2069,45 +2069,45 @@ NIL
 HORIZONTAL
 
 SLIDER
-295
-807
-525
-840
+298
+806
+528
+839
 variant_transmiss_growth
 variant_transmiss_growth
 1
 3
-1.5
+1.25
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-297
-765
-522
-798
+300
+764
+525
+797
 immune_from_reinfect
 immune_from_reinfect
 0
 1
-0.95
+0.8
 0.05
 1
 NIL
 HORIZONTAL
 
 SLIDER
-298
-727
-522
-760
+301
+726
+525
+759
 immune_from_prev_variant
 immune_from_prev_variant
 0
 1
-0.1
+0.8
 0.05
 1
 NIL
@@ -2136,10 +2136,10 @@ recoverProportion * 100 * (table:get recoverCountByVariant 2) / (table:get recov
 14
 
 MONITOR
-182
-780
-247
-825
+185
+770
+250
+815
 % Yellow
 100 * (count simuls with [color = yellow]) / Population
 2
@@ -2147,10 +2147,10 @@ MONITOR
 11
 
 MONITOR
-182
-844
-275
-889
+185
+818
+278
+863
 % Yellow First
 100 * (count simuls with [color = yellow and recoveryVariant = 1]) / Population
 2
@@ -2158,10 +2158,10 @@ MONITOR
 11
 
 MONITOR
-180
-895
-289
-940
+184
+867
+293
+912
 % Yellow Second
 100 * (count simuls with [color = yellow and recoveryVariant = 2]) / Population
 2
@@ -2201,6 +2201,32 @@ MONITOR
 560
 Incursion Var
 global_incursionVariant
+17
+1
+11
+
+SLIDER
+296
+849
+527
+882
+vac_variant_eff_prop
+vac_variant_eff_prop
+0
+1
+0.9
+0.01
+1
+NIL
+HORIZONTAL
+
+MONITOR
+184
+917
+293
+962
+% Yellow Third
+100 * (count simuls with [color = yellow and recoveryVariant = 3]) / Population
 17
 1
 11
