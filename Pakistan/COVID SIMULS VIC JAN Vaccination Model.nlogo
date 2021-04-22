@@ -1036,7 +1036,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-2512077.0
+3816425.0
 1
 1
 NIL
@@ -1088,10 +1088,10 @@ SLIDER
 145
 param_vac_uptake
 param_vac_uptake
-60
-100
-70.0
-10
+0.6
+1
+0.7
+0.1
 1
 NIL
 HORIZONTAL
