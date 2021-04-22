@@ -1036,7 +1036,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-5314010.0
+3768116.0
 1
 1
 NIL
@@ -1266,13 +1266,13 @@ Number
 
 CHOOSER
 17
-294
-190
-339
+295
+195
+340
 param_policy
 param_policy
-"TightSupress" "ModerateSupress" "AggressElim" "ModerateElim" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-0
+"TightSupress" "ModerateSupress" "TightSupress_No_4" "ModerateSupress_No_4" "AggressElim" "ModerateElim" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
+3
 
 SLIDER
 1610
@@ -1975,7 +1975,7 @@ SLIDER
 param_vac_rate_mult
 param_vac_rate_mult
 0
-4
+3
 1.0
 0.05
 1

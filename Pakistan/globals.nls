@@ -18,6 +18,7 @@ globals [
   seventyfive
   eightyfive
   ninetyfive
+  allowStage4
   InitialReserves
   AverageContacts
   AverageFinancialContacts

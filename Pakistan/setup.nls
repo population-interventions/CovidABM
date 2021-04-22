@@ -322,6 +322,7 @@ to setGlobals
   set seventyfive                0
   set eightyfive                 0
   set ninetyfive                 0
+  set allowStage4                true
   set InitialReserves            0
   set AverageContacts            0
   set AverageFinancialContacts   0

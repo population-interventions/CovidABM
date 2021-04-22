@@ -114,7 +114,7 @@ to policy_moderate_elim
 end
 
 to policy_tight_supress
-  (ifelse stage <= 3 and casesinperiod7 > 1395 * total_population / 1000000 * 7 * policyTriggerScale
+  (ifelse allowStage4 and stage <= 3 and casesinperiod7 > 1395 * total_population / 1000000 * 7 * policyTriggerScale
     [
       set stage 4  
       set decisionDate ticks
@@ -152,7 +152,7 @@ to policy_tight_supress
 end
 
 to policy_moderate_supress
-  (ifelse stage <= 3 and casesinperiod7 > 5580 * total_population / 1000000 * 7 * policyTriggerScale
+  (ifelse allowStage4 and stage <= 3 and casesinperiod7 > 5580 * total_population / 1000000 * 7 * policyTriggerScale
     [
       set stage 4  
       set decisionDate ticks
@@ -223,20 +223,32 @@ to COVIDPolicyTriggers
   if param_trigger_loosen [
     update_policy_trigger_scale 
   ]
+  if param_policy = "TightSupress" [
+    set allowStage4 true
+    policy_tight_supress
+    set Vaccine_Available true
+  ]
+  if param_policy = "ModerateSupress" [
+    set allowStage4 true
+    set Vaccine_Available true
+    policy_moderate_supress
+  ]
+  if param_policy = "TightSupress_No_4" [
+    set allowStage4 false
+    set Vaccine_Available true
+    policy_tight_supress
+  ]
+  if param_policy = "ModerateSupress_No_4" [
+    set allowStage4 false
+    set Vaccine_Available true
+    policy_moderate_supress
+  ]
   if param_policy = "AggressElim" [
     policy_agressive_elim
     set Vaccine_Available true
   ]
   if param_policy = "ModerateElim" [
     policy_moderate_elim
-    set Vaccine_Available true
-  ]
-  if param_policy = "TightSupress" [
-    policy_tight_supress
-    set Vaccine_Available true
-  ]
-  if param_policy = "ModerateSupress" [
-    policy_moderate_supress
     set Vaccine_Available true
   ]
   if param_policy = "None" [
