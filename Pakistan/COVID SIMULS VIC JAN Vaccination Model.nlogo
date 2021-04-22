@@ -86,7 +86,7 @@ BUTTON
 309
 274
 Trace_Patterns
-ask n-of 50 simuls with [ color != black ] [ pen-down ] 
+ask n-of 2500 simuls with [ color != black ] [ pen-down ] 
 NIL
 1
 T
@@ -1036,7 +1036,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3816425.0
+5314010.0
 1
 1
 NIL
@@ -1271,8 +1271,8 @@ CHOOSER
 339
 param_policy
 param_policy
-"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-3
+"TightSupress" "ModerateSupress" "AggressElim" "ModerateElim" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
+0
 
 SLIDER
 1610
@@ -1976,7 +1976,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 4
-4.0
+1.0
 0.05
 1
 NIL

@@ -175,6 +175,7 @@ to createSimulants
   let cohort_region 0
   let cohort_succeptMult 0
   let cohort_asymptomPropMult 0
+  let cohort_ignoreUptakeOverride 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of Population patches with [ pcolor = black ] [
@@ -199,6 +200,7 @@ to createSimulants
       set cohort_region item 10 cohortData
       set cohort_succeptMult item 11 cohortData
       set cohort_asymptomPropMult item 12 cohortData
+      set cohort_ignoreUptakeOverride item 14 cohortData
       
       set oldCohortIndex pop_index
     ]
@@ -232,6 +234,7 @@ to createSimulants
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
       set succeptMult cohort_succeptMult
+      set ignoreUptakeOverride cohort_ignoreUptakeOverride
       
       move-to one-of patches with [ pcolor = black ]
 

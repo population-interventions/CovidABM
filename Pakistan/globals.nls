@@ -194,6 +194,7 @@ globals [
   global_vaccineAvailible
   global_vaccineType
   global_vaccinePerDay
+  global_vaccineUptakeOverride
 
   incursionsSeedID
   incursionTable

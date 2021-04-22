@@ -18,6 +18,7 @@ simuls-own [
   gatherFreqMult
   homeRegion
   succeptMult
+  ignoreUptakeOverride
   
   ownIllnessPeriod ;; unique illness period associated with the individual
   ownIncubationPeriod ;; unique incubation pd for the person - related to IncubationPd so can probably be cleaned up - IncubationPd is a legacy var as previously all incubation periods were identical

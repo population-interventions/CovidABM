@@ -17,6 +17,7 @@ Many parameters are a boolean, which should be indicated by a value of 1 or 0.
  - succeptibleMult   is a multiplier for the chance of being infected.
  - asymptomPropMult  is a multiplier to the base proportion of the population that is asymptomatic.
  - vaccinatedCount   is the number of members of the cohort that start vaccinated.
+ - ignoreUptakeBoost ignores the effect of uptakeBoost. See vaccination.
 
 A worker being essential causes the cohort to have the highest priority for going to work during a lockdown. For example, say we are in a lockdown where the policy sets 25% of workers to be regarded as essential. If only 15% of the total workers are in an 'essential' cohort, then all of the essential cohort works, with the remaining 10% made up of other workers.
 
@@ -39,7 +40,11 @@ This file configures the phase structure of the simulation. Currently the popula
  - phase             is the phase.
  - subPhase          is the letter after the phase, but as a number.
  - days              is the number of days spent in this phase.
- - name              is the name of the vaccine in this phase. It is used by the model to change the non-static parameters in the model.
+ - name              is the name of the vaccine in this phase. Different names can use different model parameters.
+ - fixedSpeed        can be set to 1 to make the phase ignore param_vac_rate_mult. Otherwise set to 0.
+ - uptakeBoost       overrides uptake and vaccinates previous vaccine refusers.
+
+The parameter uptakeBoost ofen only makes sense near the end of the rollout. It gives cohorts a chance to boost their vaccination rate, unless the cohort has (ignoreUptakeBoost = 1). To do this it overrides param_vac_uptake (if higher) and adds simulants with (vaccinated = 0 and vaccineOffered = 1 and sm_vac_uptake < global_vaccineUptakeOverride) to the population to be vaccinated by this phase by giving them (vaccineOffered = 0). Cohorts in this phase use global_vaccineUptakeOverride as their uptake (if higher), unless they have (ignoreUptakeBoost = 1).
 
 The comment column is for human consumption. It does nothing in the model.
 

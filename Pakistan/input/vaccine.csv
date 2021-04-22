@@ -1,7 +1,8 @@
-phase,subPhase,days,name
-1,1,6,generic
-1,2,34,generic
-2,1,72,generic
-3,1,58,generic
-4,1,81,generic
-5,1,114,generic
+phase,subPhase,days,name,fixedSpeed,uptakeBoost
+1,1,6,generic,0,0
+1,2,34,generic,0,0
+2,1,72,generic,0,0
+3,1,58,generic,0,0
+4,1,81,generic,0,0
+5,1,114,generic,0,0
+6,1,183,generic,1,0.8
