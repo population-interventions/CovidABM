@@ -1976,7 +1976,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 4
-1.5
+4.0
 0.05
 1
 NIL
