@@ -7,7 +7,7 @@ Many parameters are a boolean, which should be indicated by a value of 1 or 0.
  - age               sets the singular age of the cohort.
  - atsi              sets whether the cohort are aborigional or torris strait islanders.
  - disability        sets whether the cohort has a disability.
- - essential         sets whether the workers in the cohort are the most essential workers.
+ - essentialCount    is how many workers in the cohort are the most essential workers.
  - workerCount       is how many agents for the cohort are considered to be working age.
  - phase             is the phase in which the cohort is vacinated.
  - subPhase          is the sub phase of vaccination. Ie the 'a' or 'b' after 1a or 1b
@@ -16,7 +16,7 @@ Many parameters are a boolean, which should be indicated by a value of 1 or 0.
  - region            is the region index of the cohort. See region.csv
  - succeptibleMult   is a multiplier for the chance of being infected.
  - asymptomPropMult  is a multiplier to the base proportion of the population that is asymptomatic.
- - alreadyVaccinated is the number of members of the cohort that start vaccinated.
+ - vaccinatedCount   is the number of members of the cohort that start vaccinated.
 
 A worker being essential causes the cohort to have the highest priority for going to work during a lockdown. For example, say we are in a lockdown where the policy sets 25% of workers to be regarded as essential. If only 15% of the total workers are in an 'essential' cohort, then all of the essential cohort works, with the remaining 10% made up of other workers.
 

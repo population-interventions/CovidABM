@@ -48,7 +48,8 @@ to vaccine_update
         let cohort_phase item 6 cohortData
         let cohort_subPhase item 7 cohortData
         if cohort_phase = global_vaccinePhase and cohort_subPhase = global_vaccineSubPhase [
-          set phasePop phasePop + item 0 cohortData
+          ;; Add population and subtract already vaccinated.
+          set phasePop phasePop + (item 0 cohortData) - (item 13 cohortData)
         ]
       ]
       ;print phasePop

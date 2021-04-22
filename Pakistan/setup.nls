@@ -166,7 +166,7 @@ to createSimulants
   let cohort_age 0
   let cohort_asti 0
   let cohort_disability 0
-  let cohort_essential 0
+  let cohort_essentialCount 0
   let cohort_workerCount 0
   let cohort_phase 0
   let cohort_subPhase 0
@@ -181,13 +181,16 @@ to createSimulants
     
     if oldCohortIndex != pop_index [
       ; Iterate over cohort data to get each set of simul parameters.
+      if not table:has-key? popDivisionTable pop_index [
+       print "totalAgents in population.csv sums to less than Population (2500)." 
+      ]
       let cohortData table:get popDivisionTable pop_index
       
       set cohort_pop item 0 cohortData
       set cohort_age item 1 cohortData
       set cohort_asti item 2 cohortData
       set cohort_disability item 3 cohortData
-      set cohort_essential item 4 cohortData
+      set cohort_essentialCount item 4 cohortData
       set cohort_workerCount item 5 cohortData
       set cohort_phase item 6 cohortData
       set cohort_subPhase item 7 cohortData
@@ -221,7 +224,7 @@ to createSimulants
       set agerange cohort_age
       set atsi cohort_asti
       set comorbidityState cohort_disability
-      set essentialJob (cohort_essential = 1)
+      set essentialJob (cohort_essentialCount <= agentsOfThisIndex)
       set isWorker (cohort_workerCount <= agentsOfThisIndex)
       set VaccPhase cohort_phase
       set VaccSubPhase cohort_subPhase
@@ -229,7 +232,7 @@ to createSimulants
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
       set succeptMult cohort_succeptMult
-
+      
       move-to one-of patches with [ pcolor = black ]
 
       set personalVirulence random-normal Global_Transmissibility 0.025

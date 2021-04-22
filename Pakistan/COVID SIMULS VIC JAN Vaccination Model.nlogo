@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-10.0
+3.0
 1
 1
 NIL
@@ -239,7 +239,7 @@ superspreaders
 superspreaders
 0
 1
-0.001
+5.0E-4
 0.01
 1
 NIL
@@ -294,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-10.0
+78.0
 .5
 1
 NIL
@@ -309,7 +309,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-10.0
+78.0
 .5
 1
 NIL
@@ -379,7 +379,7 @@ INPUTBOX
 310
 393
 initial_cases
-4000.0
+40000.0
 1
 0
 Number
@@ -390,7 +390,7 @@ INPUTBOX
 313
 525
 total_population
-2.166E8
+2.34E8
 1
 0
 Number
@@ -664,7 +664,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+20.0
 1
 1
 NIL
@@ -672,9 +672,9 @@ HORIZONTAL
 
 SLIDER
 553
-855
+850
 750
-888
+883
 Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
@@ -705,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+85.0
 1
 1
 NIL
@@ -718,7 +718,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -823,7 +823,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+3.6
 1
 1
 NIL
@@ -1021,8 +1021,8 @@ MONITOR
 13
 1358
 58
-Vaccine Offered %
-( count simuls with [ vaccineOffered = 1 ] / Population )* 100
+Vaccinated %
+( count simuls with [ vaccinated = 1 ] / Population )* 100
 2
 1
 11
@@ -1036,7 +1036,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3574879.0
+2512077.0
 1
 1
 NIL
@@ -1058,7 +1058,7 @@ PLOT
 64
 1438
 203
-Vaccine Offered
+Vaccinated
 NIL
 NIL
 0.0
@@ -1069,7 +1069,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot count simuls with [ vaccineOffered = 1 ]"
+"default" 1.0 0 -16777216 true "" "plot count simuls with [ vaccinated = 1 ]"
 
 TEXTBOX
 19
@@ -1090,7 +1090,7 @@ param_vac_uptake
 param_vac_uptake
 60
 100
-100.0
+70.0
 10
 1
 NIL
@@ -1099,7 +1099,7 @@ HORIZONTAL
 SLIDER
 17
 220
-194
+192
 253
 param_vac_tran_reduct
 param_vac_tran_reduct
@@ -1259,7 +1259,7 @@ INPUTBOX
 310
 457
 secondary_cases
-7000.0
+60000.0
 1
 0
 Number
@@ -1363,9 +1363,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-555
+550
 1018
-750
+745
 1051
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
@@ -1430,9 +1430,9 @@ PENS
 
 SLIDER
 554
-814
+808
 751
-847
+841
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1452,7 +1452,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+78.0
 1
 1
 NIL
@@ -1541,17 +1541,17 @@ End_Day
 End_Day
 -1
 548
-271.0
+548.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-786
-926
-984
-959
+779
+932
+977
+965
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -1693,7 +1693,7 @@ recoverProportion * 100
 SLIDER
 555
 723
-750
+753
 756
 Recovered_Match_Rate
 Recovered_Match_Rate
@@ -1754,10 +1754,10 @@ totalEndCount
 11
 
 MONITOR
-908
-722
-1013
-767
+909
+725
+1014
+770
 slopeAverage %
 slopeAverage * 100
 3
@@ -1765,10 +1765,10 @@ slopeAverage * 100
 11
 
 PLOT
-767
 770
-1024
-920
+777
+1027
+927
 slope %
 NIL
 NIL
@@ -1827,9 +1827,9 @@ HORIZONTAL
 
 SLIDER
 553
-900
+894
 726
-933
+927
 sympt_present_prop
 sympt_present_prop
 0
@@ -1841,10 +1841,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-555
-939
-728
-972
+552
+937
+725
+970
 sympt_present_min
 sympt_present_min
 0
@@ -1856,9 +1856,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-555
+550
 978
-728
+723
 1011
 sympt_present_max
 sympt_present_max
@@ -1942,10 +1942,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-778
-728
-895
-761
+779
+730
+896
+763
 track_slope
 track_slope
 1
@@ -1985,13 +1985,13 @@ HORIZONTAL
 SLIDER
 18
 75
-197
+195
 108
 param_recovered_prop
 param_recovered_prop
 0
 1
-0.3
+0.1
 0.1
 1
 NIL
@@ -2048,16 +2048,16 @@ INPUTBOX
 317
 595
 preSimDailyCases
-1000.0
+15000.0
 1
 0
 Number
 
 SLIDER
-300
-687
-525
-720
+302
+688
+535
+721
 yearly_recover_prop_loss
 yearly_recover_prop_loss
 0
@@ -2069,45 +2069,45 @@ NIL
 HORIZONTAL
 
 SLIDER
-298
-806
-528
-839
+302
+807
+536
+840
 variant_transmiss_growth
 variant_transmiss_growth
 1
 3
-1.25
-0.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-300
-764
-525
-797
-immune_from_reinfect
-immune_from_reinfect
-0
-1
-0.8
+1.5
 0.05
 1
 NIL
 HORIZONTAL
 
 SLIDER
-301
-726
-525
-759
+302
+765
+535
+798
+immune_from_reinfect
+immune_from_reinfect
+0
+1
+0.9
+0.05
+1
+NIL
+HORIZONTAL
+
+SLIDER
+303
+727
+536
+760
 immune_from_prev_variant
 immune_from_prev_variant
 0
 1
-0.8
+0.4
 0.05
 1
 NIL
@@ -2170,9 +2170,9 @@ MONITOR
 
 SLIDER
 554
-765
+767
 752
-798
+800
 Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
@@ -2206,10 +2206,10 @@ global_incursionVariant
 11
 
 SLIDER
-296
-849
-527
-882
+303
+850
+534
+883
 vac_variant_eff_prop
 vac_variant_eff_prop
 0
