@@ -615,7 +615,7 @@ to setup
 
     set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
     simul_updatepersonalvirulence
-    set infectionsToday_acc infectionsToday_acc + popPerSimul
+    set infectionsToday_acc infectionsToday_acc + 1
     array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + Scale_Factor ^ scalephase
   ]
 
@@ -630,14 +630,14 @@ to setup
   ;; this ensures that half the people in households with existing infections have also have an infection and prevents a big spike early-on
   let init_secondry_infect secondary_cases
   ask simuls [
-    if init_secondry_infect > 0 and any? other simuls in-radius 2 with [ color = red ] [
+    if init_secondry_infect > popPerSimul and any? other simuls in-radius 2 with [ color = red ] [
       set color red
       set infectVariant 1
       simul_updateVacAndReinfectMult
 
       set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
       set init_secondry_infect init_secondry_infect - popPerSimul
-      set infectionsToday_acc infectionsToday_acc + popPerSimul
+      set infectionsToday_acc infectionsToday_acc + 1
       array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
     ]
   ]

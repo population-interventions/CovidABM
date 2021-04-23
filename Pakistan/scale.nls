@@ -44,27 +44,29 @@ to ShiftRecoveredTowardsTotalProportion
     ;; Determine which variant is the most below the desired proportion.
     let wantMostVariant 0
     let wantMostProp 0
-    foreach variantKeys [ variant ->
-      let myYellow yellowSet with [recoveryVariant = variant]
-      let myProp (count myYellow) / yellowSetCount
-      let desiredProp (table:get recoverCountByVariant variant) / totalRecoverByVariant
-      if desiredProp > myProp [
-        if desiredProp - myProp > wantMostProp [
-          set wantMostProp desiredProp - myProp
-          set wantMostVariant variant
+    if yellowSetCount > 0 [
+      foreach variantKeys [ variant ->
+        let myYellow yellowSet with [recoveryVariant = variant]
+        let myProp (count myYellow) / yellowSetCount
+        let desiredProp (table:get recoverCountByVariant variant) / totalRecoverByVariant
+        if desiredProp > myProp [
+          if desiredProp - myProp > wantMostProp [
+            set wantMostProp desiredProp - myProp
+            set wantMostVariant variant
+          ]
+        ]
+        if desiredProp < myProp [
+          table:put variantSet variant myYellow
+          table:put variantPropDiff variant (myProp - desiredProp)
         ]
       ]
-      if desiredProp < myProp [
-        table:put variantSet variant myYellow
-        table:put variantPropDiff variant (myProp - desiredProp)
-      ]
-    ]
-    
-    ;; Each variant that is above its desired proportion transfers some of its share to the
-    ;; variant that has the largest shortfall.
-    foreach table:keys variantPropDiff [ variant ->
-      ask n-of ((table:get variantPropDiff variant) * Recov_Var_Match_Rate * yellowSetCount) table:get variantSet variant [
-        set recoveryVariant wantMostVariant
+      
+      ;; Each variant that is above its desired proportion transfers some of its share to the
+      ;; variant that has the largest shortfall.
+      foreach table:keys variantPropDiff [ variant ->
+        ask n-of ((table:get variantPropDiff variant) * Recov_Var_Match_Rate * yellowSetCount) table:get variantSet variant [
+          set recoveryVariant wantMostVariant
+        ]
       ]
     ]
   ]

@@ -22,8 +22,8 @@ __includes[
 GRAPHICS-WINDOW
 342
 60
-962
-681
+961
+680
 -1
 -1
 7.56
@@ -86,7 +86,7 @@ BUTTON
 309
 274
 Trace_Patterns
-ask n-of 2500 simuls with [ color != black ] [ pen-down ] 
+ask n-of 50 simuls with [ color != black ] [ pen-down ] 
 NIL
 1
 T
@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-3.0
+10.0
 1
 1
 NIL
@@ -231,15 +231,15 @@ cumulativeInfected
 14
 
 SLIDER
-1629
-294
-1808
-327
+1627
+219
+1806
+252
 superspreaders
 superspreaders
 0
 1
-5.0E-4
+0.001
 0.01
 1
 NIL
@@ -294,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-78.0
+0.0
 .5
 1
 NIL
@@ -309,7 +309,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-78.0
+0.0
 .5
 1
 NIL
@@ -379,7 +379,7 @@ INPUTBOX
 310
 393
 initial_cases
-40000.0
+4000.0
 1
 0
 Number
@@ -649,22 +649,22 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.59
+0.65
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-1629
-255
-1807
-288
+1627
+179
+1805
+212
 Essential_Workers
 Essential_Workers
 0
 100
-20.0
+100.0
 1
 1
 NIL
@@ -679,7 +679,7 @@ Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
 100
-50.0
+0.0
 1
 1
 NIL
@@ -705,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-85.0
+0.0
 1
 1
 NIL
@@ -718,7 +718,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -780,7 +780,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -800,10 +800,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1629
-373
-1811
-406
+1625
+263
+1807
+296
 Visit_Frequency
 Visit_Frequency
 0
@@ -815,15 +815,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-1629
-410
-1812
-443
+1625
+299
+1808
+332
 Visit_Radius
 Visit_Radius
 0
 16
-3.6
+8.8
 1
 1
 NIL
@@ -839,36 +839,6 @@ Asymptomatic_Trans
 0
 1
 0.5
-.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-1629
-335
-1809
-368
-OS_Import_Proportion
-OS_Import_Proportion
-0
-1
-0.0
-.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-1629
-219
-1806
-252
-OS_Import_Post_Proportion
-OS_Import_Post_Proportion
-0
-1
-0.68
 .01
 1
 NIL
@@ -1001,7 +971,7 @@ SWITCH
 526
 Vaccine_Available
 Vaccine_Available
-0
+1
 1
 -1000
 
@@ -1259,7 +1229,7 @@ INPUTBOX
 310
 457
 secondary_cases
-60000.0
+6000.0
 1
 0
 Number
@@ -1272,7 +1242,7 @@ CHOOSER
 param_policy
 param_policy
 "TightSupress" "ModerateSupress" "TightSupress_No_4" "ModerateSupress_No_4" "AggressElim" "ModerateElim" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-3
+6
 
 SLIDER
 1610
@@ -1444,15 +1414,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-1627
-183
-1809
-216
+1625
+135
+1807
+168
 Complacency_Bound
 Complacency_Bound
 0
 100
-78.0
+0.0
 1
 1
 NIL
@@ -1541,7 +1511,7 @@ End_Day
 End_Day
 -1
 548
-548.0
+91.0
 1
 1
 NIL
@@ -1549,9 +1519,9 @@ HORIZONTAL
 
 SLIDER
 779
-932
+943
 977
-965
+976
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -1765,10 +1735,10 @@ slopeAverage * 100
 11
 
 PLOT
-770
-777
-1027
-927
+771
+772
+1026
+892
 slope %
 NIL
 NIL
@@ -1871,10 +1841,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-1628
-134
-1811
-167
+1627
+338
+1810
+371
 isolate_on_inf_notice
 isolate_on_inf_notice
 1
@@ -1898,9 +1868,9 @@ HORIZONTAL
 
 SLIDER
 780
-1002
+1013
 977
-1035
+1046
 Infect_Iso_Factor
 Infect_Iso_Factor
 0
@@ -1928,9 +1898,9 @@ HORIZONTAL
 
 SLIDER
 780
-967
 978
-1000
+978
+1011
 Track_Iso_Factor
 Track_Iso_Factor
 0
@@ -1991,7 +1961,7 @@ param_recovered_prop
 param_recovered_prop
 0
 1
-0.1
+0.0
 0.1
 1
 NIL
@@ -2230,6 +2200,21 @@ MONITOR
 17
 1
 11
+
+SLIDER
+780
+902
+980
+935
+complacency_loss
+complacency_loss
+0
+1
+0.3
+0.1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

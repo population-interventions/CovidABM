@@ -1,6 +1,4 @@
-Pakistan.
- - Lactating and pregnant women need a cohort.
-
+Aim for R_0 3.7 in stage 1 for calibration.
 
 Speedup:
  * Replace "any? other simuls-here with [ householdUnit != [ householdUnit ] of myself" in general with a "am I at my house" check?
