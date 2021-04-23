@@ -203,7 +203,10 @@ end
 to-report GetInitialScale [cases]
   let caseScale floor log cases Scale_Factor
   let scaleRangeInThreshold floor log Scale_Threshold Scale_Factor
-  report caseScale - scaleRangeInThreshold
+  if caseScale - scaleRangeInThreshold > 0 [
+   report caseScale - scaleRangeInThreshold 
+  ]
+  report 0
 end
 
 to CheckScale

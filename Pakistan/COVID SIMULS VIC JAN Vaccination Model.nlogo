@@ -47,10 +47,10 @@ ticks
 30.0
 
 BUTTON
-234
-97
-298
-131
+239
+99
+303
+133
 NIL
 setup
 NIL
@@ -64,9 +64,9 @@ NIL
 1
 
 BUTTON
-199
+207
 144
-263
+271
 178
 Go
 ifelse (count simuls ) = (count simuls with [ color = blue ])  [ stop ] [ Go ]
@@ -81,9 +81,9 @@ NIL
 1
 
 BUTTON
-212
-240
-309
+219
+239
+321
 274
 Trace_Patterns
 ask n-of 50 simuls with [ color != black ] [ pen-down ] 
@@ -98,10 +98,10 @@ NIL
 1
 
 BUTTON
-210
-280
-310
-314
+220
+279
+320
+313
 UnTrace
 ask turtles [ pen-up ]
 NIL
@@ -115,10 +115,10 @@ NIL
 1
 
 SLIDER
-198
-188
-311
-221
+214
+187
+327
+220
 Population
 Population
 1000
@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-10.0
+18.0
 1
 1
 NIL
@@ -181,9 +181,9 @@ NIL
 HORIZONTAL
 
 BUTTON
-264
+272
 144
-328
+336
 178
 Go Once
 go
@@ -239,7 +239,7 @@ superspreaders
 superspreaders
 0
 1
-0.001
+0.002
 0.01
 1
 NIL
@@ -294,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-0.0
+25.0
 .5
 1
 NIL
@@ -309,7 +309,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-0.0
+25.0
 .5
 1
 NIL
@@ -374,10 +374,10 @@ infectionchange
 11
 
 INPUTBOX
-205
-332
-310
-393
+217
+325
+322
+386
 initial_cases
 4000.0
 1
@@ -385,10 +385,10 @@ initial_cases
 Number
 
 INPUTBOX
-204
-464
-313
-525
+217
+458
+324
+520
 total_population
 2.34E8
 1
@@ -649,7 +649,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.65
+0.7
 0.01
 1
 NIL
@@ -664,7 +664,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+75.0
 1
 1
 NIL
@@ -705,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-0.0
+20.0
 1
 1
 NIL
@@ -780,7 +780,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
@@ -823,7 +823,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+10.0
 1
 1
 NIL
@@ -976,17 +976,6 @@ Vaccine_Available
 -1000
 
 MONITOR
-182
-645
-271
-690
-Mean ID Time
-meanIDTime
-1
-1
-11
-
-MONITOR
 1239
 13
 1358
@@ -1006,7 +995,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3768116.0
+3961353.0
 1
 1
 NIL
@@ -1095,17 +1084,6 @@ param_vacEffDays
 1
 NIL
 HORIZONTAL
-
-MONITOR
-1645
-449
-1696
-494
-NIL
-contact_radius
-17
-1
-11
 
 MONITOR
 1479
@@ -1224,10 +1202,10 @@ Stage Policy Settings
 1
 
 INPUTBOX
-205
-397
-310
-457
+217
+390
+322
+450
 secondary_cases
 6000.0
 1
@@ -1254,7 +1232,7 @@ Scale_Threshold
 50
 500
 240.0
-1
+10
 1
 NIL
 HORIZONTAL
@@ -1422,7 +1400,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-0.0
+15.0
 1
 1
 NIL
@@ -2013,12 +1991,12 @@ PENS
 "pen-1" 1.0 0 -7500403 true "" "plot table:get endR_mean_metric 1"
 
 INPUTBOX
-203
-535
-317
-595
+215
+528
+323
+588
 preSimDailyCases
-15000.0
+1500.0
 1
 0
 Number
@@ -2062,7 +2040,7 @@ immune_from_reinfect
 immune_from_reinfect
 0
 1
-0.9
+0.95
 0.05
 1
 NIL

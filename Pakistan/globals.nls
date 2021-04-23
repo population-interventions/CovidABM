@@ -123,11 +123,9 @@ globals [
   test_acc
 
   ;; These used to be dynamic controls with conflicting variable names.
-  reduce_contact
   spatial_distance
   case_isolation
   quarantine
-  contact_radius
   Track_and_Trace_Efficiency
   stage
   prev_stage ; Last stage, so that stage settting are not reset to often
@@ -146,8 +144,6 @@ globals [
 
   PrimaryUpper
   SecondaryLower
-
-  meanIDTime
 
   popDivisionTable ; Table of population cohort data
   popDivisionTable_keys ; length of table.
