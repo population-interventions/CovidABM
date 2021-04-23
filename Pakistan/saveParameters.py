@@ -209,18 +209,16 @@ paramValuesTestR_high_track = {**defaultParams, **{
     'total_population' : '2500000000',
 }}
 
-paramValuesTestR_stageTest = {**defaultParams, **{
+paramValuesTestR_stageTestFull = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(500))),
     'param_policy' : listToStr([
         '"StageCal Test"',
     ]),
     'Global_Transmissibility' : listToStr([
-        0.36,
+        0.50,
     ]),
-    'Gather_Location_Count' : listToStr([200]),
-    'houseTotal' : listToStr([200, 500, 800, 1100, 1400, 1700]),
-    'stage_test_index' : listToStr([0, 41, 42, 48, 49, 50, 51, 52, 53, 54]),
-    'total_population' : '2500000000',
+    'stage_test_index' : listToStr(list(range(60))),
+    'total_population' : '234000000',
 }}
 
 paramValuesTestSingleR = {
@@ -248,4 +246,4 @@ paramValuesFullValues = {
     'param_trigger_loosen' : listToStr(['true', 'false']),
 }
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTest, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)

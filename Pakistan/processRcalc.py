@@ -16,7 +16,7 @@ def Process(path, name):
     df = df[['rand_seed', '[step]', 'average_R', 'global_transmissibility']]
     lastStep = df['[step]'].max()
     df = df[df['[step]'] == lastStep]
-    df = df[['rand_seed', 'average_R', 'global_transmissibility']]
+    df = df[['rand_seed', 'average_R_all_regions', 'global_transmissibility']]
     
     df = df.set_index(['rand_seed', 'global_transmissibility'])
     
@@ -38,10 +38,10 @@ def AddIfVaryingValue(colName, df, desiredIndex, toUnstack):
     return df, desiredIndex, toUnstack
 
 
-def ProcessVariableEnd(path, nameList):
+def ProcessVariableEnd(path, nameList, metricName):
     name = nameList[0]
     interestingColumns = [
-        'rand_seed', 'average_R', 'param_policy', 
+        'rand_seed', metricName, 'param_policy', 
         'global_transmissibility', 'totalEndCount', 'slopeAverage',
         'trackAverage', 'infectedTrackAverage', 'testName',
         'gather_location_count', 'housetotal',
@@ -77,7 +77,7 @@ def ProcessVariableEnd(path, nameList):
     df_desc = df.describe()
     df_desc.to_csv(path + name + '_metric.csv')
     
-    #print((df['average_R'] * df['totalEndCount']).sum() / df['totalEndCount'].sum())
+    #print((df[metricName] * df['totalEndCount']).sum() / df['totalEndCount'].sum())
     print(df.describe())
     
 
@@ -120,9 +120,11 @@ def MakePlot(df, varName,
     
     for tick in ax.xaxis.get_minor_ticks():
         tick.label.set_fontsize(32) 
+        tick.label.set_rotation(45)
+        tick.label.set_horizontalalignment('right')
+        tick.label.set_verticalalignment('top')
         tick.tick1line.set_markersize(0)
         tick.tick2line.set_markersize(0)
-        tick.label1.set_horizontalalignment('center')
     
     for tick in ax.yaxis.get_major_ticks():
         tick.label.set_fontsize(32) 
@@ -163,16 +165,18 @@ def ProcessToPlot(path, name, varName,
     df.describe().to_csv(path + name + '_plot_metric.csv')
     return df
 
-nameNumber = '_6'
+nameNumber = '_5'
 namePath = 'runCalibrate'
 #nameStr = 'COVID SIMULS VIC JAN Vaccination Model R test 7-table' + str(nameNumber)
-nameStr = 'headless MainCalibrate-table' + nameNumber
-#nameStr = 'headless find_2.5 high track-table' + nameNumber
+#nameStr = 'headless MainCalibrate-table' + nameNumber
+nameStr = 'calibrate_stages_11'
 
 #namePath = 'R regress'
 #nameStr = '55566792746ada8e5fd4b6c8efe14d2c736ad9f1_change'
+namePath = 'output/calibrate/'
+#namePath = 'output/' + namePath + '/'
 
-ProcessVariableEnd('output/' + namePath + '/', [nameStr])
+metric_name = 'average_R_all_regions'
 
 #MakePlot('output/' + namePath + '/', nameStr + '_process', 'slopeAverage',
 #    yDomain=(-0.3, 0.3),
@@ -181,24 +185,25 @@ ProcessVariableEnd('output/' + namePath + '/', [nameStr])
 #)
 #MakePlot(ProcessToPlot(
 #        'output/' + namePath + '/', nameStr + '_process',
-#        'average_R',
+#        'average_R_all_regions',
 #        indexDepth=5,
 #        indexReorder=[0, 2, 1, 3, 4],
 #    ),
-#    'average_R',
+#    'average_R_all_regions',
 #    yTop=5,
 #    hlines=[1, 2.5, 2.5*1.25, 2.5*1.5],
 #    width=60,
 #    #='1100',
 #)
+ProcessVariableEnd(namePath, [nameStr], metric_name)
 MakePlot(ProcessToPlot(
-        'output/' + namePath + '/', nameStr + '_process',
-        'average_R',
+        namePath, nameStr + '_process',
+        metric_name,
         indexDepth=4,
     ),
-    'average_R',
-    yTop=6,
-    hlines=[1, 2.5, 2.5*1.25, 2.5*1.5],
+    metric_name,
+    yTop=7,
+    hlines=[1, 3.7],
     width=70,
 )
 #MakePlot('output/' + namePath + '/', nameStr + '_process', 'trackAverage',
