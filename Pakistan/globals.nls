@@ -163,6 +163,7 @@ globals [
   endR_count
   endR_mean_metric
   average_R
+  average_R_all_regions
 
   ; Number of agents that are workers and essential workers respectively.
   totalWorkers

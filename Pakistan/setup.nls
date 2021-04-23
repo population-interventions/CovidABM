@@ -608,6 +608,7 @@ to setup
   ask n-of ( initial_cases / popPerSimul ) simuls [
     set color red
     set infectVariant 1
+    set contributeToR false
     simul_updateVacAndReinfectMult
 
     set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
@@ -628,6 +629,7 @@ to setup
   ask simuls [
     if init_secondry_infect > popPerSimul and any? other simuls in-radius 2 with [ color = red ] [
       set color red
+      set contributeToR false
       set infectVariant 1
       simul_updateVacAndReinfectMult
 

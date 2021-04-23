@@ -22,8 +22,8 @@ __includes[
 GRAPHICS-WINDOW
 342
 60
-961
-680
+962
+681
 -1
 -1
 7.56
@@ -239,7 +239,7 @@ superspreaders
 superspreaders
 0
 1
-0.002
+0.001
 0.01
 1
 NIL
@@ -294,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-25.0
+0.0
 .5
 1
 NIL
@@ -309,7 +309,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-25.0
+0.0
 .5
 1
 NIL
@@ -649,7 +649,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.7
+0.5
 0.01
 1
 NIL
@@ -664,7 +664,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-75.0
+100.0
 1
 1
 NIL
@@ -692,7 +692,7 @@ SWITCH
 392
 tracking
 tracking
-0
+1
 1
 -1000
 
@@ -705,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-20.0
+0.0
 1
 1
 NIL
@@ -780,7 +780,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -856,10 +856,10 @@ currentinfections
 11
 
 MONITOR
-1788
-450
-1842
-495
+1790
+402
+1844
+447
 Average Illness time
 mean [ timenow ] of simuls with [ color = red ]
 1
@@ -995,7 +995,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3961353.0
+3913043.0
 1
 1
 NIL
@@ -1152,10 +1152,10 @@ stage
 11
 
 MONITOR
-1643
-500
-1746
-545
+1645
+452
+1748
+497
 Interaction Infectivity
 transmission_average
 6
@@ -1163,10 +1163,10 @@ transmission_average
 11
 
 MONITOR
-1704
-450
-1784
-495
+1707
+402
+1787
+447
 Virulent Interactions
 transmission_count_metric
 17
@@ -1220,7 +1220,7 @@ CHOOSER
 param_policy
 param_policy
 "TightSupress" "ModerateSupress" "TightSupress_No_4" "ModerateSupress_No_4" "AggressElim" "ModerateElim" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-6
+12
 
 SLIDER
 1610
@@ -1344,10 +1344,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot transmission_average"
 
 MONITOR
-1750
-500
-1842
-545
+1752
+452
+1845
+497
 Expected New Cases
 transmission_count_metric * transmission_average
 6
@@ -1385,7 +1385,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 2000
-400.0
+350.0
 50
 1
 NIL
@@ -1400,7 +1400,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-15.0
+0.0
 1
 1
 NIL
@@ -1425,10 +1425,10 @@ PENS
 "default" 0.05 1 -16777216 true "" "histogram [ currentVirulence ] of simuls with [ color = red ]"
 
 MONITOR
-1752
-552
-1841
-597
+1754
+504
+1843
+549
 Real New Cases
 new_case_real
 17
@@ -1489,7 +1489,7 @@ End_Day
 End_Day
 -1
 548
-91.0
+45.0
 1
 1
 NIL
@@ -1733,10 +1733,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "plot slope_prior0 / 20"
 
 MONITOR
-1643
-552
-1746
-597
+1645
+504
+1748
+549
 Tracked Infection %
 100 * (count simuls with [color = red and tracked = 1]) / (count simuls with [color = red])
 2
@@ -1752,8 +1752,8 @@ calibrate_stage_switch
 calibrate_stage_switch
 0
 10000
-4200.0
-1
+0.0
+100
 1
 NIL
 HORIZONTAL
@@ -2010,8 +2010,8 @@ yearly_recover_prop_loss
 yearly_recover_prop_loss
 0
 0.999
-0.15
-0.001
+0.14
+0.01
 1
 NIL
 HORIZONTAL
@@ -2193,6 +2193,17 @@ complacency_loss
 1
 NIL
 HORIZONTAL
+
+MONITOR
+1613
+554
+1772
+599
+NIL
+average_R_all_regions
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?

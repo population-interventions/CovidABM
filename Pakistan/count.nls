@@ -57,6 +57,8 @@ to resetAccumulators
   set new_case_real new_case_real_counter
   set new_case_real_counter 0
   
+  let totalEndR_all_regions 0
+  let totalEndCount_all_regions 0
   foreach regionTable_list [ region ->
     if table:get endR_count region > 0 [
       table:put endR_mean_metric region table:get endR_sum region / table:get endR_count region
@@ -67,10 +69,20 @@ to resetAccumulators
     ifelse table:get totalEndCount region > 0
     [
       table:put average_R region table:get totalEndR region / table:get totalEndCount region
+      set totalEndR_all_regions totalEndR_all_regions + (table:get totalEndR region)
+      set totalEndCount_all_regions totalEndCount_all_regions + (table:get totalEndCount region)
     ]
     [
       table:put average_R region 0
     ]
+  ]
+  
+  ifelse totalEndCount_all_regions > 0
+  [
+    set average_R_all_regions totalEndR_all_regions / totalEndCount_all_regions
+  ]
+  [
+    set average_R_all_regions 0
   ]
   
   ;show ( word " avoidFails " (avoidAttempts - avoidSuccess) ", avoidSuccess " avoidSuccess)

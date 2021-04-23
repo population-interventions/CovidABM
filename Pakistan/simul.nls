@@ -12,6 +12,7 @@ simuls-own [
   IncubationPd ;; the incubation perios of the illness ascribed to the person
   RiskofDeath ;; the overall risk of deth for the person if they contract the illness based on their age
   Pace ;; the speed that pthe person moves around the environment
+  contributeToR ;; Whether to contribute to average R reporting.
 
   ;; Cohort parameters
   spanMult
@@ -298,7 +299,7 @@ end
 
 to simul_setEndR
   ;print R_measure_time
-  if R_measure_time < ticks [
+  if R_measure_time < ticks and contributeToR [
     table:put totalEndR homeRegion (table:get totalEndR homeRegion) + R
     table:put totalEndCount homeRegion (table:get totalEndCount homeRegion) + 1
     table:put endR_sum homeRegion (table:get endR_sum homeRegion) + R
@@ -416,6 +417,7 @@ to simul_infect
             ;; Check against lower succeptiblity for reinfection.
             if baseSuccept * (table:get succeptibilityTable patchVariant) * x > infectDraw [
               set color red
+              set contributeToR true
               set infectVariant patchVariant
               simul_updateVacAndReinfectMult
 
