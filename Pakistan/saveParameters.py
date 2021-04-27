@@ -209,18 +209,6 @@ paramValuesTestR_high_track = {**defaultParams, **{
     'total_population' : '2500000000',
 }}
 
-paramValuesTestR_stageTestFull = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(500))),
-    'param_policy' : listToStr([
-        '"StageCal Test"',
-    ]),
-    'Global_Transmissibility' : listToStr([
-        0.42,
-    ]),
-    'stage_test_index' : listToStr([0, 59]),
-    'total_population' : '234000000',
-}}
-
 paramValuesTestSingleR = {
     'rand_seed' : listToStr(random.randint(10000000, size=(1000))),
     'param_policy' : listToStr([
@@ -229,6 +217,19 @@ paramValuesTestSingleR = {
     'Global_Transmissibility' : listToStr([0.26]),
     'total_population' : '25000000',
 }
+
+paramValuesTestR_stageTestFull = {**defaultParams, **{
+    'rand_seed' : listToStr(random.randint(10000000, size=(500))),
+    'param_policy' : listToStr([
+        '"StageCal Test"',
+    ]),
+    'Global_Transmissibility' : listToStr([
+        0.245,
+        0.295,
+    ]),
+    'stage_test_index' : listToStr([0, 55, 57, 58, 59]),
+    'total_population' : '234000000000',
+}}
   
 paramValuesFullValues = {
     'rand_seed' : listToStr(random.randint(10000000, size=(100))),
@@ -246,4 +247,4 @@ paramValuesFullValues = {
     'vac_variant_eff_prop' : listToStr([0.8, 0.95]),
 }
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)

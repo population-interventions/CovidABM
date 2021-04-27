@@ -197,7 +197,7 @@ to scaledown_try_to_maintain_cohort
   ]
   
   ;; Reset all houses so infective people are together.
-  reset_housing
+  ;reset_housing
   set scalephase scalephase - 1
 end
 

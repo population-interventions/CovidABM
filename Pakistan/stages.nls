@@ -458,7 +458,7 @@ to do_stages_tony
     set mask_wearing 90
     set Visit_Radius 2.5
     set Visit_Frequency 0.035
-    set superspreaders 0.0005
+    set superspreaders 0.0002
   ]
 end
 

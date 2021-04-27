@@ -20,13 +20,13 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-350
-75
-832
-558
+354
+59
+974
+681
 -1
 -1
-5.21
+5.363
 1
 10
 1
@@ -294,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-20.0
+29.5
 .5
 1
 NIL
@@ -309,7 +309,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-20.0
+29.5
 .5
 1
 NIL
@@ -442,10 +442,10 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "histogram [ agerange ] of simuls with [ color = red ]"
 
 PLOT
-1039
-749
-1457
-988
+1040
+747
+1462
+995
 Active (red) and Total (blue) Infections ICU Beds (black)
 NIL
 NIL
@@ -641,10 +641,10 @@ mean [ personalvirulence] of simuls
 11
 
 SLIDER
-18
-406
-203
-439
+14
+450
+199
+483
 Global_Transmissibility
 Global_Transmissibility
 0
@@ -671,9 +671,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-553
+559
 850
-750
+756
 883
 Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
@@ -705,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-20.0
+25.0
 1
 1
 NIL
@@ -1031,10 +1031,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count simuls with [ vaccinated = 1 ]"
 
 SLIDER
-22
-176
-197
-209
+18
+220
+193
+253
 param_vac_uptake
 param_vac_uptake
 0.6
@@ -1046,10 +1046,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-21
-284
-196
-317
+17
+329
+192
+362
 param_vac_tran_reduct
 param_vac_tran_reduct
 0.5
@@ -1203,14 +1203,14 @@ secondary_cases
 Number
 
 CHOOSER
-21
-359
-199
+17
 404
+195
+449
 param_policy
 param_policy
 "TightSupress" "ModerateSupress" "TightSupress_No_4" "ModerateSupress_No_4" "AggressElim" "ModerateElim" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-1
+3
 
 SLIDER
 1610
@@ -1366,10 +1366,10 @@ PENS
 "Recovered" 1.0 0 -1184463 true "" "plot count simuls with [color = yellow]"
 
 SLIDER
-554
-808
-751
-841
+560
+809
+757
+842
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1493,7 +1493,7 @@ Isolation_Transmission
 Isolation_Transmission
 0
 1
-0.4
+0.33
 0.01
 1
 NIL
@@ -1520,7 +1520,7 @@ MONITOR
 1602
 502
 NIL
-totalOverseasIncursions
+casesinperiod7
 17
 1
 11
@@ -1628,25 +1628,25 @@ recoverProportion * 100
 14
 
 SLIDER
-555
-723
-753
+558
+729
 756
+762
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
 0.5
-0.12
-0.001
+0.1
+0.005
 1
 NIL
 HORIZONTAL
 
 SWITCH
-21
-321
-195
-354
+17
+365
+191
+398
 param_trigger_loosen
 param_trigger_loosen
 1
@@ -1875,10 +1875,10 @@ track_slope
 -1000
 
 SLIDER
-21
-248
-196
-281
+17
+293
+192
+326
 param_vac_wane
 param_vac_wane
 0
@@ -1890,10 +1890,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-22
-211
-197
-244
+18
+255
+193
+288
 param_vac_rate_mult
 param_vac_rate_mult
 0
@@ -1905,31 +1905,16 @@ NIL
 HORIZONTAL
 
 SLIDER
-22
-139
-197
-172
+18
+184
+193
+217
 param_recovered_prop
 param_recovered_prop
 0
 0.5
 0.1
 0.05
-1
-NIL
-HORIZONTAL
-
-SLIDER
-18
-443
-193
-476
-param_virulence_inc
-param_virulence_inc
-0
-0.05
-0.05
-0.0001
 1
 NIL
 HORIZONTAL
@@ -2029,7 +2014,7 @@ immune_from_prev_variant
 immune_from_prev_variant
 0
 1
-0.4
+0.7687977727792483
 0.05
 1
 NIL
@@ -2091,10 +2076,10 @@ MONITOR
 11
 
 SLIDER
-554
-767
-752
-800
+560
+768
+758
+801
 Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
@@ -2154,10 +2139,10 @@ MONITOR
 11
 
 SLIDER
-557
-684
-757
-717
+560
+690
+760
+723
 complacency_loss
 complacency_loss
 0
@@ -2180,15 +2165,30 @@ average_R_all_regions
 11
 
 SLIDER
-23
-102
-195
-135
+19
+147
+191
+180
 param_final_phase
 param_final_phase
 0
 10
 6.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+19
+109
+194
+143
+param_incur_phase_limit
+param_incur_phase_limit
+-1
+10
+0.0
 1
 1
 NIL
