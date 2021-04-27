@@ -232,18 +232,18 @@ paramValuesTestSingleR = {
   
 paramValuesFullValues = {
     'rand_seed' : listToStr(random.randint(10000000, size=(100))),
-    'total_population' : '6359000',
+    'total_population' : '234000000',
+    'param_vac_rate_mult' : listToStr([1.5, 1, 0.75]),
+    'param_final_phase' : listToStr([5, 6]),
     'param_policy' : listToStr([
-        '"AggressElim"',
-        '"ModerateElim"',
-        '"TightSupress"',
-        '"LooseSupress"',
+        '"ModerateSupress_No_4"',
+        '"ModerateSupress"',
     ]),
-    'param_vac_uptake' : listToStr([60, 75, 90]),
-    'param_vac1_tran_reduct' : listToStr([50, 75, 90]),
-    'param_vac2_tran_reduct' : listToStr([50, 75, 90]),
-    'Global_Transmissibility' : listToStr([0.34, 0.45, 0.54]),
-    'param_trigger_loosen' : listToStr(['true', 'false']),
+    'param_recovered_prop' : listToStr([0.05, 0.1]),
+    'Global_Transmissibility' : listToStr([0.246, 0.296]),
+    'variant_transmiss_growth' : listToStr([1.3, 1.6]),
+    'param_vac_tran_reduct' : listToStr([0.75, 0.875, 0.95]),
+    'vac_variant_eff_prop' : listToStr([0.8, 0.95]),
 }
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)

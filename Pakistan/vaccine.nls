@@ -31,52 +31,54 @@ to vaccine_update
     if table:has-key? vaccineTable (vaccinePhaseIndex + 1) [
       set vaccinePhaseIndex vaccinePhaseIndex + 1
       let phaseData table:get vaccineTable vaccinePhaseIndex
-      
-      ;print "Old vaccine total pop and unvaccinated pop"
-      ;print count simuls with [VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase]
-      ;print count simuls with [VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase and vaccinated = 0]
-      
-      set global_vaccinePhase item 0 phaseData
-      let phaseDays (item 2 phaseData) 
-      let phaseAtFixedSpeed item 4 phaseData
-      if phaseAtFixedSpeed = 0 [
-        set phaseDays phaseDays / param_vac_rate_mult
-      ]
-      set global_vaccineSubPhase item 1 phaseData
-      set global_vaccineType item 3 phaseData
-      set global_vaccineUptakeOverride item 5 phaseData
-      
-      ;; Sum simulants in the vaccination phase.
-      let phasePop 0
-      foreach popDivisionTable_keys [ pop_index ->
-        let cohortData table:get popDivisionTable pop_index
-        let cohort_phase item 6 cohortData
-        let cohort_subPhase item 7 cohortData
-        if cohort_phase = global_vaccinePhase and cohort_subPhase = global_vaccineSubPhase [
-          ;; Add population and subtract already vaccinated.
-          set phasePop phasePop + (item 0 cohortData) - (item 13 cohortData)
+      if item 0 phaseData <= param_final_phase [
+        
+        ;print "Old vaccine total pop and unvaccinated pop"
+        ;print count simuls with [VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase]
+        ;print count simuls with [VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase and vaccinated = 0]
+        
+        set global_vaccinePhase item 0 phaseData
+        let phaseDays (item 2 phaseData) 
+        let phaseAtFixedSpeed item 4 phaseData
+        if phaseAtFixedSpeed = 0 [
+          set phaseDays phaseDays / param_vac_rate_mult
         ]
-        if global_vaccineUptakeOverride > 0 [
-          let cohort table:get populationCohortCache pop_index
-          ask cohort with [ vaccinated = 0 and vaccineOffered = 1 and sm_vac_uptake < global_vaccineUptakeOverride ] [
-            set phasePop phasePop + 1
-            set vaccineOffered 0
+        set global_vaccineSubPhase item 1 phaseData
+        set global_vaccineType item 3 phaseData
+        set global_vaccineUptakeOverride item 5 phaseData
+        
+        ;; Sum simulants in the vaccination phase.
+        let phasePop 0
+        foreach popDivisionTable_keys [ pop_index ->
+          let cohortData table:get popDivisionTable pop_index
+          let cohort_phase item 6 cohortData
+          let cohort_subPhase item 7 cohortData
+          if cohort_phase = global_vaccinePhase and cohort_subPhase = global_vaccineSubPhase [
+            ;; Add population and subtract already vaccinated.
+            set phasePop phasePop + (item 0 cohortData) - (item 13 cohortData)
+          ]
+          if global_vaccineUptakeOverride > 0 [
+            let cohort table:get populationCohortCache pop_index
+            ask cohort with [ vaccinated = 0 and vaccineOffered = 1 and sm_vac_uptake < global_vaccineUptakeOverride ] [
+              set phasePop phasePop + 1
+              set vaccineOffered 0
+            ]
           ]
         ]
+        ;print phasePop
+        
+        set vaccinePhaseEndDay (vaccinePhaseEndDay + phaseDays)
+        set global_vaccineAvailible 0
+        set global_vaccinePerDay phasePop / phaseDays + 0.00001 ; Floats
+        
+        vaccine_brand_update
+        
+        ;print "New vaccine phase"
+        ;print global_vaccinePhase
+        ;print global_vaccineSubPhase
+        ;print global_vaccinePerDay
+        ;print vaccinePhaseEndDay
       ]
-      ;print phasePop
-      
-      set vaccinePhaseEndDay (vaccinePhaseEndDay + phaseDays)
-      set global_vaccineAvailible 0
-      set global_vaccinePerDay phasePop / phaseDays + 0.00001 ; Floats
-      
-      vaccine_brand_update
-      
-      ;print "New vaccine phase"
-      ;print global_vaccinePhase
-      ;print global_vaccineSubPhase
-      ;print global_vaccinePerDay
-      ;print vaccinePhaseEndDay
     ]
   ]
   
