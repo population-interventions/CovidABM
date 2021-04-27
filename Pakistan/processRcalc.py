@@ -44,7 +44,7 @@ def ProcessVariableEnd(path, nameList, metricName):
         'rand_seed', metricName, 'param_policy', 
         'global_transmissibility', 'totalEndCount', 'slopeAverage',
         'trackAverage', 'infectedTrackAverage', 'testName',
-        'gather_location_count', 'housetotal',
+        'gather_location_count',
     ]
     df = pd.DataFrame(columns=interestingColumns)
     for v in nameList:
@@ -58,7 +58,6 @@ def ProcessVariableEnd(path, nameList, metricName):
     toUnstack = 1
     
     df, desiredIndex, toUnstack = AddIfVaryingValue('testName', df, desiredIndex, toUnstack)
-    df, desiredIndex, toUnstack = AddIfVaryingValue('housetotal', df, desiredIndex, toUnstack)
     df, desiredIndex, toUnstack = AddIfVaryingValue('gather_location_count', df, desiredIndex, toUnstack)
     
     if 'testName' in desiredIndex:
@@ -88,7 +87,8 @@ def MakePlot(df, varName,
         ymajticks=False,
         yminticks=False,
         hlines=False,
-        width=48.5,
+        figWidth=48.5,
+        figHeight= 40,
         ):
     
     if yTop:
@@ -106,7 +106,7 @@ def MakePlot(df, varName,
     sns.set_theme(style="ticks", palette="pastel")
     sns.set_style("ticks", {"xtick.major.size": 60})
     
-    fig, ax = pyplot.subplots(figsize=(width, 40))
+    fig, ax = pyplot.subplots(figsize=(figWidth, figHeight))
     plt = sns.boxplot(data=df, fliersize=1.8, showmeans=True,
                       meanprops={"marker":"+","markerfacecolor":"black", "markeredgecolor":"black"})
     #plt = sns.swarmplot(data=df, color=".25")
@@ -169,14 +169,15 @@ nameNumber = '_5'
 namePath = 'runCalibrate'
 #nameStr = 'COVID SIMULS VIC JAN Vaccination Model R test 7-table' + str(nameNumber)
 #nameStr = 'headless MainCalibrate-table' + nameNumber
-nameStr = 'calibrate_stages_11'
+nameStr = 'calibrate_stages_32'
 
 #namePath = 'R regress'
 #nameStr = '55566792746ada8e5fd4b6c8efe14d2c736ad9f1_change'
 namePath = 'output/calibrate/'
 #namePath = 'output/' + namePath + '/'
 
-metric_name = 'average_R_all_regions'
+metric_name = 'average_R_region_1'
+#metric_name = 'average_R_all_regions'
 
 #MakePlot('output/' + namePath + '/', nameStr + '_process', 'slopeAverage',
 #    yDomain=(-0.3, 0.3),
@@ -202,9 +203,10 @@ MakePlot(ProcessToPlot(
         indexDepth=4,
     ),
     metric_name,
-    yTop=7,
-    hlines=[1, 3.7],
-    width=70,
+    yTop=5,
+    hlines=[1, 3, 2.5, 1.86],
+    figWidth=30,
+    figHeight=24,
 )
 #MakePlot('output/' + namePath + '/', nameStr + '_process', 'trackAverage',
 #    yDomain=(0, 1),

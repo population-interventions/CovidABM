@@ -1,28 +1,58 @@
 
 to reset_housing
+  let houseTotal 0
   let regionTableData table:values regionTable
   foreach regionTableData [ data -> 
     let region item 0 data
-    let houseSize item 3 data
+    let houseSizeMean item 3 data
+    let houseSizeSD item 4 data
     let regionRed simuls with [color = red and homeRegion = region]
     let regionNotRed simuls with [color != red and homeRegion = region]
+    
+    let houseSize random-normal houseSizeMean houseSizeSD
+    if houseSize > houseSizeMean + 2 * houseSizeSD [
+      set houseSize houseSizeMean + 2 * houseSizeSD
+    ]
+    if houseSize < houseSizeMean - 2 * houseSizeSD [
+      set houseSize houseSizeMean - 2 * houseSizeSD
+    ]
     
     let curHouse table:get regionHouseMin region
     let simulInHouse 0
     ask regionRed [
       set householdUnit curHouse
       set simulInHouse simulInHouse + 1
+      
       if simulInHouse >= houseSize [
         set simulInHouse 0
         set curHouse curHouse + 1
+        set houseTotal houseTotal + 1
+        
+        set houseSize random-normal houseSizeMean houseSizeSD
+        if houseSize > houseSizeMean + 2 * houseSizeSD [
+          set houseSize houseSizeMean + 2 * houseSizeSD
+        ]
+        if houseSize < houseSizeMean - 2 * houseSizeSD [
+          set houseSize houseSizeMean - 2 * houseSizeSD
+        ]
       ]
     ]
     ask regionNotRed [
       set householdUnit curHouse
       set simulInHouse simulInHouse + 1
+
       if simulInHouse >= houseSize [
         set simulInHouse 0
         set curHouse curHouse + 1
+        set houseTotal houseTotal + 1
+        
+        set houseSize random-normal houseSizeMean houseSizeSD
+        if houseSize > houseSizeMean + 2 * houseSizeSD [
+          set houseSize houseSizeMean + 2 * houseSizeSD
+        ]
+        if houseSize < houseSizeMean - 2 * houseSizeSD [
+          set houseSize houseSizeMean - 2 * houseSizeSD
+        ]
       ]
     ]
   ]

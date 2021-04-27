@@ -215,9 +215,9 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
         '"StageCal Test"',
     ]),
     'Global_Transmissibility' : listToStr([
-        0.50,
+        0.42,
     ]),
-    'stage_test_index' : listToStr(list(range(60))),
+    'stage_test_index' : listToStr([0, 59]),
     'total_population' : '234000000',
 }}
 

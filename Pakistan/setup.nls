@@ -214,9 +214,7 @@ to createSimulants
       set timenow 0
       set noticeOwnInfection 0
       set IncubationPd int ownIncubationPeriod
-      set inQuarantine 0
       set vaccineOffered 0
-      set sensitivity random-float 1
       set R 0
       set vacWaitDays 0
       set isolating 0

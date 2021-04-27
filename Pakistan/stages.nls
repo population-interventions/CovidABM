@@ -2,26 +2,11 @@
 to do_stages_test
   set testName "None"
   
-  set span 18
-  set Visit_Radius 10
-  set Visit_Frequency 0.1428
-  set superspreaders 0.002
-  
-  set proportion_people_avoid 0
-  set proportion_time_avoid 0
-  set Complacency_Bound 0
-  set case_isolation false
-  set schoolsOpen true
-  set quarantine false
-  set Essential_Workers 100
-  set maskPolicy false
-  set mask_wearing 0
-  set superspreaders 0.001
-  set tracking false
-  set spatial_distance false
-  set traceMult 0
-  set isolate_on_inf_notice false
-  
+
+  set stage -1
+  do_stages_tony
+  set stage -2
+
   if stage_test_index = 1 [
     set testName "Span 5"
     set span 5
@@ -378,10 +363,10 @@ to do_stages_tony
   ]
   if stage = -1 [
     ;; Stage 0 - nothing, no change
-    set span 18
-    set Visit_Radius 10
+    set span 20
+    set Visit_Radius 25
     set Visit_Frequency 0.1428
-    set superspreaders 0.002
+    set superspreaders 0.05
     
     set proportion_people_avoid 0
     set proportion_time_avoid 0
@@ -392,8 +377,7 @@ to do_stages_tony
     set Essential_Workers 100
     set maskPolicy false
     set mask_wearing 0
-    set superspreaders 0.001
-    set tracking false
+    set tracking true
     set spatial_distance false
     set traceMult 0
     set isolate_on_inf_notice false
@@ -409,66 +393,66 @@ to do_stages_tony
   
   if stage = 0 [
     ;; Stage 1
-    set span 18
-    set proportion_people_avoid 25
-    set proportion_time_avoid 25
-    set Complacency_Bound 15
+    set span 12
+    set proportion_people_avoid 35
+    set proportion_time_avoid 35
+    set Complacency_Bound 25
     set Essential_Workers 75
     set schoolsOpen true
-    set mask_wearing 20
-    set Visit_Radius 10
+    set mask_wearing 25
+    set Visit_Radius 8
     set Visit_Frequency 0.1428
     set superspreaders 0.002
   ]
 
   if stage = 1 [
     ;; Stage 1b
-    set span 18
-    set proportion_people_avoid 25
-    set proportion_time_avoid 25
-    set Complacency_Bound 15
+    set span 12
+    set proportion_people_avoid 35
+    set proportion_time_avoid 35
+    set Complacency_Bound 25
     set Essential_Workers 75
     set schoolsOpen true
-    set mask_wearing 20
-    set Visit_Radius 10
+    set mask_wearing 25
+    set Visit_Radius 8
     set Visit_Frequency 0.1428
     set superspreaders 0.002
   ]
 
   if stage = 2 [
     ;; Stage 2
-    set span 9
-    set proportion_people_avoid 65
-    set proportion_time_avoid 65
-    set Complacency_Bound 52
+    set span 8
+    set proportion_people_avoid 70
+    set proportion_time_avoid 70
+    set Complacency_Bound 55
     set Essential_Workers 50
     set schoolsOpen true
     set mask_wearing 50
-    set Visit_Radius 8
+    set Visit_Radius 7
     set Visit_Frequency 0.1428
     set superspreaders 0.001
   ]
 
   if stage = 3 [
     ;; Stage 3
-    set span 6
+    set span 2.5
     set proportion_people_avoid 85
     set proportion_time_avoid 85
-    set Complacency_Bound 68
+    set Complacency_Bound 70
     set Essential_Workers 25
     set schoolsOpen false
     set mask_wearing 75
-    set Visit_Radius 5
-    set Visit_Frequency 0.07
+    set Visit_Radius 4
+    set Visit_Frequency 0.071
     set superspreaders 0.0005
   ]
 
   if stage = 4 [
     ;; Stage 4
-    set span 3
+    set span 1.25
     set proportion_people_avoid 90
     set proportion_time_avoid 90
-    set Complacency_Bound 72
+    set Complacency_Bound 80
     set Essential_Workers 10
     set schoolsOpen false
     set mask_wearing 90

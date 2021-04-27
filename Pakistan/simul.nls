@@ -5,10 +5,7 @@
 breed [ simuls simul ]
 
 simuls-own [
-  inQuarantine ;; whether the person is in ICU or not
-  sensitivity ;; person's sensitivity to news about the pandemic
   R ;; the estimated RNaught of individuals
-  contacts ;; the number of contacts the person has made in the model
   IncubationPd ;; the incubation perios of the illness ascribed to the person
   RiskofDeath ;; the overall risk of deth for the person if they contract the illness based on their age
   Pace ;; the speed that pthe person moves around the environment
@@ -317,8 +314,6 @@ to simul_do_scaleup
 
   set timenow 0
   set noticeOwnInfection 0
-  set inQuarantine 0
-  set sensitivity random-float 1
   set imported 0
   set tracked 0
   set isolating 0
@@ -447,15 +442,15 @@ end
 
 to simul_move
   ;; describes the circumstances under which people can move and infect one another
-  if ticks > 1 and inQuarantine = 0 and isolateCompliant = 0 [
+  if ticks > 1 and isolateCompliant = 0 [
     ;; this is assigned per agent so day and night are not aligned across people - this is deliberate
     ifelse random 2 = 1
     [
-      set heading (heading - 90) + random 180
-      jump random pace
+      move-to homeLocation
     ]
     [
-      move-to homeLocation
+      set heading random 360
+      jump random-float pace
     ]
   ]
 end
@@ -463,7 +458,7 @@ end
 to simul_visitDestination
   ;; sets up destinations where people might gather and set off superspreader events
   ;; reduces large gatherings by stage
-  if inQuarantine = 0 and isolateCompliant = 0 and Visit_Frequency * gatherFreqMult > random-float 1  [
+  if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult > random-float 1  [
     let movePatch one-of destination_patches in-radius Visit_Radius
     if is-patch? movePatch [
       move-to movePatch
@@ -475,7 +470,7 @@ end
 to simul_avoid
   ;; so, if the social distancing policies are on and you are distancing at this time and you are not part of an age-isolated
   ;; group and you are not an EssentialWorkerPriority, then if there is anyone near you, move away if you can.♦
-  if inQuarantine = 0 and isolateCompliant != 1 [
+  if isolateCompliant != 1 [
     ;; if you are an essential worker, you can only reduce your
     ;; contacts when you are not at work assuming 8 hours work, 8 hours rest, 8 hours recreation - rest doesn't count for anyone, hence it is
     ;; set at 50 on the input slider. People don't isolate from others in their household unit
@@ -502,11 +497,11 @@ to simul_avoid
         simul_update_patch_utilisation
     ])
   ]
-  move-to patch-here
+  ;;move-to patch-here ;; Snap to grid
 end
 
 to simul_superSpread
-  if inQuarantine = 0 and isolateCompliant = 0 and superspreaders > random-float 1 [
+  if isolateCompliant = 0 and superspreaders > random-float 1 [
     move-to one-of destination_patches
   ]
 end
@@ -560,7 +555,6 @@ to simul_end_infection
     set timenow 0
     set noticeOwnInfection 0
     set requireICU 0
-    set inQuarantine 0
     set isolating 0
     set tracked 0
   ]
