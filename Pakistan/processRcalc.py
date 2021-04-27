@@ -169,15 +169,15 @@ nameNumber = '_5'
 namePath = 'runCalibrate'
 #nameStr = 'COVID SIMULS VIC JAN Vaccination Model R test 7-table' + str(nameNumber)
 #nameStr = 'headless MainCalibrate-table' + nameNumber
-nameStr = 'calibrate_stages_32'
+nameStr = 'calibrate_stages_42'
 
 #namePath = 'R regress'
 #nameStr = '55566792746ada8e5fd4b6c8efe14d2c736ad9f1_change'
 namePath = 'output/calibrate/'
 #namePath = 'output/' + namePath + '/'
 
-metric_name = 'average_R_region_1'
-#metric_name = 'average_R_all_regions'
+#metric_name = 'average_R_region_2'
+metric_name = 'average_R_all_regions'
 
 #MakePlot('output/' + namePath + '/', nameStr + '_process', 'slopeAverage',
 #    yDomain=(-0.3, 0.3),
