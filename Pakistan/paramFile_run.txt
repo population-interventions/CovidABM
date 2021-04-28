@@ -47,7 +47,7 @@
 ["proportion_time_avoid" 72.0]
 ["accept_isolation_prop" 0.4204253093081838]
 ["recov_var_match_rate" 0.85]
-["recovered_match_rate" 0.11]
+["recovered_match_rate" 0.1]
 ["report_proportion" 0.13]
 ["scale" true]
 ["scale_factor" 4.0]

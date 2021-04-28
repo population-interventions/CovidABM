@@ -119,106 +119,6 @@ topOfFile = [
 defaultParams = {
 }
 
-  
-paramValues = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
-    'param_policy' : listToStr([
-        '"AggressElim"',
-        '"ModerateElim"',
-        '"TightSupress"',
-        '"LooseSupress"',
-    ]),
-    'total_population' : '25000000',
-}
-
-paramValuesTestR = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
-    'param_policy' : listToStr([
-        '"None"',
-    ]),
-    'total_population' : '25000000',
-}
-  
-paramValuesBigRunTest = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
-    'total_population' : '25000000',
-    'param_policy' : listToStr([
-        '"AggressElim"',
-        '"ModerateElim"',
-        '"TightSupress"',
-        '"LooseSupress"',
-    ]),
-    'param_vac_uptake' : listToStr([75, 90]),
-    'param_vac2_tran_reduct' : listToStr([60, 75, 90]),
-    'Global_Transmissibility' : listToStr([0.32, 0.51]),
-    'case_reporting_delay' : listToStr([2, 5]),
-    'non_infective_Time' : listToStr([0, 2]),
-    'scale_threshold' : listToStr([240, 320]),
-}
-
-paramValuesTestR_2 = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(2000))),
-    'param_policy' : listToStr([
-        '"StageCal None"',
-        '"StageCal_1"',
-        '"StageCal_1b"',
-        '"StageCal_2"',
-        '"StageCal_3"',
-        '"StageCal_4"',
-    ]),
-    'Global_Transmissibility' : listToStr([0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.54, 0.56, 0.59, 0.61, 0.64, 0.67, 0.7, 0.73]),
-    'total_population' : '2500000000',
-}
-
-paramValuesTestR_small = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(10000))),
-    'param_policy' : listToStr([
-        '"StageCal None"',
-        #'"StageCal Isolate"',
-        '"StageCal_1"',
-        '"StageCal_1b"',
-        '"StageCal_2"',
-        '"StageCal_3"',
-        '"StageCal_4"',
-    ]),
-    'Global_Transmissibility' : listToStr([
-        0.26,
-        0.335,
-        0.405,
-    ]),
-    'calibrate_stage_switch' : 701,
-    'total_population' : '2500000000',
-}}
-
-paramValuesTestR_high_track = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(10000))),
-    'param_policy' : listToStr([
-        '"StageCal None"',
-        '"StageCal Isolate"',
-        #'"StageCal_1"',
-        #'"StageCal_1b"',
-        #'"StageCal_2"',
-        #'"StageCal_3"',
-        #'"StageCal_4"',
-    ]),
-    'Global_Transmissibility' : listToStr([
-        0.26,
-        0.335,
-        0.405,
-    ]),
-    'calibrate_stage_switch' : 701,
-    'total_population' : '2500000000',
-}}
-
-paramValuesTestSingleR = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(1000))),
-    'param_policy' : listToStr([
-        '"StageCal_1"',
-    ]),
-    'Global_Transmissibility' : listToStr([0.26]),
-    'total_population' : '25000000',
-}
-
 paramValuesTestR_stageTestFull = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(500))),
     'param_policy' : listToStr([
@@ -233,6 +133,9 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
     'initial_cases' : 10,
     'secondary_cases' : 20,
     'presimdailycases' : 0,
+    'yearly_recover_prop_loss' : 0,
+    'initial_variant_2_prop' : 0,
+    'calibrate' : 'true',
 }}
   
 paramValuesFullValues = {
@@ -253,6 +156,7 @@ paramValuesFullValues = {
     'secondary_cases' : 600000,
     'presimdailycases' : 5000,
     'track_r' : 'false',
+    'calibrate' : 'false',
 }
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)
