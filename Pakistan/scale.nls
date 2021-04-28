@@ -152,11 +152,24 @@ to scaleup_try_to_maintain_cohort
     ]
     if R_count > 0 [
       let R_average_after R_agg / R_count
-      ;;show ( word "Before " R_average_before ", After " R_average_after )
-      let R_scale R_average_before / R_average_after
-      ask simuls with [ color = red ] [
-        if contributeToR [
-          set R R * R_scale
+      if R_average_before > 0 [
+        if R_agg = 0 [
+          ;; Spread R between all simuls if none of them have it.
+          ;; Avoids a rare divide by zero.
+          ask simuls with [ color = red ] [
+            if contributeToR [
+              set R 1
+              set R_agg R_agg + 1
+            ]
+          ]
+          set R_average_after R_agg / R_count
+        ]
+        ;show ( word "Before " R_average_before ", After " R_average_after )
+        let R_scale R_average_before / R_average_after
+        ask simuls with [ color = red ] [
+          if contributeToR [
+            set R R * R_scale
+          ]
         ]
       ]
     ]
@@ -197,7 +210,9 @@ to scaledown_try_to_maintain_cohort
   ]
   
   ;; Reset all houses so infective people are together.
-  ;reset_housing
+  if house_resample_red_group > 0 [
+    reset_housing
+  ]
   set scalephase scalephase - 1
 end
 

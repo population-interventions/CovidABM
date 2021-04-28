@@ -36,8 +36,6 @@ to incursion_update
         set global_incursionArrivals item 2 phaseData
         set global_incursionVariant item 3 phaseData
         set global_incursionReplaceChance item 4 phaseData
-        print incursionPhaseIndex
-        print global_incursionVariant
       ]
     ]
   ]

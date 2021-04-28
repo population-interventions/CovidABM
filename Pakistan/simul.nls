@@ -87,8 +87,8 @@ simuls-own [
   contacts2
   contacts1 ;; contacts from today
   
-  ;; Unused
-  ;anxiety ;; person's level of anxiety aboutt he pandemic
+  ;; Temporary variables
+  hasNewHouse
 ]
 
 ;;*******************************************************************************************************************************

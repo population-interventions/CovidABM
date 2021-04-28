@@ -435,14 +435,14 @@ to do_stages_tony
 
   if stage = 3 [
     ;; Stage 3
-    set span 2
+    set span 2.5
     set proportion_people_avoid 85
     set proportion_time_avoid 85
     set Complacency_Bound 72
     set Essential_Workers 25
     set schoolsOpen false
     set mask_wearing 75
-    set Visit_Radius 4.5
+    set Visit_Radius 5
     set Visit_Frequency 0.071
     set superspreaders 0.0005
   ]

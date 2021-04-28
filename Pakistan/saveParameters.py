@@ -229,6 +229,9 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
     ]),
     'stage_test_index' : listToStr([0, 55, 57, 58, 59]),
     'total_population' : '234000000000',
+    'secondary_cases' : 20,
+    'initial_cases' : 10,
+    'presimdailycases' : 0,
 }}
   
 paramValuesFullValues = {
@@ -245,6 +248,9 @@ paramValuesFullValues = {
     'variant_transmiss_growth' : listToStr([1.3, 1.6]),
     'param_vac_tran_reduct' : listToStr([0.75, 0.875, 0.95]),
     'vac_variant_eff_prop' : listToStr([0.8, 0.95]),
+    'secondary_cases' : 180000,
+    'initial_cases' : 180000,
+    'presimdailycases' : 10000,
 }
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)

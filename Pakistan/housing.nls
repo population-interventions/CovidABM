@@ -7,7 +7,10 @@ to reset_housing
     let houseSizeMean item 3 data
     let houseSizeSD item 4 data
     let regionRed simuls with [color = red and homeRegion = region]
-    let regionNotRed simuls with [color != red and homeRegion = region]
+    let regionSimuls simuls with [homeRegion = region]
+    ask regionSimuls [
+     set hasNewHouse false 
+    ]
     
     let houseSize random-normal houseSizeMean houseSizeSD
     if houseSize > houseSizeMean + 2 * houseSizeSD [
@@ -19,9 +22,10 @@ to reset_housing
     
     let curHouse table:get regionHouseMin region
     let simulInHouse 0
-    ask regionRed [
+    ask n-of (count regionRed * house_resample_red_group) regionRed [
       set householdUnit curHouse
       set simulInHouse simulInHouse + 1
+      set hasNewHouse true
       
       if simulInHouse >= houseSize [
         set simulInHouse 0
@@ -37,7 +41,7 @@ to reset_housing
         ]
       ]
     ]
-    ask regionNotRed [
+    ask regionSimuls with [hasNewHouse = false] [
       set householdUnit curHouse
       set simulInHouse simulInHouse + 1
 

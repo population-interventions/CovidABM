@@ -219,6 +219,7 @@ to createSimulants
       set vacWaitDays 0
       set isolating 0
       set succeptibilityTable table:make
+      set hasNewHouse false
 
       set cohortIndex pop_index
       set agerange cohort_age
@@ -621,7 +622,11 @@ to setup
   set spatial_distance false
   set case_isolation false
 
+  ;; Store and retrieve house sampling for consistent calibration.
+  let store_house_resample_red_group house_resample_red_group
+  set house_resample_red_group 1
   reset_housing
+  set house_resample_red_group store_house_resample_red_group
   
   ;; this ensures that half the people in households with existing infections have also have an infection and prevents a big spike early-on
   let init_secondry_infect secondary_cases
