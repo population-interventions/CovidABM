@@ -396,7 +396,7 @@ to do_stages_tony
     set span 12
     set proportion_people_avoid 30
     set proportion_time_avoid 30
-    set Complacency_Bound 20
+    set Complacency_Bound 25
     set Essential_Workers 75
     set schoolsOpen true
     set mask_wearing 25
@@ -410,10 +410,10 @@ to do_stages_tony
     set span 12
     set proportion_people_avoid 30
     set proportion_time_avoid 30
-    set Complacency_Bound 20
+    set Complacency_Bound 25
     set Essential_Workers 75
     set schoolsOpen true
-    set mask_wearing 20
+    set mask_wearing 25
     set Visit_Radius 8
     set Visit_Frequency 0.1428
     set superspreaders 0.002
@@ -424,7 +424,7 @@ to do_stages_tony
     set span 8
     set proportion_people_avoid 65
     set proportion_time_avoid 65
-    set Complacency_Bound 45
+    set Complacency_Bound 52
     set Essential_Workers 50
     set schoolsOpen true
     set mask_wearing 50
