@@ -527,8 +527,8 @@ to setDrawValues
   
   if not calibrate [
     set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
-    set yearly_recover_prop_loss rngs:rnd-beta stream_id 3 27
   ]
+  set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
   
   set accept_isolation_prop rngs:rnd-beta stream_id 6 12
   set immune_from_prev_variant rngs:rnd-beta stream_id 32 8

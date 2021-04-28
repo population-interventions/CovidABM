@@ -142,7 +142,7 @@ paramValuesFullValues = {
     'rand_seed' : listToStr(random.randint(10000000, size=(100))),
     'total_population' : '234000000',
     'param_vac_rate_mult' : listToStr([1.5, 1, 0.75]),
-    'param_final_phase' : listToStr([5, 6]),
+    'param_final_phase' : listToStr([5, -1]),
     'param_policy' : listToStr([
         '"ModerateSupress_No_4"',
         '"ModerateSupress"',
@@ -152,11 +152,12 @@ paramValuesFullValues = {
     'variant_transmiss_growth' : listToStr([1.3, 1.45, 1.6]),
     'param_vac_tran_reduct' : listToStr([0.75, 0.875, 0.95]),
     'vac_variant_eff_prop' : listToStr([0.8, 0.95]),
-    'initial_cases' : 300000,
-    'secondary_cases' : 600000,
-    'presimdailycases' : 5000,
+    'initial_cases' : 60000,
+    'secondary_cases' : 60000,
+    'presimdailycases' : 1200,
     'track_r' : 'false',
     'calibrate' : 'false',
+    'yearly_recover_prop_loss' : 0,
 }
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
