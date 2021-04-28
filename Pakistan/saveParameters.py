@@ -112,7 +112,8 @@ topOfFile = [
     'Gather_Location_Count',
     'param_policy',
     'Global_Transmissibility',
-    'stage_test_index'
+    'stage_test_index',
+    'calibrate',
 ]
 
 defaultParams = {
@@ -224,13 +225,13 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
         '"StageCal Test"',
     ]),
     'Global_Transmissibility' : listToStr([
-        0.245,
-        0.295,
+        0.310,
+        0.375,
     ]),
     'stage_test_index' : listToStr([0, 55, 57, 58, 59]),
     'total_population' : '234000000000',
-    'secondary_cases' : 20,
     'initial_cases' : 10,
+    'secondary_cases' : 20,
     'presimdailycases' : 0,
 }}
   
@@ -243,14 +244,15 @@ paramValuesFullValues = {
         '"ModerateSupress_No_4"',
         '"ModerateSupress"',
     ]),
-    'param_recovered_prop' : listToStr([0.05, 0.1]),
-    'Global_Transmissibility' : listToStr([0.246, 0.296]),
-    'variant_transmiss_growth' : listToStr([1.3, 1.6]),
+    'param_recovered_prop' : listToStr([0.05]),
+    'Global_Transmissibility' : listToStr([0.310, 0.375]),
+    'variant_transmiss_growth' : listToStr([1.3, 1.45, 1.6]),
     'param_vac_tran_reduct' : listToStr([0.75, 0.875, 0.95]),
     'vac_variant_eff_prop' : listToStr([0.8, 0.95]),
-    'secondary_cases' : 180000,
-    'initial_cases' : 180000,
-    'presimdailycases' : 10000,
+    'initial_cases' : 300000,
+    'secondary_cases' : 600000,
+    'presimdailycases' : 5000,
+    'track_r' : 'false',
 }
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)

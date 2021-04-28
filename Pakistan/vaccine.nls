@@ -31,7 +31,7 @@ to vaccine_update
     if table:has-key? vaccineTable (vaccinePhaseIndex + 1) [
       set vaccinePhaseIndex vaccinePhaseIndex + 1
       let phaseData table:get vaccineTable vaccinePhaseIndex
-      if item 0 phaseData <= param_final_phase [
+      if param_final_phase = -1 or (item 0 phaseData) <= param_final_phase [
         
         ;print "Old vaccine total pop and unvaccinated pop"
         ;print count simuls with [VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase]

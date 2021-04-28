@@ -1,6 +1,6 @@
 totalAgents,age,atsi,disability,essentialCount,workerCount,phase,subPhase,spanMult,gatherFreqMult,region,succeptibleMult,asymptomPropMult,vaccinatedCount,ignoreUptakeBoost,comment
-198,5,0,0,0,0,6,1,1,1,1,1,2,0,1,Urban
-203,15,0,0,0,0,6,1,1,1,1,1,2,0,1,Urban
+198,5,0,0,0,0,6,1,1,1,1,0.56,2,0,1,Urban
+203,15,0,0,0,0,6,1,1,1,1,0.56,2,0,1,Urban
 152,25,0,0,0,153,5,1,1,1,1,1,1,0,0,Urban
 9,35,0,0,6,6,1,1,1,1,1,1,1,2,0,Frontline workers
 99,35,0,0,0,99,4,1,1,1,1,1,1,0,0,Urban
@@ -13,8 +13,8 @@ totalAgents,age,atsi,disability,essentialCount,workerCount,phase,subPhase,spanMu
 12,25,0,0,0,0,6,1,1,1,1,1,1,0,0,Pregnant Urban
 8,35,0,0,0,0,6,1,1,1,1,1,1,0,0,Pregnant Urban
 4,45,0,0,0,0,6,1,1,1,1,1,1,0,0,Pregnant Urban
-468,5,0,0,0,0,6,1,1,1,2,1,2,0,1,Rural
-361,15,0,0,0,0,6,1,1,1,2,1,2,0,1,Rural
+468,5,0,0,0,0,6,1,1,1,2,0.56,2,0,1,Rural
+361,15,0,0,0,0,6,1,1,1,2,0.56,2,0,1,Rural
 221,25,0,0,0,223,5,1,1,1,2,1,1,0,0,Rural
 16,35,0,0,10,10,1,1,1,1,2,1,1,2,0,Frontline workers
 168,35,0,0,0,168,4,1,1,1,2,1,1,0,0,Rural

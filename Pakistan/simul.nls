@@ -31,6 +31,8 @@ simuls-own [
   asymptomaticFlag ;; indicator identifying Asymptomatic cases
   asymptomatic_draw ;; Determines whether the agent will be asymptomatic
   symtomatic_present_day ;; When the simulant self-presents (if at all)
+  report_case_draw ;; Draw for whether the case successfully reaches the reported counts. Note that the case still isolates regardless of whether it is reported, this is just for policy.
+  accept_isolation_draw ;; Draw for accepting isolation. Use this to simulate ineffective tracking.
   
   proportion_people_avoid_draw ;; Determines whether this agent heeds avoiding at various lockdown stages
 
@@ -263,31 +265,32 @@ end
 to simul_updateIsolationResponse
   set pace span * spanMult
   set isolateCompliant 0
-  
-  if (Case_Isolation and (isolating = 1 or tracked = 1)) or (isolate_on_inf_notice and noticeOwnInfection = 1)[
-    ifelse isolating = 1 and color != red
-    [
-      if draw_isolationCompliance * Household_Iso_Factor > random-float 1 [
-        move-to homelocation
-        set pace 0
-        set isolateCompliant 1
-      ]
-    ]
-    [
-      ;; Full strength isolation for reported cases
-      ifelse caseReportTime >= ticks
+  if accept_isolation_draw < accept_isolation_prop [
+    if (Case_Isolation and (isolating = 1 or tracked = 1)) or (isolate_on_inf_notice and noticeOwnInfection = 1)[
+      ifelse isolating = 1 and color != red
       [
-        if draw_isolationCompliance * Infect_Iso_Factor > random-float 1 [
+        if draw_isolationCompliance * Household_Iso_Factor > random-float 1 [
           move-to homelocation
           set pace 0
           set isolateCompliant 1
         ]
       ]
       [
-        if draw_isolationCompliance * Track_Iso_Factor > random-float 1 [
-          move-to homelocation
-          set pace 0
-          set isolateCompliant 1
+        ;; Full strength isolation for reported cases
+        ifelse caseReportTime >= ticks
+        [
+          if draw_isolationCompliance * Infect_Iso_Factor > random-float 1 [
+            move-to homelocation
+            set pace 0
+            set isolateCompliant 1
+          ]
+        ]
+        [
+          if draw_isolationCompliance * Track_Iso_Factor > random-float 1 [
+            move-to homelocation
+            set pace 0
+            set isolateCompliant 1
+          ]
         ]
       ]
     ]
@@ -511,7 +514,7 @@ to simul_settime
   ;; dying this way currently not implemented but done at the end of the illness period, instead
   if color = red [
     set timenow timenow + 1
-    if tracked = 1 and caseReportTime = ticks [
+    if tracked = 1 and caseReportTime = ticks and report_case_draw < report_proportion [
       set casesReportedToday_acc casesReportedToday_acc + 1
     ]
   ]

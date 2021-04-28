@@ -246,7 +246,9 @@ to createSimulants
       ]
       
       set sm_vac_uptake random-float 1
-
+      set report_case_draw random-float 1
+      set accept_isolation_draw random-float 1
+      
       set asymptomatic_draw random-float 1
       set asymptomaticFlag 0
       if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
@@ -523,6 +525,12 @@ to setDrawValues
   let seed random-float 999
   rngs:set-seed stream_id seed
   
+  if not calibrate [
+    set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
+    set yearly_recover_prop_loss rngs:rnd-beta stream_id 3 27
+  ]
+  
+  set accept_isolation_prop rngs:rnd-beta stream_id 6 12
   set immune_from_prev_variant rngs:rnd-beta stream_id 32 8
   set draw_isolationCompliance rngs:rnd-beta stream_id 450.3 23.7
   ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
@@ -608,6 +616,9 @@ to setup
   ask n-of ( initial_cases / popPerSimul ) simuls [
     set color red
     set infectVariant 1
+    if random-float 1 < initial_variant_2_prop [
+      set infectVariant 2
+    ]
     set contributeToR false
     simul_updateVacAndReinfectMult
 
@@ -622,11 +633,8 @@ to setup
   set spatial_distance false
   set case_isolation false
 
-  ;; Store and retrieve house sampling for consistent calibration.
-  let store_house_resample_red_group house_resample_red_group
-  set house_resample_red_group 1
+  ;; Initialise housing
   reset_housing
-  set house_resample_red_group store_house_resample_red_group
   
   ;; this ensures that half the people in households with existing infections have also have an infection and prevents a big spike early-on
   let init_secondry_infect secondary_cases
@@ -635,6 +643,9 @@ to setup
       set color red
       set contributeToR false
       set infectVariant 1
+      if random-float 1 < initial_variant_2_prop [
+        set infectVariant 2
+      ]
       simul_updateVacAndReinfectMult
 
       set timenow random int (ownIllnessPeriod + ownIncubationPeriod)

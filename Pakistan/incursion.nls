@@ -29,7 +29,7 @@ to incursion_update
       set incursionPhaseIndex incursionPhaseIndex + 1
       if param_incur_phase_limit = -1 or incursionPhaseIndex <= param_incur_phase_limit [
         let phaseData table:get incursionTable incursionPhaseIndex
-        let phaseDays (item 0 phaseData)
+        let phaseDays (item 0 phaseData) * incursion_phase_speed_mult
         
         set incursionPhaseEndDay (incursionPhaseEndDay + phaseDays)
         set global_incursionScale item 1 phaseData
