@@ -135,6 +135,7 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
     'presimdailycases' : 0,
     'yearly_recover_prop_loss' : 0,
     'initial_variant_2_prop' : 0,
+    'param_incur_phase_limit' : -1,
     'calibrate' : 'true',
 }}
   

@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-3.3
+12.0
 1
 1
 NIL
@@ -239,7 +239,7 @@ superspreaders
 superspreaders
 0
 1
-5.0E-4
+0.002
 0.01
 1
 NIL
@@ -294,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-64.0
+28.5
 .5
 1
 NIL
@@ -309,7 +309,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-64.0
+28.5
 .5
 1
 NIL
@@ -664,7 +664,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-25.0
+75.0
 1
 1
 NIL
@@ -705,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-75.0
+25.0
 1
 1
 NIL
@@ -718,7 +718,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -808,7 +808,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.082
+0.1428
 0.01
 1
 NIL
@@ -823,7 +823,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.0
 1
 1
 NIL
@@ -984,7 +984,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-6352613.0
+5056005.0
 1
 1
 NIL
@@ -1378,7 +1378,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-62.0
+25.0
 1
 1
 NIL
@@ -1861,7 +1861,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-1.9784738272776714E-4
+2.9844761380326545E-4
 0.001
 1
 NIL
@@ -1876,7 +1876,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+1.5
 0.05
 1
 NIL
@@ -1992,7 +1992,7 @@ immune_from_prev_variant
 immune_from_prev_variant
 0
 1
-0.8011618793835457
+0.7484634195823882
 0.05
 1
 NIL
@@ -2099,7 +2099,7 @@ vac_variant_eff_prop
 vac_variant_eff_prop
 0
 1
-0.95
+0.8
 0.01
 1
 NIL
@@ -2166,7 +2166,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
-0.0
+-1.0
 1
 1
 NIL
@@ -2222,7 +2222,7 @@ accept_isolation_prop
 accept_isolation_prop
 0
 1
-0.47607132466120855
+0.2514081206119717
 0.01
 1
 NIL
@@ -2252,7 +2252,7 @@ initial_variant_2_prop
 initial_variant_2_prop
 0
 1
-0.07508418768922154
+0.021674705343927902
 0.01
 1
 NIL
@@ -2268,6 +2268,17 @@ calibrate
 1
 1
 -1000
+
+MONITOR
+1049
+100
+1218
+145
+NIL
+cumulativeInfected
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -2891,7 +2902,7 @@ NetLogo 6.2.0
       <value value="-1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_incur_phase_limit">
-      <value value="0"/>
+      <value value="-1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="asymptom_prop">
       <value value="0.3"/>
