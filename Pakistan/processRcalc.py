@@ -169,7 +169,7 @@ nameNumber = '_5'
 namePath = 'runCalibrate'
 #nameStr = 'COVID SIMULS VIC JAN Vaccination Model R test 7-table' + str(nameNumber)
 #nameStr = 'headless MainCalibrate-table' + nameNumber
-nameStr = 'calibrate_stages_58'
+nameStr = 'calibrate_stages_92'
 
 #namePath = 'R regress'
 #nameStr = '55566792746ada8e5fd4b6c8efe14d2c736ad9f1_change'
@@ -204,8 +204,8 @@ MakePlot(ProcessToPlot(
     ),
     metric_name,
     yTop=5,
-    hlines=[1, 3, 2.5, 1.86],
-    figWidth=30,
+    hlines=[1, 1.8, 1.35, 2.5, 0.9, 0.76],
+    figWidth=36,
     figHeight=24,
 )
 #MakePlot('output/' + namePath + '/', nameStr + '_process', 'trackAverage',

@@ -351,6 +351,66 @@ to do_stages_test
     do_stages_tony
     set stage -2
   ]
+  
+  
+  if stage_test_index = 60 [
+    set testName "Stage2 3 Span"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set span 2.5
+  ]
+  if stage_test_index = 61 [
+    set testName "Stage2 3 Aviod"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set proportion_people_avoid 85
+    set proportion_time_avoid 85
+    set Complacency_Bound 72
+  ]
+  if stage_test_index = 62 [
+    set testName "Stage2 3 Workers"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set Essential_Workers 25
+  ]
+  if stage_test_index = 63 [
+    set testName "Stage2 3 Schools"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set schoolsOpen false
+  ]
+  if stage_test_index = 64 [
+    set testName "Stage2 3 mask_wearing"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set mask_wearing 75
+  ]
+  if stage_test_index = 65 [
+    set testName "Stage2 3 Visit_Radius"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set Visit_Radius 5
+  ]
+  if stage_test_index = 66 [
+    set testName "Stage2 3 Visit_Frequency"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set Visit_Frequency 0.071
+  ]
+  if stage_test_index = 67 [
+    set testName "Stage2 3 superspreaders"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set superspreaders 0.0005
+  ]
 end
 
 
@@ -394,17 +454,62 @@ to do_stages_tony
   if stage = 0 [
     ;; Stage 1
     set span 12
-    set proportion_people_avoid 30
-    set proportion_time_avoid 30
-    set Complacency_Bound 25
+    set proportion_people_avoid 45
+    set proportion_time_avoid 45
+    set Complacency_Bound 35
     set Essential_Workers 75
     set schoolsOpen true
-    set mask_wearing 25
-    set Visit_Radius 8
-    set Visit_Frequency 0.1428
-    set superspreaders 0.002
+    set mask_wearing 35
+    set Visit_Radius 9
+    set Visit_Frequency 0.14
+    set superspreaders 0.0075
   ]
 
+  if stage = 2 [
+    ;; Stage 2
+    set span 8
+    set proportion_people_avoid 70
+    set proportion_time_avoid 70
+    set Complacency_Bound 54
+    set Essential_Workers 54
+    set schoolsOpen true
+    set mask_wearing 50
+    set Visit_Radius 7
+    set Visit_Frequency 0.14
+    set superspreaders 0.0075
+  ]
+
+  if stage = 3 [
+    ;; Stage 3
+    set span 3.3
+    set proportion_people_avoid 78
+    set proportion_time_avoid 78
+    set Complacency_Bound 62
+    set Essential_Workers 25
+    set schoolsOpen false
+    set mask_wearing 75
+    set Visit_Radius 5
+    set Visit_Frequency 0.082
+    set superspreaders 0.0005
+  ]
+
+  if stage = 4 [
+    ;; Stage 4
+    set span 1
+    set proportion_people_avoid 93
+    set proportion_time_avoid 93
+    set Complacency_Bound 86
+    set Essential_Workers 10
+    set schoolsOpen false
+    set mask_wearing 90
+    set Visit_Radius 2.5
+    set Visit_Frequency 0.03
+    set superspreaders 0.00025
+  ]
+
+  
+  
+  ;; Stage 1b
   if stage = 1 [
     ;; Stage 1b
     set span 12
@@ -417,48 +522,6 @@ to do_stages_tony
     set Visit_Radius 8
     set Visit_Frequency 0.1428
     set superspreaders 0.002
-  ]
-
-  if stage = 2 [
-    ;; Stage 2
-    set span 8
-    set proportion_people_avoid 65
-    set proportion_time_avoid 65
-    set Complacency_Bound 52
-    set Essential_Workers 50
-    set schoolsOpen true
-    set mask_wearing 50
-    set Visit_Radius 8
-    set Visit_Frequency 0.1428
-    set superspreaders 0.001
-  ]
-
-  if stage = 3 [
-    ;; Stage 3
-    set span 2.5
-    set proportion_people_avoid 85
-    set proportion_time_avoid 85
-    set Complacency_Bound 72
-    set Essential_Workers 25
-    set schoolsOpen false
-    set mask_wearing 75
-    set Visit_Radius 5
-    set Visit_Frequency 0.071
-    set superspreaders 0.0005
-  ]
-
-  if stage = 4 [
-    ;; Stage 4
-    set span 1
-    set proportion_people_avoid 90
-    set proportion_time_avoid 90
-    set Complacency_Bound 82
-    set Essential_Workers 10
-    set schoolsOpen false
-    set mask_wearing 90
-    set Visit_Radius 2.5
-    set Visit_Frequency 0.035
-    set superspreaders 0.0002
   ]
 end
 

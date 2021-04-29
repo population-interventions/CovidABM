@@ -17,9 +17,6 @@ to setup_incursionData
   set global_incursionArrivals 0
   set global_incursionVariant 0
   set global_incursionReplaceChance 0
-  
-  set incursionsSeedID 2
-  rngs:set-seed incursionsSeedID random-float 999
 end
 
 to incursion_update

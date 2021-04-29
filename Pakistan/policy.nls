@@ -169,7 +169,7 @@ to policy_moderate_supress
     ]
   )
   
-  if decisionDate + 21 <= ticks [
+  if decisionDate + 28 <= ticks [
     (ifelse stage >= 4 and casesinperiod7 < 8400 * policyTriggerScale
       [
         set stage 3

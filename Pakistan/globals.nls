@@ -133,7 +133,8 @@ globals [
   stageHasChanged
   stageToday
   stageYesterday
-
+  
+  houseSeedID
   houseTrackedCaseTimeTable
   houseLocationTable
   destination_patches
@@ -195,7 +196,7 @@ globals [
   global_vaccineType
   global_vaccinePerDay
   global_vaccineUptakeOverride
-
+  
   incursionsSeedID
   incursionTable
   incursionPhaseIndex

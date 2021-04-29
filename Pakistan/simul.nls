@@ -69,7 +69,7 @@ simuls-own [
   wearingMask ;; identifies if the person is wearing a mask or not
 
   householdUnit ;; the id of the household the person belongs to
-  studentFlag ;; identifies if the person is a student or not
+  isStudent ;; identifies if the person is a student or not
   currentVirulence ;; current virulence of the person on the day of their infection
   Imported ;; identifies imported cases
   adultsInHousehold ;; counts how many adults in a household for peole under 70
@@ -482,10 +482,10 @@ to simul_avoid
       and Proportion_Time_Avoid + draw_pta_modifier > random 100
       [
         let myHouse householdUnit
-        ifelse studentFlag = 1 and schoolsOpen
+        ifelse isStudent and schoolsOpen
         [
           ;; students don't isolate from each other or their household unit
-          if any? other simuls-here with [ householdUnit != myHouse or studentFlag != 1 ] [
+          if any? other simuls-here with [ householdUnit != myHouse or not isStudent ] [
             simul_move_to_empty_patch
           ]
         ]
