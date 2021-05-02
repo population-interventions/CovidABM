@@ -125,7 +125,7 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
         '"StageCal Test"',
     ]),
     'Global_Transmissibility' : listToStr([
-        0.28,
+        0.278,
         0.333,
     ]),
     'stage_test_index' : listToStr([0, 55, 57, 58, 59]),
@@ -164,4 +164,8 @@ paramValuesFullValues = {
     'report_proportion' : 0.07,
 }
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
+paramValues_stage2Infect = {**defaultParams, **{
+    'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
+}}
+
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValues_stage2Infect, topOfFile=topOfFile)

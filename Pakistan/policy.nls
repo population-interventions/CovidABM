@@ -214,6 +214,17 @@ to policy_stage [ toStage ]
   ]
 end
 
+to policy_infect [ toStage ]
+  set Vaccine_Available false
+  if ticks = 0 [
+    set stage toStage 
+    set End_Day -1
+  ]
+  if (End_Day = -1 and cumulativeInfected > Total_Population / 10) or ticks = 1090 [
+    set End_Day ticks + 1
+  ]
+end
+
 ;;;*********************************************************************************************************************
 ;;;*********************************************************************************************************************
 
@@ -248,6 +259,9 @@ to COVIDPolicyTriggers
   if param_policy = "ModerateElim" [
     policy_moderate_elim
     set Vaccine_Available true
+  ]
+  if param_policy = "Stage2infect" [
+    policy_infect 2
   ]
   if param_policy = "None" [
     policy_none
