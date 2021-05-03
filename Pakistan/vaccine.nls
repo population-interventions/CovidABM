@@ -27,7 +27,7 @@ end
 
 to vaccine_update
   ;; Happens at the start of the first 'go', since days = 0
-  if days >= vaccinePhaseEndDay [
+  if days >= vaccinePhaseEndDay and param_vac_rate_mult > 0 [
     if table:has-key? vaccineTable (vaccinePhaseIndex + 1) [
       set vaccinePhaseIndex vaccinePhaseIndex + 1
       let phaseData table:get vaccineTable vaccinePhaseIndex
