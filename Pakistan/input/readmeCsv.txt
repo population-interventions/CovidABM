@@ -18,6 +18,7 @@ Many parameters are a boolean, which should be indicated by a value of 1 or 0.
  - asymptomPropMult  is a multiplier to the base proportion of the population that is asymptomatic.
  - vaccinatedCount   is the number of members of the cohort that start vaccinated.
  - ignoreUptakeBoost ignores the effect of uptakeBoost. See vaccination.
+ - studentCount      is how many members of the cohort are students.
 
 A worker being essential causes the cohort to have the highest priority for going to work during a lockdown. For example, say we are in a lockdown where the policy sets 25% of workers to be regarded as essential. If only 15% of the total workers are in an 'essential' cohort, then all of the essential cohort works, with the remaining 10% made up of other workers.
 
@@ -30,7 +31,8 @@ This file configures the properties of cohorts from different regions. Simulants
  - region            the region index. Corresponds to the value in population.csv.
  - start             lower y coordinate for the region position. Simulants only set their houses within this band.
  - end               upper y coordinate for the band within which simulants of the region have houses.
- - houseSize         occupants-per-house for simulants in this region.
+ - houseSize         mean house size for this region.
+ - houseSizeRange    distance to the upper and lower bounds from the mean for house size in this region.
 
 Note that regions can overlap so this could be used to control the house sizes for cohorts. As with cohorts, try to avoid creating too many regions as the approximations required to squeeze the 2500 simulants into appropriate fractions become increasingly questionable.
 
