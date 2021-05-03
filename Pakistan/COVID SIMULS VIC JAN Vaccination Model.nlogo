@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-8.0
+3.3
 1
 1
 NIL
@@ -239,7 +239,7 @@ superspreaders
 superspreaders
 0
 1
-0.0075
+5.0E-4
 0.01
 1
 NIL
@@ -294,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-54.0
+71.0
 .5
 1
 NIL
@@ -309,7 +309,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-54.0
+71.0
 .5
 1
 NIL
@@ -379,7 +379,7 @@ INPUTBOX
 322
 386
 initial_cases
-20.0
+800000.0
 1
 0
 Number
@@ -664,7 +664,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-54.0
+25.0
 1
 1
 NIL
@@ -705,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-50.0
+75.0
 1
 1
 NIL
@@ -718,7 +718,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -808,7 +808,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.14
+0.082
 0.01
 1
 NIL
@@ -823,7 +823,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-7.0
+5.0
 1
 1
 NIL
@@ -960,7 +960,7 @@ SWITCH
 526
 Vaccine_Available
 Vaccine_Available
-1
+0
 1
 -1000
 
@@ -984,7 +984,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-94930.0
+6352613.0
 1
 1
 NIL
@@ -1043,7 +1043,7 @@ param_vac_tran_reduct
 param_vac_tran_reduct
 0.5
 1
-0.9
+0.75
 0.005
 1
 NIL
@@ -1186,7 +1186,7 @@ INPUTBOX
 322
 450
 secondary_cases
-40.0
+400000.0
 1
 0
 Number
@@ -1199,7 +1199,7 @@ CHOOSER
 param_policy
 param_policy
 "TightSupress" "ModerateSupress" "TightSupress_No_4" "ModerateSupress_No_4" "AggressElim" "ModerateElim" "Stage2infect" "None" "Stage 1" "Stage 1b" "Stage 2" "Stage 3" "Stage 4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-6
+3
 
 SLIDER
 1610
@@ -1378,7 +1378,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-54.0
+62.0
 1
 1
 NIL
@@ -1467,7 +1467,7 @@ End_Day
 End_Day
 -1
 730
-331.0
+730.0
 1
 1
 NIL
@@ -1541,7 +1541,7 @@ SWITCH
 784
 track_R
 track_R
-0
+1
 1
 -1000
 
@@ -1861,7 +1861,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-6.098064691227867E-4
+1.9784738272776714E-4
 0.001
 1
 NIL
@@ -1876,7 +1876,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+1.5
 0.05
 1
 NIL
@@ -1891,7 +1891,7 @@ param_recovered_prop
 param_recovered_prop
 0
 0.5
-0.0
+0.05
 0.05
 1
 NIL
@@ -1933,7 +1933,7 @@ INPUTBOX
 323
 588
 preSimDailyCases
-0.0
+5000.0
 1
 0
 Number
@@ -1962,7 +1962,7 @@ variant_transmiss_growth
 variant_transmiss_growth
 1
 3
-1.5
+1.45
 0.05
 1
 NIL
@@ -1992,7 +1992,7 @@ immune_from_prev_variant
 immune_from_prev_variant
 0
 1
-0.7105950548248887
+0.8011618793835457
 0.05
 1
 NIL
@@ -2099,7 +2099,7 @@ vac_variant_eff_prop
 vac_variant_eff_prop
 0
 1
-0.86
+0.8
 0.01
 1
 NIL
@@ -2151,7 +2151,7 @@ param_final_phase
 param_final_phase
 -1
 10
-6.0
+5.0
 1
 1
 NIL
@@ -2166,7 +2166,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
-0.0
+-1.0
 1
 1
 NIL
@@ -2222,7 +2222,7 @@ accept_isolation_prop
 accept_isolation_prop
 0
 1
-0.5325472264917275
+0.47607132466120855
 0.01
 1
 NIL
@@ -2252,7 +2252,7 @@ initial_variant_2_prop
 initial_variant_2_prop
 0
 1
-0.0
+0.07508418768922154
 0.01
 1
 NIL
@@ -2265,7 +2265,7 @@ SWITCH
 997
 calibrate
 calibrate
-0
+1
 1
 -1000
 

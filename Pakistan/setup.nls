@@ -47,7 +47,6 @@ to setdeathrisk
   ]
   [
     set riskofDeath 0.4354866
-
   ])
 end
 
@@ -531,7 +530,7 @@ to setDrawValues
   rngs:set-seed houseSeedID random-float 999
   
   if not calibrate [
-    set initial_variant_2_prop rngs:rnd-beta stream_id 90 30
+    set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
   ]
   set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
   
