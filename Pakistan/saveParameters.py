@@ -142,7 +142,7 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
 paramValuesFullValues = {
     'rand_seed' : listToStr(random.randint(10000000, size=(100))),
     'total_population' : '234000000',
-    'param_vac_rate_mult' : listToStr([1.5, 1, 0.75]),
+    'param_vac_rate_mult' : listToStr([1.5, 1, 0.75, 0]),
     'param_final_phase' : listToStr([5, -1]),
     'param_policy' : listToStr([
         '"ModerateSupress_No_4"',
