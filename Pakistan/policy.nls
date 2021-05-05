@@ -164,7 +164,7 @@ to policy_moderate_supress
     ]
     stage <= 0 and casesinperiod7 >= 5600 * policyTriggerScale
     [
-      set stage 1
+      set stage 2
       set decisionDate ticks
     ]
   )
@@ -177,10 +177,10 @@ to policy_moderate_supress
       ]
       stage >= 3 and casesinperiod7 < 7466 * policyTriggerScale
       [
-        set stage 1
+        set stage 2
         set decisionDate ticks
       ]
-      stage >= 1 and casesinperiod7 < 3733 * policyTriggerScale
+      stage >= 2 and casesinperiod7 < 3733 * policyTriggerScale
       [
         set stage 0
         set decisionDate ticks
