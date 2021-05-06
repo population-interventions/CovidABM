@@ -144,7 +144,6 @@ Span
 NIL
 HORIZONTAL
 
-
 SLIDER
 2713
 160
@@ -177,9 +176,6 @@ NIL
 NIL
 1
 
-
-
-
 SLIDER
 1627
 219
@@ -194,9 +190,6 @@ superspreaders
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 1625
@@ -228,10 +221,6 @@ Proportion_Time_Avoid
 NIL
 HORIZONTAL
 
-
-
-
-
 INPUTBOX
 217
 325
@@ -254,7 +243,6 @@ total_population
 0
 Number
 
-
 SLIDER
 2715
 117
@@ -269,10 +257,6 @@ Incubation_Period
 1
 NIL
 HORIZONTAL
-
-
-
-
 
 SLIDER
 1672
@@ -289,7 +273,6 @@ Age_Isolation
 NIL
 HORIZONTAL
 
-
 SWITCH
 1470
 791
@@ -300,11 +283,6 @@ scale
 0
 1
 -1000
-
-
-
-
-
 
 INPUTBOX
 2777
@@ -327,8 +305,6 @@ se_incubation
 1
 0
 Number
-
-
 
 SLIDER
 14
@@ -412,10 +388,6 @@ schoolsOpen
 1
 -1000
 
-
-
-
-
 SWITCH
 1483
 322
@@ -487,13 +459,6 @@ Asymptomatic_Trans
 NIL
 HORIZONTAL
 
-
-
-
-
-
-
-
 SLIDER
 1268
 1004
@@ -520,7 +485,6 @@ Vaccine_Available
 1
 -1000
 
-
 SLIDER
 13
 15
@@ -535,8 +499,6 @@ RAND_SEED
 1
 NIL
 HORIZONTAL
-
-
 
 SLIDER
 18
@@ -582,15 +544,6 @@ param_vacEffDays
 1
 NIL
 HORIZONTAL
-
-
-
-
-
-
-
-
-
 
 TEXTBOX
 1493
@@ -653,9 +606,6 @@ Scale_Factor
 NIL
 HORIZONTAL
 
-
-
-
 SLIDER
 337
 930
@@ -686,9 +636,6 @@ Asymptom_Trace_Mult
 NIL
 HORIZONTAL
 
-
-
-
 SLIDER
 560
 809
@@ -718,8 +665,6 @@ Complacency_Bound
 1
 NIL
 HORIZONTAL
-
-
 
 BUTTON
 458
@@ -811,8 +756,6 @@ Non_Infective_Time
 NIL
 HORIZONTAL
 
-
-
 SWITCH
 1470
 751
@@ -823,11 +766,6 @@ track_R
 1
 1
 -1000
-
-
-
-
-
 
 SLIDER
 558
@@ -855,7 +793,6 @@ param_trigger_loosen
 1
 -1000
 
-
 SLIDER
 1044
 53
@@ -870,9 +807,6 @@ End_R_Reported
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 14
@@ -1061,8 +995,6 @@ param_recovered_prop
 NIL
 HORIZONTAL
 
-
-
 INPUTBOX
 215
 528
@@ -1134,11 +1066,6 @@ immune_from_prev_variant
 NIL
 HORIZONTAL
 
-
-
-
-
-
 SLIDER
 560
 768
@@ -1165,7 +1092,6 @@ set_shape
 1
 -1000
 
-
 SLIDER
 303
 850
@@ -1181,7 +1107,6 @@ vac_variant_eff_prop
 NIL
 HORIZONTAL
 
-
 SLIDER
 560
 690
@@ -1196,7 +1121,6 @@ complacency_loss
 1
 NIL
 HORIZONTAL
-
 
 SLIDER
 19
@@ -1258,7 +1182,6 @@ report_proportion
 NIL
 HORIZONTAL
 
-
 SLIDER
 775
 1020
@@ -1314,7 +1237,6 @@ calibrate
 0
 1
 -1000
-
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -2584,10 +2506,14 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
       <value value="0.278"/>
+      <value value="0.333"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
+      <value value="0"/>
+      <value value="55"/>
       <value value="57"/>
-      <value value="68"/>
+      <value value="58"/>
+      <value value="59"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="case_reporting_delay">
       <value value="2"/>

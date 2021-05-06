@@ -169,7 +169,7 @@ nameNumber = '_5'
 namePath = 'runCalibrate'
 #nameStr = 'COVID SIMULS VIC JAN Vaccination Model R test 7-table' + str(nameNumber)
 #nameStr = 'headless MainCalibrate-table' + nameNumber
-nameStr = 'calibrate_stages_96'
+nameStr = 'calibrate_stages_103'
 
 #nameStr = 'calibrate_stages_92' # This is the last large run of current params.
 
@@ -205,10 +205,10 @@ MakePlot(ProcessToPlot(
         indexDepth=4,
     ),
     metric_name,
-    yTop=5,
-    hlines=[1, 1.8, 1.35, 2.5, 0.9, 0.76],
-    figWidth=36,
-    figHeight=24,
+    yTop=4,
+    hlines=[1, 2.5],
+    figWidth=30,
+    figHeight=20,
 )
 #MakePlot('output/' + namePath + '/', nameStr + '_process', 'trackAverage',
 #    yDomain=(0, 1),

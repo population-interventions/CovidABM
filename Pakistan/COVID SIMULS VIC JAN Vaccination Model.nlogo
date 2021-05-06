@@ -984,7 +984,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-4616906.0
+9424318.0
 1
 1
 NIL
@@ -1734,7 +1734,7 @@ stage_test_index
 stage_test_index
 0
 70
-68.0
+59.0
 1
 1
 NIL
@@ -1861,7 +1861,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-2.529167548531719E-4
+8.71425435136075E-5
 0.001
 1
 NIL
@@ -1992,7 +1992,7 @@ immune_from_prev_variant
 immune_from_prev_variant
 0
 1
-0.7663196271259208
+0.8441180925620365
 0.05
 1
 NIL
@@ -2222,7 +2222,7 @@ accept_isolation_prop
 accept_isolation_prop
 0
 1
-0.33790996801320977
+0.5916780762216698
 0.01
 1
 NIL
@@ -3550,8 +3550,7 @@ NetLogo 6.2.0
       <value value="0.278"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
-      <value value="57"/>
-      <value value="68"/>
+      <value value="59"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="case_reporting_delay">
       <value value="2"/>
