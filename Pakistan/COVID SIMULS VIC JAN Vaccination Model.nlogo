@@ -3548,9 +3548,21 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
       <value value="0.278"/>
+      <value value="0.333"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
+      <value value="74"/>
+      <value value="73"/>
+      <value value="72"/>
+      <value value="71"/>
+      <value value="70"/>
+      <value value="69"/>
+      <value value="68"/>
       <value value="59"/>
+      <value value="56"/>
+      <value value="57"/>
+      <value value="55"/>
+      <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="case_reporting_delay">
       <value value="2"/>

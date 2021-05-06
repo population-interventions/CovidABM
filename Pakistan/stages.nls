@@ -417,6 +417,79 @@ to do_stages_test
     do_stages_tony
     set stage -2
   ]
+  
+  if stage_test_index = 69 [
+    ;; Stage 2
+    set testName "Stage2+"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set span 7.5
+    set proportion_people_avoid 70
+    set proportion_time_avoid 70
+    set Complacency_Bound 56
+  ]
+  if stage_test_index = 70 [
+    ;; Stage 2
+    set testName "Stage2-"
+    set stage 2
+    do_stages_tony
+    set stage -2
+    set proportion_people_avoid 77
+    set proportion_time_avoid 77
+    set Complacency_Bound 52
+  ]
+
+  if stage_test_index = 71 [
+    ;; Stage 3
+    set testName "Stage3+"
+    set stage 3
+    do_stages_tony
+    set stage -2
+    set span 2.8
+    set proportion_people_avoid 86
+    set proportion_time_avoid 86
+    set Complacency_Bound 68
+  ]
+  if stage_test_index = 72 [
+    ;; Stage 3
+    set testName "Stage3-"
+    set stage 3
+    do_stages_tony
+    set stage -2
+    set span 3.2
+    set proportion_people_avoid 84
+    set proportion_time_avoid 84
+    set Complacency_Bound 66
+  ]
+
+  if stage_test_index = 73 [
+    ;; Stage 4
+    set testName "Stage4+"
+    set stage 4
+    do_stages_tony
+    set stage -2
+    set span 0.7
+    set proportion_people_avoid 98
+    set proportion_time_avoid 98
+    set Complacency_Bound 92
+    set Essential_Workers 9
+    set Visit_Frequency 0.0165
+  ]
+  if stage_test_index = 74 [
+    ;; Stage 4
+    set testName "Stage4++"
+    set stage 4
+    do_stages_tony
+    set stage -2
+    set span 0.6
+    set proportion_people_avoid 100
+    set proportion_time_avoid 100
+    set Complacency_Bound 95
+    set Essential_Workers 8
+    set Visit_Frequency 0.015
+  ]
+  
 end
 
 
@@ -473,10 +546,10 @@ to do_stages_tony
 
   if stage = 2 [
     ;; Stage 2
-    set span 8
-    set proportion_people_avoid 68
-    set proportion_time_avoid 68
-    set Complacency_Bound 55
+    set span 7.5
+    set proportion_people_avoid 70
+    set proportion_time_avoid 70
+    set Complacency_Bound 56
     set Essential_Workers 50
     set schoolsOpen true
     set mask_wearing 50
@@ -488,33 +561,31 @@ to do_stages_tony
   
   if stage = 3 [
     ;; Stage 3
-    set span 3
-    set proportion_people_avoid 84
-    set proportion_time_avoid 84
-    set Complacency_Bound 68
+    set span 2.8
+    set proportion_people_avoid 86
+    set proportion_time_avoid 86
+    set Complacency_Bound 66
     set Essential_Workers 25
     set schoolsOpen false
     set mask_wearing 75
     set Visit_Radius 5
-    set Visit_Frequency 0.081
+    set Visit_Frequency 0.082
     set superspreaders 0.0005
   ]
 
   if stage = 4 [
     ;; Stage 4
-    set span 0.8
-    set proportion_people_avoid 95
-    set proportion_time_avoid 95
-    set Complacency_Bound 90
+    set span 1
+    set proportion_people_avoid 96
+    set proportion_time_avoid 96
+    set Complacency_Bound 92
     set Essential_Workers 10
     set schoolsOpen false
     set mask_wearing 95
     set Visit_Radius 2
-    set Visit_Frequency 0.018
-    set superspreaders 0.00025
+    set Visit_Frequency 0.03
+    set superspreaders 0.0002
   ]
-
-  
   
   ;; Stage 1b
   if stage = 1 [

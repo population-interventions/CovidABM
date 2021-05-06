@@ -144,6 +144,7 @@ Span
 NIL
 HORIZONTAL
 
+
 SLIDER
 2713
 160
@@ -176,6 +177,9 @@ NIL
 NIL
 1
 
+
+
+
 SLIDER
 1627
 219
@@ -190,6 +194,9 @@ superspreaders
 1
 NIL
 HORIZONTAL
+
+
+
 
 SLIDER
 1625
@@ -221,6 +228,10 @@ Proportion_Time_Avoid
 NIL
 HORIZONTAL
 
+
+
+
+
 INPUTBOX
 217
 325
@@ -243,6 +254,7 @@ total_population
 0
 Number
 
+
 SLIDER
 2715
 117
@@ -257,6 +269,10 @@ Incubation_Period
 1
 NIL
 HORIZONTAL
+
+
+
+
 
 SLIDER
 1672
@@ -273,6 +289,7 @@ Age_Isolation
 NIL
 HORIZONTAL
 
+
 SWITCH
 1470
 791
@@ -283,6 +300,11 @@ scale
 0
 1
 -1000
+
+
+
+
+
 
 INPUTBOX
 2777
@@ -305,6 +327,8 @@ se_incubation
 1
 0
 Number
+
+
 
 SLIDER
 14
@@ -388,6 +412,10 @@ schoolsOpen
 1
 -1000
 
+
+
+
+
 SWITCH
 1483
 322
@@ -459,6 +487,13 @@ Asymptomatic_Trans
 NIL
 HORIZONTAL
 
+
+
+
+
+
+
+
 SLIDER
 1268
 1004
@@ -485,6 +520,7 @@ Vaccine_Available
 1
 -1000
 
+
 SLIDER
 13
 15
@@ -494,11 +530,13 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-4616906.0
+9424318.0
 1
 1
 NIL
 HORIZONTAL
+
+
 
 SLIDER
 18
@@ -544,6 +582,15 @@ param_vacEffDays
 1
 NIL
 HORIZONTAL
+
+
+
+
+
+
+
+
+
 
 TEXTBOX
 1493
@@ -606,6 +653,9 @@ Scale_Factor
 NIL
 HORIZONTAL
 
+
+
+
 SLIDER
 337
 930
@@ -636,6 +686,9 @@ Asymptom_Trace_Mult
 NIL
 HORIZONTAL
 
+
+
+
 SLIDER
 560
 809
@@ -665,6 +718,8 @@ Complacency_Bound
 1
 NIL
 HORIZONTAL
+
+
 
 BUTTON
 458
@@ -756,6 +811,8 @@ Non_Infective_Time
 NIL
 HORIZONTAL
 
+
+
 SWITCH
 1470
 751
@@ -766,6 +823,11 @@ track_R
 1
 1
 -1000
+
+
+
+
+
 
 SLIDER
 558
@@ -793,6 +855,7 @@ param_trigger_loosen
 1
 -1000
 
+
 SLIDER
 1044
 53
@@ -807,6 +870,9 @@ End_R_Reported
 1
 NIL
 HORIZONTAL
+
+
+
 
 SLIDER
 14
@@ -832,7 +898,7 @@ stage_test_index
 stage_test_index
 0
 70
-68.0
+59.0
 1
 1
 NIL
@@ -959,7 +1025,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-2.529167548531719E-4
+8.71425435136075E-5
 0.001
 1
 NIL
@@ -994,6 +1060,8 @@ param_recovered_prop
 1
 NIL
 HORIZONTAL
+
+
 
 INPUTBOX
 215
@@ -1060,11 +1128,16 @@ immune_from_prev_variant
 immune_from_prev_variant
 0
 1
-0.7663196271259208
+0.8441180925620365
 0.05
 1
 NIL
 HORIZONTAL
+
+
+
+
+
 
 SLIDER
 560
@@ -1092,6 +1165,7 @@ set_shape
 1
 -1000
 
+
 SLIDER
 303
 850
@@ -1107,6 +1181,7 @@ vac_variant_eff_prop
 NIL
 HORIZONTAL
 
+
 SLIDER
 560
 690
@@ -1121,6 +1196,7 @@ complacency_loss
 1
 NIL
 HORIZONTAL
+
 
 SLIDER
 19
@@ -1182,6 +1258,7 @@ report_proportion
 NIL
 HORIZONTAL
 
+
 SLIDER
 775
 1020
@@ -1191,7 +1268,7 @@ accept_isolation_prop
 accept_isolation_prop
 0
 1
-0.33790996801320977
+0.5916780762216698
 0.01
 1
 NIL
@@ -1237,6 +1314,7 @@ calibrate
 0
 1
 -1000
+
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -2509,11 +2587,18 @@ NetLogo 6.2.0
       <value value="0.333"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
-      <value value="0"/>
-      <value value="55"/>
-      <value value="57"/>
-      <value value="58"/>
+      <value value="74"/>
+      <value value="73"/>
+      <value value="72"/>
+      <value value="71"/>
+      <value value="70"/>
+      <value value="69"/>
+      <value value="68"/>
       <value value="59"/>
+      <value value="56"/>
+      <value value="57"/>
+      <value value="55"/>
+      <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="case_reporting_delay">
       <value value="2"/>
