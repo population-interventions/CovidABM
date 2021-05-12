@@ -422,13 +422,13 @@ to simul_infect
               set isolating 0
               set timenow 0
               set infectionsToday_acc infectionsToday_acc + 1
-              set new_case_real_counter new_case_real_counter + Scale_Factor ^ scalephase
+              set new_case_real_counter new_case_real_counter + extraScaleFactor * (Scale_Factor ^ scalephase)
               ifelse vaccinated = 1
               [
-                array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + Scale_Factor ^ scalephase
+                array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
               ]
               [
-                array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + Scale_Factor ^ scalephase
+                array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
               ]
               if track_R [
                 ask table:get localInfectionCulprit x [
@@ -526,7 +526,7 @@ to simul_end_infection
       simul_setEndR 
     ]
     
-    let popPerSimul Scale_Factor ^ scalephase
+    let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
     if recoveryVariant > 0 [
       table:put recoverCountByVariant recoveryVariant ((table:get recoverCountByVariant recoveryVariant) - popPerSimul)
       if table:get recoverCountByVariant recoveryVariant < 0 [
@@ -537,7 +537,7 @@ to simul_end_infection
     
     ifelse (vaccinated = 0 and RiskofDeath > random-float 1) or (vaccinated = 1 and RiskofDeath * draw_vacc_death_risk_mult > random-float 1)
     [
-      set deathcount deathcount + Scale_Factor ^ scalephase
+      set deathcount deathcount + extraScaleFactor * (Scale_Factor ^ scalephase)
       array:set dieArray cohortIndex (array:item dieArray cohortIndex) + popPerSimul
     ]
     [

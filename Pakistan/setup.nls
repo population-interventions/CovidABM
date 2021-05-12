@@ -328,6 +328,7 @@ to setGlobals
   set AverageContacts            0
   set AverageFinancialContacts   0
   set ScalePhase                 0
+  set extraScaleFactor           1
   set Days                       0
   set CaseFatalityRate           0
   set DeathCount                 0
@@ -609,7 +610,7 @@ to setup
 
   ;; set up initial infected people
   set scalephase GetInitialScale (initial_cases + secondary_cases)
-  let popPerSimul Scale_Factor ^ scalephase
+  let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
   ;; sets up the initial date for looking at policy-changes
 
   createSimulants
@@ -627,7 +628,7 @@ to setup
     set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
     simul_updatepersonalvirulence
     set infectionsToday_acc infectionsToday_acc + 1
-    array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + Scale_Factor ^ scalephase
+    array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
   ]
 
   set Quarantine false

@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-20.0
+7.5
 1
 1
 NIL
@@ -189,7 +189,7 @@ superspreaders
 superspreaders
 0
 1
-0.05
+0.0075
 0.01
 1
 NIL
@@ -207,7 +207,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-0.0
+56.0
 .5
 1
 NIL
@@ -222,7 +222,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-0.0
+56.0
 .5
 1
 NIL
@@ -238,7 +238,7 @@ INPUTBOX
 322
 386
 initial_cases
-20.0
+800000.0
 1
 0
 Number
@@ -249,7 +249,7 @@ INPUTBOX
 324
 520
 total_population
-2.34E11
+2.34E8
 1
 0
 Number
@@ -354,7 +354,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+50.0
 1
 1
 NIL
@@ -395,7 +395,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-0.0
+50.0
 1
 1
 NIL
@@ -423,7 +423,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
@@ -451,7 +451,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.1428
+0.136
 0.01
 1
 NIL
@@ -466,7 +466,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-25.0
+7.0
 1
 1
 NIL
@@ -495,10 +495,10 @@ HORIZONTAL
 
 
 SLIDER
-1268
-1004
-1475
-1037
+1263
+1009
+1462
+1043
 Mask_Efficacy_Mult
 Mask_Efficacy_Mult
 0
@@ -516,7 +516,7 @@ SWITCH
 526
 Vaccine_Available
 Vaccine_Available
-1
+0
 1
 -1000
 
@@ -530,7 +530,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-9424318.0
+7874396.0
 1
 1
 NIL
@@ -562,7 +562,7 @@ param_vac_tran_reduct
 param_vac_tran_reduct
 0.5
 1
-0.9
+0.95
 0.005
 1
 NIL
@@ -608,7 +608,7 @@ INPUTBOX
 322
 450
 secondary_cases
-40.0
+400000.0
 1
 0
 Number
@@ -621,7 +621,7 @@ CHOOSER
 param_policy
 param_policy
 "TightSupress" "ModerateSupress" "TightSupress_No_4" "ModerateSupress_No_4" "AggressElim" "ModerateElim" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-15
+10
 
 SLIDER
 1610
@@ -713,7 +713,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-0.0
+56.0
 1
 1
 NIL
@@ -775,7 +775,7 @@ End_Day
 End_Day
 -1
 730
--1.0
+730.0
 1
 1
 NIL
@@ -898,7 +898,7 @@ stage_test_index
 stage_test_index
 0
 70
-59.0
+0.0
 1
 1
 NIL
@@ -1025,7 +1025,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-8.71425435136075E-5
+7.569198422777701E-4
 0.001
 1
 NIL
@@ -1040,7 +1040,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+0.0
 0.05
 1
 NIL
@@ -1055,7 +1055,7 @@ param_recovered_prop
 param_recovered_prop
 0
 0.5
-0.0
+0.05
 0.05
 1
 NIL
@@ -1069,7 +1069,7 @@ INPUTBOX
 323
 588
 preSimDailyCases
-0.0
+5000.0
 1
 0
 Number
@@ -1098,7 +1098,7 @@ variant_transmiss_growth
 variant_transmiss_growth
 1
 3
-1.5
+1.3
 0.05
 1
 NIL
@@ -1128,7 +1128,7 @@ immune_from_prev_variant
 immune_from_prev_variant
 0
 1
-0.8441180925620365
+0.724012810774225
 0.05
 1
 NIL
@@ -1175,7 +1175,7 @@ vac_variant_eff_prop
 vac_variant_eff_prop
 0
 1
-0.86
+0.95
 0.01
 1
 NIL
@@ -1207,7 +1207,7 @@ param_final_phase
 param_final_phase
 -1
 10
-6.0
+-1.0
 1
 1
 NIL
@@ -1222,7 +1222,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
-0.0
+-1.0
 1
 1
 NIL
@@ -1268,17 +1268,17 @@ accept_isolation_prop
 accept_isolation_prop
 0
 1
-0.5916780762216698
+0.37393649058672795
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-1265
+1263
 1048
-1484
-1081
+1461
+1082
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -1298,7 +1298,7 @@ initial_variant_2_prop
 initial_variant_2_prop
 0
 1
-0.0
+0.02082477763686319
 0.01
 1
 NIL
@@ -1311,9 +1311,10 @@ SWITCH
 997
 calibrate
 calibrate
-0
+1
 1
 -1000
+
 
 
 @#$#@#$#@
@@ -8281,6 +8282,7 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="param_vac_rate_mult">
       <value value="1"/>
       <value value="0"/>
+      <value value="1.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_vac_tran_reduct">
       <value value="0.95"/>

@@ -23,6 +23,7 @@ globals [
   AverageContacts
   AverageFinancialContacts
   ScalePhase
+  extraScaleFactor
   Days
   CaseFatalityRate
   DeathCount
