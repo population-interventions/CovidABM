@@ -164,8 +164,13 @@ paramValuesFullValues = {
     'report_proportion' : 0.07,
 }
 
+paramValuesStageNone = {
+    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
+    'Global_Transmissibility' : listToStr([0.278, 0.333]),
+}
+
 paramValues_stage2Infect = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesStageNone, topOfFile=topOfFile)
