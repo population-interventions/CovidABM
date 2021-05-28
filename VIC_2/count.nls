@@ -86,7 +86,6 @@ to resetAccumulators
   ]
   
   set average_R_region_1 table:get average_R 1
-  set average_R_region_2 table:get average_R 2
   
   ;show ( word " avoidFails " (avoidAttempts - avoidSuccess) ", avoidSuccess " avoidSuccess)
   ;set avoidSuccess 0

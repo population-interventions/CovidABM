@@ -1,8 +1,6 @@
 phase,subPhase,days,name,fixedSpeed,uptakeBoost
-1,1,6,generic,0,0
-1,2,34,generic,0,0
-2,1,72,generic,0,0
-3,1,58,generic,0,0
-4,1,81,generic,0,0
-5,1,114,generic,0,0
-6,1,365,generic,1,0.8
+1,1,10,generic,0,0
+1,2,81,generic,0,0
+2,1,91,generic,0,0
+2,2,91,generic,0,0
+3,1,77,generic,0,0
