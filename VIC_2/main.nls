@@ -1,21 +1,4 @@
 
-to ShiftRecoveredTowardsTotalProportion
-  if Recovered_Match_Rate > 0 [
-    set recoverProportion recoverCount / (total_population - deathCount)
-    let repYellowCount ceiling (Population * recoverProportion)
-    let yellowSet simuls with [ color = yellow ]
-    let yellowSetCount count yellowSet
-    if repYellowCount < yellowSetCount [
-      ask n-of (Recovered_Match_Rate * (yellowSetCount - repYellowCount) + random-float 1) yellowSet [
-        set color cyan
-        set isolating 0
-      ]
-    ]
-  ]
-end
-
-;;;;;;;;;;;;*********END OF TTI FUNCTIONS******* ;;;;;;;;;;;;;
-
 to-report nonesspercentage
   if count simuls with [ essentialworkerflag != 1 and color != cyan ] > 0 [
     report (count simuls with [ essentialworkerflag != 1 and color != cyan] ) / (count simuls with [ essentialWorkerFlag != 1 ])
@@ -51,6 +34,11 @@ to go
   
   ;; Update vaccine stage and parameters related to vaccines.
   vaccine_update
+  
+  ;; Vaccine loses effectiveness over time
+  ask simuls [
+    simul_waneVacEff
+  ]
   
   ;;reset-timer
   ;; All the simulants independently either move outside or back to home
@@ -125,16 +113,16 @@ to go
   ]
   
   ;; Randomly turn suceptible agents into infected ones. Percentage chance = IncursionRate.
-  vaccine_do_incursion_based_on_phase
+  incursion_update
   
   ;show ( word " Simul Stuff " timer " seconds ")
   ;reset-timer
   
   if proportion_people_avoid > Complacency_Bound [
-    set proportion_people_avoid proportion_people_avoid - 1
+    set proportion_people_avoid proportion_people_avoid - complacency_loss
   ]
   if proportion_time_avoid > Complacency_Bound [
-    set proportion_time_avoid proportion_time_avoid - 1
+    set proportion_time_avoid proportion_time_avoid - complacency_loss
   ]
 
   updateRawCounts

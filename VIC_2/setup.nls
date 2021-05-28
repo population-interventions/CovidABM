@@ -47,7 +47,6 @@ to setdeathrisk
   ]
   [
     set riskofDeath 0.4354866
-
   ])
 end
 
@@ -68,12 +67,6 @@ to setEssentialWorkerPriority
   ]
 end
 
-to calculatedailyrisk
-  ;; estimates risk of death per day for the duration of the period of illness
-  ;; used for stats more than calibrated to real world given most people die late in the illness period
-  set dailyrisk ( riskofDeath / Illness_period )
-end
-
 to simul_resetPersonalVirulence
   ;; ensures that personalVirulence is within bounds
   if personalVirulence > 100 [
@@ -86,7 +79,7 @@ end
 
 
 to loadPopDivisionTable
-  let populationFileData remove-item 0 csv:from-file "population.csv"
+  let populationFileData remove-item 0 csv:from-file "input/population.csv"
   set popDivisionTable table:make
   set popDivisionTable_keys []
   let i 0
@@ -97,32 +90,119 @@ to loadPopDivisionTable
   ]
 end
 
+to loadRegionTable
+  let regionFileData remove-item 0 csv:from-file "input/region.csv"
+  set regionTable table:make
+  set regionTable_keys []
+  set regionTable_list []
+  let i 0
+  foreach regionFileData [ x -> 
+    let region (item 0 x)
+    table:put regionTable i x
+    set regionTable_keys lput i regionTable_keys
+    
+    set regionTable_list lput region regionTable_list
+    table:put endR_count region 0
+    table:put endR_mean_metric region 0
+    table:put endR_sum region 0
+    table:put totalEndCount region 0
+    table:put totalEndR region 0
+    table:put average_R region 0
+    
+    set i i + 1
+  ]
+end
 
-to processPopulationWorkerData
+
+to processPopulationData
   let tableData table:values popDivisionTable
+  let regionPopulation table:make
   
   set totalWorkers 0
   set totalEssentialWorkers 0
   foreach tableData [ data -> 
     set totalWorkers totalWorkers + item 5 data
-    if item 4 data = 1 [
-      set totalEssentialWorkers totalEssentialWorkers + item 5 data
+    set totalEssentialWorkers totalEssentialWorkers + item 4 data
+    let region item 10 data
+    let pop item 0 data
+    if not table:has-key? regionPopulation region [
+      table:put regionPopulation region 0
     ]
+    table:put regionPopulation region ((table:get regionPopulation region) + pop)
   ]
   
   set essentialWorkerRange 100 * totalEssentialWorkers / totalWorkers
   set otherWorkerRange 100 * (totalWorkers - totalEssentialWorkers) / totalWorkers
+  
+  ;; Set the house index range used by each region
+  set regionHouseMin table:make
+  set regionHouseMax table:make
+  set regionPosMin table:make
+  set regionPosMax table:make
+  
+  let regionTableData table:values regionTable
+  let curHouseIndex 0
+  foreach regionTableData [ data -> 
+    let region item 0 data
+    ;; Houses in the region is population / house size
+    let houses ceiling ((table:get regionPopulation region) / (item 3 data))
+    table:put regionHouseMin region curHouseIndex
+    table:put regionHouseMax region curHouseIndex + houses
+    set curHouseIndex curHouseIndex + houses
+    table:put regionPosMin region (item 1 data) * world-height
+    table:put regionPosMax region (item 2 data) * world-height
+  ]
 end
 
 to createSimulants
   let pop_index 0
   let agentsOfThisIndex 0
+  let oldCohortIndex -1
+  
+  let cohort_pop 0
+  let cohort_age 0
+  let cohort_asti 0
+  let cohort_disability 0
+  let cohort_essentialCount 0
+  let cohort_workerCount 0
+  let cohort_phase 0
+  let cohort_subPhase 0
+  let cohort_spanMult 0
+  let cohort_gatherFreqMult 0
+  let cohort_region 0
+  let cohort_succeptMult 0
+  let cohort_asymptomPropMult 0
+  let cohort_ignoreUptakeOverride 0
+  let cohort_studentCount 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of Population patches with [ pcolor = black ] [
     
-    ; Iterate over cohort data to get each set of simul parameters.
-    let cohortData table:get popDivisionTable pop_index
+    if oldCohortIndex != pop_index [
+      ; Iterate over cohort data to get each set of simul parameters.
+      if not table:has-key? popDivisionTable pop_index [
+       print "totalAgents in population.csv sums to less than Population (2500)." 
+      ]
+      let cohortData table:get popDivisionTable pop_index
+      
+      set cohort_pop item 0 cohortData
+      set cohort_age item 1 cohortData
+      set cohort_asti item 2 cohortData
+      set cohort_disability item 3 cohortData
+      set cohort_essentialCount item 4 cohortData
+      set cohort_workerCount item 5 cohortData
+      set cohort_phase item 6 cohortData
+      set cohort_subPhase item 7 cohortData
+      set cohort_spanMult item 8 cohortData
+      set cohort_gatherFreqMult item 9 cohortData
+      set cohort_region item 10 cohortData
+      set cohort_succeptMult item 11 cohortData
+      set cohort_asymptomPropMult item 12 cohortData
+      set cohort_ignoreUptakeOverride item 14 cohortData
+      set cohort_studentCount item 15 cohortData
+      
+      set oldCohortIndex pop_index
+    ]
     set agentsOfThisIndex agentsOfThisIndex + 1
     
     sprout-simuls 1 [
@@ -133,22 +213,28 @@ to createSimulants
       set timenow 0
       set noticeOwnInfection 0
       set IncubationPd int ownIncubationPeriod
-      set inQuarantine 0
       set vaccineOffered 0
-      set sensitivity random-float 1
       set R 0
       set vacWaitDays 0
       set isolating 0
+      set succeptibilityTable table:make
+      set hasNewHouse false
 
       set cohortIndex pop_index
-      set agerange item 1 cohortData
-      set atsi item 2 cohortData
-      set comorbidityState item 3 cohortData
-      set essentialJob item 4 cohortData = 1
-      set isWorker item 5 cohortData <= agentsOfThisIndex
-      set VaccPhase item 6 cohortData
-      set VaccSubPhase item 7 cohortData
-
+      set agerange cohort_age
+      set atsi cohort_asti
+      set comorbidityState cohort_disability
+      set essentialJob (agentsOfThisIndex <= cohort_essentialCount)
+      set isWorker (agentsOfThisIndex <= cohort_workerCount)
+      set isStudent (agentsOfThisIndex <= cohort_studentCount)
+      set VaccPhase cohort_phase
+      set VaccSubPhase cohort_subPhase
+      set spanMult cohort_spanMult
+      set gatherFreqMult cohort_gatherFreqMult
+      set homeRegion cohort_region
+      set succeptMult cohort_succeptMult
+      set ignoreUptakeOverride cohort_ignoreUptakeOverride
+      
       move-to one-of patches with [ pcolor = black ]
 
       set personalVirulence random-normal Global_Transmissibility 0.025
@@ -159,11 +245,13 @@ to createSimulants
         set personalVirulence 0.01
       ]
       
-      set sm_vac_uptake random 100
-
+      set sm_vac_uptake random-float 1
+      set report_case_draw random-float 1
+      set accept_isolation_draw random-float 1
+      
       set asymptomatic_draw random-float 1
       set asymptomaticFlag 0
-      if asymptomatic_draw < Asymptom_Prop [
+      if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
         set asymptomaticFlag 1
       ]
       
@@ -180,7 +268,7 @@ to createSimulants
       set requireICU 0
       set requireICU_draw random-float 1
 
-      set wearsMask random 100 ;; resethealth resetincome calculateincomeperday calculateexpenditureperday resettrust
+      set wearsMask random 100 ;; resethealth resetincome immune_from_reinfect calculateexpenditureperday resettrust
       set returntoschool random 100
 
       ;;set ownComplianceWithIsolation ( exp random-normal Mcomp SComp ) ;; log transform of compliance with isolation
@@ -193,7 +281,7 @@ to createSimulants
       simul_resetPersonalVirulence
     ]
     
-    if agentsOfThisIndex >= item 0 cohortData [ ; item 0 cohortData = cohort size
+    if agentsOfThisIndex >= cohort_pop [
       set pop_index pop_index + 1
       set agentsOfThisIndex 0
     ]
@@ -206,27 +294,16 @@ to createSimulants
   ]
 end
 
-to setup_households
-  ;; setting households up
-  ask simuls [
-      set householdUnit random houseTotal
+to setupInitialVaccination
+  foreach popDivisionTable_keys [ index ->
+    let cohort table:get populationCohortCache index
+    let cohortData table:get popDivisionTable index
+    
+    let cohort_vaccinated item 13 cohortData
+    ask n-of cohort_vaccinated cohort [
+      simul_vaccinate_me_force
+    ]
   ]
-  
-  ask simuls [
-    simul_resetlanding
-  ]
-  
-  ;; Enter values in household isolation table to save O(N) existence checks per tick
-  ask simuls [
-    table:put houseTrackedCaseTimeTable householdunit -1
-  ]
-  
-  let houseNumber 0
-  repeat houseTotal [
-    table:put houseStudentMoveCache_lastUpdate houseNumber -1
-    set houseNumber houseNumber + 1
-  ]
-  set houseStudentMoveCache_staleTime 0
   
 end
 
@@ -246,14 +323,18 @@ to setGlobals
   set seventyfive                0
   set eightyfive                 0
   set ninetyfive                 0
+  set allowStage4                true
   set InitialReserves            0
   set AverageContacts            0
   set AverageFinancialContacts   0
   set ScalePhase                 0
+  set extraScaleFactor           1
   set Days                       0
   set CaseFatalityRate           0
   set DeathCount                 0
   set recovercount               0
+  set recoverCountByVariant      table:make
+  set dailyRecoverMult           0
   set recoverProportion          0
   set casesReportedToday         0
   set casesReportedToday_acc     0
@@ -281,35 +362,35 @@ to setGlobals
   set Objfunction                0
   set decisionDate               0
   set policyTriggerScale         1
-  set prior0                     0
-  set prior1                     0
-  set prior2                     0
-  set prior3                     0
-  set prior4                     0
-  set prior5                     0
-  set prior6                     0
-  set prior7                     0
-  set prior8                     0
-  set prior9                     0
-  set prior10                    0
-  set prior11                    0
-  set prior12                    0
-  set prior13                    0
-  set prior14                    0
-  set prior15                    0
-  set prior16                    0
-  set prior17                    0
-  set prior18                    0
-  set prior19                    0
-  set prior20                    0
-  set prior21                    0
-  set prior22                    0
-  set prior23                    0
-  set prior24                    0
-  set prior25                    0
-  set prior26                    0
-  set prior27                    0
-  set prior28                    0
+  set prior0                     preSimDailyCases
+  set prior1                     preSimDailyCases
+  set prior2                     preSimDailyCases
+  set prior3                     preSimDailyCases
+  set prior4                     preSimDailyCases
+  set prior5                     preSimDailyCases
+  set prior6                     preSimDailyCases
+  set prior7                     preSimDailyCases
+  set prior8                     preSimDailyCases
+  set prior9                     preSimDailyCases
+  set prior10                    preSimDailyCases
+  set prior11                    preSimDailyCases
+  set prior12                    preSimDailyCases
+  set prior13                    preSimDailyCases
+  set prior14                    preSimDailyCases
+  set prior15                    preSimDailyCases
+  set prior16                    preSimDailyCases
+  set prior17                    preSimDailyCases
+  set prior18                    preSimDailyCases
+  set prior19                    preSimDailyCases
+  set prior20                    preSimDailyCases
+  set prior21                    preSimDailyCases
+  set prior22                    preSimDailyCases
+  set prior23                    preSimDailyCases
+  set prior24                    preSimDailyCases
+  set prior25                    preSimDailyCases
+  set prior26                    preSimDailyCases
+  set prior27                    preSimDailyCases
+  set prior28                    preSimDailyCases
   
   set real_prior0                0
   set real_prior1                0
@@ -346,11 +427,9 @@ to setGlobals
   set new_case_real_counter 0
   
   ;; These used to be dynamic controls with conflicting variable names.
-  set reduce_contact false
   set spatial_distance 0
   set case_isolation 0
   set quarantine 0
-  set contact_radius 0
   set Track_and_Trace_Efficiency 0
   set stage 0
   set prev_stage -1
@@ -367,7 +446,6 @@ to setGlobals
   set houseStudentMoveCache_lastUpdate table:make
   set houseStudentMoveCache_staleTime 0
   
-  set meanIDTime 0
   set popDivisionTable 0 ; Table of population cohort data
 
   ; Number of agents that are workers and essential workers respectively.
@@ -392,18 +470,21 @@ to setGlobals
   set global_vaccinePerDay 0
   
   set incursionsSeedID 0
+  set incursionPhaseIndex 0
+  set incursionPhaseEndDay 0
+  
   set totalOverseasIncursions 0
   set vaccinePhaseEndDay 0
   set vaccinePhaseIndex 0
   set vaccineTable 0
   set global_vaccine_eff 0 ;; Effectiveness of the vaccine along the three dimensions (infection rate, transmition rate, duration)
 
-  set totalEndR 0
-  set totalEndCount 0
-  set endR_sum 0
-  set endR_count 0
-  set endR_mean_metric 0
-  set average_R 0
+  set totalEndR table:make
+  set totalEndCount table:make
+  set endR_sum table:make
+  set endR_count table:make
+  set endR_mean_metric table:make
+  set average_R table:make
   
   ;; log transform illness period variables
   set Illness_PeriodVariance 0
@@ -442,9 +523,20 @@ to setDrawValues
   
   rngs:init ;; replacing previous log transform with beta distribution
   let stream_id 1
-  let seed random-float 999
-  rngs:set-seed stream_id seed
+  set incursionsSeedID 2
+  set houseSeedID 3
   
+  rngs:set-seed stream_id random-float 999
+  rngs:set-seed incursionsSeedID random-float 999
+  rngs:set-seed houseSeedID random-float 999
+  
+  if not calibrate [
+    set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
+  ]
+  set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
+  
+  set accept_isolation_prop rngs:rnd-beta stream_id 6 12
+  set immune_from_prev_variant rngs:rnd-beta stream_id 32 8
   set draw_isolationCompliance rngs:rnd-beta stream_id 450.3 23.7
   ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
   ;; SqRoot of above
@@ -475,17 +567,16 @@ to setup
   if profile_on [
     profiler:start
   ]
+  loadPopDivisionTable
+  loadRegionTable
   resetAccumulators
-
-  rngs:init
 
   ;;import-drawing "Background1.png" ;; imports MSD image
   set days 0 ; used to count days
 
-  loadPopDivisionTable
-  processPopulationWorkerData
+  processPopulationData
   setup_vaccineData
-  setup_overseasArrivals
+  setup_incursionData
   setup_DataOut
   
   set resetdate 7
@@ -502,9 +593,6 @@ to setup
   set MInc (ln incubation_period) - (BetaincubationPd / 2)
   set SInc sqrt BetaIncubationPd
 
-  ask red-links [
-    set color red
-  ]
   ask patches [
     set pcolor black
     set houseIndex -1
@@ -520,45 +608,64 @@ to setup
   ]
   set destination_patches patches with [ destination = 1 ]
 
-  createSimulants
-
   ;; set up initial infected people
-  set scalephase InitialScale
+  set scalephase GetInitialScale (initial_cases + secondary_cases)
+  let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
   ;; sets up the initial date for looking at policy-changes
 
-  ask n-of ( initial_cases ) simuls [
+  createSimulants
+  setupInitialVaccination
+  
+  ask n-of ( initial_cases / popPerSimul ) simuls [
     set color red
-    set timenow random int ownIncubationPeriod
+    set infectVariant 1
+    if random-float 1 < initial_variant_2_prop [
+      set infectVariant 2
+    ]
+    set contributeToR false
+    simul_updateVacAndReinfectMult
+
+    set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
     simul_updatepersonalvirulence
     set infectionsToday_acc infectionsToday_acc + 1
-    array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + 1
+    array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
   ]
 
-  ;; spend CalculateIncomePerday
-  ask simuls [
-    calculateDailyrisk
-  ]
-
-  set contact_radius 0 ;; sets contact radius of people
   set Quarantine false
   set eliminationDate 0 ; used to identify the date of elimination where no current, unrecovered cases exist
   set spatial_distance false
   set case_isolation false
 
-  setup_households
+  ;; Initialise housing
+  reset_housing
   
   ;; this ensures that half the people in households with existing infections have also have an infection and prevents a big spike early-on
   let init_secondry_infect secondary_cases
   ask simuls [
-    if init_secondry_infect > 0 and any? other simuls in-radius 2 with [ color = red ] [
+    if init_secondry_infect > popPerSimul and any? other simuls in-radius 2 with [ color = red ] [
       set color red
-      set timenow random int ownIncubationPeriod
-      set init_secondry_infect init_secondry_infect - 1
+      set contributeToR false
+      set infectVariant 1
+      if random-float 1 < initial_variant_2_prop [
+        set infectVariant 2
+      ]
+      simul_updateVacAndReinfectMult
+
+      set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
+      set init_secondry_infect init_secondry_infect - popPerSimul
       set infectionsToday_acc infectionsToday_acc + 1
-      array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + 1
+      array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
     ]
   ]
 
+  set recovercount param_recovered_prop * total_population
+  table:put recoverCountByVariant 1 recovercount
+  set dailyRecoverMult exp(ln(1 - yearly_recover_prop_loss) / 365)
+  ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
+    set color yellow
+    set recoveryVariant 1
+    simul_updateVacAndReinfectMult
+  ]
   ;;set tracking false ;; ensures this is set to false each time the model starts
   ;;set link_switch false ;; ensures this is set to false each timme the model starts
   ;;set schoolsOpen false ;; ensures that the schools settings don't begin before the policy trigger starts

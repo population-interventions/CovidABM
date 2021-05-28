@@ -12,7 +12,7 @@ to updateCounts
   set infectionsYesterday infectionsToday
   ;; this considers ALL cases - not just the reported ones
   ;set infectionsToday ( count simuls with [ color = red and timenow = 1 ] )
-  set infectionsToday infectionsToday_acc * Scale_Factor ^ scalephase
+  set infectionsToday infectionsToday_acc * extraScaleFactor * (Scale_Factor ^ scalephase)
   if infectionsYesterday != 0 [
     set InfectionChange ( infectionsToday / infectionsYesterday )
   ]
@@ -20,13 +20,13 @@ to updateCounts
   ;; Sets the day for reporting new cases at 6 (adjustable) days after testing+tracking.
   ;; (abstracted here as just tracking) this flows through to daily cases.
   ;let casesToday count simuls with [ color = red and tracked = 1 and caseReportTime = ticks ]
-  set casesReportedToday casesReportedToday_acc * Scale_Factor ^ scalephase
+  set casesReportedToday casesReportedToday_acc * extraScaleFactor * (Scale_Factor ^ scalephase)
   
   ;; population scaling function
-  set Scaled_Population Population * Scale_Factor ^ scalephase
+  set Scaled_Population Population * extraScaleFactor * (Scale_Factor ^ scalephase)
   
   ;; calculates the number of infected people in the population
-  set currentInfections redcount * Scale_Factor ^ scalephase
+  set currentInfections redcount * extraScaleFactor * (Scale_Factor ^ scalephase)
 
   ;; calculates the number of people infected and recorded today
   set cumulativeInfected cumulativeInfected + infectionsToday
@@ -36,7 +36,7 @@ to updateCounts
   ]
   
   ;; calculates the scaled population for working with smaller environments
-  set scaledPopulation Population * Scale_Factor ^ scalephase
+  set scaledPopulation Population * extraScaleFactor * (Scale_Factor ^ scalephase)
 end
 
 to resetAccumulators
@@ -47,7 +47,7 @@ to resetAccumulators
   [
     set transmission_average 0
   ]
-  set transmission_count_metric transmission_count * Scale_Factor ^ scalephase
+  set transmission_count_metric transmission_count * extraScaleFactor * (Scale_Factor ^ scalephase)
   set transmission_count 0
   set transmission_sum 0
   
@@ -56,20 +56,38 @@ to resetAccumulators
   
   set new_case_real new_case_real_counter
   set new_case_real_counter 0
- 
-  if endR_count > 0 [
-    set endR_mean_metric endR_sum / endR_count
-    set endR_sum 0
-    set endR_count 0
+  
+  let totalEndR_all_regions 0
+  let totalEndCount_all_regions 0
+  foreach regionTable_list [ region ->
+    if table:get endR_count region > 0 [
+      table:put endR_mean_metric region table:get endR_sum region / table:get endR_count region
+      table:put endR_sum region 0
+      table:put endR_count region 0
+    ]
+  
+    ifelse table:get totalEndCount region > 0
+    [
+      table:put average_R region table:get totalEndR region / table:get totalEndCount region
+      set totalEndR_all_regions totalEndR_all_regions + (table:get totalEndR region)
+      set totalEndCount_all_regions totalEndCount_all_regions + (table:get totalEndCount region)
+    ]
+    [
+      table:put average_R region 0
+    ]
   ]
   
-  ifelse totalEndCount > 0
+  ifelse totalEndCount_all_regions > 0
   [
-    set average_R totalEndR / totalEndCount
+    set average_R_all_regions totalEndR_all_regions / totalEndCount_all_regions
   ]
   [
-    set average_R 0
+    set average_R_all_regions 0
   ]
+  
+  set average_R_region_1 table:get average_R 1
+  set average_R_region_2 table:get average_R 2
+  
   ;show ( word " avoidFails " (avoidAttempts - avoidSuccess) ", avoidSuccess " avoidSuccess)
   ;set avoidSuccess 0
   ;set avoidAttempts 0
