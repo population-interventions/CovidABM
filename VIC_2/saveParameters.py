@@ -125,16 +125,14 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
         '"StageCal Test"',
     ]),
     'Global_Transmissibility' : listToStr([
-        0.278,
-        0.333,
+        0.45,
+        0.525,
+        0.6,
     ]),
-    'stage_test_index' : listToStr([0, 55, 57, 58, 59]),
+    'stage_test_index' : listToStr([0, 55, 56, 57, 58, 59]),
     'total_population' : '234000000000',
     'initial_cases' : 20,
     'secondary_cases' : 40,
-    'presimdailycases' : 0,
-    'yearly_recover_prop_loss' : 0,
-    'initial_variant_2_prop' : 0,
     'param_incur_phase_limit' : -1,
     'calibrate' : 'true',
 }}
@@ -168,4 +166,4 @@ paramValues_stage2Infect = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)

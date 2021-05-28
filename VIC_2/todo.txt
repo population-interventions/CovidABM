@@ -1,2 +1,4 @@
 Add different vaccine infection risk for ages <50 and 50+.
 Probably do this with a risk cohort column in population, which then links to a new csv with differing beta distributions.
+
+Output random R0 and other parameters for bucketing.
