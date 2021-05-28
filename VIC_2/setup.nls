@@ -1,0 +1,570 @@
+;;
+;; Setup and functions particular to setup that don't have anywhere else to live.
+;;
+
+to setdeathrisk
+  ;; risk of death associated with ageranges if they contract COVID-19
+  (ifelse agerange <= 5
+  [
+    set riskofDeath 0.0000068
+  ]
+  agerange <= 15
+  [
+    set riskofDeath 0.0000299
+  ]
+  agerange <= 25
+  [
+    set riskofDeath 0.0001112
+  ]
+  agerange <= 35
+  [
+    set riskofDeath 0.0004172
+  ]
+  agerange <= 45
+  [
+    set riskofDeath 0.0017904
+  ]
+  agerange <= 55
+  [
+    set riskofDeath 0.0071179
+  ]
+  agerange <= 65
+  [
+    set riskofDeath 0.0196950
+  ]
+  agerange <= 75
+  [
+    set riskofDeath 0.1350531
+  ]
+  agerange <= 85
+  [
+    set riskofDeath 0.3466041
+  ]
+  ;; updated from department of health Report 22 - does not map directly to age deciles here
+  agerange <= 95
+  [
+    set riskofDeath 0.4354866
+  ]
+  [
+    set riskofDeath 0.4354866
+
+  ])
+end
+
+
+to setEssentialWorkerPriority
+  ifelse isWorker 
+  [
+    ifelse essentialJob
+    [
+      set EssentialWorkerPriority round (random-float essentialWorkerRange)
+    ]
+    [
+      set EssentialWorkerPriority round (essentialWorkerRange + random-float otherWorkerRange)
+    ]
+  ]
+  [
+    set EssentialWorkerPriority 101 ;; People who don't work are never essential workers.
+  ]
+end
+
+to calculatedailyrisk
+  ;; estimates risk of death per day for the duration of the period of illness
+  ;; used for stats more than calibrated to real world given most people die late in the illness period
+  set dailyrisk ( riskofDeath / Illness_period )
+end
+
+to simul_resetPersonalVirulence
+  ;; ensures that personalVirulence is within bounds
+  if personalVirulence > 100 [
+    set personalVirulence random-normal global_Transmissibility 2.5
+  ]
+  if personalVirulence < 0 [
+    set personalVirulence random-normal global_Transmissibility 2.5
+  ]
+end
+
+
+to loadPopDivisionTable
+  let populationFileData remove-item 0 csv:from-file "population.csv"
+  set popDivisionTable table:make
+  set popDivisionTable_keys []
+  let i 0
+  foreach populationFileData [ x -> 
+    table:put popDivisionTable i x
+    set popDivisionTable_keys lput i popDivisionTable_keys
+    set i i + 1
+  ]
+end
+
+
+to processPopulationWorkerData
+  let tableData table:values popDivisionTable
+  
+  set totalWorkers 0
+  set totalEssentialWorkers 0
+  foreach tableData [ data -> 
+    set totalWorkers totalWorkers + item 5 data
+    if item 4 data = 1 [
+      set totalEssentialWorkers totalEssentialWorkers + item 5 data
+    ]
+  ]
+  
+  set essentialWorkerRange 100 * totalEssentialWorkers / totalWorkers
+  set otherWorkerRange 100 * (totalWorkers - totalEssentialWorkers) / totalWorkers
+end
+
+to createSimulants
+  let pop_index 0
+  let agentsOfThisIndex 0
+  
+  ;; set up people in the environment and allocates characteristics to them
+  ask n-of Population patches with [ pcolor = black ] [
+    
+    ; Iterate over cohort data to get each set of simul parameters.
+    let cohortData table:get popDivisionTable pop_index
+    set agentsOfThisIndex agentsOfThisIndex + 1
+    
+    sprout-simuls 1 [
+      set size 2
+      set shape "dot"
+      set color cyan
+      set householdUnit random 1000
+      set timenow 0
+      set noticeOwnInfection 0
+      set IncubationPd int ownIncubationPeriod
+      set inQuarantine 0
+      set vaccineOffered 0
+      set sensitivity random-float 1
+      set R 0
+      set vacWaitDays 0
+      set isolating 0
+
+      set cohortIndex pop_index
+      set agerange item 1 cohortData
+      set atsi item 2 cohortData
+      set comorbidityState item 3 cohortData
+      set essentialJob item 4 cohortData = 1
+      set isWorker item 5 cohortData <= agentsOfThisIndex
+      set VaccPhase item 6 cohortData
+      set VaccSubPhase item 7 cohortData
+
+      move-to one-of patches with [ pcolor = black ]
+
+      set personalVirulence random-normal Global_Transmissibility 0.025
+      if personalVirulence > 1 [
+        set personalVirulence 1
+      ]
+      if personalVirulence < 0.01 [
+        set personalVirulence 0.01
+      ]
+      
+      set sm_vac_uptake random 100
+
+      set asymptomatic_draw random-float 1
+      set asymptomaticFlag 0
+      if asymptomatic_draw < Asymptom_Prop [
+        set asymptomaticFlag 1
+      ]
+      
+      ifelse asymptomaticFlag = 0 and sympt_present_prop > random-float 1
+      [
+        set symtomatic_present_day sympt_present_min + random (sympt_present_max - sympt_present_min)
+      ]
+      [
+        set symtomatic_present_day -1
+      ]
+      ;print symtomatic_present_day
+      
+
+      set requireICU 0
+      set requireICU_draw random-float 1
+
+      set wearsMask random 100 ;; resethealth resetincome calculateincomeperday calculateexpenditureperday resettrust
+      set returntoschool random 100
+
+      ;;set ownComplianceWithIsolation ( exp random-normal Mcomp SComp ) ;; log transform of compliance with isolation
+
+      simul_resetSomeRandomParams
+
+      setEssentialWorkerPriority
+      setdeathrisk
+      
+      simul_resetPersonalVirulence
+    ]
+    
+    if agentsOfThisIndex >= item 0 cohortData [ ; item 0 cohortData = cohort size
+      set pop_index pop_index + 1
+      set agentsOfThisIndex 0
+    ]
+  ]
+  
+  ;; Cache the population cohorts.
+  set populationCohortCache table:make
+  foreach popDivisionTable_keys [ index ->
+    table:put populationCohortCache index simuls with [ cohortIndex = index ]
+  ]
+end
+
+to setup_households
+  ;; setting households up
+  ask simuls [
+      set householdUnit random houseTotal
+  ]
+  
+  ask simuls [
+    simul_resetlanding
+  ]
+  
+  ;; Enter values in household isolation table to save O(N) existence checks per tick
+  ask simuls [
+    table:put houseTrackedCaseTimeTable householdunit -1
+  ]
+  
+  let houseNumber 0
+  repeat houseTotal [
+    table:put houseStudentMoveCache_lastUpdate houseNumber -1
+    set houseNumber houseNumber + 1
+  ]
+  set houseStudentMoveCache_staleTime 0
+  
+end
+
+to setGlobals
+  set anxietyFactor              0
+  set InfectionChange            0
+  set infectionsToday            0
+  set infectionsToday_acc        0
+  set infectionsYesterday        0
+  set five                       0
+  set fifteen                    0
+  set twentyfive                 0
+  set thirtyfive                 0
+  set fortyfive                  0
+  set fiftyfive                  0
+  set sixtyfive                  0
+  set seventyfive                0
+  set eightyfive                 0
+  set ninetyfive                 0
+  set InitialReserves            0
+  set AverageContacts            0
+  set AverageFinancialContacts   0
+  set ScalePhase                 0
+  set Days                       0
+  set CaseFatalityRate           0
+  set DeathCount                 0
+  set recovercount               0
+  set recoverProportion          0
+  set casesReportedToday         0
+  set casesReportedToday_acc     0
+  set Scaled_Population          0
+  set ICUBedsRequired            0
+  set scaled_Bed_Capacity        0
+  set currentInfections          0
+  set eliminationDate            0
+  set PotentialContacts          0
+  set yellowcount                0
+  set redcount                   0
+  set cumulativeInfected         0
+  set scaledPopulation           0
+  set MeanR                      0
+  set EWInfections               0
+  set StudentInfections          0
+  set meanDaysInfected           0
+  set lasttransday               0
+  set lastPeriod                 0
+  set casesinperiod28            0
+  set casesinperiod14            0
+  set casesinperiod7             0
+  set resetDate                  0
+  set cashposition               0
+  set Objfunction                0
+  set decisionDate               0
+  set policyTriggerScale         1
+  set prior0                     0
+  set prior1                     0
+  set prior2                     0
+  set prior3                     0
+  set prior4                     0
+  set prior5                     0
+  set prior6                     0
+  set prior7                     0
+  set prior8                     0
+  set prior9                     0
+  set prior10                    0
+  set prior11                    0
+  set prior12                    0
+  set prior13                    0
+  set prior14                    0
+  set prior15                    0
+  set prior16                    0
+  set prior17                    0
+  set prior18                    0
+  set prior19                    0
+  set prior20                    0
+  set prior21                    0
+  set prior22                    0
+  set prior23                    0
+  set prior24                    0
+  set prior25                    0
+  set prior26                    0
+  set prior27                    0
+  set prior28                    0
+  
+  set real_prior0                0
+  set real_prior1                0
+  set real_prior2                0
+  set real_prior3                0
+  set real_prior4                0
+  set real_prior5                0
+  set real_prior6                0
+
+  set slope_prior0               0
+  set slope_prior1               0
+  set slope_prior2               0
+  set slope_prior3               0
+  set slope_prior4               0
+  set slope_prior5               0
+  set slope_prior6               0
+  
+  set slope                      0
+  set slopeCount                 0
+  set slopeSum                   0
+  set slopeAverage               0
+  
+  set testName                   ""
+  set traceMult                  1
+  
+  set trackCount                 0
+  set trackSum                   0
+  set trackAverage               0
+  set infectedTrackCount         0
+  set infectedTrackSum           0
+  set infectedTrackAverage       0
+  
+  set new_case_real 0
+  set new_case_real_counter 0
+  
+  ;; These used to be dynamic controls with conflicting variable names.
+  set reduce_contact false
+  set spatial_distance 0
+  set case_isolation 0
+  set quarantine 0
+  set contact_radius 0
+  set Track_and_Trace_Efficiency 0
+  set stage 0
+  set prev_stage -1
+
+  set stageHasChanged 0
+  set stageToday 0
+  set stageYesterday 0
+  set PrimaryUpper 0
+  set SecondaryLower 0
+  
+  set houseTrackedCaseTimeTable table:make
+  set houseLocationTable table:make
+  set houseStudentMoveCache table:make
+  set houseStudentMoveCache_lastUpdate table:make
+  set houseStudentMoveCache_staleTime 0
+  
+  set meanIDTime 0
+  set popDivisionTable 0 ; Table of population cohort data
+
+  ; Number of agents that are workers and essential workers respectively.
+  set totalWorkers 0
+  set totalEssentialWorkers 0
+  set essentialWorkerRange 0
+  set otherWorkerRange 0
+
+  set transmission_count 0
+  set transmission_count_metric 0
+  set transmission_sum 0
+  set transmission_average 0
+  
+  set avoidSuccess 0
+  set avoidAttempts 0
+  
+  ; Vaccine phase and subphase, as well as internal index and data table.
+  set global_vaccinePhase 0
+  set global_vaccineSubPhase 0
+  set global_vaccineAvailible 0
+  set global_vaccineType 0
+  set global_vaccinePerDay 0
+  
+  set incursionsSeedID 0
+  set totalOverseasIncursions 0
+  set vaccinePhaseEndDay 0
+  set vaccinePhaseIndex 0
+  set vaccineTable 0
+  set global_vaccine_eff 0 ;; Effectiveness of the vaccine along the three dimensions (infection rate, transmition rate, duration)
+
+  set totalEndR 0
+  set totalEndCount 0
+  set endR_sum 0
+  set endR_count 0
+  set endR_mean_metric 0
+  set average_R 0
+  
+  ;; log transform illness period variables
+  set Illness_PeriodVariance 0
+  set M 0
+  set BetaillnessPd 0
+  set S 0
+
+  ;; log transform incubation period variables
+  set Incubation_PeriodVariance 0
+  set MInc 0
+  set BetaIncubationPd 0
+  set SInc 0
+
+  ;; log transform compliance period variables
+  set Compliance_PeriodVariance 0
+  set MComp 0
+  set BetaCompliance 0
+  set SComp 0
+
+  ;; file reading and draw handling
+  set drawNumber 0
+  set drawRandomSeed 0
+  set drawList 0
+  
+  set R_measure_time -1
+  
+  set infectNoVacArray_listOut []
+  set infectVacArray_listOut []
+  set dieArray_listOut []
+  set stage_listOut []
+end
+
+to setDrawValues
+  set draw_ppa_modifier random-normal 0 3
+  set draw_pta_modifier random-normal 0 3
+  
+  rngs:init ;; replacing previous log transform with beta distribution
+  let stream_id 1
+  let seed random-float 999
+  rngs:set-seed stream_id seed
+  
+  set draw_isolationCompliance rngs:rnd-beta stream_id 450.3 23.7
+  ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
+  ;; SqRoot of above
+  set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60
+  
+  set draw_vacc_death_risk_mult (1 - (rngs:rnd-beta stream_id 64 16))
+  set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 2 8 ) * 0.02
+  
+  ;show ( word "draw_ppa_modifier " draw_ppa_modifier )
+  ;show ( word "draw_pta_modifier " draw_pta_modifier )
+  ;show ( word "draw_isolationCompliance " draw_isolationCompliance )
+  ;show ( word "draw_maskWearEfficacy " draw_maskWearEfficacy )
+end
+
+;;*******************************************************************************************************************************
+;;** Buttons **
+;;*******************************************************************************************************************************
+
+to setup
+  clear-all
+  
+  setGlobals
+  random-seed RAND_SEED ;; Read from a behaviourSpace variable.
+  
+  setDrawValues
+
+  profiler:reset
+  if profile_on [
+    profiler:start
+  ]
+  resetAccumulators
+
+  rngs:init
+
+  ;;import-drawing "Background1.png" ;; imports MSD image
+  set days 0 ; used to count days
+
+  loadPopDivisionTable
+  processPopulationWorkerData
+  setup_vaccineData
+  setup_overseasArrivals
+  setup_DataOut
+  
+  set resetdate 7
+  
+  ;; illness period estimation using ln transform
+  set Illness_Periodvariance se_Illnesspd
+  set BetaIllnessPd ln (1 + (illness_PeriodVariance / illness_period ^ 2))
+  set M (ln illness_period) - (BetaillnessPd / 2)
+  set S sqrt BetaIllnessPd
+
+  ;; illness period estimation using ln transform
+  set Incubation_Periodvariance se_Incubation
+  set BetaIncubationPd ln (1 + (incubation_PeriodVariance / incubation_period ^ 2))
+  set MInc (ln incubation_period) - (BetaincubationPd / 2)
+  set SInc sqrt BetaIncubationPd
+
+  ask red-links [
+    set color red
+  ]
+  ask patches [
+    set pcolor black
+    set houseIndex -1
+    set lastInfectionUpdate -1
+    set lastUtilTime -1
+    set infectionCulprit table:make
+  ]
+  
+  ;; a beta function for testing locating many people in one place at a single time
+  ask n-of Gather_Location_Count patches with [ pcolor = black ] [
+    set pcolor grey
+    set destination 1
+  ]
+  set destination_patches patches with [ destination = 1 ]
+
+  createSimulants
+
+  ;; set up initial infected people
+  set scalephase InitialScale
+  ;; sets up the initial date for looking at policy-changes
+
+  ask n-of ( initial_cases ) simuls [
+    set color red
+    set timenow random int ownIncubationPeriod
+    simul_updatepersonalvirulence
+    set infectionsToday_acc infectionsToday_acc + 1
+    array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + 1
+  ]
+
+  ;; spend CalculateIncomePerday
+  ask simuls [
+    calculateDailyrisk
+  ]
+
+  set contact_radius 0 ;; sets contact radius of people
+  set Quarantine false
+  set eliminationDate 0 ; used to identify the date of elimination where no current, unrecovered cases exist
+  set spatial_distance false
+  set case_isolation false
+
+  setup_households
+  
+  ;; this ensures that half the people in households with existing infections have also have an infection and prevents a big spike early-on
+  let init_secondry_infect secondary_cases
+  ask simuls [
+    if init_secondry_infect > 0 and any? other simuls in-radius 2 with [ color = red ] [
+      set color red
+      set timenow random int ownIncubationPeriod
+      set init_secondry_infect init_secondry_infect - 1
+      set infectionsToday_acc infectionsToday_acc + 1
+      array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + 1
+    ]
+  ]
+
+  ;;set tracking false ;; ensures this is set to false each time the model starts
+  ;;set link_switch false ;; ensures this is set to false each timme the model starts
+  ;;set schoolsOpen false ;; ensures that the schools settings don't begin before the policy trigger starts
+  ;;set maskPolicy false ;; that the mask policy doesn't begin before the policy trigger starts
+  ;;set assignAppEss false ;; that the assigning the App to EssentialWorkers doesn't begin before the policy trigger starts
+  reset-ticks
+  
+  setupstages ;; setting up for the MJA runs
+end

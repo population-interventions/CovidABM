@@ -1,0 +1,173 @@
+;;*******************************************************************************************************************************
+;;** Counting things, often with scale involved **
+;;*******************************************************************************************************************************
+
+to updateRawCounts
+  ;; Cache number of infected (red) suceptible (blue (actually cyan)) and recovered (yellow) agents
+  set redCount count simuls with [ color = red ]
+  set yellowcount count simuls with [ color = yellow ]
+end
+
+to updateCounts
+  set infectionsYesterday infectionsToday
+  ;; this considers ALL cases - not just the reported ones
+  ;set infectionsToday ( count simuls with [ color = red and timenow = 1 ] )
+  set infectionsToday infectionsToday_acc * Scale_Factor ^ scalephase
+  if infectionsYesterday != 0 [
+    set InfectionChange ( infectionsToday / infectionsYesterday )
+  ]
+  
+  ;; Sets the day for reporting new cases at 6 (adjustable) days after testing+tracking.
+  ;; (abstracted here as just tracking) this flows through to daily cases.
+  ;let casesToday count simuls with [ color = red and tracked = 1 and caseReportTime = ticks ]
+  set casesReportedToday casesReportedToday_acc * Scale_Factor ^ scalephase
+  
+  ;; population scaling function
+  set Scaled_Population Population * Scale_Factor ^ scalephase
+  
+  ;; calculates the number of infected people in the population
+  set currentInfections redcount * Scale_Factor ^ scalephase
+
+  ;; calculates the number of people infected and recorded today
+  set cumulativeInfected cumulativeInfected + infectionsToday
+  ;; calculates death rate per infected person over the course of the pandemic
+  if Deathcount > 0 and cumulativeInfected > 0 [
+    set casefatalityrate ( Deathcount / cumulativeInfected )
+  ]
+  
+  ;; calculates the scaled population for working with smaller environments
+  set scaledPopulation Population * Scale_Factor ^ scalephase
+end
+
+to resetAccumulators
+  ifelse transmission_count > 0
+  [
+    set transmission_average transmission_sum / transmission_count
+  ]
+  [
+    set transmission_average 0
+  ]
+  set transmission_count_metric transmission_count * Scale_Factor ^ scalephase
+  set transmission_count 0
+  set transmission_sum 0
+  
+  set infectionsToday_acc 0
+  set casesReportedToday_acc 0
+  
+  set new_case_real new_case_real_counter
+  set new_case_real_counter 0
+ 
+  if endR_count > 0 [
+    set endR_mean_metric endR_sum / endR_count
+    set endR_sum 0
+    set endR_count 0
+  ]
+  
+  ifelse totalEndCount > 0
+  [
+    set average_R totalEndR / totalEndCount
+  ]
+  [
+    set average_R 0
+  ]
+  ;show ( word " avoidFails " (avoidAttempts - avoidSuccess) ", avoidSuccess " avoidSuccess)
+  ;set avoidSuccess 0
+  ;set avoidAttempts 0
+  
+  ;print "moveCount"
+  ;print moveCount
+  ;print foundUseCount
+  ;set moveCount 0
+  ;set foundUseCount 0
+end
+
+to outputLockdownCalibrate
+  set real_prior6 real_prior5
+  set real_prior5 real_prior4
+  set real_prior4 real_prior3
+  set real_prior3 real_prior2
+  set real_prior2 real_prior1
+  set real_prior1 real_prior0
+  set real_prior0 infectionsToday
+  
+  set slope_prior6 slope_prior5
+  set slope_prior5 slope_prior4
+  set slope_prior4 slope_prior3
+  set slope_prior3 slope_prior2
+  set slope_prior2 slope_prior1
+  set slope_prior1 slope_prior0
+  set slope_prior0 (real_prior0 + real_prior1 + real_prior2 + real_prior3 + real_prior4 + real_prior5 + real_prior6) / 7
+  
+  if ticks - decisionDate >= 5 and ticks - decisionDate < 41 and
+      decisionDate > 0 and (slope_prior0 > 0 and slope_prior1 > 0 and 
+      slope_prior2 > 0 and slope_prior3 > 0 and slope_prior4 > 0 and slope_prior5 > 0 and slope_prior6 > 0)  [
+    ;show ( word "4: " slope_prior4 ", 3: " slope_prior3 ", 2: " slope_prior2 ", 1: " slope_prior1 ", 0: " slope_prior0 )
+    let linearRegress matrix:forecast-linear-growth ( list ln(slope_prior6) ln(slope_prior5) ln(slope_prior4) ln(slope_prior3) ln(slope_prior2) ln(slope_prior1) ln(slope_prior0) )
+    set slope exp(item 2 linearRegress) - 1
+    
+    set slopeCount slopeCount + 1
+    set slopeSum slopeSum + slope
+    set slopeAverage slopeSum / slopeCount
+    ;show ( word (ticks - decisionDate) ", average: " slopeAverage ", " slope )
+    
+    
+    set trackCount trackCount + 1
+    set trackSum trackSum + track_and_trace_efficiency
+    set trackAverage trackSum / trackCount
+    
+    if redCount > 0 [
+      set infectedTrackCount infectedTrackCount + 1
+      set infectedTrackSum infectedTrackSum + ((count simuls with [color = red and tracked = 1]) / redCount)
+      set infectedTrackAverage infectedTrackSum / infectedTrackCount
+    ]
+  ]
+end
+
+to calculateCasesInLastPeriod
+  ;; counts cases in the last 7/14/28 days -
+  ;; THIS ONLY COUNTS DETECTED CASES, NOT ALL INFECTIONS - TO ADJUST YOU MUST SET ASYMPTOMATIC TO ZERO
+  
+  set prior27 prior26
+  set prior26 prior25
+  set prior25 prior24
+  set prior24 prior23
+  set prior23 prior22
+  set prior22 prior21
+  set prior21 prior20
+  set prior20 prior19
+  set prior19 prior18
+  set prior18 prior17
+  set prior17 prior16
+  set prior16 prior15
+  set prior15 prior14
+  set prior14 prior13
+  set prior13 prior12
+  set prior12 prior11
+  set prior11 prior10
+  set prior10 prior9
+  set prior9 prior8
+  set prior8 prior7
+  set prior7 prior6
+  set prior6 prior5
+  set prior5 prior4
+  set prior4 prior3
+  set prior3 prior2
+  set prior2 prior1
+  set prior1 prior0
+  set prior0 casesReportedToday
+  
+  set casesinperiod7 prior0 + prior1 + prior2 + prior3
+  set casesinperiod7 casesinperiod7 + prior4 + prior5 + prior6
+  
+  set casesinperiod14 casesinperiod7 + prior7 + prior8 + prior9
+  set casesinperiod14 casesinperiod14 + prior10 + prior11 + prior12 + prior13
+
+  set casesinperiod28 casesinperiod14 + prior14 + prior15 + prior16 + prior17
+  set casesinperiod28 casesinperiod28 + prior18 + prior19 + prior20 + prior21 + prior22
+  set casesinperiod28 casesinperiod28 + prior23 + prior24 + prior25 + prior26 + prior27
+  
+  if track_slope [
+    ;; Do not run this unless you need to, is probably slow.
+    outputLockdownCalibrate
+  ]
+end
