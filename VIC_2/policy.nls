@@ -220,17 +220,17 @@ to COVIDPolicyTriggers
   if param_policy = "LooseSupress" [
     set allowStage4 true
     set Vaccine_Available true
-    policy_moderate_supress
+    policy_loose_supress
   ]
   if param_policy = "TightSupress_No_4" [
     set allowStage4 false
     set Vaccine_Available true
     policy_tight_supress
   ]
-  if param_policy = "ModerateSupress_No_4" [
+  if param_policy = "LooseSupress_No_4" [
     set allowStage4 false
     set Vaccine_Available true
-    policy_moderate_supress
+    policy_loose_supress
   ]
   if param_policy = "AggressElim" [
     policy_agressive_elim
