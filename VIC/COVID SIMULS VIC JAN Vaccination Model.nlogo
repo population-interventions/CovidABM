@@ -268,11 +268,11 @@ patches-own [
 GRAPHICS-WINDOW
 343
 65
-852
-575
+975
+698
 -1
 -1
-8.213115
+8.15
 1
 10
 1
@@ -551,7 +551,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+23.0
 .5
 1
 NIL
@@ -566,7 +566,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+23.0
 .5
 1
 NIL
@@ -971,7 +971,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.34
+0.51
 0.01
 1
 NIL
@@ -986,7 +986,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+70.0
 1
 1
 NIL
@@ -1027,7 +1027,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+35.0
 1
 1
 NIL
@@ -1575,7 +1575,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-1011768.0
+3526569.0
 1
 1
 NIL
@@ -2041,7 +2041,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+15.0
 1
 1
 NIL
@@ -2130,7 +2130,7 @@ End_Day
 End_Day
 -1
 365
-365.0
+141.0
 1
 1
 NIL
@@ -2301,7 +2301,7 @@ SWITCH
 390
 param_trigger_loosen
 param_trigger_loosen
-0
+1
 1
 -1000
 

@@ -22,11 +22,11 @@ __includes[
 GRAPHICS-WINDOW
 346
 61
-960
-676
+959
+675
 -1
 -1
-6.66
+7.902
 1
 10
 1
@@ -37,9 +37,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-90
+60
 0
-90
+60
 1
 1
 1
@@ -138,7 +138,7 @@ Span
 Span
 0
 30
-20.0
+5.0
 1
 1
 NIL
@@ -239,7 +239,7 @@ superspreaders
 superspreaders
 0
 1
-0.05
+0.008
 0.01
 1
 NIL
@@ -294,7 +294,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-0.0
+50.0
 .5
 1
 NIL
@@ -309,7 +309,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-0.0
+50.0
 .5
 1
 NIL
@@ -379,7 +379,7 @@ INPUTBOX
 322
 386
 initial_cases
-20.0
+2.0
 1
 0
 Number
@@ -390,7 +390,7 @@ INPUTBOX
 324
 520
 total_population
-2.34E11
+6359000.0
 1
 0
 Number
@@ -649,7 +649,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.278
+0.511
 0.001
 1
 NIL
@@ -664,7 +664,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+35.0
 1
 1
 NIL
@@ -679,7 +679,7 @@ Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
 100
-0.0
+50.0
 1
 1
 NIL
@@ -705,7 +705,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-0.0
+60.0
 1
 1
 NIL
@@ -718,7 +718,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -780,7 +780,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
@@ -823,7 +823,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-25.0
+5.0
 1
 1
 NIL
@@ -960,7 +960,7 @@ SWITCH
 526
 Vaccine_Available
 Vaccine_Available
-1
+0
 1
 -1000
 
@@ -984,7 +984,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-7644611.0
+3768116.0
 1
 1
 NIL
@@ -1020,10 +1020,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count simuls with [ vaccinated = 1 ]"
 
 SLIDER
-18
-220
-193
-253
+22
+180
+197
+213
 param_vac_uptake
 param_vac_uptake
 0.6
@@ -1037,14 +1037,14 @@ HORIZONTAL
 SLIDER
 17
 329
-197
-362
-param_vac_tran_reduct
-param_vac_tran_reduct
+195
+363
+param_vac_area
+param_vac_area
 0.5
 1
 0.9
-0.005
+0.01
 1
 NIL
 HORIZONTAL
@@ -1186,7 +1186,7 @@ INPUTBOX
 322
 450
 secondary_cases
-40.0
+4.0
 1
 0
 Number
@@ -1199,7 +1199,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-15
+1
 
 SLIDER
 1610
@@ -1363,7 +1363,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-150.0
+200.0
 50
 1
 NIL
@@ -1378,7 +1378,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-0.0
+50.0
 1
 1
 NIL
@@ -1467,7 +1467,7 @@ End_Day
 End_Day
 -1
 730
--1.0
+146.0
 1
 1
 NIL
@@ -1482,7 +1482,7 @@ Isolation_Transmission
 Isolation_Transmission
 0
 1
-0.33
+0.5
 0.01
 1
 NIL
@@ -1541,7 +1541,7 @@ SWITCH
 784
 track_R
 track_R
-1
+0
 1
 -1000
 
@@ -1619,14 +1619,14 @@ recoverProportion * 100
 SLIDER
 558
 729
-756
-762
+761
+763
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
 0.5
-0.1
-0.005
+0.042
+0.001
 1
 NIL
 HORIZONTAL
@@ -1792,7 +1792,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-1
+0
 1
 -1000
 
@@ -1805,7 +1805,7 @@ Household_Iso_Factor
 Household_Iso_Factor
 0
 1
-0.8
+1.0
 0.01
 1
 NIL
@@ -1835,7 +1835,7 @@ Track_Iso_Factor
 Track_Iso_Factor
 0
 1
-0.5
+1.0
 0.05
 1
 NIL
@@ -1853,25 +1853,25 @@ track_slope
 -1000
 
 SLIDER
-17
-293
-192
-326
+20
+254
+195
+287
 param_vac_wane
 param_vac_wane
 0
 0.05
-1.0973727264029787E-4
+0.001
 0.001
 1
 NIL
 HORIZONTAL
 
 SLIDER
-18
-255
-193
-288
+22
+215
+197
+248
 param_vac_rate_mult
 param_vac_rate_mult
 0
@@ -1883,10 +1883,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-18
-184
-193
-217
+22
+145
+197
+178
 param_recovered_prop
 param_recovered_prop
 0
@@ -1971,13 +1971,13 @@ HORIZONTAL
 SLIDER
 302
 765
-535
-798
-immune_from_reinfect
-immune_from_reinfect
+429
+799
+reinfect_area
+reinfect_area
 0
 1
-1.0
+0.8
 0.05
 1
 NIL
@@ -1986,13 +1986,13 @@ HORIZONTAL
 SLIDER
 303
 727
-536
-760
-immune_from_prev_variant
-immune_from_prev_variant
+430
+761
+prev_var_area
+prev_var_area
 0
 1
-0.8131595815543705
+0.0
 0.05
 1
 NIL
@@ -2062,7 +2062,7 @@ Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
 1
-0.85
+0.0
 0.01
 1
 NIL
@@ -2125,7 +2125,7 @@ complacency_loss
 complacency_loss
 0
 1
-0.5
+1.0
 0.1
 1
 NIL
@@ -2143,10 +2143,10 @@ average_R_all_regions
 11
 
 SLIDER
-19
-147
-191
-180
+23
+108
+195
+141
 param_final_phase
 param_final_phase
 -1
@@ -2158,10 +2158,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-19
-109
-194
-142
+23
+70
+198
+103
 param_incur_phase_limit
 param_incur_phase_limit
 -1
@@ -2196,7 +2196,7 @@ report_proportion
 report_proportion
 0
 1
-0.07
+1.0
 0.01
 1
 NIL
@@ -2222,7 +2222,7 @@ accept_isolation_prop
 accept_isolation_prop
 0
 1
-0.4907419104337426
+1.0
 0.01
 1
 NIL
@@ -2290,6 +2290,51 @@ extraScaleFactor
 3
 1
 11
+
+SLIDER
+18
+292
+191
+326
+param_vac_risk
+param_vac_risk
+0
+1
+0.9
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+432
+728
+554
+762
+prev_var_risk
+prev_var_risk
+0
+1
+0.0
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+433
+765
+553
+799
+reinfect_risk
+reinfect_risk
+0
+1
+0.8
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

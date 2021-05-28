@@ -528,7 +528,7 @@ to do_stages_tony
     set case_isolation true
     set tracking true
     set quarantine true
-    set isolate_on_inf_notice false
+    set isolate_on_inf_notice true
   ]
   
   if stage = 0 [

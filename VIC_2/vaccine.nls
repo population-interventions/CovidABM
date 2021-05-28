@@ -16,12 +16,14 @@ to setup_vaccineData
   set global_vaccineAvailible 0
   set global_vaccineType 0
   set global_vaccinePerDay 0
-  set global_vaccine_eff 0
+  set global_vaccine_area 0
+  set global_vaccine_risk 0
 end
 
 to vaccine_brand_update
   if global_vaccineType = "generic" [
-    set global_vaccine_eff param_vac_tran_reduct
+    set global_vaccine_area param_vac_area
+    set global_vaccine_risk param_vac_risk
   ]
 end
 
@@ -100,7 +102,8 @@ to simul_vaccinate_me
       ;; TODO for some reason people use up a vaccine even if they refuse it, but if this wasn't the case then param_vac_uptake
       ;; would mean very little. Figure out what is going on here conceptually.
       set vaccineOffered 1
-      set selfVaccEff_raw global_vaccine_eff
+      set selfVaccEff_raw_area global_vaccine_area
+      set selfVaccEff_raw_risk global_vaccine_risk
       set global_vaccineAvailible global_vaccineAvailible - 1
       ifelse sm_vac_uptake < param_vac_uptake
       [
@@ -121,7 +124,8 @@ end
 to simul_vaccinate_me_force
   if Vaccine_Available = true [
     set vaccineOffered 1
-    set selfVaccEff_raw global_vaccine_eff
+    set selfVaccEff_raw_risk global_vaccine_risk
+    set selfVaccEff_raw_area global_vaccine_area
     set vaccinated 1
     simul_updateVacAndReinfectMult
   ]

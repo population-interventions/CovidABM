@@ -477,8 +477,9 @@ to setGlobals
   set vaccinePhaseEndDay 0
   set vaccinePhaseIndex 0
   set vaccineTable 0
-  set global_vaccine_eff 0 ;; Effectiveness of the vaccine along the three dimensions (infection rate, transmition rate, duration)
-
+  set global_vaccine_area 0
+  set global_vaccine_risk 0
+  
   set totalEndR table:make
   set totalEndCount table:make
   set endR_sum table:make
@@ -533,10 +534,11 @@ to setDrawValues
   if not calibrate [
     set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
   ]
-  set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
   
-  set accept_isolation_prop rngs:rnd-beta stream_id 6 12
-  set immune_from_prev_variant rngs:rnd-beta stream_id 32 8
+  ;set accept_isolation_prop rngs:rnd-beta stream_id 6 12
+  ;set immune_from_prev_variant rngs:rnd-beta stream_id 32 8
+  ;set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
+  
   set draw_isolationCompliance rngs:rnd-beta stream_id 450.3 23.7
   ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
   ;; SqRoot of above

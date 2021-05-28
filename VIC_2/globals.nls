@@ -214,7 +214,8 @@ globals [
   vaccinePhaseEndDay
   vaccinePhaseIndex
   vaccineTable
-  global_vaccine_eff ;; Effectiveness of the vaccine along the three dimensions (infection rate, transmition rate, duration)
+  global_vaccine_area ;; Effectiveness of the vaccine along two dimensions (transmition rate, duration)
+  global_vaccine_risk ;; Effectiveness of the vaccine for infection rate
 
   global_schoolActive ;; Whether students ignore avoiding each other to go to school
 
