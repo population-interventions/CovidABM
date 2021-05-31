@@ -205,9 +205,9 @@ MakePlot(ProcessToPlot(
         indexDepth=4,
     ),
     metric_name,
-    yTop=8,
+    yTop=7,
     hlines=[1, 3.5, 4, 4.5],
-    figWidth=30,
+    figWidth=120,
     figHeight=20,
 )
 #MakePlot('output/' + namePath + '/', nameStr + '_process', 'trackAverage',
