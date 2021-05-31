@@ -56,6 +56,7 @@ simuls-own [
   vaccinated ;; is the person vaccinated?
   vaccineOffered ;; Has the vaccine been offered?
   vacWaitDays ;; Timer for the delay in vaccine coming into effect.
+  vaccineType ;; Name of vaccine being offered
   selfVaccEff_raw_area ;; Duration times transmissibility of infection
   selfVaccEff_raw_risk ;; Risk of being infected
   transmitFromVacAndReinfect ;; Multiplier for disease effects, (1 - selfVaccEff * recoveryEffect)^(1/3)

@@ -2,55 +2,6 @@
 ;; Setup and functions particular to setup that don't have anywhere else to live.
 ;;
 
-to setdeathrisk
-  ;; risk of death associated with ageranges if they contract COVID-19
-  (ifelse agerange <= 5
-  [
-    set riskofDeath 0.0000068
-  ]
-  agerange <= 15
-  [
-    set riskofDeath 0.0000299
-  ]
-  agerange <= 25
-  [
-    set riskofDeath 0.0001112
-  ]
-  agerange <= 35
-  [
-    set riskofDeath 0.0004172
-  ]
-  agerange <= 45
-  [
-    set riskofDeath 0.0017904
-  ]
-  agerange <= 55
-  [
-    set riskofDeath 0.0071179
-  ]
-  agerange <= 65
-  [
-    set riskofDeath 0.0196950
-  ]
-  agerange <= 75
-  [
-    set riskofDeath 0.1350531
-  ]
-  agerange <= 85
-  [
-    set riskofDeath 0.3466041
-  ]
-  ;; updated from department of health Report 22 - does not map directly to age deciles here
-  agerange <= 95
-  [
-    set riskofDeath 0.4354866
-  ]
-  [
-    set riskofDeath 0.4354866
-  ])
-end
-
-
 to setEssentialWorkerPriority
   ifelse isWorker 
   [
@@ -76,7 +27,6 @@ to simul_resetPersonalVirulence
     set personalVirulence random-normal global_Transmissibility 2.5
   ]
 end
-
 
 to loadPopDivisionTable
   let populationFileData remove-item 0 csv:from-file "input/population.csv"
@@ -174,6 +124,7 @@ to createSimulants
   let cohort_asymptomPropMult 0
   let cohort_ignoreUptakeOverride 0
   let cohort_studentCount 0
+  let cohort_vaccineType 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of Population patches with [ pcolor = black ] [
@@ -198,8 +149,10 @@ to createSimulants
       set cohort_region item 10 cohortData
       set cohort_succeptMult item 11 cohortData
       set cohort_asymptomPropMult item 12 cohortData
+      ;; Item 13 is vaccinatedCount, dealt with later but still in createSimulants
       set cohort_ignoreUptakeOverride item 14 cohortData
       set cohort_studentCount item 15 cohortData
+      set cohort_vaccineType item 16 cohortData
       
       set oldCohortIndex pop_index
     ]
@@ -229,6 +182,7 @@ to createSimulants
       set isStudent (agentsOfThisIndex <= cohort_studentCount)
       set VaccPhase cohort_phase
       set VaccSubPhase cohort_subPhase
+      set vaccineType cohort_vaccineType
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
@@ -276,7 +230,7 @@ to createSimulants
       simul_resetSomeRandomParams
 
       setEssentialWorkerPriority
-      setdeathrisk
+      params_setdeathrisk
       
       simul_resetPersonalVirulence
     ]
@@ -466,7 +420,6 @@ to setGlobals
   set global_vaccinePhase 0
   set global_vaccineSubPhase 0
   set global_vaccineAvailible 0
-  set global_vaccineType 0
   set global_vaccinePerDay 0
   
   set incursionsSeedID 0
@@ -474,11 +427,9 @@ to setGlobals
   set incursionPhaseEndDay 0
   
   set totalOverseasIncursions 0
+  set vaccineEffseedID 0
   set vaccinePhaseEndDay 0
   set vaccinePhaseIndex 0
-  set vaccineTable 0
-  set global_vaccine_area 0
-  set global_vaccine_risk 0
   
   set totalEndR table:make
   set totalEndCount table:make
@@ -518,41 +469,6 @@ to setGlobals
   set stage_listOut []
 end
 
-to setDrawValues
-  set draw_ppa_modifier random-normal 0 3
-  set draw_pta_modifier random-normal 0 3
-  
-  rngs:init ;; replacing previous log transform with beta distribution
-  let stream_id 1
-  set incursionsSeedID 2
-  set houseSeedID 3
-  
-  rngs:set-seed stream_id random-float 999
-  rngs:set-seed incursionsSeedID random-float 999
-  rngs:set-seed houseSeedID random-float 999
-  
-  if not calibrate [
-    set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
-  ]
-  
-  ;set accept_isolation_prop rngs:rnd-beta stream_id 6 12
-  ;set immune_from_prev_variant rngs:rnd-beta stream_id 32 8
-  ;set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
-  
-  set draw_isolationCompliance rngs:rnd-beta stream_id 450.3 23.7
-  ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
-  ;; SqRoot of above
-  set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60
-  
-  set draw_vacc_death_risk_mult (1 - (rngs:rnd-beta stream_id 64 16))
-  set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 2 8 ) * 0.02
-  
-  ;show ( word "draw_ppa_modifier " draw_ppa_modifier )
-  ;show ( word "draw_pta_modifier " draw_pta_modifier )
-  ;show ( word "draw_isolationCompliance " draw_isolationCompliance )
-  ;show ( word "draw_maskWearEfficacy " draw_maskWearEfficacy )
-end
-
 ;;*******************************************************************************************************************************
 ;;** Buttons **
 ;;*******************************************************************************************************************************
@@ -563,7 +479,7 @@ to setup
   setGlobals
   random-seed RAND_SEED ;; Read from a behaviourSpace variable.
   
-  setDrawValues
+  params_setDrawValues
 
   profiler:reset
   if profile_on [
@@ -610,15 +526,18 @@ to setup
   ]
   set destination_patches patches with [ destination = 1 ]
 
+  set initial_primary ceiling (initial_primary_prop * initial_cases)
+  set initial_secondary (initial_cases - initial_primary)
+  
   ;; set up initial infected people
-  set scalephase GetInitialScale (initial_cases + secondary_cases)
+  set scalephase GetInitialScale (initial_primary + initial_secondary)
   let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
   ;; sets up the initial date for looking at policy-changes
 
   createSimulants
   setupInitialVaccination
   
-  ask n-of ( initial_cases / popPerSimul ) simuls [
+  ask n-of ( initial_primary / popPerSimul ) simuls [
     set color red
     set infectVariant 1
     if random-float 1 < initial_variant_2_prop [
@@ -627,7 +546,7 @@ to setup
     set contributeToR false
     simul_updateVacAndReinfectMult
 
-    set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
+    set timenow random (floor ownIllnessPeriod)
     simul_updatepersonalvirulence
     set infectionsToday_acc infectionsToday_acc + 1
     array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
@@ -642,7 +561,7 @@ to setup
   reset_housing
   
   ;; this ensures that half the people in households with existing infections have also have an infection and prevents a big spike early-on
-  let init_secondry_infect secondary_cases
+  let init_secondry_infect initial_secondary
   ask simuls [
     if init_secondry_infect > popPerSimul and any? other simuls in-radius 2 with [ color = red ] [
       set color red
@@ -652,8 +571,8 @@ to setup
         set infectVariant 2
       ]
       simul_updateVacAndReinfectMult
-
-      set timenow random int (ownIllnessPeriod + ownIncubationPeriod)
+      
+      set timenow random (floor ownIllnessPeriod)
       set init_secondry_infect init_secondry_infect - popPerSimul
       set infectionsToday_acc infectionsToday_acc + 1
       array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul

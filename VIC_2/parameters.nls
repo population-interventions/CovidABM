@@ -1,0 +1,100 @@
+
+to params_setDrawValues
+  set draw_ppa_modifier random-normal 0 3
+  set draw_pta_modifier random-normal 0 3
+  
+  rngs:init ;; replacing previous log transform with beta distribution
+  let stream_id 1
+  set incursionsSeedID 2
+  set houseSeedID 3
+  set vaccineEffseedID 4
+  
+  rngs:set-seed stream_id random-float 999
+  rngs:set-seed incursionsSeedID random-float 999
+  rngs:set-seed houseSeedID random-float 999
+  rngs:set-seed vaccineEffseedID random-float 999
+  
+  if not calibrate [
+    set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
+  ]
+  
+  if param_policy_force_preset > 0 [
+    if param_policy_force_preset = 1 [
+      set param_policy_force_days 14
+      set param_policy_force_stage 3
+    ] 
+    if param_policy_force_preset = 2 [
+      set param_policy_force_days 7
+      set param_policy_force_stage 4
+    ] 
+    if param_policy_force_preset = 3[
+      set param_policy_force_days 14
+      set param_policy_force_stage 4
+    ] 
+  ]
+  
+  ;set accept_isolation_prop rngs:rnd-beta stream_id 6 12
+  ;set immune_from_prev_variant rngs:rnd-beta stream_id 32 8
+  ;set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
+  
+  set draw_isolationCompliance rngs:rnd-beta stream_id 450.3 23.7
+  ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
+  ;; SqRoot of above
+  set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60
+  
+  set draw_vacc_death_risk_mult (1 - (rngs:rnd-beta stream_id 64 16))
+  set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 2 8 ) * 0.02
+  
+  ;show ( word "draw_ppa_modifier " draw_ppa_modifier )
+  ;show ( word "draw_pta_modifier " draw_pta_modifier )
+  ;show ( word "draw_isolationCompliance " draw_isolationCompliance )
+  ;show ( word "draw_maskWearEfficacy " draw_maskWearEfficacy )
+end
+
+to params_setdeathrisk
+  ;; risk of death associated with ageranges if they contract COVID-19
+  (ifelse agerange <= 5
+  [
+    set riskofDeath 0.0000068
+  ]
+  agerange <= 15
+  [
+    set riskofDeath 0.0000299
+  ]
+  agerange <= 25
+  [
+    set riskofDeath 0.0001112
+  ]
+  agerange <= 35
+  [
+    set riskofDeath 0.0004172
+  ]
+  agerange <= 45
+  [
+    set riskofDeath 0.0017904
+  ]
+  agerange <= 55
+  [
+    set riskofDeath 0.0071179
+  ]
+  agerange <= 65
+  [
+    set riskofDeath 0.0196950
+  ]
+  agerange <= 75
+  [
+    set riskofDeath 0.1350531
+  ]
+  agerange <= 85
+  [
+    set riskofDeath 0.3466041
+  ]
+  ;; updated from department of health Report 22 - does not map directly to age deciles here
+  agerange <= 95
+  [
+    set riskofDeath 0.4354866
+  ]
+  [
+    set riskofDeath 0.4354866
+  ])
+end

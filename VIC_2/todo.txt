@@ -2,3 +2,9 @@ Add different vaccine infection risk for ages <50 and 50+.
 Probably do this with a risk cohort column in population, which then links to a new csv with differing beta distributions.
 
 Output random R0 and other parameters for bucketing.
+
+== Immediate Modelling ==
+initial_cases 2 5 10 20
+R0 (via global_transmissiblity) 3.5 4 4.5
+The unspecified contact tracing scenarios
+param_policy_force_preset 1 2 3

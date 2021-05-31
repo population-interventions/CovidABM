@@ -86,6 +86,9 @@ globals [
   prior26
   prior27
   prior28
+  
+  initial_primary
+  initial_secondary
 
   real_prior0
   real_prior1
@@ -194,7 +197,6 @@ globals [
   global_vaccinePhase
   global_vaccineSubPhase
   global_vaccineAvailible
-  global_vaccineType
   global_vaccinePerDay
   global_vaccineUptakeOverride
   
@@ -211,11 +213,11 @@ globals [
   variantList ;; List of variant indicies
   
   totalOverseasIncursions
+  vaccineEffseedID
   vaccinePhaseEndDay
   vaccinePhaseIndex
-  vaccineTable
-  global_vaccine_area ;; Effectiveness of the vaccine along two dimensions (transmition rate, duration)
-  global_vaccine_risk ;; Effectiveness of the vaccine for infection rate
+  vaccineRolloutTable
+  vaccineParamsTable
 
   global_schoolActive ;; Whether students ignore avoiding each other to go to school
 
