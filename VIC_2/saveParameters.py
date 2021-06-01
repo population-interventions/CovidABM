@@ -132,6 +132,7 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
     #'stage_test_index' : listToStr([0]),
     'stage_test_index' : listToStr([0, 55, 56, 57, 58, 59]),
     #'stage_test_index' : listToStr(list(range(75))),
+    'vaccine_available' : 'false',
     'total_population' : '668100000000',
     'initial_cases' : 60,
     'param_incur_phase_limit' : 0,
