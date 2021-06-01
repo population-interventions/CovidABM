@@ -120,7 +120,7 @@ defaultParams = {
 }
 
 paramValuesTestR_stageTestFull = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(500))),
+    'rand_seed' : listToStr(random.randint(10000000, size=(2000))),
     'param_policy' : listToStr([
         '"StageCal Test"',
     ]),
@@ -130,8 +130,8 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
         0.655,
     ]),
     #'stage_test_index' : listToStr([0]),
-    #'stage_test_index' : listToStr([0, 55, 56, 57, 58, 59]),
-    'stage_test_index' : listToStr(list(range(75))),
+    'stage_test_index' : listToStr([0, 55, 56, 57, 58, 59]),
+    #'stage_test_index' : listToStr(list(range(75))),
     'total_population' : '668100000000',
     'initial_cases' : 60,
     'param_incur_phase_limit' : 0,
