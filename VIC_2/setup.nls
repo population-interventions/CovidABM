@@ -174,6 +174,7 @@ to createSimulants
       set isolating 0
       set succeptibilityTable table:make
       set hasNewHouse false
+      set vaccineIncursionOverride 0
 
       set cohortIndex pop_index
       set agerange cohort_age
