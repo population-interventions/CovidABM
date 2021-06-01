@@ -52,6 +52,7 @@ globals [
   casesinperiod28
   casesinperiod14
   casesinperiod7
+  infectionsinperiod7
   resetDate ;; days after today that the policy is reviewed
   cashposition
   Objfunction ;; seeks to minimise the damage - totalinfection * stage * currentInfections
@@ -138,7 +139,6 @@ globals [
   stageToday
   stageYesterday
   
-  houseSeedID
   houseTrackedCaseTimeTable
   houseLocationTable
   destination_patches
@@ -200,20 +200,20 @@ globals [
   global_vaccinePerDay
   global_vaccineUptakeOverride
   
-  incursionsSeedID
   incursionTable
   incursionPhaseIndex
   incursionPhaseEndDay
-  global_incursionScale ;; Scale applied to the underlying probability, from the csv
   global_incursionArrivals ;; Number of arrivals, read from csv
-  global_incursionRisk ;; Scale multiplied by the underlying probability.
+  global_incursionRisk ;; Risk of the incursion showing up as an infection, read from CSV
+  global_incursionVaccArrivals ;; Number of arrivals that are vaccinated, read from csv
+  global_incursionVaccRisk ;; Risk of a vaccinated incursion showing up as an infection, read from CSV
+  global_incursionVaccType ;; Type of vaccine that vaccinated incursions enter with.
   global_incursionVariant
   global_incursionReplaceChance
   
   variantList ;; List of variant indicies
   
   totalOverseasIncursions
-  vaccineEffseedID
   vaccinePhaseEndDay
   vaccinePhaseIndex
   vaccineRolloutTable
@@ -258,6 +258,11 @@ globals [
   stage_listOut
 
   R_measure_time
+  
+  vaccineEffseedID
+  houseSeedID
+  incursionsSeedID
+  vaccineInitSeedID
 ]
 
 patches-own [

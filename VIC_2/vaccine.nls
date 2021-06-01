@@ -23,7 +23,10 @@ to setup_vaccineData
     let vacName item 0 rawData
     let vacTransReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
     let vacAreaReduct rngs:rnd-beta vaccineEffseedID (item 3 rawData) (item 4 rawData)
-    table:put vaccineParamsTable vacName list vacTransReduct vacAreaReduct
+    let partialDays item 5 rawData
+    let partialTrans_mult item 6 rawData
+    let partialReduct_mult item 7 rawData
+    table:put vaccineParamsTable vacName (list vacTransReduct vacAreaReduct partialDays partialTrans_mult partialReduct_mult)
   ]
 end
 
@@ -60,7 +63,7 @@ to vaccine_update
           ]
           if global_vaccineUptakeOverride > 0 [
             let cohort table:get populationCohortCache pop_index
-            ask cohort with [ vaccinated = 0 and vaccineOffered = 1 and sm_vac_uptake < global_vaccineUptakeOverride ] [
+            ask cohort with [ selfVaccEff_raw_risk = 0 and vaccineOffered = 1 and sm_vac_uptake < global_vaccineUptakeOverride ] [
               set phasePop phasePop + 1
               set vaccineOffered 0
             ]
@@ -88,34 +91,43 @@ to simul_set_vaccine_params
   let myVaccineData table:get vaccineParamsTable vaccineType
   set selfVaccEff_raw_area item 0 myVaccineData
   set selfVaccEff_raw_risk item 1 myVaccineData
+  if vacWaitDays > 0 [
+    set selfVaccEff_raw_area selfVaccEff_raw_area * item 3 myVaccineData
+    set selfVaccEff_raw_risk selfVaccEff_raw_area * item 4 myVaccineData
+  ]
+  simul_updateVacAndReinfectMult
   ;print selfVaccEff_raw_area
   ;print selfVaccEff_raw_risk
+end
+
+to simul_admininster_vaccine
+  let myVaccineData table:get vaccineParamsTable vaccineType
+  set vacWaitDays item 2 myVaccineData
+  simul_set_vaccine_params
 end
 
 to simul_vaccinate_me
   if vacWaitDays > 0 [
     set vacWaitDays vacWaitDays - 1
     if vacWaitDays = 0 [
-      set vaccinated 1
       simul_updateVacAndReinfectMult
     ]
   ]
   
   if Vaccine_Available = true and global_vaccineAvailible >= 1 [
-    if VaccPhase <= global_vaccinePhase and VaccSubPhase <= global_vaccineSubPhase and vaccinated = 0 and vaccineOffered = 0 [
+    if VaccPhase <= global_vaccinePhase and VaccSubPhase <= global_vaccineSubPhase and selfVaccEff_raw_risk = 0 and vaccineOffered = 0 [
       ;; TODO for some reason people use up a vaccine even if they refuse it, but if this wasn't the case then param_vac_uptake
       ;; would mean very little. Figure out what is going on here conceptually.
       set vaccineOffered 1
-      simul_set_vaccine_params
       set global_vaccineAvailible global_vaccineAvailible - 1
       ifelse sm_vac_uptake < param_vac_uptake
       [
-        set vacWaitDays param_vacEffDays
+        simul_admininster_vaccine
       ]
       [
         if ignoreUptakeOverride = 0 and global_vaccineUptakeOverride > 0 [
           if sm_vac_uptake < global_vaccineUptakeOverride [
-            set vacWaitDays param_vacEffDays
+            simul_admininster_vaccine
           ]
         ]
       ]
@@ -126,7 +138,6 @@ end
 to simul_vaccinate_me_force
   if Vaccine_Available = true [
     set vaccineOffered 1
-    set vaccinated 1
     simul_set_vaccine_params
     simul_updateVacAndReinfectMult
   ]

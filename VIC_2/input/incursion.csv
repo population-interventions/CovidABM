@@ -1,7 +1,4 @@
-days,incursionScale,infectedArrivals,variant,varReplaceChance
-1,0,0,1,0
-10,1,2,1,0
-81,1,2,1,0
-91,2,4,1,0
-91,4,8,1,0
-77,8,16,1,0
+days,unVaccArrive,unVaccRisk,vaccArrive,vaccRisk,vaccineType,variant,varReplaceChance
+0,0,0,0,0,AZ,1,0
+213,1,0.01,0,1,AZ,1,0
+552,1,0.01,1,1,AZ,1,0

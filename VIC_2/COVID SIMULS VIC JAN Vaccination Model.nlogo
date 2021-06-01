@@ -139,7 +139,7 @@ Span
 Span
 0
 30
-8.0
+3.0
 1
 1
 NIL
@@ -240,7 +240,7 @@ superspreaders
 superspreaders
 0
 1
-0.01
+0.005
 0.01
 1
 NIL
@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-32.0
+78.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-32.0
+78.0
 .5
 1
 NIL
@@ -346,10 +346,10 @@ PENS
 "default" 1.0 1 -2674135 true "" "Histogram [ agerange ] of simuls with [ color = black ] "
 
 PLOT
-1865
-210
-2133
-359
+2160
+213
+2428
+362
 Infection Proportional Growth Rate
 Time
 Growth rate
@@ -380,7 +380,7 @@ INPUTBOX
 325
 395
 initial_cases
-5.0
+20.0
 1
 0
 Number
@@ -439,7 +439,7 @@ false
 "" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [ agerange ] of simuls"
-"pen-1" 1.0 0 -13840069 true "" "histogram [ agerange ] of simuls with [ vaccinated = 1 ]"
+"pen-1" 1.0 0 -13840069 true "" "histogram [ agerange ] of simuls with [ selfVaccEff_raw_risk > 0 ]"
 "pen-2" 1.0 0 -2674135 true "" "histogram [ agerange ] of simuls with [ color = red ]"
 
 PLOT
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-50.0
+20.0
 1
 1
 NIL
@@ -673,9 +673,9 @@ HORIZONTAL
 
 SLIDER
 563
-867
+894
 760
-900
+927
 Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-50.0
+85.0
 1
 1
 NIL
@@ -719,7 +719,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -794,7 +794,7 @@ Case_Reporting_Delay
 Case_Reporting_Delay
 0
 20
-2.0
+1.0
 1
 1
 NIL
@@ -824,17 +824,17 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.2
+3.6
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-339
-827
-537
-860
+340
+850
+538
+883
 Asymptomatic_Trans
 Asymptomatic_Trans
 0
@@ -940,10 +940,10 @@ count simuls with [ isStudent ]
 11
 
 SLIDER
-1263
-1009
-1462
-1042
+1264
+1007
+1463
+1040
 Mask_Efficacy_Mult
 Mask_Efficacy_Mult
 0
@@ -971,7 +971,7 @@ MONITOR
 1358
 58
 Vaccinated %
-( count simuls with [ vaccinated = 1 ] / Population )* 100
+( count simuls with [ selfVaccEff_raw_risk > 0 ] / Population )* 100
 2
 1
 11
@@ -985,7 +985,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-4637681.0
+3236715.0
 1
 1
 NIL
@@ -997,7 +997,7 @@ MONITOR
 1459
 59
 Vaccinated
-count simuls with [ vaccinated = 1 ]
+count simuls with [ selfVaccEff_raw_risk > 0 ]
 17
 1
 11
@@ -1018,7 +1018,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot count simuls with [ vaccinated = 1 ]"
+"default" 1.0 0 -16777216 true "" "plot count simuls with [ selfVaccEff_raw_risk > 0 ]"
 
 SLIDER
 22
@@ -1249,10 +1249,10 @@ PENS
 "Reported" 1.0 0 -2674135 true "" "plot count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion] * extraScaleFactor * (Scale_Factor ^ scalephase)"
 
 SLIDER
-342
-864
-537
-897
+343
+888
+538
+921
 Asymptom_Prop
 Asymptom_Prop
 0
@@ -1264,15 +1264,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-342
-905
-537
-938
+343
+928
+538
+961
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
 0
 1
-0.33
+0.66
 0.01
 1
 NIL
@@ -1331,9 +1331,9 @@ PENS
 
 SLIDER
 563
-827
+854
 760
-860
+887
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1353,7 +1353,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-30.0
+78.0
 1
 1
 NIL
@@ -1442,7 +1442,7 @@ End_Day
 End_Day
 -1
 730
-42.0
+730.0
 1
 1
 NIL
@@ -1490,9 +1490,9 @@ casesinperiod7
 11
 
 PLOT
-2143
+1863
 212
-2433
+2153
 361
 OverseasIncursions
 NIL
@@ -1562,10 +1562,10 @@ recoverProportion * 100
 14
 
 SLIDER
-558
-729
-761
-762
+563
+773
+766
+806
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
@@ -1821,7 +1821,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+2.2
 0.05
 1
 NIL
@@ -1911,7 +1911,7 @@ reinfect_area
 reinfect_area
 0
 1
-1.0
+0.3106428651894847
 0.05
 1
 NIL
@@ -1988,10 +1988,10 @@ MONITOR
 11
 
 SLIDER
-560
-768
-758
-801
+564
+812
+762
+845
 Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
@@ -2019,7 +2019,7 @@ MONITOR
 1686
 447
 Incursion Var
-global_incursionVariant
+incursionPhaseEndDay
 17
 1
 11
@@ -2051,10 +2051,10 @@ MONITOR
 11
 
 SLIDER
-560
-690
-760
-723
+564
+733
+764
+766
 complacency_loss
 complacency_loss
 0
@@ -2100,7 +2100,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
-0.0
+-1.0
 1
 1
 NIL
@@ -2163,10 +2163,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1263
-1048
-1461
-1081
+1264
+1045
+1462
+1078
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -2249,7 +2249,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-1.0
+0.9141688159135856
 0.01
 1
 NIL
@@ -2279,7 +2279,7 @@ param_policy_force_days
 param_policy_force_days
 0
 28
-7.0
+14.0
 1
 1
 NIL
@@ -2294,7 +2294,7 @@ param_policy_force_stage
 param_policy_force_stage
 -1
 4
-4.0
+3.0
 1
 1
 NIL
@@ -2309,8 +2309,38 @@ param_policy_force_preset
 param_policy_force_preset
 0
 3
-2.0
+1.0
 1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+349
+803
+536
+837
+reinfect_delay
+reinfect_delay
+0
+28
+21.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+565
+690
+750
+724
+param_vacIncurMult
+param_vacIncurMult
+0
+20
+10.0
+0.5
 1
 NIL
 HORIZONTAL

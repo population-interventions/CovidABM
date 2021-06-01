@@ -17,9 +17,15 @@ Many parameters are a boolean, which should be indicated by a value of 1 or 0.
  - succeptibleMult   is a multiplier for the chance of being infected.
  - asymptomPropMult  is a multiplier to the base proportion of the population that is asymptomatic.
  - vaccinatedCount   is the number of members of the cohort that start vaccinated.
+ - doseProgressMin   defines a uniform distribution of dose progression in combination with doseProgressMax.
+ - doseProgressMax   as above, and described below. Should be at least doseProgressMin.
  - ignoreUptakeBoost ignores the effect of uptakeBoost. See vaccination.
  - studentCount      is how many members of the cohort are students.
  - vaccineType       the name of the vaccine availible to this cohort. This should match the names in vaccine_params.csv.
+
+Use doseProgressMin and doseProgressMax to define a range [doseProgressMin, doseProgressMax] from which pre-movel vaccinated simulants draw their vacWaitDays. A simulant which draws a doseProgress <= 0 has just recieved their vaccination so must wait the full dose period for their vaccine. Likewise, a simulant with doseProgerss >= 1 is assumed to have their second dose when the model starts. Draws between 0 and 1 set vacWaitDays between zero and maximum.
+
+A uniform distribution on a subset of . A simulant that draws 0 has to wait the full duration for a second dose, a simulant with a draw of 1 already had its second dose. A simulant that draws 0.5 is halfway until its second dose.
 
 A worker being essential causes the cohort to have the highest priority for going to work during a lockdown. For example, say we are in a lockdown where the policy sets 25% of workers to be regarded as essential. If only 15% of the total workers are in an 'essential' cohort, then all of the essential cohort works, with the remaining 10% made up of other workers.
 
@@ -69,8 +75,11 @@ Each vaccine has a global draw for its beta in each simulation, so all simulants
 This file sets the rate of incursions.
 
  - days              is how long this phase of incursion settings lasts
- - incursionScale    is a multiplier for the probability of any given infected arrival infecting someone in the community.
- - infectedArrivals  is the number of oppotunities availible to infect a member of the community, per day.
+ - unVaccArrive      is how many unvaccinated people arrive.
+ - unVaccRisk        is the chance of an unvaccinated arrival making it to the community.
+ - vaccArrive        is how many vaccinated people arrive.
+ - vaccRisk          is the chance of a vaccinated person making it to the community.
+ - vaccineType       is the vaccine type of vaccinated people.
  - variant           is the variant (a number 1, 2 etc) that is brought in by incursions.
  - varReplaceChance  is the probability of the new variant being spontaneously created when a simulant infects another simulant.
 

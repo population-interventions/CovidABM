@@ -17,8 +17,6 @@ to updateCounts
     set InfectionChange ( infectionsToday / infectionsYesterday )
   ]
   
-  ;; Sets the day for reporting new cases at 6 (adjustable) days after testing+tracking.
-  ;; (abstracted here as just tracking) this flows through to daily cases.
   ;let casesToday count simuls with [ color = red and tracked = 1 and caseReportTime = ticks ]
   set casesReportedToday casesReportedToday_acc * extraScaleFactor * (Scale_Factor ^ scalephase)
   
@@ -99,14 +97,6 @@ to resetAccumulators
 end
 
 to outputLockdownCalibrate
-  set real_prior6 real_prior5
-  set real_prior5 real_prior4
-  set real_prior4 real_prior3
-  set real_prior3 real_prior2
-  set real_prior2 real_prior1
-  set real_prior1 real_prior0
-  set real_prior0 infectionsToday
-  
   set slope_prior6 slope_prior5
   set slope_prior5 slope_prior4
   set slope_prior4 slope_prior3
@@ -182,6 +172,17 @@ to calculateCasesInLastPeriod
   set casesinperiod28 casesinperiod14 + prior14 + prior15 + prior16 + prior17
   set casesinperiod28 casesinperiod28 + prior18 + prior19 + prior20 + prior21 + prior22
   set casesinperiod28 casesinperiod28 + prior23 + prior24 + prior25 + prior26 + prior27
+  
+  set real_prior6 real_prior5
+  set real_prior5 real_prior4
+  set real_prior4 real_prior3
+  set real_prior3 real_prior2
+  set real_prior2 real_prior1
+  set real_prior1 real_prior0
+  set real_prior0 infectionsToday
+  
+  set infectionsinperiod7 real_prior0 + real_prior1 + real_prior2 + real_prior3
+  set infectionsinperiod7 infectionsinperiod7 + real_prior4 + real_prior5 + real_prior6
   
   if track_slope [
     ;; Do not run this unless you need to, is probably slow.

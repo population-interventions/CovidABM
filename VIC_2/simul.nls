@@ -26,6 +26,7 @@ simuls-own [
 
   timenow ;; the number of days since initial infection
   caseReportTime ;; Day on which the case will be reported
+  recoverTime ;; Days since recovery
   
   tracked ;; whether the person has been tracked by the health system
   asymptomaticFlag ;; indicator identifying Asymptomatic cases
@@ -53,7 +54,6 @@ simuls-own [
   VaccSubPhase ;; subphase at which this person would receive vaccine (1a, 1b etc)
   sm_vac_uptake ;; Likelyhood of taking a vaccine if offered
   
-  vaccinated ;; is the person vaccinated?
   vaccineOffered ;; Has the vaccine been offered?
   vacWaitDays ;; Timer for the delay in vaccine coming into effect.
   vaccineType ;; Name of vaccine being offered
@@ -162,7 +162,7 @@ to simul_updateVacAndReinfectMult
     [
       ifelse recoveryVariant > 2 or infectVariant > 2
       [
-        ifelse vaccinated = 0
+        ifelse selfVaccEff_raw_risk = 0
         [
           set shape "airplane" 
           set size 2.2 / 1.3
@@ -173,7 +173,7 @@ to simul_updateVacAndReinfectMult
         ]
       ]
       [
-        ifelse vaccinated = 0
+        ifelse selfVaccEff_raw_risk = 0
         [
           set shape "star" 
           set size 1.5 / 1.3
@@ -185,7 +185,7 @@ to simul_updateVacAndReinfectMult
       ]
     ]
     [
-      ifelse vaccinated = 0
+      ifelse selfVaccEff_raw_risk = 0
       [
         set shape "circle" 
         set size 1 / 1.3
@@ -203,7 +203,7 @@ to simul_updateVacAndReinfectMult
     set variantTransMult variant_transmiss_growth ^ (infectVariant - 1)
     
     ;; Contribute vaccine effect
-    if vaccinated = 1 [
+    if selfVaccEff_raw_risk > 0 [
       set effect_raw effect_raw * (1 - selfVaccEff_raw_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
     ]
     if recoveryVariant > 0 [
@@ -225,32 +225,38 @@ to simul_updateVacAndReinfectMult
     set succeptibilityTableMax 0
     ;; Set succeptibility to each variant
     foreach variantList [ variant ->
-      let effect_raw 1
-      if vaccinated = 1 [
-        set effect_raw effect_raw * (1 - selfVaccEff_raw_risk * (vac_variant_eff_prop ^ (variant - 1)))
+      ifelse color = yellow and recoverTime < reinfect_delay
+      [
+        table:put succeptibilityTable variant 0
       ]
-      if recoveryVariant > 0 [
-        ifelse variant > recoveryVariant 
-        [
-          set effect_raw effect_raw * (1 - prev_var_risk)
+      [
+        let effect_raw 1
+        if selfVaccEff_raw_risk > 0 [
+          set effect_raw effect_raw * (1 - selfVaccEff_raw_risk * (vac_variant_eff_prop ^ (variant - 1)))
         ]
-        [
-          set effect_raw effect_raw * (1 - reinfect_risk) 
+        if recoveryVariant > 0 [
+          ifelse variant > recoveryVariant 
+          [
+            set effect_raw effect_raw * (1 - prev_var_risk)
+          ]
+          [
+            set effect_raw effect_raw * (1 - reinfect_risk) 
+          ]
         ]
+        ;set effect_raw (effect_raw ^ (1 / 3))
+        let succeptibility effect_raw
+        if succeptibility > succeptibilityTableMax [
+          ;; This is just a speedup to stop table access.
+          set succeptibilityTableMax succeptibility
+        ]
+        table:put succeptibilityTable variant succeptibility
       ]
-      ;set effect_raw (effect_raw ^ (1 / 3))
-      let succeptibility effect_raw
-      if succeptibility > succeptibilityTableMax [
-        ;; This is just a speedup to stop table access.
-        set succeptibilityTableMax succeptibility
-      ]
-      table:put succeptibilityTable variant succeptibility
     ]
   ]
 end
 
 to simul_waneVacEff
-  if vaccinated = 1 [
+  if selfVaccEff_raw_risk > 0 [
     set selfVaccEff_raw_area selfVaccEff_raw_area * (1 - param_vac_wane)
     set selfVaccEff_raw_risk selfVaccEff_raw_risk * (1 - param_vac_wane)
     simul_updateVacAndReinfectMult
@@ -427,7 +433,7 @@ to simul_infect
               set timenow 0
               set infectionsToday_acc infectionsToday_acc + 1
               set new_case_real_counter new_case_real_counter + extraScaleFactor * (Scale_Factor ^ scalephase)
-              ifelse vaccinated = 1
+              ifelse selfVaccEff_raw_risk > 0
               [
                 array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
               ]
@@ -522,6 +528,12 @@ to simul_settime
       set casesReportedToday_acc casesReportedToday_acc + 1
     ]
   ]
+  if color = yellow [
+    set recoverTime recoverTime + 1
+    if recoverTime = reinfect_delay [
+      simul_updateVacAndReinfectMult 
+    ]
+  ]
 end
 
 to simul_end_infection
@@ -539,7 +551,7 @@ to simul_end_infection
       ]
     ]
     
-    ifelse (vaccinated = 0 and RiskofDeath > random-float 1) or (vaccinated = 1 and RiskofDeath * draw_vacc_death_risk_mult > random-float 1)
+    ifelse (selfVaccEff_raw_risk = 0 and RiskofDeath > random-float 1) or (selfVaccEff_raw_risk > 0 and RiskofDeath * draw_vacc_death_risk_mult > random-float 1)
     [
       set deathcount deathcount + extraScaleFactor * (Scale_Factor ^ scalephase)
       array:set dieArray cohortIndex (array:item dieArray cohortIndex) + popPerSimul
@@ -556,6 +568,7 @@ to simul_end_infection
     set color yellow
     set recoveryVariant infectVariant
     set infectVariant 0
+    set recoverTime 0
     simul_updateVacAndReinfectMult
   
     set R 0

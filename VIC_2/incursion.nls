@@ -13,8 +13,11 @@ to setup_incursionData
   set incursionPhaseIndex -1 ; Not yet initialised
   set incursionPhaseEndDay 0
   
-  set global_incursionScale 0
   set global_incursionArrivals 0
+  set global_incursionRisk 0
+  set global_incursionVaccArrivals 0
+  set global_incursionVaccRisk 0
+  set global_incursionVaccType 0
   set global_incursionVariant 0
   set global_incursionReplaceChance 0
 end
@@ -29,22 +32,24 @@ to incursion_update
         let phaseDays (item 0 phaseData) * incursion_phase_speed_mult
         
         set incursionPhaseEndDay (incursionPhaseEndDay + phaseDays)
-        set global_incursionScale item 1 phaseData
-        set global_incursionArrivals item 2 phaseData
-        set global_incursionVariant item 3 phaseData
-        set global_incursionReplaceChance item 4 phaseData
+        set global_incursionVaccArrivals item 1 phaseData
+        set global_incursionRisk item 2 phaseData
+        set global_incursionVaccArrivals item 3 phaseData
+        set global_incursionVaccRisk item 4 phaseData
+        set global_incursionVaccType item 5 phaseData
+        set global_incursionVariant item 6 phaseData
+        set global_incursionReplaceChance item 7 phaseData
       ]
     ]
   ]
   
   let peoplePerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
-  set global_incursionRisk ( draw_borderIncursionRisk * global_incursionScale )
-  ask n-of global_incursionArrivals simuls with [color != red and color != black] [
-    if global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
+  ask n-of global_incursionArrivals simuls with [color != red and color != black and selfVaccEff_raw_risk = 0] [
+    if draw_borderIncursionRisk * global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
       set color red
       set contributeToR true
+      
       set infectVariant global_incursionVariant
-      set variantTransMult variant_transmiss_growth ^ (infectVariant - 1)
       simul_updateVacAndReinfectMult
 
       set timenow 0
@@ -52,7 +57,34 @@ to incursion_update
       set noticeOwnInfection 0
       set new_case_real_counter new_case_real_counter + peoplePerSimul
       set totalOverseasIncursions totalOverseasIncursions + peoplePerSimul
-      ifelse vaccinated = 1
+      
+      ;; Ifelse not used since only non-vaccinated people do non-vaccinated incursions.
+      ifelse selfVaccEff_raw_risk > 0
+      [
+        array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + peoplePerSimul
+      ]
+      [
+        array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + peoplePerSimul
+      ]
+    ]
+  ]
+  
+  ask n-of (global_incursionVaccArrivals * param_vacIncurMult) simuls with [color != red and color != black] [
+    if global_incursionVaccRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
+      set color red
+      set contributeToR true
+      
+      set infectVariant global_incursionVariant
+      set vaccineType global_incursionVaccType
+      simul_vaccinate_me_force
+      simul_updateVacAndReinfectMult
+
+      set timenow 0
+      set isolating 0
+      set noticeOwnInfection 0
+      set new_case_real_counter new_case_real_counter + peoplePerSimul
+      set totalOverseasIncursions totalOverseasIncursions + peoplePerSimul
+      ifelse selfVaccEff_raw_risk > 0
       [
         array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + peoplePerSimul
       ]

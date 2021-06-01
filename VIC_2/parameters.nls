@@ -8,11 +8,16 @@ to params_setDrawValues
   set incursionsSeedID 2
   set houseSeedID 3
   set vaccineEffseedID 4
+  set vaccineInitSeedID 4
   
   rngs:set-seed stream_id random-float 999
   rngs:set-seed incursionsSeedID random-float 999
   rngs:set-seed houseSeedID random-float 999
   rngs:set-seed vaccineEffseedID random-float 999
+  rngs:set-seed vaccineInitSeedID random-float 999
+  
+  set reinfect_area rngs:rnd-beta stream_id 10 10
+  set reinfect_risk rngs:rnd-beta stream_id 8 2
   
   if not calibrate [
     set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
@@ -43,7 +48,7 @@ to params_setDrawValues
   set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60
   
   set draw_vacc_death_risk_mult (1 - (rngs:rnd-beta stream_id 64 16))
-  set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 2 8 ) * 0.02
+  set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 20 20 ) * 2
   
   ;show ( word "draw_ppa_modifier " draw_ppa_modifier )
   ;show ( word "draw_pta_modifier " draw_pta_modifier )

@@ -20,12 +20,34 @@ to simul_traceme
   ]
 end
 
+to test_traceadjust
+  print traceMult
+  set infectionsinperiod7 0
+  traceadjust
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 1 * 7
+  traceadjust
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 5 * 7
+  traceadjust
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 10 * 7
+  traceadjust
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 50 * 7
+  traceadjust
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 100 * 7
+  traceadjust
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+end
+
 to traceadjust
-  ifelse casesinperiod7 > 0
+  ifelse infectionsinperiod7 > 0
   [
-    set track_and_trace_efficiency  (0.88 ^ ln((casesinperiod7 / 7) ^ 2)) * 0.25 * traceMult
+    set track_and_trace_efficiency  (0.88 ^ ln((infectionsinperiod7 / 7) ^ 2)) * 0.25 * traceMult
   ]
   [
-    set track_and_trace_efficiency 0.25 * traceMult
+    set track_and_trace_efficiency  (0.88 ^ ln((1 / 7) ^ 2)) * 0.25 * traceMult
   ]
 end
