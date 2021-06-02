@@ -118,14 +118,33 @@ to scaleup_try_to_maintain_cohort
     ]
   ]
   
+  ; Used to periodically select infected simulants.
+  let scaleAccIncrement 1 / localScaleFactor
+  
   foreach popDivisionTable_keys [ index ->
     let cohort table:get populationCohortCache index
     
-    ;; random-float 1 randomly handles fractional counts. It works because ask n-of seems to round down.
+    ;; Go through infected simulants and scale up, while copying contacts.
     set localFilter cohort with [ color = red ]
-    ask n-of (((count localFilter + random-float 1) * (1 - 1 / localScaleFactor))) localFilter [
-      simul_do_scaleup
+    let scaleAcc random-float 1 ;; Vary where the cutoff is for a better initial scale match.
+    let contactTable table:make
+    ask localFilter [
+      set scaleAcc scaleAcc + scaleAccIncrement
+      foreach table:keys infectedContactList [ x ->
+        table:put contactTable (table:length contactTable) (table:get infectedContactList x)
+      ]
+      if scaleAcc >= 1 [
+        set scaleAcc scaleAcc - 1
+        foreach table:keys contactTable [ x ->
+          table:put infectedContactList (table:length infectedContactList) (table:get contactTable x)
+        ]
+        simul_do_scaleup
+      ]
     ]
+    
+    ;ask n-of (((count localFilter + random-float 1) * (1 - 1 / localScaleFactor))) localFilter [
+    ;  simul_do_scaleup
+    ;]
     
     set localFilter cohort with [ color = yellow ]
     ask n-of (((count localFilter + random-float 1) * (1 - 1 / yellowScaleFactor))) localFilter [
@@ -133,12 +152,19 @@ to scaleup_try_to_maintain_cohort
     ]
   ]
   
+  ;; Make up any undershoot
   set localFilter simuls with [ color = red ]
   let localRedCount_after count localFilter
   if localRedCount_after * localScaleFactor > localRedCount [
     ask n-of (localRedCount_after - localRedCount / localScaleFactor + random-float 1) localFilter [
       simul_do_scaleup
     ]
+  ]
+  
+  ;; Fix issues with contacts caused by scaling
+  set localFilter simuls with [ color = red ]
+  ask localFilter [
+    simul_fixInfectedContactList
   ]
   
   set localFilter simuls with [ color = yellow ]
@@ -190,9 +216,16 @@ to scaledown_try_to_maintain_cohort
     set localScaleFactor extraScaleFactor
   ]
   
+  ask simuls with [ color = red ] [
+    ;; Fixing the contact list is slow, but guarantees  some useful invariants
+    simul_fixInfectedContactList
+  ]
+  let infectionSplitMap table:make
+  
   foreach popDivisionTable_keys [ index ->
     let cohort table:get populationCohortCache index
-    ask cohort with [ color = red ] [
+    ;print (list "cohort" index cohort with [ color = red ])
+    ask cohort with [ color = red and not update_lock] [
       let my_timenow timenow
       let my_caseReportTime caseReportTime
       let my_tracked tracked
@@ -200,25 +233,77 @@ to scaledown_try_to_maintain_cohort
       let my_infectVariant infectVariant
       let my_variantTransMult variantTransMult
       let my_contributeToR contributeToR
+      let my_vaccineIncursionOverride vaccineIncursionOverride
+      let my_hasKnownContact hasKnownContact
       
-      let eligible cohort with [ color != red or color != black ]
+      let eligible cohort with [ color != red and color != black ]
       if count eligible < (localScaleFactor - 1) [
-        set eligible simuls with [ color != red or color != black ]
+        set eligible simuls with [ color != red and color != black ]
       ]
       
+      let loopIndex 0
+      let parentSimul who
+      table:put infectionSplitMap who table:make
+      table:put (table:get infectionSplitMap who) loopIndex self
+      
+      ;print (list "Add simul" who)
+      ;print table:values infectedContactList
+      
       ask n-of (localScaleFactor - 1) eligible [
+        ;print color = red
         set color red
         set contributeToR my_contributeToR
+        set vaccineIncursionOverride my_vaccineIncursionOverride
+        set hasKnownContact my_hasKnownContact 
         set infectVariant my_infectVariant
         set variantTransMult my_variantTransMult
         simul_updateVacAndReinfectMult
-
+        
+        set update_lock true ;; Prevent repeat splitting when acting across cohorts.
         set isolating 0
         set timenow my_timenow
         set caseReportTime my_caseReportTime
         set tracked my_tracked
         set R my_R
+        
+        ;print self
+        set loopIndex loopIndex + 1
+        table:put (table:get infectionSplitMap parentSimul) loopIndex self
       ]
+    ]
+  ]
+  ask simuls [
+    set update_lock false
+  ]
+  
+  ;; Create (localScaleFactor - 1) extra copies of the infected contact graph for the new 
+  ;; infected simulants, with vertices mapped by the scaledownMap constructed above.
+  foreach table:keys infectionSplitMap [ parentID ->
+    let crossIndex 1
+    let parentSimul simul parentID
+    let childTable table:get infectionSplitMap parentID
+    let parentInfectContact [infectedContactList] of parentSimul
+    ;print (list "Start migration simul" [who] of parentSimul)
+    ;print table:values parentInfectContact
+    ;print table:values childTable
+    while [crossIndex < localScaleFactor] [
+      ask table:get childTable crossIndex [
+        set infectedContactList table:make
+        foreach table:values parentInfectContact [ otherSimul ->
+          let otherSimulID [who] of otherSimul
+          ;print (list "otherSimulID" otherSimulID)
+          ;print table:get infectionSplitMap otherSimulID
+          table:put infectedContactList (table:length infectedContactList) (
+            table:get (
+              table:get (
+                infectionSplitMap)
+              (
+                otherSimulID))
+            (
+              crossIndex))
+        ]
+      ]
+      set crossIndex crossIndex + 1
     ]
   ]
   

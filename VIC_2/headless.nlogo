@@ -139,12 +139,11 @@ Span
 Span
 0
 30
-3.0
+10.0
 1
 1
 NIL
 HORIZONTAL
-
 
 SLIDER
 2713
@@ -178,9 +177,6 @@ NIL
 NIL
 1
 
-
-
-
 SLIDER
 1627
 219
@@ -190,14 +186,11 @@ superspreaders
 superspreaders
 0
 1
-0.005
+0.01
 0.01
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 1625
@@ -208,7 +201,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-78.0
+5.0
 .5
 1
 NIL
@@ -223,15 +216,11 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-78.0
+5.0
 .5
 1
 NIL
 HORIZONTAL
-
-
-
-
 
 INPUTBOX
 220
@@ -239,7 +228,7 @@ INPUTBOX
 325
 395
 initial_cases
-20.0
+60.0
 1
 0
 Number
@@ -250,11 +239,10 @@ INPUTBOX
 324
 520
 total_population
-6681000.0
+6.681E11
 1
 0
 Number
-
 
 SLIDER
 2715
@@ -271,10 +259,6 @@ Incubation_Period
 NIL
 HORIZONTAL
 
-
-
-
-
 SLIDER
 1672
 17
@@ -290,7 +274,6 @@ Age_Isolation
 NIL
 HORIZONTAL
 
-
 SWITCH
 1470
 791
@@ -301,11 +284,6 @@ scale
 0
 1
 -1000
-
-
-
-
-
 
 INPUTBOX
 2777
@@ -329,8 +307,6 @@ se_incubation
 0
 Number
 
-
-
 SLIDER
 348
 690
@@ -340,7 +316,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.45
+0.74
 0.001
 1
 NIL
@@ -355,7 +331,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-20.0
+100.0
 1
 1
 NIL
@@ -396,7 +372,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-85.0
+15.0
 1
 1
 NIL
@@ -409,13 +385,9 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
-
-
-
-
 
 SWITCH
 1483
@@ -467,7 +439,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+8.8
 1
 1
 NIL
@@ -487,13 +459,6 @@ Asymptomatic_Trans
 1
 NIL
 HORIZONTAL
-
-
-
-
-
-
-
 
 SLIDER
 1264
@@ -517,10 +482,9 @@ SWITCH
 526
 Vaccine_Available
 Vaccine_Available
-0
+1
 1
 -1000
-
 
 SLIDER
 13
@@ -531,13 +495,11 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3236715.0
+4299631.0
 1
 1
 NIL
 HORIZONTAL
-
-
 
 SLIDER
 22
@@ -569,15 +531,6 @@ param_vacEffDays
 NIL
 HORIZONTAL
 
-
-
-
-
-
-
-
-
-
 TEXTBOX
 1493
 27
@@ -596,7 +549,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-1
+15
 
 SLIDER
 1610
@@ -628,9 +581,6 @@ Scale_Factor
 NIL
 HORIZONTAL
 
-
-
-
 SLIDER
 343
 888
@@ -661,9 +611,6 @@ Asymptom_Trace_Mult
 NIL
 HORIZONTAL
 
-
-
-
 SLIDER
 563
 854
@@ -688,13 +635,11 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-78.0
+5.0
 1
 1
 NIL
 HORIZONTAL
-
-
 
 BUTTON
 458
@@ -750,7 +695,7 @@ End_Day
 End_Day
 -1
 730
-730.0
+86.0
 1
 1
 NIL
@@ -786,8 +731,6 @@ Non_Infective_Time
 NIL
 HORIZONTAL
 
-
-
 SWITCH
 1470
 751
@@ -795,12 +738,9 @@ SWITCH
 784
 track_R
 track_R
-1
+0
 1
 -1000
-
-
-
 
 SLIDER
 563
@@ -828,7 +768,6 @@ param_trigger_loosen
 1
 -1000
 
-
 SLIDER
 1044
 53
@@ -843,9 +782,6 @@ End_R_Reported
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 14
@@ -871,7 +807,7 @@ stage_test_index
 stage_test_index
 0
 70
-0.0
+55.0
 1
 1
 NIL
@@ -1034,7 +970,6 @@ param_recovered_prop
 NIL
 HORIZONTAL
 
-
 INPUTBOX
 215
 528
@@ -1085,7 +1020,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.3106428651894847
+0.5636597320923462
 0.05
 1
 NIL
@@ -1105,11 +1040,6 @@ prev_var_area
 1
 NIL
 HORIZONTAL
-
-
-
-
-
 
 SLIDER
 564
@@ -1137,7 +1067,6 @@ set_shape
 1
 -1000
 
-
 SLIDER
 788
 1042
@@ -1153,7 +1082,6 @@ vac_variant_eff_prop
 NIL
 HORIZONTAL
 
-
 SLIDER
 564
 733
@@ -1168,7 +1096,6 @@ complacency_loss
 1
 NIL
 HORIZONTAL
-
 
 SLIDER
 23
@@ -1194,7 +1121,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
--1.0
+0.0
 1
 1
 NIL
@@ -1229,7 +1156,6 @@ report_proportion
 1
 NIL
 HORIZONTAL
-
 
 SLIDER
 787
@@ -1287,8 +1213,6 @@ calibrate
 1
 -1000
 
-
-
 SLIDER
 788
 964
@@ -1313,7 +1237,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.9141688159135856
+0.7444005684732812
 0.01
 1
 NIL
@@ -4197,15 +4121,18 @@ NetLogo 6.2.0
       <value value="&quot;StageCal Test&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.5"/>
-      <value value="0.505"/>
-      <value value="0.51"/>
-      <value value="0.58"/>
-      <value value="0.585"/>
-      <value value="0.59"/>
-      <value value="0.65"/>
-      <value value="0.655"/>
-      <value value="0.66"/>
+      <value value="0.525"/>
+      <value value="0.53"/>
+      <value value="0.535"/>
+      <value value="0.54"/>
+      <value value="0.545"/>
+      <value value="0.72"/>
+      <value value="0.73"/>
+      <value value="0.74"/>
+      <value value="0.75"/>
+      <value value="0.76"/>
+      <value value="0.77"/>
+      <value value="0.78"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
       <value value="0"/>
@@ -4432,7 +4359,7 @@ NetLogo 6.2.0
       <value value="0.86"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="vaccine_available">
-      <value value="true"/>
+      <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="variant_transmiss_growth">
       <value value="1.5"/>

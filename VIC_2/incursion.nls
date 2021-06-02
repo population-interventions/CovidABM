@@ -48,6 +48,8 @@ to incursion_update
     if draw_borderIncursionRisk * global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
       set color red
       set contributeToR true
+      set infectedContactList table:make
+      set hasKnownContact false
       
       set infectVariant global_incursionVariant
       set vaccineIncursionOverride "none"
@@ -67,6 +69,8 @@ to incursion_update
     if global_incursionVaccRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
       set color red
       set contributeToR true
+      set infectedContactList table:make
+      set hasKnownContact false
       
       set infectVariant global_incursionVariant
       set vaccineIncursionOverride global_incursionVaccType

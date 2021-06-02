@@ -139,7 +139,7 @@ Span
 Span
 0
 30
-3.0
+8.0
 1
 1
 NIL
@@ -240,7 +240,7 @@ superspreaders
 superspreaders
 0
 1
-0.005
+0.01
 0.01
 1
 NIL
@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-78.0
+37.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-78.0
+37.0
 .5
 1
 NIL
@@ -423,10 +423,10 @@ NIL
 HORIZONTAL
 
 PLOT
-1864
-38
-2133
-200
+1865
+39
+2130
+206
 Age (black), Vaccinated (green)
 NIL
 NIL
@@ -665,17 +665,17 @@ Essential_Workers
 Essential_Workers
 0
 100
-20.0
+50.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-563
-894
-760
-927
+568
+932
+765
+965
 Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-85.0
+50.0
 1
 1
 NIL
@@ -719,7 +719,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -786,10 +786,10 @@ MaskPolicy
 -1000
 
 SLIDER
-344
-1014
-539
-1047
+567
+892
+762
+925
 Case_Reporting_Delay
 Case_Reporting_Delay
 0
@@ -824,17 +824,17 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+6.2
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-340
-850
-538
-883
+348
+934
+545
+967
 Asymptomatic_Trans
 Asymptomatic_Trans
 0
@@ -868,10 +868,10 @@ mean [ timenow ] of simuls with [ color = red ]
 11
 
 PLOT
-1039
-359
-1454
-483
+1047
+355
+1462
+479
 New cases in last 7, 14, 28 days
 NIL
 NIL
@@ -985,7 +985,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3236715.0
+7922705.0
 1
 1
 NIL
@@ -1174,7 +1174,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-1
+2
 
 SLIDER
 1610
@@ -1247,27 +1247,28 @@ PENS
 "Tracked" 1.0 0 -16777216 true "" "plot count simuls with [ color = red and tracked = 1 ] * extraScaleFactor * (Scale_Factor ^ scalephase)"
 "Total" 1.0 0 -7500403 true "" "plot count simuls with [ color = red ] * extraScaleFactor * (Scale_Factor ^ scalephase)"
 "Reported" 1.0 0 -2674135 true "" "plot count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion] * extraScaleFactor * (Scale_Factor ^ scalephase)"
+"KnowContact" 1.0 0 -13840069 true "" "plot count simuls with [hasKnownContact and color = red] * extraScaleFactor * (Scale_Factor ^ scalephase)"
 
 SLIDER
-343
-888
-538
-921
+349
+973
+544
+1006
 Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.3
+0.33
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-343
-928
-538
-961
+349
+1013
+544
+1046
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
 0
@@ -1308,11 +1309,11 @@ transmission_count_metric * transmission_average
 11
 
 PLOT
-1863
-879
-2327
-1027
-States (raw)
+1862
+882
+2325
+1052
+States (scaled)
 NIL
 NIL
 0.0
@@ -1323,17 +1324,18 @@ true
 true
 "" ""
 PENS
-"Isolating" 1.0 0 -12345184 true "" "plot count simuls with [color = cyan and isolating = 1]"
-"Infected" 1.0 0 -2674135 true "" "plot count simuls with [color = red]"
-"Tracked" 1.0 0 -5825686 true "" "plot count simuls with [color = red and tracked = 1]"
-"Comply" 1.0 0 -13840069 true "" "plot count simuls with [color = cyan and isolateCompliant = 1]"
-"Recovered" 1.0 0 -1184463 true "" "plot count simuls with [color = yellow]"
+"Isolating" 1.0 0 -12345184 true "" "plot scale_factor ^ scalePhase * count simuls with [color = cyan and isolating = 1]"
+"Infected" 1.0 0 -2674135 true "" "plot scale_factor ^ scalePhase * count simuls with [color = red]"
+"Tracked" 1.0 0 -5825686 true "" "plot scale_factor ^ scalePhase * count simuls with [color = red and tracked = 1]"
+"Comply" 1.0 0 -13840069 true "" "plot scale_factor ^ scalePhase * count simuls with [color = cyan and isolateCompliant = 1]"
+"Recovered" 1.0 0 -1184463 true "" "plot scale_factor ^ scalePhase * count simuls with [color = yellow]"
+"KnownContact" 1.0 0 -13297659 true "" "plot scale_factor ^ scalePhase * count simuls with [hasKnownContact and color = red]"
 
 SLIDER
-563
-854
-760
-887
+348
+1052
+545
+1085
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1353,7 +1355,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-78.0
+30.0
 1
 1
 NIL
@@ -1464,10 +1466,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-344
-974
-541
-1007
+567
+852
+764
+885
 Non_Infective_Time
 Non_Infective_Time
 0
@@ -1686,10 +1688,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-563
-935
-736
-968
+568
+972
+741
+1005
 sympt_present_prop
 sympt_present_prop
 0
@@ -1701,10 +1703,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-564
-978
-737
-1011
+569
+1015
+742
+1048
 sympt_present_min
 sympt_present_min
 0
@@ -1716,10 +1718,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-564
-1015
-737
-1048
+569
+1052
+742
+1085
 sympt_present_max
 sympt_present_max
 0
@@ -1821,7 +1823,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-2.2
+1.0
 0.05
 1
 NIL
@@ -1903,15 +1905,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-347
-727
-532
-760
+349
+812
+534
+845
 reinfect_area
 reinfect_area
 0
 1
-0.3106428651894847
+0.4866008272585157
 0.05
 1
 NIL
@@ -2241,15 +2243,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-348
-764
-535
-797
+350
+849
+537
+882
 reinfect_risk
 reinfect_risk
 0
 1
-0.9141688159135856
+0.7582188959699845
 0.01
 1
 NIL
@@ -2316,10 +2318,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-349
-803
-536
-836
+352
+888
+539
+921
 reinfect_delay
 reinfect_delay
 0
@@ -2341,6 +2343,51 @@ param_vacIncurMult
 20
 10.0
 0.5
+1
+NIL
+HORIZONTAL
+
+SLIDER
+349
+732
+522
+765
+trans_draw_min
+trans_draw_min
+0
+1
+0.545
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+349
+768
+522
+801
+trans_draw_max
+trans_draw_max
+0
+1
+0.75
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+212
+602
+330
+635
+param_trace_mult
+param_trace_mult
+0
+3
+0.35
+0.05
 1
 NIL
 HORIZONTAL

@@ -16,11 +16,12 @@ to params_setDrawValues
   rngs:set-seed vaccineEffseedID random-float 999
   rngs:set-seed vaccineInitSeedID random-float 999
   
-  set reinfect_area rngs:rnd-beta stream_id 10 10
   set reinfect_risk rngs:rnd-beta stream_id 8 2
+  set reinfect_area rngs:rnd-beta stream_id 10 10
   
   if not calibrate [
-    set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
+    ;set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
   ]
   
   if param_policy_force_preset > 0 [

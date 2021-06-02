@@ -3,8 +3,12 @@ Probably do this with a risk cohort column in population, which then links to a 
 
 Output random R0 and other parameters for bucketing.
 
-== Immediate Modelling ==
-initial_cases 2 5 10 20
-R0 (via global_transmissiblity) 3.5 4 4.5
-The unspecified contact tracing scenarios
-param_policy_force_preset 1 2 3
+== Model parameters ==
+param_vacIncurMult 0.1 0.5 2.5 12.5
+param_policy "ModerateElim" "TightSupress" "LooseSupress"
+we set three levels of vaccine coverage for adults (50%, 70% and 90% by 31 December 2021) and both adults and children (50%, 70% and 90% by 30 April 2022), six scenarios in total.
+
+== Missing parameters ==
+set reinfect_area rngs:rnd-beta stream_id 10 10
+
+I do not understand what "5.	Prior to opening of borders, a 1% probability of incursion of the virus with same R0 as that selected for post opening was included, with a 20% probability of being vaccinated  (leading to reduced transmission probability, 3 above)." means.

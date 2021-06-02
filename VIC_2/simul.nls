@@ -17,6 +17,7 @@ simuls-own [
   homeRegion
   succeptMult
   ignoreUptakeOverride
+  update_lock
   
   ownIllnessPeriod ;; unique illness period associated with the individual
   ownIncubationPeriod ;; unique incubation pd for the person - related to IncubationPd so can probably be cleaned up - IncubationPd is a legacy var as previously all incubation periods were identical
@@ -29,6 +30,7 @@ simuls-own [
   recoverTime ;; Days since recovery
   
   tracked ;; whether the person has been tracked by the health system
+  justTracked ;; Used to avoid order effects when updating contact tracing.
   asymptomaticFlag ;; indicator identifying Asymptomatic cases
   asymptomatic_draw ;; Determines whether the agent will be asymptomatic
   symtomatic_present_day ;; When the simulant self-presents (if at all)
@@ -84,13 +86,8 @@ simuls-own [
   noticeOwnInfection ;; Has the person noticed that they are sick and are now being tracked and isolated of their own volition?
   IDTime ;; days into infection the person is identified as a case
 
-  contacts7 ;; contacts from seven days ago
-  contacts6
-  contacts5
-  contacts4
-  contacts3
-  contacts2
-  contacts1 ;; contacts from today
+  infectedContactList ;; A table of who infected this simulant and infections that this simulant has caused. Bidirectional.
+  hasKnownContact ;; Whether the simulant has a tracked simulant in infectedContactList
   
   ;; Temporary variables
   hasNewHouse
@@ -362,6 +359,7 @@ to simul_do_scaleup
   set noticeOwnInfection 0
   set imported 0
   set tracked 0
+  set hasKnownContact false
   set isolating 0
   set R 0
   
@@ -461,6 +459,17 @@ to simul_infect
               set contributeToR true
               set infectVariant patchVariant
               simul_updateVacAndReinfectMult
+              set infectedContactList table:make
+
+              let culpritSimul table:get localInfectionCulprit x
+              let culpritTracked false
+              let thisSimul self
+              table:put infectedContactList table:length infectedContactList culpritSimul
+              ask culpritSimul [
+                set culpritTracked tracked
+                table:put infectedContactList table:length infectedContactList thisSimul
+              ]
+              set hasKnownContact (culpritTracked = 1)
 
               set isolating 0
               set timenow 0
@@ -474,7 +483,7 @@ to simul_infect
                 array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
               ]
               if track_R [
-                ask table:get localInfectionCulprit x [
+                ask culpritSimul [
                   set R R + 1
                 ]
               ]
@@ -611,6 +620,7 @@ to simul_end_infection
     set requireICU 0
     set isolating 0
     set tracked 0
+    set hasKnownContact false
   ]
 end
 

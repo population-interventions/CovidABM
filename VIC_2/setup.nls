@@ -163,6 +163,8 @@ to createSimulants
       set shape "dot"
       set color cyan
       set householdUnit random 1000
+      set tracked 0
+      set justTracked false
       set timenow 0
       set noticeOwnInfection 0
       set IncubationPd int ownIncubationPeriod
@@ -175,6 +177,10 @@ to createSimulants
       set succeptibilityTable table:make
       set hasNewHouse false
       set vaccineIncursionOverride 0
+      set update_lock false
+      
+      set infectedContactList table:make
+      set hasKnownContact false
 
       set cohortIndex pop_index
       set agerange cohort_age
@@ -554,11 +560,13 @@ to setup
   
   ask n-of ( initial_primary / popPerSimul ) simuls [
     set color red
+    set contributeToR false
     set infectVariant 1
+    set infectedContactList table:make
+    set hasKnownContact false
     if random-float 1 < initial_variant_2_prop [
       set infectVariant 2
     ]
-    set contributeToR false
     simul_updateVacAndReinfectMult
 
     set timenow random (floor ownIllnessPeriod)
@@ -578,10 +586,21 @@ to setup
   ;; this ensures that half the people in households with existing infections have also have an infection and prevents a big spike early-on
   let init_secondry_infect initial_secondary
   ask simuls [
-    if init_secondry_infect > popPerSimul and any? other simuls in-radius 2 with [ color = red ] [
+    let nearSimuls (other simuls in-radius 2 with [ color = red ])
+    if init_secondry_infect > popPerSimul and any? nearSimuls [
       set color red
       set contributeToR false
       set infectVariant 1
+      set infectedContactList table:make
+      set hasKnownContact false
+      
+      let nearSimul one-of nearSimuls
+      let thisSimul self
+      table:put infectedContactList table:length infectedContactList nearSimul
+      ask nearSimul [
+        table:put infectedContactList table:length infectedContactList thisSimul
+      ]
+      
       if random-float 1 < initial_variant_2_prop [
         set infectVariant 2
       ]
