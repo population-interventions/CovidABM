@@ -97,13 +97,10 @@ to go
   ShiftRecoveredTowardsTotalProportion
   
   ;; Randomly start tracking infected people based on track_and_trace_efficiency.
-  ask simuls [
-    simul_traceme
-  ]
+  trace_doTrace
   
   ;; Simulants do a bunch of non-interactive housekeeping.
   ask simuls [
-    simul_updateContactTracing
     ;; Increment illness time and possibly lose 'health' due to it. It is unclear what health is for.
     simul_settime
     ;; if you are not dead at the end of your illness period, then you become recovered and turn yellow. Don't need hospital resources anymore.

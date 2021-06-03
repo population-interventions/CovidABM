@@ -114,6 +114,7 @@ globals [
 
   testName
   traceMult
+  global_trace_again
 
   trackCount
   trackSum

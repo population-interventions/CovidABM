@@ -139,7 +139,7 @@ Span
 Span
 0
 30
-8.0
+10.0
 1
 1
 NIL
@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-37.0
+15.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-37.0
+15.0
 .5
 1
 NIL
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-50.0
+70.0
 1
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-50.0
+35.0
 1
 1
 NIL
@@ -824,7 +824,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.2
+8.8
 1
 1
 NIL
@@ -1248,6 +1248,7 @@ PENS
 "Total" 1.0 0 -7500403 true "" "plot count simuls with [ color = red ] * extraScaleFactor * (Scale_Factor ^ scalephase)"
 "Reported" 1.0 0 -2674135 true "" "plot count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion] * extraScaleFactor * (Scale_Factor ^ scalephase)"
 "KnowContact" 1.0 0 -13840069 true "" "plot count simuls with [hasKnownContact and color = red] * extraScaleFactor * (Scale_Factor ^ scalephase)"
+"Infective" 1.0 0 -955883 true "" "plot count simuls with [ color = red and timenow > non_infective_time ] * extraScaleFactor * (Scale_Factor ^ scalephase)"
 
 SLIDER
 349
@@ -1355,7 +1356,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-30.0
+15.0
 1
 1
 NIL
@@ -1459,7 +1460,7 @@ Isolation_Transmission
 Isolation_Transmission
 0
 1
-0.5
+0.09
 0.01
 1
 NIL
@@ -2385,8 +2386,8 @@ SLIDER
 param_trace_mult
 param_trace_mult
 0
-3
-0.35
+30
+9.75
 0.05
 1
 NIL

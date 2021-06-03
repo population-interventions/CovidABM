@@ -3,7 +3,10 @@ to simul_setContactsKnown
   ;; Allow contacts to be tracked now that this case is tracked.
   set hasKnownContact true
   ask turtle-set (table:values infectedContactList) [
-    set hasKnownContact true
+    if not hasKnownContact [
+      set hasKnownContact true
+      set knownContactTime ticks
+    ]
   ]
 end
 
@@ -39,28 +42,47 @@ to simul_traceme
       set noticeOwnInfection 1
     ]
     if tracking = true and tracked != 1 [
-      if color = red and tracked = 0 and (
-            (asymptomaticFlag = 1 and hasKnownContact and Asymptom_Trace_Mult * track_and_trace_efficiency > random-float 1)
-          or 
-            (asymptomaticFlag = 0 and (
-              noticeOwnInfection = 1
-            or
-              (hasKnownContact and track_and_trace_efficiency > random-float 1)
-            ))
-          ) [
+      if hasKnownContact [
+        set knownContactTime -1
+      ]
+      if (noticeOwnInfection = 1) or (hasKnownContact and ((asymptomaticFlag = 1 and Asymptom_Trace_Mult * track_and_trace_efficiency > random-float 1)
+        or (asymptomaticFlag = 0 and track_and_trace_efficiency > random-float 1))) [
         set caseReportTime ticks + Case_Reporting_Delay
         set tracked 1
         set IDTime timenow
-        set justTracked true
+        simul_setContactsKnown
+        set global_trace_again true
       ]
     ]
   ]
 end
 
-to simul_updateContactTracing
-  if justTracked [
-    set justTracked false
-    simul_setContactsKnown
+to simul_traceme_recursive_contact
+  ;; cut down contact tracing that sweeps the population looking for chains of contacts to trace in one day.
+  if color = red [
+    set knownContactTime -1
+    if tracking = true and tracked != 1 [
+      if (asymptomaticFlag = 1 and Asymptom_Trace_Mult * track_and_trace_efficiency > random-float 1) or (asymptomaticFlag = 0 and track_and_trace_efficiency > random-float 1) [
+        set caseReportTime ticks + Case_Reporting_Delay
+        set tracked 1
+        set IDTime timenow
+        simul_setContactsKnown
+        set global_trace_again true
+      ]
+    ]
+]
+end
+
+to trace_doTrace
+  set global_trace_again false
+  ask simuls [
+    simul_traceme
+  ]
+  while [global_trace_again] [
+    set global_trace_again false
+    ask simuls with [knownContactTime = ticks] [
+      simul_traceme_recursive_contact
+    ]
   ]
 end
 

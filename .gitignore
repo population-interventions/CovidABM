@@ -2,3 +2,13 @@
 /Pakistan/output/Runs
 /Pakistan/output/Calibrate
 /VIC_2/output/calibrate
+/VIC_2/docs/*.aux
+/VIC_2/docs/*.log
+/VIC_2/docs/*.gz
+/Pakistan/input/PakistanPastInfection.xlsx
+/Pakistan/input/Workings for triggers.xlsx
+/Pakistan/input/base_population_mor_3.csv
+/Pakistan/input/popcost_dr_for_tim.xlsx
+/Pakistan/input/possibleRuralCensur.xlsx
+/Pakistan/modelParams
+/VIC_2/output/run

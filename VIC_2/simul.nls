@@ -30,7 +30,7 @@ simuls-own [
   recoverTime ;; Days since recovery
   
   tracked ;; whether the person has been tracked by the health system
-  justTracked ;; Used to avoid order effects when updating contact tracing.
+  knownContactTime ;; Time at which a contact was known, to prevent double tracing on the traced step
   asymptomaticFlag ;; indicator identifying Asymptomatic cases
   asymptomatic_draw ;; Determines whether the agent will be asymptomatic
   symtomatic_present_day ;; When the simulant self-presents (if at all)
@@ -286,7 +286,7 @@ to simul_updateVacAndReinfectMult
 end
 
 to simul_waneVacEff
-  if selfVaccEff_raw_risk > 0 [
+  if selfVaccEff_raw_risk > 0 and param_vac_wane > 0 [
     set selfVaccEff_raw_area selfVaccEff_raw_area * (1 - param_vac_wane)
     set selfVaccEff_raw_risk selfVaccEff_raw_risk * (1 - param_vac_wane)
     simul_updateVacAndReinfectMult
