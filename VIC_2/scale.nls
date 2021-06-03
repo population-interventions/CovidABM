@@ -287,21 +287,19 @@ to scaledown_try_to_maintain_cohort
     ;print table:values parentInfectContact
     ;print table:values childTable
     while [crossIndex < localScaleFactor] [
-      ask table:get childTable crossIndex [
-        ;; Do not reset infectedContactList as it contains upstream contact information.
-        ;set infectedContactList table:make
-        foreach table:values parentInfectContact [ otherSimul ->
-          let otherSimulID [who] of otherSimul
-          ;print (list "otherSimulID" otherSimulID)
-          ;print table:get infectionSplitMap otherSimulID
-          table:put infectedContactList (table:length infectedContactList) (
-            table:get (
-              table:get (
-                infectionSplitMap)
-              (
-                otherSimulID))
-            (
-              crossIndex))
+      if table:has-key? childTable crossIndex [
+        ask table:get childTable crossIndex [
+          ;; Do not reset infectedContactList as it contains upstream contact information.
+          ;set infectedContactList table:make
+          foreach table:values parentInfectContact [ otherSimul ->
+            let otherSimulID [who] of otherSimul
+            ;print (list "otherSimulID" otherSimulID)
+            ;print table:get infectionSplitMap otherSimulID
+            let otherChildTable table:get infectionSplitMap otherSimulID
+            if table:has-key? otherChildTable crossIndex [
+              table:put infectedContactList (table:length infectedContactList) (table:get otherChildTable crossIndex)
+            ]
+          ]
         ]
       ]
       set crossIndex crossIndex + 1

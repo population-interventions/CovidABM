@@ -133,7 +133,7 @@ to policy_tight_supress
       set stage 3  
       set decisionDate ticks
     ]
-    stage <= 0 and casesinperiod14 >= 5 * total_population / 1000000 * 6 * policyTriggerScale and decisionDate + 6 <= ticks
+    stage <= 0 and casesinperiod7 >= 5 * total_population / 1000000 * 7 * policyTriggerScale and decisionDate + 7 <= ticks
     [
       set stage 1
       set decisionDate ticks
@@ -161,7 +161,7 @@ to policy_loose_supress
       set stage 3  
       set decisionDate ticks
     ]
-    stage <= 0 and casesinperiod14 >= 25 * total_population / 1000000 * 6 * policyTriggerScale and decisionDate + 6 <= ticks
+    stage <= 0 and casesinperiod7 >= 25 * total_population / 1000000 * 7 * policyTriggerScale and decisionDate + 7 <= ticks
     [
       set stage 1
       set decisionDate ticks
