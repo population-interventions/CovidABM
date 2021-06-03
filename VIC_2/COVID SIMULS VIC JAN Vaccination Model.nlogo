@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-15.0
+5.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-15.0
+5.0
 .5
 1
 NIL
@@ -380,7 +380,7 @@ INPUTBOX
 325
 395
 initial_cases
-20.0
+1.0
 1
 0
 Number
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-70.0
+100.0
 1
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-35.0
+15.0
 1
 1
 NIL
@@ -985,7 +985,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-7922705.0
+1932367.0
 1
 1
 NIL
@@ -1283,7 +1283,7 @@ HORIZONTAL
 PLOT
 1859
 384
-2268
+2267
 534
 Average Interaction Infectivity
 NIL
@@ -1356,7 +1356,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-15.0
+5.0
 1
 1
 NIL
@@ -1460,7 +1460,7 @@ Isolation_Transmission
 Isolation_Transmission
 0
 1
-0.09
+0.33
 0.01
 1
 NIL
@@ -1697,7 +1697,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.5
+0.09
 0.01
 1
 NIL
@@ -1809,7 +1809,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-0.001
+0.0
 0.001
 1
 NIL
@@ -1914,7 +1914,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.4866008272585157
+0.5568162979861204
 0.05
 1
 NIL
@@ -2252,7 +2252,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.7582188959699845
+0.9566575315839145
 0.01
 1
 NIL
@@ -2386,8 +2386,8 @@ SLIDER
 param_trace_mult
 param_trace_mult
 0
-30
-9.75
+20
+20.0
 0.05
 1
 NIL
