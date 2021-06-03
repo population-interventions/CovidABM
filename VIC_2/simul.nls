@@ -658,6 +658,7 @@ to simul_isolateAndTrackFromHouseHold
   if isolating = 1 and color = red [
     if tracked = 0 [
       set caseReportTime ticks + Case_Reporting_Delay
+      simul_setContactsKnown
     ]
     set tracked 1
   ]
@@ -671,6 +672,7 @@ to simul_isolateAndTrackFromHouseHold
       if color = red [
         if tracked = 0 [
           set caseReportTime ticks + Case_Reporting_Delay
+          simul_setContactsKnown
         ]
         set tracked 1
       ]

@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+10.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+10.0
 .5
 1
 NIL
@@ -1445,7 +1445,7 @@ End_Day
 End_Day
 -1
 730
-730.0
+102.0
 1
 1
 NIL
@@ -2387,7 +2387,7 @@ param_trace_mult
 param_trace_mult
 0
 20
-20.0
+1.25
 0.05
 1
 NIL
