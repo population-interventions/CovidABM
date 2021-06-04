@@ -1,7 +1,6 @@
-Add different vaccine infection risk for ages <50 and 50+.
-Probably do this with a risk cohort column in population, which then links to a new csv with differing beta distributions.
-
 Output random R0 and other parameters for bucketing.
+
+Draw from infectious period
 
 == Model parameters ==
 param_vacIncurMult 0.1 0.5 2.5 12.5
@@ -11,4 +10,7 @@ we set three levels of vaccine coverage for adults (50%, 70% and 90% by 31 Decem
 == Missing parameters ==
 set reinfect_area rngs:rnd-beta stream_id 10 10
 
-I do not understand what "5.	Prior to opening of borders, a 1% probability of incursion of the virus with same R0 as that selected for post opening was included, with a 20% probability of being vaccinated  (leading to reduced transmission probability, 3 above)." means.
+I do not understand what "5. Prior to opening of borders, a 1% probability of incursion of the virus with same R0 as that selected for post opening was included, with a 20% probability of being vaccinated  (leading to reduced transmission probability, 3 above)." means.
+
+Make Non_Infective_Time a distribution???
+Asymptomatic multiplier for incursion???

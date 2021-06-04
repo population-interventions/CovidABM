@@ -115,6 +115,7 @@ globals [
   testName
   traceMult
   global_trace_again
+  trace_eff_override
 
   trackCount
   trackSum
@@ -257,6 +258,10 @@ globals [
   atsi_listOut
   morbid_listOut
   stage_listOut
+  vacineEff_nameOut
+  vacineEff_transOut
+  vacineEff_areaOut
+  global_transmissibility_out
 
   R_measure_time
   

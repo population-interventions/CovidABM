@@ -16,6 +16,10 @@ to setup_vaccineData
   set global_vaccineAvailible 0
   set global_vaccinePerDay 0
   
+  set vacineEff_nameOut []
+  set vacineEff_transOut []
+  set vacineEff_areaOut []
+  
   let vaccineParamsFileData remove-item 0 csv:from-file "input/vaccine_params.csv"
   set vaccineParamsTable table:make
   set i 0
@@ -27,6 +31,10 @@ to setup_vaccineData
     let partialTrans_mult item 6 rawData
     let partialReduct_mult item 7 rawData
     table:put vaccineParamsTable vacName (list vacTransReduct vacAreaReduct partialDays partialTrans_mult partialReduct_mult)
+    
+    set vacineEff_nameOut lput vacName vacineEff_nameOut
+    set vacineEff_transOut lput vacTransReduct vacineEff_transOut
+    set vacineEff_areaOut lput vacAreaReduct vacineEff_areaOut
   ]
 end
 

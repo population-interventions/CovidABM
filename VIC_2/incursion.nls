@@ -50,10 +50,12 @@ to incursion_update
       set contributeToR true
       set infectedContactList table:make
       set hasKnownContact false
+      set traceAttempts 0
       
       set infectVariant global_incursionVariant
       set vaccineIncursionOverride "none"
       simul_updateVacAndReinfectMult
+      set timenow random (floor ownIllnessPeriod) ; Set after update vaccine update because it changes illnessPeriod
       
       set timenow 0
       set isolating 0
@@ -71,10 +73,12 @@ to incursion_update
       set contributeToR true
       set infectedContactList table:make
       set hasKnownContact false
+      set traceAttempts 0
       
       set infectVariant global_incursionVariant
       set vaccineIncursionOverride global_incursionVaccType
       simul_updateVacAndReinfectMult
+      set timenow random (floor ownIllnessPeriod) ; Set after update vaccine update because it changes illnessPeriod
       
       set timenow 0
       set isolating 0

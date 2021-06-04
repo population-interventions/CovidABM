@@ -391,6 +391,7 @@ to setGlobals
   set testName                   ""
   set traceMult                  1
   set global_trace_again         false
+  set trace_eff_override         -1
   
   set trackCount                 0
   set trackSum                   0

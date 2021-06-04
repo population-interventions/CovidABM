@@ -149,16 +149,13 @@ paramValuesFullValues = {
         '"TightSupress"',
         '"LooseSupress"',
     ]),
-    'Global_Transmissibility' : listToStr([
-        0.505,
-        0.585,
-        0.655,
-    ]),
-    'initial_cases' : 2,
-    'secondary_cases' : 4,
-    'presimdailycases' : 1,
+    'param_vacIncurMult' : listToStr([0.1, 0.5, 2.5, 12.5]),
+    'initial_cases' : 0,
+    'presimdailycases' : 0,
     'track_r' : 'false',
     'calibrate' : 'false',
+    'track_slope' : 'false',
+    'set_shape' : 'false',
     'stage_test_index' : 0,
     'end_day' : 730,
 }
@@ -172,4 +169,4 @@ paramValues_stage2Infect = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)

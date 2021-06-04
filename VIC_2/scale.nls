@@ -235,6 +235,7 @@ to scaledown_try_to_maintain_cohort
       let my_contributeToR contributeToR
       let my_vaccineIncursionOverride vaccineIncursionOverride
       let my_hasKnownContact hasKnownContact
+      let my_traceAttempts traceAttempts
       
       let eligible cohort with [ color != red and color != black ]
       if count eligible < (localScaleFactor - 1) [
@@ -257,6 +258,7 @@ to scaledown_try_to_maintain_cohort
         set hasKnownContact my_hasKnownContact 
         set infectVariant my_infectVariant
         set variantTransMult my_variantTransMult
+        set traceAttempts my_traceAttempts
         simul_updateVacAndReinfectMult
         
         set update_lock true ;; Prevent repeat splitting when acting across cohorts.
@@ -320,6 +322,9 @@ to scaledown_try_to_maintain_cohort
 end
 
 to-report GetInitialScale [cases]
+  if cases = 0 [
+   report 0 
+  ]
   let caseScale floor log cases Scale_Factor
   let scaleRangeInThreshold floor log Scale_Threshold Scale_Factor
   if caseScale - scaleRangeInThreshold > 0 [
