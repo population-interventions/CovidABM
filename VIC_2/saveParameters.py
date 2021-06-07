@@ -150,6 +150,7 @@ paramValuesFullValues = {
         '"LooseSupress"',
     ]),
     'param_vacIncurMult' : listToStr([0.1, 0.5, 2.5, 12.5]),
+    'R0_range' : listToStr([4.5, 4.833, 5.166]),
     'initial_cases' : 0,
     'presimdailycases' : 0,
     'track_r' : 'false',

@@ -89,6 +89,7 @@ simuls-own [
   infectedContactList ;; A table of who infected this simulant and infections that this simulant has caused. Bidirectional.
   hasKnownContact ;; Whether the simulant has a tracked simulant in infectedContactList
   traceAttempts ;; How many times this simulant has attempted to be traced since the start of its last/current infection.
+  selfTraceEffMult ;; Trace efficacy, used for multiple retraces.
   
   ;; Temporary variables
   hasNewHouse
@@ -462,6 +463,7 @@ to simul_infect
               simul_updateVacAndReinfectMult
               set infectedContactList table:make
               set traceAttempts 0
+              set selfTraceEffMult 1
 
               let culpritSimul table:get localInfectionCulprit x
               let culpritTracked false

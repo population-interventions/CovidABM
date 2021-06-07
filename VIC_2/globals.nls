@@ -115,7 +115,7 @@ globals [
   testName
   traceMult
   global_trace_again
-  trace_eff_override
+  trace_eff_base
 
   trackCount
   trackSum

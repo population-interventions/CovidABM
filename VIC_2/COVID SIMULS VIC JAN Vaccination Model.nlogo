@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-9.0
+0.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-9.0
+0.0
 .5
 1
 NIL
@@ -380,7 +380,7 @@ INPUTBOX
 337
 382
 initial_cases
-0.0
+60.0
 1
 0
 Number
@@ -391,7 +391,7 @@ INPUTBOX
 321
 489
 total_population
-6681000.0
+6.681E11
 1
 0
 Number
@@ -642,15 +642,15 @@ mean [ personalvirulence] of simuls
 11
 
 SLIDER
-349
-693
-534
-726
+354
+727
+539
+760
 Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.734339769333601
+0.615
 0.001
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+0.0
 1
 1
 NIL
@@ -781,7 +781,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -961,7 +961,7 @@ SWITCH
 442
 Vaccine_Available
 Vaccine_Available
-0
+1
 1
 -1000
 
@@ -985,7 +985,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-4715401.0
+5175387.0
 1
 1
 NIL
@@ -1029,7 +1029,7 @@ param_vac_uptake
 param_vac_uptake
 0.5
 1
-0.9
+0.7
 0.1
 1
 NIL
@@ -1159,7 +1159,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-2
+15
 
 SLIDER
 1610
@@ -1244,7 +1244,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.33
+0.3
 0.01
 1
 NIL
@@ -1295,10 +1295,10 @@ transmission_count_metric * transmission_average
 11
 
 PLOT
-1863
-884
-2333
-1083
+1862
+883
+2332
+1082
 States (scaled)
 NIL
 NIL
@@ -1341,7 +1341,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+0.0
 1
 1
 NIL
@@ -1430,7 +1430,7 @@ End_Day
 End_Day
 -1
 730
-730.0
+-1.0
 1
 1
 NIL
@@ -1445,7 +1445,7 @@ Isolation_Transmission
 Isolation_Transmission
 0
 1
-0.33
+0.5
 0.01
 1
 NIL
@@ -1558,7 +1558,7 @@ Recovered_Match_Rate
 Recovered_Match_Rate
 0
 0.5
-0.041
+0.04
 0.001
 1
 NIL
@@ -1725,7 +1725,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-0
+1
 1
 -1000
 
@@ -1794,7 +1794,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-0.0
+0.001
 0.001
 1
 NIL
@@ -1809,7 +1809,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+2.2
 0.05
 1
 NIL
@@ -1891,15 +1891,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-348
-824
-533
-857
+352
+842
+537
+875
 reinfect_area
 reinfect_area
 0
 1
-0.32017491704532347
+0.416043765230134
 0.05
 1
 NIL
@@ -2073,7 +2073,7 @@ param_final_phase
 param_final_phase
 -1
 10
-3.0
+5.0
 1
 1
 NIL
@@ -2088,7 +2088,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
--1.0
+0.0
 1
 1
 NIL
@@ -2103,7 +2103,7 @@ house_resample_red_group
 house_resample_red_group
 0
 1
-0.95
+0.8
 0.01
 1
 NIL
@@ -2187,7 +2187,7 @@ SWITCH
 997
 calibrate
 calibrate
-1
+0
 1
 -1000
 
@@ -2218,15 +2218,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-348
-863
-535
-896
+352
+880
+539
+913
 reinfect_risk
 reinfect_risk
 0
 1
-0.7888160521397367
+0.8286021327076014
 0.01
 1
 NIL
@@ -2256,7 +2256,7 @@ param_policy_force_days
 param_policy_force_days
 0
 28
-0.0
+14.0
 1
 1
 NIL
@@ -2271,7 +2271,7 @@ param_policy_force_stage
 param_policy_force_stage
 -1
 4
--1.0
+3.0
 1
 1
 NIL
@@ -2286,17 +2286,17 @@ param_policy_force_preset
 param_policy_force_preset
 0
 3
-0.0
+1.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-349
-902
-536
-935
+353
+919
+540
+952
 reinfect_delay
 reinfect_delay
 0
@@ -2316,37 +2316,37 @@ param_vacIncurMult
 param_vacIncurMult
 0
 20
+10.0
 0.1
-0.5
 1
 NIL
 HORIZONTAL
 
 SLIDER
-348
-730
-533
+353
 763
+538
+796
 trans_draw_min
 trans_draw_min
 0
 1
-0.545
+0.7183333333333333
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-348
-767
-532
+353
 800
+537
+833
 trans_draw_max
 trans_draw_max
 0
 1
-0.75
+0.755
 0.01
 1
 NIL
@@ -2378,6 +2378,21 @@ trace_attempt_limit
 10
 3.0
 1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+353
+688
+566
+722
+R0_range
+R0_range
+0
+6
+5.166666666666666
+1 / 6
 1
 NIL
 HORIZONTAL
@@ -2796,7 +2811,7 @@ NetLogo 6.2.0
     <metric>cumulativeInfected</metric>
     <metric>casesReportedToday</metric>
     <metric>global_transmissibility_out</metric>
-    <metric>trace_eff_override</metric>
+    <metric>trace_eff_base</metric>
     <metric>Deathcount</metric>
     <metric>totalOverseasIncursions</metric>
     <metric>vacineEff_nameOut</metric>
@@ -2919,6 +2934,11 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
       <value value="0.5746461940626614"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="R0_range">
+      <value value="4.5"/>
+      <value value="4.833"/>
+      <value value="5.166"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
       <value value="0"/>
@@ -3173,8 +3193,6 @@ NetLogo 6.2.0
   <experiment name="stageTest_Stages" repetitions="1" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go</go>
-    <metric>average_R_region_1</metric>
-    <metric>average_R_region_2</metric>
     <metric>average_R_all_regions</metric>
     <metric>global_transmissibility</metric>
     <metric>days</metric>
@@ -5195,23 +5213,12 @@ NetLogo 6.2.0
       <value value="&quot;StageCal Test&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.5"/>
-      <value value="0.505"/>
-      <value value="0.51"/>
-      <value value="0.58"/>
-      <value value="0.585"/>
-      <value value="0.59"/>
-      <value value="0.65"/>
-      <value value="0.655"/>
-      <value value="0.66"/>
+      <value value="0.615"/>
+      <value value="0.685"/>
+      <value value="0.755"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
       <value value="0"/>
-      <value value="55"/>
-      <value value="56"/>
-      <value value="57"/>
-      <value value="58"/>
-      <value value="59"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="calibrate">
       <value value="true"/>
@@ -5324,9 +5331,6 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="param_vac_wane">
       <value value="0.001"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="param_vaceffdays">
-      <value value="21"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="param_vacincurmult">
       <value value="10"/>
     </enumeratedValueSet>
@@ -5430,7 +5434,7 @@ NetLogo 6.2.0
       <value value="0.86"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="vaccine_available">
-      <value value="true"/>
+      <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="variant_transmiss_growth">
       <value value="1.5"/>

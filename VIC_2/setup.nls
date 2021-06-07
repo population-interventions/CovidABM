@@ -179,6 +179,9 @@ to createSimulants
       set vaccineIncursionOverride 0
       set update_lock false
       
+      set selfTraceEffMult 1
+      set traceAttempts 0
+      
       set infectedContactList table:make
       set hasKnownContact false
 
@@ -391,7 +394,7 @@ to setGlobals
   set testName                   ""
   set traceMult                  1
   set global_trace_again         false
-  set trace_eff_override         -1
+  set trace_eff_base             1
   
   set trackCount                 0
   set trackSum                   0
