@@ -533,11 +533,15 @@ to simul_avoid
     ;; if you are an essential worker, you can only reduce your
     ;; contacts when you are not at work assuming 8 hours work, 8 hours rest, 8 hours recreation - rest doesn't count for anyone, hence it is
     ;; set at 50 on the input slider. People don't isolate from others in their household unit
-    (ifelse (EssentialWorkerFlag = 0 or Ess_W_Risk_Reduction > random 100) and Spatial_Distance = true
+    let myHouse householdUnit
+    (ifelse any? other simuls-here with [ householdUnit != myHouse and isolateCompliant = 1] and draw_isolationCompliance > random-float 1
+      [
+        simul_move_to_empty_patch
+      ]
+      (EssentialWorkerFlag = 0 or Ess_W_Risk_Reduction > random 100) and Spatial_Distance = true
       and Proportion_People_Avoid + draw_ppa_modifier > proportion_people_avoid_draw
       and Proportion_Time_Avoid + draw_pta_modifier > random 100
       [
-        let myHouse householdUnit
         ifelse isStudent and schoolsOpen
         [
           ;; students don't isolate from each other or their household unit

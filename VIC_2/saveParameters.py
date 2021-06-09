@@ -145,11 +145,11 @@ paramValuesFullValues = {
     'param_vac_uptake' : listToStr([0.5, 0.7, 0.9]),
     'param_final_phase' : listToStr([2, 3]),
     'param_policy' : listToStr([
-        '"ModerateElim"',
+        '"ModerateElim"', # Redo this for email
         '"TightSupress"',
         '"LooseSupress"',
     ]),
-    'param_vacIncurMult' : listToStr([0.1, 0.5, 2.5, 12.5]),
+    'param_vacIncurMult' : listToStr([0.02, 0.1, 0.5, 2.5, 12.5]),
     'R0_range' : listToStr([4.5, 4.833, 5.166]),
     'initial_cases' : 0,
     'presimdailycases' : 0,

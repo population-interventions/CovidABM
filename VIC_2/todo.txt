@@ -1,6 +1,10 @@
-Output random R0 and other parameters for bucketing.
 
-Draw from infectious period
+Add the mixed policy strategy.
+Set/check the vaccination time of adults and kids.
+
+Calibrate isolation compliance to 75% of single incursions hitting less than 100 cases.
+Then calibrate model to find R0 2.5.
+Then calibrate stage 4 to slope of -8% on the downhill of 1500 initial cases at R0 2.5.
 
 == Model parameters ==
 param_vacIncurMult 0.1 0.5 2.5 12.5
