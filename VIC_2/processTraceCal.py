@@ -84,6 +84,7 @@ def PlotPartialStackedBar(df, axis, metric, size=(8,4)):
 def ProcessResults(path, nameList):
     name = nameList[0]
     interestingColumns = [
+        'param_trace_mult', 'sympt_present_prop',
         'rand_seed', 'isocomply_override', 'End_Day',
         'infectionsToday', 'first_trace_day', 'first_trace_infections',
         'currentInfections', 'cumulativeInfected', 'tracked_simuls',
@@ -131,5 +132,6 @@ def ProcessResults(path, nameList):
 nameStr = 'run002'
 namePath = 'output/trace/'
 
-ProcessResults(namePath, [nameStr, 'run003', 'run004'])
+#ProcessResults(namePath, [nameStr, 'run003', 'run004'])
+ProcessResults(namePath, [nameStr, 'run005'])
 
