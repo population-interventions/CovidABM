@@ -18,7 +18,6 @@ globals [
   seventyfive
   eightyfive
   ninetyfive
-  allowStage4
   InitialReserves
   AverageContacts
   AverageFinancialContacts
@@ -264,6 +263,16 @@ globals [
   global_transmissibility_out
 
   R_measure_time
+  stop_simulation
+  
+  finished_infections
+  finished_tracked
+  first_trace_day
+  first_trace_infections
+  tracked_simuls
+  cali_timenow
+  cali_asymptomaticFlag
+  cali_symtomatic_present_day
   
   vaccineEffseedID
   houseSeedID

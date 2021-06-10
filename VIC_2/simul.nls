@@ -613,6 +613,13 @@ to simul_end_infection
       table:put recoverCountByVariant infectVariant ((table:get recoverCountByVariant infectVariant) + popPerSimul)
     ]
     
+    if trace_calibration > 0 [
+      set finished_infections finished_infections + popPerSimul
+      if tracked > 0 [
+        set finished_tracked finished_tracked + popPerSimul
+      ]
+    ]
+    
     ;; May as well set color to yellow since dead and infected people have a similar effect on the simulation.
     ;; Very few people die in the low scales as a proportion of the total population.
     set color yellow

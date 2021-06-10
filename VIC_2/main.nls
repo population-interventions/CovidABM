@@ -143,6 +143,10 @@ to go
   
   ;; counts days per tick, likely redundant at present as days are not used for anything right now.
   calculateDataOut
+  checkCalibrationStop
+  if stop_simulation [
+    Stop 
+  ]
   
   set days days + 1
   tick

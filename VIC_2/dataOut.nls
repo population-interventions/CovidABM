@@ -19,6 +19,14 @@ to setup_DataOut
     
     set index index + 1 
   ]
+  
+  if trace_calibration > 0 [
+    set End_Day -1
+    set first_trace_day -1
+    set first_trace_infections 0
+    set finished_infections 0
+    set finished_tracked 0
+  ]
 end
 
 to calculateDataOut
@@ -30,4 +38,31 @@ to calculateDataOut
   set infectNoVacArray array:from-list cohortLengthListOfZeros
   set infectVacArray array:from-list cohortLengthListOfZeros
   set dieArray array:from-list cohortLengthListOfZeros
+end
+
+
+to checkCalibrationStop
+  if trace_calibration > 0 [
+    if first_trace_day = -1 and casesinperiod7 > 0 [
+      set first_trace_day ticks
+      set first_trace_infections currentInfections
+    ]
+    
+    if currentInfections = 0 or trace_calibration < cumulativeInfected [
+      set End_Day ticks
+      set tracked_simuls (count simuls with [color = red and tracked = 1] * extraScaleFactor * scale_factor ^ scalePhase)
+      ;print (list "End_Day" End_Day)
+      ;print (list "first_trace_day" first_trace_day)
+      ;print (list "first_trace_infections" first_trace_infections)
+      ;print (list "currentInfections" currentInfections)
+      ;print (list "cumulativeInfected" cumulativeInfected)
+      ;print (list "tracked_simuls" tracked_simuls)
+      ;print (list "finished_infections" finished_infections)
+      ;print (list "finished_tracked" finished_tracked)
+      ;print (list "cali_timenow" cali_timenow)
+      ;print (list "cali_asymptomaticFlag" cali_asymptomaticFlag)
+      ;print (list "cali_symtomatic_present_day" cali_symtomatic_present_day)
+      set stop_simulation true
+    ]
+  ]
 end

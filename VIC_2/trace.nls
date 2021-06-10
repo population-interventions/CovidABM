@@ -46,7 +46,13 @@ to simul_traceme
   ifelse color = red 
   [
     if asymptomaticFlag = 0 and noticeOwnInfection = 0 and (symtomatic_present_day > -1 and timenow >= symtomatic_present_day) [
-      set noticeOwnInfection 1
+      ifelse timenow = symtomatic_present_day
+      [
+        set noticeOwnInfection 1
+      ]
+      [
+        set noticeOwnInfection 0.25 ;; Give late infection incursions a chance of presenting.
+      ]
     ]
     if tracking and tracked != 1 [
       if hasKnownContact [
@@ -54,7 +60,9 @@ to simul_traceme
       ]
       if (noticeOwnInfection = 1 or hasKnownContact) and (trace_attempt_limit = -1 or traceAttempts < trace_attempt_limit) [
         set traceAttempts traceAttempts + 1
-        if (asymptomaticFlag = 1 and Asymptom_Trace_Mult * track_and_trace_efficiency * selfTraceEffMult > random-float 1) or (asymptomaticFlag = 0 and track_and_trace_efficiency * selfTraceEffMult > random-float 1) [
+        if (noticeOwnInfection > 0 and noticeOwnInfection > random-float 1) 
+        or (asymptomaticFlag = 1 and Asymptom_Trace_Mult * track_and_trace_efficiency * selfTraceEffMult > random-float 1)
+        or (asymptomaticFlag = 0 and track_and_trace_efficiency * selfTraceEffMult > random-float 1) [
           set caseReportTime ticks + Case_Reporting_Delay
           set tracked 1
           set IDTime timenow
@@ -67,7 +75,8 @@ to simul_traceme
   [
     if tracking and hasKnownContact and (trace_attempt_limit = -1 or traceAttempts < trace_attempt_limit) [
       set traceAttempts traceAttempts + 1
-      if (asymptomaticFlag = 1 and Asymptom_Trace_Mult * track_and_trace_efficiency * selfTraceEffMult > random-float 1) or (asymptomaticFlag = 0 and track_and_trace_efficiency * selfTraceEffMult > random-float 1) [
+      if (asymptomaticFlag = 1 and Asymptom_Trace_Mult * track_and_trace_efficiency * selfTraceEffMult > random-float 1) 
+      or (asymptomaticFlag = 0 and track_and_trace_efficiency * selfTraceEffMult > random-float 1) [
         simul_setContactsKnown
         set global_trace_again true
       ]

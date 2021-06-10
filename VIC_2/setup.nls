@@ -300,7 +300,6 @@ to setGlobals
   set seventyfive                0
   set eightyfive                 0
   set ninetyfive                 0
-  set allowStage4                true
   set InitialReserves            0
   set AverageContacts            0
   set AverageFinancialContacts   0
@@ -487,6 +486,7 @@ to setGlobals
   set drawRandomSeed 0
   set drawList 0
   
+  set stop_simulation false
   set R_measure_time -1
   
   set infectNoVacArray_listOut []
@@ -575,6 +575,11 @@ to setup
     simul_updateVacAndReinfectMult
 
     set timenow random (floor ownIllnessPeriod)
+    if trace_calibration > 0 [
+      set cali_timenow timenow
+      set cali_asymptomaticFlag asymptomaticFlag
+      set cali_symtomatic_present_day symtomatic_present_day
+    ]
     simul_updatepersonalvirulence
     set infectionsToday_acc infectionsToday_acc + 1
     array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)

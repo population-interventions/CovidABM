@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+15.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+15.0
 .5
 1
 NIL
@@ -507,10 +507,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1760
-909
-1842
-954
+1759
+949
+1841
+994
 Red (raw)
 count simuls with [ color = red ]
 0
@@ -551,10 +551,10 @@ scalePhase
 12
 
 MONITOR
-1612
-988
-1692
-1033
+1762
+1055
+1842
+1100
 NIL
 count simuls
 17
@@ -650,7 +650,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.6561804315447808
+0.685
 0.001
 1
 NIL
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+70.0
 1
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+35.0
 1
 1
 NIL
@@ -908,9 +908,9 @@ PENS
 
 MONITOR
 1762
-963
+1003
 1844
-1008
+1048
 Yellow (raw)
 count simuls with [ color = yellow ]
 0
@@ -961,7 +961,7 @@ SWITCH
 442
 Vaccine_Available
 Vaccine_Available
-0
+1
 1
 -1000
 
@@ -985,7 +985,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-4715401.0
+1304348.0
 1
 1
 NIL
@@ -1159,13 +1159,13 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-1
+0
 
 SLIDER
-1610
-909
-1747
-942
+1609
+949
+1746
+982
 Scale_Threshold
 Scale_Threshold
 50
@@ -1177,10 +1177,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1610
-947
-1748
-980
+1609
+987
+1747
+1020
 Scale_Factor
 Scale_Factor
 2
@@ -1341,7 +1341,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+15.0
 1
 1
 NIL
@@ -1430,7 +1430,7 @@ End_Day
 End_Day
 -1
 730
-730.0
+47.0
 1
 1
 NIL
@@ -1602,10 +1602,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1739
-739
-1844
-784
+1727
+778
+1832
+823
 slopeAverage %
 slopeAverage * 100
 3
@@ -1613,10 +1613,10 @@ slopeAverage * 100
 11
 
 PLOT
-1600
-787
-1855
-907
+1599
+827
+1854
+947
 slope %
 NIL
 NIL
@@ -1775,10 +1775,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-1609
-744
-1726
-777
+1599
+789
+1716
+822
 track_slope
 track_slope
 1
@@ -1899,7 +1899,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.32017491704532347
+0.5194006965479879
 0.05
 1
 NIL
@@ -2088,7 +2088,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
--1.0
+0.0
 1
 1
 NIL
@@ -2187,7 +2187,7 @@ SWITCH
 997
 calibrate
 calibrate
-1
+0
 1
 -1000
 
@@ -2226,7 +2226,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.7888160521397367
+0.8391099609357056
 0.01
 1
 NIL
@@ -2361,7 +2361,7 @@ param_trace_mult
 param_trace_mult
 0
 20
-20.0
+1.0
 0.05
 1
 NIL
@@ -2393,6 +2393,51 @@ R0_range
 6
 4.5
 1 / 6
+1
+NIL
+HORIZONTAL
+
+SLIDER
+175
+624
+348
+658
+max_stage
+max_stage
+0
+4
+1.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1615
+739
+1818
+773
+trace_calibration
+trace_calibration
+0
+100
+100.0
+10
+1
+NIL
+HORIZONTAL
+
+SLIDER
+174
+663
+347
+697
+isoComply_override
+isoComply_override
+-0.01
+1
+0.93
+0.01
 1
 NIL
 HORIZONTAL
