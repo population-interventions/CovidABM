@@ -26,6 +26,7 @@ to setup_DataOut
     set first_trace_infections 0
     set finished_infections 0
     set finished_tracked 0
+    set first_trace_occurred -1
   ]
 end
 

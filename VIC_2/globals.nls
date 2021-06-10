@@ -269,6 +269,10 @@ globals [
   finished_tracked
   first_trace_day
   first_trace_infections
+  first_trace_occurred
+  cumulative_tracked_all
+  cumulative_tracked_notice
+  
   tracked_simuls
   cali_timenow
   cali_asymptomaticFlag

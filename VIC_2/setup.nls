@@ -488,6 +488,8 @@ to setGlobals
   
   set stop_simulation false
   set R_measure_time -1
+  set cumulative_tracked_all 0
+  set cumulative_tracked_notice 0
   
   set infectNoVacArray_listOut []
   set infectVacArray_listOut []

@@ -164,9 +164,9 @@ paramValuesFullValues = {
 }
 
 paramIncursion = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
+    'rand_seed' : listToStr(random.randint(10000000, size=(2000))),
     'total_population' : '6681000',
-    'param_policy' : 'AgressElim',
+    'param_policy' : '"AggressElim"',
     'max_stage' : 1,
     'Global_Transmissibility' : 0.685,
     'initial_cases' : 1,
