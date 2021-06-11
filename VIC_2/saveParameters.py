@@ -138,6 +138,7 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
     'total_population' : '668100000000',
     'initial_cases' : 60,
     'param_incur_phase_limit' : 0,
+    'trace_calibration' : 0,
     'calibrate' : 'true',
 }}
   
@@ -162,6 +163,7 @@ paramValuesFullValues = {
     'track_slope' : 'false',
     'set_shape' : 'false',
     'stage_test_index' : 0,
+    'trace_calibration' : 0,
     'end_day' : 730,
 }
 

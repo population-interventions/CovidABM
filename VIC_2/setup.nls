@@ -204,7 +204,7 @@ to createSimulants
       move-to one-of patches with [ pcolor = black ]
 
       set personalVirulence random-normal Global_Transmissibility 0.025
-      print personalVirulence
+      ;print personalVirulence
       if personalVirulence > 1 [
         set personalVirulence 1
       ]
@@ -645,5 +645,5 @@ to setup
   setupstages ;; setting up for the MJA runs
   
   ;; Output infection rates 
-  test_traceadjust
+  ;test_traceadjust
 end

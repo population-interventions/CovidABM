@@ -146,7 +146,7 @@ def PlotStackedManyIndex(df, indexVals, axis, metric, bar=False, doSum=False, do
 def ProcessResults(path, nameList):
     name = nameList[0]
     interestingColumns = [
-        'param_trace_mult', 'sympt_present_prop',
+        'param_trace_mult', 'sympt_present_prop', 'global_transmissibility',
         'rand_seed', 'isocomply_override', 'End_Day',
         'infectionsToday', 'first_trace_day', 'first_trace_infections',
         'currentInfections', 'cumulativeInfected', 'tracked_simuls',
@@ -166,6 +166,7 @@ def ProcessResults(path, nameList):
         df[colName] = df[colName].astype(float)
     
     df = df.rename(columns={
+        'global_transmissibility' : 'GlobalTrans',
         'isocomply_override' : 'IsoComply',
         'cali_symtomatic_present_day' : 'IncurPresentDay',
         'cali_asymptomaticFlag' : 'IncurAsymptomatic',
@@ -188,22 +189,22 @@ def ProcessResults(path, nameList):
     df.loc[df['first_trace_day'] >= 0, 'any_trace'] = 1
     df['any_trace2'] = 0
     df.loc[df['first_trace_day2'] >= 0, 'any_trace2'] = 1
-     
-    PlotIntegerRange(df, 'PresentProp', 'success', ['IsoComply', 'TraceMult'], {'TraceMult' : 1}, hlines=[0.75], bar=True)
-    PlotIntegerRange(df, 'TraceMult', 'success', ['IsoComply', 'PresentProp'], {'PresentProp' : 0.5}, hlines=[0.75], bar=True)
-    PlotIntegerRange(df, 'TraceMult', 'success', ['IsoComply', 'PresentProp'], {'PresentProp' : 0.65}, hlines=[0.75], bar=True)
+    
+    PlotIntegerRange(df, 'GlobalTrans', 'success', ['IsoComply', 'TraceMult', 'PresentProp'], {'TraceMult' : 1, 'PresentProp' : 0.5}, hlines=[0.75], bar=True)
+    #PlotIntegerRange(df, 'TraceMult', 'success', ['IsoComply', 'PresentProp'], {'PresentProp' : 0.5}, hlines=[0.75], bar=True)
+    #PlotIntegerRange(df, 'TraceMult', 'success', ['IsoComply', 'PresentProp'], {'PresentProp' : 0.65}, hlines=[0.75], bar=True)
 
-    index = ['IsoComply', 'TraceMult', 'PresentProp']
-    indexVals = {'TraceMult' : 1, 'PresentProp' : 0.5}
     indexList = [
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
-         'val' : {'TraceMult' : 1, 'PresentProp' : 0.5}},
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
-         'val' : {'IsoComply' : 0.97, 'TraceMult' : 1}},
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
-         'val' : {'IsoComply' : 0.97, 'PresentProp' : 0.5}},
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
-         'val' : {'TraceMult' : 2, 'PresentProp' : 0.65}},
+        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'GlobalTrans'], 
+         'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'GlobalTrans' : 0.685}},
+        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'GlobalTrans'], 
+         'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'IsoComply' : 0.97}},
+        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
+        # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1}},
+        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
+        # 'val' : {'IsoComply' : 0.97, 'PresentProp' : 0.5}},
+        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
+        # 'val' : {'TraceMult' : 2, 'PresentProp' : 0.65}},
     ]
     
     PlotStackedManyIndex(df, indexList, 'any_trace', 'success')
@@ -218,12 +219,12 @@ def ProcessResults(path, nameList):
     
     PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success', doCount=True)
     PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success')
-   
 
 
-nameStr = 'run002'
+nameStr = 'run007'
 namePath = 'output/trace/'
 
-#ProcessResults(namePath, [nameStr, 'run003', 'run004'])
-ProcessResults(namePath, ['run005'])
+#ProcessResults(namePath, ['run002', 'run003', 'run004'])
+#ProcessResults(namePath, ['run005'])
+ProcessResults(namePath, ['run006', nameStr])
 
