@@ -204,6 +204,7 @@ to createSimulants
       move-to one-of patches with [ pcolor = black ]
 
       set personalVirulence random-normal Global_Transmissibility 0.025
+      print personalVirulence
       if personalVirulence > 1 [
         set personalVirulence 1
       ]
@@ -575,8 +576,8 @@ to setup
       set infectVariant 2
     ]
     simul_updateVacAndReinfectMult
-
-    set timenow random (floor ownIllnessPeriod)
+    
+    set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
     if trace_calibration > 0 [
       set cali_timenow timenow
       set cali_asymptomaticFlag asymptomaticFlag
@@ -618,7 +619,7 @@ to setup
       ]
       simul_updateVacAndReinfectMult
       
-      set timenow random (floor ownIllnessPeriod)
+      set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
       set init_secondry_infect init_secondry_infect - popPerSimul
       set infectionsToday_acc infectionsToday_acc + 1
       array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
@@ -644,5 +645,5 @@ to setup
   setupstages ;; setting up for the MJA runs
   
   ;; Output infection rates 
-  ;test_traceadjust
+  test_traceadjust
 end

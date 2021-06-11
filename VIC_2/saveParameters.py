@@ -131,6 +131,7 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
     ]),
     'max_stage' : 4,
     #'stage_test_index' : listToStr([0]),
+    'init_timenow_limit' : 30,
     'stage_test_index' : listToStr([0, 55, 56, 57, 58, 59]),
     #'stage_test_index' : listToStr(list(range(75))),
     'vaccine_available' : 'false',
@@ -150,6 +151,7 @@ paramValuesFullValues = {
         '"TightSupress"',
         '"LooseSupress"',
     ]),
+    'init_timenow_limit' : 30,
     'param_vacIncurMult' : listToStr([0.02, 0.1, 0.5, 2.5, 12.5]),
     'R0_range' : listToStr([4.5, 4.833, 5.166]),
     'max_stage' : 4,
@@ -164,11 +166,12 @@ paramValuesFullValues = {
 }
 
 paramIncursion = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(2000))),
+    'rand_seed' : listToStr(random.randint(10000000, size=(1600))),
     'total_population' : '6681000',
-    'param_trace_mult' : listToStr([1, 1.5, 2]),
-    'sympt_present_prop' : listToStr([0.35, 0.5, 0.65]),
-    'isoComply_override' : listToStr([0.93, 0.95, 0.97, 0.99, 1]),
+    'param_trace_mult' : listToStr([1]),
+    'sympt_present_prop' : listToStr([0.5]),
+    'isoComply_override' : listToStr([0.97, 1]),
+    'init_timenow_limit' : 4,
     'param_policy' : '"AggressElim"',
     'max_stage' : 1,
     'Global_Transmissibility' : 0.685,

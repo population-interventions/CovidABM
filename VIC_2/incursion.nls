@@ -55,7 +55,7 @@ to incursion_update
       set infectVariant global_incursionVariant
       set vaccineIncursionOverride "none"
       simul_updateVacAndReinfectMult
-      set timenow random (floor ownIllnessPeriod) ; Set after update vaccine update because it changes illnessPeriod
+      set timenow random (floor min (list init_timenow_limit ownIllnessPeriod)) ; Set after update vaccine update because it changes illnessPeriod
       
       set timenow 0
       set isolating 0
@@ -78,7 +78,7 @@ to incursion_update
       set infectVariant global_incursionVariant
       set vaccineIncursionOverride global_incursionVaccType
       simul_updateVacAndReinfectMult
-      set timenow random (floor ownIllnessPeriod) ; Set after update vaccine update because it changes illnessPeriod
+      set timenow random (floor min (list init_timenow_limit ownIllnessPeriod)) ; Set after update vaccine update because it changes illnessPeriod
       
       set timenow 0
       set isolating 0

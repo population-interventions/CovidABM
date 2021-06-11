@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-18.0
+10.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-18.0
+10.0
 .5
 1
 NIL
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-70.0
+100.0
 1
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-35.0
+15.0
 1
 1
 NIL
@@ -1320,8 +1320,8 @@ PENS
 SLIDER
 174
 580
-342
-613
+341
+614
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1341,7 +1341,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-15.0
+5.0
 1
 1
 NIL
@@ -1430,7 +1430,7 @@ End_Day
 End_Day
 -1
 730
-29.0
+-1.0
 1
 1
 NIL
@@ -2399,9 +2399,9 @@ HORIZONTAL
 
 SLIDER
 175
-624
-348
-657
+619
+340
+653
 max_stage
 max_stage
 0
@@ -2428,16 +2428,31 @@ NIL
 HORIZONTAL
 
 SLIDER
-174
-663
-347
-696
+175
+655
+339
+689
 isoComply_override
 isoComply_override
 -0.01
 1
 1.0
 0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+177
+695
+341
+729
+init_timenow_limit
+init_timenow_limit
+0
+26
+4.0
+1
 1
 NIL
 HORIZONTAL
@@ -2993,6 +3008,9 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="calibrate_stage_switch">
       <value value="300"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init_timenow_limit">
+      <value value="30"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="case_reporting_delay">
       <value value="1"/>
@@ -5270,6 +5288,9 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="calibrate_stage_switch">
       <value value="300"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init_timenow_limit">
+      <value value="30"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="case_reporting_delay">
       <value value="1"/>
