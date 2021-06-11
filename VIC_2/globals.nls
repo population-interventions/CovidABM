@@ -282,6 +282,7 @@ globals [
   houseSeedID
   incursionsSeedID
   vaccineInitSeedID
+  moveInitSeedID
 ]
 
 patches-own [

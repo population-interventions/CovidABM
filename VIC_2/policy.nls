@@ -211,11 +211,55 @@ to policy_infect [ toStage ]
     set End_Day ticks + 1
   ]
 end
+  
+;;;*********************************************************************************************************************
+;;;*********************************************************************************************************************
 
+to updatePolicyPipeline
+  if policy_pipeline = "ME_ME_ME" [
+    set param_policy "ModerateElim"
+  ]
+  if policy_pipeline = "ME_ME_TS" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      set param_policy "ModerateElim"
+    ]
+    [
+      set param_policy "TightSupress"
+    ]
+  ]
+  if policy_pipeline = "ME_ME_LS" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      set param_policy "ModerateElim"
+    ]
+    [
+      set param_policy "LooseSupress"
+    ]
+  ]
+  if policy_pipeline = "ME_TS_LS" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      ifelse ticks < policy_pipe_time 
+      [
+        set param_policy "ModerateElim"
+      ]
+      [
+        set param_policy "TightSupress"
+      ]
+    ]
+    [
+      set param_policy "LooseSupress"
+    ]
+  ]
+end
+  
 ;;;*********************************************************************************************************************
 ;;;*********************************************************************************************************************
 
 to COVIDPolicyTriggers
+  updatePolicyPipeline
+  
   if param_trigger_loosen [
     update_policy_trigger_scale 
   ]

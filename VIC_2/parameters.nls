@@ -8,13 +8,15 @@ to params_setDrawValues
   set incursionsSeedID 2
   set houseSeedID 3
   set vaccineEffseedID 4
-  set vaccineInitSeedID 4
+  set vaccineInitSeedID 5
+  set moveInitSeedID 6
   
   rngs:set-seed stream_id random-float 999
   rngs:set-seed incursionsSeedID random-float 999
   rngs:set-seed houseSeedID random-float 999
   rngs:set-seed vaccineEffseedID random-float 999
   rngs:set-seed vaccineInitSeedID random-float 999
+  rngs:set-seed moveInitSeedID random-float 999
   
   set reinfect_risk rngs:rnd-beta stream_id 8 2
   set reinfect_area rngs:rnd-beta stream_id 10 10

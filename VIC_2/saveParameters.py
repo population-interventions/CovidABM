@@ -111,7 +111,11 @@ topOfFile = [
     'rand_seed',
     'Gather_Location_Count',
     'param_policy',
+    'policy_pipeline',
     'Global_Transmissibility',
+    'R0_range',
+    'param_vac_uptake',
+    'param_vacincurmult',
     'stage_test_index',
     'calibrate',
 ]
@@ -141,18 +145,20 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
     'trace_calibration' : 0,
     'calibrate' : 'true',
 }}
-  
+
 paramValuesFullValues = {
     'rand_seed' : listToStr(random.randint(10000000, size=(100))),
     'total_population' : '6681000',
     'param_vac_uptake' : listToStr([0.5, 0.7, 0.9]),
     'param_final_phase' : listToStr([2, 3]),
-    'param_policy' : listToStr([
-        '"ModerateElim"', # Redo this for email
-        '"TightSupress"',
-        '"LooseSupress"',
+    'policy_pipeline' : listToStr([
+        '"ME_ME_ME"', 
+        '"ME_ME_TS"',
+        '"ME_ME_LS"',
+        '"ME_TS_LS"',
     ]),
     'init_timenow_limit' : 30,
+    'incur_timenow_limit' : 4,
     'param_vacIncurMult' : listToStr([0.02, 0.1, 0.5, 2.5, 12.5]),
     'R0_range' : listToStr([4.5, 4.833, 5.166]),
     'max_stage' : 4,
@@ -194,4 +200,4 @@ paramValues_stage2Infect = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramIncursion, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)

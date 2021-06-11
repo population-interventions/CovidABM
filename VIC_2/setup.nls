@@ -184,6 +184,8 @@ to createSimulants
       
       set infectedContactList table:make
       set hasKnownContact false
+      
+      set move_chance_multiplier 2 * rngs:rnd-beta moveInitSeedID 12.5 12.5
 
       set cohortIndex pop_index
       set agerange cohort_age
@@ -203,7 +205,7 @@ to createSimulants
       
       move-to one-of patches with [ pcolor = black ]
 
-      set personalVirulence random-normal Global_Transmissibility 0.025
+      set personalVirulence random-normal Global_Transmissibility 0.1
       ;print personalVirulence
       if personalVirulence > 1 [
         set personalVirulence 1

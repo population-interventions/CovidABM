@@ -19,6 +19,8 @@ simuls-own [
   ignoreUptakeOverride
   update_lock
   
+  move_chance_multiplier
+  
   ownIllnessPeriod ;; unique illness period associated with the individual
   ownIncubationPeriod ;; unique incubation pd for the person - related to IncubationPd so can probably be cleaned up - IncubationPd is a legacy var as previously all incubation periods were identical
   ownIllnessPeriod_raw ;; without vaccination
@@ -503,13 +505,13 @@ to simul_move
   ;; describes the circumstances under which people can move and infect one another
   if ticks > 1 and isolateCompliant = 0 [
     ;; this is assigned per agent so day and night are not aligned across people - this is deliberate
-    ifelse random 2 = 1
-    [
-      move-to homeLocation
-    ]
+    ifelse 0.5 * move_chance_multiplier > random-float 1
     [
       set heading random 360
       jump random-float pace
+    ]
+    [
+      move-to homeLocation
     ]
   ]
 end
@@ -517,7 +519,7 @@ end
 to simul_visitDestination
   ;; sets up destinations where people might gather and set off superspreader events
   ;; reduces large gatherings by stage
-  if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult > random-float 1  [
+  if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * move_chance_multiplier > random-float 1  [
     let movePatch one-of destination_patches in-radius Visit_Radius
     if is-patch? movePatch [
       move-to movePatch
@@ -564,7 +566,7 @@ to simul_avoid
 end
 
 to simul_superSpread
-  if isolateCompliant = 0 and superspreaders > random-float 1 [
+  if isolateCompliant = 0 and superspreaders * move_chance_multiplier > random-float 1 [
     move-to one-of destination_patches
   ]
 end

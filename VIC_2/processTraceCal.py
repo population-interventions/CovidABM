@@ -54,6 +54,7 @@ def PlotIntegerRange(df, axis, metric, index, indexVals,
         figure = df.plot.bar(figsize=size)  
     else:
         figure = df.plot(figsize=size)
+        plt.grid(which='both')
         
     plt.xticks(rotation=0)
     if doCount:
@@ -102,7 +103,7 @@ def PlotPartialStackedBar(df, axis, metric, index, indexVals, size=(9,4.5), hlin
         rect2 = ax.bar(ind + cur_width, non_vis, width, color=top_colors[i], bottom=vis)
         cur_width += 0.15
     
-    extra_space = 0.205
+    extra_space = 0.205 - 0.225 * (5 - len(neighborhoods))/3
     ax.set_xticks(ind + width + extra_space)
     ax.set_xticklabels(classes)
     
@@ -136,8 +137,8 @@ def PlotRangeManyIndex(df, indexVals, axis, metric, bar=False, doSum=False, doCo
     for preset in indexVals:
         PlotIntegerRange(df, axis, metric, preset['ind'], preset['val'],
                          bar=bar, doSum=doSum, doCount=doCount, hlines=hlines)
-   
-    
+
+
 def PlotStackedManyIndex(df, indexVals, axis, metric, bar=False, doSum=False, doCount=False, hlines=False):
     for preset in indexVals:
         PlotPartialStackedBar(df, axis, metric, preset['ind'], preset['val'], hlines=hlines)
@@ -166,6 +167,8 @@ def ProcessResults(path, nameList):
         df[colName] = df[colName].astype(float)
     
     df = df.rename(columns={
+        'first_trace_day' : 'first_report_day',
+        'first_trace_occurred' : 'first_trace_occur',
         'global_transmissibility' : 'GlobalTrans',
         'isocomply_override' : 'IsoComply',
         'cali_symtomatic_present_day' : 'IncurPresentDay',
@@ -173,7 +176,6 @@ def ProcessResults(path, nameList):
         'cali_timenow' : 'IncurDiseaseTime',
         'param_trace_mult' : 'TraceMult',
         'sympt_present_prop' : 'PresentProp',
-        'first_trace_occurred' : 'first_trace_day2',
         'cumulative_tracked_all' : 'culTrackAll',
         'cumulative_tracked_notice' : 'culNotice',
     })
@@ -186,18 +188,26 @@ def ProcessResults(path, nameList):
     df['success'] = 0
     df.loc[df['currentInfections'] == 0, 'success'] = 1
     df['any_trace'] = 0
-    df.loc[df['first_trace_day'] >= 0, 'any_trace'] = 1
-    df['any_trace2'] = 0
-    df.loc[df['first_trace_day2'] >= 0, 'any_trace2'] = 1
+    df.loc[df['first_trace_occur'] >= 0, 'any_trace'] = 1
+    df['any_transmit'] = 0
+    df.loc[df['cumulativeInfected'] > 1, 'any_transmit'] = 1
     
-    PlotIntegerRange(df, 'GlobalTrans', 'success', ['IsoComply', 'TraceMult', 'PresentProp'], {'TraceMult' : 1, 'PresentProp' : 0.5}, hlines=[0.75], bar=True)
+    
+    
+    df['R0'] = df['GlobalTrans'].replace({0.33 : 2.5, 0.685 : 5})
+    # Reset plot parameters
+    plt.rcParams.update(plt.rcParamsDefault)
+    
+    PlotIntegerRange(df, 'R0', 'success', ['IsoComply', 'TraceMult', 'PresentProp'], {'TraceMult' : 1, 'PresentProp' : 0.5}, hlines=[0.75], bar=True)
     #PlotIntegerRange(df, 'TraceMult', 'success', ['IsoComply', 'PresentProp'], {'PresentProp' : 0.5}, hlines=[0.75], bar=True)
     #PlotIntegerRange(df, 'TraceMult', 'success', ['IsoComply', 'PresentProp'], {'PresentProp' : 0.65}, hlines=[0.75], bar=True)
 
     indexList = [
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'GlobalTrans'], 
-         'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'GlobalTrans' : 0.685}},
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'GlobalTrans'], 
+        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+         'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5}},
+        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+         'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 2.5}},
+        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
          'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'IsoComply' : 0.97}},
         #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
         # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1}},
@@ -208,9 +218,10 @@ def ProcessResults(path, nameList):
     ]
     
     PlotStackedManyIndex(df, indexList, 'any_trace', 'success')
+    PlotStackedManyIndex(df, indexList, 'any_transmit', 'success')
     
-    PlotRangeManyIndex(df, indexList, 'first_trace_day', 'success')
-    PlotRangeManyIndex(df[df['first_trace_infections'] < 40], indexList,'first_trace_infections', 'success')
+    PlotRangeManyIndex(df[df['first_trace_occur'] >= 0], indexList, 'first_trace_occur', 'success')
+    PlotRangeManyIndex(df[(df['first_trace_infections'] < 40) & (df['first_trace_infections'] > 0)], indexList,'first_trace_infections', 'success')
     
     PlotRangeManyIndex(df, indexList,'IncurDiseaseTime', 'success')
     PlotRangeManyIndex(df, indexList,'IncurAsymptomatic', 'success', bar=True)
