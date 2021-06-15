@@ -143,6 +143,7 @@ def MakePlot(df, varName,
     
     ax.grid(which='minor', alpha=0.4, linewidth=1.5, zorder=-1, axis="y")
     ax.grid(which='major', alpha=0.7, linewidth=2, zorder=-1)
+    pyplot.show()
 
 
 def ProcessToPlot(path, name, varName,
@@ -165,11 +166,12 @@ def ProcessToPlot(path, name, varName,
     df.describe().to_csv(path + name + '_plot_metric.csv')
     return df
 
+
 nameNumber = '_5'
 namePath = 'runCalibrate'
 #nameStr = 'COVID SIMULS VIC JAN Vaccination Model R test 7-table' + str(nameNumber)
 #nameStr = 'headless MainCalibrate-table' + nameNumber
-nameStr = 'calibrate_stages_030'
+nameStr = 'calibrate_stages_037'
 
 #nameStr = 'calibrate_stages_92' # This is the last large run of current params.
 

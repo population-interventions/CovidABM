@@ -240,7 +240,7 @@ superspreaders
 superspreaders
 0
 1
-0.01
+0.025
 0.01
 1
 NIL
@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+18.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+18.0
 .5
 1
 NIL
@@ -380,7 +380,7 @@ INPUTBOX
 337
 382
 initial_cases
-0.0
+1.0
 1
 0
 Number
@@ -650,7 +650,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.6126603973121382
+0.33
 0.001
 1
 NIL
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+70.0
 1
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+35.0
 1
 1
 NIL
@@ -961,7 +961,7 @@ SWITCH
 440
 Vaccine_Available
 Vaccine_Available
-0
+1
 1
 -1000
 
@@ -985,7 +985,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3522066.0
+1714798.0
 1
 1
 NIL
@@ -1159,7 +1159,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-1
+0
 
 SLIDER
 1609
@@ -1341,7 +1341,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+15.0
 1
 1
 NIL
@@ -1430,7 +1430,7 @@ End_Day
 End_Day
 -1
 730
-730.0
+-1.0
 1
 1
 NIL
@@ -1504,7 +1504,7 @@ SWITCH
 784
 track_R
 track_R
-1
+0
 1
 -1000
 
@@ -1899,7 +1899,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.6291552936130067
+0.6100746945095763
 0.05
 1
 NIL
@@ -2088,7 +2088,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
--1.0
+0.0
 1
 1
 NIL
@@ -2187,7 +2187,7 @@ SWITCH
 1042
 calibrate
 calibrate
-1
+0
 1
 -1000
 
@@ -2226,7 +2226,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.8317502356658224
+0.8630107221320541
 0.01
 1
 NIL
@@ -2406,7 +2406,7 @@ max_stage
 max_stage
 0
 4
-4.0
+1.0
 1
 1
 NIL
@@ -2421,7 +2421,7 @@ trace_calibration
 trace_calibration
 0
 100
-0.0
+100.0
 10
 1
 NIL
@@ -2436,7 +2436,7 @@ isoComply_override
 isoComply_override
 -0.01
 1
-0.93
+0.97
 0.01
 1
 NIL
@@ -2451,7 +2451,7 @@ init_timenow_limit
 init_timenow_limit
 0
 26
-30.0
+4.0
 1
 1
 NIL
@@ -2465,13 +2465,13 @@ CHOOSER
 policy_pipeline
 policy_pipeline
 "None" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS"
-2
+0
 
 SLIDER
 162
 573
 335
-607
+606
 policy_pipe_time
 policy_pipe_time
 0
@@ -2486,13 +2486,58 @@ SLIDER
 174
 765
 337
-799
+798
 incur_timenow_limit
 incur_timenow_limit
 0
 30
 4.0
 1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+680
+1100
+853
+1133
+move_deviate
+move_deviate
+0
+2
+1.2
+0.1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+878
+1109
+1051
+1142
+spread_deviate
+spread_deviate
+0
+3
+0.8
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1100
+1118
+1273
+1151
+virlce_deviate
+virlce_deviate
+0
+3
+1.0
+0.01
 1
 NIL
 HORIZONTAL
@@ -11888,6 +11933,7 @@ NetLogo 6.2.0
     <metric>first_trace_occurred</metric>
     <metric>cumulative_tracked_all</metric>
     <metric>cumulative_tracked_notice</metric>
+    <metric>initial_infection_R</metric>
     <enumeratedValueSet variable="rand_seed">
       <value value="3091558"/>
       <value value="3126236"/>
@@ -13497,7 +13543,7 @@ NetLogo 6.2.0
       <value value="&quot;AggressElim&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.685"/>
+      <value value="0.33"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
       <value value="0"/>
@@ -13519,6 +13565,33 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="end_day">
       <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spread_deviate">
+      <value value="0.5"/>
+      <value value="0.7"/>
+      <value value="0.85"/>
+      <value value="1"/>
+      <value value="1.17"/>
+      <value value="1.43"/>
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="move_deviate">
+      <value value="0.5"/>
+      <value value="0.7"/>
+      <value value="0.85"/>
+      <value value="1"/>
+      <value value="1.17"/>
+      <value value="1.43"/>
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="virlce_deviate">
+      <value value="0.5"/>
+      <value value="0.7"/>
+      <value value="0.85"/>
+      <value value="1"/>
+      <value value="1.17"/>
+      <value value="1.43"/>
+      <value value="2"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="end_r_reported">
       <value value="-1"/>
@@ -13567,7 +13640,6 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="isocomply_override">
       <value value="0.97"/>
-      <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="isolate_on_inf_notice">
       <value value="true"/>
@@ -13726,7 +13798,7 @@ NetLogo 6.2.0
       <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="track_r">
-      <value value="false"/>
+      <value value="true"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="track_slope">
       <value value="false"/>

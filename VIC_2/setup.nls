@@ -18,16 +18,6 @@ to setEssentialWorkerPriority
   ]
 end
 
-to simul_resetPersonalVirulence
-  ;; ensures that personalVirulence is within bounds
-  if personalVirulence > 100 [
-    set personalVirulence random-normal global_Transmissibility 2.5
-  ]
-  if personalVirulence < 0 [
-    set personalVirulence random-normal global_Transmissibility 2.5
-  ]
-end
-
 to loadPopDivisionTable
   let populationFileData remove-item 0 csv:from-file "input/population.csv"
   set popDivisionTable table:make
@@ -178,6 +168,7 @@ to createSimulants
       set hasNewHouse false
       set vaccineIncursionOverride 0
       set update_lock false
+      set isInitialInfection false
       
       set selfTraceEffMult 1
       set traceAttempts 0
@@ -185,7 +176,9 @@ to createSimulants
       set infectedContactList table:make
       set hasKnownContact false
       
-      set move_chance_multiplier 2 * rngs:rnd-beta moveInitSeedID 12.5 12.5
+      set move_chance_multiplier 2 * rngs:rnd-beta moveInitSeedID (10 / move_deviate) (10 / move_deviate)
+      set superSpread_chance_multiplier 4 * rngs:rnd-beta moveInitSeedID (1.1 / spread_deviate) (3.3 / spread_deviate)
+      set personalVirulence rngs:rnd-beta moveInitSeedID (0.47 / virlce_deviate) (1.12 / virlce_deviate) ;random-normal Global_Transmissibility 0.1
 
       set cohortIndex pop_index
       set agerange cohort_age
@@ -204,15 +197,6 @@ to createSimulants
       set ignoreUptakeOverride cohort_ignoreUptakeOverride
       
       move-to one-of patches with [ pcolor = black ]
-
-      set personalVirulence random-normal Global_Transmissibility 0.1
-      ;print personalVirulence
-      if personalVirulence > 1 [
-        set personalVirulence 1
-      ]
-      if personalVirulence < 0.01 [
-        set personalVirulence 0.01
-      ]
       
       set sm_vac_uptake random-float 1
       set report_case_draw random-float 1
@@ -246,8 +230,6 @@ to createSimulants
 
       setEssentialWorkerPriority
       params_setdeathrisk
-      
-      simul_resetPersonalVirulence
     ]
     
     if agentsOfThisIndex >= cohort_pop [
@@ -489,6 +471,7 @@ to setGlobals
   set drawRandomSeed 0
   set drawList 0
   
+  set initial_infection_R -1
   set stop_simulation false
   set R_measure_time -1
   set cumulative_tracked_all 0
@@ -570,6 +553,7 @@ to setup
   
   ask n-of ( initial_primary / popPerSimul ) simuls [
     set color red
+    set isInitialInfection true
     set contributeToR false
     set infectVariant 1
     set infectedContactList table:make
@@ -604,6 +588,7 @@ to setup
     let nearSimuls (other simuls in-radius 2 with [ color = red ])
     if init_secondry_infect > popPerSimul and any? nearSimuls [
       set color red
+      set isInitialInfection true
       set contributeToR false
       set infectVariant 1
       set infectedContactList table:make

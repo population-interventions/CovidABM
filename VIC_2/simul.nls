@@ -18,8 +18,10 @@ simuls-own [
   succeptMult
   ignoreUptakeOverride
   update_lock
+  isInitialInfection
   
   move_chance_multiplier
+  superSpread_chance_multiplier
   
   ownIllnessPeriod ;; unique illness period associated with the individual
   ownIncubationPeriod ;; unique incubation pd for the person - related to IncubationPd so can probably be cleaned up - IncubationPd is a legacy var as previously all incubation periods were identical
@@ -341,13 +343,19 @@ to simul_updateIsolationResponse
   ]
 end
 
-to simul_setEndR
+to simul_setEndStats
   ;print R_measure_time
   if R_measure_time < ticks and contributeToR [
     table:put totalEndR homeRegion (table:get totalEndR homeRegion) + R
     table:put totalEndCount homeRegion (table:get totalEndCount homeRegion) + 1
     table:put endR_sum homeRegion (table:get endR_sum homeRegion) + R
     table:put endR_count homeRegion (table:get endR_count homeRegion) + 1
+  ]
+  if isInitialInfection [
+    if initial_infection_R = -1 [
+     set initial_infection_R 0 
+    ]
+    set initial_infection_R initial_infection_R + R
   ]
 end
 
@@ -519,7 +527,7 @@ end
 to simul_visitDestination
   ;; sets up destinations where people might gather and set off superspreader events
   ;; reduces large gatherings by stage
-  if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * move_chance_multiplier > random-float 1  [
+  if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * superSpread_chance_multiplier > random-float 1  [
     let movePatch one-of destination_patches in-radius Visit_Radius
     if is-patch? movePatch [
       move-to movePatch
@@ -591,7 +599,7 @@ end
 to simul_end_infection
   if color = red and timenow > ownillnessperiod [
     if track_R [
-      simul_setEndR 
+      simul_setEndStats
     ]
     
     let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
@@ -625,6 +633,7 @@ to simul_end_infection
     ;; May as well set color to yellow since dead and infected people have a similar effect on the simulation.
     ;; Very few people die in the low scales as a proportion of the total population.
     set color yellow
+    set isInitialInfection false
     set vaccineIncursionOverride 0
     set recoveryVariant infectVariant
     set infectVariant 0

@@ -265,6 +265,7 @@ globals [
   R_measure_time
   stop_simulation
   
+  initial_infection_R
   finished_infections
   finished_tracked
   first_trace_day

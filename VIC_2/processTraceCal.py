@@ -62,11 +62,17 @@ def PlotIntegerRange(df, axis, metric, index, indexVals,
     else:
         plt.ylabel(metric)
     figure.set_ylim(min(figure.get_ylim()[0], 0), max(figure.get_ylim()[1], 1.05))
-    figure.set_title('{} by {} {}'.format(metric, axis, GetIndexPickStr(indexVals)))
+    
+    if doCount:
+        figure.set_title('runs by {} {}'.format(axis, GetIndexPickStr(indexVals)))
+    else:
+        figure.set_title('{} by {} {}'.format(metric, axis, GetIndexPickStr(indexVals)))
+    
     plt.legend(neighborhoods, title=splitName)
     if hlines:
         for v in hlines:
             figure.axhline(y=v, linewidth=1, zorder=0, color='r')
+    plt.show()
     
     
 def PlotPartialStackedBar(df, axis, metric, index, indexVals, size=(9,4.5), hlines=False):
@@ -118,21 +124,7 @@ def PlotPartialStackedBar(df, axis, metric, index, indexVals, size=(9,4.5), hlin
             ax.axhline(y=v, linewidth=1, zorder=0, color='r')
     plt.show()
 
-def PlotResultsForIndexAndSplit(df, index, indexVals):
-    PlotPartialStackedBar(df, 'any_trace', 'success', index, indexVals)
-    
-    PlotIntegerRange(df, 'first_trace_day', 'success', index, indexVals)
-    PlotIntegerRange(df[df['first_trace_infections'] < 40], 'first_trace_infections', 'success', index, indexVals)
-    
-    PlotIntegerRange(df, 'IncurDiseaseTime', 'success', index, indexVals)
-    PlotIntegerRange(df, 'IncurAsymptomatic', 'success', index, indexVals, bar=True)
-    PlotPartialStackedBar(df, 'IncurAsymptomatic', 'success', index, indexVals)
-    PlotPartialStackedBar(df, 'IncurPresentDay', 'success', index, indexVals)
-    
-    PlotIntegerRange(df[df['End_Day'] < 100], 'End_Day', 'success', index, indexVals, doCount=True)
-    PlotIntegerRange(df[df['End_Day'] < 100], 'End_Day', 'success', index, indexVals)
-    
-    
+
 def PlotRangeManyIndex(df, indexVals, axis, metric, bar=False, doSum=False, doCount=False, hlines=False):
     for preset in indexVals:
         PlotIntegerRange(df, axis, metric, preset['ind'], preset['val'],
@@ -143,6 +135,25 @@ def PlotStackedManyIndex(df, indexVals, axis, metric, bar=False, doSum=False, do
     for preset in indexVals:
         PlotPartialStackedBar(df, axis, metric, preset['ind'], preset['val'], hlines=hlines)
 
+
+def PrintSomeStats(df, move_deviate, spread_deviate):
+    df = df[(df['move_deviate'] == move_deviate) & (df['spread_deviate'] == spread_deviate)]
+    
+    totalInfections = df['incurR'].sum()
+    totalRuns = len(df['any_transmit'])
+    noTransmitProp = len(df[df['any_transmit'] == 0]) / totalRuns
+    print("==== move {}, spread {} ====".format(move_deviate, spread_deviate))
+    print("Successes with no transmission", noTransmitProp)
+    print("Total Infections: {}, Total runs: {}".format(totalInfections, totalRuns))
+    for i in range(1, 8):
+        filterDf = df[df['incurR'] >= i]
+        print(("Transmission >={}, #infections: {:.0f}, #runs {:.0f}, " + 
+              "%infections: {:.01f}%, %runs: {:.01f}%").format(
+            i, filterDf['incurR'].sum(), filterDf['incurR'].count(),
+            100 * filterDf['incurR'].sum() / totalInfections,
+            100 * filterDf['incurR'].count() / totalRuns))
+    
+    
 
 def ProcessResults(path, nameList):
     name = nameList[0]
@@ -155,7 +166,8 @@ def ProcessResults(path, nameList):
         'cali_timenow', 'cali_asymptomaticFlag',
         'cali_symtomatic_present_day',
         'first_trace_occurred', 'cumulative_tracked_all',
-        'cumulative_tracked_notice',
+        'cumulative_tracked_notice', 'initial_infection_R',
+        'spread_deviate', 'move_deviate',
     ]
     df = pd.DataFrame(columns=interestingColumns)
     for v in nameList:
@@ -178,6 +190,7 @@ def ProcessResults(path, nameList):
         'sympt_present_prop' : 'PresentProp',
         'cumulative_tracked_all' : 'culTrackAll',
         'cumulative_tracked_notice' : 'culNotice',
+        'initial_infection_R' : 'incurR',
     })
     
     df = df.set_index(['rand_seed', 'IsoComply', 'TraceMult', 'PresentProp'])
@@ -192,23 +205,23 @@ def ProcessResults(path, nameList):
     df['any_transmit'] = 0
     df.loc[df['cumulativeInfected'] > 1, 'any_transmit'] = 1
     
-    
-    
     df['R0'] = df['GlobalTrans'].replace({0.33 : 2.5, 0.685 : 5})
     # Reset plot parameters
     plt.rcParams.update(plt.rcParamsDefault)
     
-    PlotIntegerRange(df, 'R0', 'success', ['IsoComply', 'TraceMult', 'PresentProp'], {'TraceMult' : 1, 'PresentProp' : 0.5}, hlines=[0.75], bar=True)
+    #PlotIntegerRange(df, 'R0', 'success', ['IsoComply', 'TraceMult', 'PresentProp'], {'TraceMult' : 1, 'PresentProp' : 0.5}, hlines=[0.75], bar=True)
     #PlotIntegerRange(df, 'TraceMult', 'success', ['IsoComply', 'PresentProp'], {'PresentProp' : 0.5}, hlines=[0.75], bar=True)
     #PlotIntegerRange(df, 'TraceMult', 'success', ['IsoComply', 'PresentProp'], {'PresentProp' : 0.65}, hlines=[0.75], bar=True)
 
     indexList = [
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-         'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5}},
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-         'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 2.5}},
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-         'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'IsoComply' : 0.97}},
+        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+        # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5}},
+        {'ind' : ['IsoComply', 'spread_deviate', 'move_deviate', 'R0'], 
+         'val' : {'IsoComply' : 0.97, 'spread_deviate' : 0.8, 'R0' : 2.5}},
+        {'ind' : ['IsoComply', 'spread_deviate', 'move_deviate', 'R0'], 
+         'val' : {'IsoComply' : 0.97, 'move_deviate' : 0.8, 'R0' : 2.5}},
+        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+        # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'IsoComply' : 0.97}},
         #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
         # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1}},
         #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
@@ -217,25 +230,33 @@ def ProcessResults(path, nameList):
         # 'val' : {'TraceMult' : 2, 'PresentProp' : 0.65}},
     ]
     
-    PlotStackedManyIndex(df, indexList, 'any_trace', 'success')
+    #PlotStackedManyIndex(df, indexList, 'any_trace', 'success')
     PlotStackedManyIndex(df, indexList, 'any_transmit', 'success')
+    PlotRangeManyIndex(df, indexList, 'any_transmit', 'success', bar=True, doCount=True)
+    PlotRangeManyIndex(df, indexList, 'incurR', 'success', doCount=True)
     
     PlotRangeManyIndex(df[df['first_trace_occur'] >= 0], indexList, 'first_trace_occur', 'success')
     PlotRangeManyIndex(df[(df['first_trace_infections'] < 40) & (df['first_trace_infections'] > 0)], indexList,'first_trace_infections', 'success')
     
-    PlotRangeManyIndex(df, indexList,'IncurDiseaseTime', 'success')
-    PlotRangeManyIndex(df, indexList,'IncurAsymptomatic', 'success', bar=True)
-    PlotStackedManyIndex(df, indexList, 'IncurAsymptomatic', 'success')
-    PlotStackedManyIndex(df, indexList, 'IncurPresentDay', 'success')
+    #PlotRangeManyIndex(df, indexList,'IncurDiseaseTime', 'success')
+    #PlotRangeManyIndex(df, indexList,'IncurAsymptomatic', 'success', bar=True)
+    #PlotStackedManyIndex(df, indexList, 'IncurAsymptomatic', 'success')
+    #PlotStackedManyIndex(df, indexList, 'IncurPresentDay', 'success')
     
-    PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success', doCount=True)
-    PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success')
+    #PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success', doCount=True)
+    #PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success')
+        
+    PrintSomeStats(df, 0.8, 0.8)
+    PrintSomeStats(df, 0.8, 1.2)
+    PrintSomeStats(df, 1.2, 0.8)
+    PrintSomeStats(df, 1.2, 1.2)
 
 
-nameStr = 'run007'
+nameStr = 'run029'
 namePath = 'output/trace/'
 
 #ProcessResults(namePath, ['run002', 'run003', 'run004'])
 #ProcessResults(namePath, ['run005'])
-ProcessResults(namePath, ['run006', nameStr])
+#ProcessResults(namePath, ['run006', 'run007'])
+ProcessResults(namePath, [nameStr])
 
