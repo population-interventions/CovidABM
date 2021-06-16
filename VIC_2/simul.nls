@@ -22,6 +22,7 @@ simuls-own [
   
   move_chance_multiplier
   superSpread_chance_multiplier
+  visit_chance_multiplier
   
   ownIllnessPeriod ;; unique illness period associated with the individual
   ownIncubationPeriod ;; unique incubation pd for the person - related to IncubationPd so can probably be cleaned up - IncubationPd is a legacy var as previously all incubation periods were identical
@@ -529,7 +530,7 @@ end
 to simul_visitDestination
   ;; sets up destinations where people might gather and set off superspreader events
   ;; reduces large gatherings by stage
-  if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * superSpread_chance_multiplier > random-float 1  [
+  if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * visit_chance_multiplier > random-float 1  [
     let movePatch one-of destination_patches in-radius Visit_Radius
     if is-patch? movePatch [
       move-to movePatch
@@ -576,7 +577,7 @@ to simul_avoid
 end
 
 to simul_superSpread
-  if isolateCompliant = 0 and superspreaders * move_chance_multiplier > random-float 1 [
+  if isolateCompliant = 0 and superspreaders * superSpread_chance_multiplier > random-float 1 [
     move-to one-of destination_patches
   ]
 end

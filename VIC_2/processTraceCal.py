@@ -220,10 +220,10 @@ def ProcessResults(path, nameList):
         # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5}},
         {'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
          'val' : {'spread_deviate' : 1, 'virlce_deviate' : 1}},
-        {'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
-         'val' : {'move_deviate' : 1, 'virlce_deviate' : 1}},
-        {'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
-         'val' : {'spread_deviate' : 1, 'move_deviate' : 1}},
+        #{'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
+        # 'val' : {'move_deviate' : 1, 'virlce_deviate' : 1}},
+        #{'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
+        # 'val' : {'spread_deviate' : 1, 'move_deviate' : 1}},
         #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
         # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'IsoComply' : 0.97}},
         #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
@@ -242,19 +242,19 @@ def ProcessResults(path, nameList):
     PlotRangeManyIndex(df[df['first_trace_occur'] >= 0], indexList, 'first_trace_occur', 'success')
     PlotRangeManyIndex(df[(df['first_trace_infections'] < 40) & (df['first_trace_infections'] > 0)], indexList,'first_trace_infections', 'success')
     
-    #PlotRangeManyIndex(df, indexList,'IncurDiseaseTime', 'success')
-    #PlotRangeManyIndex(df, indexList,'IncurAsymptomatic', 'success', bar=True)
-    #PlotStackedManyIndex(df, indexList, 'IncurAsymptomatic', 'success')
-    #PlotStackedManyIndex(df, indexList, 'IncurPresentDay', 'success')
+    PlotRangeManyIndex(df, indexList,'IncurDiseaseTime', 'success')
+    PlotRangeManyIndex(df, indexList,'IncurAsymptomatic', 'success', bar=True)
+    PlotStackedManyIndex(df, indexList, 'IncurAsymptomatic', 'success')
+    PlotStackedManyIndex(df, indexList, 'IncurPresentDay', 'success')
     
-    #PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success', doCount=True)
-    #PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success')
-        
-    PrintSomeStats(df, 1, 1, 0.5)
-    PrintSomeStats(df, 1, 1, 2)
+    PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success', doCount=True)
+    PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success')
+    
+    print(df['End_Day'].count())
+    PrintSomeStats(df, 1, 1, 1)
 
 
-nameStr = 'run030'
+nameStr = 'run045'
 namePath = 'output/trace/'
 
 #ProcessResults(namePath, ['run002', 'run003', 'run004'])

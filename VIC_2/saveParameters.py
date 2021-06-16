@@ -130,13 +130,11 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
     ]),
     'Global_Transmissibility' : listToStr([
         0.505,
-        0.585,
-        0.655,
     ]),
     'max_stage' : 4,
     #'stage_test_index' : listToStr([0]),
     'init_timenow_limit' : 30,
-    'stage_test_index' : listToStr([0, 55, 56, 57, 58, 59]),
+    'stage_test_index' : 0, #listToStr([0, 55, 56, 57, 58, 59]),
     #'stage_test_index' : listToStr(list(range(75))),
     'vaccine_available' : 'false',
     'total_population' : '668100000000',
@@ -178,11 +176,15 @@ paramIncursion = {
     'total_population' : '6681000',
     'param_trace_mult' : listToStr([1]),
     'sympt_present_prop' : listToStr([0.5]),
-    'isoComply_override' : listToStr([0.97, 1]),
+    'isoComply_override' : listToStr([0.97]),
+    'spread_deviate' : listToStr([1]),
+    'move_deviate' : listToStr([1]),
+    'virlce_deviate' : listToStr([1]),
     'init_timenow_limit' : 4,
     'param_policy' : '"AggressElim"',
     'max_stage' : 1,
-    'Global_Transmissibility' : 0.685,
+    'Global_Transmissibility' : 0.079,
+    'global_trans_std' : 0.09,
     'initial_cases' : 1,
     'trace_calibration' : 100,
     'param_incur_phase_limit' : 0,
@@ -200,4 +202,4 @@ paramValues_stage2Infect = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramIncursion, topOfFile=topOfFile)

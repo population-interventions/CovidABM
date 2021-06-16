@@ -78,6 +78,10 @@ to params_setDrawValues
     set draw_isolationCompliance isoComply_override
   ]
   
+  let global_trans_n global_transmissibility * ( 1 - global_transmissibility ) / (global_trans_std ^ 2)
+  set global_trans_a global_transmissibility * global_trans_n
+  set global_trans_b (1 - global_transmissibility) * global_trans_n
+  
   ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
   ;; SqRoot of above
   set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60

@@ -90,6 +90,9 @@ globals [
   initial_primary
   initial_secondary
 
+  global_trans_a
+  global_trans_b
+  
   real_prior0
   real_prior1
   real_prior2
