@@ -51,7 +51,7 @@ to simul_traceme
         set noticeOwnInfection 1
       ]
       [
-        set noticeOwnInfection 0.25 ;; Give late infection incursions a chance of presenting.
+        set noticeOwnInfection 0
       ]
     ]
     if tracking and tracked != 1 [
@@ -60,8 +60,7 @@ to simul_traceme
       ]
       if (noticeOwnInfection = 1 or hasKnownContact) and (trace_attempt_limit = -1 or traceAttempts < trace_attempt_limit) [
         set traceAttempts traceAttempts + 1
-        let traceByNotice (noticeOwnInfection > 0 and noticeOwnInfection > random-float 1)
-        if traceByNotice
+        if (noticeOwnInfection = 1)
         or (asymptomaticFlag = 1 and Asymptom_Trace_Mult * track_and_trace_efficiency * selfTraceEffMult > random-float 1)
         or (asymptomaticFlag = 0 and track_and_trace_efficiency * selfTraceEffMult > random-float 1) [
           set caseReportTime ticks + Case_Reporting_Delay
@@ -73,7 +72,7 @@ to simul_traceme
               set first_trace_occurred ticks
             ]
             set cumulative_tracked_all cumulative_tracked_all * extraScaleFactor * (Scale_Factor ^ scalephase)
-            if traceByNotice [
+            if noticeOwnInfection = 1 [
               set cumulative_tracked_notice cumulative_tracked_notice * extraScaleFactor * (Scale_Factor ^ scalephase)
             ]
           ]

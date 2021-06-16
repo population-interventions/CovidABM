@@ -240,7 +240,7 @@ superspreaders
 superspreaders
 0
 1
-0.025
+0.03
 0.01
 1
 NIL
@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-18.0
+0.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-18.0
+0.0
 .5
 1
 NIL
@@ -380,7 +380,7 @@ INPUTBOX
 337
 382
 initial_cases
-1.0
+60.0
 1
 0
 Number
@@ -391,7 +391,7 @@ INPUTBOX
 321
 489
 total_population
-6681000.0
+6.681E11
 1
 0
 Number
@@ -650,7 +650,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.33
+0.685
 0.001
 1
 NIL
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-70.0
+100.0
 1
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-35.0
+0.0
 1
 1
 NIL
@@ -781,7 +781,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -839,7 +839,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.75
+0.7621796158790874
 .01
 1
 NIL
@@ -985,7 +985,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-1714798.0
+5082761.0
 1
 1
 NIL
@@ -1029,7 +1029,7 @@ param_vac_uptake
 param_vac_uptake
 0.5
 1
-0.5
+0.7
 0.1
 1
 NIL
@@ -1159,7 +1159,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-0
+15
 
 SLIDER
 1609
@@ -1244,7 +1244,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.33
+0.3265237725798976
 0.01
 1
 NIL
@@ -1341,7 +1341,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-15.0
+0.0
 1
 1
 NIL
@@ -1430,7 +1430,7 @@ End_Day
 End_Day
 -1
 730
--1.0
+99.0
 1
 1
 NIL
@@ -1445,7 +1445,7 @@ Isolation_Transmission
 Isolation_Transmission
 0
 1
-0.33
+0.5
 0.01
 1
 NIL
@@ -1558,7 +1558,7 @@ Recovered_Match_Rate
 Recovered_Match_Rate
 0
 0.5
-0.041
+0.04
 0.001
 1
 NIL
@@ -1725,7 +1725,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-0
+1
 1
 -1000
 
@@ -1794,7 +1794,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-0.0
+0.001
 0.001
 1
 NIL
@@ -1809,7 +1809,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+2.2
 0.05
 1
 NIL
@@ -1899,7 +1899,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.6100746945095763
+0.5684083079510256
 0.05
 1
 NIL
@@ -1997,7 +1997,7 @@ SWITCH
 50
 set_shape
 set_shape
-1
+0
 1
 -1000
 
@@ -2073,7 +2073,7 @@ param_final_phase
 param_final_phase
 -1
 10
-2.0
+5.0
 1
 1
 NIL
@@ -2103,7 +2103,7 @@ house_resample_red_group
 house_resample_red_group
 0
 1
-0.95
+0.8
 0.01
 1
 NIL
@@ -2226,7 +2226,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.8630107221320541
+0.7225446079100948
 0.01
 1
 NIL
@@ -2256,7 +2256,7 @@ param_policy_force_days
 param_policy_force_days
 0
 28
-0.0
+14.0
 1
 1
 NIL
@@ -2271,7 +2271,7 @@ param_policy_force_stage
 param_policy_force_stage
 -1
 4
--1.0
+3.0
 1
 1
 NIL
@@ -2286,7 +2286,7 @@ param_policy_force_preset
 param_policy_force_preset
 0
 3
-0.0
+1.0
 1
 1
 NIL
@@ -2316,7 +2316,7 @@ param_vacIncurMult
 param_vacIncurMult
 0
 20
-0.5
+10.0
 0.1
 1
 NIL
@@ -2406,7 +2406,7 @@ max_stage
 max_stage
 0
 4
-1.0
+4.0
 1
 1
 NIL
@@ -2421,7 +2421,7 @@ trace_calibration
 trace_calibration
 0
 100
-100.0
+0.0
 10
 1
 NIL
@@ -2436,7 +2436,7 @@ isoComply_override
 isoComply_override
 -0.01
 1
-0.97
+0.93
 0.01
 1
 NIL
@@ -2451,7 +2451,7 @@ init_timenow_limit
 init_timenow_limit
 0
 26
-4.0
+30.0
 1
 1
 NIL
@@ -2498,46 +2498,61 @@ NIL
 HORIZONTAL
 
 SLIDER
-680
-1100
-853
-1133
+718
+1087
+891
+1120
 move_deviate
 move_deviate
 0
 2
-1.2
+1.0
 0.1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-878
-1109
-1051
-1142
+897
+1085
+1070
+1118
 spread_deviate
 spread_deviate
 0
 3
-0.8
+1.0
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-1100
-1118
-1273
-1151
+1080
+1087
+1253
+1120
 virlce_deviate
 virlce_deviate
 0
 3
 1.0
 0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1268
+1085
+1441
+1119
+Daily_Infect_Binom
+Daily_Infect_Binom
+0
+20
+5.0
+1
 1
 NIL
 HORIZONTAL

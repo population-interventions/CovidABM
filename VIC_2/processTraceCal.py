@@ -136,16 +136,18 @@ def PlotStackedManyIndex(df, indexVals, axis, metric, bar=False, doSum=False, do
         PlotPartialStackedBar(df, axis, metric, preset['ind'], preset['val'], hlines=hlines)
 
 
-def PrintSomeStats(df, move_deviate, spread_deviate):
-    df = df[(df['move_deviate'] == move_deviate) & (df['spread_deviate'] == spread_deviate)]
+def PrintSomeStats(df, move_deviate, spread_deviate, virlce_deviate):
+    df = df[(df['move_deviate'] == move_deviate)
+            & (df['spread_deviate'] == spread_deviate)
+            & (df['virlce_deviate'] == virlce_deviate)]
     
     totalInfections = df['incurR'].sum()
     totalRuns = len(df['any_transmit'])
     noTransmitProp = len(df[df['any_transmit'] == 0]) / totalRuns
-    print("==== move {}, spread {} ====".format(move_deviate, spread_deviate))
+    print("==== move {}, spread {}, virlce {} ====".format(move_deviate, spread_deviate, virlce_deviate))
     print("Successes with no transmission", noTransmitProp)
     print("Total Infections: {}, Total runs: {}".format(totalInfections, totalRuns))
-    for i in range(1, 8):
+    for i in range(1,16):
         filterDf = df[df['incurR'] >= i]
         print(("Transmission >={}, #infections: {:.0f}, #runs {:.0f}, " + 
               "%infections: {:.01f}%, %runs: {:.01f}%").format(
@@ -167,7 +169,7 @@ def ProcessResults(path, nameList):
         'cali_symtomatic_present_day',
         'first_trace_occurred', 'cumulative_tracked_all',
         'cumulative_tracked_notice', 'initial_infection_R',
-        'spread_deviate', 'move_deviate',
+        'spread_deviate', 'move_deviate', 'virlce_deviate',
     ]
     df = pd.DataFrame(columns=interestingColumns)
     for v in nameList:
@@ -216,10 +218,12 @@ def ProcessResults(path, nameList):
     indexList = [
         #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
         # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5}},
-        {'ind' : ['IsoComply', 'spread_deviate', 'move_deviate', 'R0'], 
-         'val' : {'IsoComply' : 0.97, 'spread_deviate' : 0.8, 'R0' : 2.5}},
-        {'ind' : ['IsoComply', 'spread_deviate', 'move_deviate', 'R0'], 
-         'val' : {'IsoComply' : 0.97, 'move_deviate' : 0.8, 'R0' : 2.5}},
+        {'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
+         'val' : {'spread_deviate' : 1, 'virlce_deviate' : 1}},
+        {'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
+         'val' : {'move_deviate' : 1, 'virlce_deviate' : 1}},
+        {'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
+         'val' : {'spread_deviate' : 1, 'move_deviate' : 1}},
         #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
         # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'IsoComply' : 0.97}},
         #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
@@ -246,13 +250,11 @@ def ProcessResults(path, nameList):
     #PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success', doCount=True)
     #PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success')
         
-    PrintSomeStats(df, 0.8, 0.8)
-    PrintSomeStats(df, 0.8, 1.2)
-    PrintSomeStats(df, 1.2, 0.8)
-    PrintSomeStats(df, 1.2, 1.2)
+    PrintSomeStats(df, 1, 1, 0.5)
+    PrintSomeStats(df, 1, 1, 2)
 
 
-nameStr = 'run029'
+nameStr = 'run030'
 namePath = 'output/trace/'
 
 #ProcessResults(namePath, ['run002', 'run003', 'run004'])

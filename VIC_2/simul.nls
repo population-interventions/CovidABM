@@ -451,8 +451,9 @@ to simul_infect
           set transmission_count transmission_count + 1
           set transmission_sum transmission_sum + baseSuccept * succeptibilityTableMax * x
           let infectDraw random-float 1
+          let binomChance 1 - (1 - baseSuccept * succeptibilityTableMax * x) ^ Daily_Infect_Binom
           
-          if baseSuccept * succeptibilityTableMax * x > infectDraw [
+          if binomChance > infectDraw [
             let patchVariant 0
             ask table:get localInfectionCulprit x [
               set patchVariant infectVariant
@@ -466,7 +467,8 @@ to simul_infect
             ]
             
             ;; Check against lower succeptiblity for reinfection.
-            if baseSuccept * (table:get succeptibilityTable patchVariant) * x > infectDraw [
+            set binomChance 1 - (1 - baseSuccept * (table:get succeptibilityTable patchVariant) * x) ^ Daily_Infect_Binom
+            if binomChance > infectDraw [
               set color red
               set contributeToR true
               set infectVariant patchVariant
