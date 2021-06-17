@@ -190,7 +190,7 @@ superspreaders
 superspreaders
 0
 1
-0.025
+0.03
 0.01
 1
 NIL
@@ -208,7 +208,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-15.0
+0.0
 .5
 1
 NIL
@@ -223,7 +223,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-15.0
+0.0
 .5
 1
 NIL
@@ -239,7 +239,7 @@ INPUTBOX
 337
 382
 initial_cases
-1.0
+60.0
 1
 0
 Number
@@ -250,7 +250,7 @@ INPUTBOX
 321
 489
 total_population
-6681000.0
+6.681E11
 1
 0
 Number
@@ -340,7 +340,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.078
+0.185
 0.001
 1
 NIL
@@ -355,7 +355,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-70.0
+100.0
 1
 1
 NIL
@@ -396,7 +396,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-35.0
+0.0
 1
 1
 NIL
@@ -424,7 +424,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -482,7 +482,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7517081328228713
+0.7051275431941881
 .01
 1
 NIL
@@ -531,7 +531,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-486292.0
+2307115.0
 1
 1
 NIL
@@ -548,7 +548,7 @@ param_vac_uptake
 param_vac_uptake
 0.5
 1
-0.5
+0.7
 0.1
 1
 NIL
@@ -581,7 +581,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-0
+15
 
 SLIDER
 1609
@@ -625,7 +625,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.34882824288711956
+0.3517374567053039
 0.01
 1
 NIL
@@ -673,7 +673,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-15.0
+0.0
 1
 1
 NIL
@@ -735,7 +735,7 @@ End_Day
 End_Day
 -1
 730
-31.0
+88.0
 1
 1
 NIL
@@ -750,7 +750,7 @@ Isolation_Transmission
 Isolation_Transmission
 0
 1
-0.33
+0.5
 0.01
 1
 NIL
@@ -796,7 +796,7 @@ Recovered_Match_Rate
 Recovered_Match_Rate
 0
 0.5
-0.041
+0.04
 0.001
 1
 NIL
@@ -914,7 +914,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-0
+1
 1
 -1000
 
@@ -983,7 +983,7 @@ param_vac_wane
 param_vac_wane
 0
 0.05
-0.0
+0.001
 0.001
 1
 NIL
@@ -998,7 +998,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+2.2
 0.05
 1
 NIL
@@ -1070,7 +1070,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.4056056102326615
+0.4840867615897516
 0.05
 1
 NIL
@@ -1118,7 +1118,7 @@ SWITCH
 50
 set_shape
 set_shape
-1
+0
 1
 -1000
 
@@ -1164,7 +1164,7 @@ param_final_phase
 param_final_phase
 -1
 10
-2.0
+5.0
 1
 1
 NIL
@@ -1194,7 +1194,7 @@ house_resample_red_group
 house_resample_red_group
 0
 1
-0.95
+0.8
 0.01
 1
 NIL
@@ -1297,7 +1297,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.8565267147014392
+0.870991831907304
 0.01
 1
 NIL
@@ -1327,7 +1327,7 @@ param_policy_force_days
 param_policy_force_days
 0
 28
-0.0
+14.0
 1
 1
 NIL
@@ -1342,7 +1342,7 @@ param_policy_force_stage
 param_policy_force_stage
 -1
 4
--1.0
+3.0
 1
 1
 NIL
@@ -1357,7 +1357,7 @@ param_policy_force_preset
 param_policy_force_preset
 0
 3
-0.0
+1.0
 1
 1
 NIL
@@ -1387,7 +1387,7 @@ param_vacIncurMult
 param_vacIncurMult
 0
 20
-0.5
+10.0
 0.1
 1
 NIL
@@ -1431,7 +1431,7 @@ SLIDER
 param_trace_mult
 param_trace_mult
 0
-20
+8
 1.0
 0.05
 1
@@ -1477,7 +1477,7 @@ max_stage
 max_stage
 0
 4
-1.0
+4.0
 1
 1
 NIL
@@ -1492,7 +1492,7 @@ trace_calibration
 trace_calibration
 0
 100
-100.0
+0.0
 10
 1
 NIL
@@ -1507,7 +1507,7 @@ isoComply_override
 isoComply_override
 -0.01
 1
-0.97
+0.93
 0.01
 1
 NIL
@@ -1522,7 +1522,7 @@ init_timenow_limit
 init_timenow_limit
 0
 26
-4.0
+30.0
 1
 1
 NIL
@@ -1632,12 +1632,12 @@ SLIDER
 358
 760
 542
-794
+793
 global_trans_std
 global_trans_std
 0
 1
-0.1
+0.135
 0.01
 1
 NIL
@@ -4485,7 +4485,10 @@ NetLogo 6.2.0
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.078"/>
+      <value value="0.182"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="global_trans_std">
+      <value value="0.135"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="r0_range">
       <value value="4.5"/>
@@ -10035,6 +10038,1606 @@ NetLogo 6.2.0
     <metric>cumulative_tracked_notice</metric>
     <metric>initial_infection_R</metric>
     <enumeratedValueSet variable="rand_seed">
+      <value value="5717283"/>
+      <value value="7714790"/>
+      <value value="3394780"/>
+      <value value="6296578"/>
+      <value value="8516995"/>
+      <value value="7211478"/>
+      <value value="7043076"/>
+      <value value="8964384"/>
+      <value value="551291"/>
+      <value value="8187284"/>
+      <value value="8272466"/>
+      <value value="8694399"/>
+      <value value="7320049"/>
+      <value value="7070736"/>
+      <value value="2712196"/>
+      <value value="9730416"/>
+      <value value="3907519"/>
+      <value value="1461700"/>
+      <value value="8782952"/>
+      <value value="267214"/>
+      <value value="3760971"/>
+      <value value="7381654"/>
+      <value value="6920098"/>
+      <value value="1666163"/>
+      <value value="7198134"/>
+      <value value="1416566"/>
+      <value value="739775"/>
+      <value value="2994002"/>
+      <value value="6650490"/>
+      <value value="4008113"/>
+      <value value="9147231"/>
+      <value value="6924268"/>
+      <value value="7246944"/>
+      <value value="731206"/>
+      <value value="6119694"/>
+      <value value="2314293"/>
+      <value value="8526870"/>
+      <value value="4758426"/>
+      <value value="5568969"/>
+      <value value="6784163"/>
+      <value value="5230773"/>
+      <value value="4573308"/>
+      <value value="362718"/>
+      <value value="318132"/>
+      <value value="1970924"/>
+      <value value="902354"/>
+      <value value="4499040"/>
+      <value value="7466493"/>
+      <value value="5256741"/>
+      <value value="263300"/>
+      <value value="871804"/>
+      <value value="231411"/>
+      <value value="7515654"/>
+      <value value="7666476"/>
+      <value value="1193911"/>
+      <value value="4350346"/>
+      <value value="3030768"/>
+      <value value="7971947"/>
+      <value value="7047911"/>
+      <value value="3971986"/>
+      <value value="8155877"/>
+      <value value="6443628"/>
+      <value value="2713402"/>
+      <value value="2775757"/>
+      <value value="7357902"/>
+      <value value="6653174"/>
+      <value value="9627487"/>
+      <value value="4548919"/>
+      <value value="5756348"/>
+      <value value="6543305"/>
+      <value value="2654584"/>
+      <value value="269022"/>
+      <value value="5017544"/>
+      <value value="3727834"/>
+      <value value="5744252"/>
+      <value value="4843851"/>
+      <value value="425525"/>
+      <value value="7661473"/>
+      <value value="9307402"/>
+      <value value="428431"/>
+      <value value="2628944"/>
+      <value value="9729183"/>
+      <value value="5742148"/>
+      <value value="5752527"/>
+      <value value="1691473"/>
+      <value value="4579672"/>
+      <value value="2597232"/>
+      <value value="8301181"/>
+      <value value="2627442"/>
+      <value value="4353927"/>
+      <value value="9129543"/>
+      <value value="6049365"/>
+      <value value="9168770"/>
+      <value value="5289905"/>
+      <value value="5218660"/>
+      <value value="5719437"/>
+      <value value="3474753"/>
+      <value value="410869"/>
+      <value value="3309136"/>
+      <value value="7036864"/>
+      <value value="9119175"/>
+      <value value="9765194"/>
+      <value value="4938082"/>
+      <value value="9038001"/>
+      <value value="7018759"/>
+      <value value="5014774"/>
+      <value value="2176343"/>
+      <value value="36676"/>
+      <value value="1670644"/>
+      <value value="7630548"/>
+      <value value="9403336"/>
+      <value value="2107441"/>
+      <value value="2665734"/>
+      <value value="3097395"/>
+      <value value="3515004"/>
+      <value value="2588982"/>
+      <value value="2613485"/>
+      <value value="6946473"/>
+      <value value="7263897"/>
+      <value value="5523078"/>
+      <value value="2502497"/>
+      <value value="813829"/>
+      <value value="3980304"/>
+      <value value="8990589"/>
+      <value value="5511163"/>
+      <value value="5362787"/>
+      <value value="9481660"/>
+      <value value="122493"/>
+      <value value="2558660"/>
+      <value value="4754631"/>
+      <value value="3504083"/>
+      <value value="996841"/>
+      <value value="5971544"/>
+      <value value="3548763"/>
+      <value value="4231410"/>
+      <value value="484746"/>
+      <value value="884130"/>
+      <value value="8652211"/>
+      <value value="9529801"/>
+      <value value="7086117"/>
+      <value value="3865019"/>
+      <value value="6947711"/>
+      <value value="4184270"/>
+      <value value="3535524"/>
+      <value value="5826794"/>
+      <value value="8955193"/>
+      <value value="2982329"/>
+      <value value="5684652"/>
+      <value value="507032"/>
+      <value value="1045988"/>
+      <value value="2105716"/>
+      <value value="6923432"/>
+      <value value="55475"/>
+      <value value="7299878"/>
+      <value value="4464773"/>
+      <value value="326431"/>
+      <value value="3537134"/>
+      <value value="8048577"/>
+      <value value="6675649"/>
+      <value value="5999613"/>
+      <value value="421406"/>
+      <value value="8187348"/>
+      <value value="8202372"/>
+      <value value="3877471"/>
+      <value value="8299505"/>
+      <value value="6817034"/>
+      <value value="2257485"/>
+      <value value="750340"/>
+      <value value="7013144"/>
+      <value value="8929939"/>
+      <value value="9586820"/>
+      <value value="8223407"/>
+      <value value="6428319"/>
+      <value value="8658477"/>
+      <value value="5909085"/>
+      <value value="2384601"/>
+      <value value="6208899"/>
+      <value value="1802521"/>
+      <value value="6367000"/>
+      <value value="4148541"/>
+      <value value="9865657"/>
+      <value value="7233272"/>
+      <value value="5761306"/>
+      <value value="2683096"/>
+      <value value="1856061"/>
+      <value value="6278847"/>
+      <value value="3382114"/>
+      <value value="9732573"/>
+      <value value="2026060"/>
+      <value value="3761351"/>
+      <value value="5647432"/>
+      <value value="6406805"/>
+      <value value="3299399"/>
+      <value value="5521432"/>
+      <value value="8368076"/>
+      <value value="351793"/>
+      <value value="8311072"/>
+      <value value="6727724"/>
+      <value value="8053680"/>
+      <value value="601095"/>
+      <value value="2146597"/>
+      <value value="99492"/>
+      <value value="6530456"/>
+      <value value="7078113"/>
+      <value value="6931604"/>
+      <value value="4394352"/>
+      <value value="4962551"/>
+      <value value="4577793"/>
+      <value value="6322553"/>
+      <value value="4169004"/>
+      <value value="9888793"/>
+      <value value="3198848"/>
+      <value value="4661868"/>
+      <value value="2551366"/>
+      <value value="7024809"/>
+      <value value="2823148"/>
+      <value value="1402836"/>
+      <value value="6398275"/>
+      <value value="6032972"/>
+      <value value="3165303"/>
+      <value value="1395201"/>
+      <value value="8568788"/>
+      <value value="6298143"/>
+      <value value="5744832"/>
+      <value value="5303314"/>
+      <value value="1631306"/>
+      <value value="1146797"/>
+      <value value="3278806"/>
+      <value value="9414318"/>
+      <value value="7284938"/>
+      <value value="3306711"/>
+      <value value="9371899"/>
+      <value value="4972548"/>
+      <value value="4394636"/>
+      <value value="9821120"/>
+      <value value="7381033"/>
+      <value value="2094399"/>
+      <value value="6065925"/>
+      <value value="7747710"/>
+      <value value="2158783"/>
+      <value value="6951128"/>
+      <value value="4820584"/>
+      <value value="9142405"/>
+      <value value="1253257"/>
+      <value value="1077869"/>
+      <value value="3708472"/>
+      <value value="4958288"/>
+      <value value="3408717"/>
+      <value value="908736"/>
+      <value value="4943660"/>
+      <value value="8780757"/>
+      <value value="1315326"/>
+      <value value="210232"/>
+      <value value="6169804"/>
+      <value value="4576043"/>
+      <value value="4327797"/>
+      <value value="4195882"/>
+      <value value="545688"/>
+      <value value="5052565"/>
+      <value value="4636331"/>
+      <value value="2946834"/>
+      <value value="6337967"/>
+      <value value="5934976"/>
+      <value value="1741810"/>
+      <value value="7806998"/>
+      <value value="2650891"/>
+      <value value="4850305"/>
+      <value value="1248696"/>
+      <value value="2495088"/>
+      <value value="4644191"/>
+      <value value="7079525"/>
+      <value value="4323906"/>
+      <value value="96366"/>
+      <value value="4170531"/>
+      <value value="8573053"/>
+      <value value="5145032"/>
+      <value value="8550345"/>
+      <value value="9399125"/>
+      <value value="8950900"/>
+      <value value="6431443"/>
+      <value value="78369"/>
+      <value value="2570432"/>
+      <value value="533440"/>
+      <value value="2718011"/>
+      <value value="6437502"/>
+      <value value="9766065"/>
+      <value value="2167566"/>
+      <value value="8297186"/>
+      <value value="6098850"/>
+      <value value="1913336"/>
+      <value value="535106"/>
+      <value value="5531719"/>
+      <value value="8892295"/>
+      <value value="2409099"/>
+      <value value="5119234"/>
+      <value value="8349643"/>
+      <value value="9916082"/>
+      <value value="9787762"/>
+      <value value="4049674"/>
+      <value value="7039636"/>
+      <value value="8871442"/>
+      <value value="345283"/>
+      <value value="2495695"/>
+      <value value="6208199"/>
+      <value value="6592612"/>
+      <value value="4040242"/>
+      <value value="8337277"/>
+      <value value="7263675"/>
+      <value value="7912614"/>
+      <value value="7465732"/>
+      <value value="2395607"/>
+      <value value="4020137"/>
+      <value value="5736955"/>
+      <value value="7627693"/>
+      <value value="1905202"/>
+      <value value="7183809"/>
+      <value value="7940707"/>
+      <value value="8539284"/>
+      <value value="3822505"/>
+      <value value="3045102"/>
+      <value value="6656357"/>
+      <value value="5819238"/>
+      <value value="595868"/>
+      <value value="5279306"/>
+      <value value="7289506"/>
+      <value value="6456275"/>
+      <value value="9478212"/>
+      <value value="4952518"/>
+      <value value="2292604"/>
+      <value value="9586473"/>
+      <value value="4368873"/>
+      <value value="882663"/>
+      <value value="6064751"/>
+      <value value="7671944"/>
+      <value value="9921512"/>
+      <value value="5014439"/>
+      <value value="177235"/>
+      <value value="2037597"/>
+      <value value="4922329"/>
+      <value value="2958486"/>
+      <value value="521083"/>
+      <value value="8447717"/>
+      <value value="5784318"/>
+      <value value="7200647"/>
+      <value value="9777049"/>
+      <value value="7725853"/>
+      <value value="9060391"/>
+      <value value="4397617"/>
+      <value value="233181"/>
+      <value value="2485965"/>
+      <value value="1297098"/>
+      <value value="5008270"/>
+      <value value="2674441"/>
+      <value value="1730985"/>
+      <value value="3815865"/>
+      <value value="6823264"/>
+      <value value="9670655"/>
+      <value value="312759"/>
+      <value value="2845932"/>
+      <value value="7237253"/>
+      <value value="8766442"/>
+      <value value="2548562"/>
+      <value value="7686912"/>
+      <value value="5540844"/>
+      <value value="7369936"/>
+      <value value="5826284"/>
+      <value value="8158980"/>
+      <value value="4088357"/>
+      <value value="6819183"/>
+      <value value="3889108"/>
+      <value value="3676278"/>
+      <value value="5715859"/>
+      <value value="4979342"/>
+      <value value="5158432"/>
+      <value value="6498763"/>
+      <value value="9375067"/>
+      <value value="3821942"/>
+      <value value="8919497"/>
+      <value value="4800364"/>
+      <value value="3682781"/>
+      <value value="2832898"/>
+      <value value="9111751"/>
+      <value value="1038562"/>
+      <value value="618416"/>
+      <value value="5448007"/>
+      <value value="2093900"/>
+      <value value="3141508"/>
+      <value value="9539158"/>
+      <value value="9224140"/>
+      <value value="3151454"/>
+      <value value="1290935"/>
+      <value value="8653910"/>
+      <value value="9809553"/>
+      <value value="2648514"/>
+      <value value="8737097"/>
+      <value value="3904424"/>
+      <value value="147352"/>
+      <value value="5025669"/>
+      <value value="72218"/>
+      <value value="1807243"/>
+      <value value="9030602"/>
+      <value value="5861283"/>
+      <value value="4745555"/>
+      <value value="985921"/>
+      <value value="2921350"/>
+      <value value="4635360"/>
+      <value value="4743358"/>
+      <value value="6724447"/>
+      <value value="1527862"/>
+      <value value="3010651"/>
+      <value value="8424760"/>
+      <value value="3214661"/>
+      <value value="1121494"/>
+      <value value="5078595"/>
+      <value value="7248798"/>
+      <value value="1920487"/>
+      <value value="3915258"/>
+      <value value="6663836"/>
+      <value value="909069"/>
+      <value value="7187119"/>
+      <value value="3614585"/>
+      <value value="7147260"/>
+      <value value="5552914"/>
+      <value value="7333513"/>
+      <value value="594478"/>
+      <value value="2942132"/>
+      <value value="5757503"/>
+      <value value="8250162"/>
+      <value value="9557766"/>
+      <value value="8001603"/>
+      <value value="3296446"/>
+      <value value="2900578"/>
+      <value value="2582085"/>
+      <value value="4368892"/>
+      <value value="6250779"/>
+      <value value="7860350"/>
+      <value value="5059420"/>
+      <value value="5763446"/>
+      <value value="6404151"/>
+      <value value="3565294"/>
+      <value value="4985163"/>
+      <value value="6850041"/>
+      <value value="2528836"/>
+      <value value="7495198"/>
+      <value value="2152291"/>
+      <value value="8853338"/>
+      <value value="8418000"/>
+      <value value="3345915"/>
+      <value value="9783743"/>
+      <value value="4998128"/>
+      <value value="5262763"/>
+      <value value="9829910"/>
+      <value value="8294284"/>
+      <value value="3671366"/>
+      <value value="9883195"/>
+      <value value="5778332"/>
+      <value value="9993517"/>
+      <value value="2257028"/>
+      <value value="286021"/>
+      <value value="1889866"/>
+      <value value="8544966"/>
+      <value value="4822842"/>
+      <value value="986903"/>
+      <value value="8917591"/>
+      <value value="9903371"/>
+      <value value="8221149"/>
+      <value value="4228148"/>
+      <value value="9286937"/>
+      <value value="5064442"/>
+      <value value="3406526"/>
+      <value value="844699"/>
+      <value value="1590722"/>
+      <value value="1262540"/>
+      <value value="5965898"/>
+      <value value="3117701"/>
+      <value value="2006716"/>
+      <value value="9955148"/>
+      <value value="2525079"/>
+      <value value="1336217"/>
+      <value value="6374950"/>
+      <value value="528818"/>
+      <value value="956521"/>
+      <value value="7483837"/>
+      <value value="6991681"/>
+      <value value="7996224"/>
+      <value value="7931184"/>
+      <value value="3127112"/>
+      <value value="6368901"/>
+      <value value="559582"/>
+      <value value="8075008"/>
+      <value value="53329"/>
+      <value value="707199"/>
+      <value value="8651569"/>
+      <value value="3328184"/>
+      <value value="9787971"/>
+      <value value="9021943"/>
+      <value value="988306"/>
+      <value value="1261650"/>
+      <value value="7359381"/>
+      <value value="7711965"/>
+      <value value="9695519"/>
+      <value value="1472289"/>
+      <value value="1944841"/>
+      <value value="7943727"/>
+      <value value="1273391"/>
+      <value value="8914015"/>
+      <value value="9833138"/>
+      <value value="9665792"/>
+      <value value="3260301"/>
+      <value value="3878805"/>
+      <value value="9063578"/>
+      <value value="1974521"/>
+      <value value="1015153"/>
+      <value value="9734909"/>
+      <value value="2489985"/>
+      <value value="1551493"/>
+      <value value="5636617"/>
+      <value value="881398"/>
+      <value value="6126624"/>
+      <value value="1365779"/>
+      <value value="1806860"/>
+      <value value="4239848"/>
+      <value value="8949683"/>
+      <value value="507101"/>
+      <value value="3447482"/>
+      <value value="2428364"/>
+      <value value="3035330"/>
+      <value value="4690303"/>
+      <value value="5374633"/>
+      <value value="4946759"/>
+      <value value="5986841"/>
+      <value value="6180428"/>
+      <value value="7878937"/>
+      <value value="2315723"/>
+      <value value="8400694"/>
+      <value value="3443705"/>
+      <value value="3582119"/>
+      <value value="7839802"/>
+      <value value="9938784"/>
+      <value value="474001"/>
+      <value value="1680419"/>
+      <value value="3011152"/>
+      <value value="5816390"/>
+      <value value="3081220"/>
+      <value value="2557749"/>
+      <value value="1293299"/>
+      <value value="6257604"/>
+      <value value="1873232"/>
+      <value value="5382385"/>
+      <value value="2903278"/>
+      <value value="7396284"/>
+      <value value="5898735"/>
+      <value value="3273990"/>
+      <value value="8444406"/>
+      <value value="8300583"/>
+      <value value="2754258"/>
+      <value value="4787118"/>
+      <value value="5469388"/>
+      <value value="2173389"/>
+      <value value="1637409"/>
+      <value value="2539086"/>
+      <value value="641702"/>
+      <value value="8319852"/>
+      <value value="3407965"/>
+      <value value="2123390"/>
+      <value value="2867883"/>
+      <value value="1719380"/>
+      <value value="302417"/>
+      <value value="1554110"/>
+      <value value="1599896"/>
+      <value value="4799318"/>
+      <value value="2968552"/>
+      <value value="2867283"/>
+      <value value="3438591"/>
+      <value value="4322545"/>
+      <value value="2634779"/>
+      <value value="7805381"/>
+      <value value="7320362"/>
+      <value value="202191"/>
+      <value value="2209425"/>
+      <value value="3319402"/>
+      <value value="1930152"/>
+      <value value="8633272"/>
+      <value value="2103792"/>
+      <value value="6267337"/>
+      <value value="2863094"/>
+      <value value="6769467"/>
+      <value value="233138"/>
+      <value value="74592"/>
+      <value value="1811830"/>
+      <value value="4063507"/>
+      <value value="1479049"/>
+      <value value="1747266"/>
+      <value value="3071162"/>
+      <value value="4313407"/>
+      <value value="2665773"/>
+      <value value="6610572"/>
+      <value value="123873"/>
+      <value value="8719665"/>
+      <value value="965206"/>
+      <value value="3584111"/>
+      <value value="3515046"/>
+      <value value="9655355"/>
+      <value value="447959"/>
+      <value value="791410"/>
+      <value value="3894116"/>
+      <value value="4812634"/>
+      <value value="8234319"/>
+      <value value="7806812"/>
+      <value value="711610"/>
+      <value value="4710226"/>
+      <value value="4508214"/>
+      <value value="6386190"/>
+      <value value="5247935"/>
+      <value value="2105171"/>
+      <value value="4166119"/>
+      <value value="6619642"/>
+      <value value="7472620"/>
+      <value value="1392170"/>
+      <value value="7667879"/>
+      <value value="8202379"/>
+      <value value="3804544"/>
+      <value value="2317721"/>
+      <value value="6254036"/>
+      <value value="3323255"/>
+      <value value="8224792"/>
+      <value value="6202727"/>
+      <value value="9488447"/>
+      <value value="7915722"/>
+      <value value="2287616"/>
+      <value value="4247617"/>
+      <value value="4790464"/>
+      <value value="140894"/>
+      <value value="485639"/>
+      <value value="4206622"/>
+      <value value="1261894"/>
+      <value value="5617998"/>
+      <value value="5511262"/>
+      <value value="5613087"/>
+      <value value="7138973"/>
+      <value value="959987"/>
+      <value value="356283"/>
+      <value value="2282188"/>
+      <value value="412437"/>
+      <value value="2856461"/>
+      <value value="8864813"/>
+      <value value="3925888"/>
+      <value value="2505345"/>
+      <value value="2039507"/>
+      <value value="829333"/>
+      <value value="3400357"/>
+      <value value="365867"/>
+      <value value="8543787"/>
+      <value value="1199161"/>
+      <value value="983806"/>
+      <value value="8376244"/>
+      <value value="8622974"/>
+      <value value="9376291"/>
+      <value value="3657742"/>
+      <value value="8963385"/>
+      <value value="7686273"/>
+      <value value="4905701"/>
+      <value value="8362326"/>
+      <value value="6986876"/>
+      <value value="339794"/>
+      <value value="2618725"/>
+      <value value="6557054"/>
+      <value value="6687118"/>
+      <value value="9106465"/>
+      <value value="3431680"/>
+      <value value="3941114"/>
+      <value value="146886"/>
+      <value value="8520502"/>
+      <value value="7392467"/>
+      <value value="7809652"/>
+      <value value="1025662"/>
+      <value value="2477138"/>
+      <value value="1357184"/>
+      <value value="3932706"/>
+      <value value="952247"/>
+      <value value="4891781"/>
+      <value value="8042409"/>
+      <value value="5171332"/>
+      <value value="6317013"/>
+      <value value="8420005"/>
+      <value value="8974970"/>
+      <value value="3969180"/>
+      <value value="9393620"/>
+      <value value="234484"/>
+      <value value="1359872"/>
+      <value value="9216132"/>
+      <value value="7964022"/>
+      <value value="3590265"/>
+      <value value="6277687"/>
+      <value value="3284845"/>
+      <value value="2006791"/>
+      <value value="574403"/>
+      <value value="517181"/>
+      <value value="2541707"/>
+      <value value="4951661"/>
+      <value value="3548773"/>
+      <value value="8207703"/>
+      <value value="8417723"/>
+      <value value="6698958"/>
+      <value value="4069770"/>
+      <value value="9845817"/>
+      <value value="6331034"/>
+      <value value="4171573"/>
+      <value value="2825247"/>
+      <value value="6939203"/>
+      <value value="4618214"/>
+      <value value="2477143"/>
+      <value value="8264112"/>
+      <value value="4056402"/>
+      <value value="461797"/>
+      <value value="2355464"/>
+      <value value="6507762"/>
+      <value value="2467304"/>
+      <value value="2269312"/>
+      <value value="3245851"/>
+      <value value="606432"/>
+      <value value="3125713"/>
+      <value value="2423448"/>
+      <value value="9797782"/>
+      <value value="1902953"/>
+      <value value="5147883"/>
+      <value value="6179288"/>
+      <value value="5786660"/>
+      <value value="1270509"/>
+      <value value="5832575"/>
+      <value value="7441696"/>
+      <value value="1812262"/>
+      <value value="461812"/>
+      <value value="564669"/>
+      <value value="7431151"/>
+      <value value="7115269"/>
+      <value value="3196775"/>
+      <value value="7772437"/>
+      <value value="1440129"/>
+      <value value="2261372"/>
+      <value value="5681166"/>
+      <value value="8111430"/>
+      <value value="7732707"/>
+      <value value="5164600"/>
+      <value value="9761035"/>
+      <value value="9253085"/>
+      <value value="6851670"/>
+      <value value="8179003"/>
+      <value value="2655546"/>
+      <value value="2777275"/>
+      <value value="350447"/>
+      <value value="645194"/>
+      <value value="3115152"/>
+      <value value="9897008"/>
+      <value value="2710177"/>
+      <value value="9151338"/>
+      <value value="2910664"/>
+      <value value="5644664"/>
+      <value value="855293"/>
+      <value value="7239505"/>
+      <value value="6655877"/>
+      <value value="6213869"/>
+      <value value="4882260"/>
+      <value value="2763051"/>
+      <value value="4677034"/>
+      <value value="1804434"/>
+      <value value="9388572"/>
+      <value value="7587595"/>
+      <value value="6699853"/>
+      <value value="9992042"/>
+      <value value="4810505"/>
+      <value value="7843712"/>
+      <value value="2114679"/>
+      <value value="4923724"/>
+      <value value="2477421"/>
+      <value value="6464366"/>
+      <value value="2809304"/>
+      <value value="1594915"/>
+      <value value="9764429"/>
+      <value value="7524641"/>
+      <value value="5015696"/>
+      <value value="35522"/>
+      <value value="7315847"/>
+      <value value="3067608"/>
+      <value value="1281688"/>
+      <value value="2397124"/>
+      <value value="5840935"/>
+      <value value="510920"/>
+      <value value="9160901"/>
+      <value value="170932"/>
+      <value value="7894604"/>
+      <value value="2495792"/>
+      <value value="6308121"/>
+      <value value="8450670"/>
+      <value value="5602851"/>
+      <value value="2220233"/>
+      <value value="1740188"/>
+      <value value="9416803"/>
+      <value value="1863614"/>
+      <value value="2865949"/>
+      <value value="5588693"/>
+      <value value="9602401"/>
+      <value value="7395730"/>
+      <value value="5699176"/>
+      <value value="1974017"/>
+      <value value="1464015"/>
+      <value value="2686801"/>
+      <value value="3753917"/>
+      <value value="1668224"/>
+      <value value="4129876"/>
+      <value value="8528908"/>
+      <value value="342535"/>
+      <value value="3955068"/>
+      <value value="7398172"/>
+      <value value="2324299"/>
+      <value value="6542826"/>
+      <value value="3578041"/>
+      <value value="8653973"/>
+      <value value="4333131"/>
+      <value value="3077632"/>
+      <value value="7536256"/>
+      <value value="9512734"/>
+      <value value="4283909"/>
+      <value value="9095679"/>
+      <value value="7267272"/>
+      <value value="8404969"/>
+      <value value="8576854"/>
+      <value value="3733058"/>
+      <value value="1958299"/>
+      <value value="4490104"/>
+      <value value="9628049"/>
+      <value value="8754862"/>
+      <value value="6205529"/>
+      <value value="6031722"/>
+      <value value="3409843"/>
+      <value value="7226090"/>
+      <value value="2373363"/>
+      <value value="2452206"/>
+      <value value="8756644"/>
+      <value value="1871825"/>
+      <value value="1738082"/>
+      <value value="3103262"/>
+      <value value="4787501"/>
+      <value value="8211745"/>
+      <value value="5533267"/>
+      <value value="8123247"/>
+      <value value="4552739"/>
+      <value value="5465836"/>
+      <value value="8857577"/>
+      <value value="3292424"/>
+      <value value="4269889"/>
+      <value value="6839527"/>
+      <value value="9106942"/>
+      <value value="2540682"/>
+      <value value="7453661"/>
+      <value value="1774083"/>
+      <value value="1055512"/>
+      <value value="7915597"/>
+      <value value="247731"/>
+      <value value="3567278"/>
+      <value value="6353013"/>
+      <value value="9438515"/>
+      <value value="753266"/>
+      <value value="1817151"/>
+      <value value="3662229"/>
+      <value value="498063"/>
+      <value value="3834946"/>
+      <value value="9513013"/>
+      <value value="5284471"/>
+      <value value="4400880"/>
+      <value value="4276646"/>
+      <value value="3756068"/>
+      <value value="6588343"/>
+      <value value="6390676"/>
+      <value value="1553403"/>
+      <value value="1208419"/>
+      <value value="8838927"/>
+      <value value="4526713"/>
+      <value value="1666964"/>
+      <value value="4735875"/>
+      <value value="7836030"/>
+      <value value="2895182"/>
+      <value value="4390379"/>
+      <value value="5718219"/>
+      <value value="4835115"/>
+      <value value="8459315"/>
+      <value value="2674951"/>
+      <value value="6544472"/>
+      <value value="8829835"/>
+      <value value="6606700"/>
+      <value value="6679210"/>
+      <value value="3290420"/>
+      <value value="5861896"/>
+      <value value="5072334"/>
+      <value value="2004441"/>
+      <value value="2368933"/>
+      <value value="4756897"/>
+      <value value="9834947"/>
+      <value value="1017890"/>
+      <value value="8415789"/>
+      <value value="643743"/>
+      <value value="2526909"/>
+      <value value="4743271"/>
+      <value value="5284498"/>
+      <value value="5322226"/>
+      <value value="9354302"/>
+      <value value="7241305"/>
+      <value value="8650268"/>
+      <value value="7691442"/>
+      <value value="7712859"/>
+      <value value="826219"/>
+      <value value="9560745"/>
+      <value value="1274212"/>
+      <value value="8759332"/>
+      <value value="7017700"/>
+      <value value="3341468"/>
+      <value value="1115236"/>
+      <value value="1571809"/>
+      <value value="9552315"/>
+      <value value="5234055"/>
+      <value value="5052526"/>
+      <value value="9887218"/>
+      <value value="4064618"/>
+      <value value="2358126"/>
+      <value value="6771342"/>
+      <value value="7696340"/>
+      <value value="8903894"/>
+      <value value="5315987"/>
+      <value value="8949404"/>
+      <value value="5740957"/>
+      <value value="9953937"/>
+      <value value="6995821"/>
+      <value value="6429041"/>
+      <value value="7755252"/>
+      <value value="7841032"/>
+      <value value="1791280"/>
+      <value value="2431162"/>
+      <value value="5487632"/>
+      <value value="1233514"/>
+      <value value="1992312"/>
+      <value value="5247534"/>
+      <value value="3611639"/>
+      <value value="32843"/>
+      <value value="7090291"/>
+      <value value="7711293"/>
+      <value value="3736487"/>
+      <value value="1151928"/>
+      <value value="6179546"/>
+      <value value="2578405"/>
+      <value value="2811356"/>
+      <value value="9235095"/>
+      <value value="7883282"/>
+      <value value="8635294"/>
+      <value value="1187694"/>
+      <value value="9692712"/>
+      <value value="8185541"/>
+      <value value="1149998"/>
+      <value value="4654197"/>
+      <value value="121916"/>
+      <value value="8224276"/>
+      <value value="9868733"/>
+      <value value="9374287"/>
+      <value value="9825689"/>
+      <value value="9592888"/>
+      <value value="4384981"/>
+      <value value="2360241"/>
+      <value value="773335"/>
+      <value value="6550334"/>
+      <value value="1864061"/>
+      <value value="8125754"/>
+      <value value="7809441"/>
+      <value value="9354001"/>
+      <value value="493110"/>
+      <value value="4961221"/>
+      <value value="9538101"/>
+      <value value="7614329"/>
+      <value value="7193886"/>
+      <value value="1213823"/>
+      <value value="7745062"/>
+      <value value="2497582"/>
+      <value value="6516159"/>
+      <value value="8407052"/>
+      <value value="7590166"/>
+      <value value="1046591"/>
+      <value value="6351287"/>
+      <value value="874802"/>
+      <value value="6549318"/>
+      <value value="6404286"/>
+      <value value="272977"/>
+      <value value="2282981"/>
+      <value value="9530629"/>
+      <value value="1213528"/>
+      <value value="7377395"/>
+      <value value="7492148"/>
+      <value value="8890229"/>
+      <value value="6532207"/>
+      <value value="1438818"/>
+      <value value="6704043"/>
+      <value value="24596"/>
+      <value value="4954546"/>
+      <value value="8705216"/>
+      <value value="2131790"/>
+      <value value="1411567"/>
+      <value value="6833297"/>
+      <value value="7996993"/>
+      <value value="3602500"/>
+      <value value="7141501"/>
+      <value value="9569702"/>
+      <value value="5702880"/>
+      <value value="4146798"/>
+      <value value="165310"/>
+      <value value="1043946"/>
+      <value value="6595791"/>
+      <value value="3720611"/>
+      <value value="8401972"/>
+      <value value="2779980"/>
+      <value value="7360283"/>
+      <value value="2159735"/>
+      <value value="9792537"/>
+      <value value="4604317"/>
+      <value value="4968787"/>
+      <value value="5992792"/>
+      <value value="5937669"/>
+      <value value="7279396"/>
+      <value value="9380877"/>
+      <value value="2052675"/>
+      <value value="6148353"/>
+      <value value="2648792"/>
+      <value value="3444317"/>
+      <value value="5688647"/>
+      <value value="5550194"/>
+      <value value="4070433"/>
+      <value value="8936361"/>
+      <value value="9308190"/>
+      <value value="4373348"/>
+      <value value="4642214"/>
+      <value value="5100677"/>
+      <value value="3857830"/>
+      <value value="2245426"/>
+      <value value="1936823"/>
+      <value value="5390415"/>
+      <value value="7351333"/>
+      <value value="2226362"/>
+      <value value="2181111"/>
+      <value value="8531716"/>
+      <value value="6031653"/>
+      <value value="6498003"/>
+      <value value="6996281"/>
+      <value value="6036928"/>
+      <value value="2281250"/>
+      <value value="6569058"/>
+      <value value="2842398"/>
+      <value value="7611539"/>
+      <value value="4943552"/>
+      <value value="1180687"/>
+      <value value="1226517"/>
+      <value value="5825941"/>
+      <value value="4438398"/>
+      <value value="6341970"/>
+      <value value="5353366"/>
+      <value value="3973670"/>
+      <value value="1781362"/>
+      <value value="7985639"/>
+      <value value="5691184"/>
+      <value value="9650769"/>
+      <value value="4362628"/>
+      <value value="7932207"/>
+      <value value="4321438"/>
+      <value value="6404833"/>
+      <value value="2713568"/>
+      <value value="6070006"/>
+      <value value="3704948"/>
+      <value value="7014116"/>
+      <value value="2315342"/>
+      <value value="2809107"/>
+      <value value="9649177"/>
+      <value value="2206775"/>
+      <value value="8315223"/>
+      <value value="5382181"/>
+      <value value="5598965"/>
+      <value value="9881133"/>
+      <value value="7254539"/>
+      <value value="5307430"/>
+      <value value="1862474"/>
+      <value value="2422923"/>
+      <value value="1199488"/>
+      <value value="3298607"/>
+      <value value="929395"/>
+      <value value="3586954"/>
+      <value value="6986389"/>
+      <value value="1407247"/>
+      <value value="2314859"/>
+      <value value="8235351"/>
+      <value value="3362767"/>
+      <value value="6205487"/>
+      <value value="8639776"/>
+      <value value="2302009"/>
+      <value value="2787067"/>
+      <value value="2781487"/>
+      <value value="6825755"/>
+      <value value="6300269"/>
+      <value value="8085196"/>
+      <value value="5236931"/>
+      <value value="60128"/>
+      <value value="8850793"/>
+      <value value="1190212"/>
+      <value value="8671065"/>
+      <value value="7876010"/>
+      <value value="6648069"/>
+      <value value="2660023"/>
+      <value value="2948988"/>
+      <value value="4129067"/>
+      <value value="5862370"/>
+      <value value="105956"/>
+      <value value="5460894"/>
+      <value value="1463144"/>
+      <value value="6460637"/>
+      <value value="991957"/>
+      <value value="555725"/>
+      <value value="6039394"/>
+      <value value="4662694"/>
+      <value value="9635735"/>
+      <value value="2867101"/>
+      <value value="4168591"/>
+      <value value="6143241"/>
+      <value value="1523672"/>
+      <value value="4091122"/>
+      <value value="7328682"/>
+      <value value="1115659"/>
+      <value value="2412852"/>
+      <value value="5089738"/>
+      <value value="3660904"/>
+      <value value="3985479"/>
+      <value value="3651076"/>
+      <value value="2957549"/>
+      <value value="4355904"/>
+      <value value="6775154"/>
+      <value value="6361930"/>
+      <value value="2027697"/>
+      <value value="799817"/>
+      <value value="1196738"/>
+      <value value="175714"/>
+      <value value="8036946"/>
+      <value value="1460231"/>
+      <value value="2157594"/>
+      <value value="8312677"/>
+      <value value="1734848"/>
+      <value value="5236276"/>
+      <value value="5860634"/>
+      <value value="2530138"/>
+      <value value="623398"/>
+      <value value="6227879"/>
+      <value value="2493763"/>
+      <value value="1122250"/>
+      <value value="9501885"/>
+      <value value="9299377"/>
+      <value value="583946"/>
+      <value value="1371634"/>
+      <value value="6261616"/>
+      <value value="5877318"/>
+      <value value="414821"/>
+      <value value="9422377"/>
+      <value value="757305"/>
+      <value value="2684547"/>
+      <value value="2834762"/>
+      <value value="5441511"/>
+      <value value="4607066"/>
+      <value value="2822906"/>
+      <value value="6495332"/>
+      <value value="8956553"/>
+      <value value="2227104"/>
+      <value value="6903085"/>
+      <value value="9347190"/>
+      <value value="1274620"/>
+      <value value="8649613"/>
+      <value value="1747920"/>
+      <value value="2487988"/>
+      <value value="3601371"/>
+      <value value="4854524"/>
+      <value value="3826392"/>
+      <value value="9560420"/>
+      <value value="2679682"/>
+      <value value="8048083"/>
+      <value value="7043533"/>
+      <value value="5258580"/>
+      <value value="8884823"/>
+      <value value="6634410"/>
+      <value value="6292377"/>
+      <value value="1017263"/>
+      <value value="5555471"/>
+      <value value="3080849"/>
+      <value value="326202"/>
+      <value value="1410118"/>
+      <value value="2472929"/>
+      <value value="2019929"/>
+      <value value="5831683"/>
+      <value value="1930878"/>
+      <value value="7350937"/>
+      <value value="7075197"/>
+      <value value="9536974"/>
+      <value value="5618165"/>
+      <value value="9622218"/>
+      <value value="1982660"/>
+      <value value="8831765"/>
+      <value value="4993278"/>
+      <value value="7545679"/>
+      <value value="3481595"/>
+      <value value="7505132"/>
+      <value value="8692071"/>
+      <value value="2111226"/>
+      <value value="9910832"/>
+      <value value="3944282"/>
+      <value value="2295934"/>
+      <value value="7389350"/>
+      <value value="3506072"/>
+      <value value="4378124"/>
+      <value value="1354614"/>
+      <value value="9877773"/>
+      <value value="8121365"/>
+      <value value="1261906"/>
+      <value value="4195283"/>
+      <value value="6799528"/>
+      <value value="5858830"/>
+      <value value="2559544"/>
+      <value value="4034102"/>
+      <value value="6646429"/>
+      <value value="9664652"/>
+      <value value="7573607"/>
+      <value value="9173020"/>
+      <value value="7324904"/>
+      <value value="6602514"/>
+      <value value="3005481"/>
+      <value value="7933706"/>
+      <value value="5776677"/>
+      <value value="2942226"/>
+      <value value="583527"/>
+      <value value="5307614"/>
+      <value value="4323984"/>
+      <value value="7153661"/>
+      <value value="2631116"/>
+      <value value="6356248"/>
+      <value value="6220015"/>
+      <value value="56878"/>
+      <value value="3136275"/>
+      <value value="7746076"/>
+      <value value="1169454"/>
+      <value value="7208839"/>
+      <value value="5662333"/>
+      <value value="4003701"/>
+      <value value="2020470"/>
+      <value value="4873846"/>
+      <value value="6318482"/>
+      <value value="2390383"/>
+      <value value="5072339"/>
+      <value value="5256985"/>
+      <value value="7396242"/>
+      <value value="4301249"/>
+      <value value="4489118"/>
+      <value value="5414416"/>
+      <value value="3843245"/>
+      <value value="7125729"/>
+      <value value="5272825"/>
+      <value value="3986300"/>
+      <value value="8342185"/>
+      <value value="9632623"/>
+      <value value="8768253"/>
+      <value value="9751546"/>
+      <value value="81095"/>
+      <value value="6269271"/>
+      <value value="3607640"/>
+      <value value="3568316"/>
+      <value value="6110132"/>
+      <value value="8800731"/>
+      <value value="2474171"/>
+      <value value="6987002"/>
+      <value value="6605629"/>
+      <value value="8984307"/>
+      <value value="7320188"/>
+      <value value="1194980"/>
+      <value value="1552062"/>
+      <value value="9619302"/>
+      <value value="1312750"/>
+      <value value="9742071"/>
+      <value value="7653078"/>
+      <value value="1398556"/>
+      <value value="9669023"/>
+      <value value="3799942"/>
+      <value value="9499291"/>
+      <value value="8968063"/>
+      <value value="9241209"/>
+      <value value="7260489"/>
+      <value value="5461465"/>
+      <value value="3903627"/>
+      <value value="935251"/>
+      <value value="391415"/>
+      <value value="5605785"/>
+      <value value="7023214"/>
+      <value value="875541"/>
+      <value value="4961606"/>
+      <value value="9792262"/>
+      <value value="9972980"/>
+      <value value="433521"/>
+      <value value="8892498"/>
+      <value value="633887"/>
+      <value value="6116959"/>
+      <value value="4312347"/>
+      <value value="2285246"/>
+      <value value="8226912"/>
+      <value value="9016300"/>
+      <value value="5307366"/>
+      <value value="4118892"/>
+      <value value="3011988"/>
+      <value value="5020145"/>
+      <value value="1143418"/>
+      <value value="4085045"/>
+      <value value="4721202"/>
+      <value value="8504387"/>
+      <value value="2802508"/>
+      <value value="1538417"/>
+      <value value="1737964"/>
+      <value value="6827199"/>
+      <value value="2805365"/>
+      <value value="4587263"/>
+      <value value="5931246"/>
+      <value value="5924051"/>
+      <value value="9731841"/>
+      <value value="3866565"/>
+      <value value="2241233"/>
+      <value value="6040766"/>
+      <value value="7734903"/>
+      <value value="4918"/>
+      <value value="4480050"/>
+      <value value="83494"/>
+      <value value="837733"/>
+      <value value="9616974"/>
+      <value value="8726368"/>
+      <value value="8520564"/>
+      <value value="6957544"/>
+      <value value="5918814"/>
+      <value value="2812675"/>
+      <value value="2685725"/>
+      <value value="937871"/>
+      <value value="3398865"/>
+      <value value="6742264"/>
+      <value value="8693782"/>
+      <value value="4066024"/>
+      <value value="7368986"/>
+      <value value="6699448"/>
+      <value value="6646575"/>
+      <value value="4890190"/>
+      <value value="4358067"/>
+      <value value="8770638"/>
+      <value value="6876868"/>
+      <value value="2786898"/>
+      <value value="8612009"/>
+      <value value="8572203"/>
+      <value value="3125588"/>
+      <value value="7328786"/>
+      <value value="1763496"/>
+      <value value="472286"/>
+      <value value="7873899"/>
+      <value value="1852166"/>
+      <value value="7497714"/>
+      <value value="8731663"/>
+      <value value="6700393"/>
+      <value value="7334553"/>
+      <value value="8583562"/>
+      <value value="6118395"/>
+      <value value="973891"/>
+      <value value="7707348"/>
+      <value value="316856"/>
+      <value value="3541710"/>
+      <value value="7438958"/>
+      <value value="3484705"/>
+      <value value="7618283"/>
+      <value value="1845370"/>
+      <value value="1337199"/>
+      <value value="1292021"/>
+      <value value="9459475"/>
+      <value value="8927261"/>
+      <value value="35760"/>
+      <value value="4627509"/>
+      <value value="405771"/>
+      <value value="6628165"/>
+      <value value="9006303"/>
+      <value value="7188596"/>
+      <value value="7322506"/>
+      <value value="2500901"/>
+      <value value="3349400"/>
+      <value value="8584058"/>
+      <value value="1308918"/>
+      <value value="1713005"/>
+      <value value="6915206"/>
+      <value value="3380222"/>
+      <value value="4573903"/>
+      <value value="3296475"/>
+      <value value="4770830"/>
+      <value value="3536649"/>
+      <value value="6118892"/>
+      <value value="2426546"/>
+      <value value="4157269"/>
+      <value value="720647"/>
+      <value value="8018033"/>
+      <value value="8472963"/>
+      <value value="4350179"/>
+      <value value="4742239"/>
+      <value value="7184422"/>
+      <value value="4116112"/>
+      <value value="8346839"/>
+      <value value="4785325"/>
+      <value value="3610530"/>
+      <value value="9220707"/>
+      <value value="433757"/>
+      <value value="4959919"/>
+      <value value="3740882"/>
+      <value value="64824"/>
+      <value value="4431783"/>
+      <value value="7507737"/>
+      <value value="3838669"/>
+      <value value="5683741"/>
+      <value value="9548110"/>
+      <value value="5435703"/>
+      <value value="1109945"/>
+      <value value="705708"/>
+      <value value="4817488"/>
+      <value value="2498778"/>
+      <value value="9370547"/>
+      <value value="5085565"/>
+      <value value="8962743"/>
+      <value value="1028644"/>
+      <value value="5104124"/>
+      <value value="9527031"/>
+      <value value="9449886"/>
+      <value value="5238650"/>
+      <value value="6505891"/>
+      <value value="3684003"/>
+      <value value="2561150"/>
+      <value value="1820605"/>
+      <value value="1151497"/>
+      <value value="6550659"/>
+      <value value="8873489"/>
+      <value value="2132638"/>
+      <value value="8579281"/>
+      <value value="2239506"/>
+      <value value="3804798"/>
+      <value value="581516"/>
+      <value value="3652908"/>
+      <value value="5400190"/>
+      <value value="6296481"/>
+      <value value="1017318"/>
+      <value value="102307"/>
+      <value value="2412138"/>
+      <value value="4201819"/>
+      <value value="2115745"/>
+      <value value="9181582"/>
+      <value value="5548584"/>
+      <value value="7671536"/>
+      <value value="5822555"/>
+      <value value="517465"/>
+      <value value="5115175"/>
+      <value value="4985944"/>
+      <value value="3413265"/>
+      <value value="7904877"/>
+      <value value="8485770"/>
+      <value value="709845"/>
+      <value value="6443086"/>
+      <value value="9218186"/>
+      <value value="9539126"/>
+      <value value="3292874"/>
+      <value value="7262083"/>
+      <value value="5548501"/>
+      <value value="4093786"/>
+      <value value="6335060"/>
+      <value value="5282535"/>
+      <value value="1042633"/>
+      <value value="3109919"/>
+      <value value="8078925"/>
+      <value value="7468231"/>
+      <value value="315897"/>
+      <value value="1718365"/>
+      <value value="5506886"/>
+      <value value="8761219"/>
+      <value value="9332957"/>
+      <value value="1684175"/>
+      <value value="8231904"/>
+      <value value="3699101"/>
+      <value value="8612691"/>
+      <value value="6163108"/>
+      <value value="4366873"/>
+      <value value="3411485"/>
+      <value value="7082207"/>
+      <value value="3182345"/>
+      <value value="3614827"/>
+      <value value="4834838"/>
+      <value value="7132116"/>
+      <value value="4487291"/>
+      <value value="2854974"/>
+      <value value="3606596"/>
+      <value value="7627304"/>
+      <value value="7723879"/>
+      <value value="3251357"/>
+      <value value="4208401"/>
+      <value value="9086269"/>
+      <value value="63292"/>
+      <value value="8281692"/>
+      <value value="3464540"/>
+      <value value="5940733"/>
+      <value value="3972718"/>
+      <value value="5935194"/>
+      <value value="6783153"/>
+      <value value="2680172"/>
+      <value value="9091783"/>
+      <value value="114484"/>
+      <value value="3023320"/>
+      <value value="9131531"/>
+      <value value="8924510"/>
+      <value value="3170847"/>
+      <value value="6547731"/>
+      <value value="3134254"/>
+      <value value="7689577"/>
+      <value value="192882"/>
+      <value value="2837421"/>
+      <value value="4746301"/>
+      <value value="5425336"/>
+      <value value="7454476"/>
+      <value value="6846806"/>
+      <value value="5687947"/>
+      <value value="3225123"/>
+      <value value="9977084"/>
+      <value value="4993225"/>
+      <value value="999239"/>
+      <value value="4450881"/>
+      <value value="9998382"/>
+      <value value="1574570"/>
+      <value value="4397028"/>
+      <value value="6605520"/>
+      <value value="4449114"/>
+      <value value="6056294"/>
+      <value value="7618400"/>
+      <value value="5432788"/>
+      <value value="430426"/>
+      <value value="5898439"/>
+      <value value="275160"/>
+      <value value="3618650"/>
+      <value value="7329297"/>
+      <value value="9050432"/>
+      <value value="9717797"/>
+      <value value="4402250"/>
+      <value value="4132754"/>
+      <value value="4773310"/>
+      <value value="1629843"/>
+      <value value="4647814"/>
+      <value value="3263231"/>
+      <value value="3317929"/>
+      <value value="2431478"/>
+      <value value="6865373"/>
+      <value value="4639224"/>
+      <value value="2802916"/>
+      <value value="5202123"/>
+      <value value="6472325"/>
+      <value value="535143"/>
+      <value value="5694610"/>
+      <value value="4350259"/>
+      <value value="4039104"/>
+      <value value="5448014"/>
+      <value value="7009218"/>
+      <value value="9012949"/>
+      <value value="5871079"/>
+      <value value="6001302"/>
+      <value value="2762342"/>
+      <value value="2368228"/>
+      <value value="4192781"/>
+      <value value="2805066"/>
+      <value value="3612937"/>
+      <value value="622849"/>
+      <value value="7358422"/>
+      <value value="6261998"/>
+      <value value="9018148"/>
+      <value value="7378511"/>
+      <value value="541001"/>
+      <value value="3611557"/>
+      <value value="9408552"/>
+      <value value="4840538"/>
+      <value value="7181524"/>
+      <value value="8487196"/>
+      <value value="694628"/>
+      <value value="5673636"/>
+      <value value="3926317"/>
+      <value value="4012860"/>
+      <value value="841194"/>
+      <value value="348277"/>
+      <value value="9056087"/>
+      <value value="8049569"/>
+      <value value="6319252"/>
+      <value value="7915106"/>
+      <value value="5273429"/>
+      <value value="8039751"/>
+      <value value="5028933"/>
+      <value value="3159542"/>
+      <value value="3122557"/>
       <value value="3748732"/>
       <value value="942764"/>
       <value value="5027817"/>
@@ -11646,8 +13249,8 @@ NetLogo 6.2.0
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.078"/>
-      <value value="0.156"/>
+      <value value="0.084"/>
+      <value value="0.182"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="r0_range">
       <value value="4.5"/>
@@ -11722,9 +13325,9 @@ NetLogo 6.2.0
       <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="isocomply_override">
+      <value value="0.91"/>
       <value value="0.93"/>
-      <value value="0.97"/>
-      <value value="0.985"/>
+      <value value="0.95"/>
       <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="isolate_on_inf_notice">
@@ -11773,9 +13376,9 @@ NetLogo 6.2.0
       <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_trace_mult">
-      <value value="0.6"/>
-      <value value="0.8"/>
+      <value value="0.85"/>
       <value value="1"/>
+      <value value="1.15"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_trigger_loosen">
       <value value="false"/>
@@ -11884,8 +13487,8 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="sympt_present_prop">
       <value value="0.5"/>
-      <value value="0.35"/>
-      <value value="0.65"/>
+      <value value="0.4"/>
+      <value value="0.6"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="total_population">
       <value value="6681000"/>
@@ -13572,7 +15175,7 @@ NetLogo 6.2.0
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.078"/>
+      <value value="0.084"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="r0_range">
       <value value="4.5"/>
@@ -13608,7 +15211,7 @@ NetLogo 6.2.0
       <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_trans_std">
-      <value value="0.1"/>
+      <value value="0.135"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="asymptomatic_trans">
       <value value="0.7244739931239075"/>
@@ -13647,6 +15250,8 @@ NetLogo 6.2.0
       <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="isocomply_override">
+      <value value="0.93"/>
+      <value value="0.95"/>
       <value value="0.97"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="isolate_on_inf_notice">
@@ -13803,7 +15408,7 @@ NetLogo 6.2.0
       <value value="6"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sympt_present_prop">
-      <value value="0.5"/>
+      <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="total_population">
       <value value="6681000"/>
