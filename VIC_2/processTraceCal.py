@@ -148,7 +148,7 @@ def PrintSomeStats(df, indexVals):
     noTransmitProp = len(df[df['any_transmit'] == 0]) / totalRuns
     
     print('=== Stats {} ==='.format(GetIndexPickStr(indexVals)))
-    print("Successes with no transmission", noTransmitProp)
+    print("Runs with no transmission", noTransmitProp)
     print("Total Infections: {}, Total runs: {}".format(totalInfections, totalRuns))
     for i in range(1,16):
         filterDf = df[df['incurR'] >= i]
@@ -210,62 +210,80 @@ def ProcessResults(path, nameList):
     df['any_transmit'] = 0
     df.loc[df['cumulativeInfected'] > 1, 'any_transmit'] = 1
     
-    df['R0'] = df['GlobalTrans'].replace({0.084 : 2.5, 0.156 : 4.75})
+    df['R0'] = df['GlobalTrans'].replace({0.0663 : 2.5, 0.135 : 5.0})
     # Reset plot parameters
     plt.rcParams.update(plt.rcParamsDefault)
     
-    PlotIntegerRange(df, 'R0', 'success',
-                     ['IsoComply', 'TraceMult', 'PresentProp'],
-                     {'TraceMult' : 1, 'IsoComply' : 0.95},
-                     hlines=[0.75, 0.9], bar=True)
-    #PlotIntegerRange(df, 'TraceMult', 'success', ['R0', 'IsoComply', 'PresentProp'], {'R0' : 2.5, 'PresentProp' : 0.5}, hlines=[0.75], bar=True)
-    #PlotIntegerRange(df, 'TraceMult', 'success', ['R0', 'IsoComply', 'PresentProp'], {'R0' : 4.75, 'PresentProp' : 0.65}, hlines=[0.75], bar=True)
-
-    indexList = [
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-        # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5}},
-        {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-         'val' : {'IsoComply' : 0.93, 'TraceMult' : 1, 'PresentProp' : 0.5}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-        # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1, 'R0' : 2.5}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-        # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1, 'R0' : 4.75}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-        # 'val' : {'IsoComply' : 0.97, 'PresentProp' : 0.5, 'R0' : 2.5}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-        # 'val' : {'IsoComply' : 0.97, 'PresentProp' : 0.5, 'R0' : 4.75}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-        # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 2.5}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-        # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 4.75}},
-        #{'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
-        # 'val' : {'move_deviate' : 1, 'virlce_deviate' : 1}},
-        #{'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
-        # 'val' : {'spread_deviate' : 1, 'move_deviate' : 1}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
-        # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'IsoComply' : 0.97}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
-        # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
-        # 'val' : {'IsoComply' : 0.97, 'PresentProp' : 0.5}},
-        #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
-        # 'val' : {'TraceMult' : 2, 'PresentProp' : 0.65}},
-    ]
-    
-    PlotStackedManyIndex(df, indexList, 'any_trace', 'success')
-    PlotStackedManyIndex(df, indexList, 'any_transmit', 'success')
-    PlotRangeManyIndex(df, indexList, 'incurR', 'success', doCount=True)
-    
-    PlotRangeManyIndex(df[df['first_trace_occur'] >= 0], indexList, 'first_trace_occur', 'success')
-    PlotRangeManyIndex(df[(df['first_trace_infections'] < 40) & (df['first_trace_infections'] > 0)],
-                       indexList,'first_trace_infections', 'success')
-    
-    PlotStackedManyIndex(df, indexList,'IncurDiseaseTime', 'success')
-    PlotStackedManyIndex(df, indexList, 'IncurAsymptomatic', 'success')
-    PlotStackedManyIndex(df, indexList, 'IncurPresentDay', 'success')
-    
-    PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success', doCount=True)
-    PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success')
+    if False:
+        PlotIntegerRange(df, 'R0', 'success',
+                         ['IsoComply', 'TraceMult', 'PresentProp'],
+                         {'TraceMult' : 1, 'IsoComply' : 0.95},
+                         hlines=[0.75, 0.9], bar=True)
+        PlotIntegerRange(df, 'R0', 'success',
+                         ['IsoComply', 'TraceMult', 'PresentProp'],
+                         {'TraceMult' : 1, 'PresentProp' : 0.5},
+                         hlines=[0.75, 0.9], bar=True)
+        PlotIntegerRange(df, 'R0', 'success',
+                         ['IsoComply', 'TraceMult', 'PresentProp'],
+                         {'PresentProp' : 0.5, 'IsoComply' : 0.95},
+                         hlines=[0.75, 0.9], bar=True)
+        indexList = [
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+            # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5}},
+            {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+             'val' : {'IsoComply' : 0.95, 'TraceMult' : 1, 'PresentProp' : 0.5}},
+            {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+             'val' : {'R0' : 2.5, 'TraceMult' : 1, 'PresentProp' : 0.5}},
+            {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+             'val' : {'R0' : 5.0, 'TraceMult' : 1, 'PresentProp' : 0.5}},
+            {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+             'val' : {'R0' : 2.5, 'IsoComply' : 0.95, 'PresentProp' : 0.5}},
+            {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+             'val' : {'R0' : 5.0, 'IsoComply' : 0.95, 'PresentProp' : 0.5}},
+            {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+             'val' : {'R0' : 2.5, 'IsoComply' : 0.95, 'TraceMult' : 1}},
+            {'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+             'val' : {'R0' : 5.0, 'IsoComply' : 0.95, 'TraceMult' : 1}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+            # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1, 'R0' : 2.5}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+            # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1, 'R0' : 4.75}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+            # 'val' : {'IsoComply' : 0.97, 'PresentProp' : 0.5, 'R0' : 2.5}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+            # 'val' : {'IsoComply' : 0.97, 'PresentProp' : 0.5, 'R0' : 4.75}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+            # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 2.5}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+            # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 4.75}},
+            #{'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
+            # 'val' : {'move_deviate' : 1, 'virlce_deviate' : 1}},
+            #{'ind' : ['spread_deviate', 'move_deviate', 'virlce_deviate'], 
+            # 'val' : {'spread_deviate' : 1, 'move_deviate' : 1}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
+            # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'IsoComply' : 0.97}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
+            # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
+            # 'val' : {'IsoComply' : 0.97, 'PresentProp' : 0.5}},
+            #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp'], 
+            # 'val' : {'TraceMult' : 2, 'PresentProp' : 0.65}},
+        ]
+        
+        PlotStackedManyIndex(df, indexList, 'any_trace', 'success')
+        PlotStackedManyIndex(df, indexList, 'any_transmit', 'success')
+        PlotRangeManyIndex(df, indexList, 'incurR', 'success', doCount=True)
+        
+        PlotRangeManyIndex(df[df['first_trace_occur'] >= 0], indexList, 'first_trace_occur', 'success')
+        PlotRangeManyIndex(df[(df['first_trace_infections'] < 40) & (df['first_trace_infections'] > 0)],
+                           indexList,'first_trace_infections', 'success')
+        
+        PlotStackedManyIndex(df, indexList,'IncurDiseaseTime', 'success')
+        PlotStackedManyIndex(df, indexList, 'IncurAsymptomatic', 'success')
+        PlotStackedManyIndex(df, indexList, 'IncurPresentDay', 'success')
+        
+        PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success', doCount=True)
+        PlotRangeManyIndex(df[df['End_Day'] < 100], indexList, 'End_Day', 'success')
     
     print('Total runs {}'.format(df['End_Day'].count()))
     PrintSomeStats(df, {'IsoComply' : 0.93, 'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 2.5})
@@ -280,5 +298,5 @@ namePath = 'output/trace/'
 #ProcessResults(namePath, [nameStr, 'run047', 'run048'])
 #ProcessResults(namePath, ['run049'])
 #ProcessResultsOne(namePath, [nameStr, 'run047', 'run048'])
-ProcessResults(namePath, ['run055'])
+ProcessResults(namePath, ['run062'])
 

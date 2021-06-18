@@ -113,6 +113,7 @@ topOfFile = [
     'param_policy',
     'policy_pipeline',
     'Global_Transmissibility',
+    'global_trans_std',
     'R0_range',
     'param_vac_uptake',
     'param_vacincurmult',
