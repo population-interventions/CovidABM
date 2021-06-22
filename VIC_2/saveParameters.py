@@ -148,7 +148,7 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
 paramValuesFullValues = {
     'rand_seed' : listToStr(random.randint(10000000, size=(100))),
     'total_population' : '6681000',
-    'param_vac_uptake' : listToStr([0.5, 0.7, 0.9]),
+    'param_vac_uptake' : listToStr([0.5, 0.6, 0.7, 0.8, 0.9]),
     'param_final_phase' : listToStr([2, 3]),
     'policy_pipeline' : listToStr([
         '"ME_ME_ME"', 
@@ -158,7 +158,8 @@ paramValuesFullValues = {
     ]),
     'init_timenow_limit' : 30,
     'incur_timenow_limit' : 4,
-    'param_vacIncurMult' : listToStr([0.02, 0.1, 0.5, 2.5, 12.5]),
+    'global_trans_std' : 1.2,
+    'param_vacIncurMult' : listToStr([0.02, 0.08, 0.32, 1.28, 5.12]),
     'R0_range' : listToStr([4.5, 4.833, 5.166]),
     'max_stage' : 4,
     'initial_cases' : 0,
@@ -170,6 +171,9 @@ paramValuesFullValues = {
     'stage_test_index' : 0,
     'trace_calibration' : 0,
     'end_day' : 730,
+    'virlce_deviate' : 1,
+    'spread_deviate' : 1,
+    'move_deviate' : 1,
 }
 
 paramIncursion = {
@@ -203,4 +207,4 @@ paramValues_stage2Infect = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
