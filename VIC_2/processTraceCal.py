@@ -214,7 +214,7 @@ def ProcessResults(path, nameList):
     # Reset plot parameters
     plt.rcParams.update(plt.rcParamsDefault)
     
-    if False:
+    if True:
         PlotIntegerRange(df, 'R0', 'success',
                          ['IsoComply', 'TraceMult', 'PresentProp'],
                          {'TraceMult' : 1, 'IsoComply' : 0.95},
@@ -272,7 +272,8 @@ def ProcessResults(path, nameList):
         
         PlotStackedManyIndex(df, indexList, 'any_trace', 'success')
         PlotStackedManyIndex(df, indexList, 'any_transmit', 'success')
-        PlotRangeManyIndex(df, indexList, 'incurR', 'success', doCount=True)
+        PlotStackedManyIndex(df[df['incurR'] < 10], indexList, 'incurR', 'success')
+        
         
         PlotRangeManyIndex(df[df['first_trace_occur'] >= 0], indexList, 'first_trace_occur', 'success')
         PlotRangeManyIndex(df[(df['first_trace_infections'] < 40) & (df['first_trace_infections'] > 0)],
@@ -287,6 +288,7 @@ def ProcessResults(path, nameList):
     
     print('Total runs {}'.format(df['End_Day'].count()))
     PrintSomeStats(df, {'IsoComply' : 0.93, 'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 2.5})
+    PrintSomeStats(df, {'IsoComply' : 0.93, 'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5})
 
 
 nameStr = 'run048'
@@ -298,5 +300,5 @@ namePath = 'output/trace/'
 #ProcessResults(namePath, [nameStr, 'run047', 'run048'])
 #ProcessResults(namePath, ['run049'])
 #ProcessResultsOne(namePath, [nameStr, 'run047', 'run048'])
-ProcessResults(namePath, ['run062'])
+ProcessResults(namePath, ['run063'])
 

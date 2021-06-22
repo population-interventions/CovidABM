@@ -125,7 +125,7 @@ defaultParams = {
 }
 
 paramValuesTestR_stageTestFull = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(2000))),
+    'rand_seed' : listToStr(random.randint(10000000, size=(20000))),
     'param_policy' : listToStr([
         '"StageCal Test"',
     ]),
@@ -203,4 +203,4 @@ paramValues_stage2Infect = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramIncursion, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesTestR_stageTestFull, topOfFile=topOfFile)
