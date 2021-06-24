@@ -176,10 +176,10 @@ to createSimulants
       set infectedContactList table:make
       set hasKnownContact false
       
-      set move_chance_multiplier 2 * rngs:rnd-beta moveInitSeedID (10 / move_deviate) (10 / move_deviate)
-      set visit_chance_multiplier 5 * rngs:rnd-beta moveInitSeedID (1 / spread_deviate) (4 / spread_deviate)
-      set superSpread_chance_multiplier 6 * rngs:rnd-beta moveInitSeedID (0.6 / spread_deviate) (3 / spread_deviate)
-      set personalVirulence rngs:rnd-beta moveInitSeedID (global_trans_a / virlce_deviate) (global_trans_b / virlce_deviate)
+      set move_chance_multiplier 2 * rngs:rnd-beta moveInitSeedID (10 / hetro_mult) (10 / hetro_mult)
+      set visit_chance_multiplier 5 * rngs:rnd-beta moveInitSeedID (1 / hetro_mult) (4 / hetro_mult)
+      set superSpread_chance_multiplier 6 * rngs:rnd-beta moveInitSeedID (0.6 / hetro_mult) (3 / hetro_mult)
+      set personalVirulence rngs:rnd-beta moveInitSeedID (global_trans_a / hetro_mult) (global_trans_b / hetro_mult)
 
       set cohortIndex pop_index
       set agerange cohort_age
@@ -247,24 +247,26 @@ to createSimulants
 end
 
 to setupInitialVaccination
-  foreach popDivisionTable_keys [ index ->
-    let cohort table:get populationCohortCache index
-    let cohortData table:get popDivisionTable index
-    
-    let vaccinatedCount item 13 cohortData
-    let progMin item 14 cohortData
-    let progMax item 15 cohortData
-    ;; Only pre-model vaccinate someone if they would take up the vaccine.
-    ;; This ensures that the final vaccinated proportion matches param_vac_uptake.
-    ask cohort [
-      if vaccinatedCount > 0 and sm_vac_uptake < param_vac_uptake [
-        let myVaccineData table:get vaccineParamsTable vaccineType
-        let maxVaccineWaitDays item 2 myVaccineData
-        set vacWaitDays round(maxVaccineWaitDays * (1 - (progMin + (progMax - progMin) * rngs:rnd-beta vaccineInitSeedID 1 1)))
-        set vacWaitDays min (list maxVaccineWaitDays max (list 0 vacWaitDays))
-        ;print vacWaitDays
-        simul_vaccinate_me_force
-        set vaccinatedCount vaccinatedCount - 1
+  if param_vac_uptake > 0 [ ;; This check is just a speedup
+    foreach popDivisionTable_keys [ index ->
+      let cohort table:get populationCohortCache index
+      let cohortData table:get popDivisionTable index
+      
+      let vaccinatedCount item 13 cohortData
+      let progMin item 14 cohortData
+      let progMax item 15 cohortData
+      ;; Only pre-model vaccinate someone if they would take up the vaccine.
+      ;; This ensures that the final vaccinated proportion matches param_vac_uptake.
+      ask cohort [
+        if vaccinatedCount > 0 and sm_vac_uptake < param_vac_uptake [
+          let myVaccineData table:get vaccineParamsTable vaccineType
+          let maxVaccineWaitDays item 2 myVaccineData
+          set vacWaitDays round(maxVaccineWaitDays * (1 - (progMin + (progMax - progMin) * rngs:rnd-beta vaccineInitSeedID 1 1)))
+          set vacWaitDays min (list maxVaccineWaitDays max (list 0 vacWaitDays))
+          ;print vacWaitDays
+          simul_vaccinate_me_force
+          set vaccinatedCount vaccinatedCount - 1
+        ]
       ]
     ]
   ]

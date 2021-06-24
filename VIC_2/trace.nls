@@ -139,10 +139,10 @@ to traceadjust
   ;; Rescale this to match 80% found at 5 cases per week.
   ifelse infectionsinperiod7 > 0
   [
-    set track_and_trace_efficiency  trace_eff_base * (0.88 ^ ln(((infectionsinperiod7) / 35) ^ 2)) * traceMult * param_trace_mult
+    set track_and_trace_efficiency  trace_eff_base * (0.88 ^ ln(((infectionsinperiod7) / 35) ^ 2)) * traceMult
   ]
   [
-    set track_and_trace_efficiency  trace_eff_base * (0.88 ^ ln((1 / 35) ^ 2)) *  traceMult * param_trace_mult
+    set track_and_trace_efficiency  trace_eff_base * (0.88 ^ ln((1 / 35) ^ 2)) *  traceMult
   ]
 end
 

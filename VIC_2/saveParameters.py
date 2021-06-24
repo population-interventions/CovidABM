@@ -150,11 +150,11 @@ paramValuesFullValues = {
     'total_population' : '6681000',
     'param_vac_uptake' : listToStr([0.5, 0.6, 0.7, 0.8, 0.9]),
     'param_final_phase' : listToStr([2, 3]),
-    'policy_pipeline' : listToStr([
-        '"ME_ME_ME"', 
+    'policy_pipeline' : listToStr([ 
         '"ME_ME_TS"',
         '"ME_ME_LS"',
         '"ME_TS_LS"',
+        '"ME_TS_BS"',
     ]),
     'init_timenow_limit' : 30,
     'incur_timenow_limit' : 4,
@@ -171,9 +171,38 @@ paramValuesFullValues = {
     'stage_test_index' : 0,
     'trace_calibration' : 0,
     'end_day' : 730,
-    'virlce_deviate' : 1,
-    'spread_deviate' : 1,
-    'move_deviate' : 1,
+    'hetro_mult' : 1,
+    'compound_param' : '"None"',
+}
+
+paramSensitivityTest = {
+    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
+    'total_population' : '6681000',
+    'param_vac_uptake' : listToStr([0, 0.5, 0.7, 0.9]),
+    'param_final_phase' : 2,
+    'policy_pipeline' : '"ME_TS_LS"',
+    'param_vacIncurMult' : 1.28,
+    'R0_range' : 4.833,
+    'policy_pipeline' : listToStr([ 
+        '"None"',
+        '"Hetro_Test"',
+    ]),
+    'mask_efficacy_mult' = listToStr([0, 1]),
+    'param_trace_mult' = listToStr([0, 0.5, 1]),
+    'init_timenow_limit' : 30,
+    'incur_timenow_limit' : 4,
+    'global_trans_std' : 1.2,
+    'max_stage' : 4,
+    'initial_cases' : 0,
+    'presimdailycases' : 0,
+    'track_r' : 'false',
+    'calibrate' : 'false',
+    'track_slope' : 'false',
+    'set_shape' : 'false',
+    'stage_test_index' : 0,
+    'trace_calibration' : 0,
+    'end_day' : 730,
+    'hetro_mult' : 1,
 }
 
 paramIncursion = {

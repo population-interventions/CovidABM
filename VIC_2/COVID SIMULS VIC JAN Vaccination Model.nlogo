@@ -139,7 +139,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -199,10 +199,10 @@ NIL
 1
 
 MONITOR
-10
-693
-159
-750
+12
+710
+161
+767
 Deaths
 Deathcount
 0
@@ -240,17 +240,17 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.1
 0.01
 1
 NIL
 HORIZONTAL
 
 MONITOR
-10
-754
-159
-811
+12
+772
+161
+829
 % Total Infections
 cumulativeInfected / Total_Population * 100
 2
@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-51.0
+10.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-51.0
+10.0
 .5
 1
 NIL
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+15.0
 1
 1
 NIL
@@ -719,7 +719,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -824,17 +824,17 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-354
-993
-551
-1026
+359
+989
+556
+1022
 Asymptomatic_Trans
 Asymptomatic_Trans
 0
@@ -1027,9 +1027,9 @@ SLIDER
 240
 param_vac_uptake
 param_vac_uptake
-0.5
+0
 1
-0.6
+0.5
 0.1
 1
 NIL
@@ -1158,8 +1158,8 @@ CHOOSER
 362
 param_policy
 param_policy
-"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-1
+"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
+4
 
 SLIDER
 1609
@@ -1236,10 +1236,10 @@ PENS
 "Infective" 1.0 0 -1184463 true "" "plot count simuls with [ color = red and timenow > non_infective_time ] * extraScaleFactor * (Scale_Factor ^ scalephase)"
 
 SLIDER
-354
-1030
-549
-1063
+359
+1025
+554
+1058
 Asymptom_Prop
 Asymptom_Prop
 0
@@ -1341,7 +1341,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -1528,10 +1528,10 @@ PENS
 "pen-1" 1.0 0 -5298144 true "" "histogram [ cohortIndex ] of simuls with [ color = red ]"
 
 MONITOR
-10
-633
-160
-690
+12
+652
+162
+709
 Total Infected
 cumulativeInfected
 17
@@ -1540,9 +1540,9 @@ cumulativeInfected
 
 MONITOR
 12
-817
+832
 167
-874
+889
 % Living Recovered
 recoverProportion * 100
 2
@@ -1644,10 +1644,10 @@ Tracked Infection %
 11
 
 SLIDER
-17
-1003
-207
-1036
+15
+1010
+205
+1043
 calibrate_stage_switch
 calibrate_stage_switch
 0
@@ -1659,10 +1659,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-19
-1043
-319
-1076
+18
+1050
+318
+1083
 stage_test_index
 stage_test_index
 0
@@ -1921,10 +1921,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-15
-878
-169
-935
+13
+889
+167
+946
 % Recovered First
 recoverProportion * 100 * (table:get recoverCountByVariant 1) / (table:get recoverCountByVariant 1 + table:get recoverCountByVariant 2)
 2
@@ -1932,10 +1932,10 @@ recoverProportion * 100 * (table:get recoverCountByVariant 1) / (table:get recov
 14
 
 MONITOR
-15
-943
-169
-1000
+13
+949
+167
+1006
 % Recovered Second
 recoverProportion * 100 * (table:get recoverCountByVariant 2) / (table:get recoverCountByVariant 1 + table:get recoverCountByVariant 2)
 2
@@ -2073,7 +2073,7 @@ param_final_phase
 param_final_phase
 -1
 10
-3.0
+2.0
 1
 1
 NIL
@@ -2181,10 +2181,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-215
-1003
-319
-1036
+213
+1010
+317
+1043
 calibrate
 calibrate
 1
@@ -2248,10 +2248,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-12
-479
-205
-512
+13
+478
+206
+511
 param_policy_force_days
 param_policy_force_days
 0
@@ -2264,9 +2264,9 @@ HORIZONTAL
 
 SLIDER
 10
-517
+515
 204
-550
+548
 param_policy_force_stage
 param_policy_force_stage
 -1
@@ -2316,7 +2316,7 @@ param_vacIncurMult
 param_vacIncurMult
 0
 20
-5.12
+0.02
 0.1
 1
 NIL
@@ -2361,7 +2361,7 @@ param_trace_mult
 param_trace_mult
 0
 8
-1.0
+0.5
 0.05
 1
 NIL
@@ -2458,14 +2458,14 @@ NIL
 HORIZONTAL
 
 CHOOSER
-13
-567
-152
-612
+10
+554
+149
+599
 policy_pipeline
 policy_pipeline
-"None" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS"
-1
+"None" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS"
+5
 
 SLIDER
 162
@@ -2498,42 +2498,12 @@ NIL
 HORIZONTAL
 
 SLIDER
-2173
-310
-2346
-343
-move_deviate
-move_deviate
-0
-2
-1.0
-0.1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-2169
-263
-2342
-296
-spread_deviate
-spread_deviate
-0
-3
-1.0
-0.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-2170
-219
-2343
-252
-virlce_deviate
-virlce_deviate
+359
+1063
+532
+1096
+hetro_mult
+hetro_mult
 0
 3
 1.0
@@ -2571,6 +2541,16 @@ global_trans_std
 1
 NIL
 HORIZONTAL
+
+CHOOSER
+10
+602
+149
+647
+compound_param
+compound_param
+"None" "Hetro_Test"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -2998,121 +2978,121 @@ NetLogo 6.2.0
     <metric>atsi_listOut</metric>
     <metric>morbid_listOut</metric>
     <enumeratedValueSet variable="rand_seed">
-      <value value="5215580"/>
-      <value value="5276631"/>
-      <value value="1315635"/>
-      <value value="6964630"/>
-      <value value="2670789"/>
-      <value value="4894407"/>
-      <value value="3587852"/>
-      <value value="9934880"/>
-      <value value="6856682"/>
-      <value value="9710314"/>
-      <value value="8515189"/>
-      <value value="1912482"/>
-      <value value="5552010"/>
-      <value value="658918"/>
-      <value value="4431665"/>
-      <value value="9009086"/>
-      <value value="5273337"/>
-      <value value="5812794"/>
-      <value value="2851987"/>
-      <value value="1258052"/>
-      <value value="9267499"/>
-      <value value="5293192"/>
-      <value value="5875909"/>
-      <value value="9806381"/>
-      <value value="7185879"/>
-      <value value="9622206"/>
-      <value value="1999710"/>
-      <value value="960915"/>
-      <value value="8472517"/>
-      <value value="2890877"/>
-      <value value="6177679"/>
-      <value value="523219"/>
-      <value value="5597893"/>
-      <value value="7480936"/>
-      <value value="1701608"/>
-      <value value="5492201"/>
-      <value value="2828169"/>
-      <value value="7104881"/>
-      <value value="4107916"/>
-      <value value="1464878"/>
-      <value value="4304590"/>
-      <value value="252957"/>
-      <value value="8414709"/>
-      <value value="3843924"/>
-      <value value="5954510"/>
-      <value value="6326495"/>
-      <value value="6716385"/>
-      <value value="9262905"/>
-      <value value="5180851"/>
-      <value value="7186147"/>
-      <value value="4301056"/>
-      <value value="5933603"/>
-      <value value="3724061"/>
-      <value value="4412881"/>
-      <value value="7119709"/>
-      <value value="9998665"/>
-      <value value="9451034"/>
-      <value value="5244146"/>
-      <value value="2827824"/>
-      <value value="8895839"/>
-      <value value="4457364"/>
-      <value value="1959452"/>
-      <value value="7173788"/>
-      <value value="4039586"/>
-      <value value="4939503"/>
-      <value value="6257695"/>
-      <value value="3112909"/>
-      <value value="9491988"/>
-      <value value="2455615"/>
-      <value value="9043059"/>
-      <value value="8133020"/>
-      <value value="493511"/>
-      <value value="8156968"/>
-      <value value="7864901"/>
-      <value value="2867637"/>
-      <value value="6488339"/>
-      <value value="1858746"/>
-      <value value="5939059"/>
-      <value value="9260541"/>
-      <value value="8228303"/>
-      <value value="3437220"/>
-      <value value="2840239"/>
-      <value value="9975143"/>
-      <value value="3458035"/>
-      <value value="6455331"/>
-      <value value="2376950"/>
-      <value value="7374444"/>
-      <value value="6697345"/>
-      <value value="2966422"/>
-      <value value="2845859"/>
-      <value value="4271360"/>
-      <value value="5242506"/>
-      <value value="136674"/>
-      <value value="1720661"/>
-      <value value="1264263"/>
-      <value value="1601477"/>
-      <value value="4521848"/>
-      <value value="4269518"/>
-      <value value="4179040"/>
-      <value value="1458572"/>
+      <value value="4058233"/>
+      <value value="4939064"/>
+      <value value="6653468"/>
+      <value value="3479925"/>
+      <value value="9114105"/>
+      <value value="2964738"/>
+      <value value="1112199"/>
+      <value value="9048296"/>
+      <value value="6626847"/>
+      <value value="4062195"/>
+      <value value="8932356"/>
+      <value value="7940118"/>
+      <value value="2518419"/>
+      <value value="5265632"/>
+      <value value="1094749"/>
+      <value value="7090714"/>
+      <value value="1087527"/>
+      <value value="2406379"/>
+      <value value="8555457"/>
+      <value value="2790825"/>
+      <value value="1987751"/>
+      <value value="9625616"/>
+      <value value="4443151"/>
+      <value value="8124687"/>
+      <value value="2674723"/>
+      <value value="6568058"/>
+      <value value="9301754"/>
+      <value value="6870828"/>
+      <value value="7100127"/>
+      <value value="7934370"/>
+      <value value="55859"/>
+      <value value="2464738"/>
+      <value value="5902809"/>
+      <value value="5685605"/>
+      <value value="298823"/>
+      <value value="977815"/>
+      <value value="4417468"/>
+      <value value="8323145"/>
+      <value value="7231795"/>
+      <value value="6535359"/>
+      <value value="352002"/>
+      <value value="2720611"/>
+      <value value="470390"/>
+      <value value="9918078"/>
+      <value value="2957538"/>
+      <value value="7159012"/>
+      <value value="232320"/>
+      <value value="7444530"/>
+      <value value="5661734"/>
+      <value value="5020147"/>
+      <value value="2955288"/>
+      <value value="9349180"/>
+      <value value="7549720"/>
+      <value value="6022824"/>
+      <value value="6177189"/>
+      <value value="8620210"/>
+      <value value="1022892"/>
+      <value value="4265063"/>
+      <value value="1573655"/>
+      <value value="6102501"/>
+      <value value="6934962"/>
+      <value value="7359178"/>
+      <value value="5598333"/>
+      <value value="5178663"/>
+      <value value="3069946"/>
+      <value value="6968095"/>
+      <value value="6252997"/>
+      <value value="7540558"/>
+      <value value="7010230"/>
+      <value value="1871354"/>
+      <value value="5973748"/>
+      <value value="3405782"/>
+      <value value="8145915"/>
+      <value value="8627414"/>
+      <value value="4400785"/>
+      <value value="9937157"/>
+      <value value="5325380"/>
+      <value value="6860842"/>
+      <value value="8404412"/>
+      <value value="8846556"/>
+      <value value="9494178"/>
+      <value value="5729842"/>
+      <value value="3150742"/>
+      <value value="4515647"/>
+      <value value="2707907"/>
+      <value value="4478703"/>
+      <value value="9716885"/>
+      <value value="9430815"/>
+      <value value="8831765"/>
+      <value value="5237293"/>
+      <value value="550047"/>
+      <value value="4154444"/>
+      <value value="5208061"/>
+      <value value="5140692"/>
+      <value value="4856710"/>
+      <value value="5805296"/>
+      <value value="9046170"/>
+      <value value="7847167"/>
+      <value value="1167312"/>
+      <value value="7335003"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="gather_location_count">
       <value value="200"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_policy">
-      <value value="&quot;ModerateElim&quot;"/>
+      <value value="&quot;BarelySupress&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="policy_pipeline">
-      <value value="&quot;ME_ME_ME&quot;"/>
       <value value="&quot;ME_ME_TS&quot;"/>
       <value value="&quot;ME_ME_LS&quot;"/>
       <value value="&quot;ME_TS_LS&quot;"/>
+      <value value="&quot;ME_TS_BS&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.1189788586057675"/>
+      <value value="0.1233349512139955"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_trans_std">
       <value value="1.2"/>
@@ -3142,6 +3122,9 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="calibrate">
       <value value="false"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="daily_infect_binom">
+      <value value="5"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="end_day">
       <value value="730"/>
     </enumeratedValueSet>
@@ -3152,16 +3135,19 @@ NetLogo 6.2.0
       <value value="50"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="essential_workers">
-      <value value="50"/>
+      <value value="100"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="age_isolation">
       <value value="0"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="daily_infect_binom">
-      <value value="5"/>
+    <enumeratedValueSet variable="compound_param">
+      <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="asymptomatic_trans">
-      <value value="0.7531202659753287"/>
+      <value value="0.7211633198996289"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="hetro_mult">
+      <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="house_resample_red_group">
       <value value="0.95"/>
@@ -3209,16 +3195,13 @@ NetLogo 6.2.0
       <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="mask_wearing">
-      <value value="50"/>
+      <value value="15"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="maskpolicy">
       <value value="true"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="max_stage">
       <value value="4"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="move_deviate">
-      <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="non_infective_time">
       <value value="2"/>
@@ -3231,7 +3214,7 @@ NetLogo 6.2.0
       <value value="-1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="asymptom_prop">
-      <value value="0.3491365341318563"/>
+      <value value="0.27855821781408385"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_policy_force_days">
       <value value="0"/>
@@ -3261,7 +3244,7 @@ NetLogo 6.2.0
       <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="complacency_bound">
-      <value value="30"/>
+      <value value="5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="policy_pipe_time">
       <value value="182.5"/>
@@ -3285,10 +3268,10 @@ NetLogo 6.2.0
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="proportion_people_avoid">
-      <value value="30"/>
+      <value value="5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="proportion_time_avoid">
-      <value value="30"/>
+      <value value="5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="calibrate_stage_switch">
       <value value="300"/>
@@ -3303,13 +3286,13 @@ NetLogo 6.2.0
       <value value="0.041"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reinfect_area">
-      <value value="0.6291552936130067"/>
+      <value value="0.5717966359423101"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reinfect_delay">
       <value value="21"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reinfect_risk">
-      <value value="0.8317502356658224"/>
+      <value value="0.7878547618165612"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="report_proportion">
       <value value="1"/>
@@ -3336,16 +3319,13 @@ NetLogo 6.2.0
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="span">
-      <value value="8"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="spread_deviate">
-      <value value="1"/>
+      <value value="10"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="complacency_loss">
       <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="superspreaders">
-      <value value="0.06"/>
+      <value value="0.1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sympt_present_max">
       <value value="9"/>
@@ -3392,14 +3372,11 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="variant_transmiss_growth">
       <value value="1.5"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="virlce_deviate">
-      <value value="1"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="visit_frequency">
       <value value="0.1428"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="visit_radius">
-      <value value="6.2"/>
+      <value value="8.8"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="yearly_recover_prop_loss">
       <value value="0"/>
@@ -23431,10 +23408,11 @@ NetLogo 6.2.0
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.118336359"/>
       <value value="0.128090431"/>
-      <value value="0.137843084"/>
-      <value value="0.147912686"/>
+      <value value="0.137843"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="hetro_mult">
+      <value value="0.2"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_trans_std">
       <value value="0.12"/>
@@ -23528,9 +23506,6 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="max_stage">
       <value value="4"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="move_deviate">
-      <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="non_infective_time">
       <value value="2"/>
@@ -23649,9 +23624,6 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="span">
       <value value="10"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="spread_deviate">
-      <value value="1"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="complacency_bound">
       <value value="0"/>
     </enumeratedValueSet>
@@ -23702,9 +23674,6 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="variant_transmiss_growth">
       <value value="1.5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="virlce_deviate">
-      <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="visit_frequency">
       <value value="0.1428"/>
@@ -37595,6 +37564,431 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="virlce_deviate">
       <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="visit_frequency">
+      <value value="0.1428"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="visit_radius">
+      <value value="8.8"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="yearly_recover_prop_loss">
+      <value value="0"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="Sensitivity" repetitions="1" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>days</metric>
+    <metric>stage_listOut</metric>
+    <metric>scalephase</metric>
+    <metric>cumulativeInfected</metric>
+    <metric>casesReportedToday</metric>
+    <metric>global_transmissibility_out</metric>
+    <metric>trace_eff_base</metric>
+    <metric>Deathcount</metric>
+    <metric>totalOverseasIncursions</metric>
+    <metric>vacineEff_nameOut</metric>
+    <metric>vacineEff_transOut</metric>
+    <metric>vacineEff_areaOut</metric>
+    <metric>infectNoVacArray_listOut</metric>
+    <metric>infectVacArray_listOut</metric>
+    <metric>age_listOut</metric>
+    <metric>atsi_listOut</metric>
+    <metric>morbid_listOut</metric>
+    <enumeratedValueSet variable="rand_seed">
+      <value value="4058233"/>
+      <value value="4939064"/>
+      <value value="6653468"/>
+      <value value="3479925"/>
+      <value value="9114105"/>
+      <value value="2964738"/>
+      <value value="1112199"/>
+      <value value="9048296"/>
+      <value value="6626847"/>
+      <value value="4062195"/>
+      <value value="8932356"/>
+      <value value="7940118"/>
+      <value value="2518419"/>
+      <value value="5265632"/>
+      <value value="1094749"/>
+      <value value="7090714"/>
+      <value value="1087527"/>
+      <value value="2406379"/>
+      <value value="8555457"/>
+      <value value="2790825"/>
+      <value value="1987751"/>
+      <value value="9625616"/>
+      <value value="4443151"/>
+      <value value="8124687"/>
+      <value value="2674723"/>
+      <value value="6568058"/>
+      <value value="9301754"/>
+      <value value="6870828"/>
+      <value value="7100127"/>
+      <value value="7934370"/>
+      <value value="55859"/>
+      <value value="2464738"/>
+      <value value="5902809"/>
+      <value value="5685605"/>
+      <value value="298823"/>
+      <value value="977815"/>
+      <value value="4417468"/>
+      <value value="8323145"/>
+      <value value="7231795"/>
+      <value value="6535359"/>
+      <value value="352002"/>
+      <value value="2720611"/>
+      <value value="470390"/>
+      <value value="9918078"/>
+      <value value="2957538"/>
+      <value value="7159012"/>
+      <value value="232320"/>
+      <value value="7444530"/>
+      <value value="5661734"/>
+      <value value="5020147"/>
+      <value value="2955288"/>
+      <value value="9349180"/>
+      <value value="7549720"/>
+      <value value="6022824"/>
+      <value value="6177189"/>
+      <value value="8620210"/>
+      <value value="1022892"/>
+      <value value="4265063"/>
+      <value value="1573655"/>
+      <value value="6102501"/>
+      <value value="6934962"/>
+      <value value="7359178"/>
+      <value value="5598333"/>
+      <value value="5178663"/>
+      <value value="3069946"/>
+      <value value="6968095"/>
+      <value value="6252997"/>
+      <value value="7540558"/>
+      <value value="7010230"/>
+      <value value="1871354"/>
+      <value value="5973748"/>
+      <value value="3405782"/>
+      <value value="8145915"/>
+      <value value="8627414"/>
+      <value value="4400785"/>
+      <value value="9937157"/>
+      <value value="5325380"/>
+      <value value="6860842"/>
+      <value value="8404412"/>
+      <value value="8846556"/>
+      <value value="9494178"/>
+      <value value="5729842"/>
+      <value value="3150742"/>
+      <value value="4515647"/>
+      <value value="2707907"/>
+      <value value="4478703"/>
+      <value value="9716885"/>
+      <value value="9430815"/>
+      <value value="8831765"/>
+      <value value="5237293"/>
+      <value value="550047"/>
+      <value value="4154444"/>
+      <value value="5208061"/>
+      <value value="5140692"/>
+      <value value="4856710"/>
+      <value value="5805296"/>
+      <value value="9046170"/>
+      <value value="7847167"/>
+      <value value="1167312"/>
+      <value value="7335003"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="gather_location_count">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_policy">
+      <value value="&quot;BarelySupress&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="policy_pipeline">
+      <value value="&quot;ME_ME_TS&quot;"/>
+      <value value="&quot;ME_ME_LS&quot;"/>
+      <value value="&quot;ME_TS_LS&quot;"/>
+      <value value="&quot;ME_TS_BS&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="global_transmissibility">
+      <value value="0.1233349512139955"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="global_trans_std">
+      <value value="1.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="r0_range">
+      <value value="4.5"/>
+      <value value="4.833"/>
+      <value value="5.166"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_vac_uptake">
+      <value value="0.5"/>
+      <value value="0.6"/>
+      <value value="0.7"/>
+      <value value="0.8"/>
+      <value value="0.9"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_vacincurmult">
+      <value value="0.02"/>
+      <value value="0.08"/>
+      <value value="0.32"/>
+      <value value="1.28"/>
+      <value value="5.12"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="stage_test_index">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="calibrate">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="daily_infect_binom">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="end_day">
+      <value value="730"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="end_r_reported">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="ess_w_risk_reduction">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="essential_workers">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="age_isolation">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="compound_param">
+      <value value="&quot;None&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="asymptomatic_trans">
+      <value value="0.7211633198996289"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="hetro_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="house_resample_red_group">
+      <value value="0.95"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="household_iso_factor">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="illness_period">
+      <value value="21.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="incubation_period">
+      <value value="4.7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="incur_timenow_limit">
+      <value value="4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="incursion_phase_speed_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="infect_iso_factor">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init_timenow_limit">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial_cases">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial_primary_prop">
+      <value value="0.6"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial_variant_2_prop">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="isocomply_override">
+      <value value="0.93"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="isolate_on_inf_notice">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="isolation_transmission">
+      <value value="0.33"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="mask_efficacy_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="mask_wearing">
+      <value value="15"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="maskpolicy">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max_stage">
+      <value value="4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="non_infective_time">
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_final_phase">
+      <value value="2"/>
+      <value value="3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_incur_phase_limit">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="asymptom_prop">
+      <value value="0.27855821781408385"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_policy_force_days">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_policy_force_preset">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_policy_force_stage">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_recovered_prop">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_trace_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_trigger_loosen">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_vac_rate_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="case_reporting_delay">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_vac_wane">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="complacency_bound">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="policy_pipe_time">
+      <value value="182.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="asymptom_trace_mult">
+      <value value="0.66"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="population">
+      <value value="2500"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="presimdailycases">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="prev_var_area">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="prev_var_risk">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="profile_on">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="proportion_people_avoid">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="proportion_time_avoid">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="calibrate_stage_switch">
+      <value value="300"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="accept_isolation_prop">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="recov_var_match_rate">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="recovered_match_rate">
+      <value value="0.041"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="reinfect_area">
+      <value value="0.5717966359423101"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="reinfect_delay">
+      <value value="21"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="reinfect_risk">
+      <value value="0.7878547618165612"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="report_proportion">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="scale">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="scale_factor">
+      <value value="4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="scale_threshold">
+      <value value="240"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="schoolsopen">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="se_illnesspd">
+      <value value="4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="se_incubation">
+      <value value="2.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="set_shape">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="span">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="complacency_loss">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="superspreaders">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sympt_present_max">
+      <value value="9"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sympt_present_min">
+      <value value="6"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sympt_present_prop">
+      <value value="0.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="total_population">
+      <value value="6681000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trace_attempt_limit">
+      <value value="3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trace_calibration">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="track_iso_factor">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="track_r">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="track_slope">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tracking">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trans_draw_max">
+      <value value="0.128090431"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trans_draw_min">
+      <value value="0.118336359"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="vac_variant_eff_prop">
+      <value value="0.86"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="vaccine_available">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="variant_transmiss_growth">
+      <value value="1.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="visit_frequency">
       <value value="0.1428"/>
