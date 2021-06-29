@@ -21,7 +21,7 @@ to params_setDrawValues
   set reinfect_risk rngs:rnd-beta stream_id 8 2
   set reinfect_area rngs:rnd-beta stream_id 10 10
   
-  let averageTraced 0.7 ;(0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2)) * param_trace_mult
+  let averageTraced (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2)) * param_trace_mult
   set trace_eff_base 1 - (1 - averageTraced) ^ (1 / trace_attempt_limit)
   
   let R0_lowerBound 0.118336359
