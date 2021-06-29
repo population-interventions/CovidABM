@@ -176,19 +176,24 @@ paramValuesFullValues = {
 }
 
 paramSensitivityTest = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
+    'rand_seed' : listToStr(random.randint(10000000, size=(50))),
     'total_population' : '6681000',
-    'param_vac_uptake' : listToStr([0, 0.5, 0.7, 0.9]),
-    'param_final_phase' : 2,
-    'policy_pipeline' : '"ME_TS_LS"',
-    'param_vacIncurMult' : 1.28,
+    'param_vac_uptake' : listToStr([0, 0.3, 0.5, 0.7, 0.9]),
+    'param_final_phase' : listToStr([2, 3]),
+    'policy_pipeline' : '"ME_TS_S1"',
+    'param_vacIncurMult' : listToStr([1.28, 5.12]),
     'R0_range' : 4.833,
-    'policy_pipeline' : listToStr([ 
+    'compound_param' : listToStr([ 
         '"None"',
         '"Hetro_Test"',
     ]),
-    'mask_efficacy_mult' = listToStr([0, 1]),
-    'param_trace_mult' = listToStr([0, 0.5, 1]),
+    'compound_mask_param' : listToStr([ 
+        '"Normal"',
+        '"NoMask"',
+        '"Min80"',
+    ]),
+    'mask_efficacy_mult' : listToStr([1]),
+    'param_trace_mult' : listToStr([0, 0.5, 1]),
     'init_timenow_limit' : 30,
     'incur_timenow_limit' : 4,
     'global_trans_std' : 1.2,
@@ -236,4 +241,4 @@ paramValues_stage2Infect = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramSensitivityTest, topOfFile=topOfFile)

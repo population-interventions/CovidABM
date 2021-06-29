@@ -254,6 +254,21 @@ end
 ;;;*********************************************************************************************************************
 
 to updatePolicyPipeline
+  if policy_pipeline = "ME_TS_S1" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      ifelse ticks < policy_pipe_time 
+      [
+        set param_policy "ModerateElim"
+      ]
+      [
+        set param_policy "TightSupress"
+      ]
+    ]
+    [
+      set param_policy "Stage1"
+    ]
+  ]
   if policy_pipeline = "ME_ME_ME" [
     set param_policy "ModerateElim"
   ]

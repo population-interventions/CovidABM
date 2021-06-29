@@ -169,4 +169,16 @@ to test_traceadjust
   set infectionsinperiod7 100 
   traceadjust
   print list (infectionsinperiod7) track_and_trace_efficiency
+  set infectionsinperiod7 350 
+  traceadjust
+  print list (infectionsinperiod7) track_and_trace_efficiency
+  set infectionsinperiod7 1000 
+  traceadjust
+  print list (infectionsinperiod7) track_and_trace_efficiency
+  set infectionsinperiod7 3500 
+  traceadjust
+  print list (infectionsinperiod7) track_and_trace_efficiency
+  set infectionsinperiod7 10000 
+  traceadjust
+  print list (infectionsinperiod7) track_and_trace_efficiency
 end
