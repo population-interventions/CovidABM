@@ -136,13 +136,19 @@ to trace_doTrace
 end
 
 to traceadjust
-  ;; Rescale this to match 80% found at 5 cases per week.
-  ifelse infectionsinperiod7 > 0
+  ifelse param_trace_mult > 0 
   [
-    set track_and_trace_efficiency  trace_eff_base * (0.88 ^ ln(((infectionsinperiod7) / 35) ^ 2)) * traceMult
+    let dailyInfections (infectionsinperiod7 / 7)
+    ifelse infectionsinperiod7 > 0
+    [
+      set track_and_trace_efficiency (1 / (trace_a * dailyInfections ^ trace_n + trace_b) + trace_c) / dailyInfections
+    ]
+    [
+      set track_and_trace_efficiency t_atOnePerDay
+    ]
   ]
   [
-    set track_and_trace_efficiency  trace_eff_base * (0.88 ^ ln((1 / 35) ^ 2)) *  traceMult
+    set track_and_trace_efficiency 0
   ]
 end
 
@@ -150,35 +156,35 @@ to test_traceadjust
   print traceMult
   set infectionsinperiod7 0
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 1
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 1 * 7
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 5
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 2 * 7
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 10 
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 3 * 7
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 35
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 5 * 7
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 50
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 10 * 7
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 100 
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 50 * 7
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 350 
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 100 * 7
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 1000 
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 500 * 7 
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 3500 
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 1000 * 7 
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
-  set infectionsinperiod7 10000 
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
+  set infectionsinperiod7 5000 * 7
   traceadjust
-  print list (infectionsinperiod7) track_and_trace_efficiency
+  print list (infectionsinperiod7 / 7) track_and_trace_efficiency
 end

@@ -42,8 +42,7 @@ def ProcessVariableEnd(path, nameList, metricName):
     name = nameList[0]
     interestingColumns = [
         'rand_seed', metricName, 'param_policy', 
-        'global_transmissibility', 'totalEndCount', 'slopeAverage',
-        'trackAverage', 'infectedTrackAverage', 'testName',
+        'global_transmissibility', 'totalEndCount', 'testName',
         'gather_location_count',
     ]
     df = pd.DataFrame(columns=interestingColumns)
@@ -171,7 +170,7 @@ nameNumber = '_5'
 namePath = 'runCalibrate'
 #nameStr = 'COVID SIMULS VIC JAN Vaccination Model R test 7-table' + str(nameNumber)
 #nameStr = 'headless MainCalibrate-table' + nameNumber
-nameStr = 'calibrate_stages_083'
+nameStr = 'calibrate_stages_088'
 
 #nameStr = 'calibrate_stages_92' # This is the last large run of current params.
 
@@ -208,7 +207,7 @@ MakePlot(ProcessToPlot(
     ),
     metric_name,
     yTop=9,
-    hlines=[1, 2.5, 5],
+    hlines=[1, 5.5, 6.5],
     figWidth=30,
     figHeight=20,
 )

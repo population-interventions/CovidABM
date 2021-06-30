@@ -144,6 +144,10 @@ to createSimulants
       set cohort_studentCount item 17 cohortData
       set cohort_vaccineType item 18 cohortData
       
+      if param_force_vaccine != "Disabled" [
+        set cohort_vaccineType param_force_vaccine 
+      ]
+      
       set oldCohortIndex pop_index
     ]
     set agentsOfThisIndex agentsOfThisIndex + 1

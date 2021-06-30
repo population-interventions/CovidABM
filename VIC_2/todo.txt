@@ -1,15 +1,33 @@
 
-Add the mixed policy strategy.
-Set/check the vaccination time of adults and kids.
+r0 ranges
+  4.5 - 5.5
+  5.5 - 6.5
 
-Tony/Alex to get hetrogenity of transmissibility.
-Tony to redo tracking and tracing equation - DONE
-Tim to rerun current at 5.0 and timenow \in [0,4]
-VJ correlation of viral load and symptomatic
+vaccine use
+  as per table
+  all AZ
+  all Pfizer
 
-Calibrate isolation compliance to 75% of single incursions hitting less than 100 cases.
-Then calibrate model to find R0 2.5.
-Then calibrate stage 4 to slope of -8% on the downhill of 1500 initial cases at R0 2.5.
+Add incursions
+  20.48
+
+VICTORIA
+Policy etc
+VacKids 5+, No
+Vaccine 0.9, 0.8, 0.7, 0.6, 0.5
+Incursion 0.04, 0.2, 1, 5, 25
+
+GLOBAL
+Vaccine 0.9, 0.7, 0.5, 0.3, 0
+VacKids 5+, No
+Policy ME_TS_S1, ME_TS_BS
+R0 4.5-5.5, 5.5-6.5
+VacForce AZ, PFizer
+Mask 0, 50, 100
+Trace 0, 50, 100
+Incursion 1, 5, 25
+
+cumulativeInfected recoverProportion
 
 == Model parameters ==
 param_vacIncurMult 0.1 0.5 2.5 12.5

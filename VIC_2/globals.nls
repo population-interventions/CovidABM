@@ -118,6 +118,12 @@ globals [
   traceMult
   global_trace_again
   trace_eff_base
+  t_atOnePerDay
+  t_atFivePerDay
+  trace_a
+  trace_b
+  trace_c
+  trace_n
 
   trackCount
   trackSum

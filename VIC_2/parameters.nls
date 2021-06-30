@@ -21,13 +21,32 @@ to params_setDrawValues
   set reinfect_risk rngs:rnd-beta stream_id 8 2
   set reinfect_area rngs:rnd-beta stream_id 10 10
   
-  let averageTraced (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2)) * param_trace_mult
-  set trace_eff_base 1 - (1 - averageTraced) ^ (1 / trace_attempt_limit)
+  if param_trace_mult > 0 [
+    let averageTraced (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2))
+    
+    set t_atOnePerDay 1 * (1 - (1 - 0.9 * param_trace_mult) ^ (1 / trace_attempt_limit))
+    set t_atFivePerDay 5 * (1 - (1 - averageTraced * param_trace_mult) ^ (1 / trace_attempt_limit))
+    
+    set trace_n 0.92
+    set trace_c 50 * param_trace_mult
+    set trace_a ((1 / (t_atFivePerDay - trace_c)) - ((1 ^ trace_n) / (t_atOnePerDay - trace_c))) / ((5 ^ trace_n) - (1 ^ trace_n))
+    set trace_b 1 / (t_atOnePerDay - trace_c) - trace_a * 1 ^ trace_n
+    ;print t_atOnePerDay
+    ;print t_atFivePerDay
+    ;print trace_a
+    ;print trace_b
+    ;print trace_c
+    ;print trace_n
+  ]
   
   let R0_lowerBound 0.118336359
   let R0_lowMidBound 0.128090431
   let R0_upMidBound 0.137843084
   let R0_upperBound 0.147912686
+  
+  let R0_lowerNew 0.118336359
+  let R0_midNew 0.147912686
+  let R0_upNew 0.1802
   
   if compound_param = "Hetro_Test" [
     set R0_lowerBound 0.118336359
@@ -45,6 +64,10 @@ to params_setDrawValues
   if compound_mask_param = "Min100" [
     set Mask_Efficacy_Mult 1
     set MinMaskWearing 100
+  ]
+  if compound_mask_param = "Min50" [
+    set Mask_Efficacy_Mult 1
+    set MinMaskWearing 50
   ]
   if compound_mask_param = "NoMask" [
     set Mask_Efficacy_Mult 0
@@ -73,6 +96,22 @@ to params_setDrawValues
       let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
       let y (rngs:rnd-beta stream_id 1 1)
       set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+    ]
+    
+    ;; New system
+    if R0_range = 5 [
+      set trans_draw_min R0_lowerNew
+      set trans_draw_max R0_midNew
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+      let y (rngs:rnd-beta stream_id 1 1)
+    ]
+    if R0_range = 6 [
+      set trans_draw_min R0_midNew
+      set trans_draw_max R0_upNew
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+      let y (rngs:rnd-beta stream_id 1 1)
     ]
   ]
   
