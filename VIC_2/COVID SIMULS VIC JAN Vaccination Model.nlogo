@@ -1864,7 +1864,7 @@ SLIDER
 1002
 1064
 1151
-1098
+1097
 yearly_recover_prop_loss
 yearly_recover_prop_loss
 0
@@ -2098,7 +2098,7 @@ SLIDER
 1160
 1067
 1302
-1101
+1100
 house_resample_red_group
 house_resample_red_group
 0
@@ -2154,7 +2154,7 @@ SLIDER
 1313
 1065
 1465
-1099
+1098
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -2566,7 +2566,7 @@ SLIDER
 1130
 1008
 1259
-1042
+1041
 MinMaskWearing
 MinMaskWearing
 0

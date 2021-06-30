@@ -42,7 +42,7 @@ to params_setDrawValues
     set Mask_Efficacy_Mult 1
     set MinMaskWearing 0
   ]
-  if compound_mask_param = "Min80" [
+  if compound_mask_param = "Min100" [
     set Mask_Efficacy_Mult 1
     set MinMaskWearing 100
   ]
