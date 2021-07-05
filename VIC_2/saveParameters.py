@@ -148,22 +148,25 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
 paramValuesFullValues = {
     'rand_seed' : listToStr(random.randint(10000000, size=(100))),
     'total_population' : '6681000',
-    'param_vac_uptake' : listToStr([0.5, 0.6, 0.7, 0.8, 0.9]),
-    'param_final_phase' : listToStr([2, 3]),
     'policy_pipeline' : listToStr([ 
         '"ME_ME_TS"',
-        '"ME_ME_LS"',
         '"ME_TS_LS"',
         '"ME_TS_BS"',
     ]),
+    'param_vac_uptake' : listToStr([0.5, 0.6, 0.7, 0.8, 0.9]),
+    'param_vacIncurMult' : listToStr([0.2, 1, 5, 25]),
+    'R0_range' : listToStr([5, 6]),
+    'param_final_phase' : listToStr([2, 3]),
+    'param_policy' : '"Stage1"',
+    'compound_param' : '"None"',
+    'mask_efficacy_mult' : listToStr([1]),
+    'global_trans_std' : 1.2,
     'init_timenow_limit' : 30,
     'incur_timenow_limit' : 4,
-    'global_trans_std' : 1.2,
-    'param_vacIncurMult' : listToStr([0.02, 0.08, 0.32, 1.28, 5.12]),
-    'R0_range' : listToStr([4.5, 4.833, 5.166]),
     'max_stage' : 4,
     'initial_cases' : 0,
     'presimdailycases' : 0,
+    'Vaccine_Available' : 'true',
     'track_r' : 'false',
     'calibrate' : 'false',
     'track_slope' : 'false',
@@ -172,7 +175,9 @@ paramValuesFullValues = {
     'trace_calibration' : 0,
     'end_day' : 730,
     'hetro_mult' : 1,
-    'compound_param' : '"None"',
+    'compound_mask_param' : '"Normal"',
+    'param_trace_mult' : 1,
+    'param_force_vaccine' : '"Disabled"',
 }
 
 paramSensitivityTest = {
@@ -248,4 +253,4 @@ paramValues_stage2Infect = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramSensitivityTest, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)
