@@ -1,0 +1,307 @@
+
+
+extensions [ rngs profiler csv table array matrix ]
+
+globals [
+  anxietyFactor
+  InfectionChange
+  infectionsToday
+  infectionsToday_acc ; Accumulator for infectionsToday
+  infectionsYesterday
+  five
+  fifteen
+  twentyfive
+  thirtyfive
+  fortyfive
+  fiftyfive
+  sixtyfive
+  seventyfive
+  eightyfive
+  ninetyfive
+  InitialReserves
+  AverageContacts
+  AverageFinancialContacts
+  ScalePhase
+  extraScaleFactor
+  Days
+  CaseFatalityRate
+  DeathCount
+  recovercount
+  recoverCountByVariant
+  dailyRecoverMult
+  recoverProportion ; Proportion of the living population that has recovered.
+  casesReportedToday
+  casesReportedToday_acc ; Accumulator for casesReportedToday
+  Scaled_Population
+  ICUBedsRequired
+  scaled_Bed_Capacity
+  currentInfections
+  eliminationDate
+  PotentialContacts
+  yellowcount
+  redcount
+  cumulativeInfected
+  scaledPopulation
+  MeanR
+  EWInfections
+  StudentInfections
+  meanDaysInfected
+  lasttransday
+  lastPeriod
+  casesinperiod28
+  casesinperiod14
+  casesinperiod7
+  infectionsinperiod7
+  resetDate ;; days after today that the policy is reviewed
+  cashposition
+  Objfunction ;; seeks to minimise the damage - totalinfection * stage * currentInfections
+  decisionDate ;; a date (ticks) when policy decsions were made
+  policyTriggerScale
+  prior0
+  prior1
+  prior2
+  prior3
+  prior4
+  prior5
+  prior6
+  prior7
+  prior8
+  prior9
+  prior10
+  prior11
+  prior12
+  prior13
+  prior14
+  prior15
+  prior16
+  prior17
+  prior18
+  prior19
+  prior20
+  prior21
+  prior22
+  prior23
+  prior24
+  prior25
+  prior26
+  prior27
+  prior28
+  
+  initial_primary
+  initial_secondary
+
+  global_trans_a
+  global_trans_b
+  
+  real_prior0
+  real_prior1
+  real_prior2
+  real_prior3
+  real_prior4
+  real_prior5
+  real_prior6
+
+  slope_prior0
+  slope_prior1
+  slope_prior2
+  slope_prior3
+  slope_prior4
+  slope_prior5
+  slope_prior6
+
+  slope
+  slopeCount
+  slopeSum
+  slopeAverage
+
+  testName
+  traceMult
+  global_trace_again
+  trace_eff_base
+  t_atOnePerDay
+  t_atFivePerDay
+  trace_a
+  trace_b
+  trace_c
+  trace_n
+
+  trackCount
+  trackSum
+  trackAverage
+  infectedTrackCount
+  infectedTrackSum
+  infectedTrackAverage
+
+  new_case_real
+  new_case_real_counter
+
+  test_acc
+
+  ;; These used to be dynamic controls with conflicting variable names.
+  spatial_distance
+  case_isolation
+  quarantine
+  Track_and_Trace_Efficiency
+  stage
+  prev_stage ; Last stage, so that stage settting are not reset to often
+
+  stageHasChanged
+  stageToday
+  stageYesterday
+  
+  houseTrackedCaseTimeTable
+  houseLocationTable
+  destination_patches
+
+  houseStudentMoveCache ;; Cache of agentset that a student from household N can move to as part of school.
+  houseStudentMoveCache_lastUpdate ;; When each agentset was last updated, or set to -1 to indicate it needs an update.
+  houseStudentMoveCache_staleTime ;; If an agentset was updated before staleTime, regenerate it.
+
+  PrimaryUpper
+  SecondaryLower
+
+  popDivisionTable ; Table of population cohort data
+  popDivisionTable_keys ; length of table.
+  populationCohortCache ; Filters for the population
+
+  regionTable
+  regionTable_list ; list of region indicies
+  regionTable_keys
+  regionHouseMin
+  regionHouseMax
+  regionPosMin
+  regionPosMax
+
+  totalEndR
+  totalEndCount
+  endR_sum
+  endR_count
+  endR_mean_metric
+  average_R
+  average_R_all_regions
+  average_R_region_1
+  average_R_region_2
+
+  ; Number of agents that are workers and essential workers respectively.
+  totalWorkers
+  totalEssentialWorkers
+  essentialWorkerRange
+  otherWorkerRange
+
+  transmission_count
+  transmission_count_metric ; For output, not dynamic change
+  transmission_sum
+  transmission_average
+
+  avoidSuccess
+  avoidAttempts
+
+  draw_ppa_modifier
+  draw_pta_modifier
+  draw_isolationCompliance
+  draw_maskWearEfficacy
+  draw_borderIncursionRisk
+  draw_vacc_death_risk_mult
+
+  ; Vaccine phase and subphase, as well as internal index and data table.
+  global_vaccinePhase
+  global_vaccineSubPhase
+  global_vaccineAvailible
+  global_vaccinePerDay
+  global_vaccineUptakeOverride
+  
+  incursionTable
+  incursionPhaseIndex
+  incursionPhaseEndDay
+  global_incursionArrivals ;; Number of arrivals, read from csv
+  global_incursionRisk ;; Risk of the incursion showing up as an infection, read from CSV
+  global_incursionVaccArrivals ;; Number of arrivals that are vaccinated, read from csv
+  global_incursionVaccRisk ;; Risk of a vaccinated incursion showing up as an infection, read from CSV
+  global_incursionVaccType ;; Type of vaccine that vaccinated incursions enter with.
+  global_incursionVariant
+  global_incursionReplaceChance
+  
+  variantList ;; List of variant indicies
+  
+  totalOverseasIncursions
+  vaccinePhaseEndDay
+  vaccinePhaseIndex
+  vaccineRolloutTable
+  vaccineParamsTable
+
+  global_schoolActive ;; Whether students ignore avoiding each other to go to school
+
+  ;; log transform illness period variables
+  Illness_PeriodVariance
+  M
+  BetaillnessPd
+  S
+
+  ;; log transform incubation period variables
+  Incubation_PeriodVariance
+  MInc
+  BetaIncubationPd
+  SInc
+
+  ;; log transform compliance period variables
+  Compliance_PeriodVariance
+  MComp
+  BetaCompliance
+  SComp
+
+  ;; file reading and draw handling
+  drawNumber
+  drawRandomSeed
+  drawList
+
+  ;; Data output
+  cohortLengthListOfZeros
+  infectNoVacArray
+  infectVacArray
+  dieArray
+  infectNoVacArray_listOut
+  infectVacArray_listOut
+  dieArray_listOut
+  age_listOut
+  atsi_listOut
+  morbid_listOut
+  stage_listOut
+  vacineEff_nameOut
+  vacineEff_transOut
+  vacineEff_areaOut
+  global_transmissibility_out
+
+  R_measure_time
+  stop_simulation
+  
+  initial_infection_R
+  finished_infections
+  finished_tracked
+  first_trace_day
+  first_trace_infections
+  first_trace_occurred
+  cumulative_tracked_all
+  cumulative_tracked_notice
+  
+  tracked_simuls
+  cali_timenow
+  cali_asymptomaticFlag
+  cali_symtomatic_present_day
+  
+  vaccineEffseedID
+  houseSeedID
+  incursionsSeedID
+  vaccineInitSeedID
+  moveInitSeedID
+]
+
+patches-own [
+  destination ;; indicator of whether this location is a place that people might gather
+  houseIndex ;; indicator that the patch is a house.
+  lastInfectionUpdate ;; Update indicator for stale simulantCount data
+  infectionList ;; List of infectivities of simulants on the patch
+  infectionCulprit ;; List of agents that cause infection. Only used of track_R is enabled.
+  lastUtilTime ;; Last tick that the patch was occupied
+  lastHouseGatherTime ;; Last tick that a house gathered here.
+  houseGatherIndex ;; Last house that gathered here. -1 indicates more than one house.
+]

@@ -1,0 +1,93 @@
+
+to setup_incursionData
+  let incursionFileData remove-item 0 csv:from-file "input/incursion.csv"
+  set incursionTable table:make
+  let i 0
+  foreach incursionFileData [ x -> 
+    table:put incursionTable i x
+    table:put recoverCountByVariant (item 3 x) 0
+    set i i + 1
+  ]
+  set variantList table:keys recoverCountByVariant
+  
+  set incursionPhaseIndex -1 ; Not yet initialised
+  set incursionPhaseEndDay 0
+  
+  set global_incursionArrivals 0
+  set global_incursionRisk 0
+  set global_incursionVaccArrivals 0
+  set global_incursionVaccRisk 0
+  set global_incursionVaccType 0
+  set global_incursionVariant 0
+  set global_incursionReplaceChance 0
+end
+
+to incursion_update
+  ;; Happens at the start of the first 'go', since days = 0
+  if days >= incursionPhaseEndDay [
+    if table:has-key? incursionTable (incursionPhaseIndex + 1) [
+      set incursionPhaseIndex incursionPhaseIndex + 1
+      if param_incur_phase_limit = -1 or incursionPhaseIndex <= param_incur_phase_limit [
+        let phaseData table:get incursionTable incursionPhaseIndex
+        let phaseDays (item 0 phaseData) * incursion_phase_speed_mult
+        
+        set incursionPhaseEndDay (incursionPhaseEndDay + phaseDays)
+        set global_incursionArrivals item 1 phaseData
+        set global_incursionRisk item 2 phaseData
+        set global_incursionVaccArrivals item 3 phaseData
+        set global_incursionVaccRisk item 4 phaseData
+        set global_incursionVaccType item 5 phaseData
+        set global_incursionVariant item 6 phaseData
+        set global_incursionReplaceChance item 7 phaseData
+      ]
+    ]
+  ]
+  
+  let peoplePerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
+  ask n-of (floor (global_incursionArrivals + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
+    if draw_borderIncursionRisk * global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
+      set color red
+      set contributeToR true
+      set infectedContactList table:make
+      set hasKnownContact false
+      set traceAttempts 0
+      
+      set infectVariant global_incursionVariant
+      set vaccineIncursionOverride "none"
+      simul_updateVacAndReinfectMult
+      set timenow random (floor min (list incur_timenow_limit ownIllnessPeriod)) ; Set after update vaccine update because it changes illnessPeriod
+      
+      set timenow 0
+      set isolating 0
+      set noticeOwnInfection 0
+      
+      set new_case_real_counter new_case_real_counter + peoplePerSimul
+      set totalOverseasIncursions totalOverseasIncursions + peoplePerSimul
+      array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + peoplePerSimul
+    ]
+  ]
+  
+  ask n-of (floor ((global_incursionVaccArrivals * param_vacIncurMult) + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
+    if global_incursionVaccRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
+      set color red
+      set contributeToR true
+      set infectedContactList table:make
+      set hasKnownContact false
+      set traceAttempts 0
+      
+      set infectVariant global_incursionVariant
+      set vaccineIncursionOverride global_incursionVaccType
+      simul_updateVacAndReinfectMult
+      set timenow random (floor min (list incur_timenow_limit ownIllnessPeriod)) ; Set after update vaccine update because it changes illnessPeriod
+      
+      set timenow 0
+      set isolating 0
+      set noticeOwnInfection 0
+      
+      set new_case_real_counter new_case_real_counter + peoplePerSimul
+      set totalOverseasIncursions totalOverseasIncursions + peoplePerSimul
+      array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + peoplePerSimul
+    ]
+  ]
+end
+

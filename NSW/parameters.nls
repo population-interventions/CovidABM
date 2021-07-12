@@ -1,0 +1,210 @@
+
+to params_setDrawValues
+  set draw_ppa_modifier random-normal 0 3
+  set draw_pta_modifier random-normal 0 3
+  
+  rngs:init ;; replacing previous log transform with beta distribution
+  let stream_id 1
+  set incursionsSeedID 2
+  set houseSeedID 3
+  set vaccineEffseedID 4
+  set vaccineInitSeedID 5
+  set moveInitSeedID 6
+  
+  rngs:set-seed stream_id random-float 999
+  rngs:set-seed incursionsSeedID random-float 999
+  rngs:set-seed houseSeedID random-float 999
+  rngs:set-seed vaccineEffseedID random-float 999
+  rngs:set-seed vaccineInitSeedID random-float 999
+  rngs:set-seed moveInitSeedID random-float 999
+  
+  set reinfect_risk rngs:rnd-beta stream_id 8 2
+  set reinfect_area rngs:rnd-beta stream_id 10 10
+  
+  if param_trace_mult > 0 [
+    let averageTraced (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2))
+    
+    set t_atOnePerDay 1 * (1 - (1 - 0.9 * param_trace_mult) ^ (1 / trace_attempt_limit))
+    set t_atFivePerDay 5 * (1 - (1 - averageTraced * param_trace_mult) ^ (1 / trace_attempt_limit))
+    
+    set trace_n 0.92
+    set trace_c 50 * param_trace_mult
+    set trace_a ((1 / (t_atFivePerDay - trace_c)) - ((1 ^ trace_n) / (t_atOnePerDay - trace_c))) / ((5 ^ trace_n) - (1 ^ trace_n))
+    set trace_b 1 / (t_atOnePerDay - trace_c) - trace_a * 1 ^ trace_n
+    ;print t_atOnePerDay
+    ;print t_atFivePerDay
+    ;print trace_a
+    ;print trace_b
+    ;print trace_c
+    ;print trace_n
+  ]
+  
+  let R0_lowerBound 0.118336359
+  let R0_lowMidBound 0.128090431
+  let R0_upMidBound 0.137843084
+  let R0_upperBound 0.147912686
+  
+  let R0_lowerNew 0.118336359
+  let R0_midNew 0.147912686
+  let R0_upNew 0.1802
+  
+  if compound_param = "Hetro_Test" [
+    set R0_lowerBound 0.118336359
+    set R0_lowMidBound 0.118336359
+    set R0_upMidBound 0.128090431
+    set R0_upperBound 0.137843084
+    
+    set hetro_mult 0.2
+  ]
+  
+  if compound_mask_param = "Normal" [
+    set Mask_Efficacy_Mult 1
+    set MinMaskWearing 0
+  ]
+  if compound_mask_param = "Min100" [
+    set Mask_Efficacy_Mult 1
+    set MinMaskWearing 100
+  ]
+  if compound_mask_param = "Min50" [
+    set Mask_Efficacy_Mult 1
+    set MinMaskWearing 50
+  ]
+  if compound_mask_param = "NoMask" [
+    set Mask_Efficacy_Mult 0
+    set MinMaskWearing 0
+  ]
+  
+  if not calibrate [
+    ;set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
+    if R0_range > 4.333 and R0_range <= 4.666 [
+      set trans_draw_min R0_lowerBound
+      set trans_draw_max R0_lowMidBound
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      let y (rngs:rnd-beta stream_id 1 1)
+    ]
+    if R0_range > 4.666 and R0_range <= 5 [
+      set trans_draw_min R0_lowMidBound
+      set trans_draw_max R0_upMidBound
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+      let y (rngs:rnd-beta stream_id 1 1)
+    ]
+    if R0_range > 5 and R0_range <= 5.333 [
+      set trans_draw_min R0_upMidBound
+      set trans_draw_max R0_upperBound
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      let y (rngs:rnd-beta stream_id 1 1)
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+    ]
+    
+    ;; New system
+    if R0_range = 5 [
+      set trans_draw_min R0_lowerNew
+      set trans_draw_max R0_midNew
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+      let y (rngs:rnd-beta stream_id 1 1)
+    ]
+    if R0_range = 6 [
+      set trans_draw_min R0_midNew
+      set trans_draw_max R0_upNew
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+      let y (rngs:rnd-beta stream_id 1 1)
+    ]
+  ]
+  
+  set global_transmissibility_out global_transmissibility
+  
+  let global_trans_n global_transmissibility * ( 1 - global_transmissibility ) / (global_trans_std ^ 2)
+  set global_trans_a global_transmissibility * global_trans_n
+  set global_trans_b (1 - global_transmissibility) * global_trans_n
+  
+  
+  if param_policy_force_preset > 0 [
+    if param_policy_force_preset = 1 [
+      set param_policy_force_days 14
+      set param_policy_force_stage 3
+    ] 
+    if param_policy_force_preset = 2 [
+      set param_policy_force_days 7
+      set param_policy_force_stage 4
+    ] 
+    if param_policy_force_preset = 3[
+      set param_policy_force_days 14
+      set param_policy_force_stage 4
+    ] 
+  ]
+  
+  ;set accept_isolation_prop rngs:rnd-beta stream_id 6 12
+  ;set immune_from_prev_variant rngs:rnd-beta stream_id 32 8
+  ;set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
+  
+  set draw_isolationCompliance rngs:rnd-beta stream_id 450.3 23.7
+  if isoComply_override >= 0 [
+    set draw_isolationCompliance isoComply_override
+  ]
+  
+  ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
+  ;; SqRoot of above
+  set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60
+  set Asymptomatic_Trans random-normal 0.75 0.03
+  set Asymptom_Prop random-normal 0.33 0.03
+  
+  set draw_vacc_death_risk_mult (1 - (rngs:rnd-beta stream_id 64 16))
+  set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 20 20 ) * 2
+  
+  ;show ( word "draw_ppa_modifier " draw_ppa_modifier )
+  ;show ( word "draw_pta_modifier " draw_pta_modifier )
+  ;show ( word "draw_isolationCompliance " draw_isolationCompliance )
+  ;show ( word "draw_maskWearEfficacy " draw_maskWearEfficacy )
+end
+
+to params_setdeathrisk
+  ;; risk of death associated with ageranges if they contract COVID-19
+  (ifelse agerange <= 5
+  [
+    set riskofDeath 0.0000068
+  ]
+  agerange <= 15
+  [
+    set riskofDeath 0.0000299
+  ]
+  agerange <= 25
+  [
+    set riskofDeath 0.0001112
+  ]
+  agerange <= 35
+  [
+    set riskofDeath 0.0004172
+  ]
+  agerange <= 45
+  [
+    set riskofDeath 0.0017904
+  ]
+  agerange <= 55
+  [
+    set riskofDeath 0.0071179
+  ]
+  agerange <= 65
+  [
+    set riskofDeath 0.0196950
+  ]
+  agerange <= 75
+  [
+    set riskofDeath 0.1350531
+  ]
+  agerange <= 85
+  [
+    set riskofDeath 0.3466041
+  ]
+  ;; updated from department of health Report 22 - does not map directly to age deciles here
+  agerange <= 95
+  [
+    set riskofDeath 0.4354866
+  ]
+  [
+    set riskofDeath 0.4354866
+  ])
+end

@@ -23,7 +23,7 @@ Many parameters are a boolean, which should be indicated by a value of 1 or 0.
  - studentCount      is how many members of the cohort are students.
  - vaccineType       the name of the vaccine availible to this cohort. This should match the names in vaccine_params.csv.
 
-Use doseProgressMin and doseProgressMax to define a range [doseProgressMin, doseProgressMax] from which pre-movel vaccinated simulants draw their vacWaitDays. A simulant which draws a doseProgress <= 0 has just recieved their vaccination so must wait the full dose period for their vaccine. Likewise, a simulant with doseProgerss >= 1 is assumed to have their second dose when the model starts. Draws between 0 and 1 set vacWaitDays between zero and maximum.
+Use doseProgressMin and doseProgressMax to define a range [doseProgressMin, doseProgressMax] from which pre-model vaccinated simulants draw their vacWaitDays. A simulant which draws a doseProgress <= 0 has just received their vaccination so must wait the full dose period for their vaccine. Likewise, a simulant with doseProgress >= 1 is assumed to have their second dose when the model starts. Draws between 0 and 1 set vacWaitDays between zero and maximum.
 
 A uniform distribution on a subset of . A simulant that draws 0 has to wait the full duration for a second dose, a simulant with a draw of 1 already had its second dose. A simulant that draws 0.5 is halfway until its second dose.
 

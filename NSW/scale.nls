@@ -1,0 +1,353 @@
+
+;;*******************************************************************************************************************************
+;;** Recovery shifting to match global scale **
+;;*******************************************************************************************************************************
+
+to ShiftRecoveredTowardsTotalProportion
+  if Recovered_Match_Rate > 0 [
+    set recoverProportion recoverCount / (total_population - deathCount)
+    let repYellowCount ceiling (Population * recoverProportion)
+    let yellowSet simuls with [ color = yellow ]
+    let yellowSetCount count yellowSet
+    if repYellowCount < yellowSetCount [
+      ask n-of (Recovered_Match_Rate * (yellowSetCount - repYellowCount) + random-float 1) yellowSet [
+        set color cyan
+        set recoveryVariant 0
+        simul_updateVacAndReinfectMult
+      ]
+    ]
+    ;if repYellowCount > yellowSetCount [
+    ;  ask n-of (Recovered_Match_Rate * (repYellowCount - yellowSetCount) + random-float 1) simuls with [ color = cyan ] [
+    ;    set color yellow
+    ;    set recoveryVariant 1 ;; TODO this number should not always be 1 if this code is to be used. However, the code may be useless.
+    ;    set isolating 0
+    ;    simul_updateVacAndReinfectMult
+    ;  ]
+    ;]
+  ]
+  
+  if Recov_Var_Match_Rate > 0 and recoverCount > 0 [
+    let yellowSet simuls with [ color = yellow ]
+    let variantKeys table:keys recoverCountByVariant
+    let yellowSetCount count yellowSet
+    
+    ;; recoverCount may not necessarily be equal to the sum of recoverCountByVariant
+    let totalRecoverByVariant 0
+    foreach variantKeys [ variant ->
+      set totalRecoverByVariant totalRecoverByVariant + table:get recoverCountByVariant variant
+    ]
+    
+    ;; Cache some simulant counts
+    let variantSet table:make
+    let variantPropDiff table:make
+    
+    ;; Determine which variant is the most below the desired proportion.
+    let wantMostVariant 0
+    let wantMostProp 0
+    if yellowSetCount > 0 [
+      foreach variantKeys [ variant ->
+        let myYellow yellowSet with [recoveryVariant = variant]
+        let myProp (count myYellow) / yellowSetCount
+        let desiredProp (table:get recoverCountByVariant variant) / totalRecoverByVariant
+        if desiredProp > myProp [
+          if desiredProp - myProp > wantMostProp [
+            set wantMostProp desiredProp - myProp
+            set wantMostVariant variant
+          ]
+        ]
+        if desiredProp < myProp [
+          table:put variantSet variant myYellow
+          table:put variantPropDiff variant (myProp - desiredProp)
+        ]
+      ]
+      
+      ;; Each variant that is above its desired proportion transfers some of its share to the
+      ;; variant that has the largest shortfall.
+      foreach table:keys variantPropDiff [ variant ->
+        ask n-of ((table:get variantPropDiff variant) * Recov_Var_Match_Rate * yellowSetCount) table:get variantSet variant [
+          set recoveryVariant wantMostVariant
+        ]
+      ]
+    ]
+  ]
+  
+  set recoverCount recoverCount * dailyRecoverMult
+end
+
+;;*******************************************************************************************************************************
+;;** Scale Modification **
+;;*******************************************************************************************************************************
+
+to scaleup_try_to_maintain_cohort
+  let localScaleFactor Scale_Factor
+  ifelse ((Scale_Factor ^ (scalePhase + 1)) * Population > Total_Population)
+  [
+    set extraScaleFactor Total_Population / ((Scale_Factor ^ scalePhase) * Population)
+    set localScaleFactor extraScaleFactor
+  ]
+  [
+    set scalephase scalephase + 1
+  ]
+  let localRedCount count simuls with [ color = red ]
+  let localYellowCount count simuls with [ color = yellow ]
+  let localFilter 0
+  
+  let R_average_before 0
+  if track_R [
+    let R_agg 0
+    let R_count 0
+    ask simuls with [ color = red ] [
+      set R_agg R_agg + R
+      set R_count R_count + 1
+    ]
+    ifelse R_count > 0 [
+      set R_average_before R_agg / R_count
+    ]
+    [
+      set R_average_before 0
+    ]
+  ]
+  
+  ;; Don't scale all yellows if a high proportion of the population has recovered.
+  let yellowScaleFactor localScaleFactor
+  set recoverProportion recoverCount / (total_population - deathCount)
+  if recoverProportion > localYellowCount / (Population * yellowScaleFactor) [
+    set yellowScaleFactor localYellowCount / (Population * recoverProportion)
+    if yellowScaleFactor < 1 [
+      set yellowScaleFactor 1
+    ]
+  ]
+  
+  ; Used to periodically select infected simulants.
+  let scaleAccIncrement 1 / localScaleFactor
+  
+  foreach popDivisionTable_keys [ index ->
+    let cohort table:get populationCohortCache index
+    
+    ;; Go through infected simulants and scale up, while copying contacts.
+    set localFilter cohort with [ color = red ]
+    let scaleAcc random-float 1 ;; Vary where the cutoff is for a better initial scale match.
+    let contactTable table:make
+    ask localFilter [
+      set scaleAcc scaleAcc + scaleAccIncrement
+      foreach table:keys infectedContactList [ x ->
+        table:put contactTable (table:length contactTable) (table:get infectedContactList x)
+      ]
+      if scaleAcc >= 1 [
+        set scaleAcc scaleAcc - 1
+        foreach table:keys contactTable [ x ->
+          table:put infectedContactList (table:length infectedContactList) (table:get contactTable x)
+        ]
+        simul_do_scaleup
+      ]
+    ]
+    
+    ;ask n-of (((count localFilter + random-float 1) * (1 - 1 / localScaleFactor))) localFilter [
+    ;  simul_do_scaleup
+    ;]
+    
+    set localFilter cohort with [ color = yellow ]
+    ask n-of (((count localFilter + random-float 1) * (1 - 1 / yellowScaleFactor))) localFilter [
+      simul_do_scaleup
+    ]
+  ]
+  
+  ;; Make up any undershoot
+  set localFilter simuls with [ color = red ]
+  let localRedCount_after count localFilter
+  if localRedCount_after * localScaleFactor > localRedCount [
+    ask n-of (localRedCount_after - localRedCount / localScaleFactor + random-float 1) localFilter [
+      simul_do_scaleup
+    ]
+  ]
+  
+  ;; Fix issues with contacts caused by scaling
+  set localFilter simuls with [ color = red ]
+  ask localFilter [
+    simul_fixInfectedContactList
+  ]
+  
+  set localFilter simuls with [ color = yellow ]
+  let localYellowCount_after count localFilter
+  if localYellowCount_after * yellowScaleFactor > localYellowCount [
+    ask n-of (localYellowCount_after - localYellowCount / yellowScaleFactor + random-float 1) localFilter [
+      simul_do_scaleup
+    ]
+  ]
+  
+  if track_R [
+    let R_agg 0
+    let R_count 0
+    ask simuls with [ color = red ] [
+      if contributeToR [
+        set R_agg R_agg + R
+        set R_count R_count + 1
+      ]
+    ]
+    if R_count > 0 [
+      let R_average_after R_agg / R_count
+      if R_average_before > 0 [
+        if R_agg = 0 [
+          ;; Spread R between all simuls if none of them have it.
+          ;; Avoids a rare divide by zero.
+          ask simuls with [ color = red ] [
+            if contributeToR [
+              set R 1
+              set R_agg R_agg + 1
+            ]
+          ]
+          set R_average_after R_agg / R_count
+        ]
+        ;show ( word "Before " R_average_before ", After " R_average_after )
+        let R_scale R_average_before / R_average_after
+        ask simuls with [ color = red ] [
+          if contributeToR [
+            set R R * R_scale
+          ]
+        ]
+      ]
+    ]
+  ]
+end
+
+to scaledown_try_to_maintain_cohort
+  let localScaleFactor Scale_Factor
+  if extraScaleFactor != 1 [
+    set localScaleFactor extraScaleFactor
+  ]
+  
+  ask simuls with [ color = red ] [
+    ;; Fixing the contact list is slow, but guarantees  some useful invariants
+    simul_fixInfectedContactList
+  ]
+  let infectionSplitMap table:make
+  
+  foreach popDivisionTable_keys [ index ->
+    let cohort table:get populationCohortCache index
+    ;print (list "cohort" index cohort with [ color = red ])
+    ask cohort with [ color = red and not update_lock] [
+      let my_timenow timenow
+      let my_caseReportTime caseReportTime
+      let my_tracked tracked
+      let my_R R
+      let my_infectVariant infectVariant
+      let my_variantTransMult variantTransMult
+      let my_contributeToR contributeToR
+      let my_vaccineIncursionOverride vaccineIncursionOverride
+      let my_hasKnownContact hasKnownContact
+      let my_traceAttempts traceAttempts
+      let my_selfTraceEffMult selfTraceEffMult
+      
+      let eligible cohort with [ color != red and color != black ]
+      if count eligible < (localScaleFactor - 1) [
+        set eligible simuls with [ color != red and color != black ]
+      ]
+      
+      let loopIndex 0
+      let parentSimul who
+      table:put infectionSplitMap who table:make
+      table:put (table:get infectionSplitMap who) loopIndex self
+      
+      ;print (list "Add simul" who)
+      ;print table:values infectedContactList
+      
+      ask n-of (localScaleFactor - 1) eligible [
+        ;print color = red
+        set color red
+        set contributeToR my_contributeToR
+        set vaccineIncursionOverride my_vaccineIncursionOverride
+        set hasKnownContact my_hasKnownContact 
+        set infectVariant my_infectVariant
+        set variantTransMult my_variantTransMult
+        set traceAttempts my_traceAttempts
+        set selfTraceEffMult my_selfTraceEffMult
+        simul_updateVacAndReinfectMult
+        
+        set update_lock true ;; Prevent repeat splitting when acting across cohorts.
+        set isolating 0
+        set timenow my_timenow
+        set caseReportTime my_caseReportTime
+        set tracked my_tracked
+        set R my_R
+        
+        ;print self
+        set loopIndex loopIndex + 1
+        table:put (table:get infectionSplitMap parentSimul) loopIndex self
+      ]
+    ]
+  ]
+  ask simuls [
+    set update_lock false
+  ]
+  
+  ;; Create (localScaleFactor - 1) extra copies of the infected contact graph for the new 
+  ;; infected simulants, with vertices mapped by the scaledownMap constructed above.
+  foreach table:keys infectionSplitMap [ parentID ->
+    let crossIndex 1
+    let parentSimul simul parentID
+    let childTable table:get infectionSplitMap parentID
+    let parentInfectContact [infectedContactList] of parentSimul
+    ;print (list "Start migration simul" [who] of parentSimul)
+    ;print table:values parentInfectContact
+    ;print table:values childTable
+    while [crossIndex < localScaleFactor] [
+      if table:has-key? childTable crossIndex [
+        ask table:get childTable crossIndex [
+          ;; Do not reset infectedContactList as it contains upstream contact information.
+          ;set infectedContactList table:make
+          foreach table:values parentInfectContact [ otherSimul ->
+            let otherSimulID [who] of otherSimul
+            ;print (list "otherSimulID" otherSimulID)
+            ;print table:get infectionSplitMap otherSimulID
+            let otherChildTable table:get infectionSplitMap otherSimulID
+            if table:has-key? otherChildTable crossIndex [
+              table:put infectedContactList (table:length infectedContactList) (table:get otherChildTable crossIndex)
+            ]
+          ]
+        ]
+      ]
+      set crossIndex crossIndex + 1
+    ]
+  ]
+  
+  ;; Do not reset housing as it causes reported cases to jump unrealistically.
+  ;if house_resample_red_group > 0 [
+  ;  reset_housing
+  ;]
+  ifelse extraScaleFactor = 1
+  [
+    set scalephase scalephase - 1
+  ]
+  [
+    set extraScaleFactor 1
+  ]
+end
+
+to-report GetInitialScale [cases]
+  if cases = 0 [
+   report 0 
+  ]
+  let caseScale floor log cases Scale_Factor
+  let scaleRangeInThreshold floor log Scale_Threshold Scale_Factor
+  if caseScale - scaleRangeInThreshold > 0 [
+   report caseScale - scaleRangeInThreshold 
+  ]
+  report 0
+end
+
+to CheckScale
+  ;; this function scales up the simulation at base Scale_Factor to enable a small and large-scale understanding of dynamics.
+  ;; It enables the fine-grained analysis in early stages that more closely resembles diffusion across a population similar to
+  ;; assumptions in SEIR models but as it scales up, recognises that there are geographic constraints of movement of populations
+  (ifelse scale = true and redCount >= Scale_Threshold and scalePhase >= 0 and extraScaleFactor = 1 and days > 0
+    [
+      ;print count simuls with [ color = red ]
+      scaleup_try_to_maintain_cohort
+      ;print count simuls with [ color = red ]
+    ]
+    scale = true and redCount <= Scale_Threshold / Scale_Factor and yellowcount > redcount and days > 0 and scalephase > 0
+    [
+      scaledown_try_to_maintain_cohort
+    ]
+  )
+end

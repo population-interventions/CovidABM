@@ -1,0 +1,713 @@
+;;
+;; Simulants and functions particular to simulants that don't have anywhere else to live.
+;;
+
+breed [ simuls simul ]
+
+simuls-own [
+  R ;; the estimated RNaught of individuals
+  IncubationPd ;; the incubation perios of the illness ascribed to the person
+  RiskofDeath ;; the overall risk of deth for the person if they contract the illness based on their age
+  Pace ;; the speed that pthe person moves around the environment
+  contributeToR ;; Whether to contribute to average R reporting.
+
+  ;; Cohort parameters
+  spanMult
+  gatherFreqMult
+  homeRegion
+  succeptMult
+  ignoreUptakeOverride
+  update_lock
+  isInitialInfection
+  
+  move_chance_multiplier
+  superSpread_chance_multiplier
+  visit_chance_multiplier
+  
+  ownIllnessPeriod ;; unique illness period associated with the individual
+  ownIncubationPeriod ;; unique incubation pd for the person - related to IncubationPd so can probably be cleaned up - IncubationPd is a legacy var as previously all incubation periods were identical
+  ownIllnessPeriod_raw ;; without vaccination
+  ownIncubationPeriod_raw ;; without vaccination
+  personalVirulence ;; the infectivity of the person
+
+  timenow ;; the number of days since initial infection
+  caseReportTime ;; Day on which the case will be reported
+  recoverTime ;; Days since recovery
+  
+  tracked ;; whether the person has been tracked by the health system
+  knownContactTime ;; Time at which a contact was known, to prevent double tracing on the traced step
+  asymptomaticFlag ;; indicator identifying Asymptomatic cases
+  asymptomatic_draw ;; Determines whether the agent will be asymptomatic
+  symtomatic_present_day ;; When the simulant self-presents (if at all)
+  report_case_draw ;; Draw for whether the case successfully reaches the reported counts. Note that the case still isolates regardless of whether it is reported, this is just for policy.
+  accept_isolation_draw ;; Draw for accepting isolation. Use this to simulate ineffective tracking.
+  
+  proportion_people_avoid_draw ;; Determines whether this agent heeds avoiding at various lockdown stages
+
+  RequireICU ;; Whether the agent requires ICU at the moment
+  requireICU_draw ;; Random determiner [0, 1) of whether the agent requires ICU
+
+  EssentialWorkerPriority ;; Value from 0 - 100 that sets priority of the job. 1 is high, 100 is low.
+  EssentialWorkerFlag ;; indicator of whether the person is considered to be an essential worker under the current lockdown policy.
+  
+  cohortIndex ;; The row of population.csv that this simulant is based on
+  agerange ;; the age of the person
+  atsi
+  comorbidityState ;; does the person have a comorbidity
+  essentialJob ;; Static indicator of whether the agent's job is most essential, which gives it higher EssentialWorkerPriority (ie closer to zero).
+  isWorker
+  
+  VaccPhase ;; phase at which this person would receive vaccine
+  VaccSubPhase ;; subphase at which this person would receive vaccine (1a, 1b etc)
+  sm_vac_uptake ;; Likelyhood of taking a vaccine if offered
+  
+  vaccineOffered ;; Has the vaccine been offered?
+  vacWaitDays ;; Timer for the delay in vaccine coming into effect.
+  vaccineType ;; Name of vaccine being offered
+  selfVaccEff_raw_area ;; Duration times transmissibility of infection
+  selfVaccEff_raw_risk ;; Risk of being infected
+  transmitFromVacAndReinfect ;; Multiplier for disease effects, (1 - selfVaccEff * recoveryEffect)^(1/3)
+  succeptibilityTable ;; exposureAndVacMult but for each variant
+  succeptibilityTableMax ;; maximum of the above table.
+  vaccineIncursionOverride ;; Override the vaccine status of the simulant for as long as they have their incursion infection. This is worse than it sounds.
+
+  infectVariant ;; Variant of SARS that I am infected with. Is > 0 iff color = red.
+  variantTransMult ;; Transmissiblity multiplier for this variant
+  recoveryVariant ;; The highest level of SARS recovered from. More recent and virulent versions have a higher level.
+  
+  wearsMask ;; for use in determining if the person wears a face mask
+  wearingMask ;; identifies if the person is wearing a mask or not
+
+  householdUnit ;; the id of the household the person belongs to
+  isStudent ;; identifies if the person is a student or not
+  currentVirulence ;; current virulence of the person on the day of their infection
+  Imported ;; identifies imported cases
+  adultsInHousehold ;; counts how many adults in a household for peole under 70
+  homeLocation ;; this is where these people live
+  returntoschool ;; a random number between 0 and 100 that determines whether the person will return to school (assuming they are a student) at time x
+
+  isolateCompliant ;; Is the person currently isolating this tick (because they are succeptible and isolating, or infected and tracked)
+  isolating ;; is a succeptible person supposed to be isolating?
+  noticeOwnInfection ;; Has the person noticed that they are sick and are now being tracked and isolated of their own volition?
+  IDTime ;; days into infection the person is identified as a case
+
+  infectedContactList ;; A table of who infected this simulant and infections that this simulant has caused. Bidirectional.
+  hasKnownContact ;; Whether the simulant has a tracked simulant in infectedContactList
+  traceAttempts ;; How many times this simulant has attempted to be traced since the start of its last/current infection.
+  selfTraceEffMult ;; Trace efficacy, used for multiple retraces.
+  
+  ;; Temporary variables
+  hasNewHouse
+]
+
+;;*******************************************************************************************************************************
+;;** Simul Utility Functions **
+;;*******************************************************************************************************************************
+
+to simul_updatepersonalvirulence
+  ;; creates a triangular distribution of virulence that peaks at the end of the incubation period
+  if color = red [
+    if timenow <= Non_Infective_Time [
+      set currentVirulence 0
+    ]
+    ifelse ownIllnessPeriod > 0
+    [
+      if timenow > Non_Infective_Time and timenow <= ownIncubationPeriod [
+        set currentVirulence variantTransMult * personalVirulence * ( (timenow - Non_Infective_Time) / (ownIncubationPeriod - Non_Infective_Time) )
+      ]
+      if timenow > ownIncubationPeriod [
+        set currentVirulence variantTransMult * personalVirulence * ( ( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))
+      ]
+    ]
+    [
+      set currentVirulence 0
+    ]
+    ;if vaccinated = 1 [
+    ;  show (word "cine " vaccinated ",time " timenow ",VIR " (currentVirulence / personalVirulence) ",unscale " currentVirulence)
+    ;]
+    ;set currentVirulence 0
+  ]
+  ;show (word "personalVirulence " personalVirulence ",ownIncubationPeriod " ownIncubationPeriod ",ownIllnessPeriod " ownIllnessPeriod)
+end
+
+to simul_resetlanding
+  ;; now working so home locations are not in green space
+  let region homeRegion
+  ifelse table:has-key? houseLocationTable householdUnit 
+  [
+    set homeLocation table:get houseLocationTable householdUnit
+  ]
+  [
+    move-to one-of patches with [ pcolor = black and houseIndex = -1 and
+      pycor >= table:get regionPosMin region and pycor <= table:get regionPosMax region]
+    let houseNumber householdUnit
+    ask patch-here [
+      set houseIndex houseNumber
+    ]
+    set homeLocation patch-here
+    table:put houseLocationTable householdUnit patch-here
+  ]
+  
+  move-to homeLocation
+end
+
+to simul_move_to_empty_patch
+  let movePatch one-of neighbors with [ lastUtilTime < ticks ]
+  if is-patch? movePatch [
+    move-to movePatch
+    ask movePatch [
+      set lastUtilTime ticks
+    ]
+  ]
+end
+
+to simul_updateVacAndReinfectMult
+  if vaccineIncursionOverride != 0 [
+    ;; Override with overseas infections
+    let store_selfVaccEff_raw_risk selfVaccEff_raw_risk
+    let store_selfVaccEff_raw_area selfVaccEff_raw_area
+    let store_recoveryVariant recoveryVariant
+    let store_vacWaitDays vacWaitDays
+    let store_vaccineIncursionOverride vaccineIncursionOverride
+    
+    
+    ifelse table:has-key? vaccineParamsTable vaccineIncursionOverride
+    [
+      let overrideVaccineData table:get vaccineParamsTable vaccineIncursionOverride
+      set selfVaccEff_raw_area item 0 overrideVaccineData
+      set selfVaccEff_raw_risk item 1 overrideVaccineData
+    ]
+    [
+      set selfVaccEff_raw_area 0
+      set selfVaccEff_raw_risk 0
+    ]
+    set recoveryVariant 0
+    set vacWaitDays 0
+    set vaccineIncursionOverride 0
+ 
+    simul_updateVacAndReinfectMult
+    
+    set selfVaccEff_raw_risk store_selfVaccEff_raw_risk
+    set selfVaccEff_raw_area store_selfVaccEff_raw_area
+    set recoveryVariant store_recoveryVariant
+    set vacWaitDays store_vacWaitDays
+    set store_vaccineIncursionOverride vaccineIncursionOverride
+  ]
+  
+  if set_shape [
+    ifelse recoveryVariant > 1 or infectVariant > 1
+    [
+      ifelse recoveryVariant > 2 or infectVariant > 2
+      [
+        ifelse selfVaccEff_raw_risk = 0
+        [
+          set shape "airplane" 
+          set size 2.2 / 1.3
+        ]
+        [
+          set shape "car"  
+          set size 2.1 / 1.3
+        ]
+      ]
+      [
+        ifelse selfVaccEff_raw_risk = 0
+        [
+          set shape "star" 
+          set size 1.5 / 1.3
+        ]
+        [
+          set shape "person"  
+          set size 2 / 1.3
+        ]
+      ]
+    ]
+    [
+      ifelse selfVaccEff_raw_risk = 0
+      [
+        set shape "circle" 
+        set size 1 / 1.3
+      ]
+      [
+        set shape "face happy" 
+        set size 1.3 / 1.3
+      ]
+    ]
+  ]
+  
+  ifelse color = red
+  [
+    let effect_raw 1
+    set variantTransMult variant_transmiss_growth ^ (infectVariant - 1)
+    
+    ;; Contribute vaccine effect
+    if selfVaccEff_raw_risk > 0 [
+      set effect_raw effect_raw * (1 - selfVaccEff_raw_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
+    ]
+    if recoveryVariant > 0 [
+      ;; Set reduced infectiveness based on previously having an infection.
+      ifelse infectVariant > recoveryVariant
+      [
+        set effect_raw effect_raw * (1 - prev_var_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
+      ]
+      [
+        set effect_raw effect_raw * (1 - reinfect_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
+      ]
+    ]
+    
+    set transmitFromVacAndReinfect effect_raw ^ (1 / 2)
+    set ownIllnessPeriod ownIllnessPeriod_raw * transmitFromVacAndReinfect
+    set ownIncubationPeriod ownIncubationPeriod_raw * transmitFromVacAndReinfect
+  ]
+  [
+    set succeptibilityTableMax 0
+    ;; Set succeptibility to each variant
+    foreach variantList [ variant ->
+      ifelse color = yellow and recoverTime < reinfect_delay
+      [
+        table:put succeptibilityTable variant 0
+      ]
+      [
+        let effect_raw 1
+        if selfVaccEff_raw_risk > 0 [
+          set effect_raw effect_raw * (1 - selfVaccEff_raw_risk * (vac_variant_eff_prop ^ (variant - 1)))
+        ]
+        if recoveryVariant > 0 [
+          ifelse variant > recoveryVariant 
+          [
+            set effect_raw effect_raw * (1 - prev_var_risk)
+          ]
+          [
+            set effect_raw effect_raw * (1 - reinfect_risk) 
+          ]
+        ]
+        ;set effect_raw (effect_raw ^ (1 / 3))
+        let succeptibility effect_raw
+        if succeptibility > succeptibilityTableMax [
+          ;; This is just a speedup to stop table access.
+          set succeptibilityTableMax succeptibility
+        ]
+        table:put succeptibilityTable variant succeptibility
+      ]
+    ]
+  ]
+end
+
+to simul_waneVacEff
+  if selfVaccEff_raw_risk > 0 and param_vac_wane > 0 [
+    set selfVaccEff_raw_area selfVaccEff_raw_area * (1 - param_vac_wane)
+    set selfVaccEff_raw_risk selfVaccEff_raw_risk * (1 - param_vac_wane)
+    simul_updateVacAndReinfectMult
+  ]
+end
+
+to simul_resetSomeRandomParams
+  set ownIllnessPeriod_raw ( exp random-normal M S ) ;; log transform of illness period
+  set ownIncubationPeriod_raw ( exp random-normal Minc Sinc ) ;;; log transform of incubation period
+  set ownIllnessPeriod ownIllnessPeriod_raw
+  set ownIncubationPeriod ownIncubationPeriod_raw
+  set proportion_people_avoid_draw random 100
+  simul_updateVacAndReinfectMult
+end
+
+to simul_updateIsolationResponse
+  set pace span * spanMult
+  set isolateCompliant 0
+  if accept_isolation_draw < accept_isolation_prop [
+    if (Case_Isolation and (isolating = 1 or tracked = 1)) or (isolate_on_inf_notice and noticeOwnInfection = 1)[
+      ifelse isolating = 1 and color != red
+      [
+        if draw_isolationCompliance * Household_Iso_Factor > random-float 1 [
+          move-to homelocation
+          set pace 0
+          set isolateCompliant 1
+        ]
+      ]
+      [
+        ;; Full strength isolation for reported cases
+        ifelse caseReportTime >= ticks
+        [
+          if draw_isolationCompliance * Infect_Iso_Factor > random-float 1 [
+            move-to homelocation
+            set pace 0
+            set isolateCompliant 1
+          ]
+        ]
+        [
+          if draw_isolationCompliance * Track_Iso_Factor > random-float 1 [
+            move-to homelocation
+            set pace 0
+            set isolateCompliant 1
+          ]
+        ]
+      ]
+    ]
+  ]
+end
+
+to simul_setEndStats
+  ;print R_measure_time
+  if R_measure_time < ticks and contributeToR [
+    table:put totalEndR homeRegion (table:get totalEndR homeRegion) + R
+    table:put totalEndCount homeRegion (table:get totalEndCount homeRegion) + 1
+    table:put endR_sum homeRegion (table:get endR_sum homeRegion) + R
+    table:put endR_count homeRegion (table:get endR_count homeRegion) + 1
+  ]
+  if isInitialInfection [
+    if initial_infection_R = -1 [
+     set initial_infection_R 0 
+    ]
+    set initial_infection_R initial_infection_R + R
+  ]
+end
+
+to simul_do_scaleup
+  set size 2
+  set color cyan
+  set variantTransMult 0
+  set infectVariant 0
+  set recoveryVariant 0
+  simul_updateVacAndReinfectMult
+
+  set timenow 0
+  set noticeOwnInfection 0
+  set imported 0
+  set tracked 0
+  set hasKnownContact false
+  set isolating 0
+  set R 0
+  
+  move-to one-of patches with [ pcolor = black ]
+  simul_resetSomeRandomParams
+  
+  set returntoschool random 100
+end
+
+;;*******************************************************************************************************************************
+;;** Simul Once-A-Tick Functions **
+;;*******************************************************************************************************************************
+
+to simul_record_patch_infectiveness
+  if color = red and currentVirulence > 0 [
+    let localInfectiveness currentVirulence * transmitFromVacAndReinfect * variantTransMult
+    if wearingMask = 1 and Mask_Efficacy_Mult > 0 [
+      set localInfectiveness (localInfectiveness * (1 - draw_maskWearEfficacy * Mask_Efficacy_Mult))
+    ]
+    if asymptomaticFlag = 1 [
+      set localInfectiveness (localInfectiveness * Asymptomatic_Trans)
+    ]
+    if isolateCompliant = 1 [
+     set localInfectiveness (localInfectiveness * Isolation_Transmission )
+    ]
+    
+    ;print "currentVirulence"
+    ;print currentVirulence
+    ;print ownMaskEfficacy
+    ;print Asymptomatic_Trans
+    ;print localInfectiveness
+    
+    let myPatch patch-here
+    let thisSimul self
+    let localVariant infectVariant
+    ask myPatch [
+      if lastInfectionUpdate < ticks [
+        set infectionList []
+        set lastInfectionUpdate ticks
+        ;set infectionCulprit table:make ;; Slow, but while technically correct, unlikely to cause issues.
+      ]
+      set infectionList lput localInfectiveness infectionList
+      table:put infectionCulprit localInfectiveness thisSimul
+    ]
+  ]
+end
+
+to simul_update_patch_utilisation
+  let myPatch patch-here
+  ask myPatch [
+    set lastUtilTime ticks
+  ]
+end
+
+to simul_infect
+  if color != red [
+    let baseSuccept succeptMult
+    if wearingMask = 1 and Mask_Efficacy_Mult > 0 [
+      set baseSuccept baseSuccept * (1 - draw_maskWearEfficacy * Mask_Efficacy_Mult)
+    ]
+
+    let myPatch patch-here
+    let localInfectionList 0
+    let localInfectionCulprit 0
+    ask myPatch [
+      if lastInfectionUpdate >= ticks [
+        set localInfectionList infectionList
+        set localInfectionCulprit infectionCulprit
+      ]
+    ]
+    
+    if is-list? localInfectionList [
+      foreach infectionList [ x ->
+        ;print "x"
+        ;print x
+        if color != red [
+          set transmission_count transmission_count + 1
+          set transmission_sum transmission_sum + baseSuccept * succeptibilityTableMax * x
+          let infectDraw random-float 1
+          let binomChance 1 - (1 - baseSuccept * succeptibilityTableMax * x) ^ Daily_Infect_Binom
+          
+          if binomChance > infectDraw [
+            let patchVariant 0
+            ask table:get localInfectionCulprit x [
+              set patchVariant infectVariant
+            ]
+            
+            ;; Replace infection with more virulent variant
+            if global_incursionReplaceChance > 0 and global_incursionVariant > patchVariant [
+              if global_incursionReplaceChance > random-float 1 [
+                set patchVariant global_incursionVariant
+              ]
+            ]
+            
+            ;; Check against lower succeptiblity for reinfection.
+            set binomChance 1 - (1 - baseSuccept * (table:get succeptibilityTable patchVariant) * x) ^ Daily_Infect_Binom
+            if binomChance > infectDraw [
+              set color red
+              set contributeToR true
+              set infectVariant patchVariant
+              simul_updateVacAndReinfectMult
+              set infectedContactList table:make
+              set traceAttempts 0
+              set selfTraceEffMult 1
+
+              let culpritSimul table:get localInfectionCulprit x
+              let culpritTracked false
+              let thisSimul self
+              table:put infectedContactList table:length infectedContactList culpritSimul
+              ask culpritSimul [
+                set culpritTracked tracked
+                table:put infectedContactList table:length infectedContactList thisSimul
+              ]
+              set hasKnownContact (culpritTracked = 1)
+
+              set isolating 0
+              set timenow 0
+              set infectionsToday_acc infectionsToday_acc + 1
+              set new_case_real_counter new_case_real_counter + extraScaleFactor * (Scale_Factor ^ scalephase)
+              ifelse selfVaccEff_raw_risk > 0
+              [
+                array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
+              ]
+              [
+                array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
+              ]
+              if track_R [
+                ask culpritSimul [
+                  set R R + 1
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+end
+
+to simul_move
+  ;; describes the circumstances under which people can move and infect one another
+  if ticks > 1 and isolateCompliant = 0 [
+    ;; this is assigned per agent so day and night are not aligned across people - this is deliberate
+    ifelse 0.5 * move_chance_multiplier > random-float 1
+    [
+      set heading random 360
+      jump random-float pace
+    ]
+    [
+      move-to homeLocation
+    ]
+  ]
+end
+
+to simul_visitDestination
+  ;; sets up destinations where people might gather and set off superspreader events
+  ;; reduces large gatherings by stage
+  if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * visit_chance_multiplier > random-float 1  [
+    let movePatch one-of destination_patches in-radius Visit_Radius
+    if is-patch? movePatch [
+      move-to movePatch
+    ]
+  ]
+  ;; essential workers do not have the same capacity to reduce contact as non-esssential
+end
+
+to simul_avoid
+  ;; so, if the social distancing policies are on and you are distancing at this time and you are not part of an age-isolated
+  ;; group and you are not an EssentialWorkerPriority, then if there is anyone near you, move away if you can.♦
+  if isolateCompliant != 1 [
+    ;; if you are an essential worker, you can only reduce your
+    ;; contacts when you are not at work assuming 8 hours work, 8 hours rest, 8 hours recreation - rest doesn't count for anyone, hence it is
+    ;; set at 50 on the input slider. People don't isolate from others in their household unit
+    let myHouse householdUnit
+    (ifelse any? other simuls-here with [ householdUnit != myHouse and isolateCompliant = 1] and draw_isolationCompliance > random-float 1
+      [
+        simul_move_to_empty_patch
+      ]
+      (EssentialWorkerFlag = 0 or Ess_W_Risk_Reduction > random 100) and Spatial_Distance = true
+      and Proportion_People_Avoid + draw_ppa_modifier > proportion_people_avoid_draw
+      and Proportion_Time_Avoid + draw_pta_modifier > random 100
+      [
+        ifelse isStudent and schoolsOpen
+        [
+          ;; students don't isolate from each other or their household unit
+          if any? other simuls-here with [ householdUnit != myHouse or not isStudent ] [
+            simul_move_to_empty_patch
+          ]
+        ]
+        [
+          if any? other simuls-here with [ householdUnit != myHouse ] [
+            simul_move_to_empty_patch
+          ]
+        ]
+      ]
+      [
+        ;; otherwise just avoid ICU (we already moved)
+        simul_update_patch_utilisation
+    ])
+  ]
+  ;;move-to patch-here ;; Snap to grid
+end
+
+to simul_superSpread
+  if isolateCompliant = 0 and superspreaders * superSpread_chance_multiplier > random-float 1 [
+    move-to one-of destination_patches
+  ]
+end
+
+to simul_settime
+  ;; asks simuls to start counting the days since they became infected and to also possibly die
+  ;; dying this way currently not implemented but done at the end of the illness period, instead
+  if color = red [
+    set timenow timenow + 1
+    if tracked = 1 and caseReportTime = ticks and report_case_draw < report_proportion [
+      set casesReportedToday_acc casesReportedToday_acc + 1
+    ]
+  ]
+  if color = yellow [
+    set recoverTime recoverTime + 1
+    if recoverTime = reinfect_delay [
+      simul_updateVacAndReinfectMult 
+    ]
+  ]
+end
+
+to simul_end_infection
+  if color = red and timenow > ownillnessperiod [
+    if track_R [
+      simul_setEndStats
+    ]
+    
+    let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
+    if recoveryVariant > 0 [
+      table:put recoverCountByVariant recoveryVariant ((table:get recoverCountByVariant recoveryVariant) - popPerSimul)
+      if table:get recoverCountByVariant recoveryVariant < 0 [
+        set recoverCount recoverCount - table:get recoverCountByVariant recoveryVariant
+        table:put recoverCountByVariant recoveryVariant 0
+      ]
+    ]
+    
+    ifelse (selfVaccEff_raw_risk = 0 and RiskofDeath > random-float 1) or (selfVaccEff_raw_risk > 0 and RiskofDeath * draw_vacc_death_risk_mult > random-float 1)
+    [
+      set deathcount deathcount + extraScaleFactor * (Scale_Factor ^ scalephase)
+      array:set dieArray cohortIndex (array:item dieArray cohortIndex) + popPerSimul
+    ]
+    [
+      if recoveryVariant = 0 [
+        set recoverCount recoverCount + popPerSimul
+      ]
+      table:put recoverCountByVariant infectVariant ((table:get recoverCountByVariant infectVariant) + popPerSimul)
+    ]
+    
+    if trace_calibration > 0 [
+      set finished_infections finished_infections + popPerSimul
+      if tracked > 0 [
+        set finished_tracked finished_tracked + popPerSimul
+      ]
+    ]
+    
+    ;; May as well set color to yellow since dead and infected people have a similar effect on the simulation.
+    ;; Very few people die in the low scales as a proportion of the total population.
+    set color yellow
+    set isInitialInfection false
+    set vaccineIncursionOverride 0
+    set recoveryVariant infectVariant
+    set infectVariant 0
+    set recoverTime 0
+    simul_updateVacAndReinfectMult
+  
+    set R 0
+    set timenow 0
+    set noticeOwnInfection 0
+    set requireICU 0
+    set isolating 0
+    set tracked 0
+    set hasKnownContact false
+  ]
+end
+
+to simul_EssentialWorkerID
+  ;; identifies essential workers
+  ifelse EssentialWorkerPriority < Essential_Workers
+  [
+    set EssentialWorkerFlag 1
+  ]
+  [
+    set EssentialWorkerFlag 0
+  ]
+end
+
+to simul_checkMask
+  ;; identifies people who waear a mask
+  ifelse maskPolicy and wearsMask <= mask_Wearing and patch-here != homelocation
+  [
+    set wearingMask 1
+  ]
+  [
+    set wearingMask 0
+  ]
+end
+
+to simul_updateHouseTrackedCase
+  ;; Add and Case_Reporting_Delay <= ticks to only isolate with confirmed cases in a household.
+  if color = red and tracked = 1 [
+    table:put houseTrackedCaseTimeTable householdunit ticks
+  ]
+end
+
+to simul_isolateAndTrackFromHouseHold
+  ;; this identifies people in the system earlier because they get a test straight away having been a close contact of someone in their house
+  if isolating = 1 and color = red [
+    if tracked = 0 [
+      set caseReportTime ticks + Case_Reporting_Delay
+      simul_setContactsKnown
+    ]
+    set tracked 1
+  ]
+  
+  if color != red or (color = red and tracked = 0) [
+    ifelse table:get houseTrackedCaseTimeTable householdunit = ticks
+    [
+      if color != red [
+        set isolating 1
+      ]
+      if color = red [
+        if tracked = 0 [
+          set caseReportTime ticks + Case_Reporting_Delay
+          simul_setContactsKnown
+        ]
+        set tracked 1
+      ]
+    ]
+    [
+      set isolating 0
+    ]
+  ]
+end
