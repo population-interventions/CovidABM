@@ -2591,7 +2591,7 @@ SLIDER
 1622
 714
 1829
-748
+747
 success_7day_cases
 success_7day_cases
 -1
@@ -54902,7 +54902,8 @@ NetLogo 6.2.0
     <metric>stage3time</metric>
     <metric>stage2time</metric>
     <metric>stage1btime</metric>
-    <metric>stage1timestage_listOut</metric>
+    <metric>stage1times</metric>
+    <metric>tage_listOut</metric>
     <metric>infectNoVacArray_listOut</metric>
     <metric>infectVacArray_listOut</metric>
     <metric>age_listOut</metric>
