@@ -195,4 +195,11 @@ to calculateCasesInLastPeriod
   if casesinperiod7 > casesinperiod7_max [
    set casesinperiod7_max casesinperiod7
   ]
+  
+  if casesReportedToday_min = -1 or casesReportedToday < casesReportedToday_min [
+   set casesReportedToday_min casesReportedToday
+  ]
+  if casesinperiod7_min = -1 or casesinperiod7 < casesinperiod7_min [
+   set casesinperiod7_min casesinperiod7
+  ]
 end

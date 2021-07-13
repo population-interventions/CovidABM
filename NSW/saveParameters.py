@@ -245,7 +245,13 @@ paramIncursion = {
 }
 
 paramValuesStageNone = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100000))),
+    'rand_seed' : listToStr(random.randint(10000000, size=(10000))),
+    'sympt_present_prop' : listToStr([0.3, 0.5]),
+    'param_policy' : listToStr([ 
+        '"Stage2"',
+        '"Stage3"',
+        '"Stage4"',
+    ]),
 }
 
 paramValues_stage2Infect = {**defaultParams, **{

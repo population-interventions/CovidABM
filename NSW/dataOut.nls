@@ -20,8 +20,7 @@ to setup_DataOut
     set index index + 1 
   ]
   
-  if trace_calibration > 0 [
-    set End_Day -1
+  if trace_calibration > 0 or success_7day_cases > 0 [
     set first_trace_day -1
     set first_trace_infections 0
     set finished_infections 0
@@ -65,7 +64,7 @@ to checkCalibrationStop
     ]
     
     if currentInfections = 0 or trace_calibration < cumulativeInfected [
-      set End_Day ticks
+      set pre_stop_day ticks
       set tracked_simuls (count simuls with [color = red and tracked = 1] * extraScaleFactor * scale_factor ^ scalePhase)
       ;print (list "End_Day" End_Day)
       ;print (list "first_trace_day" first_trace_day)
@@ -78,6 +77,14 @@ to checkCalibrationStop
       ;print (list "cali_timenow" cali_timenow)
       ;print (list "cali_asymptomaticFlag" cali_asymptomaticFlag)
       ;print (list "cali_symtomatic_present_day" cali_symtomatic_present_day)
+      set stop_simulation true
+    ]
+  ]
+  
+  if success_7day_cases > -1 [
+    if casesinperiod7_min < success_7day_cases [
+      set pre_stop_day ticks
+      set tracked_simuls (count simuls with [color = red and tracked = 1] * extraScaleFactor * scale_factor ^ scalePhase)
       set stop_simulation true
     ]
   ]

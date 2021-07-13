@@ -196,6 +196,8 @@ def ProcessResults(path, nameList):
         'cumulative_tracked_notice', 'initial_infection_R',
         'casesinperiod7_max', 'casesReportedToday_max',
         'max_stage',
+        #'stage1time', 'stage1btime', 
+        #'stage2time', 'stage3time', 'stage4time', 
     ]
     df = pd.DataFrame(columns=interestingColumns)
     for v in nameList:
@@ -278,7 +280,7 @@ def ProcessResults(path, nameList):
         ]
         
         if True:
-            PlotStackedManyIndex(df, indexList, 'any_trace', 'success')
+            #PlotStackedManyIndex(df, indexList, 'any_trace', 'success')
             #PlotRangeManyIndex(df[df['first_trace_occur'] >= 0], indexList, 'first_trace_occur', 'success')
             titlePrepend = '[min daily for week = {}] '.format(dailyCaseLimit)
             
@@ -304,5 +306,5 @@ namePath = 'output/trace/'
 #ProcessResults(namePath, [nameStr, 'run047', 'run048'])
 #ProcessResults(namePath, ['run049'])
 #ProcessResultsOne(namePath, [nameStr, 'run047', 'run048'])
-ProcessResults(namePath, ['trace_08'])
+ProcessResults(namePath, ['trace_07'])
 

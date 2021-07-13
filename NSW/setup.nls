@@ -404,6 +404,10 @@ to setGlobals
   set stage2time 0
   set stage1btime 0
   set stage1time 0
+  set casesinperiod7_min -1
+  set casesReportedToday_min -1
+  set casesinperiod7_final -1
+  set pre_stop_day -1
   
   ;; These used to be dynamic controls with conflicting variable names.
   set spatial_distance 0

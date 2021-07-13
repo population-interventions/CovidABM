@@ -139,6 +139,12 @@ globals [
   stage2time
   stage1btime
   stage1time
+  casesinperiod7_max
+  casesReportedToday_max
+  casesinperiod7_min
+  casesReportedToday_min
+  casesinperiod7_final
+  pre_stop_day
 
   test_acc
 
@@ -176,9 +182,6 @@ globals [
   regionHouseMax
   regionPosMin
   regionPosMax
-
-  casesinperiod7_max
-  casesReportedToday_max
   
   totalEndR
   totalEndCount
