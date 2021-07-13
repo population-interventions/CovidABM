@@ -188,4 +188,11 @@ to calculateCasesInLastPeriod
     ;; Do not run this unless you need to, is probably slow.
     outputLockdownCalibrate
   ]
+  
+  if casesReportedToday > casesReportedToday_max [
+   set casesReportedToday_max casesReportedToday
+  ]
+  if casesinperiod7 > casesinperiod7_max [
+   set casesinperiod7_max casesinperiod7
+  ]
 end

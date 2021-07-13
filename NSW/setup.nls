@@ -381,6 +381,8 @@ to setGlobals
   set slopeCount                 0
   set slopeSum                   0
   set slopeAverage               0
+  set casesinperiod7_max         0
+  set casesReportedToday_max     0
   
   set testName                   ""
   set traceMult                  1
@@ -396,6 +398,12 @@ to setGlobals
   
   set new_case_real 0
   set new_case_real_counter 0
+  
+  set stage4time 0
+  set stage3time 0
+  set stage2time 0
+  set stage1btime 0
+  set stage1time 0
   
   ;; These used to be dynamic controls with conflicting variable names.
   set spatial_distance 0

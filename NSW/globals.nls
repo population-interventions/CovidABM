@@ -134,6 +134,11 @@ globals [
 
   new_case_real
   new_case_real_counter
+  stage4time
+  stage3time
+  stage2time
+  stage1btime
+  stage1time
 
   test_acc
 
@@ -172,6 +177,9 @@ globals [
   regionPosMin
   regionPosMax
 
+  casesinperiod7_max
+  casesReportedToday_max
+  
   totalEndR
   totalEndCount
   endR_sum
