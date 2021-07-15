@@ -220,6 +220,8 @@ def ProcessResults(nameList):
         'stage1time', 'stage1btime', 
         'stage2time', 'stage3time', 'stage4time', 
         'casesinperiod7_min',
+        'casesinperiod7_switchTime',
+        'cumulativeInfected_switchTime',
     ]
     notFloatCol = ['param_policy']
     df = pd.DataFrame(columns=interestingColumns)
@@ -246,9 +248,8 @@ def ProcessResults(nameList):
         'initial_infection_R' : 'incurR',
         'casesinperiod7_max' : 'maxCasesDailyOverWeek',
         'casesReportedToday_max' : 'maxCasesDaily',
+        'casesinperiod7_switchTime' : 'intCasesWeekDaily',
     })
-    
-    df = df[df['PresentProp'] == 0.5]
     
     df = df.set_index(['rand_seed', 'TraceMult', 'param_policy'])
     df['IncurPresentDay'] = df['IncurPresentDay'].replace(
@@ -268,21 +269,22 @@ def ProcessResults(nameList):
     df.loc[df['cumulativeInfected'] > 1, 'any_transmit'] = 1
     
     # Reset plot parameters
-    dailyCaseLimit = 61
+    dailyCaseLimit = 0
     plt.rcParams.update(plt.rcParamsDefault)
     df = df[df['maxCasesDailyOverWeek'] >= dailyCaseLimit]
     df = df.sort_index()
+    print(df)
     
     if True:
         PlotIntegerRange(df, 'TraceMult', 'success',
                          ['TraceMult', 'param_policy'],
-                         {'TraceMult' : 0.5},
+                         {'TraceMult' : 1},
                          bar=True, nameOverride='Success in runs with a week of at least {} average daily cases.'.format(dailyCaseLimit))
         indexList = [
             #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
             # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5}},
             {'ind' : ['TraceMult', 'param_policy'], 
-             'val' : {'TraceMult' : 0.5}},
+             'val' : {'TraceMult' : 1}},
             #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
             # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1, 'R0' : 2.5}},
             #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
@@ -314,11 +316,14 @@ def ProcessResults(nameList):
             #PlotRangeManyIndex(df[df['first_trace_occur'] >= 0], indexList, 'first_trace_occur', 'success')
             titlePrepend = '[min daily for week = {}] '.format(dailyCaseLimit)
             
+            PlotRangeManyIndex(df, indexList, 'intCasesWeekDaily', 'success', doCount=True, bucketWidth=2, titlePrepend=titlePrepend)
+            
             PlotRangeManyIndex(df, indexList, 'combinedStop', 'success', doCount=True, bucketWidth=5, titlePrepend=titlePrepend)
             PlotRangeManyIndex(df[df['success'] == 1], indexList, 'combinedStop', 'success', doCount=True, bucketWidth=5, titlePrepend=titlePrepend)
             PlotRangeManyIndex(df, indexList, 'cumulativeInfected', 'combinedStop', loglog=True, doCount=True, bucketWidth=1/15, titlePrepend=titlePrepend)
-            PlotRangeManyIndex(df, indexList, 'maxCasesDailyOverWeek', 'success', doCount=True, bucketWidth=25, titlePrepend=titlePrepend)
-            PlotRangeManyIndex(df, indexList, 'maxCasesDailyOverWeek', 'success', bucketWidth=25, titlePrepend=titlePrepend)
+            
+            #PlotRangeManyIndex(df, indexList, 'maxCasesDailyOverWeek', 'success', doCount=True, bucketWidth=25, titlePrepend=titlePrepend)
+            #PlotRangeManyIndex(df, indexList, 'maxCasesDailyOverWeek', 'success', bucketWidth=25, titlePrepend=titlePrepend)
             PlotStackedManyIndex(df[df['maxCasesDailyOverWeek'] < 210], indexList, 'maxCasesDailyOverWeek', 'success', bucketWidth=20, titlePrepend=titlePrepend)
     
     print('Total runs {}'.format(df['combinedStop'].count()))
@@ -346,5 +351,5 @@ namePath = 'output/trace/'
 #ProcessResults(namePath, [nameStr, 'run047', 'run048'])
 #ProcessResults(namePath, ['run049'])
 #ProcessResultsOne(namePath, [nameStr, 'run047', 'run048'])
-ProcessResults(GetFiles('output/trace/HPC_2021_07_14/'))
+ProcessResults(['output/trace/trace_11'])
 

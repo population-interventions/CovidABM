@@ -145,7 +145,6 @@ Span
 NIL
 HORIZONTAL
 
-
 SLIDER
 2713
 160
@@ -178,9 +177,6 @@ NIL
 NIL
 1
 
-
-
-
 SLIDER
 1627
 219
@@ -195,9 +191,6 @@ superspreaders
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 1625
@@ -229,10 +222,6 @@ Proportion_Time_Avoid
 NIL
 HORIZONTAL
 
-
-
-
-
 INPUTBOX
 195
 313
@@ -255,7 +244,6 @@ total_population
 0
 Number
 
-
 SLIDER
 2715
 117
@@ -270,10 +258,6 @@ Incubation_Period
 1
 NIL
 HORIZONTAL
-
-
-
-
 
 SLIDER
 1672
@@ -290,7 +274,6 @@ Age_Isolation
 NIL
 HORIZONTAL
 
-
 SWITCH
 1470
 791
@@ -301,11 +284,6 @@ scale
 0
 1
 -1000
-
-
-
-
-
 
 INPUTBOX
 2777
@@ -328,8 +306,6 @@ se_incubation
 1
 0
 Number
-
-
 
 SLIDER
 355
@@ -413,10 +389,6 @@ schoolsOpen
 1
 -1000
 
-
-
-
-
 SWITCH
 1483
 322
@@ -488,13 +460,6 @@ Asymptomatic_Trans
 NIL
 HORIZONTAL
 
-
-
-
-
-
-
-
 SLIDER
 1264
 1007
@@ -521,7 +486,6 @@ Vaccine_Available
 1
 -1000
 
-
 SLIDER
 13
 15
@@ -537,8 +501,6 @@ RAND_SEED
 NIL
 HORIZONTAL
 
-
-
 SLIDER
 12
 207
@@ -553,15 +515,6 @@ param_vac_uptake
 1
 NIL
 HORIZONTAL
-
-
-
-
-
-
-
-
-
 
 TEXTBOX
 1493
@@ -613,9 +566,6 @@ Scale_Factor
 NIL
 HORIZONTAL
 
-
-
-
 SLIDER
 359
 1025
@@ -646,9 +596,6 @@ Asymptom_Trace_Mult
 NIL
 HORIZONTAL
 
-
-
-
 SLIDER
 173
 623
@@ -678,8 +625,6 @@ Complacency_Bound
 1
 NIL
 HORIZONTAL
-
-
 
 BUTTON
 458
@@ -771,8 +716,6 @@ Non_Infective_Time
 NIL
 HORIZONTAL
 
-
-
 SWITCH
 1470
 751
@@ -783,9 +726,6 @@ track_R
 0
 1
 -1000
-
-
-
 
 SLIDER
 574
@@ -813,7 +753,6 @@ param_trigger_loosen
 1
 -1000
 
-
 SLIDER
 1038
 53
@@ -828,9 +767,6 @@ End_R_Reported
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 15
@@ -1019,7 +955,6 @@ param_recovered_prop
 NIL
 HORIZONTAL
 
-
 INPUTBOX
 223
 480
@@ -1091,11 +1026,6 @@ prev_var_area
 NIL
 HORIZONTAL
 
-
-
-
-
-
 SLIDER
 577
 965
@@ -1122,7 +1052,6 @@ set_shape
 1
 -1000
 
-
 SLIDER
 788
 1042
@@ -1138,7 +1067,6 @@ vac_variant_eff_prop
 NIL
 HORIZONTAL
 
-
 SLIDER
 577
 1007
@@ -1153,7 +1081,6 @@ complacency_loss
 1
 NIL
 HORIZONTAL
-
 
 SLIDER
 12
@@ -1215,7 +1142,6 @@ report_proportion
 NIL
 HORIZONTAL
 
-
 SLIDER
 784
 845
@@ -1271,7 +1197,6 @@ calibrate
 1
 1
 -1000
-
 
 SLIDER
 788
@@ -74151,7 +74076,7 @@ NetLogo 6.2.0
       <value value="14"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_trace_mult">
-      <value value="1"/>
+      <value value="0.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_trigger_loosen">
       <value value="false"/>
