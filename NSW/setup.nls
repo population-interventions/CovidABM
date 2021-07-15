@@ -592,7 +592,8 @@ to setup
     ]
     simul_updatepersonalvirulence
     set infectionsToday_acc infectionsToday_acc + 1
-    array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
+    ;; Do not add to infection output as it makes for poor traces.
+    ;array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
   ]
 
   set Quarantine false
@@ -630,7 +631,8 @@ to setup
       set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
       set init_secondry_infect init_secondry_infect - popPerSimul
       set infectionsToday_acc infectionsToday_acc + 1
-      array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
+      ;; Do not add to infection output as it makes for poor traces.
+      ;;array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
     ]
   ]
 
