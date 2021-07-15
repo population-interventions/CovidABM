@@ -39,7 +39,9 @@ def PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=False,
     #print(indexVals)
     if bucketWidth:
         if loglog:
-            df[axis] = np.log(np.floor(np.exp(df[axis] / bucketWidth))) * bucketWidth + bucketWidth/2
+            print(df[axis])
+            df[axis] = np.exp(np.floor(np.log(df[axis]) / bucketWidth) * bucketWidth)
+            print(df[axis])
         else:
             df[axis] = np.floor(df[axis] / bucketWidth) * bucketWidth + bucketWidth/2
     # splitNames should only have one entry.
@@ -53,7 +55,7 @@ def PlotIntegerRange(df, axis, metric, index, indexVals,
                      size=(9,4.5), hlines=False, nameOverride=False,
                      bucketWidth=False, titlePrepend='', loglog=False):
     print('PlotIntegerRange', axis, metric)
-    df, splitName = PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=bucketWidth, loglog=False)
+    df, splitName = PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=bucketWidth, loglog=loglog)
     
     if doCount:
         df = df.groupby(level=[1, 2]).count()
@@ -66,20 +68,22 @@ def PlotIntegerRange(df, axis, metric, index, indexVals,
     
     print('Plotting')
     if bar:
-        figure = df.plot.bar(figsize=size, loglog=loglog)
+        figure = df.plot.bar(figsize=size, logx=loglog)
         plt.grid(which='major', axis='y')
-        plt.grid(which='minor', linewidth=0.2, axis='y')
-        if doCount or doSum:
-            plt.gca().yaxis.set_minor_locator(ticker.AutoMinorLocator())
-        else:
-            plt.gca().yaxis.set_minor_locator(ticker.MultipleLocator(0.05))
+        if not loglog:
+            plt.grid(which='minor', linewidth=0.2, axis='y')
+            if doCount or doSum:
+                plt.gca().yaxis.set_minor_locator(ticker.AutoMinorLocator())
+            else:
+                plt.gca().yaxis.set_minor_locator(ticker.MultipleLocator(0.05))
         plt.gca().set_axisbelow(True)
     else:
-        figure = df.plot(figsize=size, loglog=loglog)
+        figure = df.plot(figsize=size, logx=loglog)
         plt.grid(which='major')
         plt.grid(which='minor', linewidth=0.2)
-        plt.gca().xaxis.set_minor_locator(ticker.AutoMinorLocator())
-        plt.gca().yaxis.set_minor_locator(ticker.AutoMinorLocator())
+        if not loglog:
+            plt.gca().xaxis.set_minor_locator(ticker.AutoMinorLocator())
+            plt.gca().yaxis.set_minor_locator(ticker.AutoMinorLocator())
         
     plt.xticks(rotation=0)
     if doCount:
@@ -312,7 +316,7 @@ def ProcessResults(nameList):
             
             PlotRangeManyIndex(df, indexList, 'combinedStop', 'success', doCount=True, bucketWidth=5, titlePrepend=titlePrepend)
             PlotRangeManyIndex(df[df['success'] == 1], indexList, 'combinedStop', 'success', doCount=True, bucketWidth=5, titlePrepend=titlePrepend)
-            PlotRangeManyIndex(df, indexList, 'cumulativeInfected', 'combinedStop', loglog=True, doCount=True, bucketWidth=250, titlePrepend=titlePrepend)
+            PlotRangeManyIndex(df, indexList, 'cumulativeInfected', 'combinedStop', loglog=True, doCount=True, bucketWidth=1/15, titlePrepend=titlePrepend)
             PlotRangeManyIndex(df, indexList, 'maxCasesDailyOverWeek', 'success', doCount=True, bucketWidth=25, titlePrepend=titlePrepend)
             PlotRangeManyIndex(df, indexList, 'maxCasesDailyOverWeek', 'success', bucketWidth=25, titlePrepend=titlePrepend)
             PlotStackedManyIndex(df[df['maxCasesDailyOverWeek'] < 210], indexList, 'maxCasesDailyOverWeek', 'success', bucketWidth=20, titlePrepend=titlePrepend)

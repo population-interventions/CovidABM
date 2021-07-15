@@ -408,6 +408,8 @@ to setGlobals
   set casesReportedToday_min -1
   set casesinperiod7_final -1
   set pre_stop_day -1
+  set casesinperiod7_switchTime 0
+  set cumulativeInfected_switchTime 0
   
   ;; These used to be dynamic controls with conflicting variable names.
   set spatial_distance 0
@@ -651,5 +653,5 @@ to setup
   setupstages ;; setting up for the MJA runs
   
   ;; Output infection rates 
-  test_traceadjust
+  ;test_traceadjust
 end

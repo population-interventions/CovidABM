@@ -250,8 +250,7 @@ paramIncursion = {
 }
 
 paramValuesStageNone = {
-    'rand_seed' : GetRandomListUnique(10000),
-    'sympt_present_prop' : listToStr([0.3, 0.5]),
+    'rand_seed' : GetRandomListUnique(20000),
     'param_policy' : listToStr([ 
         '"Stage2"',
         '"Stage3"',

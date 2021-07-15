@@ -54,6 +54,11 @@ to calculateDataOut
   if stage = 4 [
     set stage4time stage4time + 1
   ]
+  
+  if ticks < param_stage1_time [
+    set casesinperiod7_switchTime casesinperiod7
+    set cumulativeInfected_switchTime cumulativeInfected
+  ]
 end
 
 to checkCalibrationStop
