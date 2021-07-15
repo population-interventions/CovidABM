@@ -11,6 +11,10 @@ def listToStr(input):
     return " ".join(str(x) for x in input)
 
 
+def GetRandomListUnique(listSize, maxIntSize=10000000):
+    return listToStr(baseRandom.sample(range(maxIntSize), listSize))
+
+
 def MoveMatchToPos(data, match, pos):
     for i in range(len(data)):
         if data[i][0] == match:
@@ -125,7 +129,7 @@ defaultParams = {
 }
 
 paramValuesTestR_stageTestFull = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(20000))),
+    'rand_seed' : GetRandomListUnique(20000),
     'param_policy' : listToStr([
         '"StageCal Test"',
     ]),
@@ -146,7 +150,7 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
 }}
 
 paramValuesFullValues = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
+    'rand_seed' : GetRandomListUnique(100),
     'total_population' : '6681000',
     'policy_pipeline' : listToStr([ 
         '"ME_ME_TS"',
@@ -181,7 +185,7 @@ paramValuesFullValues = {
 }
 
 paramSensitivityTest = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
+    'rand_seed' : GetRandomListUnique(100),
     'total_population' : '6681000',
     'param_vac_uptake' : listToStr([0, 0.3, 0.5, 0.7, 0.9]),
     'param_final_phase' : listToStr([2, 3]),
@@ -223,7 +227,7 @@ paramSensitivityTest = {
 }
 
 paramIncursion = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(1600))),
+    'rand_seed' : GetRandomListUnique(1600),
     'total_population' : '6681000',
     'param_trace_mult' : listToStr([1]),
     'sympt_present_prop' : listToStr([0.5]),
@@ -245,12 +249,12 @@ paramIncursion = {
 }
 
 paramValuesStageNone = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
+    'rand_seed' : GetRandomListUnique(100),
     'Global_Transmissibility' : listToStr([0.278, 0.333]),
 }
 
 paramValues_stage2Infect = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
+    'rand_seed' : GetRandomListUnique(5000),
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesFullValues, topOfFile=topOfFile)

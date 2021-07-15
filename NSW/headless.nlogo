@@ -316,7 +316,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.16909605255783358
+0.17158043449447796
 0.001
 1
 NIL
@@ -454,7 +454,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7529513047805232
+0.7892147532744355
 .01
 1
 NIL
@@ -495,7 +495,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3961353.0
+581489.0
 1
 1
 NIL
@@ -575,7 +575,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.37544157977130227
+0.3101395822507171
 0.01
 1
 NIL
@@ -1005,7 +1005,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.637166694150061
+0.6905440489418184
 0.05
 1
 NIL
@@ -1222,7 +1222,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.78670288433303
+0.7395080662865628
 0.01
 1
 NIL

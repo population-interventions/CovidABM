@@ -10,6 +10,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import matplotlib.ticker as ticker
 import seaborn as sns
+import pathlib
 #from tqdm import tqdm
 
 def GetIndexPickStr(indexVals):
@@ -29,7 +30,7 @@ def PickOutIndex(df, indexVals):
         df = df[df[key] == indexVals[key]]
     return df
         
-def PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=False):
+def PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=False, loglog=False):
     df = PickOutIndex(df, indexVals)
     
     splitNames = [x for x in index if x not in indexVals]
@@ -37,7 +38,10 @@ def PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=False)
     #print(index)
     #print(indexVals)
     if bucketWidth:
-        df[axis] = np.floor(df[axis] / bucketWidth) * bucketWidth + bucketWidth/2
+        if loglog:
+            df[axis] = np.log(np.floor(np.exp(df[axis] / bucketWidth))) * bucketWidth + bucketWidth/2
+        else:
+            df[axis] = np.floor(df[axis] / bucketWidth) * bucketWidth + bucketWidth/2
     # splitNames should only have one entry.
     df = df.set_index(['rand_seed', axis] + splitNames)
     df = df[[metric]]
@@ -47,9 +51,9 @@ def PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=False)
 def PlotIntegerRange(df, axis, metric, index, indexVals,
                      bar=False, doSum=False, doCount=False,
                      size=(9,4.5), hlines=False, nameOverride=False,
-                     bucketWidth=False, titlePrepend=''):
+                     bucketWidth=False, titlePrepend='', loglog=False):
     print('PlotIntegerRange', axis, metric)
-    df, splitName = PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=bucketWidth)
+    df, splitName = PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=bucketWidth, loglog=False)
     
     if doCount:
         df = df.groupby(level=[1, 2]).count()
@@ -62,14 +66,20 @@ def PlotIntegerRange(df, axis, metric, index, indexVals,
     
     print('Plotting')
     if bar:
-        figure = df.plot.bar(figsize=size)
+        figure = df.plot.bar(figsize=size, loglog=loglog)
         plt.grid(which='major', axis='y')
         plt.grid(which='minor', linewidth=0.2, axis='y')
-        plt.gca().yaxis.set_minor_locator(ticker.MultipleLocator(0.05))
+        if doCount or doSum:
+            plt.gca().yaxis.set_minor_locator(ticker.AutoMinorLocator())
+        else:
+            plt.gca().yaxis.set_minor_locator(ticker.MultipleLocator(0.05))
         plt.gca().set_axisbelow(True)
     else:
-        figure = df.plot(figsize=size)
-        plt.grid(which='both')
+        figure = df.plot(figsize=size, loglog=loglog)
+        plt.grid(which='major')
+        plt.grid(which='minor', linewidth=0.2)
+        plt.gca().xaxis.set_minor_locator(ticker.AutoMinorLocator())
+        plt.gca().yaxis.set_minor_locator(ticker.AutoMinorLocator())
         
     plt.xticks(rotation=0)
     if doCount:
@@ -110,6 +120,12 @@ def PlotPartialStackedBar(df, axis, metric, index, indexVals, size=(9, 4.5), hli
     fig, ax = plt.subplots()
     fig.set_size_inches(size[0], size[1])
     
+    plt.grid(which='major', axis='y')
+    plt.grid(which='minor', linewidth=0.2, axis='y')
+    plt.gca().yaxis.set_major_locator(ticker.AutoLocator())
+    plt.gca().yaxis.set_minor_locator(ticker.AutoMinorLocator())
+    plt.gca().set_axisbelow(True)
+    
     top_colors = ['#7EA3BC', '#FFB97C', '#9DE09D', '#E57072', '#BD98E0']
     bottom_colors = ['#1F77B4', '#FF7F0E', '#2CA02C', '#D62728', '#9467BD']
     width = 0.24
@@ -147,10 +163,11 @@ def PlotPartialStackedBar(df, axis, metric, index, indexVals, size=(9, 4.5), hli
     plt.show()
 
 
-def PlotRangeManyIndex(df, indexVals, axis, metric, bar=False, doSum=False,
+def PlotRangeManyIndex(df, indexVals, axis, metric, bar=False, doSum=False, loglog=False,
                        doCount=False, hlines=False, bucketWidth=False, titlePrepend=''):
     for preset in indexVals:
         PlotIntegerRange(df, axis, metric, preset['ind'], preset['val'],
+                         loglog=loglog,
                          bar=bar, doSum=doSum, doCount=doCount, hlines=hlines,
                          bucketWidth=bucketWidth, titlePrepend=titlePrepend)
 
@@ -182,11 +199,11 @@ def PrintSomeStats(df, indexVals):
     
     
 
-def ProcessResults(path, nameList):
+def ProcessResults(nameList):
     name = nameList[0]
     interestingColumns = [
         'param_trace_mult', 'sympt_present_prop',
-        'rand_seed', 'isocomply_override', 'End_Day',
+        'rand_seed', 'isocomply_override', 'End_Day', 'pre_stop_day',
         'infectionsToday', 'first_trace_day', 'first_trace_infections',
         'currentInfections', 'cumulativeInfected', 'tracked_simuls',
         'finished_infections', 'finished_tracked',
@@ -195,18 +212,21 @@ def ProcessResults(path, nameList):
         'first_trace_occurred', 'cumulative_tracked_all',
         'cumulative_tracked_notice', 'initial_infection_R',
         'casesinperiod7_max', 'casesReportedToday_max',
-        'max_stage',
-        #'stage1time', 'stage1btime', 
-        #'stage2time', 'stage3time', 'stage4time', 
+        'max_stage', 'param_policy',
+        'stage1time', 'stage1btime', 
+        'stage2time', 'stage3time', 'stage4time', 
+        'casesinperiod7_min',
     ]
+    notFloatCol = ['param_policy']
     df = pd.DataFrame(columns=interestingColumns)
     for v in nameList:
-        pdf = pd.read_csv(path + v + '.csv', header=6)
+        pdf = pd.read_csv(v + '.csv', header=6)
         pdf = pdf[interestingColumns]
         df  = df.append(pdf)
     
     for colName in interestingColumns:
-        df[colName] = df[colName].astype(float)
+        if colName not in notFloatCol:
+            df[colName] = df[colName].astype(float)
     
     df = df.rename(columns={
         'first_trace_day' : 'first_report_day',
@@ -224,14 +244,20 @@ def ProcessResults(path, nameList):
         'casesReportedToday_max' : 'maxCasesDaily',
     })
     
-    df = df.set_index(['rand_seed', 'TraceMult', 'max_stage'])
+    df = df[df['PresentProp'] == 0.5]
+    
+    df = df.set_index(['rand_seed', 'TraceMult', 'param_policy'])
     df['IncurPresentDay'] = df['IncurPresentDay'].replace(
         {-1 : 'None'})
+    
+    df['combinedStop'] = df.apply(lambda row:
+        row['pre_stop_day'] if row['pre_stop_day'] > -1 else row['End_Day'], axis=1)
+    
     
     df['maxCasesDailyOverWeek'] = df['maxCasesDailyOverWeek'] / 7
     df['culTrace'] = df['culTrackAll'] - df['culNotice']
     df['success'] = 0
-    df.loc[df['currentInfections'] == 0, 'success'] = 1
+    df.loc[df['casesinperiod7_min'] < 5, 'success'] = 1
     df['any_trace'] = 0
     df.loc[df['first_trace_occur'] >= 0, 'any_trace'] = 1
     df['any_transmit'] = 0
@@ -245,14 +271,14 @@ def ProcessResults(path, nameList):
     
     if True:
         PlotIntegerRange(df, 'TraceMult', 'success',
-                         ['TraceMult', 'max_stage'],
-                         {'TraceMult' : 1},
+                         ['TraceMult', 'param_policy'],
+                         {'TraceMult' : 0.5},
                          bar=True, nameOverride='Success in runs with a week of at least {} average daily cases.'.format(dailyCaseLimit))
         indexList = [
             #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
             # 'val' : {'TraceMult' : 1, 'PresentProp' : 0.5, 'R0' : 5}},
-            {'ind' : ['TraceMult', 'max_stage'], 
-             'val' : {'TraceMult' : 1}},
+            {'ind' : ['TraceMult', 'param_policy'], 
+             'val' : {'TraceMult' : 0.5}},
             #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
             # 'val' : {'IsoComply' : 0.97, 'TraceMult' : 1, 'R0' : 2.5}},
             #{'ind' : ['IsoComply', 'TraceMult', 'PresentProp', 'R0'], 
@@ -284,17 +310,27 @@ def ProcessResults(path, nameList):
             #PlotRangeManyIndex(df[df['first_trace_occur'] >= 0], indexList, 'first_trace_occur', 'success')
             titlePrepend = '[min daily for week = {}] '.format(dailyCaseLimit)
             
-            PlotRangeManyIndex(df, indexList, 'End_Day', 'success', doCount=True, bucketWidth=10, titlePrepend=titlePrepend)
-            PlotRangeManyIndex(df[df['success'] == 1], indexList, 'End_Day', 'success', doCount=True, bucketWidth=10, titlePrepend=titlePrepend)
-            PlotRangeManyIndex(df[df['cumulativeInfected'] < 10000], indexList, 'cumulativeInfected', 'success', doCount=True, bucketWidth=500, titlePrepend=titlePrepend)
+            PlotRangeManyIndex(df, indexList, 'combinedStop', 'success', doCount=True, bucketWidth=5, titlePrepend=titlePrepend)
+            PlotRangeManyIndex(df[df['success'] == 1], indexList, 'combinedStop', 'success', doCount=True, bucketWidth=5, titlePrepend=titlePrepend)
+            PlotRangeManyIndex(df, indexList, 'cumulativeInfected', 'combinedStop', loglog=True, doCount=True, bucketWidth=250, titlePrepend=titlePrepend)
             PlotRangeManyIndex(df, indexList, 'maxCasesDailyOverWeek', 'success', doCount=True, bucketWidth=25, titlePrepend=titlePrepend)
             PlotRangeManyIndex(df, indexList, 'maxCasesDailyOverWeek', 'success', bucketWidth=25, titlePrepend=titlePrepend)
             PlotStackedManyIndex(df[df['maxCasesDailyOverWeek'] < 210], indexList, 'maxCasesDailyOverWeek', 'success', bucketWidth=20, titlePrepend=titlePrepend)
     
-    print('Total runs {}'.format(df['End_Day'].count()))
+    print('Total runs {}'.format(df['combinedStop'].count()))
     for i in range(2, 5):
-        print('Sucesse Rate max stage {} {}'.format(i, df.loc[(slice(None), slice(None), i),'success'].mean()))
+        print('Sucesse Rate max stage {} {}'.format(i, df.loc[(slice(None), slice(None), 'Stage{}'.format(i)),'success'].mean()))
     #PrintSomeStats(df, {'IsoComply' : 0.93, 'TraceMult' : 1, 'PresentProp' : 0.5})
+
+
+def GetFiles(subfolder):
+    inputPath = pathlib.Path(subfolder)
+    suffix = '.csv'
+    pathList = sorted(inputPath.glob('*{}'.format(suffix)))
+    filelist = [] # TODO - Do better.
+    for path in pathList:
+        filelist.append(subfolder + str(path.name)[:-len(suffix)])
+    return filelist
 
 
 nameStr = 'run048'
@@ -306,5 +342,5 @@ namePath = 'output/trace/'
 #ProcessResults(namePath, [nameStr, 'run047', 'run048'])
 #ProcessResults(namePath, ['run049'])
 #ProcessResultsOne(namePath, [nameStr, 'run047', 'run048'])
-ProcessResults(namePath, ['trace_07'])
+ProcessResults(GetFiles('output/trace/HPC_2021_07_14/'))
 

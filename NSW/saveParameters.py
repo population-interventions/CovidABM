@@ -6,9 +6,14 @@ Created on Thu Feb 11 12:11:03 2021
 """
 
 from numpy import random
+import random as baseRandom
 
 def listToStr(input):
     return " ".join(str(x) for x in input)
+
+
+def GetRandomListUnique(listSize, maxIntSize=10000000):
+    return listToStr(baseRandom.sample(range(maxIntSize), listSize))
 
 
 def MoveMatchToPos(data, match, pos):
@@ -125,7 +130,7 @@ defaultParams = {
 }
 
 paramValuesTestR_stageTestFull = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(20000))),
+    'rand_seed' : GetRandomListUnique(2000),
     'param_policy' : listToStr([
         '"StageCal Test"',
     ]),
@@ -146,7 +151,7 @@ paramValuesTestR_stageTestFull = {**defaultParams, **{
 }}
 
 paramValuesFullValues = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
+    'rand_seed' : GetRandomListUnique(100),
     'total_population' : '6681000',
     'policy_pipeline' : listToStr([ 
         '"ME_ME_TS"',
@@ -181,7 +186,7 @@ paramValuesFullValues = {
 }
 
 paramSensitivityTest = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(100))),
+    'rand_seed' : GetRandomListUnique(100),
     'total_population' : '6681000',
     'param_vac_uptake' : listToStr([0, 0.3, 0.5, 0.7, 0.9]),
     'param_final_phase' : listToStr([2, 3]),
@@ -223,7 +228,7 @@ paramSensitivityTest = {
 }
 
 paramIncursion = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(1600))),
+    'rand_seed' : GetRandomListUnique(1600),
     'total_population' : '6681000',
     'param_trace_mult' : listToStr([1]),
     'sympt_present_prop' : listToStr([0.5]),
@@ -245,7 +250,7 @@ paramIncursion = {
 }
 
 paramValuesStageNone = {
-    'rand_seed' : listToStr(random.randint(10000000, size=(10000))),
+    'rand_seed' : GetRandomListUnique(10000),
     'sympt_present_prop' : listToStr([0.3, 0.5]),
     'param_policy' : listToStr([ 
         '"Stage2"',
