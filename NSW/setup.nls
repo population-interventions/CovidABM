@@ -504,6 +504,8 @@ to setGlobals
   set dieArray_listOut []
   set case_listOut []
   set case7_listOut []
+  set case14_listOut []
+  set case28_listOut []
   set stage_listOut []
 end
 

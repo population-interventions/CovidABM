@@ -278,6 +278,8 @@ globals [
   infectVacArray_listOut
   case_listOut
   case7_listOut
+  case14_listOut
+  case28_listOut
   dieArray_listOut
   age_listOut
   atsi_listOut
