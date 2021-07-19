@@ -400,6 +400,6 @@ to COVIDPolicyTriggers
     policy_stage 4
   ]
   if ticks < param_stage1_time [
-    set stage 0
+    set stage 2
   ]
 end

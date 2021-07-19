@@ -134,6 +134,10 @@ to calculateCasesInLastPeriod
   ;; counts cases in the last 7/14/28 days -
   ;; THIS ONLY COUNTS DETECTED CASES, NOT ALL INFECTIONS - TO ADJUST YOU MUST SET ASYMPTOMATIC TO ZERO
   
+  if ticks < IGNORE_CASE_UNTIL [
+    set casesReportedToday preSimDailyCases
+  ]
+  
   set prior27 prior26
   set prior26 prior25
   set prior25 prior24

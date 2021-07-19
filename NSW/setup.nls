@@ -176,6 +176,7 @@ to createSimulants
       
       set selfTraceEffMult 1
       set traceAttempts 0
+      set caseReportTime 0
       
       set infectedContactList table:make
       set hasKnownContact false
@@ -501,6 +502,8 @@ to setGlobals
   set infectNoVacArray_listOut []
   set infectVacArray_listOut []
   set dieArray_listOut []
+  set case_listOut []
+  set case7_listOut []
   set stage_listOut []
 end
 
@@ -510,6 +513,7 @@ end
 
 to setup
   clear-all
+  reset-ticks
   
   setGlobals
   random-seed RAND_SEED ;; Read from a behaviourSpace variable.
@@ -590,6 +594,9 @@ to setup
       set cali_asymptomaticFlag asymptomaticFlag
       set cali_symtomatic_present_day symtomatic_present_day
     ]
+    if random-float 1 < init_trace_prop [
+      simul_applyTrace 
+    ]
     simul_updatepersonalvirulence
     set infectionsToday_acc infectionsToday_acc + 1
     ;; Do not add to infection output as it makes for poor traces.
@@ -626,6 +633,9 @@ to setup
       if random-float 1 < initial_variant_2_prop [
         set infectVariant 2
       ]
+      if random-float 1 < init_trace_prop [
+       simul_applyTrace 
+      ]
       simul_updateVacAndReinfectMult
       
       set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
@@ -650,7 +660,6 @@ to setup
   ;;set schoolsOpen false ;; ensures that the schools settings don't begin before the policy trigger starts
   ;;set maskPolicy false ;; that the mask policy doesn't begin before the policy trigger starts
   ;;set assignAppEss false ;; that the assigning the App to EssentialWorkers doesn't begin before the policy trigger starts
-  reset-ticks
   
   setupstages ;; setting up for the MJA runs
   

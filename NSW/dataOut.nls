@@ -33,6 +33,8 @@ to calculateDataOut
   set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
   set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
   set dieArray_listOut lput array:to-list dieArray dieArray_listOut
+  set case_listOut lput casesReportedToday case_listOut
+  set case7_listOut lput casesinperiod7 case7_listOut
   set stage_listOut lput stage stage_listOut
   
   set infectNoVacArray array:from-list cohortLengthListOfZeros

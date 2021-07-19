@@ -250,7 +250,7 @@ paramIncursion = {
 }
 
 paramValuesStageNone = {
-    'rand_seed' : GetRandomListUnique(20000),
+    'rand_seed' : GetRandomListUnique(10000),
     'param_policy' : listToStr([ 
         '"Stage2"',
         '"Stage3"',

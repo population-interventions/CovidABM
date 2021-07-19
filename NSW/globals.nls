@@ -87,6 +87,8 @@ globals [
   prior27
   prior28
   
+  IGNORE_CASE_UNTIL
+  
   initial_primary
   initial_secondary
 
@@ -274,6 +276,8 @@ globals [
   dieArray
   infectNoVacArray_listOut
   infectVacArray_listOut
+  case_listOut
+  case7_listOut
   dieArray_listOut
   age_listOut
   atsi_listOut

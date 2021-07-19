@@ -21,6 +21,9 @@ to params_setDrawValues
   set reinfect_risk rngs:rnd-beta stream_id 8 2
   set reinfect_area rngs:rnd-beta stream_id 10 10
   
+  ;; Ignore cases reported before this day, due to initial spike
+  set IGNORE_CASE_UNTIL 3
+  
   if param_trace_mult > 0 [
     let averageTraced (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2))
     
