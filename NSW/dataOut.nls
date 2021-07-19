@@ -20,7 +20,7 @@ to setup_DataOut
     set index index + 1 
   ]
   
-  if trace_calibration > 0 or success_28day_cases > 0 [
+  if trace_calibration > 0 or success_14day_cases > 0 [
     set first_trace_day -1
     set first_trace_infections 0
     set finished_infections 0
@@ -90,8 +90,8 @@ to checkCalibrationStop
     ]
   ]
   
-  if success_28day_cases > -1 [
-    if casesinperiod28 / 28 < success_28day_cases [
+  if success_14day_cases > -1 [
+    if casesinperiod14 / 14 < success_14day_cases [
       set pre_stop_day ticks
       set tracked_simuls (count simuls with [color = red and tracked = 1] * extraScaleFactor * scale_factor ^ scalePhase)
       set stop_simulation true
