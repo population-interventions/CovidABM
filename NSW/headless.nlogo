@@ -139,7 +139,7 @@ Span
 Span
 0
 30
-8.0
+3.0
 1
 1
 NIL
@@ -190,7 +190,7 @@ superspreaders
 superspreaders
 0
 1
-0.06
+0.02
 0.01
 1
 NIL
@@ -208,7 +208,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-30.0
+78.0
 .5
 1
 NIL
@@ -223,7 +223,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-30.0
+78.0
 .5
 1
 NIL
@@ -340,7 +340,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.16250424859743887
+0.17284871098458918
 0.001
 1
 NIL
@@ -355,7 +355,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-50.0
+20.0
 1
 1
 NIL
@@ -396,7 +396,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-50.0
+85.0
 1
 1
 NIL
@@ -409,7 +409,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -467,7 +467,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.2
+3.6
 1
 1
 NIL
@@ -482,7 +482,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7710107996360869
+0.7645999922552114
 .01
 1
 NIL
@@ -531,7 +531,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-5603865.0
+4154589.0
 1
 1
 NIL
@@ -581,7 +581,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-11
+14
 
 SLIDER
 1609
@@ -625,7 +625,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.32613343688524243
+0.3133069904835004
 0.01
 1
 NIL
@@ -673,7 +673,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-30.0
+78.0
 1
 1
 NIL
@@ -1070,7 +1070,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.4330741685641456
+0.2773560511642994
 0.05
 1
 NIL
@@ -1297,7 +1297,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.920383919520323
+0.7333617096170216
 0.01
 1
 NIL
