@@ -380,7 +380,7 @@ INPUTBOX
 340
 375
 initial_cases
-8000.0
+8500.0
 1
 0
 Number
@@ -65041,7 +65041,7 @@ NetLogo 6.2.0
       <value value="0.6"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="initial_cases">
-      <value value="8000"/>
+      <value value="8500"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="initial_primary_prop">
       <value value="0.66"/>
