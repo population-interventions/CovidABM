@@ -32,9 +32,6 @@ to go
   ;; Set lockdown stage and easing date, bases mostly on casesinperiod7
   CovidPolicyTriggers
   
-  ;; Update vaccine stage and parameters related to vaccines.
-  vaccine_update
-  
   ;; Vaccine loses effectiveness over time
   ask simuls [
     simul_waneVacEff
@@ -109,9 +106,12 @@ to go
     ;; Set infected people to always require ICU after their incubation period???
     ;simul_checkICU
     
-    ;; Randomly vaccinate people according to uptake and stage.
-    simul_vaccinate_me
+    ;; Update second dose progression
+    simul_vaccinate_updateSecondDose
   ]
+  
+  ;; Randomly vaccinate people and update vaccine phases.
+  vaccine_update
   
   ;; Randomly turn suceptible agents into infected ones. Percentage chance = IncursionRate.
   incursion_update
