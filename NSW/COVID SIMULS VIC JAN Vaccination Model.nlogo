@@ -650,7 +650,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.17709401882560355
+0.16545389562468962
 0.001
 1
 NIL
@@ -839,7 +839,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7385306048175264
+0.770622770354652
 .01
 1
 NIL
@@ -868,10 +868,10 @@ mean [ timenow ] of simuls with [ color = red ]
 11
 
 PLOT
-1040
-354
-1455
-478
+1039
+355
+1459
+487
 New cases in last 7, 14, 28 days
 NIL
 NIL
@@ -884,9 +884,9 @@ true
 "" ""
 PENS
 "7" 1.0 0 -16777216 true "" "plot casesinperiod7 / 7"
-"14" 1.0 0 -7500403 true "" "plot casesinperiod14 / 14"
+"14" 1.0 0 -14454117 true "" "plot casesinperiod14 / 14"
 "28" 1.0 0 -2674135 true "" "plot casesinperiod28 / 28"
-"1" 1.0 0 -955883 true "" "plot casesReportedToday"
+"1" 1.0 0 -14439633 true "" "plot casesReportedToday"
 "pS" 1.0 0 -6459832 true "" "plot preSimDailyCases"
 
 PLOT
@@ -987,7 +987,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-7584541.0
+6135266.0
 1
 1
 NIL
@@ -1246,7 +1246,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.32314765836783244
+0.2832735840731332
 0.01
 1
 NIL
@@ -1901,7 +1901,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.3961378593091599
+0.6525717577436225
 0.05
 1
 NIL
@@ -2004,10 +2004,10 @@ set_shape
 -1000
 
 MONITOR
-1595
-382
-1682
-427
+1610
+383
+1700
+428
 Incursion Var
 incursionPhaseEndDay
 17
@@ -2228,7 +2228,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.9458283785206731
+0.6546797954067061
 0.01
 1
 NIL
