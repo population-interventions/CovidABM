@@ -507,10 +507,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1762
-994
-1844
-1039
+1753
+993
+1855
+1038
 Red (raw)
 count simuls with [ color = red ]
 0
@@ -541,9 +541,9 @@ Days
 
 MONITOR
 1473
-798
+799
 1581
-847
+848
 Scale Exponent
 scalePhase
 17
@@ -650,7 +650,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.16139775187657315
+0.17754283506206903
 0.001
 1
 NIL
@@ -672,16 +672,16 @@ NIL
 HORIZONTAL
 
 SLIDER
-575
-848
-765
-881
+833
+743
+1016
+777
 Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
-100
-50.0
 1
+0.5
+0.1
 1
 NIL
 HORIZONTAL
@@ -764,10 +764,10 @@ EWInfections / Population
 11
 
 MONITOR
-2445
-350
-2578
-395
+2597
+403
+2730
+448
 Student Infections %
 studentInfections / Population
 1
@@ -839,7 +839,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.723500037085145
+0.7323987903021911
 .01
 1
 NIL
@@ -909,10 +909,10 @@ PENS
 "Scale" 1.0 0 -14454117 true "" "plot (scalePhase + (extraScaleFactor - 1) / Scale_Factor)"
 
 MONITOR
-1762
-1043
-1844
-1088
+1754
+1040
+1854
+1085
 Yellow (raw)
 count simuls with [ color = yellow ]
 0
@@ -942,10 +942,10 @@ count simuls with [ isStudent ]
 11
 
 SLIDER
-789
-884
-988
-917
+833
+1004
+1017
+1038
 Mask_Efficacy_Mult
 Mask_Efficacy_Mult
 0
@@ -987,7 +987,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-5314010.0
+4589372.0
 1
 1
 NIL
@@ -1180,9 +1180,9 @@ HORIZONTAL
 
 MONITOR
 1473
-855
+853
 1581
-900
+898
 Person per Simul
 (extraScaleFactor * (Scale_Factor ^ scalephase))
 17
@@ -1191,9 +1191,9 @@ Person per Simul
 
 MONITOR
 1473
-909
+903
 1583
-954
+948
 People in Model
 (Population * extraScaleFactor * (Scale_Factor ^ scalephase))
 17
@@ -1231,7 +1231,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.3462237185801149
+0.34924130654942276
 0.01
 1
 NIL
@@ -1417,17 +1417,17 @@ End_Day
 End_Day
 -1
 730
-70.0
+90.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-784
-692
-982
-725
+2343
+378
+2541
+411
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -1590,9 +1590,9 @@ HORIZONTAL
 
 MONITOR
 1752
-944
-1857
-989
+945
+1855
+990
 slopeAverage %
 slopeAverage * 100
 3
@@ -1717,10 +1717,10 @@ isolate_on_inf_notice
 -1000
 
 SLIDER
-783
-733
-983
-766
+2342
+419
+2542
+452
 Household_Iso_Factor
 Household_Iso_Factor
 0
@@ -1732,10 +1732,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-784
-808
-981
-841
+2343
+494
+2540
+527
 Infect_Iso_Factor
 Infect_Iso_Factor
 0
@@ -1747,10 +1747,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-784
-773
-982
-806
+2343
+459
+2541
+492
 Track_Iso_Factor
 Track_Iso_Factor
 0
@@ -1886,7 +1886,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.33171673228482007
+0.35741100531828024
 0.05
 1
 NIL
@@ -2082,10 +2082,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-793
-927
-989
-962
+575
+825
+771
+860
 house_resample_red_group
 house_resample_red_group
 0
@@ -2123,10 +2123,10 @@ Case report %
 11
 
 SLIDER
-784
-845
-983
-878
+2350
+539
+2543
+573
 accept_isolation_prop
 accept_isolation_prop
 0
@@ -2138,10 +2138,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-794
-970
-993
-1005
+575
+864
+774
+899
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -2179,10 +2179,10 @@ calibrate
 -1000
 
 MONITOR
-1475
-959
-1584
-1004
+1473
+950
+1582
+995
 NIL
 extraScaleFactor
 3
@@ -2213,7 +2213,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.8712798536433874
+0.9423593523533782
 0.01
 1
 NIL
@@ -2235,9 +2235,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-13
+9
 457
-206
+202
 490
 param_policy_force_days
 param_policy_force_days
@@ -2250,9 +2250,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-9
+7
 493
-203
+201
 526
 param_policy_force_stage
 param_policy_force_stage
@@ -2265,10 +2265,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-12
-420
-205
-453
+9
+419
+202
+452
 param_policy_force_preset
 param_policy_force_preset
 0
@@ -2385,10 +2385,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1332
-1044
-1460
-1078
+220
+564
+329
+598
 max_stage
 max_stage
 0
@@ -2430,10 +2430,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-795
-1010
-959
-1043
+1044
+1002
+1208
+1035
 init_timenow_limit
 init_timenow_limit
 0
@@ -2445,20 +2445,20 @@ NIL
 HORIZONTAL
 
 CHOOSER
-14
-564
-166
-609
+8
+568
+201
+613
 policy_pipeline
 policy_pipeline
 "None" "ME_TS_S1" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS"
 0
 
 SLIDER
-15
-613
-164
-647
+9
+617
+198
+651
 policy_pipe_time
 policy_pipe_time
 0
@@ -2470,10 +2470,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-795
-1049
-958
-1082
+1044
+1040
+1207
+1073
 incur_timenow_limit
 incur_timenow_limit
 0
@@ -2540,20 +2540,20 @@ compound_param
 0
 
 CHOOSER
-177
-719
-324
-764
+834
+914
+1018
+959
 compound_mask_param
 compound_mask_param
 "Normal" "NoMask" "Min100" "Min50" "None"
 0
 
 SLIDER
-1333
-1004
-1461
-1039
+833
+963
+1016
+998
 MinMaskWearing
 MinMaskWearing
 0
@@ -2565,10 +2565,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-1193
-1002
-1326
-1047
+1468
+1003
+1601
+1048
 param_force_vaccine
 param_force_vaccine
 "Disabled" "AZ" "Pfizer"
@@ -2590,10 +2590,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-10
-528
-204
-562
+8
+529
+202
+563
 param_stage1_time
 param_stage1_time
 -1
@@ -2643,9 +2643,9 @@ String
 
 CHOOSER
 177
-670
+717
 324
-715
+762
 compound_input
 compound_input
 "None" "baseline"
@@ -2661,6 +2661,57 @@ param_vac_uptake_mult
 0
 1
 1.0
+0.1
+1
+NIL
+HORIZONTAL
+
+CHOOSER
+834
+692
+1017
+737
+compound_essential
+compound_essential
+"None" "Default" "Extreme"
+0
+
+SWITCH
+834
+859
+1014
+893
+avoid_essential
+avoid_essential
+1
+1
+-1000
+
+SLIDER
+834
+780
+1017
+814
+ess_radius_anchor
+ess_radius_anchor
+0
+20
+0.0
+0.1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+834
+819
+1017
+853
+ess_spread_anchor
+ess_spread_anchor
+0
+0.15
+0.0
 0.1
 1
 NIL

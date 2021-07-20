@@ -49,6 +49,7 @@ simuls-own [
 
   EssentialWorkerPriority ;; Value from 0 - 100 that sets priority of the job. 1 is high, 100 is low.
   EssentialWorkerFlag ;; indicator of whether the person is considered to be an essential worker under the current lockdown policy.
+  BeAvoided ;; Indicator of whether this simulant should be avoided by others. 
   
   cohortIndex ;; The row of population.csv that this simulant is based on
   agerange ;; the age of the person
@@ -531,7 +532,11 @@ to simul_visitDestination
   ;; sets up destinations where people might gather and set off superspreader events
   ;; reduces large gatherings by stage
   if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * visit_chance_multiplier > random-float 1  [
-    let movePatch one-of destination_patches in-radius Visit_Radius
+    let myRadius Visit_Radius
+    if EssentialWorkerFlag and myRadius < ess_radius_anchor [
+      set myRadius (myRadius + ess_radius_anchor) * 0.5
+    ]
+    let movePatch one-of destination_patches in-radius myRadius
     if is-patch? movePatch [
       move-to movePatch
     ]
@@ -547,23 +552,23 @@ to simul_avoid
     ;; contacts when you are not at work assuming 8 hours work, 8 hours rest, 8 hours recreation - rest doesn't count for anyone, hence it is
     ;; set at 50 on the input slider. People don't isolate from others in their household unit
     let myHouse householdUnit
-    (ifelse any? other simuls-here with [ householdUnit != myHouse and isolateCompliant = 1] and draw_isolationCompliance > random-float 1
+    (ifelse any? other simuls-here with [ (householdUnit != myHouse and isolateCompliant = 1) ] and draw_isolationCompliance > random-float 1
       [
         simul_move_to_empty_patch
       ]
-      (EssentialWorkerFlag = 0 or Ess_W_Risk_Reduction > random 100) and Spatial_Distance = true
+      ((not EssentialWorkerFlag) or Ess_W_Risk_Reduction > random-float 1) and Spatial_Distance = true
       and Proportion_People_Avoid + draw_ppa_modifier > proportion_people_avoid_draw
       and Proportion_Time_Avoid + draw_pta_modifier > random 100
       [
         ifelse isStudent and schoolsOpen
         [
           ;; students don't isolate from each other or their household unit
-          if any? other simuls-here with [ householdUnit != myHouse or not isStudent ] [
+          if any? other simuls-here with [ (householdUnit != myHouse or not isStudent) and BeAvoided ] [
             simul_move_to_empty_patch
           ]
         ]
         [
-          if any? other simuls-here with [ householdUnit != myHouse ] [
+          if any? other simuls-here with [ (householdUnit != myHouse) and BeAvoided ] [
             simul_move_to_empty_patch
           ]
         ]
@@ -577,7 +582,11 @@ to simul_avoid
 end
 
 to simul_superSpread
-  if isolateCompliant = 0 and superspreaders * superSpread_chance_multiplier > random-float 1 [
+  let mySpread superspreaders
+  if EssentialWorkerFlag and mySpread < ess_spread_anchor [
+    set mySpread (mySpread + ess_spread_anchor) * 0.5
+  ]
+  if isolateCompliant = 0 and mySpread * superSpread_chance_multiplier > random-float 1 [
     move-to one-of destination_patches
   ]
 end
@@ -657,10 +666,12 @@ to simul_EssentialWorkerID
   ;; identifies essential workers
   ifelse EssentialWorkerPriority < Essential_Workers
   [
-    set EssentialWorkerFlag 1
+    set EssentialWorkerFlag true
+    set BeAvoided avoid_essential
   ]
   [
-    set EssentialWorkerFlag 0
+    set EssentialWorkerFlag false
+    set BeAvoided true
   ]
 end
 

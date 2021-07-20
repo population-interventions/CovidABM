@@ -173,6 +173,7 @@ to createSimulants
       set vaccineIncursionOverride 0
       set update_lock false
       set isInitialInfection false
+      set BeAvoided true
       
       set selfTraceEffMult 1
       set traceAttempts 0

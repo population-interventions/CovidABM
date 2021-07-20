@@ -77,6 +77,19 @@ to params_setDrawValues
     set MinMaskWearing 0
   ]
   
+  if compound_essential = "Normal" [
+    set Ess_W_Risk_Reduction 0.5
+    set ess_radius_anchor 0
+    set ess_spread_anchor 0
+    set avoid_essential true
+  ]
+  if compound_essential = "Extreme" [
+    set Ess_W_Risk_Reduction 0
+    set ess_radius_anchor 8.8
+    set ess_spread_anchor 0.08
+    set avoid_essential false
+  ]
+  
   if not calibrate [
     ;set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
     if R0_range > 4.333 and R0_range <= 4.666 [

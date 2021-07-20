@@ -1,7 +1,7 @@
 
 to-report nonesspercentage
-  if count simuls with [ essentialworkerflag != 1 and color != cyan ] > 0 [
-    report (count simuls with [ essentialworkerflag != 1 and color != cyan] ) / (count simuls with [ essentialWorkerFlag != 1 ])
+  if count simuls with [ (not essentialworkerflag) and color != cyan ] > 0 [
+    report (count simuls with [ (not essentialworkerflag) and color != cyan] ) / (count simuls with [ (not essentialworkerflag) ])
   ]
 end
 
