@@ -2651,6 +2651,21 @@ compound_input
 "None" "baseline"
 0
 
+SLIDER
+13
+207
+185
+241
+param_vac_uptake_mult
+param_vac_uptake_mult
+0
+1
+1.0
+0.1
+1
+NIL
+HORIZONTAL
+
 @#$#@#$#@
 ## WHAT IS IT?
 

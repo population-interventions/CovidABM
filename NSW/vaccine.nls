@@ -53,7 +53,7 @@ to vaccine_nextPhase
       set global_vaccinePhase item 0 phaseData
       set global_vaccineSubPhase item 1 phaseData
       set global_vaccinePerDay (item 2 phaseData) * param_vac_rate_mult + 0.00001 ; Floats
-      let vaccineUptake item 3 phaseData
+      let vaccineUptake (item 3 phaseData) * param_vac_uptake_mult
       
       set vaccineActiveAgentSet simuls with [
         VaccPhase = global_vaccinePhase and 
