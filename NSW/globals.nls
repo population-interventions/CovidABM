@@ -87,6 +87,9 @@ globals [
   prior27
   prior28
   
+  currentInfections_minusInit
+  cumulativeInfected_minusInit
+  
   IGNORE_CASE_UNTIL
   
   initial_primary

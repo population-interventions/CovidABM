@@ -458,8 +458,8 @@ true
 false
 "" "\n"
 PENS
-"Current Cases" 1.0 1 -7858858 true "" "plot currentInfections "
-"Total Infected" 1.0 0 -13345367 true "" "plot cumulativeInfected"
+"Current Cases" 1.0 1 -7858858 true "" "plot currentInfections_minusInit"
+"Total Infected" 1.0 0 -13345367 true "" "plot cumulativeInfected_minusInit"
 "ICU Beds Required" 1.0 0 -16777216 true "" "plot ICUBedsRequired "
 
 MONITOR
@@ -650,7 +650,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.17754283506206903
+0.17388280490851754
 0.001
 1
 NIL
@@ -680,7 +680,7 @@ Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
 1
-0.5
+0.0
 0.1
 1
 NIL
@@ -786,10 +786,10 @@ MaskPolicy
 -1000
 
 SLIDER
-580
-1013
-775
-1046
+579
+1035
+774
+1068
 Case_Reporting_Delay
 Case_Reporting_Delay
 0
@@ -839,7 +839,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7323987903021911
+0.7371479754724216
 .01
 1
 NIL
@@ -987,7 +987,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-4589372.0
+6859903.0
 1
 1
 NIL
@@ -1231,17 +1231,17 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.34924130654942276
+0.34732450984780183
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-578
-934
-773
-967
+580
+957
+775
+990
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
 0
@@ -1439,10 +1439,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-580
-972
-777
-1005
+579
+994
+776
+1027
 Non_Infective_Time
 Non_Infective_Time
 0
@@ -1537,10 +1537,10 @@ recoverProportion * 100
 14
 
 SLIDER
-576
-888
-765
-923
+580
+914
+769
+949
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
@@ -1886,7 +1886,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.35741100531828024
+0.3800568007291751
 0.05
 1
 NIL
@@ -2082,10 +2082,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-575
-825
-771
-860
+580
+837
+776
+872
 house_resample_red_group
 house_resample_red_group
 0
@@ -2138,10 +2138,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-575
-864
-774
-899
+580
+875
+779
+910
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -2213,7 +2213,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.9423593523533782
+0.9457175208517583
 0.01
 1
 NIL
@@ -2673,8 +2673,8 @@ CHOOSER
 737
 compound_essential
 compound_essential
-"None" "Default" "Extreme"
-0
+"None" "Normal" "Extreme"
+2
 
 SWITCH
 834
@@ -2696,7 +2696,7 @@ ess_radius_anchor
 ess_radius_anchor
 0
 20
-0.0
+8.8
 0.1
 1
 NIL
@@ -2711,7 +2711,7 @@ ess_spread_anchor
 ess_spread_anchor
 0
 0.15
-0.0
+0.08
 0.1
 1
 NIL

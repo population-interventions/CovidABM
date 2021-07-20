@@ -25,9 +25,12 @@ to updateCounts
   
   ;; calculates the number of infected people in the population
   set currentInfections redcount * extraScaleFactor * (Scale_Factor ^ scalephase)
+  set currentInfections_minusInit count simuls with [ color = red and timenow <= ticks ] * extraScaleFactor * (Scale_Factor ^ scalephase)
 
   ;; calculates the number of people infected and recorded today
   set cumulativeInfected cumulativeInfected + infectionsToday
+  set cumulativeInfected_minusInit cumulativeInfected - initial_cases
+  
   ;; calculates death rate per infected person over the course of the pandemic
   if Deathcount > 0 and cumulativeInfected > 0 [
     set casefatalityrate ( Deathcount / cumulativeInfected )
