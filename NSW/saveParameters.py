@@ -258,8 +258,15 @@ paramValuesStageNone = {
     ]),
 }
 
-paramValues_stage2Infect = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(5000))),
+paramValues_stageEssential = {**defaultParams, **{
+    'rand_seed' : listToStr(random.randint(10000000, size=(2000))),
+    'param_vac_rate_mult' : listToStr([0, 0.5, 1, 2, 3]),
+    'compound_essential' : listToStr(['"Normal"', '"Extreme"']),
+    'input_population_table' : listToStr([
+        '"input/pop_essential_2007_bau.csv"',
+        '"input/pop_essential_2007_int.csv"'
+    ]),
+    'input_vaccine_table' : '"input/vaccine_rollout.csv"',                                 
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValuesStageNone, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValues_stageEssential, topOfFile=topOfFile)

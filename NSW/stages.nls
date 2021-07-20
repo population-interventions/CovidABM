@@ -593,7 +593,7 @@ to do_stages_tony
     set proportion_people_avoid 85
     set proportion_time_avoid 85
     set Complacency_Bound 78
-    set Essential_Workers 20
+    set Essential_Workers 24
     set schoolsOpen false
     set mask_wearing 85
     set Visit_Radius 3.6

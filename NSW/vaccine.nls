@@ -60,17 +60,24 @@ to vaccine_nextPhase
         VaccSubPhase = global_vaccineSubPhase
       ]
       
-      set global_vaccinePending floor(vaccineUptake * (count vaccineActiveAgentSet) + 0.5)
-      let unvaccinatedCount count (vaccineActiveAgentSet with [vaccineOffered = 0])
-      if unvaccinatedCount < global_vaccinePending [
-        set global_vaccinePending unvaccinatedCount
+      let phaseSizeTotal count vaccineActiveAgentSet
+      set vaccineActiveAgentSet vaccineActiveAgentSet with [vaccineOffered = 0]
+      let phaseUnvaccinated count vaccineActiveAgentSet
+      
+      ;; Vaccinate the remainder of the phase such that total vaccination matches vaccineUptake
+      set global_vaccinePending floor(vaccineUptake * phaseSizeTotal + 0.5) - (phaseSizeTotal - phaseUnvaccinated)
+      if global_vaccinePending < 0 [
+        set global_vaccinePending 0 
       ]
       
       ;print "New vaccine phase"
+      ;print count vaccineActiveAgentSet
       ;print global_vaccinePhase
       ;print global_vaccineSubPhase
-      ;print global_vaccinePerDay
+      ;print vaccineUptake
       ;print global_vaccinePending
+      ;print floor(vaccineUptake * phaseSizeTotal + 0.5)
+      ;print (phaseSizeTotal - phaseUnvaccinated)
     ]
   ]
   [
