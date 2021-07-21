@@ -145,7 +145,6 @@ Span
 NIL
 HORIZONTAL
 
-
 SLIDER
 2108
 448
@@ -178,9 +177,6 @@ NIL
 NIL
 1
 
-
-
-
 SLIDER
 1627
 219
@@ -195,9 +191,6 @@ superspreaders
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 1625
@@ -229,10 +222,6 @@ Proportion_Time_Avoid
 NIL
 HORIZONTAL
 
-
-
-
-
 INPUTBOX
 197
 307
@@ -255,7 +244,6 @@ total_population
 0
 Number
 
-
 SLIDER
 1867
 449
@@ -270,10 +258,6 @@ Incubation_Period
 1
 NIL
 HORIZONTAL
-
-
-
-
 
 SLIDER
 1672
@@ -290,22 +274,16 @@ Age_Isolation
 NIL
 HORIZONTAL
 
-
 SWITCH
 1477
 762
 1580
-796
+795
 scale
 scale
 0
 1
 -1000
-
-
-
-
-
 
 INPUTBOX
 2760
@@ -329,8 +307,6 @@ se_incubation
 0
 Number
 
-
-
 SLIDER
 359
 730
@@ -340,7 +316,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.16054086813843899
+0.15954985810290853
 0.001
 1
 NIL
@@ -413,10 +389,6 @@ schoolsOpen
 1
 -1000
 
-
-
-
-
 SWITCH
 1483
 322
@@ -482,18 +454,11 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7225323226799573
+0.727016247032771
 .01
 1
 NIL
 HORIZONTAL
-
-
-
-
-
-
-
 
 SLIDER
 833
@@ -521,7 +486,6 @@ Vaccine_Available
 1
 -1000
 
-
 SLIDER
 13
 15
@@ -531,22 +495,11 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-5458937.0
+8467166.0
 1
 1
 NIL
 HORIZONTAL
-
-
-
-
-
-
-
-
-
-
-
 
 TEXTBOX
 1493
@@ -566,7 +519,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-9
+14
 
 SLIDER
 1608
@@ -598,9 +551,6 @@ Scale_Factor
 NIL
 HORIZONTAL
 
-
-
-
 SLIDER
 364
 1030
@@ -610,7 +560,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.3402360722076868
+0.3132241051699235
 0.01
 1
 NIL
@@ -630,9 +580,6 @@ Asymptom_Trace_Mult
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 2108
@@ -663,8 +610,6 @@ Complacency_Bound
 1
 NIL
 HORIZONTAL
-
-
 
 BUTTON
 458
@@ -756,8 +701,6 @@ Non_Infective_Time
 NIL
 HORIZONTAL
 
-
-
 SWITCH
 1474
 724
@@ -768,9 +711,6 @@ track_R
 0
 1
 -1000
-
-
-
 
 SLIDER
 584
@@ -798,7 +738,6 @@ param_trigger_loosen
 1
 -1000
 
-
 SLIDER
 1038
 53
@@ -813,9 +752,6 @@ End_R_Reported
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 15
@@ -978,12 +914,12 @@ SLIDER
 14
 245
 186
-279
+278
 param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+0.5
 0.05
 1
 NIL
@@ -1003,7 +939,6 @@ param_recovered_prop
 1
 NIL
 HORIZONTAL
-
 
 INPUTBOX
 220
@@ -1055,7 +990,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.5797744547517377
+0.657370737006127
 0.05
 1
 NIL
@@ -1075,11 +1010,6 @@ prev_var_area
 1
 NIL
 HORIZONTAL
-
-
-
-
-
 
 SLIDER
 2372
@@ -1107,7 +1037,6 @@ set_shape
 1
 -1000
 
-
 SLIDER
 2373
 1045
@@ -1122,7 +1051,6 @@ vac_variant_eff_prop
 1
 NIL
 HORIZONTAL
-
 
 SLIDER
 2109
@@ -1139,12 +1067,11 @@ complacency_loss
 NIL
 HORIZONTAL
 
-
 SLIDER
 12
 135
 189
-169
+168
 param_final_phase
 param_final_phase
 -1
@@ -1199,7 +1126,6 @@ report_proportion
 1
 NIL
 HORIZONTAL
-
 
 SLIDER
 2350
@@ -1257,7 +1183,6 @@ calibrate
 1
 -1000
 
-
 SLIDER
 2372
 928
@@ -1282,7 +1207,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.7488556560836038
+0.6105460672643992
 0.01
 1
 NIL
@@ -1694,7 +1619,7 @@ INPUTBOX
 2084
 548
 input_population_table
-input/pop_essential_2007_bau.csv
+input/pop_essential_2007_int.csv
 1
 0
 String
@@ -1786,7 +1711,6 @@ ess_spread_anchor
 NIL
 HORIZONTAL
 
-
 INPUTBOX
 1870
 619
@@ -1797,7 +1721,6 @@ input/dose_rate.csv
 1
 0
 String
-
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -56120,7 +56043,7 @@ NetLogo 6.2.0
       <value value="200"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_policy">
-      <value value="&quot;Stage1&quot;"/>
+      <value value="&quot;Stage4&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="policy_pipeline">
       <value value="&quot;None&quot;"/>
