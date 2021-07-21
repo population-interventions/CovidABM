@@ -1,18 +1,4 @@
 
-to update_policy_trigger_scale
-  if global_vaccinePhase = 2 [
-    if global_vaccineSubPhase = 1 [
-      set policyTriggerScale 2
-    ]
-    if global_vaccineSubPhase = 2 [
-      set policyTriggerScale 4
-    ]
-  ]
-  if global_vaccinePhase >= 3 [
-    set policyTriggerScale 8
-  ]
-end
-
 ;;;*********************************************************************************************************************
 ;; Agressive/Moderate Elimination, and Tight/Loose Supression
 ;;;*********************************************************************************************************************
@@ -328,9 +314,6 @@ end
 to COVIDPolicyTriggers
   updatePolicyPipeline
   
-  if param_trigger_loosen [
-    update_policy_trigger_scale 
-  ]
   if param_policy = "TightSupress" [
     policy_tight_supress
   ]

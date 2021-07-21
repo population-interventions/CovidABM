@@ -266,7 +266,8 @@ paramValues_stageEssential = {**defaultParams, **{
         '"input/pop_essential_2007_bau.csv"',
         '"input/pop_essential_2007_int.csv"'
     ]),
-    'input_vaccine_table' : '"input/vaccine_rollout.csv"',                                 
+    'input_vaccine_table' : '"input/vaccine_rollout.csv"',     
+    'input_dose_rate_table' : '"input/dose_rate.csv"',                            
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValues_stageEssential, topOfFile=topOfFile)

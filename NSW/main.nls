@@ -102,12 +102,6 @@ to go
     simul_settime
     ;; if you are not dead at the end of your illness period, then you become recovered and turn yellow. Don't need hospital resources anymore.
     simul_end_infection
-
-    ;; Set infected people to always require ICU after their incubation period???
-    ;simul_checkICU
-    
-    ;; Update second dose progression
-    simul_vaccinate_updateSecondDose
   ]
   
   ;; Randomly vaccinate people and update vaccine phases.
