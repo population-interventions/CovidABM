@@ -256,17 +256,17 @@ paramIncursion = {
 
 paramValuesStageNone = {
     'rand_seed' : GetRandomListUnique(10000),
-    'param_policy' : listToStr([ 
-        '"Stage2"',
-        '"Stage3"',
-        '"Stage4"',
-    ]),
+    'R0_range' : listToStr([6, 8]),
+    'input_vaccine_table' : '"input/vaccine_rollout.csv"',     
+    'input_dose_rate_table' : '"input/dose_rate.csv"',  
+    'input_population_table' : '"input/pop_essential_2007_bau.csv"',
 }
 
 paramValues_stageEssential = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(2000))),
-    'param_vac_rate_mult' : listToStr([0, 0.5, 1, 2, 3]),
+    'param_vac_rate_mult' : listToStr([0, 1, 2]),
     'param_vac_uptake_mult' : listToStr([0.7, 0.8]),
+    'R0_range' : listToStr([6, 8]),
     'compound_essential' : listToStr(['"Normal"', '"Extreme"']),
     'input_population_table' : listToStr([
         '"input/pop_essential_2007_bau.csv"',
@@ -281,5 +281,5 @@ paramValues_stageEssential = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-                            paramValues_stageEssential,
+                            paramValuesStageNone,
                             topOfFile=topOfFile)
