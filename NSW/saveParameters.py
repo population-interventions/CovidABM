@@ -7,13 +7,18 @@ Created on Thu Feb 11 12:11:03 2021
 
 from numpy import random
 import random as baseRandom
+import utilities as util
 
 def listToStr(input):
     return " ".join(str(x) for x in input)
 
 
 def GetRandomListUnique(listSize, maxIntSize=10000000):
-    return listToStr(baseRandom.sample(range(maxIntSize), listSize))
+    randList = baseRandom.sample(range(maxIntSize), listSize)
+    while len(util.FindRepeat(randList)) > 0:
+        randList = baseRandom.sample(range(maxIntSize), listSize)
+    
+    return listToStr(randList)
 
 
 def MoveMatchToPos(data, match, pos):
@@ -261,13 +266,20 @@ paramValuesStageNone = {
 paramValues_stageEssential = {**defaultParams, **{
     'rand_seed' : listToStr(random.randint(10000000, size=(2000))),
     'param_vac_rate_mult' : listToStr([0, 0.5, 1, 2, 3]),
+    'param_vac_uptake_mult' : listToStr([0.7, 0.8]),
     'compound_essential' : listToStr(['"Normal"', '"Extreme"']),
     'input_population_table' : listToStr([
         '"input/pop_essential_2007_bau.csv"',
         '"input/pop_essential_2007_int.csv"'
     ]),
+    'param_policy' : listToStr([
+        '"Stage4"',
+    ]), 
     'input_vaccine_table' : '"input/vaccine_rollout.csv"',     
-    'input_dose_rate_table' : '"input/dose_rate.csv"',                            
+    'input_dose_rate_table' : '"input/dose_rate.csv"',  
+    'end_day' : 364,                         
 }}
 
-ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@', paramValues_stageEssential, topOfFile=topOfFile)
+ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
+                            paramValues_stageEssential,
+                            topOfFile=topOfFile)

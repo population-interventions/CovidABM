@@ -243,7 +243,8 @@ to vaccine_update
       
       ;; Prioritise second doses from this phase over first doses
       foreach agentsByVaccPhase [ simul_part ->
-        if (item 0 simul_part) = branch and ((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
+        ;if (item 0 simul_part) = branch and ((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
+        if (item 0 simul_part) = branch [
           ask (item 3 simul_part) [
             simul_vaccinate_updateSecondDose
           ]
@@ -270,13 +271,13 @@ to vaccine_update
       ]
       
       ;; Second doses from later phases occur later
-      foreach agentsByVaccPhase [ simul_part ->
-        if (item 0 simul_part) = branch and not ((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
-          ask (item 3 simul_part) [
-            simul_vaccinate_updateSecondDose
-          ]
-        ]
-      ]
+      ;foreach agentsByVaccPhase [ simul_part ->
+      ;  if (item 0 simul_part) = branch and not ((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
+      ;    ask (item 3 simul_part) [
+      ;      simul_vaccinate_updateSecondDose
+      ;    ]
+      ;  ]
+      ;]
     ]
   ]
 end
