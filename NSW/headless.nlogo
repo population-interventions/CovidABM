@@ -66459,14 +66459,15 @@ NetLogo 6.2.0
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.09"/>
-      <value value="0.12"/>
+      <value value="0.2"/>
       <value value="0.2166"/>
       <value value="0.2333"/>
-      <value value="0.26"/>
-      <value value="0.27"/>
-      <value value="0.28"/>
-      <value value="0.29"/>
+      <value value="0.25"/>
+      <value value="0.2583"/>
+      <value value="0.2666"/>
+      <value value="0.2833"/>
+      <value value="0.3"/>
+      <value value="0.333"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_trans_std">
       <value value="1.2"/>
