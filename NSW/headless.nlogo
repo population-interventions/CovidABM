@@ -145,7 +145,6 @@ Span
 NIL
 HORIZONTAL
 
-
 SLIDER
 2108
 448
@@ -178,9 +177,6 @@ NIL
 NIL
 1
 
-
-
-
 SLIDER
 1627
 219
@@ -195,9 +191,6 @@ superspreaders
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 1625
@@ -229,10 +222,6 @@ Proportion_Time_Avoid
 NIL
 HORIZONTAL
 
-
-
-
-
 INPUTBOX
 197
 307
@@ -255,7 +244,6 @@ total_population
 0
 Number
 
-
 SLIDER
 1867
 449
@@ -270,10 +258,6 @@ Incubation_Period
 1
 NIL
 HORIZONTAL
-
-
-
-
 
 SLIDER
 1672
@@ -290,7 +274,6 @@ Age_Isolation
 NIL
 HORIZONTAL
 
-
 SWITCH
 1477
 762
@@ -301,11 +284,6 @@ scale
 1
 1
 -1000
-
-
-
-
-
 
 INPUTBOX
 2760
@@ -328,8 +306,6 @@ se_incubation
 1
 0
 Number
-
-
 
 SLIDER
 364
@@ -413,10 +389,6 @@ schoolsOpen
 1
 -1000
 
-
-
-
-
 SWITCH
 1483
 322
@@ -432,7 +404,7 @@ SLIDER
 585
 958
 785
-992
+991
 Case_Reporting_Delay
 Case_Reporting_Delay
 0
@@ -488,13 +460,6 @@ Asymptomatic_Trans
 NIL
 HORIZONTAL
 
-
-
-
-
-
-
-
 SLIDER
 833
 1004
@@ -521,7 +486,6 @@ Vaccine_Available
 1
 -1000
 
-
 SLIDER
 13
 15
@@ -536,17 +500,6 @@ RAND_SEED
 1
 NIL
 HORIZONTAL
-
-
-
-
-
-
-
-
-
-
-
 
 TEXTBOX
 1493
@@ -598,9 +551,6 @@ Scale_Factor
 NIL
 HORIZONTAL
 
-
-
-
 SLIDER
 364
 1030
@@ -631,9 +581,6 @@ Asymptom_Trace_Mult
 NIL
 HORIZONTAL
 
-
-
-
 SLIDER
 2108
 372
@@ -663,8 +610,6 @@ Complacency_Bound
 1
 NIL
 HORIZONTAL
-
-
 
 BUTTON
 458
@@ -756,8 +701,6 @@ Non_Infective_Time
 NIL
 HORIZONTAL
 
-
-
 SWITCH
 1474
 724
@@ -768,9 +711,6 @@ track_R
 0
 1
 -1000
-
-
-
 
 SLIDER
 584
@@ -798,7 +738,6 @@ param_trigger_loosen
 1
 -1000
 
-
 SLIDER
 1038
 53
@@ -813,9 +752,6 @@ End_R_Reported
 1
 NIL
 HORIZONTAL
-
-
-
 
 SLIDER
 15
@@ -1004,7 +940,6 @@ param_recovered_prop
 NIL
 HORIZONTAL
 
-
 INPUTBOX
 220
 499
@@ -1076,11 +1011,6 @@ prev_var_area
 NIL
 HORIZONTAL
 
-
-
-
-
-
 SLIDER
 2372
 1006
@@ -1107,7 +1037,6 @@ set_shape
 1
 -1000
 
-
 SLIDER
 2373
 1045
@@ -1123,7 +1052,6 @@ vac_variant_eff_prop
 NIL
 HORIZONTAL
 
-
 SLIDER
 2109
 497
@@ -1138,7 +1066,6 @@ complacency_loss
 1
 NIL
 HORIZONTAL
-
 
 SLIDER
 12
@@ -1200,7 +1127,6 @@ report_proportion
 NIL
 HORIZONTAL
 
-
 SLIDER
 2350
 539
@@ -1256,7 +1182,6 @@ calibrate
 1
 1
 -1000
-
 
 SLIDER
 2372
@@ -1786,7 +1711,6 @@ ess_spread_anchor
 NIL
 HORIZONTAL
 
-
 INPUTBOX
 1870
 619
@@ -1798,13 +1722,11 @@ input/dose_rate.csv
 0
 String
 
-
-
 SWITCH
 175
 678
 350
-712
+711
 block_non_index_infect
 block_non_index_infect
 0
@@ -1815,7 +1737,7 @@ SLIDER
 585
 1032
 785
-1066
+1065
 prepeak_vir_boost
 prepeak_vir_boost
 0
@@ -66537,13 +66459,14 @@ NetLogo 6.2.0
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.15"/>
-      <value value="0.2"/>
-      <value value="0.25"/>
-      <value value="0.3"/>
-      <value value="0.35"/>
-      <value value="0.4"/>
-      <value value="0.45"/>
+      <value value="0.09"/>
+      <value value="0.12"/>
+      <value value="0.2166"/>
+      <value value="0.2333"/>
+      <value value="0.26"/>
+      <value value="0.27"/>
+      <value value="0.28"/>
+      <value value="0.29"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_trans_std">
       <value value="1.2"/>
