@@ -32,7 +32,7 @@ to setup_doseTable
 end
 
 to setup_vaccineData
-  let vaccineTypeFileData remove-item 0 csv:from-file input_vaccine_table
+  let vaccineTypeFileData remove-item 0 csv:from-file (word input_vaccine_table data_suffix)
   set vaccineRolloutTable table:make
   set vaccineBranches []
   
@@ -62,6 +62,7 @@ to setup_vaccineData
   set global_vaccineSubPhase table:make
   set global_vaccinePerDay table:make
   set global_vaccinePending table:make
+  set global_vaccinePrioritiseFirstOverSecond table:make
   
   setup_doseTable
   
@@ -126,6 +127,7 @@ to vaccine_nextPhase [branch]
       let local_vacSubPhase (item 2 phaseData)
       table:put global_vaccinePerDay branch ((item 3 phaseData) * param_vac_rate_mult + 0.00001) ; Floats
       let vaccineUptake (item 4 phaseData) * param_vac_uptake_mult
+      table:put global_vaccinePrioritiseFirstOverSecond branch ((item 5 phaseData) = 1)
       
       let agentSet simuls with [
         VaccPhase = local_vacPhase and 
@@ -153,6 +155,7 @@ to vaccine_nextPhase [branch]
       ;print (word "phase: " (table:get global_vaccinePhase branch) (table:get global_vaccineSubPhase branch))
       ;print (word "pending vaccine: " (table:get global_vaccinePending branch))
       ;print (word "per day: " global_vaccinePerDay)
+      print (word "first priority: " (table:get global_vaccinePrioritiseFirstOverSecond branch))
     ]
     [
       table:put global_firstDoseDone branch true
@@ -219,11 +222,12 @@ to add_vaccine [branch]
     table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) + (table:get global_vaccinePerDay branch))
   ]
   [
+    ;; global_vaccinePerDay acts as a rate multiplier
     let increase 0
     if table:has-key? (table:get vaccineDoseRateTable branch) ticks [
-      set increase (table:get (table:get vaccineDoseRateTable branch) ticks)
+      set increase (table:get (table:get vaccineDoseRateTable branch) ticks) * (table:get global_vaccinePerDay branch)
     ]
-    table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) + increase * param_vac_rate_mult)  
+    table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) + increase)  
   ]  
 end
 
@@ -240,13 +244,17 @@ to vaccine_update
       
       let local_phase table:get global_vaccinePhase branch
       let local_subPhase table:get global_vaccineSubPhase branch
+      let prioritiseFirstOverSecond table:get global_vaccinePrioritiseFirstOverSecond branch
       
-      ;; Prioritise second doses from this phase over first doses
-      foreach agentsByVaccPhase [ simul_part ->
-        ;if (item 0 simul_part) = branch and ((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
-        if (item 0 simul_part) = branch [
-          ask (item 3 simul_part) [
-            simul_vaccinate_updateSecondDose
+      ;; Prioritise second doses over first doses.
+      ;; Sometimes a phase may prioritise first doses over second doses for people in later phases.
+      if not prioritiseFirstOverSecond [
+        foreach agentsByVaccPhase [ simul_part ->
+          ;if (item 0 simul_part) = branch and (((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
+          if (item 0 simul_part) = branch [
+            ask (item 3 simul_part) [
+              simul_vaccinate_updateSecondDose
+            ]
           ]
         ]
       ]
@@ -270,14 +278,16 @@ to vaccine_update
         ]
       ]
       
-      ;; Second doses from later phases occur later
-      ;foreach agentsByVaccPhase [ simul_part ->
-      ;  if (item 0 simul_part) = branch and not ((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
-      ;    ask (item 3 simul_part) [
-      ;      simul_vaccinate_updateSecondDose
-      ;    ]
-      ;  ]
-      ;]
+      if prioritiseFirstOverSecond [
+        foreach agentsByVaccPhase [ simul_part ->
+          ;if (item 0 simul_part) = branch and (((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
+          if (item 0 simul_part) = branch [
+            ask (item 3 simul_part) [
+              simul_vaccinate_updateSecondDose
+            ]
+          ]
+        ]
+      ]
     ]
   ]
 end

@@ -264,23 +264,26 @@ paramValuesStageNone = {
 }
 
 paramValues_stageEssential = {**defaultParams, **{
-    'rand_seed' : GetRandomListUnique(10000),
-    'param_vac_rate_mult' : listToStr([0, 1, 2]),
-    'param_vac_uptake_mult' : listToStr([0.7, 0.8]),
-    'R0_range' : listToStr([6, 8]),
+    'rand_seed' : GetRandomListUnique(2000),
+    'Global_Transmissibility' : listToStr([0.27, 0.365, 0.47]),
+    'Non_Infective_Time' : listToStr([0, 1]),
     'compound_essential' : listToStr(['"Normal"', '"Extreme"']),
-    'input_population_table' : listToStr([
-        '"input/pop_essential_2007_bau.csv"',
-        '"input/pop_essential_2007_int.csv"'
+    'param_vac_uptake' : listToStr([0.7, 0.85]),
+    'data_suffix' : listToStr([
+        '"_bau.csv"',
+        '"_int.csv"'
+        '"_fast_az.csv"'
     ]),
     'param_policy' : listToStr([
+        '"Stage3"',
         '"Stage4"',
-    ]), 
-    'input_vaccine_table' : '"input/vaccine_rollout.csv"',     
+    ]),
+    'input_population_table' : '"input/pop_essential_2007"', 
+    'input_vaccine_table' : '"input/vaccine_rollout"',     
     'input_dose_rate_table' : '"input/dose_rate.csv"',  
-    'end_day' : 364,                         
+    'end_day' : 728,                         
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-                            paramValuesStageNone,
+                            paramValues_stageEssential,
                             topOfFile=topOfFile)

@@ -1,5 +1,5 @@
 
-to reset_housing
+to reset_housing [red_group]
   let houseTotal 0
   let regionTableData table:values regionTable
   foreach regionTableData [ data -> 
@@ -16,7 +16,7 @@ to reset_housing
     
     let curHouse table:get regionHouseMin region
     let simulInHouse 0
-    ask n-of (count regionRed * house_resample_red_group) regionRed [
+    ask n-of (count regionRed * red_group) regionRed [
       set householdUnit curHouse
       set simulInHouse simulInHouse + 1
       set hasNewHouse true

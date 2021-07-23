@@ -208,6 +208,11 @@ to scaleup_try_to_maintain_cohort
       ]
     ]
   ]
+  
+  ;; Reset housing to put infected people together so as to not cause cases to rebound
+  if house_resample_scale_up > 0 [
+    reset_housing house_resample_scale_up
+  ]
 end
 
 to scaledown_try_to_maintain_cohort
@@ -310,10 +315,10 @@ to scaledown_try_to_maintain_cohort
     ]
   ]
   
-  ;; Do not reset housing as it causes reported cases to jump unrealistically.
-  ;if house_resample_red_group > 0 [
-  ;  reset_housing
-  ;]
+  ;; Reset housing to put infected people together so as to not cause cases to rebound
+  if house_resample_red_group > 0 [
+    reset_housing house_resample_red_group
+  ]
   ifelse extraScaleFactor = 1
   [
     set scalephase scalephase - 1
