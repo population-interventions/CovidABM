@@ -18,6 +18,7 @@ def GetRandomListUnique(listSize, maxIntSize=10000000):
     while len(util.FindRepeat(randList)) > 0:
         randList = baseRandom.sample(range(maxIntSize), listSize)
     
+    print(len(list(set(randList))))
     return listToStr(randList)
 
 
@@ -256,14 +257,14 @@ paramIncursion = {
 
 paramValuesStageNone = {
     'rand_seed' : GetRandomListUnique(10000),
-    'R0_range' : listToStr([6, 8]),
+    'global_transmissibility' : listToStr([0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45]),
     'input_vaccine_table' : '"input/vaccine_rollout.csv"',     
     'input_dose_rate_table' : '"input/dose_rate.csv"',  
     'input_population_table' : '"input/pop_essential_2007_bau.csv"',
 }
 
 paramValues_stageEssential = {**defaultParams, **{
-    'rand_seed' : listToStr(random.randint(10000000, size=(2000))),
+    'rand_seed' : GetRandomListUnique(10000),
     'param_vac_rate_mult' : listToStr([0, 1, 2]),
     'param_vac_uptake_mult' : listToStr([0.7, 0.8]),
     'R0_range' : listToStr([6, 8]),
