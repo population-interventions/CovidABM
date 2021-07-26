@@ -51,7 +51,7 @@ to simul_applyTrace
       set first_trace_occurred ticks
     ]
     set cumulative_tracked_all cumulative_tracked_all * extraScaleFactor * (Scale_Factor ^ scalephase)
-    if noticeOwnInfection = 1 [
+    if (noticeOwnInfection = 1 and timenow >= symtomatic_present_day) [
       set cumulative_tracked_notice cumulative_tracked_notice * extraScaleFactor * (Scale_Factor ^ scalephase)
     ]
   ]
@@ -65,7 +65,7 @@ to simul_traceme
   ;; Symtomatic people automatically trace themselves on symtomatic_present_day of their infection (with the day of infection being day 0) 
   ifelse color = red 
   [
-    if asymptomaticFlag = 0 and noticeOwnInfection = 0 and (symtomatic_present_day > -1 and timenow >= symtomatic_present_day) [
+    if asymptomaticFlag = 0 and noticeOwnInfection = 0 and (symtomatic_present_day > -1 and timenow >= symtomatic_present_day - pre_present_iso) [
       ifelse timenow = symtomatic_present_day
       [
         set noticeOwnInfection 1
@@ -78,7 +78,7 @@ to simul_traceme
       if hasKnownContact [
         set knownContactTime -1
       ]
-      if (noticeOwnInfection = 1) or (hasKnownContact and (trace_attempt_limit = -1 or traceAttempts < trace_attempt_limit)) [
+      if (noticeOwnInfection = 1 and timenow >= symtomatic_present_day) or (hasKnownContact and (trace_attempt_limit = -1 or traceAttempts < trace_attempt_limit)) [
         set traceAttempts traceAttempts + 1
         if (noticeOwnInfection = 1)
         or (asymptomaticFlag = 1 and Asymptom_Trace_Mult * track_and_trace_efficiency * selfTraceEffMult > random-float 1)
