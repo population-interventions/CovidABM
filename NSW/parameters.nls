@@ -1,4 +1,17 @@
 
+to params_readDrawTable
+  let regionFileData remove-item 0 csv:from-file "input/draw_params.csv"
+  
+  foreach regionFileData [ x ->
+    if (item 0 x) = "symptPresent" [
+      set sympt_present_a (item 1 x)
+      set sympt_present_b (item 2 x)
+      set sympt_present_min (item 3 x)
+      set sympt_present_max (item 4 x)
+    ]
+  ]
+end
+
 to params_setDrawValues
   set draw_ppa_modifier random-normal 0 3
   set draw_pta_modifier random-normal 0 3
@@ -10,6 +23,7 @@ to params_setDrawValues
   set vaccineEffseedID 4
   set vaccineInitSeedID 5
   set moveInitSeedID 6
+  set presentInitSeedID 6
   
   rngs:set-seed stream_id random-float 999
   rngs:set-seed incursionsSeedID random-float 999
@@ -17,6 +31,7 @@ to params_setDrawValues
   rngs:set-seed vaccineEffseedID random-float 999
   rngs:set-seed vaccineInitSeedID random-float 999
   rngs:set-seed moveInitSeedID random-float 999
+  rngs:set-seed presentInitSeedID random-float 999
   
   set reinfect_risk rngs:rnd-beta stream_id 8 2
   set reinfect_area rngs:rnd-beta stream_id 10 10

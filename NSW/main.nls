@@ -141,6 +141,9 @@ to go
   if stop_simulation [
     Stop 
   ]
+  if first_case_calibrate and initial_infection_R > -1 [
+    Stop
+  ]
   
   set days days + 1
   tick

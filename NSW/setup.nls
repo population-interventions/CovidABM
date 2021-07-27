@@ -168,7 +168,8 @@ to createSimulants
       set selfVaccEff_raw_area 0
       set selfVaccEff_raw_risk 0
       set R 0
-      set vacWaitDays 0
+      set vacEffectCountdown 0
+      set vacSecondDoseCountdown 0
       set isolating 0
       set succeptibilityTable table:make
       set hasNewHouse false
@@ -218,15 +219,13 @@ to createSimulants
         set asymptomaticFlag 1
       ]
       
-      ifelse asymptomaticFlag = 0 and sympt_present_prop > random-float 1
+      ifelse asymptomaticFlag = 0 and sympt_present_prop > (rngs:rnd-beta presentInitSeedID 1 1)
       [
-        set symtomatic_present_day sympt_present_min + random (sympt_present_max - sympt_present_min)
+        set symtomatic_present_day round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
       ]
       [
         set symtomatic_present_day -1
       ]
-      ;print symtomatic_present_day
-      
 
       set requireICU 0
       set requireICU_draw random-float 1
@@ -268,10 +267,24 @@ to setupInitialVaccination
     ask cohort [
       if vaccinatedCount > 0 [
         let myVaccineData table:get vaccineParamsTable vaccineType
-        let maxVaccineWaitDays item 2 myVaccineData
-        ;print (word "maxVaccineWaitDays " maxVaccineWaitDays)
-        set vacWaitDays round(maxVaccineWaitDays * (1 - (progMin + (progMax - progMin) * rngs:rnd-beta vaccineInitSeedID 1 1)))
-        set vacWaitDays min (list maxVaccineWaitDays max (list 0 vacWaitDays))
+        let maxVaccineDoseDays item 2 myVaccineData
+        let maxVaccineEffectDays item 5 myVaccineData
+        let progress round(maxVaccineDoseDays * (progMin + (progMax - progMin) * rngs:rnd-beta vaccineInitSeedID 1 1))
+        set vacSecondDoseCountdown maxVaccineDoseDays - max (list 0 min (list maxVaccineDoseDays progress))
+        set vacEffectCountdown 0
+        ifelse vacSecondDoseCountdown > 0
+        [
+          if progress < maxVaccineEffectDays [
+           set vacEffectCountdown maxVaccineEffectDays - progress
+          ]
+        ]
+        [
+          if progress < maxVaccineEffectDays + maxVaccineDoseDays [
+           set vacEffectCountdown maxVaccineDoseDays + maxVaccineEffectDays - progress
+          ]
+        ]
+        ;print (word "maxVaccineDoseDays " maxVaccineDoseDays ", maxVaccineEffectDays " maxVaccineEffectDays)
+        ;print (word "progress " progress ", vacEffectCountdown " vacEffectCountdown ", vacSecondDoseCountdown " vacSecondDoseCountdown)
         ;if maxVaccineWaitDays < 80 [
         ;  print (word "vacWaitDays " vacWaitDays)
         ;]
@@ -525,6 +538,7 @@ to setup
   setGlobals
   random-seed RAND_SEED ;; Read from a behaviourSpace variable.
   
+  params_readDrawTable
   params_setDrawValues
 
   profiler:reset

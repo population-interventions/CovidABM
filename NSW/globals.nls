@@ -155,6 +155,11 @@ globals [
   
   test_acc
 
+  sympt_present_min
+  sympt_present_max
+  sympt_present_a
+  sympt_present_b
+  
   ;; These used to be dynamic controls with conflicting variable names.
   spatial_distance
   case_isolation
@@ -322,6 +327,7 @@ globals [
   incursionsSeedID
   vaccineInitSeedID
   moveInitSeedID
+  presentInitSeedID
 ]
 
 patches-own [

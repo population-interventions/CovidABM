@@ -36,12 +36,12 @@ def ProcessResults(outputName, nameList):
 
 	df = df.set_index(index + ['rand_seed'])
 	df = df.transpose().stack('rand_seed')
-	df = df.describe(percentiles=[0.5 + 0.05*i for i in range(10)] + [0.975, 0.99, 0.999])
+	df = df.describe(percentiles=[0 + 0.05*i for i in range(20)] + [0.975, 0.99, 0.999])
 	print(df)
 	util.OutputToFile(df, 'output/rCalc/' + outputName, head=False)
 
 
 files = util.GetFiles('output/rCalc/2021_07_23b/')
-files = ['output/trace/trace_14']
+files = ['output/rCalc/trace06']
 print(files)
-ProcessResults('desc_04', files)
+ProcessResults('desc_06', files)

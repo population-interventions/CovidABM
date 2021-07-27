@@ -310,11 +310,15 @@ paramValues_stageEssential_single = {**defaultParams, **{
 
 paramValues_rCalibrate = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(50000),
-	'global_transmissibility' : listToStr([0.11, 0.13, 0.15, 0.17, 0.21, 0.23, 0.25]),
+	'global_transmissibility' : listToStr([
+		0.0998792,
+		0.1191725,
+		0.1449964,
+		0.1826428]),
 
 	'gather_location_count' : 200,
 	'global_trans_std' : 0.12,
-	'end_day' : 30,
+	'end_day' : 40,
 	
 	'input_dose_rate_table' : '"input/dose_rate.csv"',
 	'input_population_table' : '"input/pop_essential_2007"',
@@ -391,7 +395,7 @@ paramValues_rCalibrate = {**defaultParams, **{
 	'profile_on' : 'false',
 	'proportion_people_avoid' : 0,
 	'proportion_time_avoid' : 0,
-	'block_non_index_infect' : 'true',
+	'first_case_calibrate' : 'true',
 	'accept_isolation_prop' : 0,
 	'recov_var_match_rate' : 0,
 	'recovered_match_rate' : 0.08,

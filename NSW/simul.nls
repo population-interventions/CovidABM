@@ -64,7 +64,8 @@ simuls-own [
   sm_vac_uptake ;; Likelyhood of taking a vaccine if offered
   
   vaccineOffered ;; Has the vaccine been offered?
-  vacWaitDays ;; Timer for the delay in vaccine coming into effect.
+  vacSecondDoseCountdown ;; Timer for the delay to second dose
+  vacEffectCountdown ;; Timer for the vaccine (first or second dose) coming into effect.
   vaccineType ;; Name of vaccine being offered
   selfVaccEff_raw_area ;; Duration times transmissibility of infection
   selfVaccEff_raw_risk ;; Risk of being infected
@@ -108,7 +109,7 @@ simuls-own [
 
 to simul_updatepersonalvirulence
   ;; creates a triangular distribution of virulence that peaks at the end of the incubation period
-  if color = red and (isInitialInfection or not block_non_index_infect) [
+  if color = red and (isInitialInfection or not first_case_calibrate) [
     if timenow <= Non_Infective_Time [
       set currentVirulence 0
     ]
@@ -170,7 +171,8 @@ to simul_updateVacAndReinfectMult
     let store_selfVaccEff_raw_risk selfVaccEff_raw_risk
     let store_selfVaccEff_raw_area selfVaccEff_raw_area
     let store_recoveryVariant recoveryVariant
-    let store_vacWaitDays vacWaitDays
+    let store_vacSecondDoseCountdown vacSecondDoseCountdown
+    let store_vacEffectCountdown vacEffectCountdown
     let store_vaccineIncursionOverride vaccineIncursionOverride
     
     
@@ -185,7 +187,8 @@ to simul_updateVacAndReinfectMult
       set selfVaccEff_raw_risk 0
     ]
     set recoveryVariant 0
-    set vacWaitDays 0
+    set vacSecondDoseCountdown 0
+    set vacEffectCountdown 0
     set vaccineIncursionOverride 0
  
     simul_updateVacAndReinfectMult
@@ -193,7 +196,8 @@ to simul_updateVacAndReinfectMult
     set selfVaccEff_raw_risk store_selfVaccEff_raw_risk
     set selfVaccEff_raw_area store_selfVaccEff_raw_area
     set recoveryVariant store_recoveryVariant
-    set vacWaitDays store_vacWaitDays
+    set vacSecondDoseCountdown store_vacSecondDoseCountdown
+    set vacEffectCountdown store_vacEffectCountdown
     set store_vaccineIncursionOverride vaccineIncursionOverride
   ]
   
