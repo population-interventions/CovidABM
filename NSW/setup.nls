@@ -236,6 +236,11 @@ to createSimulants
       ;;set ownComplianceWithIsolation ( exp random-normal Mcomp SComp ) ;; log transform of compliance with isolation
 
       simul_resetSomeRandomParams
+      ;print ownIncubationPeriod_raw
+      if symtomatic_present_day > -1 and self_iso_at_peak [
+       set symtomatic_present_day floor (ownIncubationPeriod_raw + pre_present_iso + random-float 1)
+      ]
+      ;print symtomatic_present_day
 
       setEssentialWorkerPriority
       params_setdeathrisk

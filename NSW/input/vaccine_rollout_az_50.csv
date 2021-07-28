@@ -1,5 +1,5 @@
-branch,phase,subPhase,rateMult,uptake,firstDoseOverSecond
-A,1,1,1,1,0
+branch,phase,subPhase,rateMult,uptake,firstDoseOverLaterPhaseSecond
+A,1,1,1,1,1
 A,1,2,1,1,0
 A,2,1,1,1,0
 A,3,1,1,1,0

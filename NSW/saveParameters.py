@@ -269,52 +269,34 @@ paramValuesStageNone = {
 
 paramValues_stageEssential = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(2000),
-	'Global_Transmissibility' : listToStr([0.27, 0.365, 0.47]),
-	'Non_Infective_Time' : listToStr([0, 1]),
+	'r0_range' : listToStr([5, 6, 8]),
+	'Non_Infective_Time' : listToStr([0]),
 	'compound_essential' : listToStr(['"Normal"', '"Extreme"']),
-	'param_vac_uptake_mult' : listToStr([0.7, 0.85]),
+	'param_vac_uptake_mult' : listToStr([0.7]),
 	'data_suffix' : listToStr([
 		'"_bau.csv"',
-		'"_int.csv"'
-		'"_fast_az.csv"'
+		'"_int.csv"',
+		'"_az_25.csv"',
+		'"_az_50.csv"',
 	]),
 	'param_policy' : listToStr([
 		'"Stage3"',
 		'"Stage4"',
 	]),
 	'input_population_table' : '"input/pop_essential_2007"', 
-	'input_vaccine_table' : '"input/vaccine_rollout"',     
-	'input_dose_rate_table' : '"input/dose_rate.csv"',  
-	'end_day' : 728,                         
-}}
-
-paramValues_stageEssential_single = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(2000),
-	'Global_Transmissibility' : listToStr([0.158]),
-	'Non_Infective_Time' : listToStr([0]),
-	'compound_essential' : listToStr(['"Extreme"']),
-	'param_vac_uptake_mult' : listToStr([0.7]),
-	'data_suffix' : listToStr([
-		'"_bau.csv"',
-		'"_int.csv"'
-		'"_fast_az.csv"'
-	]),
-	'param_policy' : listToStr([
-		'"Stage4"',
-	]),
-	'input_population_table' : '"input/pop_essential_2007"', 
-	'input_vaccine_table' : '"input/vaccine_rollout"',     
-	'input_dose_rate_table' : '"input/dose_rate.csv"',  
+	'input_vaccine_table' : '"input/vaccine_rollout"',
+	'input_dose_rate_table' : '"input/dose_rate.csv"',
 	'end_day' : 728,
 }}
 
 paramValues_rCalibrate = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(50000),
 	'global_transmissibility' : listToStr([
-		0.0998792,
-		0.1191725,
-		0.1449964,
-		0.1826428]),
+		0.098394749,
+		0.119370711,
+		0.144497012,
+		0.183084084,
+	]),
 
 	'gather_location_count' : 200,
 	'global_trans_std' : 0.12,
@@ -352,7 +334,7 @@ paramValues_rCalibrate = {**defaultParams, **{
 	'house_resample_scale_up' : 0.7,
 	'household_iso_factor' : 1,
 	'illness_period' : 21.2,
-	'incubation_period' : 4.7,
+	'incubation_period' : 4.4,
 	'incur_timenow_limit' : 4,
 	'incursion_phase_speed_mult' : 1,
 	'infect_iso_factor' : 1,
@@ -409,6 +391,7 @@ paramValues_rCalibrate = {**defaultParams, **{
 	'schoolsopen' : 'true',
 	'se_illnesspd' : 4,
 	'se_incubation' : 2.25,
+	'self_iso_at_peak' : 'true',
 	'set_shape' : 'false',
 	'span' : 10,
 	'case_reporting_delay' : 1,
@@ -437,5 +420,5 @@ paramValues_rCalibrate = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_rCalibrate,
+							paramValues_stageEssential,
 							topOfFile=topOfFile)

@@ -66,13 +66,7 @@ to simul_traceme
   ifelse color = red 
   [
     if asymptomaticFlag = 0 and noticeOwnInfection = 0 and (symtomatic_present_day > -1 and timenow >= symtomatic_present_day - pre_present_iso) [
-      ifelse timenow = symtomatic_present_day
-      [
-        set noticeOwnInfection 1
-      ]
-      [
-        set noticeOwnInfection 0
-      ]
+      set noticeOwnInfection 1
     ]
     if tracking and tracked != 1 [
       if hasKnownContact [

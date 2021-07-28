@@ -105,52 +105,23 @@ to params_setDrawValues
     set avoid_essential false
   ]
   
-  if not calibrate [
-    ;set initial_variant_2_prop rngs:rnd-beta stream_id 1 19
-    if R0_range > 4.333 and R0_range <= 4.666 [
-      set trans_draw_min R0_lowerBound
-      set trans_draw_max R0_lowMidBound
-      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-      let y (rngs:rnd-beta stream_id 1 1)
-    ]
-    if R0_range > 4.666 and R0_range <= 5 [
-      set trans_draw_min R0_lowMidBound
-      set trans_draw_max R0_upMidBound
-      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-      let y (rngs:rnd-beta stream_id 1 1)
-    ]
-    if R0_range > 5 and R0_range <= 5.333 [
-      set trans_draw_min R0_upMidBound
-      set trans_draw_max R0_upperBound
-      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-      let y (rngs:rnd-beta stream_id 1 1)
-      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-    ]
-    
-    ;; New system
-    if R0_range = 5 [
-      set trans_draw_min R0_lowerNew
-      set trans_draw_max R0_midNew
-      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-      let y (rngs:rnd-beta stream_id 1 1)
-    ]
-    if R0_range = 6 [
-      set trans_draw_min R0_midNew
-      set trans_draw_max R0_upNew
-      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-      let y (rngs:rnd-beta stream_id 1 1)
-    ]
-    if R0_range = 8 [
-      set trans_draw_min 0.22
-      set trans_draw_max 0.27
-      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-      let y (rngs:rnd-beta stream_id 1 1)
-    ]
+  ;; New system
+  if R0_range = 5 [
+    set trans_draw_min 0.098394749 ;; R0 4.5
+    set trans_draw_max 0.119370711 ;; R0 5.5
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ]
+  if R0_range = 6 [
+    set trans_draw_min 0.119370711 ;; R0 5.5
+    set trans_draw_max 0.144497012 ;; R0 4.5
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ]
+  if R0_range = 8 [
+    set global_transmissibility 0.183084084 ;; R0 8
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    let y (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
   ]
   
   set global_transmissibility_out global_transmissibility
