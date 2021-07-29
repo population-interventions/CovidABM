@@ -586,6 +586,19 @@ to do_stages_tony
     set Visit_Frequency 0.1428
     set superspreaders 0.04
   ]
+  if stage = 3.5 [
+    ;; Stage 3b
+    set span 4
+    set proportion_people_avoid 72.5
+    set proportion_time_avoid 72.5
+    set Complacency_Bound 64
+    set Essential_Workers 27.5
+    set schoolsOpen false
+    set mask_wearing 72.5
+    set Visit_Radius 4.3
+    set Visit_Frequency 0.1428
+    set superspreaders 0.03
+  ]
 
   if stage = 4 [
     ;; Stage 4

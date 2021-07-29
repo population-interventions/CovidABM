@@ -358,6 +358,9 @@ to COVIDPolicyTriggers
   if param_policy = "Stage3" [
     set stage 3
   ]
+  if param_policy = "Stage3b" [
+    set stage 3.5
+  ]
   if param_policy = "Stage4" [
     set stage 4
   ]

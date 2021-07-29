@@ -271,8 +271,9 @@ paramValues_stageEssential = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(2000),
 	'r0_range' : listToStr([5, 6, 8]),
 	'Non_Infective_Time' : listToStr([0]),
-	'compound_essential' : listToStr(['"Normal"', '"Extreme"']),
+	'compound_essential' : listToStr(['"Extreme"']),
 	'param_vac_uptake_mult' : listToStr([0.7]),
+	'param_vac_rate_mult' : listToStr([0.5, 1]),
 	'data_suffix' : listToStr([
 		'"_bau.csv"',
 		'"_int.csv"',
@@ -280,7 +281,7 @@ paramValues_stageEssential = {**defaultParams, **{
 		'"_az_50.csv"',
 	]),
 	'param_policy' : listToStr([
-		'"Stage3"',
+		'"Stage3b"',
 		'"Stage4"',
 	]),
 	'input_population_table' : '"input/pop_essential_2007"', 
