@@ -157,6 +157,9 @@ to vaccine_nextPhase [branch]
       ;print (word "pending vaccine: " (table:get global_vaccinePending branch))
       ;print (word "per day: " global_vaccinePerDay)
       ;print (word "first priority: " (table:get global_vaccinePrioritiseFirstOverSecond branch))
+      if print_phase [
+       print (word "Day " ticks ", Branch " branch ", Phase " (table:get global_vaccinePhase branch) ", SubPhase " (table:get global_vaccineSubPhase branch))
+      ]
     ]
     [
       table:put global_firstDoseDone branch true
