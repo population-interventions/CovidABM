@@ -1,0 +1,4 @@
+days,unVaccArrive,unVaccRisk,vaccArrive,vaccRisk,vaccineType,variant,varReplaceChance,present_a,present_b
+0,0,0,0,0,IncursionVac,1,0,12,6
+210,1,0.045,0,1,IncursionVac,1,0,0,0
+574,1,0.0225,1,1,IncursionVac,1,0,6,12
