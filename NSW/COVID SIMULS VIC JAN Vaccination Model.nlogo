@@ -167,10 +167,10 @@ PENS
 "New Infections" 1.0 0 -11221820 true "" "plot count simuls with [ color = red and timenow = Incubation_Period ] * ( Total_Population / 100 / count Simuls )"
 
 SLIDER
-2109
-454
-2321
-487
+2715
+623
+2927
+656
 Illness_period
 Illness_period
 0
@@ -408,10 +408,10 @@ AverageContacts
 11
 
 SLIDER
-1854
-404
-2067
-437
+2717
+585
+2930
+618
 Incubation_Period
 Incubation_Period
 0
@@ -562,10 +562,10 @@ count simuls
 11
 
 MONITOR
-2630
-524
-2744
-569
+2587
+537
+2701
+582
 Potential contacts
 PotentialContacts
 0
@@ -920,10 +920,10 @@ count simuls with [ color = yellow ]
 11
 
 MONITOR
-2629
-633
-2702
-678
+2587
+645
+2660
+690
 Time = 1 
 count simuls with [ timenow = 2 ]
 0
@@ -931,10 +931,10 @@ count simuls with [ timenow = 2 ]
 11
 
 MONITOR
-2629
-575
-2694
-620
+2587
+587
+2652
+632
 Students
 count simuls with [ isStudent ]
 0
@@ -2847,7 +2847,7 @@ SLIDER
 1253
 1073
 1455
-1107
+1106
 house_init_group
 house_init_group
 0

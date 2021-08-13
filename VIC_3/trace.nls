@@ -135,6 +135,7 @@ to trace_doTrace
 end
 
 to traceadjust
+  ;print (word "trace_a " trace_a ", trace_b " trace_b ", trace_c " trace_c ", trace_n " trace_n)
   ifelse param_trace_mult > 0 
   [
     let dailyInfections (infectionsinperiod7 / 7)

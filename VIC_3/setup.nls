@@ -691,5 +691,5 @@ to setup
   setupstages ;; setting up for the MJA runs
   
   ;; Output infection rates 
-  ;test_traceadjust
+  test_traceadjust
 end

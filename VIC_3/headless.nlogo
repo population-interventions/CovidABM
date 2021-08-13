@@ -139,7 +139,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -190,7 +190,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.1
 0.01
 1
 NIL
@@ -208,7 +208,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-56.0
+10.0
 .5
 1
 NIL
@@ -223,7 +223,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-56.0
+10.0
 .5
 1
 NIL
@@ -340,7 +340,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.1349271080793813
+0.15185669264150783
 0.001
 1
 NIL
@@ -355,7 +355,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -396,7 +396,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+15.0
 1
 1
 NIL
@@ -409,7 +409,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -467,7 +467,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -482,7 +482,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7621202994923244
+0.76549538672628
 .01
 1
 NIL
@@ -531,7 +531,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-6618357.0
+5169082.0
 1
 1
 NIL
@@ -566,7 +566,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-4
+1
 
 SLIDER
 1608
@@ -610,7 +610,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.29696742461630954
+0.35759371466909784
 0.01
 1
 NIL
@@ -658,7 +658,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -856,7 +856,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.33272089848779574
+0.772567335344422
 0.01
 1
 NIL
@@ -1025,7 +1025,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.4437315152684722
+0.5763435114503237
 0.05
 1
 NIL
@@ -1252,7 +1252,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.5739455249453762
+0.7852813687169516
 0.01
 1
 NIL
@@ -1502,7 +1502,7 @@ policy_pipe_time
 policy_pipe_time
 0
 200
-91.0
+105.0
 0.5
 1
 NIL
@@ -1804,7 +1804,7 @@ CHOOSER
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv"
-2
+1
 
 SLIDER
 1252
@@ -116472,7 +116472,7 @@ NetLogo 6.2.0
       <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="policy_pipe_time">
-      <value value="91"/>
+      <value value="105"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="asymptom_trace_mult">
       <value value="0.66"/>
