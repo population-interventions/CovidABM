@@ -139,7 +139,7 @@ Span
 Span
 0
 30
-10.0
+8.0
 1
 1
 NIL
@@ -240,7 +240,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.06
 0.01
 1
 NIL
@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-10.0
+30.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-10.0
+30.0
 .5
 1
 NIL
@@ -650,7 +650,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.15185669264150783
+0.14824547756286338
 0.001
 1
 NIL
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+50.0
 1
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+50.0
 1
 1
 NIL
@@ -824,7 +824,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+6.2
 1
 1
 NIL
@@ -1331,7 +1331,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+30.0
 1
 1
 NIL
