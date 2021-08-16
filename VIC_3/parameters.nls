@@ -175,6 +175,41 @@ to params_setDrawValues
   ;show ( word "draw_pta_modifier " draw_pta_modifier )
   ;show ( word "draw_isolationCompliance " draw_isolationCompliance )
   ;show ( word "draw_maskWearEfficacy " draw_maskWearEfficacy )
+  
+  ;; Sensitivity overrides
+  set house_resample_scale_up 0.6
+  set house_resample_red_group 0.7
+  set Non_Infective_Time 0
+  set trace_eff_override -1
+  set vac_trans_mult 1
+  
+  if sensitivity = "HouseResampleUp+" [
+    set house_resample_scale_up 0.8
+  ]
+  if sensitivity = "HouseResampleUp-" [
+    set house_resample_scale_up 0.4
+  ]
+  if sensitivity = "HouseResample+" [
+    set house_resample_red_group 0.9
+  ]
+  if sensitivity = "HouseResample-" [
+    set house_resample_red_group 0.5
+  ]
+  if sensitivity = "NoInfect_1" [
+    set Non_Infective_Time 1
+  ]
+  if sensitivity = "NoInfect_2" [
+    set Non_Infective_Time 2
+  ]
+  if sensitivity = "UniformContact_054" [
+    set trace_eff_override 0.5358
+  ]
+  if sensitivity = "UniformContact_033" [
+    set trace_eff_override 0.3306
+  ]
+  if sensitivity = "ReduceVacTrans_050" [
+    set vac_trans_mult 0.5
+  ]
 end
 
 to params_setdeathrisk

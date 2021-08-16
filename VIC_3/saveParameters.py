@@ -267,31 +267,6 @@ paramValuesStageNone = {
 	'input_dose_rate_table' : '"input/dose_rate.csv"',  
 }
 
-paramValues_stageEssential = {**defaultParams, **{
-	
-	'rand_seed' : GetRandomListUnique(100),
-	'total_population' : '6681000',
-	'r0_range' : listToStr([5, 6.5, 8]),
-	'policy_pipeline' : listToStr([ 
-		'"ME_ME_TS"',
-		'"ME_TS_LS"',
-		'"ME_TS_BS"',
-	]),
-	'param_vac_uptake_mult' : listToStr([0.7, 0.8, 0.9, 0.95]),
-	'param_vacIncurMult' : listToStr([0.2, 1, 5, 25]),
-	'param_final_phase' : listToStr([3, 4]),
-	'Non_Infective_Time' : listToStr([0]),
-	'compound_essential' : listToStr(['"Extreme"']),
-	'param_vac_rate_mult' : listToStr([0.5]),
-	'data_suffix' : listToStr([
-		'"_az_25.csv"',
-		'"_int.csv"',
-	]),
-	'input_population_table' : '"input/population"', 
-	'input_vaccine_table' : '"input/vaccine_rollout"',
-	'input_dose_rate_table' : '"input/dose_rate.csv"',
-	'end_day' : 574,
-}}
 
 paramValues_rCalibrate = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(50000),
@@ -419,10 +394,70 @@ paramValues_rCalibrate = {**defaultParams, **{
 	'visit_frequency' : 0.1428,
 	'visit_radius' : 8.8,
 	'yearly_recover_prop_loss' : 0,
+}}
 
 
+paramValues_stageEssential = {**defaultParams, **{
+	'rand_seed' : GetRandomListUnique(100),
+	'total_population' : '6681000',
+	'r0_range' : listToStr([5, 6.5, 8]),
+	'policy_pipeline' : listToStr([ 
+		'"ME_ME_TS"',
+		'"ME_TS_LS"',
+		'"ME_TS_BS"',
+	]),
+	'param_vac_uptake_mult' : listToStr([0.7, 0.8, 0.9, 0.95]),
+	'param_vacIncurMult' : listToStr([0.2, 1, 5, 25]),
+	'param_final_phase' : listToStr([3, 4]),
+	'Non_Infective_Time' : listToStr([0]),
+	'compound_essential' : listToStr(['"Extreme"']),
+	'param_vac_rate_mult' : listToStr([0.5]),
+	'data_suffix' : listToStr([
+		'"_az_25.csv"',
+		'"_int.csv"',
+	]),
+	'input_population_table' : '"input/population"', 
+	'input_vaccine_table' : '"input/vaccine_rollout"',
+	'input_dose_rate_table' : '"input/dose_rate.csv"',
+	'end_day' : 574,
+}}
+
+paramValues_stageEssentialSensitive = {**defaultParams, **{
+	'rand_seed' : GetRandomListUnique(100),
+	'total_population' : '6681000',
+	'r0_range' : listToStr([5, 6.5]),
+	'policy_pipeline' : listToStr([ 
+		'"ME_ME_TS"',
+		'"ME_TS_LS"',
+		'"ME_TS_BS"',
+	]),
+	'sensitivity' : listToStr([ 
+		'"None"',
+		'"HouseResample+"',
+		'"HouseResample-"',
+		'"HouseResampleUp+"',
+		'"HouseResampleUp-"',
+		'"NoInfect_1"',
+		'"NoInfect_2"',
+		'"UniformContact_054"',
+		'"UniformContact_033"',
+		'"ReduceVacTrans_050"',
+	]),
+	'param_vac_uptake_mult' : listToStr([0.7, 0.8, 0.9]),
+	'param_vacIncurMult' : listToStr([0.2, 1, 25]),
+	'param_final_phase' : listToStr([4]),
+	'Non_Infective_Time' : listToStr([0]),
+	'compound_essential' : listToStr(['"Extreme"']),
+	'param_vac_rate_mult' : listToStr([0.5]),
+	'data_suffix' : listToStr([
+		'"_az_25.csv"',
+	]),
+	'input_population_table' : '"input/population"', 
+	'input_vaccine_table' : '"input/vaccine_rollout"',
+	'input_dose_rate_table' : '"input/dose_rate.csv"',
+	'end_day' : 574,
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_stageEssential,
+							paramValues_stageEssentialSensitive,
 							topOfFile=topOfFile)

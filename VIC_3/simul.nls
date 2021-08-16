@@ -116,10 +116,13 @@ to simul_updatepersonalvirulence
     ifelse ownIllnessPeriod > 0
     [
       if timenow > Non_Infective_Time and timenow <= ownIncubationPeriod [
-        set currentVirulence variantTransMult * personalVirulence * (( (timenow - Non_Infective_Time) / (ownIncubationPeriod - Non_Infective_Time) ) * (1 - prepeak_vir_boost) + prepeak_vir_boost)
+        set currentVirulence variantTransMult * personalVirulence * (((timenow - Non_Infective_Time) / (ownIncubationPeriod - Non_Infective_Time) ) * (1 - prepeak_vir_boost) + prepeak_vir_boost)
       ]
       if timenow > ownIncubationPeriod [
-        set currentVirulence variantTransMult * personalVirulence * ( ( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))
+        set currentVirulence variantTransMult * personalVirulence * (( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))
+      ]
+      if selfVaccEff_raw_risk > 0 and vac_trans_mult != 1 [
+        set currentVirulence currentVirulence * vac_trans_mult
       ]
     ]
     [

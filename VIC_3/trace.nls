@@ -150,6 +150,9 @@ to traceadjust
   [
     set track_and_trace_efficiency 0
   ]
+  if trace_eff_override >= 0 [
+    set track_and_trace_efficiency trace_eff_override
+  ]
 end
 
 to test_traceadjust
