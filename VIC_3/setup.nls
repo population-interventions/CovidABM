@@ -178,6 +178,8 @@ to createSimulants
       set isInitialInfection false
       set BeAvoided true
       
+      set siteIsolating false
+      
       set selfTraceEffMult 1
       set traceAttempts 0
       set caseReportTime 0
@@ -691,5 +693,7 @@ to setup
   setupstages ;; setting up for the MJA runs
   
   ;; Output infection rates 
-  test_traceadjust
+  if trace_print [
+    test_traceadjust
+  ]
 end

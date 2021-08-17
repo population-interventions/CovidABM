@@ -91,6 +91,9 @@ simuls-own [
 
   isolateCompliant ;; Is the person currently isolating this tick (because they are succeptible and isolating, or infected and tracked)
   isolating ;; is a succeptible person supposed to be isolating?
+  siteIsolating ;; is an infective person spontaneously isolating but not yet being tracked due to a site exposure.
+  doSiteIsolation ;; Does the person site isolate
+  siteIsolateDay ;; Which day does the person site isolate on
   noticeOwnInfection ;; Has the person noticed that they are sick and are now being tracked and isolated of their own volition?
   IDTime ;; days into infection the person is identified as a case
 
@@ -316,7 +319,15 @@ to simul_resetSomeRandomParams
   set ownIllnessPeriod ownIllnessPeriod_raw
   set ownIncubationPeriod ownIncubationPeriod_raw
   set proportion_people_avoid_draw random 100
+  set doSiteIsolation (random-float 1) < site_iso_prop
+  set siteIsolateDay 1 + random site_iso_max_day
   simul_updateVacAndReinfectMult
+end
+
+to simul_applyIsolation
+  move-to homelocation
+  set pace 0
+  set isolateCompliant 1
 end
 
 to simul_updateIsolationResponse
@@ -327,9 +338,7 @@ to simul_updateIsolationResponse
       ifelse isolating = 1 and color != red
       [
         if draw_isolationCompliance * Household_Iso_Factor > random-float 1 [
-          move-to homelocation
-          set pace 0
-          set isolateCompliant 1
+          simul_applyIsolation
         ]
       ]
       [
@@ -337,20 +346,22 @@ to simul_updateIsolationResponse
         ifelse caseReportTime >= ticks
         [
           if draw_isolationCompliance * Infect_Iso_Factor > random-float 1 [
-            move-to homelocation
-            set pace 0
-            set isolateCompliant 1
+            simul_applyIsolation
           ]
         ]
         [
           if draw_isolationCompliance * Track_Iso_Factor > random-float 1 [
-            move-to homelocation
-            set pace 0
-            set isolateCompliant 1
+            simul_applyIsolation
           ]
         ]
       ]
     ]
+    if Case_Isolation and doSiteIsolation and color = red and siteIsolateDay >= timenow [
+      if draw_isolationCompliance * Track_Iso_Factor > random-float 1 [
+        simul_applyIsolation
+        print "simul_applyIsolation"
+      ]
+    ] 
   ]
 end
 

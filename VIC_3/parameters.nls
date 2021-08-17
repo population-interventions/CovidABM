@@ -39,14 +39,54 @@ to params_setDrawValues
   ;; Ignore cases reported before this day, due to initial spike
   set IGNORE_CASE_UNTIL 3
   
+  if compound_trace = "ass50_70at5" [
+    set trace_at_5 0.7
+    set trace_assymtote 50
+    set site_iso_prop 0
+    set site_iso_max_day 0
+    set trace_attempt_limit 3
+    set param_trace_mult 1
+    set trace_eff_override -1
+  ]
+  if compound_trace = "ass100_90at5" [
+    set trace_at_1 0.98
+    set trace_at_5 0.9
+    set trace_assymtote 100
+    set site_iso_prop 0
+    set site_iso_max_day 0
+    set trace_attempt_limit 3
+    set param_trace_mult 1
+    set trace_eff_override -1
+  ]
+  if compound_trace = "ass100_90at5_iso" [
+    set trace_at_1 0.98
+    set trace_at_5 0.9
+    set trace_assymtote 100
+    set site_iso_prop 0.333
+    set site_iso_max_day 7
+    set trace_attempt_limit 3
+    set param_trace_mult 1
+    set trace_eff_override -1
+  ]
+  if compound_trace = "ass200_90at5" [
+    set trace_at_1 0.98
+    set trace_at_5 0.9
+    set trace_assymtote 200
+    set site_iso_prop 0
+    set site_iso_max_day 0
+    set trace_attempt_limit 3
+    set param_trace_mult 1
+    set trace_eff_override -1
+  ]
+  
   if param_trace_mult > 0 [
-    let averageTraced (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2))
+    ;set trace_at_5 (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2))
     
-    set t_atOnePerDay 1 * (1 - (1 - 0.9 * param_trace_mult) ^ (1 / trace_attempt_limit))
-    set t_atFivePerDay 5 * (1 - (1 - averageTraced * param_trace_mult) ^ (1 / trace_attempt_limit))
+    set t_atOnePerDay 1 * (1 - (1 - trace_at_1 * param_trace_mult) ^ (1 / trace_attempt_limit))
+    set t_atFivePerDay 5 * (1 - (1 - trace_at_5 * param_trace_mult) ^ (1 / trace_attempt_limit))
     
     set trace_n 0.92
-    set trace_c 50 * param_trace_mult
+    set trace_c trace_assymtote * param_trace_mult
     set trace_a ((1 / (t_atFivePerDay - trace_c)) - ((1 ^ trace_n) / (t_atOnePerDay - trace_c))) / ((5 ^ trace_n) - (1 ^ trace_n))
     set trace_b 1 / (t_atOnePerDay - trace_c) - trace_a * 1 ^ trace_n
     ;print t_atOnePerDay

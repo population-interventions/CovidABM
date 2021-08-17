@@ -406,6 +406,12 @@ paramValues_stageEssential = {**defaultParams, **{
 		'"ME_TS_LS"',
 		'"ME_TS_BS"',
 	]),
+	'compound_trace' : listToStr([ 
+		'"ass50_70at5"',
+		'"ass100_90at5"',
+		'"ass100_90at5_iso"',
+		'"ass200_90at5"',
+	]),
 	'param_vac_uptake_mult' : listToStr([0.7, 0.8, 0.9, 0.95]),
 	'param_vacIncurMult' : listToStr([0.2, 1, 5, 25]),
 	'param_final_phase' : listToStr([3, 4]),
@@ -414,7 +420,6 @@ paramValues_stageEssential = {**defaultParams, **{
 	'param_vac_rate_mult' : listToStr([0.5]),
 	'data_suffix' : listToStr([
 		'"_az_25.csv"',
-		'"_int.csv"',
 	]),
 	'input_population_table' : '"input/population"', 
 	'input_vaccine_table' : '"input/vaccine_rollout"',
@@ -459,5 +464,5 @@ paramValues_stageEssentialSensitive = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_stageEssentialSensitive,
+							paramValues_stageEssential,
 							topOfFile=topOfFile)
