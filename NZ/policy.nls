@@ -1,0 +1,198 @@
+
+;;;*********************************************************************************************************************
+;;; Stage Calibration
+;;;*********************************************************************************************************************
+
+to policy_none
+  set stage -1
+end
+
+to policy_stage [ toStage ]
+  if ticks = 0 [
+    set stage -1
+    set End_Day -1
+    set track_R False
+  ]
+  
+  if End_Day = -1 and casesinperiod7 >= calibrate_stage_switch [
+    set stage toStage
+    set End_Day ticks + 70
+    set track_R True
+    set R_measure_time ticks + 30
+    set decisionDate ticks
+  ]
+end
+
+to policy_infect [ toStage ]
+  if ticks = 0 [
+    set stage toStage 
+    set End_Day -1
+  ]
+  if (End_Day = -1 and cumulativeInfected > Total_Population / 10) or ticks = 1090 [
+    set End_Day ticks + 1
+  ]
+end
+  
+;;;*********************************************************************************************************************
+;;;*********************************************************************************************************************
+
+to updatePolicyPipeline
+  if policy_pipeline = "ME_TS_S1" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      ifelse ticks < policy_pipe_time 
+      [
+        set param_policy "ModerateElim"
+      ]
+      [
+        set param_policy "TightSupress"
+      ]
+    ]
+    [
+      set param_policy "Stage1"
+    ]
+  ]
+  if policy_pipeline = "ME_ME_ME" [
+    set param_policy "ModerateElim"
+  ]
+  if policy_pipeline = "ME_ME_TS" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      set param_policy "ModerateElim"
+    ]
+    [
+      set param_policy "TightSupress"
+    ]
+  ]
+  if policy_pipeline = "ME_ME_LS" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      set param_policy "ModerateElim"
+    ]
+    [
+      set param_policy "LooseSupress"
+    ]
+  ]
+  if policy_pipeline = "ME_TS_LS" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      ifelse ticks < policy_pipe_time 
+      [
+        set param_policy "ModerateElim"
+      ]
+      [
+        set param_policy "TightSupress"
+      ]
+    ]
+    [
+      set param_policy "LooseSupress"
+    ]
+  ]
+  if policy_pipeline = "ME_TS_BS" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      ifelse ticks < policy_pipe_time 
+      [
+        set param_policy "ModerateElim"
+      ]
+      [
+        set param_policy "TightSupress"
+      ]
+    ]
+    [
+      set param_policy "BarelySupress"
+    ]
+  ]
+end
+  
+;;;*********************************************************************************************************************
+;;;*********************************************************************************************************************
+
+to COVIDPolicyTriggers
+  updatePolicyPipeline
+  
+  if param_policy = "TightSupress" [
+    policy_tight_supress
+  ]
+  if param_policy = "LooseSupress" [
+    policy_loose_supress
+  ]
+  if param_policy = "BarelySupress" [
+    policy_barely_supress
+  ]
+  if param_policy = "TightSupress_No_4" [
+    set max_stage 3
+    policy_tight_supress
+  ]
+  if param_policy = "LooseSupress_No_4" [
+    set max_stage 3
+    policy_loose_supress
+  ]
+  if param_policy = "AggressElim" [
+    if policy_switch = "tony" [
+      policy_agressive_elim
+    ]
+    if policy_switch = "nz" [
+      policy_agressive_elim_nz
+    ]
+  ]
+  if param_policy = "ModerateElim" [
+    if policy_switch = "tony" [
+      policy_moderate_elim
+    ]
+    if policy_switch = "nz" [
+      policy_moderate_elim_nz
+    ]
+  ]
+  if param_policy = "Stage2infect" [
+    policy_infect 2
+  ]
+  if param_policy = "None" [
+    policy_none
+  ]
+  if param_policy = "Stage1" [
+    set stage 0
+  ]
+  if param_policy = "Stage1b" [
+    set stage 1
+  ]
+  if param_policy = "Stage2" [
+    set stage 2
+  ]
+  if param_policy = "Stage2b" [
+    set stage 2.5
+  ]
+  if param_policy = "Stage3" [
+    set stage 3
+  ]
+  if param_policy = "Stage3b" [
+    set stage 3.5
+  ]
+  if param_policy = "Stage4" [
+    set stage 4
+  ]
+  if param_policy = "StageCal None" [
+    policy_stage -1
+  ]
+  if param_policy = "StageCal Test" [
+    policy_stage -2
+  ]
+  if param_policy = "StageCal_1" [
+    policy_stage 0
+  ]
+  if param_policy = "StageCal_1b" [
+    policy_stage 1
+  ]
+  if param_policy = "StageCal_2" [
+    policy_stage 2
+  ]
+  if param_policy = "StageCal_3" [
+    policy_stage 3
+  ]
+  if param_policy = "StageCal_4" [
+    policy_stage 4
+  ]
+  if ticks < param_stage1_time [
+    set stage 4
+  ]
+end
