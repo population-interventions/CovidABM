@@ -359,7 +359,6 @@ to simul_updateIsolationResponse
     if Case_Isolation and doSiteIsolation and color = red and siteIsolateDay >= timenow [
       if draw_isolationCompliance * Track_Iso_Factor > random-float 1 [
         simul_applyIsolation
-        print "simul_applyIsolation"
       ]
     ] 
   ]
