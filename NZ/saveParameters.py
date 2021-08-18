@@ -410,7 +410,7 @@ paramValues_stageEssential = {**defaultParams, **{
 		'"_85"',
 		'"_95"',
 	]),
-	'data_suffix2' : listToStr([ 
+	'data_suffix_2' : listToStr([ 
 		'"_15.csv"',
 		'"_10.csv"',
 		'"_5.csv"',

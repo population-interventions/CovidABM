@@ -269,7 +269,7 @@ paramValuesStageNone = {
 
 
 paramValues_rCalibrate = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(50000),
+	'rand_seed' : GetRandomListUnique(5000),
 	'global_transmissibility' : listToStr([
 		0.098394749,
 		0.119370711,
@@ -282,7 +282,7 @@ paramValues_rCalibrate = {**defaultParams, **{
 	'end_day' : 40,
 	
 	'input_dose_rate_table' : '"input/dose_rate.csv"',
-	'input_population_table' : '"input/pop_essential_2007"',
+	'input_population_table' : '"input/population"',
 	'input_vaccine_table' : '"input/vaccine_rollout"',
 	'data_suffix' : '"_bau.csv"',
 	
@@ -464,5 +464,5 @@ paramValues_stageEssentialSensitive = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_stageEssential,
+							paramValues_rCalibrate,
 							topOfFile=topOfFile)
