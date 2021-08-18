@@ -399,32 +399,32 @@ paramValues_rCalibrate = {**defaultParams, **{
 
 paramValues_stageEssential = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(100),
-	'total_population' : '6681000',
-	'r0_range' : listToStr([5, 6.5, 8]),
-	'policy_pipeline' : listToStr([ 
-		'"ME_ME_TS"',
-		'"ME_TS_LS"',
-		'"ME_TS_BS"',
+	'total_population' : '5000000',
+	'r0_range' : listToStr([6.5]),
+	'param_policy' : listToStr([ 
+		'"AggressElim"',
+		'"ModerateElim"',
 	]),
-	'compound_trace' : listToStr([ 
-		'"ass50_70at5"',
-		'"ass100_90at5"',
-		'"ass100_90at5_iso"',
-		'"ass200_90at5"',
+	'data_suffix' : listToStr([ 
+		'"_70"',
+		'"_85"',
+		'"_95"',
 	]),
-	'param_vac_uptake_mult' : listToStr([0.7, 0.8, 0.9, 0.95]),
-	'param_vacIncurMult' : listToStr([0.2, 1, 5, 25]),
-	'param_final_phase' : listToStr([3, 4]),
+	'data_suffix2' : listToStr([ 
+		'"_15.csv"',
+		'"_10.csv"',
+		'"_5.csv"',
+	]),
+	'param_vac_uptake_mult' : listToStr([0]),
+	'param_vacIncurMult' : listToStr([0.5, 1, 5, 10]),
+	'param_final_phase' : listToStr([4]),
 	'Non_Infective_Time' : listToStr([0]),
 	'compound_essential' : listToStr(['"Extreme"']),
 	'param_vac_rate_mult' : listToStr([0.5]),
-	'data_suffix' : listToStr([
-		'"_az_25.csv"',
-	]),
 	'input_population_table' : '"input/population"', 
-	'input_vaccine_table' : '"input/vaccine_rollout"',
+	'input_vaccine_table' : '"input/vaccine_rollout.csv"',
 	'input_dose_rate_table' : '"input/dose_rate.csv"',
-	'end_day' : 574,
+	'end_day' : 364,
 }}
 
 paramValues_stageEssentialSensitive = {**defaultParams, **{
