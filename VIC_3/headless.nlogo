@@ -11,7 +11,11 @@ __includes[
   "parameters.nls"
   "scale.nls"
   "stages.nls"
+  "stages_tony.nls"
+  "stages_nz.nls"
   "policy.nls"
+  "policy_tony.nls"
+  "policy_nz.nls"
   "trace.nls"
   "count.nls"
   "vaccine.nls"
@@ -21,9 +25,9 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-392
+394
 65
-1016
+1018
 690
 -1
 -1
@@ -190,7 +194,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.08
 0.01
 1
 NIL
@@ -208,7 +212,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-0.0
+15.0
 .5
 1
 NIL
@@ -223,7 +227,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-0.0
+15.0
 .5
 1
 NIL
@@ -239,7 +243,7 @@ INPUTBOX
 370
 389
 initial_cases
-1.0
+0.0
 1
 0
 Number
@@ -250,7 +254,7 @@ INPUTBOX
 329
 496
 total_population
-8.166E13
+6681000.0
 1
 0
 Number
@@ -298,7 +302,7 @@ SWITCH
 795
 scale
 scale
-1
+0
 1
 -1000
 
@@ -340,7 +344,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.1579
+0.1574693177402951
 0.001
 1
 NIL
@@ -355,22 +359,22 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+70.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-833
-743
-1016
-776
+834
+750
+1017
+783
 Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
 1
-0.5
+0.0
 0.1
 1
 NIL
@@ -396,7 +400,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-0.0
+35.0
 1
 1
 NIL
@@ -424,7 +428,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
@@ -482,7 +486,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7818030253062234
+0.8579550513322936
 .01
 1
 NIL
@@ -511,13 +515,13 @@ NIL
 HORIZONTAL
 
 SWITCH
-14
-375
-183
-408
+12
+382
+181
+415
 Vaccine_Available
 Vaccine_Available
-1
+0
 1
 -1000
 
@@ -531,7 +535,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3385964.0
+3526570.0
 1
 1
 NIL
@@ -559,14 +563,14 @@ Stage Policy Settings
 1
 
 CHOOSER
-14
-285
-182
-330
+12
+292
+180
+337
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-8
+1
 
 SLIDER
 1608
@@ -610,7 +614,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.3122480858184666
+0.32007257373899883
 0.01
 1
 NIL
@@ -658,7 +662,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-0.0
+15.0
 1
 1
 NIL
@@ -720,7 +724,7 @@ End_Day
 End_Day
 -1
 730
-40.0
+574.0
 1
 1
 NIL
@@ -781,17 +785,17 @@ Recovered_Match_Rate
 Recovered_Match_Rate
 0
 0.5
-0.08
+0.11
 0.001
 1
 NIL
 HORIZONTAL
 
 SWITCH
-14
-335
-181
-368
+12
+342
+179
+375
 param_trigger_loosen
 param_trigger_loosen
 1
@@ -826,7 +830,7 @@ calibrate_stage_switch
 calibrate_stage_switch
 0
 500
-0.0
+300.0
 100
 1
 NIL
@@ -848,15 +852,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-588
-733
-761
-766
+589
+739
+762
+772
 sympt_present_prop
 sympt_present_prop
 0
 1
-0.7207411024218862
+0.5737358826816504
 0.01
 1
 NIL
@@ -869,7 +873,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-1
+0
 1
 -1000
 
@@ -945,15 +949,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-14
-245
-186
-278
+12
+252
+184
+285
 param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+0.5
 0.1
 1
 NIL
@@ -1025,7 +1029,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.5518978608275715
+0.7038371938972241
 0.05
 1
 NIL
@@ -1112,14 +1116,14 @@ HORIZONTAL
 
 SLIDER
 12
-135
+129
 189
-168
+162
 param_final_phase
 param_final_phase
 -1
 10
-3.0
+4.0
 1
 1
 NIL
@@ -1127,14 +1131,14 @@ HORIZONTAL
 
 SLIDER
 14
-60
+54
 189
-93
+87
 param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
-0.0
+3.0
 1
 1
 NIL
@@ -1180,7 +1184,7 @@ accept_isolation_prop
 accept_isolation_prop
 0
 1
-0.0
+1.0
 0.01
 1
 NIL
@@ -1252,7 +1256,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.8227501789508304
+0.8755028989296493
 0.01
 1
 NIL
@@ -1335,14 +1339,14 @@ HORIZONTAL
 
 SLIDER
 13
-98
+93
 187
-131
+126
 param_vacIncurMult
 param_vacIncurMult
 0
 25
-0.1
+5.0
 0.1
 1
 NIL
@@ -1357,7 +1361,7 @@ trans_draw_min
 trans_draw_min
 0
 1
-0.22
+0.1335
 0.01
 1
 NIL
@@ -1372,17 +1376,17 @@ trans_draw_max
 trans_draw_max
 0
 1
-0.27
+0.1579
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-2113
-582
-2286
-615
+2195
+562
+2368
+595
 param_trace_mult
 param_trace_mult
 0
@@ -1394,10 +1398,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2112
-652
-2285
-685
+2194
+632
+2367
+665
 trace_attempt_limit
 trace_attempt_limit
 -1
@@ -1417,7 +1421,7 @@ R0_range
 R0_range
 -1
 10
--1.0
+6.5
 0.5
 1
 NIL
@@ -1477,7 +1481,7 @@ init_timenow_limit
 init_timenow_limit
 0
 26
-0.0
+14.0
 1
 1
 NIL
@@ -1491,7 +1495,7 @@ CHOOSER
 policy_pipeline
 policy_pipeline
 "None" "ME_TS_S1" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS"
-0
+3
 
 SLIDER
 9
@@ -1502,7 +1506,7 @@ policy_pipe_time
 policy_pipe_time
 0
 200
-182.5
+105.0
 0.5
 1
 NIL
@@ -1652,17 +1656,17 @@ init_trace_prop
 init_trace_prop
 0
 1
-0.0
+1.0
 0.05
 1
 NIL
 HORIZONTAL
 
 INPUTBOX
-1857
-443
-2072
-503
+1856
+406
+2071
+466
 input_population_table
 input/population
 1
@@ -1670,10 +1674,10 @@ input/population
 String
 
 INPUTBOX
-1857
-508
-2072
-568
+1856
+471
+2071
+531
 input_vaccine_table
 input/vaccine_rollout
 1
@@ -1691,66 +1695,66 @@ compound_input
 0
 
 SLIDER
-13
-207
-203
-240
+10
+214
+200
+247
 param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.7
+0.3
 0.05
 1
 NIL
 HORIZONTAL
 
 CHOOSER
-834
-692
-1017
-737
+835
+699
+1018
+744
 compound_essential
 compound_essential
 "None" "Normal" "Extreme"
-1
+2
 
 SWITCH
-834
-859
-1014
-892
+835
+867
+1015
+900
 avoid_essential
 avoid_essential
-0
+1
 1
 -1000
 
 SLIDER
-834
-780
-1017
-813
+835
+787
+1018
+820
 ess_radius_anchor
 ess_radius_anchor
 0
 20
-0.0
+8.8
 0.1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-834
-819
-1017
-852
+835
+827
+1018
+860
 ess_spread_anchor
 ess_spread_anchor
 0
 0.15
-0.0
+0.08
 0.1
 1
 NIL
@@ -1758,10 +1762,10 @@ HORIZONTAL
 
 
 INPUTBOX
-1857
-574
-2072
-634
+1856
+537
+2071
+597
 input_dose_rate_table
 input/dose_rate.csv
 1
@@ -1777,7 +1781,7 @@ SWITCH
 711
 first_case_calibrate
 first_case_calibrate
-0
+1
 1
 -1000
 
@@ -1797,14 +1801,14 @@ NIL
 HORIZONTAL
 
 CHOOSER
-1860
-643
-2032
-688
+1857
+601
+2029
+646
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv"
-0
+2
 
 SLIDER
 1252
@@ -1895,10 +1899,10 @@ sensitivity
 0
 
 SLIDER
-2113
-617
-2286
-650
+2195
+597
+2368
+630
 trace_eff_override
 trace_eff_override
 -1
@@ -1925,10 +1929,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2114
-510
-2287
-543
+2196
+490
+2369
+523
 trace_at_5
 trace_at_5
 0
@@ -1940,10 +1944,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2114
-547
-2287
-580
+2196
+527
+2369
+560
 trace_assymtote
 trace_assymtote
 0
@@ -1955,14 +1959,14 @@ NIL
 HORIZONTAL
 
 CHOOSER
-2115
-427
-2288
-472
+2197
+407
+2370
+452
 compound_trace
 compound_trace
 "None" "ass50_70at5" "ass100_90at5" "ass100_90at5_iso" "ass200_90at5"
-0
+1
 
 SLIDER
 2388
@@ -1995,10 +1999,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2114
-474
-2287
-507
+2196
+454
+2369
+487
 trace_at_1
 trace_at_1
 0
@@ -2010,24 +2014,44 @@ NIL
 HORIZONTAL
 
 SWITCH
-2113
-389
-2227
-422
+2195
+369
+2309
+402
 trace_print
 trace_print
 1
 1
 -1000
 
+CHOOSER
+1856
+648
+1994
+693
+data_suffix_2
+data_suffix_2
+"None"
+0
+
+CHOOSER
+12
+167
+150
+212
+policy_switch
+policy_switch
+"tony" "nz"
+0
+
 SWITCH
-2715
-658
-2846
-691
-recreate_bug
-recreate_bug
-1
+2033
+603
+2161
+636
+suffix_rollout
+suffix_rollout
+0
 1
 -1000
 
@@ -117338,106 +117362,106 @@ NetLogo 6.2.0
     <metric>cumulativeInfected_switchTime</metric>
     <metric>cumulativeInfected_minusInit</metric>
     <enumeratedValueSet variable="rand_seed">
-      <value value="1054940"/>
-      <value value="1293242"/>
-      <value value="8434874"/>
-      <value value="96259"/>
-      <value value="898239"/>
-      <value value="357484"/>
-      <value value="1373475"/>
-      <value value="5554026"/>
-      <value value="3807631"/>
-      <value value="3760893"/>
-      <value value="5581128"/>
-      <value value="6167017"/>
-      <value value="5829376"/>
-      <value value="1214198"/>
-      <value value="4647057"/>
-      <value value="7119543"/>
-      <value value="4196177"/>
-      <value value="205672"/>
-      <value value="4072816"/>
-      <value value="9323603"/>
-      <value value="3188413"/>
-      <value value="581328"/>
-      <value value="1714226"/>
-      <value value="1184900"/>
-      <value value="1919353"/>
-      <value value="9942450"/>
-      <value value="1452447"/>
-      <value value="82659"/>
-      <value value="7607631"/>
-      <value value="2859747"/>
-      <value value="311269"/>
-      <value value="8775151"/>
-      <value value="8123804"/>
-      <value value="2020567"/>
-      <value value="3687745"/>
-      <value value="6801793"/>
-      <value value="4893473"/>
-      <value value="1369553"/>
-      <value value="4684611"/>
-      <value value="2032938"/>
-      <value value="2616068"/>
-      <value value="291725"/>
-      <value value="4572549"/>
-      <value value="5676615"/>
-      <value value="680897"/>
-      <value value="4543071"/>
-      <value value="9233072"/>
-      <value value="6040038"/>
-      <value value="5654622"/>
-      <value value="8644038"/>
-      <value value="845185"/>
-      <value value="3022775"/>
-      <value value="5050292"/>
-      <value value="5669895"/>
-      <value value="4562126"/>
-      <value value="4388874"/>
-      <value value="5662250"/>
-      <value value="9338153"/>
-      <value value="9369210"/>
-      <value value="9784043"/>
-      <value value="2898195"/>
-      <value value="5800200"/>
-      <value value="2439403"/>
-      <value value="1782756"/>
-      <value value="61472"/>
-      <value value="6545694"/>
-      <value value="4711067"/>
-      <value value="7484203"/>
-      <value value="1617382"/>
-      <value value="6730158"/>
-      <value value="5513143"/>
-      <value value="8444529"/>
-      <value value="8128247"/>
-      <value value="2749212"/>
-      <value value="5293182"/>
-      <value value="7889250"/>
-      <value value="4800837"/>
-      <value value="8408134"/>
-      <value value="7462273"/>
-      <value value="4923858"/>
-      <value value="2202829"/>
-      <value value="1341823"/>
-      <value value="3829976"/>
-      <value value="3689849"/>
-      <value value="1304192"/>
-      <value value="1148307"/>
-      <value value="8034974"/>
-      <value value="9719257"/>
-      <value value="2107713"/>
-      <value value="200598"/>
-      <value value="4397956"/>
-      <value value="9707747"/>
-      <value value="2913199"/>
-      <value value="669633"/>
-      <value value="9191394"/>
-      <value value="5858422"/>
-      <value value="9605843"/>
-      <value value="2026542"/>
-      <value value="9174061"/>
-      <value value="3379163"/>
+      <value value="2306927"/>
+      <value value="5906346"/>
+      <value value="5392729"/>
+      <value value="9410065"/>
+      <value value="1199347"/>
+      <value value="9454465"/>
+      <value value="7693300"/>
+      <value value="8092787"/>
+      <value value="774001"/>
+      <value value="867849"/>
+      <value value="502589"/>
+      <value value="7839233"/>
+      <value value="7654564"/>
+      <value value="3303850"/>
+      <value value="9906148"/>
+      <value value="1264694"/>
+      <value value="9510624"/>
+      <value value="8881348"/>
+      <value value="8660378"/>
+      <value value="7088823"/>
+      <value value="1180336"/>
+      <value value="6867921"/>
+      <value value="9209236"/>
+      <value value="1800322"/>
+      <value value="8429175"/>
+      <value value="6180275"/>
+      <value value="901004"/>
+      <value value="465338"/>
+      <value value="5512862"/>
+      <value value="1916634"/>
+      <value value="5363852"/>
+      <value value="9029245"/>
+      <value value="144371"/>
+      <value value="9565685"/>
+      <value value="6549388"/>
+      <value value="7958273"/>
+      <value value="9046246"/>
+      <value value="9761647"/>
+      <value value="1675735"/>
+      <value value="3511162"/>
+      <value value="4449343"/>
+      <value value="963266"/>
+      <value value="7674997"/>
+      <value value="7333661"/>
+      <value value="8688439"/>
+      <value value="4250551"/>
+      <value value="9777889"/>
+      <value value="3799929"/>
+      <value value="815940"/>
+      <value value="4242181"/>
+      <value value="5071675"/>
+      <value value="235013"/>
+      <value value="3237986"/>
+      <value value="7718606"/>
+      <value value="2296536"/>
+      <value value="1170274"/>
+      <value value="6048039"/>
+      <value value="435498"/>
+      <value value="899774"/>
+      <value value="8720470"/>
+      <value value="3549629"/>
+      <value value="423584"/>
+      <value value="1346878"/>
+      <value value="2434249"/>
+      <value value="9874838"/>
+      <value value="7368833"/>
+      <value value="6675553"/>
+      <value value="2785720"/>
+      <value value="706108"/>
+      <value value="5859008"/>
+      <value value="2484662"/>
+      <value value="6579523"/>
+      <value value="7717411"/>
+      <value value="9250072"/>
+      <value value="9996032"/>
+      <value value="4798301"/>
+      <value value="2059474"/>
+      <value value="973768"/>
+      <value value="9444121"/>
+      <value value="5695989"/>
+      <value value="4313658"/>
+      <value value="6122144"/>
+      <value value="9146543"/>
+      <value value="3781245"/>
+      <value value="2895240"/>
+      <value value="8568148"/>
+      <value value="6745119"/>
+      <value value="2054286"/>
+      <value value="8312022"/>
+      <value value="7238788"/>
+      <value value="1071704"/>
+      <value value="935061"/>
+      <value value="9546971"/>
+      <value value="6273497"/>
+      <value value="151689"/>
+      <value value="5662013"/>
+      <value value="4747537"/>
+      <value value="2482847"/>
+      <value value="5901100"/>
+      <value value="6408972"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="gather_location_count">
       <value value="200"/>
@@ -117451,7 +117475,7 @@ NetLogo 6.2.0
       <value value="&quot;ME_TS_BS&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
-      <value value="0.10101891326401138"/>
+      <value value="0.1574693177402951"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_trans_std">
       <value value="0.12"/>
@@ -117500,6 +117524,9 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="data_suffix">
       <value value="&quot;_az_25.csv&quot;"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="data_suffix_2">
+      <value value="&quot;None&quot;"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="end_day">
       <value value="574"/>
     </enumeratedValueSet>
@@ -117516,7 +117543,7 @@ NetLogo 6.2.0
       <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="essential_workers">
-      <value value="100"/>
+      <value value="70"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="first_case_calibrate">
       <value value="false"/>
@@ -117528,7 +117555,7 @@ NetLogo 6.2.0
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="asymptomatic_trans">
-      <value value="0.7413610564616082"/>
+      <value value="0.8579550513322936"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="hetro_mult">
       <value value="1"/>
@@ -117597,7 +117624,7 @@ NetLogo 6.2.0
       <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="mask_wearing">
-      <value value="15"/>
+      <value value="35"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="maskpolicy">
       <value value="true"/>
@@ -117622,7 +117649,7 @@ NetLogo 6.2.0
       <value value="3"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="asymptom_prop">
-      <value value="0.3673229395901558"/>
+      <value value="0.32007257373899883"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_policy_force_days">
       <value value="0"/>
@@ -117649,6 +117676,7 @@ NetLogo 6.2.0
       <value value="0.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_vac_uptake_mult">
+      <value value="0.3"/>
       <value value="0.7"/>
       <value value="0.8"/>
       <value value="0.9"/>
@@ -117665,6 +117693,9 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="asymptom_trace_mult">
       <value value="0.66"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="policy_switch">
+      <value value="&quot;tony&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="population">
       <value value="2500"/>
@@ -117694,10 +117725,10 @@ NetLogo 6.2.0
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="proportion_people_avoid">
-      <value value="10"/>
+      <value value="15"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="proportion_time_avoid">
-      <value value="10"/>
+      <value value="15"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="complacency_loss">
       <value value="1"/>
@@ -117712,13 +117743,13 @@ NetLogo 6.2.0
       <value value="0.11"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reinfect_area">
-      <value value="0.5318055308841553"/>
+      <value value="0.7038371938972241"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reinfect_delay">
       <value value="21"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reinfect_risk">
-      <value value="0.6278850442901395"/>
+      <value value="0.8755028989296493"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="report_proportion">
       <value value="1"/>
@@ -117760,28 +117791,31 @@ NetLogo 6.2.0
       <value value="10"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="complacency_bound">
-      <value value="5"/>
+      <value value="15"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="success_14day_cases">
       <value value="-1"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="suffix_rollout">
+      <value value="true"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="superspreaders">
-      <value value="0.1"/>
+      <value value="0.08"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sympt_present_prop">
-      <value value="0.6014638657572254"/>
+      <value value="0.5737358826816504"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="total_population">
       <value value="6681000"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_assymtote">
-      <value value="200"/>
+      <value value="50"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_at_1">
       <value value="0.98"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_at_5">
-      <value value="0.9"/>
+      <value value="0.7"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_attempt_limit">
       <value value="3"/>
@@ -117808,10 +117842,10 @@ NetLogo 6.2.0
       <value value="true"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trans_draw_max">
-      <value value="0.119370711"/>
+      <value value="0.1579"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trans_draw_min">
-      <value value="0.098394749"/>
+      <value value="0.1335"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="vac_trans_mult">
       <value value="1"/>
