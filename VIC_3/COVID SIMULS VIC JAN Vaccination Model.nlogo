@@ -240,7 +240,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.08
 0.01
 1
 NIL
@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-0.0
+25.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-0.0
+25.0
 .5
 1
 NIL
@@ -380,7 +380,7 @@ INPUTBOX
 370
 389
 initial_cases
-1.0
+0.0
 1
 0
 Number
@@ -391,7 +391,7 @@ INPUTBOX
 329
 496
 total_population
-8.166E13
+6681000.0
 1
 0
 Number
@@ -524,7 +524,7 @@ SWITCH
 795
 scale
 scale
-1
+0
 1
 -1000
 
@@ -650,7 +650,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.1579
+0.1574693177402951
 0.001
 1
 NIL
@@ -665,7 +665,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+70.0
 1
 1
 NIL
@@ -680,7 +680,7 @@ Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
 1
-0.5
+0.0
 0.1
 1
 NIL
@@ -706,7 +706,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-0.0
+35.0
 1
 1
 NIL
@@ -781,7 +781,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
@@ -839,7 +839,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7818030253062234
+0.8579550513322936
 .01
 1
 NIL
@@ -963,7 +963,7 @@ SWITCH
 408
 Vaccine_Available
 Vaccine_Available
-1
+0
 1
 -1000
 
@@ -987,7 +987,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3385964.0
+3526570.0
 1
 1
 NIL
@@ -1149,7 +1149,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-8
+1
 
 SLIDER
 1608
@@ -1234,7 +1234,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.3122480858184666
+0.32007257373899883
 0.01
 1
 NIL
@@ -1331,7 +1331,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-0.0
+15.0
 1
 1
 NIL
@@ -1420,7 +1420,7 @@ End_Day
 End_Day
 -1
 730
-40.0
+130.0
 1
 1
 NIL
@@ -1548,7 +1548,7 @@ Recovered_Match_Rate
 Recovered_Match_Rate
 0
 0.5
-0.08
+0.11
 0.001
 1
 NIL
@@ -1642,7 +1642,7 @@ calibrate_stage_switch
 calibrate_stage_switch
 0
 500
-0.0
+300.0
 100
 1
 NIL
@@ -1672,7 +1672,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.7207411024218862
+0.5737358826816504
 0.01
 1
 NIL
@@ -1685,7 +1685,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-1
+0
 1
 -1000
 
@@ -1769,7 +1769,7 @@ param_vac_rate_mult
 param_vac_rate_mult
 0
 3
-1.0
+0.5
 0.1
 1
 NIL
@@ -1859,7 +1859,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.5518978608275715
+0.7038371938972241
 0.05
 1
 NIL
@@ -2033,7 +2033,7 @@ param_final_phase
 param_final_phase
 -1
 10
-3.0
+4.0
 1
 1
 NIL
@@ -2048,7 +2048,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
-0.0
+3.0
 1
 1
 NIL
@@ -2104,7 +2104,7 @@ accept_isolation_prop
 accept_isolation_prop
 0
 1
-0.0
+1.0
 0.01
 1
 NIL
@@ -2186,7 +2186,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.8227501789508304
+0.8755028989296493
 0.01
 1
 NIL
@@ -2276,7 +2276,7 @@ param_vacIncurMult
 param_vacIncurMult
 0
 25
-0.1
+5.0
 0.1
 1
 NIL
@@ -2291,7 +2291,7 @@ trans_draw_min
 trans_draw_min
 0
 1
-0.22
+0.1335
 0.01
 1
 NIL
@@ -2306,7 +2306,7 @@ trans_draw_max
 trans_draw_max
 0
 1
-0.27
+0.1579
 0.01
 1
 NIL
@@ -2351,7 +2351,7 @@ R0_range
 R0_range
 -1
 10
--1.0
+6.5
 0.5
 1
 NIL
@@ -2411,7 +2411,7 @@ init_timenow_limit
 init_timenow_limit
 0
 26
-0.0
+14.0
 1
 1
 NIL
@@ -2425,7 +2425,7 @@ CHOOSER
 policy_pipeline
 policy_pipeline
 "None" "ME_TS_S1" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS"
-0
+3
 
 SLIDER
 9
@@ -2436,7 +2436,7 @@ policy_pipe_time
 policy_pipe_time
 0
 200
-182.5
+105.0
 0.5
 1
 NIL
@@ -2586,7 +2586,7 @@ init_trace_prop
 init_trace_prop
 0
 1
-0.0
+1.0
 0.05
 1
 NIL
@@ -2633,7 +2633,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.7
+0.8
 0.05
 1
 NIL
@@ -2647,7 +2647,7 @@ CHOOSER
 compound_essential
 compound_essential
 "None" "Normal" "Extreme"
-1
+2
 
 SWITCH
 834
@@ -2656,7 +2656,7 @@ SWITCH
 892
 avoid_essential
 avoid_essential
-0
+1
 1
 -1000
 
@@ -2669,7 +2669,7 @@ ess_radius_anchor
 ess_radius_anchor
 0
 20
-0.0
+8.8
 0.1
 1
 NIL
@@ -2684,7 +2684,7 @@ ess_spread_anchor
 ess_spread_anchor
 0
 0.15
-0.0
+0.08
 0.1
 1
 NIL
@@ -2751,7 +2751,7 @@ SWITCH
 711
 first_case_calibrate
 first_case_calibrate
-0
+1
 1
 -1000
 
@@ -2778,7 +2778,7 @@ CHOOSER
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv"
-0
+2
 
 SLIDER
 1252
@@ -2936,7 +2936,7 @@ CHOOSER
 compound_trace
 compound_trace
 "None" "ass50_70at5" "ass100_90at5" "ass100_90at5_iso" "ass200_90at5"
-0
+1
 
 SLIDER
 2388
@@ -2995,13 +2995,13 @@ trace_print
 -1000
 
 SWITCH
-2715
-658
-2846
-691
+1043
+242
+1174
+275
 recreate_bug
 recreate_bug
-1
+0
 1
 -1000
 
