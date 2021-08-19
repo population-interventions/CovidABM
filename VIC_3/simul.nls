@@ -275,33 +275,31 @@ to simul_updateVacAndReinfectMult
     set succeptibilityTableMax 0
     ;; Set succeptibility to each variant
     foreach variantList [ variant ->
-      if variant >= 1 [
-        ifelse color = yellow and recoverTime < reinfect_delay
-        [
-          table:put succeptibilityTable variant 0
+      ifelse color = yellow and recoverTime < reinfect_delay
+      [
+        table:put succeptibilityTable variant 0
+      ]
+      [
+        let effect_raw 1
+        if selfVaccEff_raw_risk > 0 [
+          set effect_raw effect_raw * (1 - selfVaccEff_raw_risk * (vac_variant_eff_prop ^ (variant - 1)))
         ]
-        [
-          let effect_raw 1
-          if selfVaccEff_raw_risk > 0 [
-            set effect_raw effect_raw * (1 - selfVaccEff_raw_risk * (vac_variant_eff_prop ^ (variant - 1)))
+        if recoveryVariant > 0 [
+          ifelse variant > recoveryVariant 
+          [
+            set effect_raw effect_raw * (1 - prev_var_risk)
           ]
-          if recoveryVariant > 0 [
-            ifelse variant > recoveryVariant 
-            [
-              set effect_raw effect_raw * (1 - prev_var_risk)
-            ]
-            [
-              set effect_raw effect_raw * (1 - reinfect_risk) 
-            ]
+          [
+            set effect_raw effect_raw * (1 - reinfect_risk) 
           ]
-          ;set effect_raw (effect_raw ^ (1 / 3))
-          let succeptibility effect_raw
-          if succeptibility > succeptibilityTableMax [
-            ;; This is just a speedup to stop table access.
-            set succeptibilityTableMax succeptibility
-          ]
-          table:put succeptibilityTable variant succeptibility
         ]
+        ;set effect_raw (effect_raw ^ (1 / 3))
+        let succeptibility effect_raw
+        if succeptibility > succeptibilityTableMax [
+          ;; This is just a speedup to stop table access.
+          set succeptibilityTableMax succeptibility
+        ]
+        table:put succeptibilityTable variant succeptibility
       ]
     ]
   ]

@@ -5,7 +5,13 @@ to setup_incursionData
   let i 0
   foreach incursionFileData [ x -> 
     table:put incursionTable i x
-    table:put recoverCountByVariant (item 6 x) 0
+    ifelse recreate_bug
+    [
+      table:put recoverCountByVariant (item 3 x) 0
+    ]
+    [
+      table:put recoverCountByVariant (item 6 x) 0
+    ]
     set i i + 1
   ]
   set variantList table:keys recoverCountByVariant

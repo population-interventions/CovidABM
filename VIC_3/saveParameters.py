@@ -269,12 +269,18 @@ paramValuesStageNone = {
 
 
 paramValues_rCalibrate = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(5000),
+	'rand_seed' : GetRandomListUnique(10000),
 	'global_transmissibility' : listToStr([
 		0.098394749,
 		0.119370711,
-		0.144497012,
-		0.183084084,
+		0.1335,
+		0.1579,
+		0.1701,
+		0.1945,
+	]),
+	'recreate_bug' : listToStr([
+		'true',
+		'false',
 	]),
 
 	'gather_location_count' : 200,
