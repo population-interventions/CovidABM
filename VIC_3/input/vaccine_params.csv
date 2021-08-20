@@ -1,4 +1,4 @@
 name,reduceTrans_a,reduceTrans_b,reduceArea_a,reduceArea_b,partialDays,partialTransMult,partialAreaMult,vacEffectDays
-AZ,40,26.66666667,1.9,5.7,42,0.5,1,10
+AZ,40,26.66666667,1.9,5.7,84,0.5,1,10
 Pfizer,35.55555556,8.888888889,1.9,5.7,21,0.5,1,10
 IncursionVac,14.7,6.3,1.9,5.7,21,0.5,1,10
