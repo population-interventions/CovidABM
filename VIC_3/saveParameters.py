@@ -404,7 +404,7 @@ paramValues_rCalibrate = {**defaultParams, **{
 
 
 paramValues_stageEssential = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(100),
+	'rand_seed' : GetRandomListUnique(500),
 	'total_population' : '6681000',
 	'r0_range' : listToStr([5, 6.5, 8]),
 	'policy_pipeline' : listToStr([ 
@@ -418,7 +418,7 @@ paramValues_stageEssential = {**defaultParams, **{
 		'"ass100_90at5_iso"',
 		'"ass200_90at5"',
 	]),
-	'param_vac_uptake_mult' : listToStr([0.3, 0.7, 0.8, 0.9, 0.95]),
+	'param_vac_uptake_mult' : listToStr([0.7, 0.8, 0.9, 0.95]),
 	'param_vacIncurMult' : listToStr([0.2, 1, 5, 25]),
 	'param_final_phase' : listToStr([3, 4]),
 	'Non_Infective_Time' : listToStr([0]),
