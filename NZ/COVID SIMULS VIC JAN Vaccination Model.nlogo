@@ -143,7 +143,7 @@ Span
 Span
 0
 30
-10.0
+3.0
 1
 1
 NIL
@@ -244,7 +244,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.02
 0.01
 1
 NIL
@@ -299,7 +299,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+86.0
 .5
 1
 NIL
@@ -314,7 +314,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+86.0
 .5
 1
 NIL
@@ -654,7 +654,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.15006542270816864
+0.15278301845444367
 0.001
 1
 NIL
@@ -669,7 +669,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+20.0
 1
 1
 NIL
@@ -710,7 +710,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+85.0
 1
 1
 NIL
@@ -723,7 +723,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -828,7 +828,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+3.6
 1
 1
 NIL
@@ -843,7 +843,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7295207495275081
+0.8042951297417426
 .01
 1
 NIL
@@ -991,7 +991,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-4527191.0
+2767365.0
 1
 1
 NIL
@@ -1153,7 +1153,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-0
+2
 
 SLIDER
 1608
@@ -1238,7 +1238,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.2752127470892966
+0.33388420452326184
 0.01
 1
 NIL
@@ -1335,7 +1335,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+86.0
 1
 1
 NIL
@@ -1863,7 +1863,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.454604980258639
+0.4538594453589555
 0.05
 1
 NIL
@@ -2190,7 +2190,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.8149436259566845
+0.7857666148958616
 0.01
 1
 NIL
@@ -2280,7 +2280,7 @@ param_vacIncurMult
 param_vacIncurMult
 0
 25
-0.5
+15.0
 0.1
 1
 NIL
@@ -2781,8 +2781,8 @@ CHOOSER
 643
 data_suffix
 data_suffix
-"_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_95" "_85" "_70"
-6
+"_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_95" "_85" "_80" "_70" "_65"
+8
 
 SLIDER
 1252
@@ -3026,8 +3026,8 @@ CHOOSER
 693
 data_suffix_2
 data_suffix_2
-"None" "_15.csv" "_10.csv" "_5.csv"
-1
+"None" "_15.csv" "_12.csv" "_10.csv" "_5.csv"
+4
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -118880,106 +118880,106 @@ NetLogo 6.2.0
     <metric>cumulativeInfected_switchTime</metric>
     <metric>cumulativeInfected_minusInit</metric>
     <enumeratedValueSet variable="rand_seed">
-      <value value="3551039"/>
-      <value value="4546848"/>
-      <value value="3595701"/>
-      <value value="9830574"/>
-      <value value="5945486"/>
-      <value value="4906036"/>
-      <value value="1892769"/>
-      <value value="1415391"/>
-      <value value="6871975"/>
-      <value value="4509139"/>
-      <value value="7341020"/>
-      <value value="6631385"/>
-      <value value="593801"/>
-      <value value="6995808"/>
-      <value value="2317700"/>
-      <value value="8426254"/>
-      <value value="9120213"/>
-      <value value="3440867"/>
-      <value value="1929423"/>
-      <value value="5908855"/>
-      <value value="151983"/>
-      <value value="6762031"/>
-      <value value="6177831"/>
-      <value value="858604"/>
-      <value value="5066872"/>
-      <value value="2123336"/>
-      <value value="5607186"/>
-      <value value="6055518"/>
-      <value value="3448569"/>
-      <value value="3743699"/>
-      <value value="5335935"/>
-      <value value="7620085"/>
-      <value value="6252263"/>
-      <value value="403550"/>
-      <value value="8592369"/>
-      <value value="6198608"/>
-      <value value="8073843"/>
-      <value value="2176133"/>
-      <value value="475448"/>
-      <value value="2868259"/>
-      <value value="8222388"/>
-      <value value="4040931"/>
-      <value value="1478932"/>
-      <value value="7918483"/>
-      <value value="9028174"/>
-      <value value="9582247"/>
-      <value value="1830812"/>
-      <value value="5633444"/>
-      <value value="4034560"/>
-      <value value="2528984"/>
-      <value value="9863995"/>
-      <value value="2223577"/>
-      <value value="3228746"/>
-      <value value="3187267"/>
-      <value value="9066362"/>
-      <value value="1697621"/>
-      <value value="9757342"/>
-      <value value="9832616"/>
-      <value value="6220167"/>
-      <value value="2746216"/>
-      <value value="3276853"/>
-      <value value="196718"/>
-      <value value="4045417"/>
-      <value value="3519565"/>
-      <value value="6358723"/>
-      <value value="9088176"/>
-      <value value="956961"/>
-      <value value="5282755"/>
-      <value value="539176"/>
-      <value value="998390"/>
-      <value value="1101677"/>
-      <value value="5740633"/>
-      <value value="6500990"/>
-      <value value="3948055"/>
-      <value value="6091847"/>
-      <value value="5411330"/>
-      <value value="1625264"/>
-      <value value="8837530"/>
-      <value value="4558507"/>
-      <value value="2345179"/>
-      <value value="2252314"/>
-      <value value="9098302"/>
-      <value value="1977351"/>
-      <value value="8477289"/>
-      <value value="4804886"/>
-      <value value="5011330"/>
-      <value value="2339538"/>
-      <value value="1645109"/>
-      <value value="9818718"/>
-      <value value="9331232"/>
-      <value value="3705971"/>
-      <value value="442216"/>
-      <value value="4634522"/>
-      <value value="1354041"/>
-      <value value="9894492"/>
-      <value value="1500930"/>
-      <value value="9481815"/>
-      <value value="3346402"/>
-      <value value="2747766"/>
-      <value value="7004056"/>
+      <value value="2767365"/>
+      <value value="8131139"/>
+      <value value="1562276"/>
+      <value value="9048460"/>
+      <value value="7332796"/>
+      <value value="3997484"/>
+      <value value="6146940"/>
+      <value value="4673644"/>
+      <value value="143120"/>
+      <value value="3974827"/>
+      <value value="1505396"/>
+      <value value="8711982"/>
+      <value value="4263969"/>
+      <value value="7026478"/>
+      <value value="8224006"/>
+      <value value="1949187"/>
+      <value value="2229398"/>
+      <value value="3771215"/>
+      <value value="9666286"/>
+      <value value="9728545"/>
+      <value value="2760501"/>
+      <value value="244018"/>
+      <value value="8232639"/>
+      <value value="9929769"/>
+      <value value="9213087"/>
+      <value value="9778070"/>
+      <value value="9888587"/>
+      <value value="7281304"/>
+      <value value="1453643"/>
+      <value value="2911138"/>
+      <value value="5915222"/>
+      <value value="2174392"/>
+      <value value="2177894"/>
+      <value value="5886203"/>
+      <value value="7398761"/>
+      <value value="2084219"/>
+      <value value="3378465"/>
+      <value value="6440437"/>
+      <value value="1097325"/>
+      <value value="7416622"/>
+      <value value="8059253"/>
+      <value value="7044491"/>
+      <value value="8620252"/>
+      <value value="4623578"/>
+      <value value="4904239"/>
+      <value value="1548041"/>
+      <value value="8827151"/>
+      <value value="6662305"/>
+      <value value="7103872"/>
+      <value value="637101"/>
+      <value value="1630860"/>
+      <value value="7313060"/>
+      <value value="8911823"/>
+      <value value="6644981"/>
+      <value value="8645731"/>
+      <value value="9298496"/>
+      <value value="2082036"/>
+      <value value="9524941"/>
+      <value value="4181104"/>
+      <value value="6582759"/>
+      <value value="9250895"/>
+      <value value="9648656"/>
+      <value value="6220778"/>
+      <value value="7103818"/>
+      <value value="4446155"/>
+      <value value="9344482"/>
+      <value value="6683494"/>
+      <value value="2295146"/>
+      <value value="6141534"/>
+      <value value="438774"/>
+      <value value="3217442"/>
+      <value value="707936"/>
+      <value value="6688490"/>
+      <value value="6661432"/>
+      <value value="1555308"/>
+      <value value="8707991"/>
+      <value value="1802485"/>
+      <value value="9644509"/>
+      <value value="601975"/>
+      <value value="4083708"/>
+      <value value="1813618"/>
+      <value value="4446636"/>
+      <value value="8281507"/>
+      <value value="4299205"/>
+      <value value="2702013"/>
+      <value value="1899912"/>
+      <value value="2248805"/>
+      <value value="7960188"/>
+      <value value="113409"/>
+      <value value="2199513"/>
+      <value value="9940664"/>
+      <value value="807400"/>
+      <value value="1324557"/>
+      <value value="1566817"/>
+      <value value="4380175"/>
+      <value value="4571761"/>
+      <value value="4050595"/>
+      <value value="6145819"/>
+      <value value="9239529"/>
+      <value value="2822304"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="gather_location_count">
       <value value="200"/>
@@ -118987,6 +118987,8 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="param_policy">
       <value value="&quot;AggressElim&quot;"/>
       <value value="&quot;ModerateElim&quot;"/>
+      <value value="&quot;TightSupress&quot;"/>
+      <value value="&quot;LooseSupress&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="policy_pipeline">
       <value value="&quot;None&quot;"/>
@@ -119007,7 +119009,8 @@ NetLogo 6.2.0
       <value value="0.5"/>
       <value value="1"/>
       <value value="5"/>
-      <value value="10"/>
+      <value value="15"/>
+      <value value="25"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
       <value value="0"/>
@@ -119034,13 +119037,12 @@ NetLogo 6.2.0
       <value value="5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="data_suffix">
-      <value value="&quot;_70&quot;"/>
-      <value value="&quot;_85&quot;"/>
+      <value value="&quot;_65&quot;"/>
+      <value value="&quot;_80&quot;"/>
       <value value="&quot;_95&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="data_suffix_2">
-      <value value="&quot;_15.csv&quot;"/>
-      <value value="&quot;_10.csv&quot;"/>
+      <value value="&quot;_12.csv&quot;"/>
       <value value="&quot;_5.csv&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="end_day">

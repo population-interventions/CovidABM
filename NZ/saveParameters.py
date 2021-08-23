@@ -404,19 +404,20 @@ paramValues_stageEssential = {**defaultParams, **{
 	'param_policy' : listToStr([ 
 		'"AggressElim"',
 		'"ModerateElim"',
+		'"TightSupress"',
+		'"LooseSupress"',
 	]),
-	'data_suffix' : listToStr([ 
-		'"_70"',
-		'"_85"',
+	'data_suffix' : listToStr([
+		'"_65"',
+		'"_80"',
 		'"_95"',
 	]),
-	'data_suffix_2' : listToStr([ 
-		'"_15.csv"',
-		'"_10.csv"',
+	'data_suffix_2' : listToStr([
+		'"_12.csv"',
 		'"_5.csv"',
 	]),
 	'param_vac_uptake_mult' : listToStr([0]),
-	'param_vacIncurMult' : listToStr([0.5, 1, 5, 10]),
+	'param_vacIncurMult' : listToStr([0.5, 1, 5, 15, 25]),
 	'param_final_phase' : listToStr([4]),
 	'Non_Infective_Time' : listToStr([0]),
 	'compound_essential' : listToStr(['"Extreme"']),

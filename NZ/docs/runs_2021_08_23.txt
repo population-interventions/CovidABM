@@ -1,0 +1,8 @@
+I have edited the incursion sheet if we could please re-run this all.
+
+If we can run for the following Updated scenarios:
+•	65%, 80%, 95% of population vaccinated (NZ has now announced all 12+ will get vaccinated)
+•	So for the age 10-15 group, include 2/3rd as part of the "adult population"
+•	Kids 5-11 vaccinated (this will include the remaining 1/3rd from the 10-15 age group + half of the 1-9 age group), and no kids vaccinated
+•	Aggressive elimination, moderate elimination, loose elimination
+•	Daily international arrival incursion: 0.2, 1, 5, 15, 25
