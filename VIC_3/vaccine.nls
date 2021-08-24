@@ -79,16 +79,16 @@ to setup_vaccineData
   set i 0
   foreach vaccineParamsFileData [ rawData -> 
     let vacName item 0 rawData
-    let vacTransReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
+    let vacRiskReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
     let vacAreaReduct rngs:rnd-beta vaccineEffseedID (item 3 rawData) (item 4 rawData)
     let partialDays item 5 rawData
     let partialTrans_mult item 6 rawData
     let partialReduct_mult item 7 rawData
     let vacEffectDays item 8 rawData
-    table:put vaccineParamsTable vacName (list vacTransReduct vacAreaReduct partialDays partialTrans_mult partialReduct_mult vacEffectDays)
+    table:put vaccineParamsTable vacName (list vacRiskReduct vacAreaReduct partialDays partialTrans_mult partialReduct_mult vacEffectDays)
     
     set vacineEff_nameOut lput vacName vacineEff_nameOut
-    set vacineEff_transOut lput vacTransReduct vacineEff_transOut
+    set vacineEff_transOut lput vacRiskReduct vacineEff_transOut
     set vacineEff_areaOut lput vacAreaReduct vacineEff_areaOut
   ]
 end
@@ -178,21 +178,20 @@ to simul_set_vaccine_params
   if vaccineOffered = 1 [
     ifelse vacSecondDoseCountdown > 0 and vacEffectCountdown > 0 [
       ; Recieved first dose and it has not yet taken effect.
-      set selfVaccEff_raw_area 0
-      set selfVaccEff_raw_risk 0
+      set selfVaccEff_raw_area_reduct 0
+      set selfVaccEff_raw_risk_reduct 0
     ]
     [
       let myVaccineData table:get vaccineParamsTable vaccineType
-      set selfVaccEff_raw_area item 0 myVaccineData
-      set selfVaccEff_raw_risk item 1 myVaccineData
+      set selfVaccEff_raw_risk_reduct item 0 myVaccineData
+      set selfVaccEff_raw_area_reduct item 1 myVaccineData
       if vacSecondDoseCountdown > 0 or vacEffectCountdown > 0 [
         ; Not yet recieved second dose or waiting for most recent dose to take effect.
-        set selfVaccEff_raw_area selfVaccEff_raw_area * item 3 myVaccineData
-        set selfVaccEff_raw_risk selfVaccEff_raw_area * item 4 myVaccineData
+        set selfVaccEff_raw_area_reduct selfVaccEff_raw_area_reduct * item 3 myVaccineData
+        set selfVaccEff_raw_risk_reduct selfVaccEff_raw_area_reduct * item 4 myVaccineData
       ]
       simul_updateVacAndReinfectMult
-      ;print selfVaccEff_raw_area
-      ;print selfVaccEff_raw_risk
+      ;print selfVaccEff_raw_risk_reduct
     ]
   ]
 end

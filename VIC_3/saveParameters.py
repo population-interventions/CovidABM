@@ -404,7 +404,7 @@ paramValues_rCalibrate = {**defaultParams, **{
 
 
 paramValues_stageEssential = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(500),
+	'rand_seed' : GetRandomListUnique(100),
 	'total_population' : '6681000',
 	'r0_range' : listToStr([5, 6.5, 8]),
 	'policy_pipeline' : listToStr([ 

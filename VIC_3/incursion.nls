@@ -70,7 +70,9 @@ to incursion_update
         
         set new_case_real_counter new_case_real_counter + peoplePerSimul
         set totalOverseasIncursions totalOverseasIncursions + peoplePerSimul
-        array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + peoplePerSimul
+        if count_incursion [
+          array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + peoplePerSimul
+        ]
       ]
     ]
   ]
@@ -95,7 +97,9 @@ to incursion_update
         
         set new_case_real_counter new_case_real_counter + peoplePerSimul
         set totalOverseasIncursions totalOverseasIncursions + peoplePerSimul
-        array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + peoplePerSimul
+        if count_incursion [
+          array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + peoplePerSimul
+        ]
       ]
     ]
   ]

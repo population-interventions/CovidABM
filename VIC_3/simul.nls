@@ -67,8 +67,8 @@ simuls-own [
   vacSecondDoseCountdown ;; Timer for the delay to second dose
   vacEffectCountdown ;; Timer for the vaccine (first or second dose) coming into effect.
   vaccineType ;; Name of vaccine being offered
-  selfVaccEff_raw_area ;; Duration times transmissibility of infection
-  selfVaccEff_raw_risk ;; Risk of being infected
+  selfVaccEff_raw_area_reduct ;; Reduction of duration*transmissibility of infection
+  selfVaccEff_raw_risk_reduct ;; Reduction of risk of being infected
   transmitFromVacAndReinfect ;; Multiplier for disease effects, (1 - selfVaccEff * recoveryEffect)^(1/3)
   succeptibilityTable ;; exposureAndVacMult but for each variant
   succeptibilityTableMax ;; maximum of the above table.
@@ -124,7 +124,7 @@ to simul_updatepersonalvirulence
       if timenow > ownIncubationPeriod [
         set currentVirulence variantTransMult * personalVirulence * (( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))
       ]
-      if selfVaccEff_raw_risk > 0 and vac_trans_mult != 1 [
+      if selfVaccEff_raw_risk_reduct > 0 and vac_trans_mult != 1 [
         set currentVirulence currentVirulence * vac_trans_mult
       ]
     ]
@@ -174,8 +174,8 @@ end
 to simul_updateVacAndReinfectMult
   if vaccineIncursionOverride != 0 [
     ;; Override with overseas infections
-    let store_selfVaccEff_raw_risk selfVaccEff_raw_risk
-    let store_selfVaccEff_raw_area selfVaccEff_raw_area
+    let store_selfVaccEff_raw_risk_reduct selfVaccEff_raw_risk_reduct
+    let store_selfVaccEff_raw_area_reduct selfVaccEff_raw_area_reduct
     let store_recoveryVariant recoveryVariant
     let store_vacSecondDoseCountdown vacSecondDoseCountdown
     let store_vacEffectCountdown vacEffectCountdown
@@ -185,13 +185,14 @@ to simul_updateVacAndReinfectMult
     ifelse table:has-key? vaccineParamsTable vaccineIncursionOverride
     [
       let overrideVaccineData table:get vaccineParamsTable vaccineIncursionOverride
-      set selfVaccEff_raw_area item 0 overrideVaccineData
-      set selfVaccEff_raw_risk item 1 overrideVaccineData
+      set selfVaccEff_raw_risk_reduct item 0 overrideVaccineData
+      set selfVaccEff_raw_area_reduct item 1 overrideVaccineData
     ]
     [
-      set selfVaccEff_raw_area 0
-      set selfVaccEff_raw_risk 0
+      set selfVaccEff_raw_area_reduct 0
+      set selfVaccEff_raw_risk_reduct 0
     ]
+    
     set recoveryVariant 0
     set vacSecondDoseCountdown 0
     set vacEffectCountdown 0
@@ -199,8 +200,8 @@ to simul_updateVacAndReinfectMult
  
     simul_updateVacAndReinfectMult
     
-    set selfVaccEff_raw_risk store_selfVaccEff_raw_risk
-    set selfVaccEff_raw_area store_selfVaccEff_raw_area
+    set selfVaccEff_raw_risk_reduct store_selfVaccEff_raw_risk_reduct
+    set selfVaccEff_raw_area_reduct store_selfVaccEff_raw_area_reduct
     set recoveryVariant store_recoveryVariant
     set vacSecondDoseCountdown store_vacSecondDoseCountdown
     set vacEffectCountdown store_vacEffectCountdown
@@ -212,7 +213,7 @@ to simul_updateVacAndReinfectMult
     [
       ifelse recoveryVariant > 2 or infectVariant > 2
       [
-        ifelse selfVaccEff_raw_risk = 0
+        ifelse selfVaccEff_raw_risk_reduct = 0
         [
           set shape "airplane" 
           set size 2.2 / 1.3
@@ -223,7 +224,7 @@ to simul_updateVacAndReinfectMult
         ]
       ]
       [
-        ifelse selfVaccEff_raw_risk = 0
+        ifelse selfVaccEff_raw_risk_reduct = 0
         [
           set shape "star" 
           set size 1.5 / 1.3
@@ -235,7 +236,7 @@ to simul_updateVacAndReinfectMult
       ]
     ]
     [
-      ifelse selfVaccEff_raw_risk = 0
+      ifelse selfVaccEff_raw_risk_reduct = 0
       [
         set shape "circle" 
         set size 1 / 1.3
@@ -253,8 +254,8 @@ to simul_updateVacAndReinfectMult
     set variantTransMult variant_transmiss_growth ^ (infectVariant - 1)
     
     ;; Contribute vaccine effect
-    if selfVaccEff_raw_risk > 0 [
-      set effect_raw effect_raw * (1 - selfVaccEff_raw_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
+    if selfVaccEff_raw_risk_reduct > 0 [
+      set effect_raw effect_raw * (1 - selfVaccEff_raw_area_reduct * (vac_variant_eff_prop ^ (infectVariant - 1)))
     ]
     if recoveryVariant > 0 [
       ;; Set reduced infectiveness based on previously having an infection.
@@ -281,8 +282,8 @@ to simul_updateVacAndReinfectMult
       ]
       [
         let effect_raw 1
-        if selfVaccEff_raw_risk > 0 [
-          set effect_raw effect_raw * (1 - selfVaccEff_raw_risk * (vac_variant_eff_prop ^ (variant - 1)))
+        if selfVaccEff_raw_risk_reduct > 0 [
+          set effect_raw effect_raw * (1 - selfVaccEff_raw_risk_reduct * (vac_variant_eff_prop ^ (variant - 1)))
         ]
         if recoveryVariant > 0 [
           ifelse variant > recoveryVariant 
@@ -306,9 +307,9 @@ to simul_updateVacAndReinfectMult
 end
 
 to simul_waneVacEff
-  if selfVaccEff_raw_risk > 0 and param_vac_wane > 0 [
-    set selfVaccEff_raw_area selfVaccEff_raw_area * (1 - param_vac_wane)
-    set selfVaccEff_raw_risk selfVaccEff_raw_risk * (1 - param_vac_wane)
+  if selfVaccEff_raw_risk_reduct > 0 and param_vac_wane > 0 [
+    set selfVaccEff_raw_area_reduct selfVaccEff_raw_area_reduct * (1 - param_vac_wane)
+    set selfVaccEff_raw_risk_reduct selfVaccEff_raw_risk_reduct * (1 - param_vac_wane)
     simul_updateVacAndReinfectMult
   ]
 end
@@ -489,6 +490,7 @@ to simul_infect
             
             ;; Check against lower succeptiblity for reinfection.
             set binomChance 1 - (1 - baseSuccept * (table:get succeptibilityTable patchVariant) * x) ^ Daily_Infect_Binom
+            ;print (word x ", " binomChance ", " selfVaccEff_raw_risk_reduct ", " table:get succeptibilityTable patchVariant)
             if binomChance > infectDraw [
               set color red
               set contributeToR true
@@ -512,7 +514,7 @@ to simul_infect
               set timenow 0
               set infectionsToday_acc infectionsToday_acc + 1
               set new_case_real_counter new_case_real_counter + extraScaleFactor * (Scale_Factor ^ scalephase)
-              ifelse selfVaccEff_raw_risk > 0
+              ifelse selfVaccEff_raw_risk_reduct > 0
               [
                 array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
               ]
@@ -642,7 +644,7 @@ to simul_end_infection
       ]
     ]
     
-    ifelse (selfVaccEff_raw_risk = 0 and RiskofDeath > random-float 1) or (selfVaccEff_raw_risk > 0 and RiskofDeath * draw_vacc_death_risk_mult > random-float 1)
+    ifelse (selfVaccEff_raw_risk_reduct = 0 and RiskofDeath > random-float 1) or (selfVaccEff_raw_risk_reduct > 0 and RiskofDeath * draw_vacc_death_risk_mult > random-float 1)
     [
       set deathcount deathcount + extraScaleFactor * (Scale_Factor ^ scalephase)
       array:set dieArray cohortIndex (array:item dieArray cohortIndex) + popPerSimul
