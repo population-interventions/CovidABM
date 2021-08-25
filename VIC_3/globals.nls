@@ -328,6 +328,9 @@ globals [
   vaccineInitSeedID
   moveInitSeedID
   presentInitSeedID
+  
+  generic_count_total
+  generic_count_partial
 ]
 
 patches-own [

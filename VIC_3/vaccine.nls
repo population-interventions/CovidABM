@@ -82,14 +82,15 @@ to setup_vaccineData
     let vacRiskReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
     let vacAreaReduct rngs:rnd-beta vaccineEffseedID (item 3 rawData) (item 4 rawData)
     let partialDays item 5 rawData
-    let partialTrans_mult item 6 rawData
+    let partialRisk_mult item 6 rawData
     let partialReduct_mult item 7 rawData
     let vacEffectDays item 8 rawData
-    table:put vaccineParamsTable vacName (list vacRiskReduct vacAreaReduct partialDays partialTrans_mult partialReduct_mult vacEffectDays)
+    table:put vaccineParamsTable vacName (list vacRiskReduct vacAreaReduct partialDays partialRisk_mult partialReduct_mult vacEffectDays)
     
     set vacineEff_nameOut lput vacName vacineEff_nameOut
     set vacineEff_transOut lput vacRiskReduct vacineEff_transOut
     set vacineEff_areaOut lput vacAreaReduct vacineEff_areaOut
+    ;print (word "Vac " vacName ", riskRed " vacRiskReduct ", areaRed " vacAreaReduct)
   ]
 end
 
@@ -145,7 +146,7 @@ to vaccine_nextPhase [branch]
       let phaseSizeTotal count agentSet
       set agentSet agentSet with [vaccineOffered = 0]
       let phaseUnvaccinated count agentSet
-      table:put vaccineActiveAgentSet branch agentSet
+      table:put vaccineActiveAgentSet branch agentSet with [ vaccinePriority < vaccineUptake ]
       
       ;; Vaccinate the remainder of the phase such that total vaccination matches vaccineUptake
       let vaccinePending (floor(vaccineUptake * phaseSizeTotal + 0.5) - (phaseSizeTotal - phaseUnvaccinated))
@@ -161,8 +162,8 @@ to vaccine_nextPhase [branch]
       ;print (word "pending vaccine: " (table:get global_vaccinePending branch))
       ;print (word "per day: " global_vaccinePerDay)
       ;print (word "first priority: " (table:get global_vaccinePrioritiseFirstOverSecond branch))
-      if print_phase [
-       print (word "Day " ticks ", Branch " branch ", Phase " (table:get global_vaccinePhase branch) ", SubPhase " (table:get global_vaccineSubPhase branch))
+      if print_phase and branch = "A" [
+       print (word "Day " ticks ", Branch " branch ", Phase " (table:get global_vaccinePhase branch) ", SubPhase " (table:get global_vaccineSubPhase branch) ", total " phaseSizeTotal ", pending " vaccinePending ", unvac " phaseUnvaccinated )
       ]
     ]
     [
@@ -187,8 +188,8 @@ to simul_set_vaccine_params
       set selfVaccEff_raw_area_reduct item 1 myVaccineData
       if vacSecondDoseCountdown > 0 or vacEffectCountdown > 0 [
         ; Not yet recieved second dose or waiting for most recent dose to take effect.
-        set selfVaccEff_raw_area_reduct selfVaccEff_raw_area_reduct * item 3 myVaccineData
-        set selfVaccEff_raw_risk_reduct selfVaccEff_raw_area_reduct * item 4 myVaccineData
+        set selfVaccEff_raw_risk_reduct selfVaccEff_raw_risk_reduct * item 3 myVaccineData
+        set selfVaccEff_raw_area_reduct selfVaccEff_raw_area_reduct * item 4 myVaccineData
       ]
       simul_updateVacAndReinfectMult
       ;print selfVaccEff_raw_risk_reduct
@@ -200,6 +201,7 @@ to simul_admininster_vaccine
   let myVaccineData table:get vaccineParamsTable vaccineType
   set vacEffectCountdown item 5 myVaccineData
   set vacSecondDoseCountdown item 2 myVaccineData
+  ;print (word vacEffectCountdown ", " vacSecondDoseCountdown)
   simul_set_vaccine_params
 end
 
@@ -299,7 +301,11 @@ to vaccine_update
           set vaccinateToday (table:get global_vaccinePending branch) 
         ]
         
-        ask n-of (vaccinateToday) ((table:get vaccineActiveAgentSet branch) with [vaccineOffered = 0]) [
+        let askSimuls ((table:get vaccineActiveAgentSet branch) with [vaccineOffered = 0])
+        if count askSimuls < vaccinateToday [
+         set vaccinateToday count askSimuls
+        ]
+        ask n-of vaccinateToday askSimuls [
           simul_vaccinate_me
         ]
         

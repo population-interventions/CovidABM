@@ -270,13 +270,20 @@ to setupInitialVaccination
     let cohort table:get populationCohortCache index
     let cohortData table:get popDivisionTable index
     
+    let cohort_pop item 0 cohortData
     let vaccinatedCount item 13 cohortData
     let progMin item 14 cohortData
     let progMax item 15 cohortData
+    
+    let toVaccinateNow vaccinatedCount
+    let vacPrioIncrement 1 / cohort_pop
+    let vacPrio vacPrioIncrement / 2
+    
     ;; Only pre-model vaccinate someone if they would take up the vaccine.
     ;; This ensures that the final vaccinated proportion matches init_vac_uptake.
     ask cohort [
-      if vaccinatedCount > 0 [
+      ifelse toVaccinateNow > 0
+      [
         let myVaccineData table:get vaccineParamsTable vaccineType
         let maxVaccineDoseDays item 2 myVaccineData
         let maxVaccineEffectDays item 5 myVaccineData
@@ -301,7 +308,14 @@ to setupInitialVaccination
         ;]
         ;print vacWaitDays
         simul_vaccinate_me_force
-        set vaccinatedCount vaccinatedCount - 1
+        set toVaccinateNow toVaccinateNow - 1
+        set vacPrio vacPrio
+        set vacPrio vacPrio + vacPrioIncrement
+      ]
+      [
+        ;; Predestine people to uptake the vaccine or not
+        set vaccinePriority vacPrio
+        set vacPrio vacPrio + vacPrioIncrement
       ]
     ]
   ]
