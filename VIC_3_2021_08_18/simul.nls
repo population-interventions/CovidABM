@@ -185,8 +185,8 @@ to simul_updateVacAndReinfectMult
     ifelse table:has-key? vaccineParamsTable vaccineIncursionOverride
     [
       let overrideVaccineData table:get vaccineParamsTable vaccineIncursionOverride
-      set selfVaccEff_raw_area item 0 overrideVaccineData
-      set selfVaccEff_raw_risk item 1 overrideVaccineData
+      set selfVaccEff_raw_risk item 0 overrideVaccineData
+      set selfVaccEff_raw_area item 1 overrideVaccineData
     ]
     [
       set selfVaccEff_raw_area 0

@@ -2055,6 +2055,17 @@ suffix_rollout
 1
 -1000
 
+SWITCH
+1039
+238
+1179
+272
+count_incursion
+count_incursion
+1
+1
+-1000
+
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -128453,6 +128464,9 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="policy_pipeline">
       <value value="&quot;ME_TS_LS&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="count_incursion">
+      <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_transmissibility">
       <value value="0.10101891326401138"/>
