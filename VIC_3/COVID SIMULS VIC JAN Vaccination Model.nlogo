@@ -143,7 +143,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -244,7 +244,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.1
 0.01
 1
 NIL
@@ -299,7 +299,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-50.0
+5.0
 .5
 1
 NIL
@@ -314,7 +314,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-50.0
+5.0
 .5
 1
 NIL
@@ -654,7 +654,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.1486269375294447
+0.14828620572239162
 0.001
 1
 NIL
@@ -669,7 +669,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -710,7 +710,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+15.0
 1
 1
 NIL
@@ -723,7 +723,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -828,7 +828,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -843,7 +843,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.77639527948855
+0.7183069100666566
 .01
 1
 NIL
@@ -991,7 +991,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-7246377.0
+5217391.0
 1
 1
 NIL
@@ -1153,7 +1153,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-2
+1
 
 SLIDER
 1608
@@ -1238,7 +1238,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.2889245246815249
+0.34672810857919634
 0.01
 1
 NIL
@@ -1335,7 +1335,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -1676,7 +1676,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.21483178110344703
+0.6911814817568331
 0.01
 1
 NIL
@@ -1863,7 +1863,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.35669431450962036
+0.44960318105529556
 0.05
 1
 NIL
@@ -2190,7 +2190,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.5385648755262359
+0.7231905851222109
 0.01
 1
 NIL
@@ -2637,7 +2637,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.3
+0.8
 0.05
 1
 NIL
@@ -3011,7 +3011,7 @@ data_suffix_2
 CHOOSER
 12
 167
-150
+129
 212
 policy_switch
 policy_switch

@@ -272,6 +272,7 @@ to simul_updateVacAndReinfectMult
     set transmitFromVacAndReinfect effect_raw ^ (1 / 2)
     set ownIllnessPeriod ownIllnessPeriod_raw * transmitFromVacAndReinfect
     set ownIncubationPeriod ownIncubationPeriod_raw * transmitFromVacAndReinfect
+    ;print (word selfVaccEff_raw_area_reduct ", "transmitFromVacAndReinfect ", " ownIllnessPeriod ", " ownIllnessPeriod_raw)
   ]
   [
     set succeptibilityTableMax 0
@@ -496,7 +497,7 @@ to simul_infect
             
             ;; Check against lower succeptiblity for reinfection.
             set binomChance 1 - (1 - baseSuccept * (table:get succeptibilityTable patchVariant) * x) ^ Daily_Infect_Binom
-            ;print (word x ", " binomChance ", " selfVaccEff_raw_risk_reduct ", " table:get succeptibilityTable patchVariant)
+            print (word x ", " binomChance ", " selfVaccEff_raw_risk_reduct ", " table:get succeptibilityTable patchVariant)
             if infectDraw < binomChance [
               set color red
               set contributeToR true
