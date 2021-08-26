@@ -73,6 +73,7 @@ simuls-own [
   succeptibilityTable ;; exposureAndVacMult but for each variant
   succeptibilityTableMax ;; maximum of the above table.
   vaccineIncursionOverride ;; Override the vaccine status of the simulant for as long as they have their incursion infection. This is worse than it sounds.
+  vaccinePriority ;; Number that determines whether simulant will recieve a vaccination. Compared to uptake.
 
   infectVariant ;; Variant of SARS that I am infected with. Is > 0 iff color = red.
   variantTransMult ;; Transmissiblity multiplier for this variant

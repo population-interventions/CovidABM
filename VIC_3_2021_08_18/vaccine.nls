@@ -145,7 +145,7 @@ to vaccine_nextPhase [branch]
       let phaseSizeTotal count agentSet
       set agentSet agentSet with [vaccineOffered = 0]
       let phaseUnvaccinated count agentSet
-      table:put vaccineActiveAgentSet branch agentSet
+      table:put vaccineActiveAgentSet branch agentSet with [ vaccinePriority < vaccineUptake ]
       
       ;; Vaccinate the remainder of the phase such that total vaccination matches vaccineUptake
       let vaccinePending (floor(vaccineUptake * phaseSizeTotal + 0.5) - (phaseSizeTotal - phaseUnvaccinated))
@@ -300,7 +300,11 @@ to vaccine_update
           set vaccinateToday (table:get global_vaccinePending branch) 
         ]
         
-        ask n-of (vaccinateToday) ((table:get vaccineActiveAgentSet branch) with [vaccineOffered = 0]) [
+        let askSimuls ((table:get vaccineActiveAgentSet branch) with [vaccineOffered = 0])
+        if count askSimuls < vaccinateToday [
+          set vaccinateToday count askSimuls
+        ]
+        ask n-of (vaccinateToday) askSimuls [
           simul_vaccinate_me
         ]
         

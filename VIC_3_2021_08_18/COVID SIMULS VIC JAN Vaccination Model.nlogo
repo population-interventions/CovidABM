@@ -1153,7 +1153,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-1
+2
 
 SLIDER
 1608
@@ -3033,7 +3033,7 @@ SWITCH
 1039
 238
 1179
-272
+271
 count_incursion
 count_incursion
 1
