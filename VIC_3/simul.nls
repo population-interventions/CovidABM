@@ -74,7 +74,7 @@ simuls-own [
   succeptibilityTableMax ;; maximum of the above table.
   vaccineIncursionOverride ;; Override the vaccine status of the simulant for as long as they have their incursion infection. This is worse than it sounds.
   vaccinePriority ;; Number that determines whether simulant will recieve a vaccination. Compared to uptake.
-
+  
   infectVariant ;; Variant of SARS that I am infected with. Is > 0 iff color = red.
   variantTransMult ;; Transmissiblity multiplier for this variant
   recoveryVariant ;; The highest level of SARS recovered from. More recent and virulent versions have a higher level.
@@ -496,6 +496,7 @@ to simul_infect
             
             ;; Check against lower succeptiblity for reinfection.
             set binomChance 1 - (1 - baseSuccept * (table:get succeptibilityTable patchVariant) * x) ^ Daily_Infect_Binom
+            ;print (word x ", " binomChance ", " selfVaccEff_raw_risk_reduct ", " table:get succeptibilityTable patchVariant)
             if infectDraw < binomChance [
               set color red
               set contributeToR true
@@ -615,7 +616,6 @@ to simul_superSpread
   if isolateCompliant = 0 and mySpread * superSpread_chance_multiplier > random-float 1 [
     move-to one-of destination_patches
   ]
-  ;move-to one-of destination_patches
 end
 
 to simul_settime
