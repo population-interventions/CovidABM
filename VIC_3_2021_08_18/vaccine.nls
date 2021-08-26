@@ -32,7 +32,11 @@ to setup_doseTable
 end
 
 to setup_vaccineData
-  let vaccineTypeFileData remove-item 0 csv:from-file (word input_vaccine_table data_suffix)
+  let inputFile (word input_vaccine_table data_suffix)
+  if not suffix_rollout [
+    set inputFile input_vaccine_table
+  ]
+  let vaccineTypeFileData remove-item 0 csv:from-file inputFile
   set vaccineRolloutTable table:make
   set vaccineBranches []
   

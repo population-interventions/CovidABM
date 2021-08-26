@@ -11,7 +11,11 @@ __includes[
   "parameters.nls"
   "scale.nls"
   "stages.nls"
+  "stages_tony.nls"
+  "stages_nz.nls"
   "policy.nls"
+  "policy_tony.nls"
+  "policy_nz.nls"
   "trace.nls"
   "count.nls"
   "vaccine.nls"
@@ -21,9 +25,9 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-392
+394
 65
-1016
+1018
 690
 -1
 -1
@@ -340,7 +344,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.13552301878491418
+0.1385815784382634
 0.001
 1
 NIL
@@ -362,10 +366,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-833
-743
-1016
-776
+834
+750
+1017
+783
 Ess_W_Risk_Reduction
 Ess_W_Risk_Reduction
 0
@@ -482,7 +486,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.711985666108215
+0.7440787056724778
 .01
 1
 NIL
@@ -511,10 +515,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-14
-375
-183
-408
+12
+382
+181
+415
 Vaccine_Available
 Vaccine_Available
 0
@@ -531,7 +535,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-1714226.0
+1054940.0
 1
 1
 NIL
@@ -559,14 +563,14 @@ Stage Policy Settings
 1
 
 CHOOSER
-14
-285
-182
-330
+12
+292
+180
+337
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-3
+1
 
 SLIDER
 1608
@@ -610,7 +614,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.3366405173931703
+0.31513898237743954
 0.01
 1
 NIL
@@ -788,10 +792,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-14
-335
-181
-368
+12
+342
+179
+375
 param_trigger_loosen
 param_trigger_loosen
 1
@@ -848,15 +852,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-588
-733
-761
-766
+589
+739
+762
+772
 sympt_present_prop
 sympt_present_prop
 0
 1
-0.42303723300965923
+0.7482631728767288
 0.01
 1
 NIL
@@ -945,10 +949,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-14
-245
-186
-278
+12
+252
+184
+285
 param_vac_rate_mult
 param_vac_rate_mult
 0
@@ -1025,7 +1029,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.5326287763775047
+0.3478241574042499
 0.05
 1
 NIL
@@ -1112,9 +1116,9 @@ HORIZONTAL
 
 SLIDER
 12
-135
+129
 189
-168
+162
 param_final_phase
 param_final_phase
 -1
@@ -1127,9 +1131,9 @@ HORIZONTAL
 
 SLIDER
 14
-60
+54
 189
-93
+87
 param_incur_phase_limit
 param_incur_phase_limit
 -1
@@ -1252,7 +1256,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.9431352711253567
+0.9105973283585627
 0.01
 1
 NIL
@@ -1335,9 +1339,9 @@ HORIZONTAL
 
 SLIDER
 13
-98
+93
 187
-131
+126
 param_vacIncurMult
 param_vacIncurMult
 0
@@ -1379,10 +1383,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2113
-582
-2286
-615
+2195
+562
+2368
+595
 param_trace_mult
 param_trace_mult
 0
@@ -1394,10 +1398,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2112
-652
-2285
-685
+2194
+632
+2367
+665
 trace_attempt_limit
 trace_attempt_limit
 -1
@@ -1659,10 +1663,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-1857
-443
-2072
-503
+1856
+406
+2071
+466
 input_population_table
 input/population
 1
@@ -1670,10 +1674,10 @@ input/population
 String
 
 INPUTBOX
-1857
-508
-2072
-568
+1856
+471
+2071
+531
 input_vaccine_table
 input/vaccine_rollout
 1
@@ -1691,10 +1695,10 @@ compound_input
 0
 
 SLIDER
-13
-207
-203
-240
+10
+214
+200
+247
 param_vac_uptake_mult
 param_vac_uptake_mult
 0
@@ -1706,20 +1710,20 @@ NIL
 HORIZONTAL
 
 CHOOSER
-834
-692
-1017
-737
+835
+699
+1018
+744
 compound_essential
 compound_essential
 "None" "Normal" "Extreme"
 2
 
 SWITCH
-834
-859
-1014
-892
+835
+867
+1015
+900
 avoid_essential
 avoid_essential
 1
@@ -1727,10 +1731,10 @@ avoid_essential
 -1000
 
 SLIDER
-834
-780
-1017
-813
+835
+787
+1018
+820
 ess_radius_anchor
 ess_radius_anchor
 0
@@ -1742,10 +1746,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-834
-819
-1017
-852
+835
+827
+1018
+860
 ess_spread_anchor
 ess_spread_anchor
 0
@@ -1758,10 +1762,10 @@ HORIZONTAL
 
 
 INPUTBOX
-1857
-574
-2072
-634
+1856
+537
+2071
+597
 input_dose_rate_table
 input/dose_rate.csv
 1
@@ -1797,10 +1801,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-1860
-643
-2032
-688
+1857
+601
+2029
+646
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv"
@@ -1895,10 +1899,10 @@ sensitivity
 0
 
 SLIDER
-2113
-617
-2286
-650
+2195
+597
+2368
+630
 trace_eff_override
 trace_eff_override
 -1
@@ -1925,10 +1929,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2114
-510
-2287
-543
+2196
+490
+2369
+523
 trace_at_5
 trace_at_5
 0
@@ -1940,10 +1944,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2114
-547
-2287
-580
+2196
+527
+2369
+560
 trace_assymtote
 trace_assymtote
 0
@@ -1955,10 +1959,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-2115
-427
-2288
-472
+2197
+407
+2370
+452
 compound_trace
 compound_trace
 "None" "ass50_70at5" "ass100_90at5" "ass100_90at5_iso" "ass200_90at5"
@@ -1995,10 +1999,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2114
-474
-2287
-507
+2196
+454
+2369
+487
 trace_at_1
 trace_at_1
 0
@@ -2010,23 +2014,43 @@ NIL
 HORIZONTAL
 
 SWITCH
-2113
-389
-2227
-422
+2195
+369
+2309
+402
 trace_print
 trace_print
 1
 1
 -1000
 
+CHOOSER
+1856
+648
+1994
+693
+data_suffix_2
+data_suffix_2
+"None"
+0
+
+CHOOSER
+12
+167
+150
+212
+policy_switch
+policy_switch
+"tony" "nz"
+0
+
 SWITCH
-1043
-242
-1174
-275
-recreate_bug
-recreate_bug
+2033
+603
+2161
+636
+suffix_rollout
+suffix_rollout
 0
 1
 -1000

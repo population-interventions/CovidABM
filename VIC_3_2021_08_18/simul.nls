@@ -488,9 +488,6 @@ to simul_infect
             ]
             
             ;; Check against lower succeptiblity for reinfection.
-            if patchVariant != 1 [
-             print (word "patchVariant " patchVariant) 
-            ]
             set binomChance 1 - (1 - baseSuccept * (table:get succeptibilityTable patchVariant) * x) ^ Daily_Infect_Binom
             if binomChance > infectDraw [
               set color red
