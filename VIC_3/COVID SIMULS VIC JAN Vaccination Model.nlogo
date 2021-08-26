@@ -118572,10 +118572,7 @@ NetLogo 6.2.0
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="compound_trace">
-      <value value="&quot;ass50_70at5&quot;"/>
       <value value="&quot;ass100_90at5&quot;"/>
-      <value value="&quot;ass100_90at5_iso&quot;"/>
-      <value value="&quot;ass200_90at5&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="count_age_max">
       <value value="60"/>
