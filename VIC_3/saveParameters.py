@@ -413,10 +413,10 @@ paramValues_stageEssential = {**defaultParams, **{
 		'"ME_TS_BS"',
 	]),
 	'compound_trace' : listToStr([ 
-		'"ass50_70at5"',
+		#'"ass50_70at5"',
 		'"ass100_90at5"',
-		'"ass100_90at5_iso"',
-		'"ass200_90at5"',
+		#'"ass100_90at5_iso"',
+		#'"ass200_90at5"',
 	]),
 	'param_vac_uptake_mult' : listToStr([0.7, 0.8, 0.9, 0.95]),
 	'param_vacIncurMult' : listToStr([0.2, 1, 5, 25]),
