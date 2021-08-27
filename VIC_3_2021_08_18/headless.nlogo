@@ -212,7 +212,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+8.0
 .5
 1
 NIL
@@ -227,7 +227,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+8.0
 .5
 1
 NIL
@@ -784,9 +784,9 @@ SLIDER
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
-0.5
-0.11
-0.001
+1
+0.22
+0.01
 1
 NIL
 HORIZONTAL
@@ -1331,7 +1331,7 @@ reinfect_delay
 reinfect_delay
 0
 28
-21.0
+7.0
 1
 1
 NIL
@@ -128723,13 +128723,13 @@ NetLogo 6.2.0
       <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="recovered_match_rate">
-      <value value="0.11"/>
+      <value value="0.22"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reinfect_area">
       <value value="0.5318055308841553"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reinfect_delay">
-      <value value="21"/>
+      <value value="7"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reinfect_risk">
       <value value="0.6278850442901395"/>
