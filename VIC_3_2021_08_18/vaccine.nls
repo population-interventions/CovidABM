@@ -80,6 +80,10 @@ to setup_vaccineData
     let vacName item 0 rawData
     let vacTransReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
     let vacAreaReduct rngs:rnd-beta vaccineEffseedID (item 3 rawData) (item 4 rawData)
+    if param_override_ve >= 0 [
+      set vacTransReduct param_override_ve
+      set vacAreaReduct 0
+    ]
     let partialDays item 5 rawData
     let partialTrans_mult item 6 rawData
     let partialReduct_mult item 7 rawData
