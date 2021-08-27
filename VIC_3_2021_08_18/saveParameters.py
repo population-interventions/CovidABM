@@ -402,7 +402,6 @@ paramValues_rCalibrate = {**defaultParams, **{
 	'yearly_recover_prop_loss' : 0,
 }}
 
-
 paramValues_stageEssential = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(100),
 	'total_population' : '6681000',
@@ -425,7 +424,41 @@ paramValues_stageEssential = {**defaultParams, **{
 	'compound_essential' : listToStr(['"Extreme"']),
 	'param_vac_rate_mult' : listToStr([0.5]),
 	'data_suffix' : listToStr([
-		'"_az_25_95.csv"',
+		'"_az_25.csv"',
+		#'"_az_25_90.csv"',
+		#'"_az_25_80.csv"',
+		#'"_az_25_70.csv"',
+	]),
+	'input_population_table' : '"input/population"', 
+	'input_vaccine_table' : '"input/vaccine_rollout_az_25.csv"',
+	'input_dose_rate_table' : '"input/dose_rate.csv"',
+	'policy_switch' : '"tony"',
+	'data_suffix_2' : '"None"',
+	'suffix_rollout' : 'false',
+	'end_day' : 574,
+}}
+
+paramValues_stageEssential_single = {**defaultParams, **{
+	'rand_seed' : GetRandomListUnique(100),
+	'total_population' : '6681000',
+	'r0_range' : listToStr([6.5]),
+	'policy_pipeline' : listToStr([ 
+		'"ME_TS_LS"',
+	]),
+	'compound_trace' : listToStr([ 
+		#'"ass50_70at5"',
+		'"ass100_90at5"',
+		#'"ass100_90at5_iso"',
+		#'"ass200_90at5"',
+	]),
+	'param_vac_uptake_mult' : listToStr([1]),
+	'param_vacIncurMult' : listToStr([1]),
+	'param_final_phase' : listToStr([4]),
+	'Non_Infective_Time' : listToStr([0]),
+	'compound_essential' : listToStr(['"Extreme"']),
+	'param_vac_rate_mult' : listToStr([0.5]),
+	'data_suffix' : listToStr([
+		'"_az_25.csv"',
 		#'"_az_25_90.csv"',
 		#'"_az_25_80.csv"',
 		#'"_az_25_70.csv"',
@@ -476,5 +509,5 @@ paramValues_stageEssentialSensitive = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_stageEssential,
+							paramValues_stageEssential_single,
 							topOfFile=topOfFile)
