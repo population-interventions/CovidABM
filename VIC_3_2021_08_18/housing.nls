@@ -1,6 +1,6 @@
 
 to reset_housing [red_group]
-  let houseTotal 0
+  set houseTotal 0
   let regionTableData table:values regionTable
   foreach regionTableData [ data -> 
     let region item 0 data

@@ -176,6 +176,7 @@ globals [
   houseLocationTable
   destination_patches
 
+  houseTotal ;; Number of houses
   houseStudentMoveCache ;; Cache of agentset that a student from household N can move to as part of school.
   houseStudentMoveCache_lastUpdate ;; When each agentset was last updated, or set to -1 to indicate it needs an update.
   houseStudentMoveCache_staleTime ;; If an agentset was updated before staleTime, regenerate it.

@@ -269,9 +269,10 @@ to simul_updateVacAndReinfectMult
       ]
     ]
     
-    set transmitFromVacAndReinfect effect_raw ^ (1 / 2)
-    set ownIllnessPeriod ownIllnessPeriod_raw * transmitFromVacAndReinfect
-    set ownIncubationPeriod ownIncubationPeriod_raw * transmitFromVacAndReinfect
+    ;; Use transmiss_skew and duration_skew to stretch the triangle in a direction.
+    set transmitFromVacAndReinfect effect_raw ^ (1 / 2) * transmit_skew
+    set ownIllnessPeriod ownIllnessPeriod_raw * transmitFromVacAndReinfect / duration_skew
+    set ownIncubationPeriod ownIncubationPeriod_raw * transmitFromVacAndReinfect / duration_skew
   ]
   [
     set succeptibilityTableMax 0
@@ -333,7 +334,7 @@ to simul_applyIsolation
 end
 
 to simul_updateIsolationResponse
-  set pace span * spanMult
+  set pace span * spanMult * global_distance_mult
   set isolateCompliant 0
   if accept_isolation_draw < accept_isolation_prop [
     if (Case_Isolation and (isolating = 1 or tracked = 1)) or (isolate_on_inf_notice and noticeOwnInfection = 1)[
@@ -553,7 +554,7 @@ to simul_visitDestination
   ;; sets up destinations where people might gather and set off superspreader events
   ;; reduces large gatherings by stage
   if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * visit_chance_multiplier > random-float 1  [
-    let myRadius Visit_Radius
+    let myRadius Visit_Radius * global_distance_mult
     if EssentialWorkerFlag and myRadius < ess_radius_anchor [
       set myRadius (myRadius + ess_radius_anchor) * 0.5
     ]
@@ -631,6 +632,7 @@ end
 
 to simul_end_infection
   if color = red and timenow > ownillnessperiod [
+    ;; Truncate infective period by transmis_vs_duration_skew for testing.
     if track_R [
       simul_setEndStats
     ]

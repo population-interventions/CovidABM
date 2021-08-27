@@ -273,10 +273,10 @@ caseFatalityRate * 100
 11
 
 PLOT
-2762
-720
-2990
-850
+3133
+734
+3361
+864
 Case Fatality Rate %
 NIL
 NIL
@@ -733,7 +733,7 @@ MONITOR
 904
 58
 Household
-mean [ householdunit ] of simuls
+houseTotal
 1
 1
 11
@@ -1153,7 +1153,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-2
+3
 
 SLIDER
 1608
@@ -1312,10 +1312,10 @@ PENS
 "KnownContact" 1.0 0 -13297659 true "" "plot count simuls with [hasKnownContact and color = red] * extraScaleFactor * scale_factor ^ scalePhase "
 
 SLIDER
-2715
-617
-2923
-650
+2722
+590
+2930
+623
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1552,7 +1552,7 @@ Recovered_Match_Rate
 Recovered_Match_Rate
 0
 1
-0.22
+1.0
 0.01
 1
 NIL
@@ -1676,7 +1676,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.6173461932362602
+0.6209765658280049
 0.01
 1
 NIL
@@ -1863,7 +1863,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.3424733632386995
+0.0
 0.05
 1
 NIL
@@ -2190,7 +2190,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.9245546191668836
+0.0
 0.01
 1
 NIL
@@ -2265,7 +2265,7 @@ reinfect_delay
 reinfect_delay
 0
 28
-7.0
+0.0
 1
 1
 NIL
@@ -3039,6 +3039,66 @@ count_incursion
 1
 1
 -1000
+
+SLIDER
+2723
+630
+2927
+664
+transmit_skew
+transmit_skew
+0
+20
+2.75
+0.25
+1
+NIL
+HORIZONTAL
+
+SLIDER
+2723
+668
+2930
+702
+duration_skew
+duration_skew
+0
+20
+10.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+2758
+708
+2931
+742
+global_distance_mult
+global_distance_mult
+0
+20
+20.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+2754
+752
+2939
+786
+recover_immunity_mult
+recover_immunity_mult
+0
+1
+0.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
