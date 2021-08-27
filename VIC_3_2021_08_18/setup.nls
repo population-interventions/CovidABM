@@ -120,6 +120,7 @@ to createSimulants
   let cohort_studentCount 0
   let cohort_vaccineType 0
   let cohort_vaccineBranch 0
+  let cohort_vaccineUptake 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of Population patches with [ pcolor = black ] [
@@ -149,6 +150,7 @@ to createSimulants
       set cohort_studentCount item 17 cohortData
       set cohort_vaccineType item 18 cohortData
       set cohort_vaccineBranch item 19 cohortData
+      set cohort_vaccineUptake item 20 cohortData
       
       if param_force_vaccine != "Disabled" [
         set cohort_vaccineType param_force_vaccine 
@@ -207,6 +209,7 @@ to createSimulants
       set VaccSubPhase cohort_subPhase
       set vaccineType cohort_vaccineType
       set vaccBranch cohort_vaccineBranch
+      set cohortVacUptake cohort_vaccineUptake
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region

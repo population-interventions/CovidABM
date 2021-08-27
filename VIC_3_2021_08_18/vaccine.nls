@@ -65,7 +65,6 @@ to setup_vaccineData
   set global_vaccinePhase table:make
   set global_vaccineSubPhase table:make
   set global_vaccinePerDay table:make
-  set global_vaccinePending table:make
   set global_vaccinePrioritiseFirstOverSecond table:make
   
   setup_doseTable
@@ -131,7 +130,6 @@ to vaccine_nextPhase [branch]
       let local_vacPhase (item 1 phaseData)
       let local_vacSubPhase (item 2 phaseData)
       table:put global_vaccinePerDay branch ((item 3 phaseData) * param_vac_rate_mult + 0.00001) ; Floats
-      let vaccineUptake (item 4 phaseData) * param_vac_uptake_mult
       table:put global_vaccinePrioritiseFirstOverSecond branch ((item 5 phaseData) = 1)
       
       let agentSet simuls with [
@@ -145,14 +143,9 @@ to vaccine_nextPhase [branch]
       let phaseSizeTotal count agentSet
       set agentSet agentSet with [vaccineOffered = 0]
       let phaseUnvaccinated count agentSet
-      table:put vaccineActiveAgentSet branch agentSet with [ vaccinePriority < vaccineUptake ]
       
-      ;; Vaccinate the remainder of the phase such that total vaccination matches vaccineUptake
-      let vaccinePending (floor(vaccineUptake * phaseSizeTotal + 0.5) - (phaseSizeTotal - phaseUnvaccinated))
-      if vaccinePending < 0 [
-        set vaccinePending 0 
-      ]
-      table:put global_vaccinePending branch vaccinePending
+      let phaseUptakeMult (item 4 phaseData) * param_vac_uptake_mult
+      table:put vaccineActiveAgentSet branch agentSet with [ vaccinePriority < cohortVacUptake * phaseUptakeMult ]
       
       ;print (word "New vaccine phase, branch: " branch)
       ;print (word "day: " ticks)
@@ -296,10 +289,6 @@ to vaccine_update
       
       while [(table:get global_vaccineAvailible branch) >= 1 and not (table:get global_firstDoseDone branch)] [
         let vaccinateToday floor(table:get global_vaccineAvailible branch)
-        if vaccinateToday > (table:get global_vaccinePending branch) [
-          set vaccinateToday (table:get global_vaccinePending branch) 
-        ]
-        
         let askSimuls ((table:get vaccineActiveAgentSet branch) with [vaccineOffered = 0])
         if count askSimuls < vaccinateToday [
           set vaccinateToday count askSimuls
@@ -309,7 +298,6 @@ to vaccine_update
         ]
         
         table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) - vaccinateToday)
-        table:put global_vaccinePending branch ((table:get global_vaccinePending branch) - vaccinateToday)
         
         ;print (word "p: " table:get global_vaccinePending branch)
         if (table:get global_vaccineAvailible branch) >= 1 [

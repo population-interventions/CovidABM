@@ -299,7 +299,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-8.0
+5.0
 .5
 1
 NIL
@@ -314,7 +314,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-8.0
+5.0
 .5
 1
 NIL
@@ -2613,7 +2613,7 @@ INPUTBOX
 2071
 531
 input_vaccine_table
-input/vaccine_rollout
+input/vaccine_rollout_az_25.csv
 1
 0
 String
@@ -2637,7 +2637,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.8
+1.0
 0.05
 1
 NIL
@@ -2781,8 +2781,8 @@ CHOOSER
 646
 data_suffix
 data_suffix
-"_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv"
-2
+"_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_az_25_95.csv" "_az_25_90.csv" "_az_25_80.csv" "_az_25_70.csv"
+0
 
 SLIDER
 1252
@@ -3025,7 +3025,7 @@ SWITCH
 636
 suffix_rollout
 suffix_rollout
-0
+1
 1
 -1000
 

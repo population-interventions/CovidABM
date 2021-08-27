@@ -231,7 +231,6 @@ globals [
   global_vaccineSubPhase
   global_vaccineAvailible
   global_vaccinePerDay
-  global_vaccinePending
   global_vaccinePrioritiseFirstOverSecond
   global_firstDoseDone
   

@@ -19,6 +19,7 @@ simuls-own [
   ignoreUptakeOverride
   update_lock
   isInitialInfection
+  cohortVacUptake
   
   move_chance_multiplier
   superSpread_chance_multiplier
