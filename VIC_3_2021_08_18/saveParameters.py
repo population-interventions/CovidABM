@@ -458,9 +458,9 @@ paramValues_stageEssential_single = {**defaultParams, **{
 	'compound_essential' : listToStr(['"Extreme"']),
 	'param_vac_rate_mult' : listToStr([0.5]),
 	'data_suffix' : listToStr([
-		'"_az_25.csv"',
+		#'"_az_25_95.csv"',
 		#'"_az_25_90.csv"',
-		#'"_az_25_80.csv"',
+		'"_az_25_80.csv"',
 		#'"_az_25_70.csv"',
 	]),
 	'input_population_table' : '"input/population"', 
