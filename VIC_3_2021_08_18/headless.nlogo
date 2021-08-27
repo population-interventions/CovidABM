@@ -1551,7 +1551,7 @@ Daily_Infect_Binom
 Daily_Infect_Binom
 1
 20
-1.0
+5.0
 1
 1
 NIL
@@ -2075,8 +2075,8 @@ transmit_skew
 transmit_skew
 0.2
 20
-1.2
-0.1
+0.7
+0.05
 1
 NIL
 HORIZONTAL
@@ -2091,7 +2091,7 @@ duration_skew
 1
 20
 9.0
-1
+0.5
 1
 NIL
 HORIZONTAL
@@ -129492,7 +129492,7 @@ NetLogo 6.2.0
       <value value="0.1335"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="transmit_skew">
-      <value value="0.9"/>
+      <value value="0.65"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="vac_trans_mult">
       <value value="1"/>
