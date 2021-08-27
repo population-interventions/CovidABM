@@ -2485,7 +2485,7 @@ Daily_Infect_Binom
 Daily_Infect_Binom
 1
 20
-1.0
+5.0
 1
 1
 NIL
@@ -3049,7 +3049,7 @@ transmit_skew
 transmit_skew
 0.2
 20
-2.4
+1.2
 0.1
 1
 NIL
@@ -129977,106 +129977,106 @@ NetLogo 6.2.0
     <metric>cumulativeInfected_switchTime</metric>
     <metric>cumulativeInfected_minusInit</metric>
     <enumeratedValueSet variable="rand_seed">
-      <value value="6861876"/>
-      <value value="5475750"/>
-      <value value="6351200"/>
-      <value value="1260917"/>
-      <value value="2402683"/>
-      <value value="4200974"/>
-      <value value="945363"/>
-      <value value="1974527"/>
-      <value value="3531877"/>
-      <value value="5087723"/>
-      <value value="7087667"/>
-      <value value="2224307"/>
-      <value value="5883961"/>
-      <value value="4932857"/>
-      <value value="3970200"/>
-      <value value="3491156"/>
-      <value value="8098906"/>
-      <value value="7759601"/>
-      <value value="2207339"/>
-      <value value="346318"/>
-      <value value="4132861"/>
-      <value value="6899820"/>
-      <value value="2641158"/>
-      <value value="6782142"/>
-      <value value="5737274"/>
-      <value value="5168836"/>
-      <value value="6704834"/>
-      <value value="3900964"/>
-      <value value="8324352"/>
-      <value value="9504751"/>
-      <value value="4714306"/>
-      <value value="4876984"/>
-      <value value="6644154"/>
-      <value value="5372182"/>
-      <value value="4299063"/>
-      <value value="421627"/>
-      <value value="6451443"/>
-      <value value="3663141"/>
-      <value value="4421359"/>
-      <value value="804201"/>
-      <value value="9661302"/>
-      <value value="8494812"/>
-      <value value="212523"/>
-      <value value="1805270"/>
-      <value value="3034671"/>
-      <value value="9868341"/>
-      <value value="4424616"/>
-      <value value="6017351"/>
-      <value value="7824047"/>
-      <value value="7957731"/>
-      <value value="3158986"/>
-      <value value="4834482"/>
-      <value value="8563160"/>
-      <value value="4558558"/>
-      <value value="454959"/>
-      <value value="2761562"/>
-      <value value="614252"/>
-      <value value="383253"/>
-      <value value="7677051"/>
-      <value value="1144502"/>
-      <value value="9098524"/>
-      <value value="8002984"/>
-      <value value="1218722"/>
-      <value value="8900186"/>
-      <value value="3190171"/>
-      <value value="2208471"/>
-      <value value="7473744"/>
-      <value value="6657549"/>
-      <value value="8425010"/>
-      <value value="2109055"/>
-      <value value="9005190"/>
-      <value value="5224243"/>
-      <value value="7589982"/>
-      <value value="4243859"/>
-      <value value="5754349"/>
-      <value value="5674755"/>
-      <value value="6869370"/>
-      <value value="8471766"/>
-      <value value="6315603"/>
-      <value value="224826"/>
-      <value value="9026845"/>
-      <value value="6410883"/>
-      <value value="5298163"/>
-      <value value="5890918"/>
-      <value value="9137735"/>
-      <value value="8635195"/>
-      <value value="8765615"/>
-      <value value="2897983"/>
-      <value value="1466960"/>
-      <value value="9258124"/>
-      <value value="727408"/>
-      <value value="1760764"/>
-      <value value="9705958"/>
-      <value value="3664249"/>
-      <value value="4478859"/>
-      <value value="324480"/>
-      <value value="3832564"/>
-      <value value="9462159"/>
-      <value value="9381883"/>
-      <value value="6637879"/>
+      <value value="9237723"/>
+      <value value="4056588"/>
+      <value value="5697341"/>
+      <value value="3386234"/>
+      <value value="9388356"/>
+      <value value="2730217"/>
+      <value value="7944495"/>
+      <value value="5373165"/>
+      <value value="1675460"/>
+      <value value="4606815"/>
+      <value value="2156060"/>
+      <value value="8205686"/>
+      <value value="2213298"/>
+      <value value="3818185"/>
+      <value value="8283457"/>
+      <value value="2460856"/>
+      <value value="6733918"/>
+      <value value="5558146"/>
+      <value value="1475909"/>
+      <value value="8860518"/>
+      <value value="2981254"/>
+      <value value="291355"/>
+      <value value="5021637"/>
+      <value value="8265018"/>
+      <value value="5848530"/>
+      <value value="2753983"/>
+      <value value="1121127"/>
+      <value value="910323"/>
+      <value value="6864473"/>
+      <value value="743291"/>
+      <value value="4655308"/>
+      <value value="8762961"/>
+      <value value="7430559"/>
+      <value value="4503867"/>
+      <value value="188697"/>
+      <value value="1432756"/>
+      <value value="5739926"/>
+      <value value="1889436"/>
+      <value value="8222424"/>
+      <value value="2315213"/>
+      <value value="1279603"/>
+      <value value="7302305"/>
+      <value value="4798766"/>
+      <value value="9118479"/>
+      <value value="6643348"/>
+      <value value="9267957"/>
+      <value value="3389747"/>
+      <value value="9999624"/>
+      <value value="7912935"/>
+      <value value="8534118"/>
+      <value value="5898853"/>
+      <value value="1640034"/>
+      <value value="6328545"/>
+      <value value="5223183"/>
+      <value value="9666348"/>
+      <value value="2382979"/>
+      <value value="5041596"/>
+      <value value="9691314"/>
+      <value value="8280939"/>
+      <value value="7324934"/>
+      <value value="2962481"/>
+      <value value="6413652"/>
+      <value value="4870274"/>
+      <value value="6922690"/>
+      <value value="9920803"/>
+      <value value="9122523"/>
+      <value value="6677833"/>
+      <value value="6830502"/>
+      <value value="5038759"/>
+      <value value="833432"/>
+      <value value="1433502"/>
+      <value value="1536269"/>
+      <value value="5253483"/>
+      <value value="2111877"/>
+      <value value="220281"/>
+      <value value="3478755"/>
+      <value value="2350909"/>
+      <value value="3789257"/>
+      <value value="8964535"/>
+      <value value="9986757"/>
+      <value value="4861285"/>
+      <value value="7863144"/>
+      <value value="6708705"/>
+      <value value="7482987"/>
+      <value value="4972776"/>
+      <value value="411801"/>
+      <value value="5186021"/>
+      <value value="9980504"/>
+      <value value="6569580"/>
+      <value value="5842689"/>
+      <value value="8360316"/>
+      <value value="5416267"/>
+      <value value="5671507"/>
+      <value value="5653201"/>
+      <value value="9785015"/>
+      <value value="5775315"/>
+      <value value="1500126"/>
+      <value value="4515733"/>
+      <value value="1391470"/>
+      <value value="4808914"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="gather_location_count">
       <value value="1000"/>
@@ -130130,7 +130130,7 @@ NetLogo 6.2.0
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="daily_infect_binom">
-      <value value="1"/>
+      <value value="5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="data_suffix">
       <value value="&quot;_az_25_80.csv&quot;"/>
@@ -130466,7 +130466,7 @@ NetLogo 6.2.0
       <value value="0.1335"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="transmit_skew">
-      <value value="2.4"/>
+      <value value="1.2"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="vac_trans_mult">
       <value value="1"/>
