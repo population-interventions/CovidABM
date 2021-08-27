@@ -350,7 +350,7 @@ to CheckScale
       scaleup_try_to_maintain_cohort
       ;print count simuls with [ color = red ]
     ]
-    scale = true and redCount <= Scale_Threshold / Scale_Factor and yellowcount > redcount and days > 0 and scalephase > 0
+    scale = true and redCount <= Scale_Threshold / (Scale_Factor + 1) and days > 0 and scalephase > 0
     [
       scaledown_try_to_maintain_cohort
     ]

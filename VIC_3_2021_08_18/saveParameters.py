@@ -424,10 +424,10 @@ paramValues_stageEssential = {**defaultParams, **{
 	'compound_essential' : listToStr(['"Extreme"']),
 	'param_vac_rate_mult' : listToStr([0.5]),
 	'data_suffix' : listToStr([
-		'"_az_25.csv"',
-		#'"_az_25_90.csv"',
-		#'"_az_25_80.csv"',
-		#'"_az_25_70.csv"',
+		'"_az_25_95.csv"',
+		'"_az_25_90.csv"',
+		'"_az_25_80.csv"',
+		'"_az_25_70.csv"',
 	]),
 	'input_population_table' : '"input/population"', 
 	'input_vaccine_table' : '"input/vaccine_rollout_az_25.csv"',
@@ -509,5 +509,5 @@ paramValues_stageEssentialSensitive = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_stageEssential_single,
+							paramValues_stageEssential,
 							topOfFile=topOfFile)

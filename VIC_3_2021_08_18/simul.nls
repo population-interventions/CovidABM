@@ -104,6 +104,9 @@ simuls-own [
   traceAttempts ;; How many times this simulant has attempted to be traced since the start of its last/current infection.
   selfTraceEffMult ;; Trace efficacy, used for multiple retraces.
   
+  ;; Debug out
+  contact_events
+  
   ;; Temporary variables
   hasNewHouse
 ]
@@ -477,6 +480,13 @@ to simul_infect
           let infectDraw random-float 1
           let binomChance 1 - (1 - baseSuccept * succeptibilityTableMax * x) ^ Daily_Infect_Binom
           
+          if print_contact_events [
+            let culpritSimul table:get localInfectionCulprit x
+            ask culpritSimul [
+              set contact_events contact_events + 1
+            ]
+          ]
+          
           if binomChance > infectDraw [
             let patchVariant 0
             ask table:get localInfectionCulprit x [
@@ -494,6 +504,7 @@ to simul_infect
             set binomChance 1 - (1 - baseSuccept * (table:get succeptibilityTable patchVariant) * x) ^ Daily_Infect_Binom
             if binomChance > infectDraw [
               set color red
+              set contact_events 0
               set contributeToR true
               set infectVariant patchVariant
               simul_updateVacAndReinfectMult
@@ -675,6 +686,11 @@ to simul_end_infection
     set recoverTime 0
     simul_updateVacAndReinfectMult
   
+    if print_contact_events [
+      print contact_events
+      set contact_events 0
+    ]
+    
     set R 0
     set timenow 0
     set noticeOwnInfection 0
