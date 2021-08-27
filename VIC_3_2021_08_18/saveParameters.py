@@ -452,7 +452,7 @@ paramValues_stageEssential_single = {**defaultParams, **{
 		#'"ass200_90at5"',
 	]),
 	'param_vac_uptake_mult' : listToStr([1]),
-	'param_vacIncurMult' : listToStr([1]),
+	'param_vacIncurMult' : listToStr([5]),
 	'param_final_phase' : listToStr([4]),
 	'Non_Infective_Time' : listToStr([0]),
 	'compound_essential' : listToStr(['"Extreme"']),
