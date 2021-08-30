@@ -123,7 +123,7 @@ to createSimulants
   let cohort_vaccineUptake 0
   
   ;; set up people in the environment and allocates characteristics to them
-  ask n-of Population patches with [ pcolor = black ] [
+  ask n-of (Population / pop_mult) patches with [ pcolor = black ] [
     
     if oldCohortIndex != pop_index [
       ; Iterate over cohort data to get each set of simul parameters.
@@ -160,7 +160,7 @@ to createSimulants
     ]
     set agentsOfThisIndex agentsOfThisIndex + 1
     
-    sprout-simuls 1 [
+    sprout-simuls pop_mult [
       set size 2
       set shape "dot"
       set color cyan
@@ -274,7 +274,7 @@ to setupInitialVaccination
     let cohortData table:get popDivisionTable index
     
     let cohort_pop item 0 cohortData
-    let vaccinatedCount item 13 cohortData
+    let vaccinatedCount (item 13 cohortData) * pop_mult
     let progMin item 14 cohortData
     let progMax item 15 cohortData
     

@@ -13,6 +13,7 @@ __includes[
   "stages.nls"
   "stages_tony.nls"
   "stages_nz.nls"
+  "stages_continuous.nls"
   "policy.nls"
   "policy_tony.nls"
   "policy_nz.nls"
@@ -86,10 +87,10 @@ NIL
 1
 
 BUTTON
-235
-198
-337
-233
+2815
+887
+2917
+922
 Trace_Patterns
 ask n-of 1 simuls with [ color != black ] [ pen-down ] 
 NIL
@@ -103,10 +104,10 @@ NIL
 1
 
 BUTTON
-235
-238
-335
-272
+2824
+932
+2924
+966
 UnTrace
 ask turtles [ pen-up ]
 NIL
@@ -120,10 +121,10 @@ NIL
 1
 
 SLIDER
-227
-158
-340
-191
+224
+150
+337
+183
 Population
 Population
 1000
@@ -143,7 +144,7 @@ Span
 Span
 0
 30
-5.0
+5.300000000000001
 1
 1
 NIL
@@ -244,7 +245,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.042
 0.01
 1
 NIL
@@ -299,7 +300,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-50.0
+47.99999999999999
 .5
 1
 NIL
@@ -314,7 +315,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-50.0
+47.99999999999999
 .5
 1
 NIL
@@ -384,7 +385,7 @@ INPUTBOX
 370
 389
 initial_cases
-0.0
+30.0
 1
 0
 Number
@@ -467,10 +468,10 @@ PENS
 "ICU Beds Required" 1.0 0 -16777216 true "" "plot ICUBedsRequired "
 
 MONITOR
-1477
-460
-1602
-509
+1479
+445
+1604
+494
 New Infections
 (extraScaleFactor * (Scale_Factor ^ scalephase)) * (count simuls with [ color = red and timenow = 1 ])
 0
@@ -523,9 +524,9 @@ count simuls with [ color = red ]
 
 SWITCH
 1477
-762
+800
 1580
-795
+833
 scale
 scale
 0
@@ -545,9 +546,9 @@ Days
 
 MONITOR
 1473
-799
+838
 1581
-848
+887
 Scale Exponent
 scalePhase
 17
@@ -636,9 +637,9 @@ PENS
 
 MONITOR
 1537
-674
+713
 1602
-719
+758
 Virulence
 mean [ personalvirulence] of simuls
 1
@@ -654,7 +655,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.18728879979103805
+0.1701
 0.001
 1
 NIL
@@ -669,7 +670,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+36.5
 1
 1
 NIL
@@ -710,7 +711,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+59.0
 1
 1
 NIL
@@ -723,7 +724,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -828,7 +829,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+5.120000000000001
 1
 1
 NIL
@@ -843,17 +844,17 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7263890108106921
+0.744639486171163
 .01
 1
 NIL
 HORIZONTAL
 
 MONITOR
-1478
-607
-1580
-652
+1482
+593
+1584
+638
 NIL
 currentinfections
 17
@@ -991,7 +992,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-5845411.0
+5942029.0
 1
 1
 NIL
@@ -1086,9 +1087,9 @@ Track_and_Trace_Efficiency
 
 MONITOR
 1472
-673
+712
 1529
-718
+757
 NIL
 stage
 17
@@ -1152,8 +1153,8 @@ CHOOSER
 337
 param_policy
 param_policy
-"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4"
-2
+"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4" "continuous"
+23
 
 SLIDER
 1608
@@ -1187,9 +1188,9 @@ HORIZONTAL
 
 MONITOR
 1473
-853
+892
 1581
-898
+937
 Person per Simul
 (extraScaleFactor * (Scale_Factor ^ scalephase))
 17
@@ -1198,9 +1199,9 @@ Person per Simul
 
 MONITOR
 1473
-903
+942
 1583
-948
+987
 People in Model
 (Population * extraScaleFactor * (Scale_Factor ^ scalephase))
 17
@@ -1238,7 +1239,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.33531718507533637
+0.33924646302944506
 0.01
 1
 NIL
@@ -1335,7 +1336,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+47.99999999999999
 1
 1
 NIL
@@ -1461,10 +1462,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1475
-512
-1600
-557
+1477
+498
+1602
+543
 NIL
 casesinperiod7
 17
@@ -1493,9 +1494,9 @@ PENS
 
 SWITCH
 1474
-724
+763
 1578
-757
+796
 track_R
 track_R
 0
@@ -1570,10 +1571,10 @@ param_trigger_loosen
 -1000
 
 MONITOR
-1478
-414
-1583
-459
+1480
+400
+1585
+445
 NIL
 policyTriggerScale
 17
@@ -1676,7 +1677,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.4225664302687426
+0.6392572661581537
 0.01
 1
 NIL
@@ -2052,7 +2053,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
-3.0
+0.0
 1
 1
 NIL
@@ -2157,9 +2158,9 @@ calibrate
 
 MONITOR
 1473
-950
+988
 1582
-995
+1033
 NIL
 extraScaleFactor
 3
@@ -2310,7 +2311,7 @@ trans_draw_max
 trans_draw_max
 0
 1
-0.1945
+0.1701
 0.01
 1
 NIL
@@ -2355,7 +2356,7 @@ R0_range
 R0_range
 -1
 10
-8.0
+7.5
 0.5
 1
 NIL
@@ -2370,7 +2371,7 @@ max_stage
 max_stage
 0
 4
-3.0
+4.0
 1
 1
 NIL
@@ -2429,7 +2430,7 @@ CHOOSER
 policy_pipeline
 policy_pipeline
 "None" "ME_TS_S1" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS"
-3
+0
 
 SLIDER
 9
@@ -2543,9 +2544,9 @@ HORIZONTAL
 
 CHOOSER
 1468
-1003
+1042
 1601
-1048
+1087
 param_force_vaccine
 param_force_vaccine
 "Disabled" "AZ" "Pfizer"
@@ -2695,10 +2696,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1479
-562
-1582
-607
+1480
+547
+1583
+592
 NIL
 casesinperiod14
 17
@@ -3015,8 +3016,8 @@ CHOOSER
 212
 policy_switch
 policy_switch
-"tony" "nz"
-0
+"tony" "nz" "continuous"
+2
 
 SWITCH
 2033
@@ -3136,6 +3137,36 @@ print_contact_events
 1
 1
 -1000
+
+SLIDER
+1467
+673
+1606
+707
+cont_stage
+cont_stage
+0
+4
+2.9
+0.1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+225
+193
+334
+227
+pop_mult
+pop_mult
+1
+3
+1.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

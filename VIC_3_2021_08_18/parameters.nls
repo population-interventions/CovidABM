@@ -164,6 +164,12 @@ to params_setDrawValues
     let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
     set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
   ]
+  if R0_range = 7.5 [
+    set trans_draw_min 0.1701 ;; R0 7.5
+    set trans_draw_max 0.1701 ;; R0 7.5
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ]
   if R0_range = 8 [
     set trans_draw_min 0.1701 ;; R0 7.5
     set trans_draw_max 0.1945 ;; R0 8.5

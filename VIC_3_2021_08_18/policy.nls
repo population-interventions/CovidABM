@@ -192,6 +192,9 @@ to COVIDPolicyTriggers
   if param_policy = "StageCal_4" [
     policy_stage 4
   ]
+  if param_policy = "continuous" [
+    set stage cont_stage
+  ]
   if ticks < param_stage1_time [
     set stage 4
   ]
