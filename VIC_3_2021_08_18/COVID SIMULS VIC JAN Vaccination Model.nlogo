@@ -143,7 +143,7 @@ Span
 Span
 0
 30
-3.0
+5.0
 1
 1
 NIL
@@ -244,7 +244,7 @@ superspreaders
 superspreaders
 0
 1
-0.02
+0.04
 0.01
 1
 NIL
@@ -299,7 +299,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-78.0
+50.0
 .5
 1
 NIL
@@ -314,7 +314,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-78.0
+50.0
 .5
 1
 NIL
@@ -654,7 +654,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.11317145437878778
+0.18728879979103805
 0.001
 1
 NIL
@@ -669,7 +669,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-20.0
+35.0
 1
 1
 NIL
@@ -710,7 +710,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-85.0
+60.0
 1
 1
 NIL
@@ -828,7 +828,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+5.0
 1
 1
 NIL
@@ -1335,7 +1335,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-78.0
+50.0
 1
 1
 NIL
@@ -2295,7 +2295,7 @@ trans_draw_min
 trans_draw_min
 0
 1
-0.098394749
+0.1701
 0.01
 1
 NIL
@@ -2310,7 +2310,7 @@ trans_draw_max
 trans_draw_max
 0
 1
-0.119370711
+0.1945
 0.01
 1
 NIL
@@ -2355,7 +2355,7 @@ R0_range
 R0_range
 -1
 10
-5.0
+8.0
 0.5
 1
 NIL
@@ -2370,7 +2370,7 @@ max_stage
 max_stage
 0
 4
-4.0
+3.0
 1
 1
 NIL
@@ -2637,7 +2637,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.7
+0.8
 0.05
 1
 NIL
@@ -3089,7 +3089,7 @@ SLIDER
 2758
 750
 2933
-784
+783
 recover_immunity_mult
 recover_immunity_mult
 0
@@ -3130,7 +3130,7 @@ SWITCH
 2827
 837
 2999
-871
+870
 print_contact_events
 print_contact_events
 1

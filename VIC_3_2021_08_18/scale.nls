@@ -119,7 +119,7 @@ to scaleup_try_to_maintain_cohort
   ]
   
   ; Used to periodically select infected simulants.
-  let scaleAccIncrement 1 / localScaleFactor
+  let scaleAccIncrement 1 - (1 / localScaleFactor)
   
   foreach popDivisionTable_keys [ index ->
     let cohort table:get populationCohortCache index
@@ -155,6 +155,7 @@ to scaleup_try_to_maintain_cohort
   ;; Make up any undershoot
   set localFilter simuls with [ color = red ]
   let localRedCount_after count localFilter
+  ;print (word localRedCount_after ", " localScaleFactor ", " localRedCount) 
   if localRedCount_after * localScaleFactor > localRedCount [
     ask n-of (localRedCount_after - localRedCount / localScaleFactor + random-float 1) localFilter [
       simul_do_scaleup
