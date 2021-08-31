@@ -103,6 +103,21 @@ to updatePolicyPipeline
       set param_policy "BarelySupress"
     ]
   ]
+  if policy_pipeline = "ME_TS_NONE" [
+    ifelse ticks < 2 * policy_pipe_time 
+    [
+      ifelse ticks < policy_pipe_time 
+      [
+        set param_policy "ModerateElim"
+      ]
+      [
+        set param_policy "TightSupress"
+      ]
+    ]
+    [
+      set param_policy "None"
+    ]
+  ]
 end
   
 ;;;*********************************************************************************************************************

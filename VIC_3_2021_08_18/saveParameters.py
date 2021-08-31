@@ -417,6 +417,7 @@ paramValues_stageEssential = {**defaultParams, **{
 		#'"ass100_90at5_iso"',
 		#'"ass200_90at5"',
 	]),
+	'min_stage' : listToStr([0, 2]),
 	'param_vac_uptake_mult' : listToStr([1]),
 	'param_vacIncurMult' : listToStr([0.2, 1, 5]),
 	'param_final_phase' : listToStr([3, 4]),

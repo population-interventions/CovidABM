@@ -22,22 +22,27 @@ to policy_agressive_elim_nz
   )
   
   if decisionDate + 14 <= ticks [
-    (ifelse stage >= 4 and casesinperiod7 < 5 * 7 * policyTriggerScale
+    (ifelse min_stage <= 3 and stage >= 4 and casesinperiod7 < 5 * 7 * policyTriggerScale
       [
         set stage 3 
         set decisionDate ticks
       ]
-      stage >= 3 and casesinperiod7 < 1 * 7 * policyTriggerScale
+      min_stage <= 2 and stage >= 3 and casesinperiod7 < 1 * 7 * policyTriggerScale
       [
         set stage 2  
         set decisionDate ticks
       ]
-      stage >= 2 and casesinperiod7 <= 0 and casesinperiod14 < 2 * policyTriggerScale
+      min_stage <= 0 and stage >= 2 and casesinperiod7 <= 0 and casesinperiod14 < 2 * policyTriggerScale
       [
         set stage 0
         set decisionDate ticks
       ]
     )
+  ]
+  
+  if stage < min_stage [
+    set stage min_stage 
+    set decisionDate ticks
   ]
 end
 
@@ -68,22 +73,27 @@ to policy_moderate_elim_nz
     )
     
     if decisionDate + 14 <= ticks [
-      (ifelse stage >= 4 and casesinperiod7 < 20 * 7 * policyTriggerScale
+      (ifelse min_stage <= 3 and stage >= 4 and casesinperiod7 < 20 * 7 * policyTriggerScale
         [
           set stage 3
           set decisionDate ticks
         ]
-        stage >= 3 and casesinperiod7 < 5 * 7 * policyTriggerScale
+        min_stage <= 2 and stage >= 3 and casesinperiod7 < 5 * 7 * policyTriggerScale
         [
           set stage 2  
           set decisionDate ticks
         ]
-        stage >= 2 and casesinperiod7 < 1 * 7 * policyTriggerScale
+        min_stage <= 0 and stage >= 2 and casesinperiod7 < 1 * 7 * policyTriggerScale
         [
           set stage 0
           set decisionDate ticks
         ]
       )
     ]
+  ]
+  
+  if stage < min_stage [
+    set stage min_stage 
+    set decisionDate ticks
   ]
 end
