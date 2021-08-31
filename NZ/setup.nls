@@ -120,9 +120,10 @@ to createSimulants
   let cohort_studentCount 0
   let cohort_vaccineType 0
   let cohort_vaccineBranch 0
+  let cohort_vaccineUptake 0
   
   ;; set up people in the environment and allocates characteristics to them
-  ask n-of Population patches with [ pcolor = black ] [
+  ask n-of (Population / pop_mult) patches with [ pcolor = black ] [
     
     if oldCohortIndex != pop_index [
       ; Iterate over cohort data to get each set of simul parameters.
@@ -149,6 +150,7 @@ to createSimulants
       set cohort_studentCount item 17 cohortData
       set cohort_vaccineType item 18 cohortData
       set cohort_vaccineBranch item 19 cohortData
+      set cohort_vaccineUptake item 20 cohortData
       
       if param_force_vaccine != "Disabled" [
         set cohort_vaccineType param_force_vaccine 
@@ -158,7 +160,7 @@ to createSimulants
     ]
     set agentsOfThisIndex agentsOfThisIndex + 1
     
-    sprout-simuls 1 [
+    sprout-simuls pop_mult [
       set size 2
       set shape "dot"
       set color cyan
@@ -207,6 +209,7 @@ to createSimulants
       set VaccSubPhase cohort_subPhase
       set vaccineType cohort_vaccineType
       set vaccBranch cohort_vaccineBranch
+      set cohortVacUptake cohort_vaccineUptake
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
@@ -270,38 +273,54 @@ to setupInitialVaccination
     let cohort table:get populationCohortCache index
     let cohortData table:get popDivisionTable index
     
-    let vaccinatedCount item 13 cohortData
+    let cohort_pop item 0 cohortData
+    let vaccinatedCount (item 13 cohortData) * pop_mult
     let progMin item 14 cohortData
     let progMax item 15 cohortData
-    ;; Only pre-model vaccinate someone if they would take up the vaccine.
-    ;; This ensures that the final vaccinated proportion matches init_vac_uptake.
-    ask cohort [
-      if vaccinatedCount > 0 [
-        let myVaccineData table:get vaccineParamsTable vaccineType
-        let maxVaccineDoseDays item 2 myVaccineData
-        let maxVaccineEffectDays item 5 myVaccineData
-        let progress round(maxVaccineDoseDays * (progMin + (progMax - progMin) * rngs:rnd-beta vaccineInitSeedID 1 1))
-        set vacSecondDoseCountdown maxVaccineDoseDays - max (list 0 min (list maxVaccineDoseDays progress))
-        set vacEffectCountdown 0
-        ifelse vacSecondDoseCountdown > 0
+    
+    if cohort_pop > 0 [
+      let toVaccinateNow vaccinatedCount
+      let vacPrioIncrement 1 / cohort_pop
+      let vacPrio vacPrioIncrement / 2
+      
+      ;; Only pre-model vaccinate someone if they would take up the vaccine.
+      ;; This ensures that the final vaccinated proportion matches init_vac_uptake.
+      ask cohort [
+        ifelse toVaccinateNow > 0
         [
-          if progress < maxVaccineEffectDays [
-           set vacEffectCountdown maxVaccineEffectDays - progress
+          let myVaccineData table:get vaccineParamsTable vaccineType
+          let maxVaccineDoseDays item 2 myVaccineData
+          let maxVaccineEffectDays item 5 myVaccineData
+          let progress round(maxVaccineDoseDays * (progMin + (progMax - progMin) * rngs:rnd-beta vaccineInitSeedID 1 1))
+          set vacSecondDoseCountdown maxVaccineDoseDays - max (list 0 min (list maxVaccineDoseDays progress))
+          set vacEffectCountdown 0
+          ifelse vacSecondDoseCountdown > 0
+          [
+            if progress < maxVaccineEffectDays [
+              set vacEffectCountdown maxVaccineEffectDays - progress
+            ]
           ]
+          [
+            if progress < maxVaccineEffectDays + maxVaccineDoseDays [
+              set vacEffectCountdown maxVaccineDoseDays + maxVaccineEffectDays - progress
+            ]
+          ]
+          ;print (word "maxVaccineDoseDays " maxVaccineDoseDays ", maxVaccineEffectDays " maxVaccineEffectDays)
+          ;print (word "progress " progress ", vacEffectCountdown " vacEffectCountdown ", vacSecondDoseCountdown " vacSecondDoseCountdown)
+          ;if maxVaccineWaitDays < 80 [
+          ;  print (word "vacWaitDays " vacWaitDays)
+          ;]
+          ;print vacWaitDays
+          simul_vaccinate_me_force
+          set toVaccinateNow toVaccinateNow - 1
+          set vacPrio vacPrio
+          set vacPrio vacPrio + vacPrioIncrement
         ]
         [
-          if progress < maxVaccineEffectDays + maxVaccineDoseDays [
-           set vacEffectCountdown maxVaccineDoseDays + maxVaccineEffectDays - progress
-          ]
+          ;; Predestine people to uptake the vaccine or not
+          set vaccinePriority vacPrio
+          set vacPrio vacPrio + vacPrioIncrement
         ]
-        ;print (word "maxVaccineDoseDays " maxVaccineDoseDays ", maxVaccineEffectDays " maxVaccineEffectDays)
-        ;print (word "progress " progress ", vacEffectCountdown " vacEffectCountdown ", vacSecondDoseCountdown " vacSecondDoseCountdown)
-        ;if maxVaccineWaitDays < 80 [
-        ;  print (word "vacWaitDays " vacWaitDays)
-        ;]
-        ;print vacWaitDays
-        simul_vaccinate_me_force
-        set vaccinatedCount vaccinatedCount - 1
       ]
     ]
   ]

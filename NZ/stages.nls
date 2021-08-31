@@ -521,6 +521,9 @@ to do_stages
     set isolate_on_inf_notice false
   ]
   
+  if policy_switch = "continuous" [
+    do_stages_continuous
+  ]
   if policy_switch = "tony" [
     do_stages_tony
   ]

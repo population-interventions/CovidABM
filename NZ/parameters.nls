@@ -33,8 +33,8 @@ to params_setDrawValues
   rngs:set-seed moveInitSeedID random-float 999
   rngs:set-seed presentInitSeedID random-float 999
   
-  set reinfect_risk rngs:rnd-beta stream_id 8 2
-  set reinfect_area rngs:rnd-beta stream_id 10 10
+  set reinfect_risk (rngs:rnd-beta stream_id 8 2) * recover_immunity_mult
+  set reinfect_area (rngs:rnd-beta stream_id 10 10) * recover_immunity_mult
   
   ;; Ignore cases reported before this day, due to initial spike
   set IGNORE_CASE_UNTIL 3
@@ -161,6 +161,12 @@ to params_setDrawValues
   if R0_range = 6.5 [
     set trans_draw_min 0.1335 ;; R0 6
     set trans_draw_max 0.1579 ;; R0 7
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ]
+  if R0_range = 7.5 [
+    set trans_draw_min 0.1701 ;; R0 7.5
+    set trans_draw_max 0.1701 ;; R0 7.5
     let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
     set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
   ]

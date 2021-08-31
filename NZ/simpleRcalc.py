@@ -16,7 +16,8 @@ import utilities as util
 def ProcessResults(outputName, nameList):
 	
 	index = [
-		'global_transmissibility'
+		'global_transmissibility',
+		'recreate_bug',
 	]
 	metric = [
 		'initial_infection_R',
@@ -41,7 +42,7 @@ def ProcessResults(outputName, nameList):
 	util.OutputToFile(df, 'output/rCalc/' + outputName, head=False)
 
 
-files = util.GetFiles('output/rCalc/2021_07_23b/')
-files = ['output/rCalc/trace08']
+files = util.GetFiles('output/rCalc/2021_08_19/')
+#files = ['output/rCalc/trace09']
 print(files)
-ProcessResults('desc_08', files)
+ProcessResults('desc_2021_08_19', files)

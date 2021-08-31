@@ -450,8 +450,8 @@ PENS
 PLOT
 1040
 747
-1462
-995
+1463
+986
 Active (red) and Total (blue) Infections ICU Beds (black)
 NIL
 NIL
@@ -2060,10 +2060,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1252
-1000
-1448
-1033
+1253
+989
+1449
+1022
 house_resample_red_group
 house_resample_red_group
 0
@@ -2408,10 +2408,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1044
-1002
-1208
-1035
+1042
+990
+1206
+1023
 init_timenow_limit
 init_timenow_limit
 0
@@ -2448,10 +2448,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1044
-1040
-1207
-1073
+1042
+1028
+1205
+1061
 incur_timenow_limit
 incur_timenow_limit
 0
@@ -2786,10 +2786,10 @@ data_suffix
 4
 
 SLIDER
-1252
-1037
-1452
-1070
+1253
+1027
+1453
+1060
 house_resample_scale_up
 house_resample_scale_up
 0
@@ -2849,10 +2849,10 @@ print_vac
 -1000
 
 SLIDER
-1253
-1073
-1455
-1106
+1254
+1063
+1456
+1096
 house_init_group
 house_init_group
 0
@@ -2870,7 +2870,7 @@ CHOOSER
 282
 sensitivity
 sensitivity
-"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050"
+"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asympt_66" "RAT_33" "AllPF" "GatherVent_33" "NoInfDay_1" "BoostMask_25" "StageMax_3b" "StageMax_3"
 0
 
 SLIDER

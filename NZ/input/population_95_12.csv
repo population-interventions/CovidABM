@@ -1,33 +1,33 @@
-totalAgents,age,atsi,disability,essentialCount,workerCount,phase,subphase,spanMult,gatherFreqMult,region,succeptibleMult,asymptomPropMult,vaccinatedCount,doseProgressMin,doesProgressMax,ignoreUptakeBoost,studentCount,vaccineType,vaccineBranch,comment
-235,5,0,0,0,0,1,1,1,1,1,1,2,0,2,2,0,235,Pfizer,P,0-9
-88,5,1,0,0,0,1,1,1,1,1,1,2,0,2,2,0,88,Pfizer,P,0-9 Maori
-142,15,0,0,0,0,1,1,1,1,1,1,2,101,2,2,0,142,Pfizer,P,Oct-17
-50,15,1,0,0,0,1,1,1,1,1,1,2,36,2,2,0,50,Pfizer,P,10-17  Maori
-256,25,0,0,0,187,1,1,1,1,1,1,1,243,2,2,0,0,Pfizer,P,18-29
-138,25,0,0,138,138,1,1,1,1,1,1,1,131,2,2,0,0,Pfizer,P,18-29 Essential Worker
-66,25,1,0,0,45,1,1,1,1,1,1,1,63,2,2,0,0,Pfizer,P,18-29 Maori
-34,25,1,0,34,34,1,1,1,1,1,1,1,32,2,2,0,0,Pfizer,P,18-29 Maori Essential Worker
-186,35,0,0,0,152,1,1,1,1,1,1,1,177,2,2,0,0,Pfizer,P,30-39 
-95,35,0,0,95,95,1,1,1,1,1,1,1,90,2,2,0,0,Pfizer,P,30-39 Essential Worker
-32,35,1,0,0,26,1,1,1,1,1,1,1,30,2,2,0,0,Pfizer,P,30-39 Maori
-17,35,1,0,17,17,1,1,1,1,1,1,1,16,2,2,0,0,Pfizer,P,30-39 Maori Essential Worker
-195,45,0,0,0,111,1,1,1,1,1,1,1,185,2,2,0,0,Pfizer,P,40-49 
-82,45,0,0,82,82,1,1,1,1,1,1,1,78,2,2,0,0,Pfizer,P,40-49 Essential worker
-33,45,1,0,0,19,1,1,1,1,1,1,1,31,2,2,0,0,Pfizer,P,40-49 Maori
-14,45,1,0,14,14,1,1,1,1,1,1,1,13,2,2,0,0,Pfizer,P,40-49 Maori Essential Worker
-198,55,0,0,0,113,1,1,1,1,1,1,1,188,2,2,0,0,Pfizer,P,50-59 
-84,55,0,0,84,84,1,1,1,1,1,1,1,80,2,2,0,0,Pfizer,P,50-59 Essential Worker
-29,55,1,0,0,17,1,1,1,1,1,1,1,28,2,2,0,0,Pfizer,P,50-59 Maori
-13,55,1,0,13,13,1,1,1,1,1,1,1,12,2,2,0,0,Pfizer,P,50-59 Maori Essential Worker
-192,65,0,0,0,56,1,1,1,1,1,1,1,182,2,2,0,0,Pfizer,P,60-69 
-41,65,0,0,41,41,1,1,1,1,1,1,1,39,2,2,0,0,Pfizer,P,60-69 Essential Worker
-21,65,1,0,0,6,1,1,1,1,1,1,1,20,2,2,0,0,Pfizer,P,60-69 Maori
-5,65,1,0,5,5,1,1,1,1,1,1,1,5,2,2,0,0,Pfizer,P,60-69 Maori Essential Worker
-147,75,0,0,0,12,1,1,1,1,1,1,1,140,2,2,0,0,Pfizer,P,70-79 
-9,75,0,0,9,9,1,1,1,1,1,1,1,9,2,2,0,0,Pfizer,P,70-79 Essential Worker
-10,75,1,0,0,1,1,1,1,1,1,1,1,10,2,2,0,0,Pfizer,P,70-79 Maori
-1,75,1,0,1,1,1,1,1,1,1,1,1,1,2,2,0,0,Pfizer,P,70-79 Maori Essential Worker
-67,85,0,0,0,3,1,1,1,1,1,1,1,64,2,2,0,0,Pfizer,P,80-89 
-2,85,0,0,2,2,1,1,1,1,1,1,1,2,2,2,0,0,Pfizer,P,80-89 Essential Worker
-3,85,1,0,0,0,1,1,1,1,1,1,1,3,2,2,0,0,Pfizer,P,80-89 Maori
-15,95,0,0,0,0,1,1,1,1,1,1,1,14,2,2,0,0,Pfizer,P,90-100 
+totalAgents,age,atsi,disability,essentialCount,workerCount,phase,subphase,spanMult,gatherFreqMult,region,succeptibleMult,asymptomPropMult,vaccinatedCount,doseProgressMin,doesProgressMax,ignoreUptakeBoost,studentCount,vaccineType,vaccineBranch,vaccineUptakeTarget,comment
+235,5,0,0,0,0,1,1,1,1,1,1,2,0,2,2,0,235,Pfizer,P,1,0-9
+88,5,1,0,0,0,1,1,1,1,1,1,2,0,2,2,0,88,Pfizer,P,1,0-9 Maori
+142,15,0,0,0,0,1,1,1,1,1,1,2,101,2,2,0,142,Pfizer,P,1,Oct-17
+50,15,1,0,0,0,1,1,1,1,1,1,2,36,2,2,0,50,Pfizer,P,1,10-17  Maori
+256,25,0,0,0,187,1,1,1,1,1,1,1,243,2,2,0,0,Pfizer,P,1,18-29
+138,25,0,0,138,138,1,1,1,1,1,1,1,131,2,2,0,0,Pfizer,P,1,18-29 Essential Worker
+66,25,1,0,0,45,1,1,1,1,1,1,1,63,2,2,0,0,Pfizer,P,1,18-29 Maori
+34,25,1,0,34,34,1,1,1,1,1,1,1,32,2,2,0,0,Pfizer,P,1,18-29 Maori Essential Worker
+186,35,0,0,0,152,1,1,1,1,1,1,1,177,2,2,0,0,Pfizer,P,1,30-39 
+95,35,0,0,95,95,1,1,1,1,1,1,1,90,2,2,0,0,Pfizer,P,1,30-39 Essential Worker
+32,35,1,0,0,26,1,1,1,1,1,1,1,30,2,2,0,0,Pfizer,P,1,30-39 Maori
+17,35,1,0,17,17,1,1,1,1,1,1,1,16,2,2,0,0,Pfizer,P,1,30-39 Maori Essential Worker
+195,45,0,0,0,111,1,1,1,1,1,1,1,185,2,2,0,0,Pfizer,P,1,40-49 
+82,45,0,0,82,82,1,1,1,1,1,1,1,78,2,2,0,0,Pfizer,P,1,40-49 Essential worker
+33,45,1,0,0,19,1,1,1,1,1,1,1,31,2,2,0,0,Pfizer,P,1,40-49 Maori
+14,45,1,0,14,14,1,1,1,1,1,1,1,13,2,2,0,0,Pfizer,P,1,40-49 Maori Essential Worker
+198,55,0,0,0,113,1,1,1,1,1,1,1,188,2,2,0,0,Pfizer,P,1,50-59 
+84,55,0,0,84,84,1,1,1,1,1,1,1,80,2,2,0,0,Pfizer,P,1,50-59 Essential Worker
+29,55,1,0,0,17,1,1,1,1,1,1,1,28,2,2,0,0,Pfizer,P,1,50-59 Maori
+13,55,1,0,13,13,1,1,1,1,1,1,1,12,2,2,0,0,Pfizer,P,1,50-59 Maori Essential Worker
+192,65,0,0,0,56,1,1,1,1,1,1,1,182,2,2,0,0,Pfizer,P,1,60-69 
+41,65,0,0,41,41,1,1,1,1,1,1,1,39,2,2,0,0,Pfizer,P,1,60-69 Essential Worker
+21,65,1,0,0,6,1,1,1,1,1,1,1,20,2,2,0,0,Pfizer,P,1,60-69 Maori
+5,65,1,0,5,5,1,1,1,1,1,1,1,5,2,2,0,0,Pfizer,P,1,60-69 Maori Essential Worker
+147,75,0,0,0,12,1,1,1,1,1,1,1,140,2,2,0,0,Pfizer,P,1,70-79 
+9,75,0,0,9,9,1,1,1,1,1,1,1,9,2,2,0,0,Pfizer,P,1,70-79 Essential Worker
+10,75,1,0,0,1,1,1,1,1,1,1,1,10,2,2,0,0,Pfizer,P,1,70-79 Maori
+1,75,1,0,1,1,1,1,1,1,1,1,1,1,2,2,0,0,Pfizer,P,1,70-79 Maori Essential Worker
+67,85,0,0,0,3,1,1,1,1,1,1,1,64,2,2,0,0,Pfizer,P,1,80-89 
+2,85,0,0,2,2,1,1,1,1,1,1,1,2,2,2,0,0,Pfizer,P,1,80-89 Essential Worker
+3,85,1,0,0,0,1,1,1,1,1,1,1,3,2,2,0,0,Pfizer,P,1,80-89 Maori
+15,95,0,0,0,0,1,1,1,1,1,1,1,14,2,2,0,0,Pfizer,P,1,90-100 

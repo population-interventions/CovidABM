@@ -19,6 +19,7 @@ simuls-own [
   ignoreUptakeOverride
   update_lock
   isInitialInfection
+  cohortVacUptake
   
   move_chance_multiplier
   superSpread_chance_multiplier
@@ -73,6 +74,7 @@ simuls-own [
   succeptibilityTable ;; exposureAndVacMult but for each variant
   succeptibilityTableMax ;; maximum of the above table.
   vaccineIncursionOverride ;; Override the vaccine status of the simulant for as long as they have their incursion infection. This is worse than it sounds.
+  vaccinePriority ;; Number that determines whether simulant will recieve a vaccination. Compared to uptake.
 
   infectVariant ;; Variant of SARS that I am infected with. Is > 0 iff color = red.
   variantTransMult ;; Transmissiblity multiplier for this variant
@@ -101,6 +103,9 @@ simuls-own [
   hasKnownContact ;; Whether the simulant has a tracked simulant in infectedContactList
   traceAttempts ;; How many times this simulant has attempted to be traced since the start of its last/current infection.
   selfTraceEffMult ;; Trace efficacy, used for multiple retraces.
+  
+  ;; Debug out
+  contact_events
   
   ;; Temporary variables
   hasNewHouse
@@ -185,8 +190,8 @@ to simul_updateVacAndReinfectMult
     ifelse table:has-key? vaccineParamsTable vaccineIncursionOverride
     [
       let overrideVaccineData table:get vaccineParamsTable vaccineIncursionOverride
-      set selfVaccEff_raw_area item 0 overrideVaccineData
-      set selfVaccEff_raw_risk item 1 overrideVaccineData
+      set selfVaccEff_raw_risk item 0 overrideVaccineData
+      set selfVaccEff_raw_area item 1 overrideVaccineData
     ]
     [
       set selfVaccEff_raw_area 0
@@ -267,9 +272,10 @@ to simul_updateVacAndReinfectMult
       ]
     ]
     
-    set transmitFromVacAndReinfect effect_raw ^ (1 / 2)
-    set ownIllnessPeriod ownIllnessPeriod_raw * transmitFromVacAndReinfect
-    set ownIncubationPeriod ownIncubationPeriod_raw * transmitFromVacAndReinfect
+    ;; Use transmiss_skew and duration_skew to stretch the triangle in a direction.
+    set transmitFromVacAndReinfect effect_raw ^ (1 / 2) * transmit_skew
+    set ownIllnessPeriod ownIllnessPeriod_raw * transmitFromVacAndReinfect / duration_skew
+    set ownIncubationPeriod ownIncubationPeriod_raw * transmitFromVacAndReinfect / duration_skew
   ]
   [
     set succeptibilityTableMax 0
@@ -331,9 +337,9 @@ to simul_applyIsolation
 end
 
 to simul_updateIsolationResponse
-  set pace span * spanMult
+  set pace span * spanMult * global_distance_mult
   set isolateCompliant 0
-  if accept_isolation_draw < accept_isolation_prop [
+  if accept_isolation_draw < accept_isolation_prop and not always_spread [
     if (Case_Isolation and (isolating = 1 or tracked = 1)) or (isolate_on_inf_notice and noticeOwnInfection = 1)[
       ifelse isolating = 1 and color != red
       [
@@ -474,6 +480,13 @@ to simul_infect
           let infectDraw random-float 1
           let binomChance 1 - (1 - baseSuccept * succeptibilityTableMax * x) ^ Daily_Infect_Binom
           
+          if print_contact_events [
+            let culpritSimul table:get localInfectionCulprit x
+            ask culpritSimul [
+              set contact_events contact_events + 1
+            ]
+          ]
+          
           if binomChance > infectDraw [
             let patchVariant 0
             ask table:get localInfectionCulprit x [
@@ -491,6 +504,7 @@ to simul_infect
             set binomChance 1 - (1 - baseSuccept * (table:get succeptibilityTable patchVariant) * x) ^ Daily_Infect_Binom
             if binomChance > infectDraw [
               set color red
+              set contact_events 0
               set contributeToR true
               set infectVariant patchVariant
               simul_updateVacAndReinfectMult
@@ -551,7 +565,7 @@ to simul_visitDestination
   ;; sets up destinations where people might gather and set off superspreader events
   ;; reduces large gatherings by stage
   if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * visit_chance_multiplier > random-float 1  [
-    let myRadius Visit_Radius
+    let myRadius Visit_Radius * global_distance_mult
     if EssentialWorkerFlag and myRadius < ess_radius_anchor [
       set myRadius (myRadius + ess_radius_anchor) * 0.5
     ]
@@ -605,7 +619,7 @@ to simul_superSpread
   if EssentialWorkerFlag and mySpread < ess_spread_anchor [
     set mySpread (mySpread + ess_spread_anchor) * 0.5
   ]
-  if isolateCompliant = 0 and mySpread * superSpread_chance_multiplier > random-float 1 [
+  if (isolateCompliant = 0 and mySpread * superSpread_chance_multiplier > random-float 1) or always_spread [
     move-to one-of destination_patches
   ]
 end
@@ -629,6 +643,7 @@ end
 
 to simul_end_infection
   if color = red and timenow > ownillnessperiod [
+    ;; Truncate infective period by transmis_vs_duration_skew for testing.
     if track_R [
       simul_setEndStats
     ]
@@ -671,6 +686,11 @@ to simul_end_infection
     set recoverTime 0
     simul_updateVacAndReinfectMult
   
+    if print_contact_events [
+      print contact_events
+      set contact_events 0
+    ]
+    
     set R 0
     set timenow 0
     set noticeOwnInfection 0
