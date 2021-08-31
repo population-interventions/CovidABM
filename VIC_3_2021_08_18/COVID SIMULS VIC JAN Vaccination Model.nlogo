@@ -144,7 +144,7 @@ Span
 Span
 0
 30
-8.0
+5.0
 1
 1
 NIL
@@ -245,7 +245,7 @@ superspreaders
 superspreaders
 0
 1
-0.06
+0.04
 0.01
 1
 NIL
@@ -300,7 +300,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-30.0
+50.0
 .5
 1
 NIL
@@ -315,7 +315,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-30.0
+50.0
 .5
 1
 NIL
@@ -655,7 +655,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.10749420271465007
+0.11233416827105289
 0.001
 1
 NIL
@@ -670,7 +670,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-50.0
+35.0
 1
 1
 NIL
@@ -711,7 +711,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-50.0
+60.0
 1
 1
 NIL
@@ -724,7 +724,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -829,7 +829,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.2
+5.0
 1
 1
 NIL
@@ -844,7 +844,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7230415973616465
+0.7338942906254846
 .01
 1
 NIL
@@ -992,7 +992,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-1996339.0
+5700483.0
 1
 1
 NIL
@@ -1154,7 +1154,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4" "continuous"
-1
+2
 
 SLIDER
 1608
@@ -1239,7 +1239,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.33078338121552237
+0.3576801775949684
 0.01
 1
 NIL
@@ -1336,7 +1336,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-30.0
+50.0
 1
 1
 NIL
@@ -1677,7 +1677,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.7506959103826187
+0.5401542105508804
 0.01
 1
 NIL
@@ -2870,7 +2870,7 @@ CHOOSER
 282
 sensitivity
 sensitivity
-"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asympt_66" "RAT_33" "AllPF" "GatherVent_33" "NoInfDay_1" "BoostMask_25" "StageMax_3b" "StageMax_3"
+"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asympt_66" "RAT_33" "AllPF" "GatherVent_33" "NoInfDay_1" "BoostMask_25" "StageMax_3b" "StageMax_3" "LetItRip"
 0
 
 SLIDER
@@ -3177,7 +3177,7 @@ min_stage
 min_stage
 0
 4
-2.0
+0.0
 1
 1
 NIL
@@ -131153,107 +131153,107 @@ NetLogo 6.2.0
     <metric>casesinperiod7_switchTime</metric>
     <metric>cumulativeInfected_switchTime</metric>
     <metric>cumulativeInfected_minusInit</metric>
-    <enumeratedValueSet variable="rand_seed">
-      <value value="3423308"/>
-      <value value="6744344"/>
-      <value value="7367832"/>
-      <value value="4083885"/>
-      <value value="9736302"/>
-      <value value="5203300"/>
-      <value value="1634253"/>
-      <value value="7932223"/>
-      <value value="2661032"/>
-      <value value="6119271"/>
-      <value value="8992384"/>
-      <value value="77524"/>
-      <value value="4758398"/>
-      <value value="8332425"/>
-      <value value="2887426"/>
-      <value value="5174819"/>
-      <value value="3181142"/>
-      <value value="768144"/>
-      <value value="149411"/>
-      <value value="9709163"/>
-      <value value="5643811"/>
-      <value value="8086414"/>
-      <value value="7204350"/>
-      <value value="6670873"/>
-      <value value="4259032"/>
-      <value value="2435925"/>
-      <value value="234647"/>
-      <value value="8702084"/>
-      <value value="3786956"/>
-      <value value="984780"/>
-      <value value="8925587"/>
-      <value value="6124361"/>
-      <value value="7941522"/>
-      <value value="4765968"/>
-      <value value="9374074"/>
-      <value value="9564861"/>
-      <value value="9958679"/>
-      <value value="7126694"/>
-      <value value="9658498"/>
-      <value value="1717213"/>
-      <value value="5533230"/>
-      <value value="4231852"/>
-      <value value="9441575"/>
-      <value value="8059808"/>
-      <value value="910302"/>
-      <value value="4194417"/>
-      <value value="7584654"/>
-      <value value="7884557"/>
-      <value value="6764787"/>
-      <value value="5257056"/>
-      <value value="6232937"/>
-      <value value="8370186"/>
-      <value value="3162112"/>
-      <value value="3717411"/>
-      <value value="6074757"/>
-      <value value="1260862"/>
-      <value value="4124726"/>
-      <value value="981357"/>
-      <value value="9155912"/>
-      <value value="1630918"/>
-      <value value="7018950"/>
-      <value value="407170"/>
-      <value value="4144868"/>
-      <value value="3209236"/>
-      <value value="8372760"/>
-      <value value="6919180"/>
-      <value value="1418026"/>
-      <value value="6433165"/>
-      <value value="5030373"/>
-      <value value="1185331"/>
-      <value value="7749253"/>
-      <value value="7754066"/>
-      <value value="431719"/>
-      <value value="2582310"/>
-      <value value="1406998"/>
-      <value value="8148708"/>
-      <value value="6834950"/>
-      <value value="3487540"/>
-      <value value="7691276"/>
-      <value value="8469597"/>
-      <value value="8671873"/>
-      <value value="97478"/>
-      <value value="9823746"/>
-      <value value="8860828"/>
-      <value value="1104300"/>
-      <value value="1170045"/>
-      <value value="4820443"/>
-      <value value="2921200"/>
-      <value value="7661242"/>
-      <value value="3237799"/>
-      <value value="7195641"/>
-      <value value="1334625"/>
-      <value value="120922"/>
-      <value value="5843174"/>
-      <value value="8928067"/>
-      <value value="5238888"/>
-      <value value="245345"/>
-      <value value="5478846"/>
-      <value value="8916486"/>
-      <value value="9748417"/>
+   <enumeratedValueSet variable="rand_seed">
+      <value value="1996339"/>
+      <value value="1732945"/>
+      <value value="5526027"/>
+      <value value="6024590"/>
+      <value value="9145887"/>
+      <value value="9577236"/>
+      <value value="4146027"/>
+      <value value="4043467"/>
+      <value value="6271806"/>
+      <value value="4442290"/>
+      <value value="7499011"/>
+      <value value="1409885"/>
+      <value value="8144603"/>
+      <value value="8448953"/>
+      <value value="9490347"/>
+      <value value="8207798"/>
+      <value value="2752947"/>
+      <value value="5291185"/>
+      <value value="829936"/>
+      <value value="1640101"/>
+      <value value="8886604"/>
+      <value value="5769192"/>
+      <value value="5086824"/>
+      <value value="745276"/>
+      <value value="8272154"/>
+      <value value="2665457"/>
+      <value value="8695233"/>
+      <value value="7549739"/>
+      <value value="9281777"/>
+      <value value="9241636"/>
+      <value value="2977191"/>
+      <value value="7595056"/>
+      <value value="6481371"/>
+      <value value="7446471"/>
+      <value value="9909588"/>
+      <value value="4420496"/>
+      <value value="8482968"/>
+      <value value="6007532"/>
+      <value value="8647785"/>
+      <value value="37954"/>
+      <value value="8053573"/>
+      <value value="5652851"/>
+      <value value="1486441"/>
+      <value value="6394595"/>
+      <value value="2749154"/>
+      <value value="6698385"/>
+      <value value="4902980"/>
+      <value value="877026"/>
+      <value value="9862563"/>
+      <value value="8677100"/>
+      <value value="3794071"/>
+      <value value="214217"/>
+      <value value="5138088"/>
+      <value value="8237473"/>
+      <value value="6762305"/>
+      <value value="5713301"/>
+      <value value="666653"/>
+      <value value="5180855"/>
+      <value value="725109"/>
+      <value value="3834246"/>
+      <value value="4601840"/>
+      <value value="1582118"/>
+      <value value="8934402"/>
+      <value value="1763682"/>
+      <value value="828588"/>
+      <value value="9223958"/>
+      <value value="6121391"/>
+      <value value="1526675"/>
+      <value value="254900"/>
+      <value value="8968332"/>
+      <value value="5230026"/>
+      <value value="1143389"/>
+      <value value="6048116"/>
+      <value value="6164237"/>
+      <value value="7520853"/>
+      <value value="2399491"/>
+      <value value="2464421"/>
+      <value value="5343525"/>
+      <value value="7120031"/>
+      <value value="6161429"/>
+      <value value="9855355"/>
+      <value value="6023864"/>
+      <value value="4187780"/>
+      <value value="1079108"/>
+      <value value="4193832"/>
+      <value value="291062"/>
+      <value value="5624652"/>
+      <value value="7237689"/>
+      <value value="1643951"/>
+      <value value="5630093"/>
+      <value value="5529259"/>
+      <value value="5568960"/>
+      <value value="3890428"/>
+      <value value="5776373"/>
+      <value value="9644141"/>
+      <value value="1366315"/>
+      <value value="2301122"/>
+      <value value="4197032"/>
+      <value value="8484743"/>
+      <value value="4071180"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="gather_location_count">
       <value value="200"/>

@@ -259,7 +259,7 @@ to add_vaccine [branch]
     if table:has-key? (table:get vaccineDoseRateTable branch) ticks [
       set increase (table:get (table:get vaccineDoseRateTable branch) ticks) * (table:get global_vaccinePerDay branch)
     ]
-    set increase increase * pop_mult
+    set increase increase
     table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) + increase)  
   ]  
 end
