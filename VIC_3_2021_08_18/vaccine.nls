@@ -188,8 +188,7 @@ to simul_set_vaccine_params
         set selfVaccEff_raw_area selfVaccEff_raw_area * item 4 myVaccineData
       ]
       simul_updateVacAndReinfectMult
-      ;print selfVaccEff_raw_area
-      ;print selfVaccEff_raw_risk
+      ;print vaccineType
     ]
   ]
 end

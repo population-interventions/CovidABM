@@ -152,6 +152,10 @@ to createSimulants
       set cohort_vaccineBranch item 19 cohortData
       set cohort_vaccineUptake item 20 cohortData
       
+      if vacType_override != "off" [
+        set cohort_vaccineType vacType_override
+      ]
+      
       if param_force_vaccine != "Disabled" [
         set cohort_vaccineType param_force_vaccine 
       ]
@@ -224,8 +228,16 @@ to createSimulants
       
       set asymptomatic_draw random-float 1
       set asymptomaticFlag 0
-      if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
-        set asymptomaticFlag 1
+      ifelse cohort_asymptomPropMult <= 1
+      [
+        if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
+          set asymptomaticFlag 1
+        ]
+      ]
+      [
+        if asymptomatic_draw < 1 - (1 - Asymptom_Prop) / cohort_asymptomPropMult [
+          set asymptomaticFlag 1
+        ]
       ]
       
       ifelse asymptomaticFlag = 0 and sympt_present_prop > (rngs:rnd-beta presentInitSeedID 1 1)
@@ -250,6 +262,14 @@ to createSimulants
        set symtomatic_present_day floor (ownIncubationPeriod_raw + pre_present_iso + random-float 1)
       ]
       ;print symtomatic_present_day
+      
+      ;; Rapid antigen testing hits a proportion of the population regardless of symptomatic status
+      if random-float 1 < rat_prop [
+        let rat_day 1 + random rat_day_max
+        if symtomatic_present_day = -1 or rat_day < symtomatic_present_day [
+          set symtomatic_present_day rat_day
+        ]
+      ]
 
       setEssentialWorkerPriority
       params_setdeathrisk

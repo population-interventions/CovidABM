@@ -422,7 +422,7 @@ to simul_record_patch_infectiveness
       set localInfectiveness (localInfectiveness * Asymptomatic_Trans)
     ]
     if isolateCompliant = 1 [
-     set localInfectiveness (localInfectiveness * Isolation_Transmission )
+      set localInfectiveness (localInfectiveness * Isolation_Transmission )
     ]
     
     ;print "currentVirulence"
@@ -439,6 +439,9 @@ to simul_record_patch_infectiveness
         set infectionList []
         set lastInfectionUpdate ticks
         ;set infectionCulprit table:make ;; Slow, but while technically correct, unlikely to cause issues.
+      ]
+      if gather_loc_trans_red > 0 and destination = 1 [
+        set localInfectiveness (localInfectiveness * (1 - gather_loc_trans_red))
       ]
       set infectionList lput localInfectiveness infectionList
       table:put infectionCulprit localInfectiveness thisSimul
@@ -716,7 +719,7 @@ end
 
 to simul_checkMask
   ;; identifies people who waear a mask
-  ifelse maskPolicy and wearsMask <= mask_Wearing and patch-here != homelocation
+  ifelse maskPolicy and wearsMask <= (mask_Wearing + Mask_Wear_Boost) and patch-here != homelocation
   [
     set wearingMask 1
   ]

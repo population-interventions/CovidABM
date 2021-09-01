@@ -12,33 +12,7 @@ to params_readDrawTable
   ]
 end
 
-to params_setDrawValues
-  set draw_ppa_modifier random-normal 0 3
-  set draw_pta_modifier random-normal 0 3
-  
-  rngs:init ;; replacing previous log transform with beta distribution
-  let stream_id 1
-  set incursionsSeedID 2
-  set houseSeedID 3
-  set vaccineEffseedID 4
-  set vaccineInitSeedID 5
-  set moveInitSeedID 6
-  set presentInitSeedID 6
-  
-  rngs:set-seed stream_id random-float 999
-  rngs:set-seed incursionsSeedID random-float 999
-  rngs:set-seed houseSeedID random-float 999
-  rngs:set-seed vaccineEffseedID random-float 999
-  rngs:set-seed vaccineInitSeedID random-float 999
-  rngs:set-seed moveInitSeedID random-float 999
-  rngs:set-seed presentInitSeedID random-float 999
-  
-  set reinfect_risk (rngs:rnd-beta stream_id 8 2) * recover_immunity_mult
-  set reinfect_area (rngs:rnd-beta stream_id 10 10) * recover_immunity_mult
-  
-  ;; Ignore cases reported before this day, due to initial spike
-  set IGNORE_CASE_UNTIL 3
-  
+to params_updateCompoundTrace
   if compound_trace = "ass50_70at5" [
     set trace_at_5 0.7
     set trace_assymtote 50
@@ -78,6 +52,35 @@ to params_setDrawValues
     set param_trace_mult 1
     set trace_eff_override -1
   ]
+end
+
+to params_setDrawValues
+  set draw_ppa_modifier random-normal 0 3
+  set draw_pta_modifier random-normal 0 3
+  
+  rngs:init ;; replacing previous log transform with beta distribution
+  let stream_id 1
+  set incursionsSeedID 2
+  set houseSeedID 3
+  set vaccineEffseedID 4
+  set vaccineInitSeedID 5
+  set moveInitSeedID 6
+  set presentInitSeedID 6
+  
+  rngs:set-seed stream_id random-float 999
+  rngs:set-seed incursionsSeedID random-float 999
+  rngs:set-seed houseSeedID random-float 999
+  rngs:set-seed vaccineEffseedID random-float 999
+  rngs:set-seed vaccineInitSeedID random-float 999
+  rngs:set-seed moveInitSeedID random-float 999
+  rngs:set-seed presentInitSeedID random-float 999
+  
+  set reinfect_risk (rngs:rnd-beta stream_id 8 2) * recover_immunity_mult
+  set reinfect_area (rngs:rnd-beta stream_id 10 10) * recover_immunity_mult
+  
+  ;; Ignore cases reported before this day, due to initial spike
+  set IGNORE_CASE_UNTIL 3
+  params_updateCompoundTrace
   
   if param_trace_mult > 0 [
     ;set trace_at_5 (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2))
@@ -222,12 +225,21 @@ to params_setDrawValues
   ;show ( word "draw_isolationCompliance " draw_isolationCompliance )
   ;show ( word "draw_maskWearEfficacy " draw_maskWearEfficacy )
   
+  
   ;; Sensitivity overrides
   set house_resample_scale_up 0.6
   set house_resample_red_group 0.7
   set Non_Infective_Time 0
   set trace_eff_override -1
   set vac_trans_mult 1
+  set pipe_end_override "off"
+  set rat_prop 0
+  set rat_day_max 7
+  set vacType_override "off"
+  set gather_loc_trans_red 0
+  set Mask_Wear_Boost 0
+  set reducedStageFour true
+  set max_stage 4
   
   if sensitivity = "HouseResampleUp+" [
     set house_resample_scale_up 0.8
@@ -256,6 +268,49 @@ to params_setDrawValues
   if sensitivity = "ReduceVacTrans_050" [
     set vac_trans_mult 0.5
   ]
+  if sensitivity = "TraceLow" [
+    set compound_trace "ass50_70at5" 
+    params_updateCompoundTrace
+  ]
+  if sensitivity = "TraceHigh" [
+    set compound_trace "ass200_90at5" 
+    params_updateCompoundTrace
+  ]
+  if sensitivity = "Asmpyt_66" [
+    set Asymptom_Prop random-normal 0.66 0.03
+  ]
+  if sensitivity = "RAT_33" [
+    set rat_prop 0.333
+    set rat_day_max 7
+  ]
+  if sensitivity = "AllPF" [
+    set vacType_override "Pfizer"
+  ]
+  if sensitivity = "GatherVent_33" [
+    set gather_loc_trans_red 0.333
+  ]
+  if sensitivity = "GatherVent_80" [
+    set gather_loc_trans_red 0.8
+  ]
+  if sensitivity = "BoostMask_25" [
+    set Mask_Wear_Boost 25
+  ]
+  if sensitivity = "StageMax_3b" [
+    set reducedStageFour true
+  ]
+  if sensitivity = "StageMax_3" [
+    set max_stage 3
+  ]
+  if sensitivity = "LetItRip" [
+    set pipe_end_override "None"
+  ]
+  if sensitivity = "LetItRipStage1" [
+    set pipe_end_override "Stage1"
+  ]
+  if sensitivity = "LetItRipStage2" [
+    set pipe_end_override "Stage2"
+  ]
+  
 end
 
 to params_setdeathrisk

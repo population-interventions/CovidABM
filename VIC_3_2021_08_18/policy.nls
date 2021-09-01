@@ -118,6 +118,11 @@ to updatePolicyPipeline
       set param_policy "None"
     ]
   ]
+  if ticks >= 2 * policy_pipe_time [
+    if pipe_end_override != "off" [
+      set param_policy pipe_end_override
+    ]
+  ]
 end
   
 ;;;*********************************************************************************************************************

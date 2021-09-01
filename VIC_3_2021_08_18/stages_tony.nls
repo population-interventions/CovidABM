@@ -93,7 +93,8 @@ to do_stages_tony
     set superspreaders          0.04
     set schoolsOpen false
   ]
-  if stage = 3.5 [
+  
+  if stage = 3.5 or (reducedStageFour and stage = 4) [
     ;; Stage 3b
     set span                    4
     set proportion_people_avoid 72.5
@@ -107,7 +108,7 @@ to do_stages_tony
     set schoolsOpen false
   ]
 
-  if stage = 4 [
+  if stage = 4 and not reducedStageFour [
     ;; Stage 4
     set span                    3
     set proportion_people_avoid 85
