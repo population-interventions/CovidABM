@@ -119,7 +119,7 @@ to scaleup_try_to_maintain_cohort
   ]
   
   ; Used to periodically select infected simulants.
-  let scaleAccIncrement 1 - (1 / localScaleFactor)
+  let scaleAccIncrement (1 / localScaleFactor)
   
   foreach popDivisionTable_keys [ index ->
     let cohort table:get populationCohortCache index
