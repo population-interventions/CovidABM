@@ -12,7 +12,7 @@ to params_readDrawTable
   ]
 end
 
-to params_updateCompoundTrace
+to params_updateTrace
   if compound_trace = "ass50_70at5" [
     set trace_at_5 0.7
     set trace_assymtote 50
@@ -52,6 +52,24 @@ to params_updateCompoundTrace
     set param_trace_mult 1
     set trace_eff_override -1
   ]
+  
+  if param_trace_mult > 0 [
+    ;set trace_at_5 (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2))
+    
+    set t_atOnePerDay 1 * (1 - (1 - trace_at_1 * param_trace_mult) ^ (1 / trace_attempt_limit))
+    set t_atFivePerDay 5 * (1 - (1 - trace_at_5 * param_trace_mult) ^ (1 / trace_attempt_limit))
+    
+    set trace_n 0.92
+    set trace_c trace_assymtote * param_trace_mult
+    set trace_a ((1 / (t_atFivePerDay - trace_c)) - ((1 ^ trace_n) / (t_atOnePerDay - trace_c))) / ((5 ^ trace_n) - (1 ^ trace_n))
+    set trace_b 1 / (t_atOnePerDay - trace_c) - trace_a * 1 ^ trace_n
+    ;print t_atOnePerDay
+    ;print t_atFivePerDay
+    ;print trace_a
+    ;print trace_b
+    ;print trace_c
+    ;print trace_n
+  ]
 end
 
 to params_setDrawValues
@@ -80,25 +98,7 @@ to params_setDrawValues
   
   ;; Ignore cases reported before this day, due to initial spike
   set IGNORE_CASE_UNTIL 3
-  params_updateCompoundTrace
-  
-  if param_trace_mult > 0 [
-    ;set trace_at_5 (0.6 + 0.2 * (rngs:rnd-beta stream_id 2 2))
-    
-    set t_atOnePerDay 1 * (1 - (1 - trace_at_1 * param_trace_mult) ^ (1 / trace_attempt_limit))
-    set t_atFivePerDay 5 * (1 - (1 - trace_at_5 * param_trace_mult) ^ (1 / trace_attempt_limit))
-    
-    set trace_n 0.92
-    set trace_c trace_assymtote * param_trace_mult
-    set trace_a ((1 / (t_atFivePerDay - trace_c)) - ((1 ^ trace_n) / (t_atOnePerDay - trace_c))) / ((5 ^ trace_n) - (1 ^ trace_n))
-    set trace_b 1 / (t_atOnePerDay - trace_c) - trace_a * 1 ^ trace_n
-    ;print t_atOnePerDay
-    ;print t_atFivePerDay
-    ;print trace_a
-    ;print trace_b
-    ;print trace_c
-    ;print trace_n
-  ]
+  params_updateTrace
   
   let R0_lowerBound 0.118336359
   let R0_lowMidBound 0.128090431
@@ -238,7 +238,7 @@ to params_setDrawValues
   set vacType_override "off"
   set gather_loc_trans_red 0
   set Mask_Wear_Boost 0
-  set reducedStageFour true
+  set reducedStageFour false
   set max_stage 4
   
   if sensitivity = "HouseResampleUp+" [
@@ -270,11 +270,11 @@ to params_setDrawValues
   ]
   if sensitivity = "TraceLow" [
     set compound_trace "ass50_70at5" 
-    params_updateCompoundTrace
+    params_updateTrace
   ]
   if sensitivity = "TraceHigh" [
     set compound_trace "ass200_90at5" 
-    params_updateCompoundTrace
+    params_updateTrace
   ]
   if sensitivity = "Asmpyt_66" [
     set Asymptom_Prop random-normal 0.66 0.03
