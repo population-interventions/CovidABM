@@ -494,6 +494,7 @@ paramValues_stageEssentialSensitive = {**defaultParams, **{
 		'"TraceLow"',
 		'"TraceHigh"',
 		'"Asmpyt_66"',
+		'"RAT_15"',
 		'"RAT_33"',
 		'"AllPF"',
 		'"GatherVent_33"',

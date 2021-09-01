@@ -283,6 +283,10 @@ to params_setDrawValues
     set rat_prop 0.333
     set rat_day_max 7
   ]
+  if sensitivity = "RAT_15" [
+    set rat_prop 0.15
+    set rat_day_max 7
+  ]
   if sensitivity = "AllPF" [
     set vacType_override "Pfizer"
   ]
