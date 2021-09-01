@@ -131153,7 +131153,7 @@ NetLogo 6.2.0
     <metric>casesinperiod7_switchTime</metric>
     <metric>cumulativeInfected_switchTime</metric>
     <metric>cumulativeInfected_minusInit</metric>
-   <enumeratedValueSet variable="rand_seed">
+    <enumeratedValueSet variable="rand_seed">
       <value value="1996339"/>
       <value value="1732945"/>
       <value value="5526027"/>
@@ -131963,6 +131963,9 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="infect_iso_factor">
       <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="min_stage">
+      <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init_timenow_limit">
       <value value="14"/>
