@@ -504,6 +504,8 @@ paramValues_stageEssentialSensitive = {**defaultParams, **{
 		'"StageMax_3"',
 		'"LetItRipStage1"',
 		'"LetItRipStage2"',
+		'"ScaleBoost_20"',
+		'"ScaleSet_70"',
 	]),
 	'compound_trace' : '"ass100_90at5"',
 	'param_vac_uptake_mult' : listToStr([1]),

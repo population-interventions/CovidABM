@@ -144,7 +144,7 @@ Span
 Span
 0
 30
-10.0
+5.0
 1
 1
 NIL
@@ -245,7 +245,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.04
 0.01
 1
 NIL
@@ -300,7 +300,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-6.0
+57.0
 .5
 1
 NIL
@@ -315,7 +315,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-6.0
+57.0
 .5
 1
 NIL
@@ -369,10 +369,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "if ticks > 1 [ plot ( InfectionChange ) * 10 ]"
 
 MONITOR
-3009
-668
-3141
-713
+2964
+688
+3096
+733
 Infection Growth %
 infectionchange
 2
@@ -655,7 +655,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.14272886120164768
+0.10142819992733176
 0.001
 1
 NIL
@@ -670,7 +670,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+35.0
 1
 1
 NIL
@@ -711,7 +711,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+60.0
 1
 1
 NIL
@@ -724,7 +724,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -829,7 +829,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+5.0
 1
 1
 NIL
@@ -844,7 +844,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.8046336360764622
+0.7631368578832254
 .01
 1
 NIL
@@ -992,7 +992,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-5797101.0
+4492754.0
 1
 1
 NIL
@@ -1064,10 +1064,10 @@ quarantine
 11
 
 MONITOR
-3153
-672
-3311
-717
+3108
+692
+3266
+737
 NIL
 Asymptom_Prop
 17
@@ -1119,10 +1119,10 @@ transmission_count_metric
 11
 
 PLOT
-2942
-482
-3349
-656
+2964
+504
+3371
+678
 Potential transmission interactions per day (scaled)
 NIL
 NIL
@@ -1239,7 +1239,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.32303433037048007
+0.31561091060961294
 0.01
 1
 NIL
@@ -1261,10 +1261,10 @@ NIL
 HORIZONTAL
 
 PLOT
-2942
-329
-3350
-479
+2964
+352
+3372
+502
 Average Interaction Infectivity
 NIL
 NIL
@@ -1290,10 +1290,10 @@ transmission_count_metric * transmission_average
 11
 
 PLOT
-1860
-879
-2330
-1078
+1865
+887
+2334
+1081
 States (scaled)
 NIL
 NIL
@@ -1336,7 +1336,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+50.0
 1
 1
 NIL
@@ -1677,7 +1677,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.20553322651791214
+0.38359386632257964
 0.01
 1
 NIL
@@ -2068,7 +2068,7 @@ house_resample_red_group
 house_resample_red_group
 0
 1
-0.7
+0.3
 0.05
 1
 NIL
@@ -2296,7 +2296,7 @@ trans_draw_min
 trans_draw_min
 0
 1
-0.1335
+0.098394749
 0.01
 1
 NIL
@@ -2311,7 +2311,7 @@ trans_draw_max
 trans_draw_max
 0
 1
-0.1579
+0.119370711
 0.01
 1
 NIL
@@ -2356,7 +2356,7 @@ R0_range
 R0_range
 -1
 10
-6.5
+5.0
 0.5
 1
 NIL
@@ -2794,7 +2794,7 @@ house_resample_scale_up
 house_resample_scale_up
 0
 1
-0.6
+0.0
 0.05
 1
 NIL
@@ -2870,7 +2870,7 @@ CHOOSER
 282
 sensitivity
 sensitivity
-"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asmpyt_66" "RAT_33" "AllPF" "GatherVent_33" "GatherVent_80" "BoostMask_25" "StageMax_3b" "StageMax_3" "LetItRip" "LetItRipStage1" "LetItRipStage2"
+"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asmpyt_66" "RAT_33" "AllPF" "GatherVent_33" "GatherVent_80" "BoostMask_25" "StageMax_3b" "StageMax_3" "LetItRip" "LetItRipStage1" "LetItRipStage2" "ScaleBoost_20" "ScaleSet_70"
 0
 
 SLIDER
