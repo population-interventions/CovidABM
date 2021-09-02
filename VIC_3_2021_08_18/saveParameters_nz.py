@@ -428,6 +428,7 @@ paramValues_stageEssential = {**defaultParams, **{
 	'input_vaccine_table' : '"input/vaccine_rollout.csv"',
 	'input_dose_rate_table' : '"input/dose_rate.csv"',
 	'input_incursion_table' : '"input/incursion_nz.csv"',
+	'policy_pipeline' : '"None"',
 	'end_day' : 364,
 }}
 
