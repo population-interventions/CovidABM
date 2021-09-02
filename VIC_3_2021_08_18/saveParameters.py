@@ -430,6 +430,9 @@ paramValues_stageEssential = {**defaultParams, **{
 		'"_az_25_80.csv"',
 		'"_az_25_70.csv"',
 	]),
+	'sensitivity' : listToStr([
+		'"None"',
+	]),
 	'input_population_table' : '"input/population"', 
 	'input_vaccine_table' : '"input/vaccine_rollout_az_25.csv"',
 	'input_dose_rate_table' : '"input/dose_rate.csv"',
@@ -463,6 +466,9 @@ paramValues_stageEssential_single = {**defaultParams, **{
 		#'"_az_25_90.csv"',
 		'"_az_25_80.csv"',
 		#'"_az_25_70.csv"',
+	]),
+	'sensitivity' : listToStr([
+		'"None"',
 	]),
 	'input_population_table' : '"input/population"', 
 	'input_vaccine_table' : '"input/vaccine_rollout_az_25.csv"',
