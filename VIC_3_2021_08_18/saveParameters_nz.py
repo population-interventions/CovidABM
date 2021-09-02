@@ -427,6 +427,7 @@ paramValues_stageEssential = {**defaultParams, **{
 	'input_population_table' : '"input/population_nz"', 
 	'input_vaccine_table' : '"input/vaccine_rollout.csv"',
 	'input_dose_rate_table' : '"input/dose_rate.csv"',
+	'input_incursion_table' : '"input/incursion_nz.csv"',
 	'end_day' : 364,
 }}
 
@@ -463,6 +464,7 @@ paramValues_stageEssentialSensitive = {**defaultParams, **{
 	'input_population_table' : '"input/population"', 
 	'input_vaccine_table' : '"input/vaccine_rollout"',
 	'input_dose_rate_table' : '"input/dose_rate.csv"',
+	'input_incursion_table' : '"input/incursion_nz.csv"',
 	'end_day' : 574,
 }}
 

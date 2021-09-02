@@ -1,6 +1,6 @@
 
 to setup_incursionData
-  let incursionFileData remove-item 0 csv:from-file "input/incursion.csv"
+  let incursionFileData remove-item 0 csv:from-file input_incursion_table
   set incursionTable table:make
   let i 0
   foreach incursionFileData [ x -> 
