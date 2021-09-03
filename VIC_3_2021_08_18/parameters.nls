@@ -240,6 +240,10 @@ to params_setDrawValues
   set Mask_Wear_Boost 0
   set reducedStageFour false
   set max_stage 4
+  set recover_immunity_mult 1
+  set param_override_ve -1
+  set param_override_ve_area -1
+  set global_distance_mult 1
   
   if sensitivity = "HouseResampleUp+" [
     set house_resample_scale_up 0.8
@@ -321,6 +325,15 @@ to params_setDrawValues
   if sensitivity = "ScaleSet_70" [
     set house_resample_scale_up 0.7
     set house_resample_red_group 0.7
+  ]
+  if sensitivity = "SetVacArea50" [
+    set param_override_ve_area 0.5
+  ]
+  if sensitivity = "NoRecoverImmune" [
+    set recover_immunity_mult 0
+  ]
+  if global_distance_mult = "DistMult_2" [
+    set global_distance_mult 2
   ]
 end
 
