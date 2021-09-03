@@ -144,7 +144,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -195,7 +195,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.1
 0.01
 1
 NIL
@@ -213,7 +213,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-60.0
+0.0
 .5
 1
 NIL
@@ -228,7 +228,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-60.0
+0.0
 .5
 1
 NIL
@@ -360,7 +360,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -401,7 +401,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+0.0
 1
 1
 NIL
@@ -414,7 +414,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -429,7 +429,7 @@ SWITCH
 355
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -472,7 +472,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -571,7 +571,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4" "continuous"
-1
+8
 
 SLIDER
 1608
@@ -663,7 +663,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+0.0
 1
 1
 NIL
@@ -861,7 +861,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.7101159590714191
+0.33668434739310604
 0.01
 1
 NIL
@@ -874,7 +874,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-0
+1
 1
 -1000
 
@@ -1938,7 +1938,7 @@ trace_at_5
 trace_at_5
 0
 1
-0.9
+0.7
 0.05
 1
 NIL
@@ -1953,7 +1953,7 @@ trace_assymtote
 trace_assymtote
 0
 500
-100.0
+50.0
 1
 1
 NIL
@@ -1967,7 +1967,7 @@ CHOOSER
 compound_trace
 compound_trace
 "None" "ass50_70at5" "ass100_90at5" "ass100_90at5_iso" "ass200_90at5"
-2
+1
 
 SLIDER
 2388
