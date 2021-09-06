@@ -13,9 +13,6 @@ to updateCounts
   ;; Cache number of infected (red) suceptible (blue (actually cyan)) and recovered (yellow) agents
   set redCount count simuls with [ color = red ]
   set yellowcount count simuls with [ color = yellow ]
-  
-  let redLower simuls with [color = red and myScale = scalePhase]
-  let redUpper simuls with [color = red and myScale = scalePhase + 1]
 
   set infectionsYesterday infectionsToday
   ;; this considers ALL cases - not just the reported ones
@@ -28,6 +25,8 @@ to updateCounts
   set casesReportedToday casesReportedToday_acc
   
   ;; calculates the number of infected people in the population
+  let redLower simuls with [color = red and myScale = scalePhase]
+  let redUpper simuls with [color = red and myScale = scalePhase + 1]
   set currentInfections (count redLower + count redUpper * Scale_Factor) * (Scale_Factor ^ scalephase)
   
   let redLowerNoInit simuls with [color = red and myScale = scalePhase and timenow <= ticks ]

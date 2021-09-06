@@ -539,5 +539,5 @@ paramValues_stageEssentialSensitive = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_stageEssentialSensitive,
+							paramValues_stageEssential,
 							topOfFile=topOfFile)
