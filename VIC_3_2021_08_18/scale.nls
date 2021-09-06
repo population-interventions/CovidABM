@@ -1,80 +1,5 @@
 
 ;;*******************************************************************************************************************************
-;;** Recovery shifting to match global scale **
-;;*******************************************************************************************************************************
-
-to ShiftRecoveredTowardsTotalProportion
-  if Recovered_Match_Rate > 0 [
-    set recoverProportion recoverCount / (total_population - deathCount)
-    let repYellowCount ceiling (Population * recoverProportion)
-    let yellowSet simuls with [ color = yellow ]
-    let yellowSetCount count yellowSet
-    if repYellowCount < yellowSetCount [
-      ask n-of (Recovered_Match_Rate * (yellowSetCount - repYellowCount) + random-float 1) yellowSet [
-        set color cyan
-        set recoveryVariant 0
-        simul_updateVacAndReinfectMult
-      ]
-    ]
-    ;if repYellowCount > yellowSetCount [
-    ;  ask n-of (Recovered_Match_Rate * (repYellowCount - yellowSetCount) + random-float 1) simuls with [ color = cyan ] [
-    ;    set color yellow
-    ;    set recoveryVariant 1 ;; TODO this number should not always be 1 if this code is to be used. However, the code may be useless.
-    ;    set isolating 0
-    ;    simul_updateVacAndReinfectMult
-    ;  ]
-    ;]
-  ]
-  
-  if Recov_Var_Match_Rate > 0 and recoverCount > 0 [
-    let yellowSet simuls with [ color = yellow ]
-    let variantKeys table:keys recoverCountByVariant
-    let yellowSetCount count yellowSet
-    
-    ;; recoverCount may not necessarily be equal to the sum of recoverCountByVariant
-    let totalRecoverByVariant 0
-    foreach variantKeys [ variant ->
-      set totalRecoverByVariant totalRecoverByVariant + table:get recoverCountByVariant variant
-    ]
-    
-    ;; Cache some simulant counts
-    let variantSet table:make
-    let variantPropDiff table:make
-    
-    ;; Determine which variant is the most below the desired proportion.
-    let wantMostVariant 0
-    let wantMostProp 0
-    if yellowSetCount > 0 [
-      foreach variantKeys [ variant ->
-        let myYellow yellowSet with [recoveryVariant = variant]
-        let myProp (count myYellow) / yellowSetCount
-        let desiredProp (table:get recoverCountByVariant variant) / totalRecoverByVariant
-        if desiredProp > myProp [
-          if desiredProp - myProp > wantMostProp [
-            set wantMostProp desiredProp - myProp
-            set wantMostVariant variant
-          ]
-        ]
-        if desiredProp < myProp [
-          table:put variantSet variant myYellow
-          table:put variantPropDiff variant (myProp - desiredProp)
-        ]
-      ]
-      
-      ;; Each variant that is above its desired proportion transfers some of its share to the
-      ;; variant that has the largest shortfall.
-      foreach table:keys variantPropDiff [ variant ->
-        ask n-of ((table:get variantPropDiff variant) * Recov_Var_Match_Rate * yellowSetCount) table:get variantSet variant [
-          set recoveryVariant wantMostVariant
-        ]
-      ]
-    ]
-  ]
-  
-  set recoverCount recoverCount * dailyRecoverMult
-end
-
-;;*******************************************************************************************************************************
 ;;** Scale Modification **
 ;;*******************************************************************************************************************************
 
@@ -214,6 +139,10 @@ to scaleup_try_to_maintain_cohort
   if house_resample_scale_up >= 0 [
     reset_housing house_resample_scale_up
   ]
+  
+  ask simuls [
+    set myScale scalePhase 
+  ]
 end
 
 to scaledown_try_to_maintain_cohort
@@ -327,31 +256,24 @@ to scaledown_try_to_maintain_cohort
   [
     set extraScaleFactor 1
   ]
+  
+  ask simuls [
+    set myScale scalePhase 
+  ]
 end
 
-to-report GetInitialScale [cases]
-  if cases = 0 [
-   report 0 
-  ]
-  let caseScale floor log cases Scale_Factor
-  let scaleRangeInThreshold floor log Scale_Threshold Scale_Factor
-  if caseScale - scaleRangeInThreshold > 0 [
-   report caseScale - scaleRangeInThreshold 
-  ]
-  report 0
-end
 
 to CheckScale
   ;; this function scales up the simulation at base Scale_Factor to enable a small and large-scale understanding of dynamics.
   ;; It enables the fine-grained analysis in early stages that more closely resembles diffusion across a population similar to
   ;; assumptions in SEIR models but as it scales up, recognises that there are geographic constraints of movement of populations
-  (ifelse scale = true and redCount >= Scale_Threshold and scalePhase >= 0 and extraScaleFactor = 1 and days > 0
+  (ifelse scale = true and redCount >= Scale_Up_Threshold and scalePhase >= 0 and extraScaleFactor = 1 and days > 0
     [
       ;print count simuls with [ color = red ]
       scaleup_try_to_maintain_cohort
       ;print count simuls with [ color = red ]
     ]
-    scale = true and redCount <= Scale_Threshold / (Scale_Factor + 1) and days > 0 and scalephase > 0
+    scale = true and redCount <= Scale_Up_Threshold / (Scale_Factor + 1) and days > 0 and scalephase > 0
     [
       scaledown_try_to_maintain_cohort
     ]

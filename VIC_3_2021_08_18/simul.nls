@@ -21,6 +21,8 @@ simuls-own [
   isInitialInfection
   cohortVacUptake
   
+  myScale
+  
   move_chance_multiplier
   superSpread_chance_multiplier
   visit_chance_multiplier
@@ -402,7 +404,7 @@ to simul_do_scaleup
   set isolating 0
   set R 0
   
-  move-to one-of patches with [ pcolor = black ]
+  ;move-to one-of patches with [ pcolor = black ]
   simul_resetSomeRandomParams
   
   set returntoschool random 100
@@ -478,7 +480,7 @@ to simul_infect
         ;print "x"
         ;print x
         if color != red [
-          set transmission_count transmission_count + 1
+          set transmission_count transmission_count + extraScaleFactor * (Scale_Factor ^ myScale)
           set transmission_sum transmission_sum + baseSuccept * succeptibilityTableMax * x
           let infectDraw random-float 1
           let binomChance 1 - (1 - baseSuccept * succeptibilityTableMax * x) ^ Daily_Infect_Binom
@@ -517,24 +519,28 @@ to simul_infect
 
               let culpritSimul table:get localInfectionCulprit x
               let culpritTracked false
+              let culpritScale 0
               let thisSimul self
               table:put infectedContactList table:length infectedContactList culpritSimul
               ask culpritSimul [
                 set culpritTracked tracked
+                set culpritScale myScale
                 table:put infectedContactList table:length infectedContactList thisSimul
               ]
               set hasKnownContact (culpritTracked = 1)
+              set myScale culpritScale
+              let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
 
               set isolating 0
               set timenow 0
-              set infectionsToday_acc infectionsToday_acc + 1
-              set new_case_real_counter new_case_real_counter + extraScaleFactor * (Scale_Factor ^ scalephase)
+              set infectionsToday_acc infectionsToday_acc + popPerSimul
+              set new_case_real_counter new_case_real_counter + popPerSimul
               ifelse selfVaccEff_raw_risk > 0
               [
-                array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
+                array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + popPerSimul
               ]
               [
-                array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
+                array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
               ]
               if track_R [
                 ask culpritSimul [
@@ -633,7 +639,8 @@ to simul_settime
   if color = red [
     set timenow timenow + 1
     if tracked = 1 and caseReportTime = ticks and report_case_draw < report_proportion and ticks >= IGNORE_CASE_UNTIL [
-      set casesReportedToday_acc casesReportedToday_acc + 1
+      let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
+      set casesReportedToday_acc casesReportedToday_acc + popPerSimul
     ]
   ]
   if color = yellow [
@@ -651,7 +658,7 @@ to simul_end_infection
       simul_setEndStats
     ]
     
-    let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
+    let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
     if recoveryVariant > 0 [
       table:put recoverCountByVariant recoveryVariant ((table:get recoverCountByVariant recoveryVariant) - popPerSimul)
       if table:get recoverCountByVariant recoveryVariant < 0 [
@@ -662,7 +669,7 @@ to simul_end_infection
     
     ifelse (selfVaccEff_raw_risk = 0 and RiskofDeath > random-float 1) or (selfVaccEff_raw_risk > 0 and RiskofDeath * draw_vacc_death_risk_mult > random-float 1)
     [
-      set deathcount deathcount + extraScaleFactor * (Scale_Factor ^ scalephase)
+      set deathcount deathcount + extraScaleFactor * (Scale_Factor ^ myScale)
       array:set dieArray cohortIndex (array:item dieArray cohortIndex) + popPerSimul
     ]
     [

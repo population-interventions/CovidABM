@@ -72,6 +72,12 @@ to params_updateTrace
   ]
 end
 
+to param_updateRecoverImmune
+  let stream_id 1
+  set reinfect_risk (rngs:rnd-beta stream_id 8 2) * recover_immunity_mult
+  set reinfect_area (rngs:rnd-beta stream_id 10 10) * recover_immunity_mult
+end
+
 to params_setDrawValues
   set draw_ppa_modifier random-normal 0 3
   set draw_pta_modifier random-normal 0 3
@@ -93,8 +99,7 @@ to params_setDrawValues
   rngs:set-seed moveInitSeedID random-float 999
   rngs:set-seed presentInitSeedID random-float 999
   
-  set reinfect_risk (rngs:rnd-beta stream_id 8 2) * recover_immunity_mult
-  set reinfect_area (rngs:rnd-beta stream_id 10 10) * recover_immunity_mult
+  param_updateRecoverImmune
   
   ;; Ignore cases reported before this day, due to initial spike
   set IGNORE_CASE_UNTIL 3
@@ -244,6 +249,8 @@ to params_setDrawValues
   set param_override_ve -1
   set param_override_ve_area -1
   set global_distance_mult 1
+  set sympt_present_mult 1
+  set Isolation_Transmission 0.33
   
   if sensitivity = "HouseResampleUp+" [
     set house_resample_scale_up 0.8
@@ -279,9 +286,6 @@ to params_setDrawValues
   if sensitivity = "TraceHigh" [
     set compound_trace "ass200_90at5" 
     params_updateTrace
-  ]
-  if sensitivity = "Asmpyt_66" [
-    set Asymptom_Prop random-normal 0.66 0.03
   ]
   if sensitivity = "RAT_33" [
     set rat_prop 0.333
@@ -331,9 +335,35 @@ to params_setDrawValues
   ]
   if sensitivity = "NoRecoverImmune" [
     set recover_immunity_mult 0
+    param_updateRecoverImmune
   ]
-  if global_distance_mult = "DistMult_2" [
+  if sensitivity = "DistMult_2" [
     set global_distance_mult 2
+  ]
+  if sensitivity = "Asmpyt_66" [
+    set Asymptom_Prop random-normal 0.66 0.03
+  ]
+  if sensitivity = "PresentPropMult_050" [
+    set sympt_present_mult 0.5
+  ]
+  if sensitivity = "IsoTransmit_05" [
+    set Isolation_Transmission 0.5
+  ]
+  if sensitivity = "IsoTransmit_1" [
+    set Isolation_Transmission 1
+  ]
+  if sensitivity = "PPM_050_Stage3" [
+    set sympt_present_mult 0.5
+    set max_stage 3
+  ]
+  if sensitivity = "PPM_050_Stage3b" [
+    set sympt_present_mult 0.5
+    set reducedStageFour true
+  ]
+  if sensitivity = "TestVic" [
+    set sympt_present_mult 0.667
+    set reducedStageFour true
+    set Isolation_Transmission 0.667
   ]
 end
 

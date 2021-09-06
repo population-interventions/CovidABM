@@ -10,6 +10,8 @@ __includes[
   "setup.nls"
   "parameters.nls"
   "scale.nls"
+  "scale_cont.nls"
+  "scale_shared.nls"
   "stages.nls"
   "stages_tony.nls"
   "stages_nz.nls"
@@ -151,10 +153,10 @@ NIL
 HORIZONTAL
 
 PLOT
-3063
-892
-3475
-1066
+3112
+917
+3524
+1091
 Susceptible, Infected and Recovered - 000's
 Days from March 10th
 Numbers of people
@@ -473,7 +475,7 @@ MONITOR
 1604
 494
 New Infections
-(extraScaleFactor * (Scale_Factor ^ scalephase)) * (count simuls with [ color = red and timenow = 1 ])
+(globalPopPerSimul * (count simuls with [ color = red and timenow = 1 ]))
 0
 1
 12
@@ -494,7 +496,7 @@ true
 false
 "" ""
 PENS
-"New Cases" 1.0 1 -5298144 true "" "plot (extraScaleFactor * (Scale_Factor ^ scalephase)) * (count simuls with [ color = red and timenow = 1 ])"
+"New Cases" 1.0 1 -5298144 true "" "plot globalPopPerSimul * (count simuls with [ color = red and timenow = 1 ])"
 
 SLIDER
 1672
@@ -556,10 +558,10 @@ scalePhase
 12
 
 MONITOR
-1668
-1024
-1748
-1069
+2579
+644
+2659
+689
 NIL
 count simuls
 17
@@ -655,7 +657,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.13802372442698108
+0.14511086718318986
 0.001
 1
 NIL
@@ -791,10 +793,10 @@ MaskPolicy
 -1000
 
 SLIDER
-583
-990
-783
-1023
+585
+999
+785
+1032
 Case_Reporting_Delay
 Case_Reporting_Delay
 0
@@ -844,7 +846,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7330370698717612
+0.7862658977672785
 .01
 1
 NIL
@@ -911,7 +913,8 @@ false
 "" ""
 PENS
 "Stage" 1.0 0 -5298144 true "" "plot stage"
-"Scale" 1.0 0 -14454117 true "" "plot (scalePhase + (extraScaleFactor - 1) / Scale_Factor)"
+"LS" 1.0 0 -8990512 true "" "plot Log (max (list (scaledPopulation / Population) 1)) Scale_Factor"
+"Scale" 1.0 0 -14454117 true "" "plot scalePhase"
 
 MONITOR
 1754
@@ -925,10 +928,10 @@ count simuls with [ color = yellow ]
 11
 
 MONITOR
-2629
-633
-2702
-678
+2649
+625
+2722
+670
 Time = 1 
 count simuls with [ timenow = 2 ]
 0
@@ -992,7 +995,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-1875911.0
+4734300.0
 1
 1
 NIL
@@ -1157,30 +1160,15 @@ param_policy
 8
 
 SLIDER
-1608
-944
-1745
-977
-Scale_Threshold
-Scale_Threshold
-50
-500
-120.0
-10
-1
-NIL
-HORIZONTAL
-
-SLIDER
-1608
-982
-1746
-1015
+1613
+1012
+1751
+1045
 Scale_Factor
 Scale_Factor
 2
 10
-3.0
+2.0
 1
 1
 NIL
@@ -1203,8 +1191,8 @@ MONITOR
 1583
 987
 People in Model
-(Population * extraScaleFactor * (Scale_Factor ^ scalephase))
-17
+scaledPopulation * extraScaleFactor
+0
 1
 11
 
@@ -1224,11 +1212,11 @@ true
 true
 "" ""
 PENS
-"Tracked" 1.0 0 -16777216 true "" "plot count simuls with [ color = red and tracked = 1 ] * extraScaleFactor * (Scale_Factor ^ scalephase)"
-"Total" 1.0 0 -7500403 true "" "plot count simuls with [ color = red ] * extraScaleFactor * (Scale_Factor ^ scalephase)"
-"Reported" 1.0 0 -2674135 true "" "plot count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion] * extraScaleFactor * (Scale_Factor ^ scalephase)"
-"KnowContact" 1.0 0 -13840069 true "" "plot count simuls with [hasKnownContact and color = red] * extraScaleFactor * (Scale_Factor ^ scalephase)"
-"Infective" 1.0 0 -1184463 true "" "plot count simuls with [ color = red and timenow > non_infective_time ] * extraScaleFactor * (Scale_Factor ^ scalephase)"
+"Tracked" 1.0 0 -16777216 true "" "plot count simuls with [ color = red and tracked = 1 ] * globalPopPerSimul"
+"Total" 1.0 0 -7500403 true "" "plot count simuls with [ color = red ] * globalPopPerSimul"
+"Reported" 1.0 0 -2674135 true "" "plot count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion] globalPopPerSimul"
+"KnowContact" 1.0 0 -13840069 true "" "plot count simuls with [hasKnownContact and color = red] * globalPopPerSimul"
+"Infective" 1.0 0 -1184463 true "" "plot count simuls with [ color = red and timenow > non_infective_time ] * globalPopPerSimul"
 
 SLIDER
 364
@@ -1239,17 +1227,17 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.2944158681113338
+0.30251762356628925
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-588
-913
-783
-946
+590
+922
+785
+955
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
 0
@@ -1305,12 +1293,12 @@ true
 true
 "" ""
 PENS
-"Isolating" 1.0 0 -12345184 true "" "plot count simuls with [color = cyan and isolating = 1] * extraScaleFactor * scale_factor ^ scalePhase "
-"Infected" 1.0 0 -2674135 true "" "plot count simuls with [color = red] * extraScaleFactor * scale_factor ^ scalePhase "
-"Tracked" 1.0 0 -5825686 true "" "plot count simuls with [color = red and tracked = 1] * extraScaleFactor * scale_factor ^ scalePhase "
-"Comply" 1.0 0 -13840069 true "" "plot count simuls with [color = cyan and isolateCompliant = 1] * extraScaleFactor * scale_factor ^ scalePhase "
-"Recovered" 1.0 0 -1184463 true "" "plot count simuls with [color = yellow] * extraScaleFactor * scale_factor ^ scalePhase "
-"KnownContact" 1.0 0 -13297659 true "" "plot count simuls with [hasKnownContact and color = red] * extraScaleFactor * scale_factor ^ scalePhase "
+"Isolating" 1.0 0 -12345184 true "" "plot count simuls with [color = cyan and isolating = 1] * globalPopPerSimul "
+"Infected" 1.0 0 -2674135 true "" "plot count simuls with [color = red] * globalPopPerSimul "
+"Tracked" 1.0 0 -5825686 true "" "plot count simuls with [color = red and tracked = 1] * globalPopPerSimul "
+"Comply" 1.0 0 -13840069 true "" "plot count simuls with [color = cyan and isolateCompliant = 1] * globalPopPerSimul "
+"Recovered" 1.0 0 -1184463 true "" "plot count simuls with [color = yellow] * globalPopPerSimul "
+"KnownContact" 1.0 0 -13297659 true "" "plot count simuls with [hasKnownContact and color = red] * globalPopPerSimul "
 
 SLIDER
 2722
@@ -1447,10 +1435,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-585
-1027
-782
-1060
+587
+1037
+784
+1070
 Non_Infective_Time
 Non_Infective_Time
 0
@@ -1545,15 +1533,15 @@ recoverProportion * 100
 14
 
 SLIDER
-588
-875
-777
-908
+590
+883
+779
+916
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
 1
-0.33
+0.66
 0.01
 1
 NIL
@@ -1597,10 +1585,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1752
-945
-1855
-990
+2963
+888
+3066
+933
 slopeAverage %
 slopeAverage * 100
 3
@@ -1608,10 +1596,10 @@ slopeAverage * 100
 11
 
 PLOT
-1598
-822
-1853
-942
+2825
+973
+3080
+1093
 slope %
 NIL
 NIL
@@ -1669,15 +1657,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-589
-739
-762
-772
+590
+737
+763
+770
 sympt_present_prop
 sympt_present_prop
 0
 1
-0.33668434739310604
+0.3323918905468107
 0.01
 1
 NIL
@@ -1740,10 +1728,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-1622
-784
-1739
-817
+2957
+933
+3074
+966
 track_slope
 track_slope
 1
@@ -1864,7 +1852,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.4600001363515146
+0.4317101196665883
 0.05
 1
 NIL
@@ -2038,7 +2026,7 @@ param_final_phase
 param_final_phase
 -1
 10
-3.0
+4.0
 1
 1
 NIL
@@ -2116,10 +2104,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-588
-835
-787
-868
+590
+843
+789
+876
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -2157,10 +2145,10 @@ calibrate
 -1000
 
 MONITOR
-1473
-988
-1582
-1033
+1474
+995
+1583
+1040
 NIL
 extraScaleFactor
 3
@@ -2191,7 +2179,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.9699850575998425
+0.870655702638208
 0.01
 1
 NIL
@@ -2416,7 +2404,7 @@ init_timenow_limit
 init_timenow_limit
 0
 26
-14.0
+4.0
 1
 1
 NIL
@@ -2430,7 +2418,7 @@ CHOOSER
 policy_pipeline
 policy_pipeline
 "None" "ME_TS_S1" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS" "ME_TS_NONE"
-3
+0
 
 SLIDER
 9
@@ -2463,25 +2451,25 @@ NIL
 HORIZONTAL
 
 SLIDER
-2827
-1014
-3039
-1047
+3230
+240
+3442
+273
 hetro_mult
 hetro_mult
 0
 3
-1.0
+0.2
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-2827
-1052
-3036
-1085
+3230
+278
+3439
+311
 Daily_Infect_Binom
 Daily_Infect_Binom
 1
@@ -2515,7 +2503,7 @@ CHOOSER
 compound_param
 compound_param
 "None" "Hetro_Test"
-0
+1
 
 CHOOSER
 835
@@ -2627,7 +2615,7 @@ CHOOSER
 compound_input
 compound_input
 "None" "baseline"
-0
+1
 
 SLIDER
 10
@@ -2801,10 +2789,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-585
-953
-784
-986
+587
+963
+786
+996
 pre_present_iso
 pre_present_iso
 0
@@ -2816,10 +2804,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-588
-787
-735
-820
+592
+807
+739
+840
 self_iso_at_peak
 self_iso_at_peak
 0
@@ -2870,8 +2858,8 @@ CHOOSER
 282
 sensitivity
 sensitivity
-"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asmpyt_66" "RAT_33" "RAT_15" "AllPF" "GatherVent_33" "GatherVent_80" "BoostMask_25" "StageMax_3b" "StageMax_3" "LetItRip" "LetItRipStage1" "LetItRipStage2" "ScaleBoost_20" "ScaleSet_70" "SetVacArea50" "NoRecoverImmune" "DistMult_2"
-21
+"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asmpyt_66" "RAT_33" "RAT_15" "AllPF" "GatherVent_33" "GatherVent_80" "BoostMask_25" "StageMax_3b" "StageMax_3" "LetItRip" "LetItRipStage1" "LetItRipStage2" "ScaleBoost_20" "ScaleSet_70" "SetVacArea50" "NoRecoverImmune" "DistMult_2" "PresentPropMult_050" "IsoTransmit_05" "IsoTransmit_1" "PPM_050_Stage3" "PPM_050_Stage3b" "TestVic"
+0
 
 SLIDER
 2195
@@ -3191,7 +3179,7 @@ CHOOSER
 pipe_end_override
 pipe_end_override
 "off" "None" "Stage1" "Stage2"
-1
+0
 
 SLIDER
 3033
@@ -3295,6 +3283,103 @@ param_override_ve_area
 -1
 1
 -1.0
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+590
+772
+763
+805
+sympt_present_mult
+sympt_present_mult
+0
+1
+1.0
+0.01
+1
+NIL
+HORIZONTAL
+
+SWITCH
+1614
+1052
+1749
+1085
+cont_scale
+cont_scale
+0
+1
+-1000
+
+SLIDER
+1605
+783
+1778
+816
+Scale_Up_Threshold
+Scale_Up_Threshold
+0
+200
+120.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1605
+822
+1784
+856
+Scale_Down_Threshold
+Scale_Down_Threshold
+0
+200
+90.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1607
+862
+1782
+896
+scale_cont_buffer
+scale_cont_buffer
+0
+100
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+MONITOR
+1588
+943
+1676
+988
+% in Model
+extraScaleFactor * 100 * scaledPopulation / total_population
+2
+1
+11
+
+SLIDER
+1607
+900
+1770
+934
+scale_up_limit
+scale_up_limit
+0
+1
+0.9
 0.01
 1
 NIL

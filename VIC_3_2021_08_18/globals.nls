@@ -22,6 +22,8 @@ globals [
   AverageContacts
   AverageFinancialContacts
   ScalePhase
+  ScalePhaseMax
+  globalPopPerSimul
   extraScaleFactor
   Days
   CaseFatalityRate
@@ -32,7 +34,6 @@ globals [
   recoverProportion ; Proportion of the living population that has recovered.
   casesReportedToday
   casesReportedToday_acc ; Accumulator for casesReportedToday
-  Scaled_Population
   ICUBedsRequired
   scaled_Bed_Capacity
   currentInfections

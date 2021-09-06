@@ -50,9 +50,9 @@ to simul_applyTrace
     if first_trace_occurred = -1 [
       set first_trace_occurred ticks
     ]
-    set cumulative_tracked_all cumulative_tracked_all * extraScaleFactor * (Scale_Factor ^ scalephase)
+    set cumulative_tracked_all cumulative_tracked_all + extraScaleFactor * (Scale_Factor ^ myScale)
     if (noticeOwnInfection = 1 and timenow >= symtomatic_present_day) [
-      set cumulative_tracked_notice cumulative_tracked_notice * extraScaleFactor * (Scale_Factor ^ scalephase)
+      set cumulative_tracked_notice cumulative_tracked_notice + extraScaleFactor * (Scale_Factor ^ myScale)
     ]
   ]
   

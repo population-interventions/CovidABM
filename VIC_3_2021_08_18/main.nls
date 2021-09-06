@@ -13,7 +13,13 @@ end
 
 to go
   ;; Check whether to scale up, which occurs when 10% of the agents are infected.
-  CheckScale
+  ifelse cont_scale
+  [
+    CheckScale_cont
+  ]
+  [
+    CheckScale
+  ]
   
   ;set test_acc 0
   ;reset-timer
@@ -126,7 +132,6 @@ to go
     ]
   ]
 
-  updateRawCounts
   updateCounts
   
   ;; Set casesinperiod7, which is only detected cases. Also sets casesinperiod14 and casesinperiod28.

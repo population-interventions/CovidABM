@@ -240,7 +240,7 @@ to createSimulants
         ]
       ]
       
-      ifelse asymptomaticFlag = 0 and sympt_present_prop > (rngs:rnd-beta presentInitSeedID 1 1)
+      ifelse asymptomaticFlag = 0 and sympt_present_prop * sympt_present_mult > (rngs:rnd-beta presentInitSeedID 1 1)
       [
         set symtomatic_present_day round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
       ]
@@ -366,6 +366,7 @@ to setGlobals
   set AverageContacts            0
   set AverageFinancialContacts   0
   set ScalePhase                 0
+  set ScalePhaseMax              0
   set extraScaleFactor           1
   set Days                       0
   set CaseFatalityRate           0
@@ -376,7 +377,6 @@ to setGlobals
   set recoverProportion          0
   set casesReportedToday         0
   set casesReportedToday_acc     0
-  set Scaled_Population          0
   set ICUBedsRequired            0
   set scaled_Bed_Capacity        0
   set currentInfections          0
@@ -640,8 +640,12 @@ to setup
   set initial_secondary (initial_cases - initial_primary)
   
   ;; set up initial infected people
+  scale_setup
   set scalephase GetInitialScale (initial_primary + initial_secondary)
+  
   let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
+  print (scalePhase + (extraScaleFactor - 1) / Scale_Factor)
+  set globalPopPerSimul popPerSimul
   ;; sets up the initial date for looking at policy-changes
 
   createSimulants
@@ -655,6 +659,7 @@ to setup
     set infectVariant 1
     set infectedContactList table:make
     set hasKnownContact false
+    set myScale scalePhase
     if random-float 1 < initial_variant_2_prop [
       set infectVariant 2
     ]
@@ -672,7 +677,7 @@ to setup
     simul_updatepersonalvirulence
     set infectionsToday_acc infectionsToday_acc + 1
     ;; Do not add to infection output as it makes for poor traces.
-    ;array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + extraScaleFactor * (Scale_Factor ^ scalephase)
+    ;array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
   ]
 
   set Quarantine false
@@ -694,6 +699,7 @@ to setup
       set infectVariant 1
       set infectedContactList table:make
       set hasKnownContact false
+      set myScale scalePhase
       
       let nearSimul one-of nearSimuls
       let thisSimul self
@@ -712,7 +718,7 @@ to setup
       
       set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
       set init_secondry_infect init_secondry_infect - popPerSimul
-      set infectionsToday_acc infectionsToday_acc + 1
+      set infectionsToday_acc infectionsToday_acc + popPerSimul
       ;; Do not add to infection output as it makes for poor traces.
       ;;array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
     ]

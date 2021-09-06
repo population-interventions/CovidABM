@@ -49,7 +49,7 @@ to incursion_update
     ]
   ]
   
-  let peoplePerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
+  let peoplePerSimul (Scale_Factor ^ scalephase)
   if global_incursionArrivals > 0 [
     ask n-of (floor (global_incursionArrivals + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
       if draw_borderIncursionRisk * global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
@@ -58,6 +58,7 @@ to incursion_update
         set infectedContactList table:make
         set hasKnownContact false
         set traceAttempts 0
+        set myScale scalephase
         
         set infectVariant global_incursionVariant
         set vaccineIncursionOverride "none"
@@ -85,6 +86,7 @@ to incursion_update
         set infectedContactList table:make
         set hasKnownContact false
         set traceAttempts 0
+        set myScale scalephase
         
         set infectVariant global_incursionVariant
         set vaccineIncursionOverride global_incursionVaccType
