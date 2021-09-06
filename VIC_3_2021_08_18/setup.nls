@@ -644,7 +644,6 @@ to setup
   set scalephase GetInitialScale (initial_primary + initial_secondary)
   
   let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
-  print (scalePhase + (extraScaleFactor - 1) / Scale_Factor)
   set globalPopPerSimul popPerSimul
   ;; sets up the initial date for looking at policy-changes
 

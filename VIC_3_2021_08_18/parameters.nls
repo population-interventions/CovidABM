@@ -361,9 +361,7 @@ to params_setDrawValues
     set reducedStageFour true
   ]
   if sensitivity = "TestVic" [
-    set sympt_present_mult 0.667
-    set reducedStageFour true
-    set Isolation_Transmission 0.667
+    set sympt_present_mult 0.8
   ]
 end
 
