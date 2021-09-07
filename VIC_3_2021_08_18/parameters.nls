@@ -334,6 +334,9 @@ to params_setDrawValues
   if sensitivity = "SetVacArea50" [
     set param_override_ve_area 0.5
   ]
+  if sensitivity = "SetVacArea65" [
+    set param_override_ve_area 0.65
+  ]
   if sensitivity = "NoRecoverImmune" [
     set recover_immunity_mult 0
     param_updateRecoverImmune

@@ -121,7 +121,7 @@
 ["se_illnesspd" 4.0]
 ["se_incubation" 2.25]
 ["self_iso_at_peak" true]
-["sensitivity" "None" "OverrideAsympt"]
+["sensitivity" "None" "SetVacArea65" "OverrideAsympt"]
 ["set_shape" false]
 ["site_iso_max_day" 0.0]
 ["site_iso_prop" 0.0]
