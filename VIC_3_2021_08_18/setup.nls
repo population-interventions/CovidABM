@@ -228,18 +228,24 @@ to createSimulants
       
       set asymptomatic_draw random-float 1
       set asymptomaticFlag 0
-      ifelse cohort_asymptomPropMult <= 1
+      ifelse override_asympt_table
       [
-        if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
-          set asymptomaticFlag 1
-        ]
+        params_setOverrideAsympt
       ]
       [
-        if asymptomatic_draw < 1 - (1 - Asymptom_Prop) / cohort_asymptomPropMult [
-          set asymptomaticFlag 1
+        ifelse cohort_asymptomPropMult <= 1
+        [
+          if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
+            set asymptomaticFlag 1
+          ]
+        ]
+        [
+          if asymptomatic_draw < 1 - (1 - Asymptom_Prop) / cohort_asymptomPropMult [
+            set asymptomaticFlag 1
+          ]
         ]
       ]
-      
+        
       ifelse asymptomaticFlag = 0 and sympt_present_prop * sympt_present_mult > (rngs:rnd-beta presentInitSeedID 1 1)
       [
         set symtomatic_present_day round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))

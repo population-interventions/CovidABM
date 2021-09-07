@@ -251,6 +251,7 @@ to params_setDrawValues
   set global_distance_mult 1
   set sympt_present_mult 1
   set Isolation_Transmission 0.33
+  set override_asympt_table false
   
   if sensitivity = "HouseResampleUp+" [
     set house_resample_scale_up 0.8
@@ -363,52 +364,124 @@ to params_setDrawValues
   if sensitivity = "TestVic" [
     set sympt_present_mult 0.8
   ]
+  if sensitivity = "OverrideAsympt" [
+    set override_asympt_table true
+  ]
 end
 
 to params_setdeathrisk
   ;; risk of death associated with ageranges if they contract COVID-19
   (ifelse agerange <= 5
-  [
-    set riskofDeath 0.0000068
-  ]
-  agerange <= 15
-  [
-    set riskofDeath 0.0000299
-  ]
-  agerange <= 25
-  [
-    set riskofDeath 0.0001112
-  ]
-  agerange <= 35
-  [
-    set riskofDeath 0.0004172
-  ]
-  agerange <= 45
-  [
-    set riskofDeath 0.0017904
-  ]
-  agerange <= 55
-  [
-    set riskofDeath 0.0071179
-  ]
-  agerange <= 65
-  [
-    set riskofDeath 0.0196950
-  ]
-  agerange <= 75
-  [
-    set riskofDeath 0.1350531
-  ]
-  agerange <= 85
-  [
-    set riskofDeath 0.3466041
-  ]
-  ;; updated from department of health Report 22 - does not map directly to age deciles here
-  agerange <= 95
-  [
-    set riskofDeath 0.4354866
-  ]
-  [
-    set riskofDeath 0.4354866
+    [
+      set riskofDeath 0.0000068
+    ]
+    agerange <= 15
+    [
+      set riskofDeath 0.0000299
+    ]
+    agerange <= 25
+    [
+      set riskofDeath 0.0001112
+    ]
+    agerange <= 35
+    [
+      set riskofDeath 0.0004172
+    ]
+    agerange <= 45
+    [
+      set riskofDeath 0.0017904
+    ]
+    agerange <= 55
+    [
+      set riskofDeath 0.0071179
+    ]
+    agerange <= 65
+    [
+      set riskofDeath 0.0196950
+    ]
+    agerange <= 75
+    [
+      set riskofDeath 0.1350531
+    ]
+    agerange <= 85
+    [
+      set riskofDeath 0.3466041
+    ]
+    ;; updated from department of health Report 22 - does not map directly to age deciles here
+    agerange <= 95
+    [
+      set riskofDeath 0.4354866
+    ]
+    [
+      set riskofDeath 0.4354866
+  ])
+end
+
+to params_setOverrideAsympt
+  ;; risk of death associated with ageranges if they contract COVID-19
+  (ifelse agerange <= 5
+    [
+      if asymptomatic_draw < 1 - 0.28 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 15
+    [
+      if asymptomatic_draw < 1 - 0.2 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 25
+    [
+      if asymptomatic_draw < 1 - 0.26 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 35
+    [
+      if asymptomatic_draw < 1 - 0.33 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 45
+    [
+      if asymptomatic_draw < 1 - 0.40 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 55
+    [
+      if asymptomatic_draw < 1 - 0.49 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 65
+    [
+      if asymptomatic_draw < 1 - 0.63 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 75
+    [
+      if asymptomatic_draw < 1 - 0.69 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 85
+    [
+      if asymptomatic_draw < 1 - 0.69 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 95
+    [
+      if asymptomatic_draw < 1 - 0.69 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    [
+      if asymptomatic_draw < 1 - 0.69 [
+        set asymptomaticFlag 1
+      ]
   ])
 end
