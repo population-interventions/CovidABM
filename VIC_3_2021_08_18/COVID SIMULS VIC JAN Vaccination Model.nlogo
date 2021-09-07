@@ -302,7 +302,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+10.0
 .5
 1
 NIL
@@ -317,7 +317,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+10.0
 .5
 1
 NIL
@@ -398,7 +398,7 @@ INPUTBOX
 331
 456
 total_population
-6681000.0
+5120000.0
 1
 0
 Number
@@ -657,7 +657,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.1415017307049595
+0.106840008748785
 0.001
 1
 NIL
@@ -846,7 +846,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7563430674119459
+0.7720745142278226
 .01
 1
 NIL
@@ -995,7 +995,7 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3816425.0
+4251208.0
 1
 1
 NIL
@@ -1157,7 +1157,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4" "continuous"
-1
+8
 
 SLIDER
 1610
@@ -1227,7 +1227,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.30881546678265126
+0.24969407350917178
 0.01
 1
 NIL
@@ -1664,7 +1664,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.6967018660209561
+0.43492272754707717
 0.01
 1
 NIL
@@ -1851,7 +1851,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.30619155839591816
+0.5490039450778627
 0.05
 1
 NIL
@@ -2178,7 +2178,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.624087814253467
+0.7924130931499654
 0.01
 1
 NIL
@@ -2283,7 +2283,7 @@ trans_draw_min
 trans_draw_min
 0
 1
-0.1335
+0.098394749
 0.01
 1
 NIL
@@ -2298,7 +2298,7 @@ trans_draw_max
 trans_draw_max
 0
 1
-0.1579
+0.119370711
 0.01
 1
 NIL
@@ -2343,7 +2343,7 @@ R0_range
 R0_range
 -1
 10
-6.5
+5.0
 0.5
 1
 NIL
@@ -2417,7 +2417,7 @@ CHOOSER
 policy_pipeline
 policy_pipeline
 "None" "ME_TS_S1" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS" "ME_TS_NONE"
-3
+7
 
 SLIDER
 9
@@ -2770,7 +2770,7 @@ CHOOSER
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_az_25_95.csv" "_az_25_90.csv" "_az_25_80.csv" "_az_25_70.csv" "_70" "_80" "_90" "_95"
-6
+7
 
 SLIDER
 1253

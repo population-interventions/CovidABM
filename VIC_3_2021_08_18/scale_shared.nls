@@ -79,6 +79,14 @@ to ShiftRecoveredTowardsTotalProportion
   set recoverCount recoverCount * dailyRecoverMult
 end
 
+to scale_setup
+  set scalePhaseMax (floor Log (total_population / population) Scale_Factor) - 1
+  ;print total_population
+  ;print population
+  ;print Scale_Factor
+  ;print scalePhaseMax
+end
+
 to-report GetInitialScale [cases]
   if cases = 0 [
    report 0 

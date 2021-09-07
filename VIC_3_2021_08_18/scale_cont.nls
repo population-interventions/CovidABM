@@ -1,7 +1,4 @@
 
-to scale_setup
-  set scalePhaseMax (floor Log (total_population / population) Scale_Factor)
-end
 
 ;;*******************************************************************************************************************************
 ;;** Scale Modification **
@@ -10,7 +7,7 @@ end
 to do_scaleup_cont
   let toScale redCount - Scale_Up_Threshold
   
-  if toScale > 0 and scaledPopulation < total_population * scale_up_limit [
+  if toScale > 0 [
     set toScale toScale + scale_cont_buffer
     
     let redLower simuls with [color = red and myScale = scalePhase]
@@ -34,7 +31,7 @@ to do_scaleup_cont
       ]
     ]
     
-    if toScale > 0 or doubleNext > 0 [
+    if (toScale > 0 or doubleNext > 0) and scalePhase < scalePhaseMax [
       set scalePhase scalePhase + 1
       
       ask redUpper [
@@ -58,7 +55,7 @@ end
 to do_scaledown_cont
   let toScale Scale_Down_Threshold - redCount
   
-  if (toScale > 0 and scalePhase > 0) or scaledPopulation > total_population [
+  if toScale > 0 [
     set toScale toScale + scale_cont_buffer
     if toScale < scale_cont_buffer [
       set toScale scale_cont_buffer
@@ -127,7 +124,7 @@ to do_scaledown_cont
       ]
     ]
     
-    if toScale > 0 [
+    if toScale > 0 and scalePhase > 0 [
       set scalePhase scalePhase - 1
       
       ask redLower [
