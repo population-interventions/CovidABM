@@ -244,6 +244,7 @@ to params_setDrawValues
   set param_override_ve -1
   set param_override_ve_area -1
   set global_distance_mult 1
+  set overrideAsympt false
   
   if sensitivity = "HouseResampleUp+" [
     set house_resample_scale_up 0.8
@@ -335,6 +336,12 @@ to params_setDrawValues
   if global_distance_mult = "DistMult_2" [
     set global_distance_mult 2
   ]
+  if sensitivity = "SetVacArea65" [
+    set param_override_ve_area 0.65
+  ]
+  if sensitivity = "OverrideAsympt" [
+    set overrideAsympt true
+  ]
 end
 
 to params_setdeathrisk
@@ -382,5 +389,74 @@ to params_setdeathrisk
   ]
   [
     set riskofDeath 0.4354866
+  ])
+end
+
+to params_setOverrideAsympt
+  ;; risk of death associated with ageranges if they contract COVID-19
+  (ifelse agerange <= 5
+    [
+      if asymptomatic_draw < 1 - 0.28 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 15
+    [
+      if asymptomatic_draw < 1 - 0.2 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 25
+    [
+      if asymptomatic_draw < 1 - 0.26 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 35
+    [
+      if asymptomatic_draw < 1 - 0.33 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 45
+    [
+      if asymptomatic_draw < 1 - 0.40 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 55
+    [
+      if asymptomatic_draw < 1 - 0.49 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 65
+    [
+      if asymptomatic_draw < 1 - 0.63 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 75
+    [
+      if asymptomatic_draw < 1 - 0.69 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 85
+    [
+      if asymptomatic_draw < 1 - 0.69 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    agerange <= 95
+    [
+      if asymptomatic_draw < 1 - 0.69 [
+        set asymptomaticFlag 1
+      ]
+    ]
+    [
+      if asymptomatic_draw < 1 - 0.69 [
+        set asymptomaticFlag 1
+      ]
   ])
 end
