@@ -228,15 +228,21 @@ to createSimulants
       
       set asymptomatic_draw random-float 1
       set asymptomaticFlag 0
-      ifelse cohort_asymptomPropMult <= 1
+      ifelse overrideAsympt
       [
-        if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
-          set asymptomaticFlag 1
-        ]
+        params_setOverrideAsympt
       ]
       [
-        if asymptomatic_draw < 1 - (1 - Asymptom_Prop) / cohort_asymptomPropMult [
-          set asymptomaticFlag 1
+        ifelse cohort_asymptomPropMult <= 1
+        [
+          if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
+            set asymptomaticFlag 1
+          ]
+        ]
+        [
+          if asymptomatic_draw < 1 - (1 - Asymptom_Prop) / cohort_asymptomPropMult [
+            set asymptomaticFlag 1
+          ]
         ]
       ]
       

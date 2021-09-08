@@ -144,7 +144,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -245,7 +245,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.1
 0.01
 1
 NIL
@@ -300,7 +300,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-51.0
+10.0
 .5
 1
 NIL
@@ -315,7 +315,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-51.0
+10.0
 .5
 1
 NIL
@@ -670,7 +670,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -711,7 +711,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+15.0
 1
 1
 NIL
@@ -724,7 +724,7 @@ SWITCH
 315
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -829,7 +829,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -1336,7 +1336,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
