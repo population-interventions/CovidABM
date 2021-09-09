@@ -257,8 +257,8 @@ to add_vaccine [branch]
   [
     ;; global_vaccinePerDay acts as a rate multiplier
     let increase 0
-    if table:has-key? (table:get vaccineDoseRateTable branch) ticks [
-      set increase (table:get (table:get vaccineDoseRateTable branch) ticks) * (table:get global_vaccinePerDay branch)
+    if table:has-key? (table:get vaccineDoseRateTable branch) (ticks - start_day) [
+      set increase (table:get (table:get vaccineDoseRateTable branch) (ticks - start_day)) * (table:get global_vaccinePerDay branch)
     ]
     set increase increase
     table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) + increase)  
@@ -266,57 +266,59 @@ to add_vaccine [branch]
 end
 
 to vaccine_update
-  foreach vaccineBranches [ branch -> 
-    ;print (word "START " branch)
-    if (table:get global_vaccineAvailible branch) > -1 and Vaccine_Available = True [
-      ;; Vaccine over if global_vaccineAvailible = -1
-      
-      if (table:get vaccinePhaseIndex branch) = -1 [
-        vaccine_nextPhase branch
-      ]
-      add_vaccine branch
-      
-      let local_phase table:get global_vaccinePhase branch
-      let local_subPhase table:get global_vaccineSubPhase branch
-      let prioritiseFirstOverSecond table:get global_vaccinePrioritiseFirstOverSecond branch
-      
-      ;; Prioritise second doses over first doses.
-      ;; Sometimes a phase may prioritise first doses over second doses for people in later phases.
-      if not prioritiseFirstOverSecond [
-        foreach agentsByVaccPhase [ simul_part ->
-          ;if (item 0 simul_part) = branch and (((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
-          if (item 0 simul_part) = branch [
-            ask (item 3 simul_part) [
-              simul_vaccinate_updateSecondDose
+  if start_case_threshold < 0 [
+    foreach vaccineBranches [ branch -> 
+      ;print (word "START " branch)
+      if (table:get global_vaccineAvailible branch) > -1 and Vaccine_Available = True [
+        ;; Vaccine over if global_vaccineAvailible = -1
+        
+        if (table:get vaccinePhaseIndex branch) = -1 [
+          vaccine_nextPhase branch
+        ]
+        add_vaccine branch
+        
+        let local_phase table:get global_vaccinePhase branch
+        let local_subPhase table:get global_vaccineSubPhase branch
+        let prioritiseFirstOverSecond table:get global_vaccinePrioritiseFirstOverSecond branch
+        
+        ;; Prioritise second doses over first doses.
+        ;; Sometimes a phase may prioritise first doses over second doses for people in later phases.
+        if not prioritiseFirstOverSecond [
+          foreach agentsByVaccPhase [ simul_part ->
+            ;if (item 0 simul_part) = branch and (((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
+            if (item 0 simul_part) = branch [
+              ask (item 3 simul_part) [
+                simul_vaccinate_updateSecondDose
+              ]
             ]
           ]
         ]
-      ]
-      
-      while [(table:get global_vaccineAvailible branch) >= 1 and not (table:get global_firstDoseDone branch)] [
-        let vaccinateToday floor(table:get global_vaccineAvailible branch)
-        let askSimuls ((table:get vaccineActiveAgentSet branch) with [vaccineOffered = 0])
-        if count askSimuls < vaccinateToday [
-          set vaccinateToday count askSimuls
-        ]
-        ask n-of (vaccinateToday) askSimuls [
-          simul_vaccinate_me
+        
+        while [(table:get global_vaccineAvailible branch) >= 1 and not (table:get global_firstDoseDone branch)] [
+          let vaccinateToday floor(table:get global_vaccineAvailible branch)
+          let askSimuls ((table:get vaccineActiveAgentSet branch) with [vaccineOffered = 0])
+          if count askSimuls < vaccinateToday [
+            set vaccinateToday count askSimuls
+          ]
+          ask n-of (vaccinateToday) askSimuls [
+            simul_vaccinate_me
+          ]
+          
+          table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) - vaccinateToday)
+          
+          ;print (word "p: " table:get global_vaccinePending branch)
+          if (table:get global_vaccineAvailible branch) >= 1 [
+            vaccine_nextPhase branch
+          ]
         ]
         
-        table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) - vaccinateToday)
-        
-        ;print (word "p: " table:get global_vaccinePending branch)
-        if (table:get global_vaccineAvailible branch) >= 1 [
-          vaccine_nextPhase branch
-        ]
-      ]
-      
-      if prioritiseFirstOverSecond [
-        foreach agentsByVaccPhase [ simul_part ->
-          ;if (item 0 simul_part) = branch and (((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
-          if (item 0 simul_part) = branch [
-            ask (item 3 simul_part) [
-              simul_vaccinate_updateSecondDose
+        if prioritiseFirstOverSecond [
+          foreach agentsByVaccPhase [ simul_part ->
+            ;if (item 0 simul_part) = branch and (((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
+            if (item 0 simul_part) = branch [
+              ask (item 3 simul_part) [
+                simul_vaccinate_updateSecondDose
+              ]
             ]
           ]
         ]

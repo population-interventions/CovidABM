@@ -24,7 +24,7 @@ end
 
 to incursion_update
   ;; Happens at the start of the first 'go', since days = 0
-  if days >= incursionPhaseEndDay [
+  if (start_case_threshold < 0 or ticks <= 1) and ticks - start_day >= incursionPhaseEndDay [
     if table:has-key? incursionTable (incursionPhaseIndex + 1) [
       set incursionPhaseIndex incursionPhaseIndex + 1
       if param_incur_phase_limit = -1 or incursionPhaseIndex <= param_incur_phase_limit [

@@ -154,35 +154,43 @@ to params_setDrawValues
   ]
   
   ;; New system
-  if R0_range = 5 [
-    set trans_draw_min 0.098394749 ;; R0 4.5
-    set trans_draw_max 0.119370711 ;; R0 5.5
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ifelse precise_R0
+  [
+    if R0_range = 6.5 [
+      set global_transmissibility 0.144497012 ;; R0 6.5
+    ]
   ]
-  if R0_range = 6 [
-    set trans_draw_min 0.119370711 ;; R0 5.5
-    set trans_draw_max 0.144497012 ;; R0 6.5
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-  ]
-  if R0_range = 6.5 [
-    set trans_draw_min 0.1335 ;; R0 6
-    set trans_draw_max 0.1579 ;; R0 7
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-  ]
-  if R0_range = 7.5 [
-    set trans_draw_min 0.1701 ;; R0 7.5
-    set trans_draw_max 0.1701 ;; R0 7.5
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-  ]
-  if R0_range = 8 [
-    set trans_draw_min 0.1701 ;; R0 7.5
-    set trans_draw_max 0.1945 ;; R0 8.5
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  [
+    if R0_range = 5 [
+      set trans_draw_min 0.098394749 ;; R0 4.5
+      set trans_draw_max 0.119370711 ;; R0 5.5
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+    ]
+    if R0_range = 6 [
+      set trans_draw_min 0.119370711 ;; R0 5.5
+      set trans_draw_max 0.144497012 ;; R0 6.5
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+    ]
+    if R0_range = 6.5 [
+      set trans_draw_min 0.1335 ;; R0 6
+      set trans_draw_max 0.1579 ;; R0 7
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+    ]
+    if R0_range = 7.5 [
+      set trans_draw_min 0.1701 ;; R0 7.5
+      set trans_draw_max 0.1701 ;; R0 7.5
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+    ]
+    if R0_range = 8 [
+      set trans_draw_min 0.1701 ;; R0 7.5
+      set trans_draw_max 0.1945 ;; R0 8.5
+      let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+      set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+    ]
   ]
   
   set global_transmissibility_out global_transmissibility
@@ -230,8 +238,9 @@ to params_setDrawValues
   ;show ( word "draw_isolationCompliance " draw_isolationCompliance )
   ;show ( word "draw_maskWearEfficacy " draw_maskWearEfficacy )
   
-  
   ;; Sensitivity overrides
+  ;set max_stage 4
+  
   set house_resample_scale_up 0
   set house_resample_red_group 0.3
   set Non_Infective_Time 0
@@ -244,7 +253,6 @@ to params_setDrawValues
   set gather_loc_trans_red 0
   set Mask_Wear_Boost 0
   set reducedStageFour false
-  set max_stage 4
   set recover_immunity_mult 1
   set param_override_ve -1
   set param_override_ve_area -1

@@ -437,6 +437,9 @@ to setGlobals
   set prior27                    preSimDailyCases
   set prior28                    preSimDailyCases
   
+  set start_case_threshold       init_case_threshold
+  set start_day                  0
+  
   set real_prior0                0
   set real_prior1                0
   set real_prior2                0

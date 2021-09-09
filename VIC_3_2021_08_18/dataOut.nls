@@ -59,7 +59,7 @@ to calculateDataOut
     set stage4time stage4time + 1
   ]
   
-  if ticks < param_stage1_time [
+  if start_case_threshold < 0 and ticks < param_stage1_time [
     set casesinperiod7_switchTime casesinperiod7
     set cumulativeInfected_switchTime cumulativeInfected
   ]

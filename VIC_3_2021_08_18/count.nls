@@ -125,7 +125,7 @@ to outputLockdownCalibrate
   set slope_prior1 slope_prior0
   set slope_prior0 (casesinperiod7) / 7
   
-  if casesinperiod7 / 7 > slope_track_end [
+  if slope_track_end > 0 and casesinperiod7 / 7 > slope_track_end [
    set stop_simulation true 
   ]
   

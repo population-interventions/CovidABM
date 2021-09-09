@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-58.0
+51.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-58.0
+51.0
 .5
 1
 NIL
@@ -2852,7 +2852,7 @@ house_init_group
 house_init_group
 0
 1
-0.0
+0.7
 0.05
 1
 NIL

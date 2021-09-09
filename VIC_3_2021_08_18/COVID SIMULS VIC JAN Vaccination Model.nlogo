@@ -146,7 +146,7 @@ Span
 Span
 0
 30
-10.0
+4.2
 1
 1
 NIL
@@ -247,7 +247,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.032
 0.01
 1
 NIL
@@ -302,7 +302,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+61.199999999999996
 .5
 1
 NIL
@@ -317,7 +317,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+61.199999999999996
 .5
 1
 NIL
@@ -387,7 +387,7 @@ INPUTBOX
 372
 349
 initial_cases
-0.0
+40.0
 1
 0
 Number
@@ -404,10 +404,10 @@ total_population
 Number
 
 MONITOR
-1040
-304
-1212
-349
+1039
+309
+1211
+354
 Close contacts per day
 AverageContacts
 2
@@ -470,10 +470,10 @@ PENS
 "ICU Beds Required" 1.0 0 -16777216 true "" "plot ICUBedsRequired "
 
 MONITOR
-1479
-445
-1604
-494
+1484
+449
+1609
+498
 New Infections
 (globalPopPerSimul * (count simuls with [ color = red and timenow = 1 ]))
 0
@@ -536,10 +536,10 @@ scale
 -1000
 
 MONITOR
-920
-13
-985
-58
+892
+14
+957
+59
 NIL
 Days
 17
@@ -657,7 +657,7 @@ Global_Transmissibility
 Global_Transmissibility
 0
 1
-0.11158696456980605
+0.144497012
 0.001
 1
 NIL
@@ -672,7 +672,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+29.0
 1
 1
 NIL
@@ -713,7 +713,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+70.0
 1
 1
 NIL
@@ -731,10 +731,10 @@ schoolsOpen
 -1000
 
 MONITOR
-832
-13
-910
-58
+804
+14
+882
+59
 Households
 houseTotal
 1
@@ -831,7 +831,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+4.44
 1
 1
 NIL
@@ -846,17 +846,17 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7309096747736975
+0.7725717254313574
 .01
 1
 NIL
 HORIZONTAL
 
 MONITOR
-1480
-595
-1584
-640
+1483
+599
+1587
+644
 NIL
 currentinfections
 17
@@ -976,9 +976,9 @@ Vaccine_Available
 -1000
 
 MONITOR
-1248
+1264
 13
-1353
+1369
 58
 Vaccinated %
 ( count simuls with [ selfVaccEff_raw_risk > 0 or vacEffectCountdown > 0 ] / Population )* 100
@@ -995,17 +995,17 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-3864734.0
+4057971.0
 1
 1
 NIL
 HORIZONTAL
 
 MONITOR
-1362
-13
-1460
-58
+1377
+15
+1475
+60
 Vaccinated
 count simuls with [ selfVaccEff_raw_risk > 0 ]
 17
@@ -1078,10 +1078,10 @@ Asymptom_Prop
 11
 
 MONITOR
-1038
-144
-1210
-189
+1039
+222
+1211
+267
 NIL
 Track_and_Trace_Efficiency
 17
@@ -1157,7 +1157,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4" "continuous"
-2
+23
 
 SLIDER
 1610
@@ -1227,7 +1227,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.36007829616073916
+0.3212017596854608
 0.01
 1
 NIL
@@ -1324,7 +1324,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+61.199999999999996
 1
 1
 NIL
@@ -1405,15 +1405,15 @@ NIL
 1
 
 SLIDER
-1038
-13
-1211
-46
+1039
+18
+1212
+51
 End_Day
 End_Day
 -1
 730
-574.0
+37.0
 1
 1
 NIL
@@ -1450,12 +1450,12 @@ NIL
 HORIZONTAL
 
 MONITOR
-1477
-498
-1602
-543
+1482
+503
+1634
+548
 NIL
-casesinperiod7
+floor (casesinperiod7 / 7)
 17
 1
 11
@@ -1559,10 +1559,10 @@ param_trigger_loosen
 -1000
 
 MONITOR
-1480
-400
-1585
-445
+1484
+404
+1589
+449
 NIL
 policyTriggerScale
 17
@@ -1570,10 +1570,10 @@ policyTriggerScale
 11
 
 SLIDER
-1038
-53
-1211
-86
+1039
+57
+1212
+90
 End_R_Reported
 End_R_Reported
 -1
@@ -1585,10 +1585,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1614
-592
-1717
-637
+1620
+610
+1723
+655
 slopeAverage %
 slopeAverage * 100
 3
@@ -1596,10 +1596,10 @@ slopeAverage * 100
 11
 
 PLOT
-1615
-640
-1822
-760
+1620
+658
+1827
+778
 slope %
 NIL
 NIL
@@ -1656,15 +1656,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-590
-737
-763
-770
+588
+773
+761
+806
 sympt_present_prop
 sympt_present_prop
 0
 1
-0.6384471387894968
+0.6833399915388613
 0.01
 1
 NIL
@@ -1727,10 +1727,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-1720
-602
-1835
-635
+1725
+620
+1840
+653
 track_slope
 track_slope
 1
@@ -1851,7 +1851,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.6639704534895021
+0.6734602637918868
 0.05
 1
 NIL
@@ -2047,10 +2047,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1253
-989
-1449
-1022
+3495
+452
+3691
+485
 house_resample_red_group
 house_resample_red_group
 0
@@ -2062,10 +2062,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1038
-193
-1211
-226
+1039
+270
+1212
+303
 report_proportion
 report_proportion
 0
@@ -2077,10 +2077,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1038
-97
-1211
-142
+1042
+175
+1215
+220
 Case report %
 100 * (count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion]) / (count simuls with [ color = red ])
 2
@@ -2103,10 +2103,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-590
-843
-789
-876
+589
+847
+788
+880
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -2178,7 +2178,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.93973923001613
+0.6968007808143103
 0.01
 1
 NIL
@@ -2283,7 +2283,7 @@ trans_draw_min
 trans_draw_min
 0
 1
-0.098394749
+0.1335
 0.01
 1
 NIL
@@ -2298,7 +2298,7 @@ trans_draw_max
 trans_draw_max
 0
 1
-0.119370711
+0.1579
 0.01
 1
 NIL
@@ -2343,7 +2343,7 @@ R0_range
 R0_range
 -1
 10
-5.0
+6.5
 0.5
 1
 NIL
@@ -2417,7 +2417,7 @@ CHOOSER
 policy_pipeline
 policy_pipeline
 "None" "ME_TS_S1" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS" "ME_TS_NONE"
-7
+0
 
 SLIDER
 9
@@ -2570,10 +2570,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-588
-698
-778
-731
+587
+737
+777
+770
 init_trace_prop
 init_trace_prop
 0
@@ -2683,12 +2683,12 @@ NIL
 HORIZONTAL
 
 MONITOR
-1480
-547
-1583
-592
+1483
+552
+1615
+597
 NIL
-casesinperiod14
+casesReportedToday
 17
 1
 11
@@ -2770,13 +2770,13 @@ CHOOSER
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_az_25_95.csv" "_az_25_90.csv" "_az_25_80.csv" "_az_25_70.csv" "_70" "_80" "_90" "_95"
-7
+6
 
 SLIDER
-1253
-1027
-1453
-1060
+3495
+489
+3695
+522
 house_resample_scale_up
 house_resample_scale_up
 0
@@ -2803,10 +2803,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-592
-807
-739
-840
+3243
+138
+3418
+172
 self_iso_at_peak
 self_iso_at_peak
 0
@@ -2836,10 +2836,10 @@ print_vac
 -1000
 
 SLIDER
-1254
-1063
-1456
-1096
+1259
+993
+1461
+1026
 house_init_group
 house_init_group
 0
@@ -2858,7 +2858,7 @@ CHOOSER
 sensitivity
 sensitivity
 "None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asmpyt_66" "RAT_33" "RAT_15" "AllPF" "GatherVent_33" "GatherVent_80" "BoostMask_25" "StageMax_3b" "StageMax_3" "LetItRip" "LetItRipStage1" "LetItRipStage2" "ScaleBoost_20" "ScaleSet_70" "SetVacArea50" "SetVacArea65" "NoRecoverImmune" "DistMult_2" "PresentPropMult_050" "IsoTransmit_05" "IsoTransmit_1" "PPM_050_Stage3" "PPM_050_Stage3b" "TestVic" "OverrideAsympt"
-36
+0
 
 SLIDER
 2195
@@ -3004,7 +3004,7 @@ CHOOSER
 policy_switch
 policy_switch
 "tony" "nz" "continuous"
-0
+2
 
 SWITCH
 2033
@@ -3018,10 +3018,10 @@ suffix_rollout
 -1000
 
 SWITCH
-1039
-238
-1179
-271
+1707
+523
+1847
+556
 count_incursion
 count_incursion
 1
@@ -3134,7 +3134,7 @@ cont_stage
 cont_stage
 0
 4
-2.9
+3.4
 0.1
 1
 NIL
@@ -3288,10 +3288,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-590
-772
-763
-805
+588
+810
+761
+843
 sympt_present_mult
 sympt_present_mult
 0
@@ -3385,30 +3385,30 @@ NIL
 HORIZONTAL
 
 SLIDER
-1615
-764
-1788
-797
+1620
+783
+1793
+816
 slope_track_start
 slope_track_start
 0
-100
-15.0
-5
+300
+240.0
+10
 1
 NIL
 HORIZONTAL
 
 SLIDER
-1615
-802
-1788
-835
+1620
+820
+1793
+853
 slope_track_end
 slope_track_end
 0
 5000
-240.0
+0.0
 5
 1
 NIL
@@ -3422,6 +3422,58 @@ SWITCH
 override_asympt_table
 override_asympt_table
 1
+1
+-1000
+
+SLIDER
+1039
+95
+1213
+128
+init_case_threshold
+init_case_threshold
+-10
+300
+240.0
+10
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1040
+132
+1213
+165
+init_stage
+init_stage
+0
+4
+2.0
+1
+1
+NIL
+HORIZONTAL
+
+MONITOR
+963
+14
+1031
+59
+NIL
+start_day
+17
+1
+11
+
+SWITCH
+588
+697
+720
+731
+precise_R0
+precise_R0
+0
 1
 -1000
 
