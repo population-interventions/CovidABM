@@ -38,6 +38,9 @@ to go
   ;; Set lockdown stage and easing date, bases mostly on casesinperiod7
   CovidPolicyTriggers
   
+  ;; Randomly turn suceptible agents into infected ones. Percentage chance = IncursionRate.
+  incursion_update
+  
   ;; Vaccine loses effectiveness over time
   ask simuls [
     simul_waneVacEff
@@ -113,9 +116,6 @@ to go
   ;; Randomly vaccinate people and update vaccine phases.
   vaccine_update
   
-  ;; Randomly turn suceptible agents into infected ones. Percentage chance = IncursionRate.
-  incursion_update
-  
   ;show ( word " Simul Stuff " timer " seconds ")
   ;reset-timer
   
@@ -156,15 +156,20 @@ to go
     Stop
   ]
   
-  if start_case_threshold > -1 and casesinperiod7 / 7 > start_case_threshold [
-    set start_day ticks
-    set start_case_threshold -1
-    ;print (word "start_day " start_day ", cases " (casesinperiod7 / 7))
+  if start_case_threshold > -1 [
+    let compareNumber casesinperiod7 / 7
+    if realNotCaseThres [
+      set compareNumber infectionsinperiod7 / 7
+    ]
+    if compareNumber > start_case_threshold [
+      set start_day ticks
+      set start_case_threshold -1
+      ;print (word "start_day " start_day ", cases " (casesinperiod7 / 7))
+    ]
   ]
   
   set days days + 1
   tick
-  
   
   if (start_case_threshold < 0 and ticks - start_day = End_Day) or (end_R_reported >= 0 and totalEndCount >= end_R_reported )[
     ;print (word "stop")

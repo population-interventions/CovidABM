@@ -166,6 +166,9 @@ paramValues_singleTest = {**defaultParams, **{
 	'compound_essential' : listToStr(['"Extreme"']),
 	'param_vac_uptake_mult' : listToStr([0.8]),
 	'param_vac_rate_mult' : listToStr([0.6]),
+	'init_case_threshold'  : listToStr([240, 360, 480]),
+	'cont_stage' : listToStr([2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4]),
+	'realNotCaseThres' : listToStr(['true', 'false']),
 	'data_suffix' : listToStr([
 		#'"_bau.csv"',
 		#'"_int.csv"',

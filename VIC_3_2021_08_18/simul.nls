@@ -42,6 +42,9 @@ simuls-own [
   asymptomaticFlag ;; indicator identifying Asymptomatic cases
   asymptomatic_draw ;; Determines whether the agent will be asymptomatic
   symtomatic_present_day ;; When the simulant self-presents (if at all)
+  symtomatic_present_day_draw ;; Store for the above for all simulants
+  present_draw ;; Determines whether the agent will present
+  rat_draw ;; Does the simulant receive RAT
   report_case_draw ;; Draw for whether the case successfully reaches the reported counts. Note that the case still isolates regardless of whether it is reported, this is just for policy.
   accept_isolation_draw ;; Draw for accepting isolation. Use this to simulate ineffective tracking.
   
@@ -408,6 +411,25 @@ to simul_do_scaleup
   simul_resetSomeRandomParams
   
   set returntoschool random 100
+end
+
+to simul_updatePresentDay
+  ifelse asymptomaticFlag = 0 and sympt_present_prop * sympt_present_mult > present_draw
+  [
+    set symtomatic_present_day symtomatic_present_day_draw
+  ]
+  [
+    set symtomatic_present_day -1
+  ]
+
+  ;print symtomatic_present_day
+  ;; Rapid antigen testing hits a proportion of the population regardless of symptomatic status
+  if rat_draw < rat_prop [
+    let rat_day 1 + random rat_day_max
+    if symtomatic_present_day = -1 or rat_day < symtomatic_present_day [
+      set symtomatic_present_day rat_day
+    ]
+  ]
 end
 
 ;;*******************************************************************************************************************************
