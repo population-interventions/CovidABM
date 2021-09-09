@@ -44,9 +44,11 @@ to updateCounts
   set globalPopPerSimul scaledPopulation / Population
 
   ;; calculates the number of people infected and recorded today
-  set cumulativeInfected cumulativeInfected + infectionsToday
-  set cumulativeInfected_minusInit cumulativeInfected - initial_cases
-  
+  if start_case_threshold < 0 [
+    set cumulativeInfected cumulativeInfected + infectionsToday
+    set cumulativeInfected_minusInit cumulativeInfected - initial_cases
+  ]
+    
   ;; calculates death rate per infected person over the course of the pandemic
   if Deathcount > 0 and cumulativeInfected > 0 [
     set casefatalityrate ( Deathcount / cumulativeInfected )

@@ -1,4 +1,4 @@
-totalAgents,age,atsi,disability,essentialCount,workerCount,phase,subphase,spanMult,gatherFreqMult,region,succeptibleMult,asymptomPropMult,vaccinatedCount,doseProgressMin,doesProgressMax,ignoreUptakeBoost,studentCount,vaccineType,vaccineBranch,,comment
+totalAgents,age,atsi,disability,essentialCount,workerCount,phase,subphase,spanMult,gatherFreqMult,region,succeptibleMult,asymptomPropMult,vaccinatedCount,doseProgressMin,doesProgressMax,ignoreUptakeBoost,studentCount,vaccineType,vaccineBranch,uptake,comment
 82,85,0,0,0,12,1,1,1,1,1,1,1,62,0,2.147,0,0,AZ,A,0.8,80-89
 20,95,0,0,0,3,1,1,1,1,1,1,1,17,0,2.8363,0,0,AZ,A,0.8,90+
 1,55,1,0,0,1,1,1,1,1,1,1,1,0,0,1.35675,0,0,AZ,A,0.8,ATSI 55-60

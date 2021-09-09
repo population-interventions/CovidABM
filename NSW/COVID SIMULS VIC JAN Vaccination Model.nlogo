@@ -295,7 +295,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-51.0
+50.0
 .5
 1
 NIL
@@ -310,7 +310,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-51.0
+50.0
 .5
 1
 NIL
@@ -968,12 +968,12 @@ Vaccine_Available
 -1000
 
 MONITOR
-1248
+1225
 13
-1353
+1295
 58
-Vaccinated %
-( count simuls with [ selfVaccEff_raw_risk > 0 or vacEffectCountdown > 0 ] / Population )* 100
+Vac1 %
+( count simuls with [ selfVaccEff_raw_risk > 0 or vacEffectCountdown > 0 ] / (count simuls with [agerange > 15]) )* 100
 2
 1
 11
@@ -994,9 +994,9 @@ NIL
 HORIZONTAL
 
 MONITOR
-1362
+1405
 13
-1460
+1478
 58
 Vaccinated
 count simuls with [ selfVaccEff_raw_risk > 0 ]
@@ -2778,7 +2778,7 @@ CHOOSER
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv"
-0
+3
 
 SLIDER
 1252
@@ -2857,6 +2857,17 @@ house_init_group
 1
 NIL
 HORIZONTAL
+
+MONITOR
+1310
+15
+1368
+60
+Vac2 %
+( count simuls with [ selfVaccEff_raw_risk > 0 or vacEffectCountdown > 0 ] / (count simuls with [agerange > 15]) )* 100
+2
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?

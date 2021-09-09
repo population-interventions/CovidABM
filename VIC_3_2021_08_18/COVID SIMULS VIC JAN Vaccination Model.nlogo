@@ -131,7 +131,7 @@ Population
 Population
 1000
 5000
-2500.0
+2000.0
 500
 1
 NIL
@@ -146,7 +146,7 @@ Span
 Span
 0
 30
-4.2
+10.0
 1
 1
 NIL
@@ -247,7 +247,7 @@ superspreaders
 superspreaders
 0
 1
-0.032
+0.1
 0.01
 1
 NIL
@@ -302,7 +302,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-61.199999999999996
+10.0
 .5
 1
 NIL
@@ -317,7 +317,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-61.199999999999996
+10.0
 .5
 1
 NIL
@@ -387,7 +387,7 @@ INPUTBOX
 372
 349
 initial_cases
-40.0
+1500.0
 1
 0
 Number
@@ -398,7 +398,7 @@ INPUTBOX
 331
 456
 total_population
-6681000.0
+8166000.0
 1
 0
 Number
@@ -672,7 +672,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-29.0
+100.0
 1
 1
 NIL
@@ -713,7 +713,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-70.0
+15.0
 1
 1
 NIL
@@ -831,7 +831,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-4.44
+8.8
 1
 1
 NIL
@@ -846,7 +846,7 @@ Asymptomatic_Trans
 Asymptomatic_Trans
 0
 1
-0.7725717254313574
+0.7720745142278226
 .01
 1
 NIL
@@ -976,12 +976,12 @@ Vaccine_Available
 -1000
 
 MONITOR
-1264
-13
-1369
-58
-Vaccinated %
-( count simuls with [ selfVaccEff_raw_risk > 0 or vacEffectCountdown > 0 ] / Population )* 100
+1224
+15
+1293
+60
+Vac1 %
+( count simuls with [ selfVaccEff_raw_risk > 0 or vacEffectCountdown > 0 ] / (count simuls with [agerange > 15]) )* 100
 2
 1
 11
@@ -995,17 +995,17 @@ RAND_SEED
 RAND_SEED
 0
 10000000
-4057971.0
+4251208.0
 1
 1
 NIL
 HORIZONTAL
 
 MONITOR
-1377
-15
-1475
-60
+1404
+13
+1477
+58
 Vaccinated
 count simuls with [ selfVaccEff_raw_risk > 0 ]
 17
@@ -1227,7 +1227,7 @@ Asymptom_Prop
 Asymptom_Prop
 0
 1
-0.3212017596854608
+0.24969407350917178
 0.01
 1
 NIL
@@ -1324,7 +1324,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-61.199999999999996
+5.0
 1
 1
 NIL
@@ -1664,7 +1664,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.6833399915388613
+0.6928598922795046
 0.01
 1
 NIL
@@ -1851,7 +1851,7 @@ reinfect_area
 reinfect_area
 0
 1
-0.6734602637918868
+0.5490039450778627
 0.05
 1
 NIL
@@ -2178,7 +2178,7 @@ reinfect_risk
 reinfect_risk
 0
 1
-0.6968007808143103
+0.7924130931499654
 0.01
 1
 NIL
@@ -2590,7 +2590,7 @@ INPUTBOX
 2071
 466
 input_population_table
-input/population
+input/nsw/pop_nsw
 1
 0
 String
@@ -2601,7 +2601,7 @@ INPUTBOX
 2071
 531
 input_vaccine_table
-input/vaccine_rollout_az_25.csv
+input/nsw/vaccine_roll_nsw
 1
 0
 String
@@ -2625,7 +2625,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-1.0
+0.8
 0.05
 1
 NIL
@@ -2699,7 +2699,7 @@ INPUTBOX
 2071
 597
 input_dose_rate_table
-input/dose_rate.csv
+input/nsw/dose_rate_nsw.csv
 1
 0
 String
@@ -2770,7 +2770,7 @@ CHOOSER
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_az_25_95.csv" "_az_25_90.csv" "_az_25_80.csv" "_az_25_70.csv" "_70" "_80" "_90" "_95"
-6
+3
 
 SLIDER
 3495
@@ -2806,7 +2806,7 @@ SWITCH
 3243
 138
 3418
-172
+171
 self_iso_at_peak
 self_iso_at_peak
 0
@@ -3013,7 +3013,7 @@ SWITCH
 636
 suffix_rollout
 suffix_rollout
-1
+0
 1
 -1000
 
@@ -3134,7 +3134,7 @@ cont_stage
 cont_stage
 0
 4
-3.4
+2.8
 0.1
 1
 NIL
@@ -3267,7 +3267,7 @@ INPUTBOX
 2070
 400
 input_incursion_table
-input/incursion.csv
+input/nsw/incursion_nsw.csv
 1
 0
 String
@@ -3449,8 +3449,8 @@ init_stage
 init_stage
 0
 4
-2.0
-1
+1.0
+0.1
 1
 NIL
 HORIZONTAL
@@ -3470,12 +3470,23 @@ SWITCH
 588
 697
 720
-731
+730
 precise_R0
 precise_R0
 0
 1
 -1000
+
+MONITOR
+1304
+15
+1372
+60
+Vac2 %
+( count simuls with [ selfVaccEff_raw_risk > 0 and vacSecondDoseCountdown = 0 ] / (count simuls with [agerange > 15]) )* 100
+2
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
