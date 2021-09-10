@@ -131,7 +131,7 @@ to outputLockdownCalibrate
    set stop_simulation true 
   ]
   
-  if casesinperiod7 / 7 > slope_track_start and (slope_prior0 > 0 and slope_prior1 > 0 and 
+  if start_case_threshold < 0 and slope_track_start > ticks - start_day and (slope_prior0 > 0 and slope_prior1 > 0 and 
       slope_prior2 > 0 and slope_prior3 > 0 and slope_prior4 > 0 and slope_prior5 > 0 and slope_prior6 > 0)  [
     ;show ( word "4: " slope_prior4 ", 3: " slope_prior3 ", 2: " slope_prior2 ", 1: " slope_prior1 ", 0: " slope_prior0 )
     let linearRegress matrix:forecast-linear-growth ( list ln(slope_prior6) ln(slope_prior5) ln(slope_prior4) ln(slope_prior3) ln(slope_prior2) ln(slope_prior1) ln(slope_prior0) )
