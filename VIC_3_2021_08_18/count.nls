@@ -47,6 +47,7 @@ to updateCounts
   if start_case_threshold < 0 [
     set cumulativeInfected cumulativeInfected + infectionsToday
     set cumulativeInfected_minusInit cumulativeInfected - initial_cases
+    set totalCasesReported totalCasesReported + casesReportedToday
   ]
     
   ;; calculates death rate per infected person over the course of the pandemic

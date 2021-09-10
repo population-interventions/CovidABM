@@ -33,6 +33,7 @@ globals [
   dailyRecoverMult
   recoverProportion ; Proportion of the living population that has recovered.
   casesReportedToday
+  totalCasesReported
   casesReportedToday_acc ; Accumulator for casesReportedToday
   ICUBedsRequired
   scaled_Bed_Capacity
@@ -87,6 +88,11 @@ globals [
   prior26
   prior27
   prior28
+  
+  midReport_cumulativeInfected_minusInit
+  midReport_totalCasesReported
+  midReport_slopeAverage
+  midReport_casesinperiod7_max
   
   currentInfections_minusInit
   cumulativeInfected_minusInit

@@ -153,7 +153,13 @@ to vaccine_nextPhase [branch]
       let phaseUnvaccinated count agentSet
       
       let phaseUptakeMult (item 4 phaseData) * param_vac_uptake_mult
-      table:put vaccineActiveAgentSet branch agentSet with [ vaccinePriority < cohortVacUptake * phaseUptakeMult ]
+      let nextPhaseVacProp (item 6 phaseData)
+      let agentsToVaccinate agentSet with [ vaccinePriority < cohortVacUptake * phaseUptakeMult ]
+      
+      if nextPhaseVacProp > 0 [
+        set agentsToVaccinate n-of ((count agentsToVaccinate) * (1 - nextPhaseVacProp)) agentsToVaccinate
+      ]
+      table:put vaccineActiveAgentSet branch agentsToVaccinate
       
       ;print (word "New vaccine phase, branch: " branch)
       ;print (word "day: " ticks)
