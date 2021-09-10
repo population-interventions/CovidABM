@@ -100,6 +100,7 @@ def ReadModelFileAndWriteParams(startPart, endPart, valueOverwrite, topOfFile=[]
 			elif line == 'CHOOSER':
 				name, value = FindNameAndValue(modelFile, 5, 2)
 				value = GetChooserValue(value, modelFile.readline().rstrip())
+				print(name, value)
 				parameters.append([name, value])
 	
 	modelFile.close()
