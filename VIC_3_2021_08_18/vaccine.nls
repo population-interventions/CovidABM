@@ -43,6 +43,7 @@ to setup_vaccineData
   set vaccinePhaseIndex table:make
   set vaccineBranchStartIndex table:make
   set global_vaccineAvailible table:make
+  set global_vaccineSecondAvailible table:make
   set global_firstDoseDone table:make
   
   let i 0
@@ -53,6 +54,7 @@ to setup_vaccineData
       set vaccineBranches lput branch vaccineBranches
       table:put vaccinePhaseIndex branch -1
       table:put global_vaccineAvailible branch 0
+      table:put global_vaccineSecondAvailible branch 0
       table:put vaccineBranchStartIndex branch i
       table:put global_firstDoseDone branch false
     ]
@@ -65,7 +67,7 @@ to setup_vaccineData
   set global_vaccinePhase table:make
   set global_vaccineSubPhase table:make
   set global_vaccinePerDay table:make
-  set global_vaccinePrioritiseFirstOverSecond table:make
+  set global_vaccineFirstDoseReserveProp table:make
   
   setup_doseTable
   
@@ -136,7 +138,7 @@ to vaccine_nextPhase [branch]
       let local_vacPhase (item 1 phaseData)
       let local_vacSubPhase (item 2 phaseData)
       table:put global_vaccinePerDay branch ((item 3 phaseData) * param_vac_rate_mult + 0.00001) ; Floats
-      table:put global_vaccinePrioritiseFirstOverSecond branch ((item 5 phaseData) = 1)
+      table:put global_vaccineFirstDoseReserveProp branch (item 5 phaseData)
       
       let agentSet simuls with [
         VaccPhase = local_vacPhase and 
@@ -215,9 +217,13 @@ to simul_vaccinate_updateSecondDose
       set vacSecondDoseCountdown vacSecondDoseCountdown - 1
       if vacSecondDoseCountdown = 0 [
         let vacAvailible table:get global_vaccineAvailible vaccBranch
-        ifelse vacAvailible >= 1
+        let vacSecondAvailible table:get global_vaccineSecondAvailible vaccBranch
+        ifelse vacAvailible >= 1 and (vacSecondAvailible = true or vacSecondAvailible >= 1)
         [
           table:put global_vaccineAvailible vaccBranch (vacAvailible - 1)
+          if vacSecondAvailible != true [
+            table:put global_vaccineSecondAvailible vaccBranch (vacSecondAvailible - 1)
+          ]
           let myVaccineData table:get vaccineParamsTable vaccineType
           set vacEffectCountdown item 5 myVaccineData
           set needUpdate true
@@ -279,11 +285,12 @@ to vaccine_update
         
         let local_phase table:get global_vaccinePhase branch
         let local_subPhase table:get global_vaccineSubPhase branch
-        let prioritiseFirstOverSecond table:get global_vaccinePrioritiseFirstOverSecond branch
+        let firstDoseProp table:get global_vaccineFirstDoseReserveProp branch
         
         ;; Prioritise second doses over first doses.
         ;; Sometimes a phase may prioritise first doses over second doses for people in later phases.
-        if not prioritiseFirstOverSecond [
+        if firstDoseProp < 1 [
+          table:put global_vaccineSecondAvailible branch ((table:get global_vaccineAvailible branch) * (1 - firstDoseProp))
           foreach agentsByVaccPhase [ simul_part ->
             ;if (item 0 simul_part) = branch and (((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
             if (item 0 simul_part) = branch [
@@ -312,7 +319,9 @@ to vaccine_update
           ]
         ]
         
-        if prioritiseFirstOverSecond [
+        ;; Use remaining doses on second dose vaccination
+        if firstDoseProp > 0 [
+          table:put global_vaccineSecondAvailible branch true
           foreach agentsByVaccPhase [ simul_part ->
             ;if (item 0 simul_part) = branch and (((item 1 simul_part) < local_phase or ((item 1 simul_part) = local_phase and (item 2 simul_part) <= local_subPhase)) [
             if (item 0 simul_part) = branch [
