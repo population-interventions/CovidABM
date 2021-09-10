@@ -198,10 +198,10 @@ to COVIDPolicyTriggers
     if param_policy = "Stage4" [
       set stage 4
     ]
-    if param_policy = "StageCal None" [
+    if param_policy = "StageCal_None" [
       policy_stage -1
     ]
-    if param_policy = "StageCal Test" [
+    if param_policy = "StageCal_Test" [
       policy_stage -2
     ]
     if param_policy = "StageCal_1" [

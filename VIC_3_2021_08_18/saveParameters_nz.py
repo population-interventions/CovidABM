@@ -138,7 +138,7 @@ defaultParams = {
 paramValuesTestR_stageTestFull = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(2000),
 	'param_policy' : listToStr([
-		'"StageCal Test"',
+		'"StageCal_Test"',
 	]),
 	'Global_Transmissibility' : listToStr([
 		0.122,
