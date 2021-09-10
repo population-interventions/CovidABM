@@ -26,12 +26,19 @@ to updateCounts
   
   ;; calculates the number of infected people in the population
   let redLower simuls with [color = red and myScale = scalePhase]
-  let redUpper simuls with [color = red and myScale = scalePhase + 1]
-  set currentInfections (count redLower + count redUpper * Scale_Factor) * (Scale_Factor ^ scalephase)
+  let redUpper simuls with [color = red and myScale > scalePhase]
   
   let redLowerNoInit simuls with [color = red and myScale = scalePhase and timenow <= ticks ]
-  let redUpperNoInit simuls with [color = red and myScale = scalePhase + 1 and timenow <= ticks ]
-  set currentInfections_minusInit (count redLowerNoInit + count redUpperNoInit * Scale_Factor) * (Scale_Factor ^ scalephase)
+  let redUpperNoInit simuls with [color = red and myScale > scalePhase and timenow <= ticks ]
+  ifelse scalephase < scalePhaseMax 
+  [
+    set currentInfections (count redLower + count redUpper * Scale_Factor) * (Scale_Factor ^ scalephase)
+    set currentInfections_minusInit (count redLowerNoInit + count redUpperNoInit * Scale_Factor) * (Scale_Factor ^ scalephase) 
+  ]
+  [
+    set currentInfections (count redLower) * (Scale_Factor ^ scalephase) + (count redUpper) * (Scale_Factor ^ (scalephase + scalePhaseExtra))
+    set currentInfections_minusInit (count redLowerNoInit) * (Scale_Factor ^ scalephase) + (count redUpperNoInit) * (Scale_Factor ^ (scalephase + scalePhaseExtra))
+  ]
   
   ;; calculates the scaled population for working with smaller environments
   ifelse (scalephase = 0 and redUpper = 0) or redCount = 0

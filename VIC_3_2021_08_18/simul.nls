@@ -619,8 +619,8 @@ to simul_avoid
     let myPTA Proportion_Time_Avoid + draw_pta_modifier
     
     if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
-      set myPPA myPPA * vac_avoid_ease
-      set myPTA myPTA * vac_avoid_ease
+      set myPPA myPPA * (1 - vac_avoid_ease)
+      set myPTA myPTA * (1 - vac_avoid_ease)
     ]
     
     let myHouse householdUnit
@@ -758,7 +758,7 @@ to simul_checkMask
   ;; identifies people who waear a mask
   let myMaskWear mask_Wearing + Mask_Wear_Boost
   if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
-    set myMaskWear myMaskWear * vac_mask_ease
+    set myMaskWear myMaskWear * (1 - vac_mask_ease)
   ]
   ifelse maskPolicy and wearsMask <= myMaskWear and patch-here != homelocation
   [

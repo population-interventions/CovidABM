@@ -23,6 +23,7 @@ globals [
   AverageFinancialContacts
   ScalePhase
   ScalePhaseMax
+  scalePhaseExtra
   globalPopPerSimul
   extraScaleFactor
   Days

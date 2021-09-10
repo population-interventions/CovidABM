@@ -11,39 +11,47 @@ to do_scaleup_cont
     set toScale toScale + scale_cont_buffer
     
     let redLower simuls with [color = red and myScale = scalePhase]
-    let redUpper simuls with [color = red and myScale = scalePhase + 1]
+    let redUpper simuls with [color = red and myScale > scalePhase]
     
-    ;print (word "Scale Up: " scalePhase ", Lower: " (count redLower) ", Upper: " (count redUpper))
+    ;print (word "Scale Up: " scalePhase ", Lower: " (count redLower) ", Upper: " (count redUpper) ", Max: " scalePhaseMax)
     
-    let doubleNext 0
+    let scaleExp 1
+    if scalePhase >= scalePhaseMax [
+      set scaleExp scalePhaseExtra
+    ]
+    
+    let increaseNext 0
     ask redLower [
-      ifelse doubleNext > 0
+      ifelse increaseNext > 0
       [
-        set myScale myScale + 1
-        set doubleNext doubleNext - 1
+        set myScale myScale + scaleExp
+        set increaseNext increaseNext - 1
       ]
       [
         if toScale > 0 [
           simul_do_scaleup
-          set doubleNext (Scale_Factor - 1)
+          set increaseNext increaseNext + 1 / (Scale_Factor ^ scaleExp - 1)
           set toScale toScale - 1 
         ]
       ]
     ]
     
-    if (toScale > 0 or doubleNext > 0) and scalePhase < scalePhaseMax [
+    if (toScale > 0 or increaseNext > 0) and scalePhase < scalePhaseMax [
       set scalePhase scalePhase + 1
+      if scalePhase >= scalePhaseMax [
+        set scaleExp scalePhaseExtra
+      ]
       
       ask redUpper [
-        ifelse doubleNext > 0
+        ifelse increaseNext > 0
         [
-          set myScale myScale + 1
-          set doubleNext doubleNext - 1
+          set myScale myScale + scaleExp
+          set increaseNext increaseNext - 1
         ]
         [
           if toScale > 0 [
             simul_do_scaleup
-            set doubleNext (Scale_Factor - 1)
+            set increaseNext increaseNext + 1 / (Scale_Factor ^ scaleExp - 1)
             set toScale toScale - 1 
           ]
         ]
@@ -62,7 +70,7 @@ to do_scaledown_cont
     ]
     
     let redLower simuls with [color = red and myScale = scalePhase]
-    let redUpper simuls with [color = red and myScale = scalePhase + 1]
+    let redUpper simuls with [color = red and myScale > scalePhase]
     
     ;print (word "Scale Down: " scalePhase ", Lower: " (count redLower) ", Upper: " (count redUpper))
     
@@ -95,29 +103,34 @@ to do_scaledown_cont
         set my_hasKnownContact          hasKnownContact
         set my_traceAttempts            traceAttempts
         set my_selfTraceEffMult         selfTraceEffMult
-        set my_myScale                  myScale - 1
         
+        let toAsk Scale_Factor ^ (myScale - scalePhase) - 1 + random-float 1
+        set toScale toScale - 1 
+        set my_myScale scalePhase
+    
         set thisSimul self
         
-        ask n-of (Scale_Factor - 1) simuls with [color != red] [
-          set color red
-          set timenow                  my_timenow
-          set caseReportTime           my_caseReportTime
-          set tracked                  my_tracked
-          set R                        my_R
-          set infectVariant            my_infectVariant
-          set variantTransMult         my_variantTransMult
-          set contributeToR            my_contributeToR
-          set vaccineIncursionOverride my_vaccineIncursionOverride
-          set hasKnownContact          my_hasKnownContact
-          set traceAttempts            my_traceAttempts
-          set selfTraceEffMult         my_selfTraceEffMult
-          set myScale                  my_myScale
-          
-          table:put infectedContactList table:length infectedContactList thisSimul
-          set otherSimul self
+        if toAsk > random-float 1 [
+          ask n-of 1 simuls with [color != red] [
+            set color red
+            set timenow                  my_timenow
+            set caseReportTime           my_caseReportTime
+            set tracked                  my_tracked
+            set R                        my_R
+            set infectVariant            my_infectVariant
+            set variantTransMult         my_variantTransMult
+            set contributeToR            my_contributeToR
+            set vaccineIncursionOverride my_vaccineIncursionOverride
+            set hasKnownContact          my_hasKnownContact
+            set traceAttempts            my_traceAttempts
+            set selfTraceEffMult         my_selfTraceEffMult
+            set myScale                  my_myScale
+            
+            table:put infectedContactList table:length infectedContactList thisSimul
+            set otherSimul self
+          ]
+          table:put infectedContactList table:length infectedContactList otherSimul
         ]
-        table:put infectedContactList table:length infectedContactList otherSimul
         
         set myScale my_myScale
         set toScale toScale - 1 
@@ -140,32 +153,36 @@ to do_scaledown_cont
           set my_hasKnownContact          hasKnownContact
           set my_traceAttempts            traceAttempts
           set my_selfTraceEffMult         selfTraceEffMult
-          set my_myScale                  myScale - 1
+          
+          let toAsk Scale_Factor ^ (myScale - scalePhase) - 1
+          set toScale toScale - 1 
+          set my_myScale scalePhase
           
           set thisSimul self
           
-          ask n-of (Scale_Factor - 1) simuls with [color != red] [
-            set color red
-            set timenow                  my_timenow
-            set caseReportTime           my_caseReportTime
-            set tracked                  my_tracked
-            set R                        my_R
-            set infectVariant            my_infectVariant
-            set variantTransMult         my_variantTransMult
-            set contributeToR            my_contributeToR
-            set vaccineIncursionOverride my_vaccineIncursionOverride
-            set hasKnownContact          my_hasKnownContact
-            set traceAttempts            my_traceAttempts
-            set selfTraceEffMult         my_selfTraceEffMult
-            set myScale                  my_myScale
-            
-            table:put infectedContactList table:length infectedContactList thisSimul
-            set otherSimul self
+          if toAsk > random-float 1 [
+            ask n-of 1 simuls with [color != red] [
+              set color red
+              set timenow                  my_timenow
+              set caseReportTime           my_caseReportTime
+              set tracked                  my_tracked
+              set R                        my_R
+              set infectVariant            my_infectVariant
+              set variantTransMult         my_variantTransMult
+              set contributeToR            my_contributeToR
+              set vaccineIncursionOverride my_vaccineIncursionOverride
+              set hasKnownContact          my_hasKnownContact
+              set traceAttempts            my_traceAttempts
+              set selfTraceEffMult         my_selfTraceEffMult
+              set myScale                  my_myScale
+              
+              table:put infectedContactList table:length infectedContactList thisSimul
+              set otherSimul self
+            ]
+            table:put infectedContactList table:length infectedContactList otherSimul
           ]
-          table:put infectedContactList table:length infectedContactList otherSimul
           
           set myScale my_myScale
-          set toScale toScale - 1 
         ]
       ]
     ]
