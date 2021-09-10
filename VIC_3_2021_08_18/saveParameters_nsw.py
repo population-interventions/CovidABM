@@ -160,29 +160,32 @@ paramValues_stageEssential = {**defaultParams, **{
 	'end_day' : 728,
 }}
 
-paramValues_singleTest = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(4000),
+paramValues_mainTest = {**defaultParams, **{
+	'rand_seed' : GetRandomListUnique(500),
 	'r0_range' : listToStr([6.5]),
 	'Non_Infective_Time' : listToStr([0]),
 	'compound_essential' : listToStr(['"Extreme"']),
 	'param_vac_uptake_mult' : listToStr([0.8]),
 	'param_vac_rate_mult' : listToStr([0.6]),
 	'init_case_threshold'  : listToStr([240]),
-	'cont_stage' : listToStr([2.9, 3, 3.1, 3.2, 3.3]),
+	'cont_stage' : listToStr([2.6, 2.8, 3, 3.2, 3.4]),
+	'vac_lockdown_ease' : listToStr([0, 0.2, 0.4, 0.6, 0.8, 1]),
 	'realNotCaseThres' : listToStr(['false']),
 	'data_suffix' : listToStr([
 		#'"_bau.csv"',
 		#'"_int.csv"',
-		#'"_az_25.csv"',
-		'"_az_50.csv"',
+		'"_az_25.csv"',
+		#'"_az_50.csv"',
 	]),
 	'input_incursion_table' : '"input/nsw/incursion_nsw.csv"',
 	'input_population_table' : '"input/nsw/pop_nsw"', 
 	'input_vaccine_table' : '"input/nsw/vaccine_roll_nsw"',
-	'input_dose_rate_table' : '"input/nsw/dose_rate_nsw.csv"',
-	'end_day' : 38,
+	'input_dose_rate_table' : '"input/nsw/dose_rate_laxman2.csv"',
+	'end_day' : 476,
+	'vac_restrict_ease_day' : 112,
+	'mid_report_day' : 37,
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_singleTest,
+							paramValues_mainTest,
 							topOfFile=topOfFile)
