@@ -161,14 +161,14 @@ paramValues_stageEssential = {**defaultParams, **{
 }}
 
 paramValues_mainTest = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(500),
+	'rand_seed' : GetRandomListUnique(2000),
 	'r0_range' : listToStr([6.5]),
 	'Non_Infective_Time' : listToStr([0]),
 	'compound_essential' : listToStr(['"Extreme"']),
 	'param_vac_uptake_mult' : listToStr([0.8]),
 	'param_vac_rate_mult' : listToStr([0.6]),
 	'init_case_threshold'  : listToStr([240]),
-	'cont_stage' : listToStr([2.6, 2.8, 3, 3.2, 3.4]),
+	'cont_stage' : listToStr([3.3, 3.4, 3.5]),
 	'vac_lockdown_ease' : listToStr([0, 0.2, 0.4, 0.6, 0.8, 1]),
 	'realNotCaseThres' : listToStr(['false']),
 	'data_suffix' : listToStr([

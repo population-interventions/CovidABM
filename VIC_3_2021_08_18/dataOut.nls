@@ -30,45 +30,48 @@ to setup_DataOut
 end
 
 to calculateDataOut
-  set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
-  set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
-  set dieArray_listOut lput array:to-list dieArray dieArray_listOut
-  set case_listOut lput casesReportedToday case_listOut
-  set case7_listOut lput casesinperiod7 case7_listOut
-  set case14_listOut lput casesinperiod14 case14_listOut
-  set case28_listOut lput casesinperiod28 case28_listOut
-  set stage_listOut lput stage stage_listOut
-  
-  set infectNoVacArray array:from-list cohortLengthListOfZeros
-  set infectVacArray array:from-list cohortLengthListOfZeros
-  set dieArray array:from-list cohortLengthListOfZeros
-  
-  if stage = 0 [
-    set stage1time stage1time + 1
-  ]
-  if stage = 1 [
-    set stage1btime stage1btime + 1
-  ]
-  if stage = 2 [
-    set stage2time stage2time + 1
-  ]
-  if stage = 3 [
-    set stage3time stage3time + 1
-  ]
-  if stage = 4 [
-    set stage4time stage4time + 1
-  ]
-  
-  if start_case_threshold < 0 and ticks < param_stage1_time [
-    set casesinperiod7_switchTime casesinperiod7
-    set cumulativeInfected_switchTime cumulativeInfected
-  ]
-  
-  if start_case_threshold < 0 and ticks - start_day = mid_report_day [
-    set midReport_cumulativeInfected_minusInit cumulativeInfected_minusInit
-    set midReport_totalCasesReported           totalCasesReported
-    set midReport_slopeAverage                 slopeAverage
-    set midReport_casesinperiod7_max           casesinperiod7_max
+  if start_case_threshold < 0 [
+    ;print "doDataOut"
+    set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
+    set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
+    set dieArray_listOut lput array:to-list dieArray dieArray_listOut
+    set case_listOut lput casesReportedToday case_listOut
+    set case7_listOut lput casesinperiod7 case7_listOut
+    set case14_listOut lput casesinperiod14 case14_listOut
+    set case28_listOut lput casesinperiod28 case28_listOut
+    set stage_listOut lput stage stage_listOut
+    
+    set infectNoVacArray array:from-list cohortLengthListOfZeros
+    set infectVacArray array:from-list cohortLengthListOfZeros
+    set dieArray array:from-list cohortLengthListOfZeros
+    
+    if stage = 0 [
+      set stage1time stage1time + 1
+    ]
+    if stage = 1 [
+      set stage1btime stage1btime + 1
+    ]
+    if stage = 2 [
+      set stage2time stage2time + 1
+    ]
+    if stage = 3 [
+      set stage3time stage3time + 1
+    ]
+    if stage = 4 [
+      set stage4time stage4time + 1
+    ]
+    
+    if start_case_threshold < 0 and ticks < param_stage1_time [
+      set casesinperiod7_switchTime casesinperiod7
+      set cumulativeInfected_switchTime cumulativeInfected
+    ]
+    
+    if ticks - start_day = mid_report_day [
+      set midReport_cumulativeInfected_minusInit cumulativeInfected_minusInit
+      set midReport_totalCasesReported           totalCasesReported
+      set midReport_slopeAverage                 slopeAverage
+      set midReport_casesinperiod7_max           casesinperiod7_max
+    ]
   ]
 end
 

@@ -221,6 +221,18 @@ to calculateCasesInLastPeriod
   set infectionsinperiod7 real_prior0 + real_prior1 + real_prior2 + real_prior3
   set infectionsinperiod7 infectionsinperiod7 + real_prior4 + real_prior5 + real_prior6
   
+  if start_case_threshold > -1 [
+    let compareNumber casesinperiod7 / 7
+    if realNotCaseThres [
+      set compareNumber infectionsinperiod7 / 7
+    ]
+    if compareNumber > start_case_threshold [
+      set start_day ticks
+      set start_case_threshold -1
+      ;print (word "start_day " start_day ", cases " (casesinperiod7 / 7))
+    ]
+  ]
+  
   if track_slope [
     ;; Do not run this unless you need to, is probably slow.
     outputLockdownCalibrate
