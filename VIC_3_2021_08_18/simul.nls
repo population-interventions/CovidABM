@@ -343,6 +343,9 @@ end
 
 to simul_updateIsolationResponse
   set pace span * spanMult * global_distance_mult
+  if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
+    set span vac_ease_span
+  ]
   set isolateCompliant 0
   if accept_isolation_draw < accept_isolation_prop and not always_spread [
     if (Case_Isolation and (isolating = 1 or tracked = 1)) or (isolate_on_inf_notice and noticeOwnInfection = 1)[
@@ -597,6 +600,9 @@ to simul_visitDestination
   ;; reduces large gatherings by stage
   if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * visit_chance_multiplier > random-float 1  [
     let myRadius Visit_Radius * global_distance_mult
+    if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
+      set myRadius vac_ease_visit_rad * global_distance_mult
+    ]
     if EssentialWorkerFlag and myRadius < ess_radius_anchor [
       set myRadius (myRadius + ess_radius_anchor) * 0.5
     ]
@@ -619,8 +625,8 @@ to simul_avoid
     let myPTA Proportion_Time_Avoid + draw_pta_modifier
     
     if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
-      set myPPA myPPA * (1 - vac_lockdown_ease)
-      set myPTA myPTA * (1 - vac_lockdown_ease)
+      set myPPA vac_ease_avoid_postComp + draw_ppa_modifier
+      set myPTA vac_ease_avoid_postComp + draw_pta_modifier
     ]
     
     let myHouse householdUnit
@@ -655,6 +661,10 @@ end
 
 to simul_superSpread
   let mySpread superspreaders
+  if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day
+  [
+    set mySpread vac_ease_spread
+  ]
   if EssentialWorkerFlag and mySpread < ess_spread_anchor [
     set mySpread (mySpread + ess_spread_anchor) * 0.5
   ]
@@ -757,9 +767,9 @@ end
 to simul_checkMask
   ;; identifies people who waear a mask
   let myMaskWear mask_Wearing + Mask_Wear_Boost
-  if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
-    set myMaskWear myMaskWear * (1 - vac_lockdown_ease)
-  ]
+  ;if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
+  ;  set myMaskWear myMaskWear * (1 - vac_lockdown_ease)
+  ;]
   ifelse maskPolicy and wearsMask <= myMaskWear and patch-here != homelocation
   [
     set wearingMask 1

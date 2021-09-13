@@ -225,5 +225,33 @@ to COVIDPolicyTriggers
     if ticks < param_stage1_time [
       set stage 4
     ]
+    
+    if vac_ease_schools_open and ticks - start_day >= vac_restrict_ease_day [
+      set schoolsOpen true
+    ]
+  ]
+end
+
+to updateComplacency
+  if proportion_people_avoid > Complacency_Bound [
+    set proportion_people_avoid proportion_people_avoid - complacency_loss
+    if proportion_people_avoid < Complacency_Bound [
+      set proportion_people_avoid Complacency_Bound
+    ]
+  ]
+  if proportion_time_avoid > Complacency_Bound [
+    set proportion_time_avoid proportion_time_avoid - complacency_loss
+    if proportion_time_avoid < Complacency_Bound [
+      set proportion_time_avoid Complacency_Bound
+    ]
+  ]
+  
+  if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
+    if vac_ease_avoid_postComp > vac_ease_avoid_compBound [
+      set vac_ease_avoid_postComp vac_ease_avoid_postComp - complacency_loss
+      if vac_ease_avoid_postComp < vac_ease_avoid_compBound [
+        set vac_ease_avoid_postComp vac_ease_avoid_compBound
+      ]
+    ]
   ]
 end

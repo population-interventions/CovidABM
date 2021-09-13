@@ -206,6 +206,8 @@ globals [
   regionPosMin
   regionPosMax
   
+  vac_ease_avoid_postComp
+  
   totalEndR
   totalEndCount
   endR_sum

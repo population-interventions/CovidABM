@@ -119,18 +119,7 @@ to go
   ;show ( word " Simul Stuff " timer " seconds ")
   ;reset-timer
   
-  if proportion_people_avoid > Complacency_Bound [
-    set proportion_people_avoid proportion_people_avoid - complacency_loss
-    if proportion_people_avoid < Complacency_Bound [
-      set proportion_people_avoid Complacency_Bound
-    ]
-  ]
-  if proportion_time_avoid > Complacency_Bound [
-    set proportion_time_avoid proportion_time_avoid - complacency_loss
-    if proportion_time_avoid < Complacency_Bound [
-      set proportion_time_avoid Complacency_Bound
-    ]
-  ]
+  updateComplacency
 
   ;; Set casesinperiod7, which is only detected cases. Also sets casesinperiod14 and casesinperiod28.
   calculateCasesInLastPeriod

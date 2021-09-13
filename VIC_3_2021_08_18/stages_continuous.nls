@@ -90,6 +90,7 @@ to do_stages_continuous
         set Visit_Radius            (1 - prop) * 5.0    + prop * 3.6
         set Visit_Frequency         (1 - prop) * 0.1428 + prop * 0.1428
         set superspreaders          (1 - prop) * 0.04   + prop * 0.02
+        set schoolsOpen false
     ])
   ]
   
