@@ -494,6 +494,7 @@ to setGlobals
   set stageHasChanged 0
   set stageToday 0
   set stageYesterday 0
+  set vacRestrictionEase false
   set PrimaryUpper 0
   set SecondaryLower 0
   

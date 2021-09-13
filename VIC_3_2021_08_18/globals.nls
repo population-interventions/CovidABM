@@ -181,6 +181,7 @@ globals [
   stageHasChanged
   stageToday
   stageYesterday
+  vacRestrictionEase
   
   houseTrackedCaseTimeTable
   houseLocationTable

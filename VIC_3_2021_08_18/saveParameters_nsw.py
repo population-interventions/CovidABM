@@ -161,7 +161,7 @@ paramValues_stageEssential = {**defaultParams, **{
 }}
 
 paramValues_mainTest = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(2000),
+	'rand_seed' : GetRandomListUnique(10000),
 	'r0_range' : listToStr([6.5]),
 	'Non_Infective_Time' : listToStr([0]),
 	'compound_essential' : listToStr(['"Extreme"']),
@@ -212,5 +212,5 @@ paramValues_calibrate = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_calibrate,
+							paramValues_mainTest,
 							topOfFile=topOfFile)
