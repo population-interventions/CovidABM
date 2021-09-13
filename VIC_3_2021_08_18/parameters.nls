@@ -342,6 +342,17 @@ to params_setDrawValues
   if sensitivity = "OverrideAsympt" [
     set overrideAsympt true
   ]
+  if sensitivity = "Incur1125" [
+    set unVacIncurMult 0.5
+    set unVacIncurDay 210
+  ]
+  if sensitivity = "Incur45" [
+    set unVacIncurMult 2
+    set unVacIncurDay 210
+  ]
+  if sensitivity = "VacIncur0" [
+    set param_vacIncurMult 0
+  ]
 end
 
 to params_setdeathrisk

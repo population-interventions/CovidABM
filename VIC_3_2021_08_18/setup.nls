@@ -471,6 +471,9 @@ to setGlobals
   set infectedTrackCount         0
   set infectedTrackSum           0
   set infectedTrackAverage       0
+ 
+  set unVacIncurMult 1
+  set unVacIncurDay -1
   
   set new_case_real 0
   set new_case_real_counter 0

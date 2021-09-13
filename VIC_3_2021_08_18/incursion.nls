@@ -51,8 +51,12 @@ to incursion_update
   
   let peoplePerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
   if global_incursionArrivals > 0 [
+    let _incurRisk global_incursionRisk
+    if unVacIncurDay >= 0 and ticks >= unVacIncurDay [
+      set _incurRisk _incurRisk * unVacIncurMult
+    ]
     ask n-of (floor (global_incursionArrivals + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
-      if draw_borderIncursionRisk * global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
+      if draw_borderIncursionRisk * _incurRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
         set color red
         set contributeToR true
         set infectedContactList table:make

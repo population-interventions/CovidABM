@@ -213,7 +213,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-10.0
+7.0
 .5
 1
 NIL
@@ -228,7 +228,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-10.0
+7.0
 .5
 1
 NIL
@@ -571,7 +571,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal None" "StageCal Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4" "continuous"
-1
+2
 
 SLIDER
 1608
@@ -861,7 +861,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.7101159590714191
+0.33668434739310604
 0.01
 1
 NIL
@@ -1347,7 +1347,7 @@ param_vacIncurMult
 param_vacIncurMult
 0
 25
-1.0
+0.0
 0.1
 1
 NIL
@@ -1896,8 +1896,8 @@ CHOOSER
 282
 sensitivity
 sensitivity
-"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asmpyt_66" "RAT_33" "RAT_15" "AllPF" "GatherVent_33" "GatherVent_80" "BoostMask_25" "StageMax_3b" "StageMax_3" "LetItRip" "LetItRipStage1" "LetItRipStage2" "ScaleBoost_20" "ScaleSet_70" "SetVacArea50" "NoRecoverImmune" "DistMult_2" "SetVacArea65" "OverrideAsympt"
-30
+"None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asmpyt_66" "RAT_33" "RAT_15" "AllPF" "GatherVent_33" "GatherVent_80" "BoostMask_25" "StageMax_3b" "StageMax_3" "LetItRip" "LetItRipStage1" "LetItRipStage2" "ScaleBoost_20" "ScaleSet_70" "SetVacArea50" "NoRecoverImmune" "DistMult_2" "SetVacArea65" "OverrideAsympt" "Incur1125" "Incur45" "VacIncur0"
+33
 
 SLIDER
 2195
@@ -2333,7 +2333,7 @@ SWITCH
 289
 overrideAsympt
 overrideAsympt
-0
+1
 1
 -1000
 
@@ -132878,6 +132878,7 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="data_suffix">
       <value value="&quot;_az_25_90.csv&quot;"/>
       <value value="&quot;_az_25_80.csv&quot;"/>
+      <value value="&quot;_az_25_70.csv&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="data_suffix_2">
       <value value="&quot;None&quot;"/>
@@ -133174,8 +133175,9 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="sensitivity">
       <value value="&quot;None&quot;"/>
-      <value value="&quot;OverrideAsympt&quot;"/>
-      <value value="&quot;SetVacArea65&quot;"/>
+      <value value="&quot;Incur1125&quot;"/>
+      <value value="&quot;Incur45&quot;"/>
+      <value value="&quot;VacIncur0&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="set_shape">
       <value value="false"/>

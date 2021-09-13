@@ -136,6 +136,9 @@ globals [
   infectedTrackCount
   infectedTrackSum
   infectedTrackAverage
+  
+  unVacIncurMult
+  unVacIncurDay
 
   new_case_real
   new_case_real_counter
