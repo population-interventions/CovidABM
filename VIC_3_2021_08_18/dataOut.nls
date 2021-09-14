@@ -66,7 +66,7 @@ to calculateDataOut
       set cumulativeInfected_switchTime cumulativeInfected
     ]
     
-    if ticks - start_day = mid_report_day [
+    if ticks - start_day = mid_report_day - 1 [
       set midReport_cumulativeInfected_minusInit cumulativeInfected_minusInit
       set midReport_totalCasesReported           totalCasesReported
       set midReport_slopeAverage                 slopeAverage

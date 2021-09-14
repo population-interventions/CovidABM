@@ -625,8 +625,8 @@ to simul_avoid
     let myPTA Proportion_Time_Avoid + draw_pta_modifier
     
     if vacRestrictionEase and selfVaccEff_raw_risk > 0 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0 [
-      set myPPA vac_ease_avoid_postComp + draw_ppa_modifier
-      set myPTA vac_ease_avoid_postComp + draw_pta_modifier
+      set myPPA vac_ease_avoid + draw_ppa_modifier
+      set myPTA vac_ease_avoid + draw_pta_modifier
     ]
     
     let myHouse householdUnit
@@ -767,9 +767,9 @@ end
 to simul_checkMask
   ;; identifies people who waear a mask
   let myMaskWear mask_Wearing + Mask_Wear_Boost
-  ;if vacRestrictionEase and selfVaccEff_raw_risk > 0 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0 [
-  ;  set myMaskWear myMaskWear * (1 - vac_lockdown_ease)
-  ;]
+  if vacRestrictionEase and selfVaccEff_raw_risk > 0 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0 [
+    set myMaskWear vac_ease_mask_wear + Mask_Wear_Boost
+  ]
   ifelse maskPolicy and wearsMask <= myMaskWear and patch-here != homelocation
   [
     set wearingMask 1

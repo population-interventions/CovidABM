@@ -241,9 +241,33 @@ to params_setDrawValues
   ;show ( word "draw_isolationCompliance " draw_isolationCompliance )
   ;show ( word "draw_maskWearEfficacy " draw_maskWearEfficacy )
   
+  if vac_ease_stage = "None" [
+    set vac_ease_span             10
+    set vac_ease_avoid            0
+    set vac_ease_avoid_compBound  0
+    set vac_ease_mask_wear        0
+    set vac_ease_visit_rad        8.8
+    set vac_ease_spread           0.1
+  ]
+  if vac_ease_stage = "1b" [
+    set vac_ease_span             10
+    set vac_ease_avoid            30
+    set vac_ease_avoid_compBound  15
+    set vac_ease_mask_wear        35
+    set vac_ease_visit_rad        8.8
+    set vac_ease_spread           0.08
+  ]
+  if vac_ease_stage = "2a" [
+    set vac_ease_span             8
+    set vac_ease_avoid            45
+    set vac_ease_avoid_compBound  30
+    set vac_ease_mask_wear        50
+    set vac_ease_visit_rad        6.2
+    set vac_ease_spread           0.06
+  ]
+  
   ;; Sensitivity overrides
   ;set max_stage 4
-  
   set house_resample_scale_up 0
   set house_resample_red_group 0.3
   set Non_Infective_Time 0
