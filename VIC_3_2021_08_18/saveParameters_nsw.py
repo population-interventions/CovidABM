@@ -161,7 +161,7 @@ paramValues_stageEssential = {**defaultParams, **{
 }}
 
 paramValues_mainTest = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(10000),
+	'rand_seed' : GetRandomListUnique(6000),
 	'r0_range' : listToStr([6.5]),
 	'Non_Infective_Time' : listToStr([0]),
 	'compound_essential' : listToStr(['"Extreme"']),
@@ -169,6 +169,7 @@ paramValues_mainTest = {**defaultParams, **{
 	'param_vac_rate_mult' : listToStr([1.0]),
 	'init_case_threshold'  : listToStr([240]),
 	'cont_stage' : listToStr([3.25]),
+	'vac_ease_everyone' : listToStr(['true', 'false']),
 	'vac_ease_schools_open' : listToStr(['true', 'false']),
 	'vac_ease_stage' : listToStr(['"1b"', '"2a_mask3a"', '"1b_mask2a"']),
 	'realNotCaseThres' : listToStr(['false']),
@@ -182,7 +183,7 @@ paramValues_mainTest = {**defaultParams, **{
 	'input_population_table' : '"input/nsw/pop_nsw"', 
 	'input_vaccine_table' : '"input/nsw/vaccine_roll_nsw"',
 	'input_dose_rate_table' : '"input/nsw/dose_rate_laxman2.csv"',
-	'end_day' : 476,
+	'end_day' : 140,
 	'vac_restrict_ease_day' : 77,
 	'mid_report_day' : 42,
 }}
