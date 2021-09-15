@@ -535,6 +535,37 @@ paramValues_stageEssentialSensitive = {**defaultParams, **{
 	'end_day' : 574,
 }}
 
+paramValues_rCalcSmall = {**defaultParams, **{
+	'rand_seed' : GetRandomListUnique(10000),
+	'total_population' : '6681000',
+	'first_case_calibrate' : 'true',
+	'global_transmissibility' : listToStr([
+		0.1235, 0.1285, 0.1335, 0.1385, 0.1435, 
+		0.1479, 0.1529, 0.1579, 0.1629, 0.1679]),
+	'r0_range' : listToStr([-1]),
+	'data_suffix' : listToStr([
+		'"_az_25_80.csv"',
+	]),
+	'sensitivity' : listToStr([
+		'"None"',
+		'"NoInfect_1"',
+		'"OverrideAsympt"',
+	]),
+	'compound_trace' : '"ass100_90at5"',
+	'param_vac_uptake_mult' : listToStr([1]),
+	'param_vacIncurMult' : listToStr([1]),
+	'compound_essential' : listToStr(['"Extreme"']),
+	'param_vac_rate_mult' : listToStr([0.5]),
+	'input_population_table' : '"input/population"', 
+	'input_vaccine_table' : '"input/vaccine_rollout_az_25.csv"',
+	'input_dose_rate_table' : '"input/dose_rate.csv"',
+	'input_incursion_table' : '"input/incursion.csv"',
+	'policy_switch' : '"tony"',
+	'data_suffix_2' : '"None"',
+	'suffix_rollout' : 'false',
+	'end_day' : 574,
+}}
+
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_stageEssentialSensitive,
+							paramValues_rCalcSmall,
 							topOfFile=topOfFile)
