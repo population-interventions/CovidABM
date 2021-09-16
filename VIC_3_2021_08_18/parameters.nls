@@ -158,45 +158,6 @@ to params_setDrawValues
     set init_timenow_limit 0
   ]
   
-  ;; New system
-  if R0_range = 5 [
-    set trans_draw_min 0.098394749 ;; R0 4.5
-    set trans_draw_max 0.119370711 ;; R0 5.5
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-  ]
-  if R0_range = 6 [
-    set trans_draw_min 0.119370711 ;; R0 5.5
-    set trans_draw_max 0.144497012 ;; R0 6.5
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-  ]
-  if R0_range = 6.5 [
-    set trans_draw_min 0.1335 ;; R0 6
-    set trans_draw_max 0.1579 ;; R0 7
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-  ]
-  if R0_range = 7.5 [
-    set trans_draw_min 0.1701 ;; R0 7.5
-    set trans_draw_max 0.1701 ;; R0 7.5
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-  ]
-  if R0_range = 8 [
-    set trans_draw_min 0.1701 ;; R0 7.5
-    set trans_draw_max 0.1945 ;; R0 8.5
-    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
-    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
-  ]
-  
-  set global_transmissibility_out global_transmissibility
-  
-  let global_trans_n global_transmissibility * ( 1 - global_transmissibility ) / (global_trans_std ^ 2)
-  set global_trans_a global_transmissibility * global_trans_n
-  set global_trans_b (1 - global_transmissibility) * global_trans_n
-  
-  
   if param_policy_force_preset > 0 [
     if param_policy_force_preset = 1 [
       set param_policy_force_days 14
@@ -363,6 +324,52 @@ to params_setDrawValues
   if sensitivity = "VacIncur0" [
     set param_vacIncurMult 0
   ]
+  
+  ;; New system for R0 Range
+  if R0_range = 5 [
+    set trans_draw_min 0.098394749 ;; R0 4.5
+    set trans_draw_max 0.119370711 ;; R0 5.5
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ]
+  if R0_range = 6 [
+    set trans_draw_min 0.119370711 ;; R0 5.5
+    set trans_draw_max 0.144497012 ;; R0 6.5
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ]
+  if R0_range = 6.5 [
+    set trans_draw_min 0.1335 ;; R0 6
+    set trans_draw_max 0.1579 ;; R0 7
+    if sensitivity = "OverrideAsympt" [
+      set trans_draw_min 0.1435 ;; R0 6
+      set trans_draw_max 0.1675 ;; R0 7
+    ]
+    if sensitivity = "NoInfect_1" [
+      set trans_draw_min 0.1459 ;; R0 6
+      set trans_draw_max 0.1659 ;; R0 7
+    ]
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ]
+  if R0_range = 7.5 [
+    set trans_draw_min 0.1701 ;; R0 7.5
+    set trans_draw_max 0.1701 ;; R0 7.5
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ]
+  if R0_range = 8 [
+    set trans_draw_min 0.1701 ;; R0 7.5
+    set trans_draw_max 0.1945 ;; R0 8.5
+    let x (rngs:rnd-beta stream_id 1 1) ;; Use up random numbers.
+    set global_transmissibility trans_draw_min + (trans_draw_max - trans_draw_min) * (rngs:rnd-beta stream_id 1 1)
+  ]
+  
+  set global_transmissibility_out global_transmissibility
+  
+  let global_trans_n global_transmissibility * ( 1 - global_transmissibility ) / (global_trans_std ^ 2)
+  set global_trans_a global_transmissibility * global_trans_n
+  set global_trans_b (1 - global_transmissibility) * global_trans_n
 end
 
 to params_setdeathrisk
