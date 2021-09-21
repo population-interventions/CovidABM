@@ -16,15 +16,17 @@ import utilities as util
 def ProcessResults(outputName, nameList):
 	
 	index = [
+		'sensitivity',
 		'global_transmissibility',
-		'recreate_bug',
+	]
+	notFloatCol = [
+		'sensitivity',
 	]
 	metric = [
 		'initial_infection_R',
 	]
 	interestingColumns = index + ['rand_seed'] + metric
 	
-	notFloatCol = []
 	df = pd.DataFrame(columns=interestingColumns)
 	for v in nameList:
 		pdf = pd.read_csv(v + '.csv', header=6)
@@ -42,7 +44,7 @@ def ProcessResults(outputName, nameList):
 	util.OutputToFile(df, 'output/rCalc/' + outputName, head=False)
 
 
-files = util.GetFiles('output/rCalc/2021_08_19/')
-#files = ['output/rCalc/trace09']
+#files = util.GetFiles('output/rCalc/2021_08_19/')
+files = ['output/rCalc/nsw_01']
 print(files)
 ProcessResults('desc_2021_08_19', files)

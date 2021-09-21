@@ -153,6 +153,17 @@ to params_setDrawValues
     set avoid_essential false
   ]
   
+  ;; R calibration
+  if first_case_calibrate [
+    set initial_cases 1
+    set param_incur_phase_limit 0
+    set Vaccine_Available false
+    set param_policy "None"
+    set policy_pipeline "None"
+    set init_timenow_limit 0
+    set init_case_threshold -10
+  ]
+
   ;; New system
   ifelse precise_R0
   [

@@ -213,6 +213,35 @@ paramValues_calibrate = {**defaultParams, **{
 	'mid_report_day' : 42,
 }}
 
+paramValues_rCalcSmall = {**defaultParams, **{
+	'rand_seed' : GetRandomListUnique(10000),
+	'total_population' : '6681000',
+	'first_case_calibrate' : 'true',
+	'global_transmissibility' : listToStr([
+		0.144497012
+	]),
+	'r0_range' : listToStr([-1]),
+	'data_suffix' : listToStr([
+		'"_az_25.csv"',
+	]),
+	'sensitivity' : listToStr([
+		'"None"',
+	]),
+	'compound_trace' : '"ass100_90at5"',
+	'param_vac_uptake_mult' : listToStr([1]),
+	'param_vacIncurMult' : listToStr([1]),
+	'compound_essential' : listToStr(['"Extreme"']),
+	'param_vac_rate_mult' : listToStr([1.0]),
+	'input_incursion_table' : '"input/nsw/incursion_nsw.csv"',
+	'input_population_table' : '"input/nsw/pop_nsw"', 
+	'input_vaccine_table' : '"input/nsw/vaccine_roll_nsw"',
+	'input_dose_rate_table' : '"input/nsw/dose_rate_covid_live.csv"',
+	'policy_switch' : '"tony"',
+	'data_suffix_2' : '"None"',
+	'suffix_rollout' : 'true',
+	'end_day' : 574,
+}}
+
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_mainTest,
+							paramValues_rCalcSmall,
 							topOfFile=topOfFile)
