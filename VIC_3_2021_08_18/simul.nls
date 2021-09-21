@@ -641,7 +641,7 @@ to simul_avoid
         ifelse isStudent and schoolsOpen
         [
           ;; students don't isolate from each other or their household unit
-          if any? other simuls-here with [ (householdUnit != myHouse or not isStudent) and BeAvoided ] [
+          if any? other simuls-here with [ (householdUnit != myHouse and not isStudent) and BeAvoided ] [
             simul_move_to_empty_patch
           ]
         ]

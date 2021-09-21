@@ -10,7 +10,7 @@ Isolation,FALSE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TR
 Essential Workers,100%,100%,100%,100%,100%,100%,70%,70%,70%,50%,50%,50%,30%,30%,35%,20%,20%,20%,,What proportion of the workforce is considered to be essential.
 Mask Wearing,0%,0%,0%,30%,30%,15%,60%,60%,35%,70%,70%,50%,70%,70%,60%,80%,80%,85%,,The proportion of people that always wear a mask (except when at home).
 Tracking,FALSE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,,Whether the tracking system is in use.
-Superspread,10.0%,10.0%,1.0%,10.0%,10.0%,1.0%,10.0%,9.0%,1.0%,10.0%,7.0%,1.0%,7.0%,5.0%,0.8%,4.0%,3.0%,0.5%,,This many people are randomly teleported halfway around the world each day.
+Superspread,10.00%,10.00%,1.00%,10.00%,10.00%,1.00%,10.00%,9.00%,1.00%,10.00%,7.00%,1.00%,7.00%,5.00%,0.80%,4.00%,3.00%,0.50%,,This many people are randomly teleported halfway around the world each day.
 ,,,,,,,,,,,,,,,,,,,,
 Transmissability 0.34,,,,,,,,,,,,,,,,,,,,
 R_eff,,,2.485146918,,,1.600565563,,,1.401262973,,,1.179047645,,,0.90486687,,,0.502746363,,
@@ -22,11 +22,14 @@ Slope,,,0.122980673,,,0.077230966,,,0.059955477,,,0.039989317,,,0.003677855,,,-0
 ,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
+Stage,1,1b,2,3,4,,,,,,,,,,,,,,,
+Proportion of people who try to avoid contact with others (excluding their household),10%,30%,45%,60%,85%,,,,,,,,,,,,,,,
+"Proportion of time spent trying to avoid contacts, for those that attempt to do so.",10%,30%,45%,60%,85%,,,,,,,,,,,,,,,
+"Complacency: Minimal value that restrictions above reduce to as a result of fatigue, at one percentage point per day after a stage is entered.",5%,15%,30%,50%,78%,,,,,,,,,,,,,,,
+Essential workers: Proportion of working age adults classified as essential workers (not taking part in the contact avoiding system),100%,70%,50%,35%,20%,,,,,,,,,,,,,,,
+Schools open (disable contact avoiding behaviour among students),Yes,Yes,Yes,No,No,,,,,,,,,,,,,,,
+Mask wearing: Proportion of people that wear masks outside the home.,15%,35%,50%,60%,85%,,,,,,,,,,,,,,,
+Super spreaders: Proportion of people that engage in super spreading behaviour each day (move to a random gathering location),10%,8%,6%,4%,2%,,,,,,,,,,,,,,,
+Underlying frequency of visiting a random nearby gather location each day (supermarkets etc),14.28%,14.28%,14.28%,14.28%,14.28%,,,,,,,,,,,,,,,
+Radius for determining whether a gather location counts as nearby,8.8,8.8,6.2,5,3.6,,,,,,,,,,,,,,,
+Maximum daily speed in the simulation,10,10,8,5,3,,,,,,,,,,,,,,,
