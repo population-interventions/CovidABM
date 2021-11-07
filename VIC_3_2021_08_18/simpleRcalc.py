@@ -45,6 +45,6 @@ def ProcessResults(outputName, nameList):
 
 
 #files = util.GetFiles('output/rCalc/2021_08_19/')
-files = ['output/rCalc/nsw_01']
+files = ['output/rCalc/nsw_03']
 print(files)
 ProcessResults('desc_2021_08_19', files)

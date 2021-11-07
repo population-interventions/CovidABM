@@ -162,6 +162,8 @@ to params_setDrawValues
     set policy_pipeline "None"
     set init_timenow_limit 0
     set init_case_threshold -10
+    set param_vacIncurMult 0
+    set param_incurMult 0
   ]
 
   ;; New system

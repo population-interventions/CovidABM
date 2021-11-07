@@ -54,7 +54,7 @@ to incursion_update
   
   let peoplePerSimul scaledPopulation * extraScaleFactor / Population
   if global_incursionArrivals > 0 [
-    ask n-of (floor (global_incursionArrivals + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
+    ask n-of (floor (global_incursionArrivals * param_incurMult + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
       if draw_borderIncursionRisk * global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
         set color red
         set contributeToR true
