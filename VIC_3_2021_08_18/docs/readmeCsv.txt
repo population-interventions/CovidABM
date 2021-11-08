@@ -55,7 +55,8 @@ This file configures the phase structure of the simulation. Currently the popula
  - subPhase          is the letter after the phase, but as a number.
  - rateMult          multiplier for the speed of vaccination in this phase.
  - uptake            multiplier for the vaccine uptake in this phase.
- - firstDosePriority set to 1 to spend the phase issuing first doses, otherwise prefer second doses over first.
+ - firstDoseReserve  the proportion of doses reserved for people to recieve their first dose during the phase.
+ - nextPhaseVacProp  set above zero to override the proportion of people vaccinated in this phase.
 
 The order of the rows within each branch is the order of the steps in each parallel rollout.
 
