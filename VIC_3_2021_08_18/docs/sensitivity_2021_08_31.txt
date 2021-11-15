@@ -1,0 +1,24 @@
+Add stage 2 minimum to main grid
+
+
+ - Contact tracing low and high.
+ - Asymptomatic proportion 66%, and fix how kids are doubled in the main model.
+ - Random additional self isolation on days 1-7 for 33% of the population (proxy for mass RAT).
+ - Everyone gets Pfizer
+ - Reduce infectivity of infection at gather locations by 33%.
+ - Set infectivity to 65% for vaccinated simulants.
+ - No infectivity on day 1 of infection.
+ - Boost mask wearing by 25 percentage points in all stages.
+ - Stage 3b and stage 3 being the maximum stages.
+ 
+"None"
+"TraceLow"
+"TraceHigh"
+"Asympt_66"
+"RAT_33"
+"AllPF"
+"GatherVent_33"
+"NoInfDay_1"
+"BoostMask_25"
+"StageMax_3b"
+"StageMax_3"
