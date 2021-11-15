@@ -139,19 +139,20 @@ defaultParams = {
 paramValues_mainTest = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(100),
     'total_population' : '234000000',
-	'data_suffix' : listToStr([
-		#'"_bau.csv"',
-		#'"_int.csv"',
-		'"_az_25.csv"',
-		#'"_az_50.csv"',
+
+	'global_transmissibility' : listToStr([
+		0.144497012
 	]),
 	'data_suffix' : listToStr([
-		'"_az_25.csv"',
+		'".csv"',
 	]),
-	'input_incursion_table' : '"input/nsw/incursion_nsw.csv"',
-	'input_population_table' : '"input/nsw/pop_nsw"', 
-	'input_vaccine_table' : '"input/nsw/vaccine_roll_nsw"',
-	'input_dose_rate_table' : '"input/nsw/dose_rate_laxman2.csv"',
+	'param_policy' : '"pak"',
+	
+	'input_region' : '"input/pak/region.csv"',
+	'input_incursion_table' : '"input/pak/incursion.csv"',
+	'input_population_table' : '"input/pak/pop"', 
+	'input_vaccine_table' : '"input/pak/vaccine_roll"',
+	'input_dose_rate_table' : '"input/pak/dose_rate.csv"',
 	'end_day' : 574,
 }}
 
@@ -159,20 +160,20 @@ paramValues_rCalcSmall = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(100),
     'total_population' : '234000000',
 	'first_case_calibrate' : 'true',
+	
 	'global_transmissibility' : listToStr([
 		0.144497012
 	]),
-	'r0_range' : listToStr([-1]),
 	'data_suffix' : listToStr([
-		'"_az_25.csv"',
+		'".csv"',
 	]),
-	'sensitivity' : listToStr([
-		'"None"',
-	]),
-	'input_incursion_table' : '"input/nsw/incursion_nsw.csv"',
-	'input_population_table' : '"input/nsw/pop_nsw"', 
-	'input_vaccine_table' : '"input/nsw/vaccine_roll_nsw"',
-	'input_dose_rate_table' : '"input/nsw/dose_rate_covid_live.csv"',
+	'param_policy' : '"pak"',
+	
+	'input_region' : '"input/pak/region.csv"',
+	'input_incursion_table' : '"input/pak/incursion.csv"',
+	'input_population_table' : '"input/pak/pop"', 
+	'input_vaccine_table' : '"input/pak/vaccine_roll"',
+	'input_dose_rate_table' : '"input/pak/dose_rate.csv"',
 	'end_day' : 574,
 }}
 

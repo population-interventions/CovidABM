@@ -173,38 +173,43 @@ to COVIDPolicyTriggers
     set stage init_stage
   ]
   [
-    if param_policy = "TightSupress" [
-      policy_tight_supress
-    ]
-    if param_policy = "LooseSupress" [
-      policy_loose_supress
-    ]
-    if param_policy = "BarelySupress" [
-      policy_barely_supress
-    ]
-    if param_policy = "TightSupress_No_4" [
-      set max_stage 3
-      policy_tight_supress
-    ]
-    if param_policy = "LooseSupress_No_4" [
-      set max_stage 3
-      policy_loose_supress
-    ]
-    if param_policy = "AggressElim" [
-      if policy_switch = "tony" [
-        policy_agressive_elim
+    if policy_switch = "tony" or policy_switch = "nz" [
+      if param_policy = "TightSupress" [
+        policy_tight_supress
       ]
-      if policy_switch = "nz" [
-        policy_agressive_elim_nz
+      if param_policy = "LooseSupress" [
+        policy_loose_supress
+      ]
+      if param_policy = "BarelySupress" [
+        policy_barely_supress
+      ]
+      if param_policy = "TightSupress_No_4" [
+        set max_stage 3
+        policy_tight_supress
+      ]
+      if param_policy = "LooseSupress_No_4" [
+        set max_stage 3
+        policy_loose_supress
+      ]
+      if param_policy = "AggressElim" [
+        if policy_switch = "tony" [
+          policy_agressive_elim
+        ]
+        if policy_switch = "nz" [
+          policy_agressive_elim_nz
+        ]
+      ]
+      if param_policy = "ModerateElim" [
+        if policy_switch = "tony" [
+          policy_moderate_elim
+        ]
+        if policy_switch = "nz" [
+          policy_moderate_elim_nz
+        ]
       ]
     ]
-    if param_policy = "ModerateElim" [
-      if policy_switch = "tony" [
-        policy_moderate_elim
-      ]
-      if policy_switch = "nz" [
-        policy_moderate_elim_nz
-      ]
+    if policy_switch = "pak" [
+      COVIDPolicyTriggers_pak
     ]
     if param_policy = "Stage2infect" [
       policy_infect 2

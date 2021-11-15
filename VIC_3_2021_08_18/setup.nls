@@ -35,7 +35,7 @@ to loadPopDivisionTable
 end
 
 to loadRegionTable
-  let regionFileData remove-item 0 csv:from-file "input/region.csv"
+  let regionFileData remove-item 0 csv:from-file input_region
   set regionTable table:make
   set regionTable_keys []
   set regionTable_list []
