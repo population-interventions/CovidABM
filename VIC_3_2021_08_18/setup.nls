@@ -177,6 +177,8 @@ to createSimulants
       set vaccineOffered 0
       set selfVaccEff_raw_area 0
       set selfVaccEff_raw_risk 0
+      set selfVaccEff_raw_hosp 0
+      set selfVaccEff_raw_mort 0
       set R 0
       set vacEffectCountdown 0
       set vacSecondDoseCountdown 0

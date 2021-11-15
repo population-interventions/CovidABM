@@ -70,13 +70,19 @@ Note that these doses are used for first and second shots, and that each agent r
 This file configures the effectiveness of each of the vaccine types.
 
  - name              this is the name of the vaccine. It is used to match cohorts to vaccine types via vaccineType in population.csv.
- - reductTrans_a     alpha in the beta distribution for transmission risk reduction - ie for catching the virus.
- - reductTrans_b     beta in the beta distribution for transmission risk reduction.
- - reductArea_a      alpha in the beta distribution for infectivity area.
- - reductArea_b      beta in the beta distribution for infectivity area.
+ - reductRisk_a      alpha in the beta distribution for transmission risk reduction - ie for catching the virus.
+ - reductRisk_b      beta for the above
+ - reductInfect_a    alpha in the beta distribution for infectivity reduction, split evenly between peak and duration.
+ - reductInfect_b    beta for the above.
+ - reductHosp_a      alpha in the beta distribution for hospitalisation reduction.
+ - reductHosp_b      beta for the above.
+ - reductMort_a      alpha in the beta distribution for mortality reduction.
+ - reductMort_b      beta for the above.
  - partialDays       minimum days between first and second doses. May be higher in practise if a dose is not availible.
- - partialTransMult  multiplier to transmission risk reduction for only having one dose.
- - partialAreaMult   multiplier to infectivity area reduction for only having one dose.
+ - partialRiskMult   multiplier to transmission risk reduction for only having one dose.
+ - partialInfectMult multiplier to infectivity area reduction for only having one dose.
+ - partialHospMult   multiplier to hospitalisation reduction for only having one dose.
+ - partialMortMult   multiplier to mortality reduction for only having one dose.
  - vacEffectDays     days of delay for a dose to take effect.
 
 Infectivity area is the product of peak infectivity reduction and illness duration reduction.

@@ -75,6 +75,8 @@ simuls-own [
   vaccineType ;; Name of vaccine being offered
   selfVaccEff_raw_area ;; Duration times transmissibility of infection
   selfVaccEff_raw_risk ;; Risk of being infected
+  selfVaccEff_raw_hosp ;; Hospitalisation risk reduction
+  selfVaccEff_raw_mort ;; Mortality risk reduction
   transmitFromVacAndReinfect ;; Multiplier for disease effects, (1 - selfVaccEff * recoveryEffect)^(1/3)
   succeptibilityTable ;; exposureAndVacMult but for each variant
   succeptibilityTableMax ;; maximum of the above table.
@@ -186,6 +188,8 @@ to simul_updateVacAndReinfectMult
     ;; Override with overseas infections
     let store_selfVaccEff_raw_risk selfVaccEff_raw_risk
     let store_selfVaccEff_raw_area selfVaccEff_raw_area
+    let store_selfVaccEff_raw_hosp selfVaccEff_raw_hosp
+    let store_selfVaccEff_raw_mort selfVaccEff_raw_mort
     let store_recoveryVariant recoveryVariant
     let store_vacSecondDoseCountdown vacSecondDoseCountdown
     let store_vacEffectCountdown vacEffectCountdown
@@ -197,10 +201,14 @@ to simul_updateVacAndReinfectMult
       let overrideVaccineData table:get vaccineParamsTable vaccineIncursionOverride
       set selfVaccEff_raw_risk item 0 overrideVaccineData
       set selfVaccEff_raw_area item 1 overrideVaccineData
+      set selfVaccEff_raw_hosp item 2 overrideVaccineData
+      set selfVaccEff_raw_mort item 3 overrideVaccineData
     ]
     [
       set selfVaccEff_raw_area 0
       set selfVaccEff_raw_risk 0
+      set selfVaccEff_raw_hosp 0
+      set selfVaccEff_raw_mort 0
     ]
     set recoveryVariant 0
     set vacSecondDoseCountdown 0
@@ -211,6 +219,8 @@ to simul_updateVacAndReinfectMult
     
     set selfVaccEff_raw_risk store_selfVaccEff_raw_risk
     set selfVaccEff_raw_area store_selfVaccEff_raw_area
+    set selfVaccEff_raw_hosp store_selfVaccEff_raw_hosp
+    set selfVaccEff_raw_mort store_selfVaccEff_raw_mort
     set recoveryVariant store_recoveryVariant
     set vacSecondDoseCountdown store_vacSecondDoseCountdown
     set vacEffectCountdown store_vacEffectCountdown
@@ -320,6 +330,8 @@ to simul_waneVacEff
   if selfVaccEff_raw_risk > 0 and param_vac_wane > 0 [
     set selfVaccEff_raw_area selfVaccEff_raw_area * (1 - param_vac_wane)
     set selfVaccEff_raw_risk selfVaccEff_raw_risk * (1 - param_vac_wane)
+    set selfVaccEff_raw_hosp selfVaccEff_raw_hosp * (1 - param_vac_wane)
+    set selfVaccEff_raw_mort selfVaccEff_raw_mort * (1 - param_vac_wane)
     simul_updateVacAndReinfectMult
   ]
 end

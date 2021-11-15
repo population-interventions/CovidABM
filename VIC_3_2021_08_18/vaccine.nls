@@ -75,28 +75,32 @@ to setup_vaccineData
   set vacineEff_transOut []
   set vacineEff_areaOut []
   
-  let vaccineParamsFileData remove-item 0 csv:from-file "input/vaccine_params.csv"
+  let vaccineParamsFileData remove-item 0 csv:from-file input_vac_params
   set vaccineParamsTable table:make
   set i 0
   foreach vaccineParamsFileData [ rawData -> 
     let vacName item 0 rawData
-    let vacTransReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
-    let vacAreaReduct rngs:rnd-beta vaccineEffseedID (item 3 rawData) (item 4 rawData)
+    let vacRiskReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
+    let vacInfectReduct rngs:rnd-beta vaccineEffseedID (item 3 rawData) (item 4 rawData)
+    let vacHospReduct rngs:rnd-beta vaccineEffseedID (item 5 rawData) (item 6 rawData)
+    let vacMortReduct rngs:rnd-beta vaccineEffseedID (item 7 rawData) (item 8 rawData)
     if param_override_ve >= 0 [
-      set vacTransReduct param_override_ve
+      set vacRiskReduct param_override_ve
     ]
     if param_override_ve_area >= 0 [
-      set vacAreaReduct param_override_ve_area
+      set vacInfectReduct param_override_ve_area
     ]
-    let partialDays item 5 rawData
-    let partialTrans_mult item 6 rawData
-    let partialReduct_mult item 7 rawData
-    let vacEffectDays item 8 rawData
-    table:put vaccineParamsTable vacName (list vacTransReduct vacAreaReduct partialDays partialTrans_mult partialReduct_mult vacEffectDays)
+    let partialDays item 9 rawData
+    let partialRisk_mult item 10 rawData
+    let partialInfect_mult item 11 rawData
+    let partialHosp_mult item 12 rawData
+    let partialMort_mult item 13 rawData
+    let vacEffectDays item 14 rawData
+    table:put vaccineParamsTable vacName (list vacRiskReduct vacInfectReduct vacHospReduct vacMortReduct partialRisk_mult partialInfect_mult partialHosp_mult partialMort_mult partialDays vacEffectDays)
     
     set vacineEff_nameOut lput vacName vacineEff_nameOut
-    set vacineEff_transOut lput vacTransReduct vacineEff_transOut
-    set vacineEff_areaOut lput vacAreaReduct vacineEff_areaOut
+    set vacineEff_transOut lput vacRiskReduct vacineEff_transOut
+    set vacineEff_areaOut lput vacInfectReduct vacineEff_areaOut
   ]
 end
 
@@ -192,10 +196,14 @@ to simul_set_vaccine_params
       let myVaccineData table:get vaccineParamsTable vaccineType
       set selfVaccEff_raw_risk item 0 myVaccineData
       set selfVaccEff_raw_area item 1 myVaccineData
+      set selfVaccEff_raw_hosp item 2 myVaccineData
+      set selfVaccEff_raw_mort item 3 myVaccineData
       if vacSecondDoseCountdown > 0 or vacEffectCountdown > 0 [
         ; Not yet recieved second dose or waiting for most recent dose to take effect.
-        set selfVaccEff_raw_risk selfVaccEff_raw_risk * item 3 myVaccineData
-        set selfVaccEff_raw_area selfVaccEff_raw_area * item 4 myVaccineData
+        set selfVaccEff_raw_risk selfVaccEff_raw_risk * item 4 myVaccineData
+        set selfVaccEff_raw_area selfVaccEff_raw_area * item 5 myVaccineData
+        set selfVaccEff_raw_hosp selfVaccEff_raw_hosp * item 6 myVaccineData
+        set selfVaccEff_raw_mort selfVaccEff_raw_mort * item 7 myVaccineData
       ]
       simul_updateVacAndReinfectMult
       ;print vaccineType
@@ -205,8 +213,8 @@ end
 
 to simul_admininster_vaccine
   let myVaccineData table:get vaccineParamsTable vaccineType
-  set vacEffectCountdown item 5 myVaccineData
-  set vacSecondDoseCountdown item 2 myVaccineData
+  set vacSecondDoseCountdown item 8 myVaccineData
+  set vacEffectCountdown item 9 myVaccineData
   simul_set_vaccine_params
 end
 
@@ -231,7 +239,7 @@ to simul_vaccinate_updateSecondDose
             table:put global_vaccineSecondAvailible vaccBranch (vacSecondAvailible - 1)
           ]
           let myVaccineData table:get vaccineParamsTable vaccineType
-          set vacEffectCountdown item 5 myVaccineData
+          set vacEffectCountdown item 9 myVaccineData
           set needUpdate true
         ]
         [
