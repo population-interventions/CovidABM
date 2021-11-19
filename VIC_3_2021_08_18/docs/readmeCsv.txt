@@ -6,26 +6,27 @@ This file defines the characteristics of the agents in the model. There are alwa
 
 Many parameters are a boolean, which should be indicated by a value of 1 or 0.
 
- - totalAgents       sets the size of the cohort. This column must sum to 2500
- - age               sets the singular age of the cohort.
- - atsi              sets whether the cohort are aborigional or torris strait islanders.
- - disability        sets whether the cohort has a disability.
- - essentialCount    is how many workers in the cohort are the most essential workers.
- - workerCount       is how many agents for the cohort are considered to be working age.
- - phase             is the phase in which the cohort is vacinated.
- - subPhase          is the sub phase of vaccination. Ie the 'a' or 'b' after 1a or 1b
- - spanMult          is a multiplier to the speed of the cohort.
- - gatherFreqMult    is a multiplier to how often the cohort gathers at central locations.
- - region            is the region index of the cohort. See region.csv
- - succeptibleMult   is a multiplier for the chance of being infected.
- - asymptomPropMult  is a multiplier to the base proportion of the population that is asymptomatic.
- - vaccinatedCount   is the number of members of the cohort that start vaccinated.
- - doseProgressMin   defines a uniform distribution of dose progression in combination with doseProgressMax.
- - doseProgressMax   as above, and described below. Should be at least doseProgressMin.
- - ignoreUptakeBoost ignores the effect of uptakeBoost. See vaccination.
- - studentCount      is how many members of the cohort are students.
- - vaccineType       the name of the vaccine availible to this cohort. This should match the names in vaccine_params.csv.
- - vaccineBranch     the name of the parallel vaccine rollout branch. Matches branch in vaccine_rollout.csv.
+ - totalAgents         sets the size of the cohort. This column must sum to 2500
+ - age                 sets the singular age of the cohort.
+ - atsi                sets whether the cohort are aborigional or torris strait islanders.
+ - disability          sets whether the cohort has a disability.
+ - essentialCount      is how many workers in the cohort are the most essential workers.
+ - workerCount         is how many agents for the cohort are considered to be working age.
+ - phase               is the phase in which the cohort is vacinated.
+ - subPhase            is the sub phase of vaccination. Ie the 'a' or 'b' after 1a or 1b
+ - spanMult            is a multiplier to the speed of the cohort.
+ - gatherFreqMult      is a multiplier to how often the cohort gathers at central locations.
+ - region              is the region index of the cohort. See region.csv
+ - succeptibleMult     is a multiplier for the chance of being infected.
+ - asymptomPropMult    is a multiplier to the base proportion of the population that is asymptomatic.
+ - vaccinatedCount     is the number of members of the cohort that start vaccinated.
+ - doseProgressMin     defines a uniform distribution of dose progression in combination with doseProgressMax.
+ - doseProgressMax     as above, and described below. Should be at least doseProgressMin.
+ - ignoreUptakeBoost   ignores the effect of uptakeBoost. See vaccination.
+ - studentCount        is how many members of the cohort are students.
+ - vaccineType         the name of the vaccine availible to this cohort. This should match the names in vaccine_params.csv.
+ - vaccineBranch       the name of the parallel vaccine rollout branch. Matches branch in vaccine_rollout.csv.
+ - vaccineUptakeTarget ?? not sure and not relevant to NZ as there is no rollout in NZ.
 
 Use doseProgressMin and doseProgressMax to define a range [doseProgressMin, doseProgressMax] from which pre-model vaccinated simulants draw their vacWaitDays. A simulant which draws a doseProgress <= 0 has just received their vaccination so must wait the full dose period for their vaccine. Likewise, a simulant with doseProgress >= 1 is assumed to have their second dose when the model starts. Draws between 0 and 1 set vacWaitDays between zero and maximum.
 
