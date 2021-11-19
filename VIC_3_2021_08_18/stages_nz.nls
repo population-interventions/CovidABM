@@ -55,6 +55,20 @@ to do_stages_nz
     set superspreaders 0.1
   ]
 
+  if stage = 2.5 [
+    ;; Stage 2B
+    set span 6.5
+    set proportion_people_avoid 55
+    set proportion_time_avoid 55
+    set Complacency_Bound 45
+    set Essential_Workers 70
+    set schoolsOpen true
+    set mask_wearing 55
+    set Visit_Radius 5.6
+    set Visit_Frequency 0.1428
+    set superspreaders 0.065
+  ]
+
   if stage = 3 [
     ;; Stage 3
     set span 5

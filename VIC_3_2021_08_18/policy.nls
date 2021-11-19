@@ -132,13 +132,28 @@ to COVIDPolicyTriggers
   updatePolicyPipeline
   
   if param_policy = "TightSupress" [
-    policy_tight_supress
+    if policy_switch = "tony" [
+      policy_tight_supress
+    ]
+    if policy_switch = "nz" [
+      policy_tight_supress_nz
+    ]
   ]
   if param_policy = "LooseSupress" [
-    policy_loose_supress
+    if policy_switch = "tony" [
+      policy_loose_supress
+    ]
+    if policy_switch = "nz" [
+      policy_loose_supress_nz
+    ]
   ]
   if param_policy = "BarelySupress" [
-    policy_barely_supress
+    if policy_switch = "tony" [
+      policy_barely_supress
+    ]
+    if policy_switch = "nz" [
+      policy_barely_supress_nz
+    ]
   ]
   if param_policy = "TightSupress_No_4" [
     set max_stage 3
