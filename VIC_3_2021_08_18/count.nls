@@ -3,8 +3,8 @@
 ;;*******************************************************************************************************************************
 
 to printVaccineProgress
-  let doubleDoseAdult count simuls with [ vaccineOffered = 1 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0 and agerange > 15 ]
-  let doubleDose16_17 count simuls with [ vaccineOffered = 1 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0 and agerange = 15 ]
+  let doubleDoseAdult count simuls with [ doseCount >= 2 and agerange > 15 ]
+  let doubleDose16_17 count simuls with [ doseCount >= 2 and agerange = 15 ]
   let popAtLeast16 (count simuls with [ agerange > 15 ]) + (count simuls with [ agerange = 15 ]) / 4
   print (word "Day: " ticks ", Vaccine 16+: " ((round (((doubleDoseAdult + doubleDose16_17) / popAtLeast16) * 1000)) / 10))
 end

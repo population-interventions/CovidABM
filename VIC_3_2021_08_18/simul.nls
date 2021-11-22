@@ -71,7 +71,7 @@ simuls-own [
   
   doseCount ;; Number of vaccine doses
   vaccineOffered ;; Has the vaccine been offered?
-  vacSecondDoseCountdown ;; Timer for the delay to second dose
+  nextDoseTimer ;; Timer for the delay to next dose
   vacEffectCountdown ;; Timer for the vaccine (first or second dose) coming into effect.
   vaccineType ;; Name of vaccine being offered
   selfVaccEff_raw_area ;; Duration times transmissibility of infection
@@ -192,7 +192,7 @@ to simul_updateVacAndReinfectMult
     let store_selfVaccEff_raw_hosp selfVaccEff_raw_hosp
     let store_selfVaccEff_raw_mort selfVaccEff_raw_mort
     let store_recoveryVariant recoveryVariant
-    let store_vacSecondDoseCountdown vacSecondDoseCountdown
+    let store_nextDoseTimer nextDoseTimer
     let store_vacEffectCountdown vacEffectCountdown
     let store_vaccineIncursionOverride vaccineIncursionOverride
     
@@ -212,7 +212,7 @@ to simul_updateVacAndReinfectMult
       set selfVaccEff_raw_mort 0
     ]
     set recoveryVariant 0
-    set vacSecondDoseCountdown 0
+    set nextDoseTimer 0
     set vacEffectCountdown 0
     set vaccineIncursionOverride 0
  
@@ -223,7 +223,7 @@ to simul_updateVacAndReinfectMult
     set selfVaccEff_raw_hosp store_selfVaccEff_raw_hosp
     set selfVaccEff_raw_mort store_selfVaccEff_raw_mort
     set recoveryVariant store_recoveryVariant
-    set vacSecondDoseCountdown store_vacSecondDoseCountdown
+    set nextDoseTimer store_nextDoseTimer
     set vacEffectCountdown store_vacEffectCountdown
     set store_vaccineIncursionOverride vaccineIncursionOverride
   ]
@@ -356,7 +356,7 @@ end
 
 to simul_updateIsolationResponse
   set pace span * spanMult * global_distance_mult
-  if vacRestrictionEase and (vac_ease_everyone or (selfVaccEff_raw_risk > 0 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0)) [
+  if vacRestrictionEase and (vac_ease_everyone or nextDoseTimer >= 2) [
     set pace vac_ease_span * spanMult * global_distance_mult
   ]
   set isolateCompliant 0
@@ -613,7 +613,7 @@ to simul_visitDestination
   ;; reduces large gatherings by stage
   if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * visit_chance_multiplier > random-float 1  [
     let myRadius Visit_Radius * global_distance_mult
-    if vacRestrictionEase and (vac_ease_everyone or (selfVaccEff_raw_risk > 0 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0)) [
+    if vacRestrictionEase and (vac_ease_everyone or nextDoseTimer >= 2) [
       set myRadius vac_ease_visit_rad * global_distance_mult
     ]
     if EssentialWorkerFlag and myRadius < ess_radius_anchor [
@@ -637,7 +637,7 @@ to simul_avoid
     let myPPA Proportion_People_Avoid + draw_ppa_modifier
     let myPTA Proportion_Time_Avoid + draw_pta_modifier
     
-    if vacRestrictionEase and (vac_ease_everyone or (selfVaccEff_raw_risk > 0 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0)) [
+    if vacRestrictionEase and (vac_ease_everyone or nextDoseTimer >= 2) [
       set myPPA vac_ease_avoid + draw_ppa_modifier
       set myPTA vac_ease_avoid + draw_pta_modifier
     ]
@@ -674,10 +674,10 @@ end
 
 to simul_superSpread
   let mySpread superspreaders
-  if vacRestrictionEase and (vac_ease_everyone or (selfVaccEff_raw_risk > 0 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0)) [
+  if vacRestrictionEase and (vac_ease_everyone or doseCount >= 2) [
     set mySpread vac_ease_spread
   ]
-  ;if random-float 1 < 0.001 [ print (word mySpread ", " selfVaccEff_raw_risk ", " vacSecondDoseCountdown ", " vacEffectCountdown)]
+  ;if random-float 1 < 0.001 [ print (word mySpread ", " selfVaccEff_raw_risk ", " nextDoseTimer ", " nextDoseTimer)]
   if EssentialWorkerFlag and mySpread < ess_spread_anchor [
     set mySpread (mySpread + ess_spread_anchor) * 0.5
   ]
@@ -780,7 +780,7 @@ end
 to simul_checkMask
   ;; identifies people who waear a mask
   let myMaskWear mask_Wearing + Mask_Wear_Boost
-  if vacRestrictionEase and (vac_ease_everyone or (selfVaccEff_raw_risk > 0 and vacSecondDoseCountdown = 0 and vacEffectCountdown = 0)) [
+  if vacRestrictionEase and (vac_ease_everyone or doseCount >= 2) [
     set myMaskWear vac_ease_mask_wear + Mask_Wear_Boost
   ]
   ifelse maskPolicy and wearsMask <= myMaskWear and patch-here != homelocation
