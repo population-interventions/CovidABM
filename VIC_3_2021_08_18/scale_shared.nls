@@ -89,6 +89,17 @@ to scale_setup
   ;print scalePhaseMax
 end
 
+to-report GetUninfectedOfCohort [index]
+  let cohortSimuls (table:get populationCohortCache index) with [color != red]
+  ifelse any? cohortSimuls
+  [
+    report cohortSimuls
+  ]
+  [
+    report simuls with [color != red]
+  ]
+end
+
 to-report GetInitialScale [cases]
   if cases = 0 [
    report 0 

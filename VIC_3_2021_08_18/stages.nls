@@ -37,6 +37,9 @@ to do_stages
   if policy_switch = "nz" [
     do_stages_nz
   ]
+  if policy_switch = "pak" [
+    do_stages_pak
+  ]
 end
 
 to set_policy_overrides

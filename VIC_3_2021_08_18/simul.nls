@@ -69,6 +69,7 @@ simuls-own [
   vaccBranch ;; Brach of vaccination to take second doses from
   sm_vac_uptake ;; Likelyhood of taking a vaccine if offered
   
+  doseCount ;; Number of vaccine doses
   vaccineOffered ;; Has the vaccine been offered?
   vacSecondDoseCountdown ;; Timer for the delay to second dose
   vacEffectCountdown ;; Timer for the vaccine (first or second dose) coming into effect.

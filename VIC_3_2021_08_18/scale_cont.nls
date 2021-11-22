@@ -111,7 +111,7 @@ to do_scaledown_cont
         set thisSimul self
         
         if toAsk > random-float 1 [
-          ask n-of 1 simuls with [color != red] [
+          ask n-of 1 (GetUninfectedOfCohort cohortIndex) [
             set color red
             set timenow                  my_timenow
             set caseReportTime           my_caseReportTime
@@ -161,7 +161,7 @@ to do_scaledown_cont
           set thisSimul self
           
           if toAsk > random-float 1 [
-            ask n-of 1 simuls with [color != red] [
+            ask n-of 1 (GetUninfectedOfCohort cohortIndex) [
               set color red
               set timenow                  my_timenow
               set caseReportTime           my_caseReportTime
