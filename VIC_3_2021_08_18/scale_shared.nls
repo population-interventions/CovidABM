@@ -89,14 +89,31 @@ to scale_setup
   ;print scalePhaseMax
 end
 
-to-report GetUninfectedOfCohort [index]
+to-report GetUninfectedOfCohort [index wantedDoseCount wantedHomeRegion]
   let cohortSimuls (table:get populationCohortCache index) with [color != red]
-  ifelse any? cohortSimuls
+  let matchDose cohortSimuls with [doseCount = wantedDoseCount]
+  ifelse any? matchDose
   [
-    report cohortSimuls
+    report matchDose
   ]
   [
-    report simuls with [color != red]
+    let succSimuls simuls with [color != red]
+    let regionSimuls succSimuls with [homeRegion = wantedHomeRegion]
+    set matchDose regionSimuls with [doseCount = wantedDoseCount]
+    ifelse any? matchDose
+    [
+      report matchDose
+    ]
+    [
+      set matchDose succSimuls with [doseCount = wantedDoseCount]
+      ifelse any? matchDose
+      [
+        report matchDose
+      ]
+      [
+        report  succSimuls
+      ]
+    ]
   ]
 end
 

@@ -71,13 +71,10 @@ simuls-own [
   
   doseCount ;; Number of vaccine doses
   vaccineOffered ;; Has the vaccine been offered?
-  nextDoseTimer ;; Timer for the delay to next dose
   vacEffectCountdown ;; Timer for the vaccine (first or second dose) coming into effect.
   vaccineType ;; Name of vaccine being offered
-  selfVaccEff_raw_area ;; Duration times transmissibility of infection
+  selfVaccEff_raw_infect ;; Duration times transmissibility of infection
   selfVaccEff_raw_risk ;; Risk of being infected
-  selfVaccEff_raw_hosp ;; Hospitalisation risk reduction
-  selfVaccEff_raw_mort ;; Mortality risk reduction
   transmitFromVacAndReinfect ;; Multiplier for disease effects, (1 - selfVaccEff * recoveryEffect)^(1/3)
   succeptibilityTable ;; exposureAndVacMult but for each variant
   succeptibilityTableMax ;; maximum of the above table.
@@ -188,11 +185,8 @@ to simul_updateVacAndReinfectMult
   if vaccineIncursionOverride != 0 [
     ;; Override with overseas infections
     let store_selfVaccEff_raw_risk selfVaccEff_raw_risk
-    let store_selfVaccEff_raw_area selfVaccEff_raw_area
-    let store_selfVaccEff_raw_hosp selfVaccEff_raw_hosp
-    let store_selfVaccEff_raw_mort selfVaccEff_raw_mort
+    let store_selfVaccEff_raw_infect selfVaccEff_raw_infect
     let store_recoveryVariant recoveryVariant
-    let store_nextDoseTimer nextDoseTimer
     let store_vacEffectCountdown vacEffectCountdown
     let store_vaccineIncursionOverride vaccineIncursionOverride
     
@@ -201,29 +195,21 @@ to simul_updateVacAndReinfectMult
     [
       let overrideVaccineData table:get vaccineParamsTable vaccineIncursionOverride
       set selfVaccEff_raw_risk item 0 overrideVaccineData
-      set selfVaccEff_raw_area item 1 overrideVaccineData
-      set selfVaccEff_raw_hosp item 2 overrideVaccineData
-      set selfVaccEff_raw_mort item 3 overrideVaccineData
+      set selfVaccEff_raw_infect item 1 overrideVaccineData
     ]
     [
-      set selfVaccEff_raw_area 0
+      set selfVaccEff_raw_infect 0
       set selfVaccEff_raw_risk 0
-      set selfVaccEff_raw_hosp 0
-      set selfVaccEff_raw_mort 0
     ]
     set recoveryVariant 0
-    set nextDoseTimer 0
     set vacEffectCountdown 0
     set vaccineIncursionOverride 0
  
     simul_updateVacAndReinfectMult
     
     set selfVaccEff_raw_risk store_selfVaccEff_raw_risk
-    set selfVaccEff_raw_area store_selfVaccEff_raw_area
-    set selfVaccEff_raw_hosp store_selfVaccEff_raw_hosp
-    set selfVaccEff_raw_mort store_selfVaccEff_raw_mort
+    set selfVaccEff_raw_infect store_selfVaccEff_raw_infect
     set recoveryVariant store_recoveryVariant
-    set nextDoseTimer store_nextDoseTimer
     set vacEffectCountdown store_vacEffectCountdown
     set store_vaccineIncursionOverride vaccineIncursionOverride
   ]
@@ -275,7 +261,7 @@ to simul_updateVacAndReinfectMult
     
     ;; Contribute vaccine effect
     if selfVaccEff_raw_risk > 0 [
-      set effect_raw effect_raw * (1 - selfVaccEff_raw_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
+      set effect_raw effect_raw * (1 - selfVaccEff_raw_infect * (vac_variant_eff_prop ^ (infectVariant - 1)))
     ]
     if recoveryVariant > 0 [
       ;; Set reduced infectiveness based on previously having an infection.
@@ -329,10 +315,8 @@ end
 
 to simul_waneVacEff
   if selfVaccEff_raw_risk > 0 and param_vac_wane > 0 [
-    set selfVaccEff_raw_area selfVaccEff_raw_area * (1 - param_vac_wane)
+    set selfVaccEff_raw_infect selfVaccEff_raw_infect * (1 - param_vac_wane)
     set selfVaccEff_raw_risk selfVaccEff_raw_risk * (1 - param_vac_wane)
-    set selfVaccEff_raw_hosp selfVaccEff_raw_hosp * (1 - param_vac_wane)
-    set selfVaccEff_raw_mort selfVaccEff_raw_mort * (1 - param_vac_wane)
     simul_updateVacAndReinfectMult
   ]
 end
@@ -356,7 +340,7 @@ end
 
 to simul_updateIsolationResponse
   set pace span * spanMult * global_distance_mult
-  if vacRestrictionEase and (vac_ease_everyone or nextDoseTimer >= 2) [
+  if vacRestrictionEase and (vac_ease_everyone or doseCount >= 2) [
     set pace vac_ease_span * spanMult * global_distance_mult
   ]
   set isolateCompliant 0
@@ -613,7 +597,7 @@ to simul_visitDestination
   ;; reduces large gatherings by stage
   if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * visit_chance_multiplier > random-float 1  [
     let myRadius Visit_Radius * global_distance_mult
-    if vacRestrictionEase and (vac_ease_everyone or nextDoseTimer >= 2) [
+    if vacRestrictionEase and (vac_ease_everyone or doseCount >= 2) [
       set myRadius vac_ease_visit_rad * global_distance_mult
     ]
     if EssentialWorkerFlag and myRadius < ess_radius_anchor [
@@ -637,7 +621,7 @@ to simul_avoid
     let myPPA Proportion_People_Avoid + draw_ppa_modifier
     let myPTA Proportion_Time_Avoid + draw_pta_modifier
     
-    if vacRestrictionEase and (vac_ease_everyone or nextDoseTimer >= 2) [
+    if vacRestrictionEase and (vac_ease_everyone or doseCount >= 2) [
       set myPPA vac_ease_avoid + draw_ppa_modifier
       set myPTA vac_ease_avoid + draw_pta_modifier
     ]

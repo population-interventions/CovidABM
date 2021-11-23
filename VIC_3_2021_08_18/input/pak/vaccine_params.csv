@@ -1,4 +1,4 @@
-name,reduceRisk_a,reduceRisk_b,reduceInfect_a,reduceInfect_b,reduceHosp_a,reduceHosp_b,reduceMort_a,reduceMort_b,partialDays,partialRiskMult,partialInfectMult,partialHospMult,partialMortMult,vacEffectDays
-AZ,40,26.66666667,1.9,5.7,40,26.66666667,40,26.66666667,42,0.5,1,1,1,10
-Pfizer,35.55555556,8.888888889,1.9,5.7,35.55555556,8.888888889,35.55555556,8.888888889,21,0.5,1,1,1,10
-IncursionVac,14.7,6.3,1.9,5.7,14.7,6.3,14.7,6.3,21,0.5,1,1,1,10
+name,reduceRisk_a,reduceRisk_b,reduceInfect_a,reduceInfect_b,partialDays,partialRiskMult,vacEffectDays,risk_dose_1,risk_dose_2,risk_dose_3,infect_dose_1,infect_dose_2,infect_dose_3
+AZ,40,26.66666667,1.9,5.7,42,0.5,10,0.5,0.9,1,0.5,0.9,1
+Pfizer,35.55555556,8.888888889,1.9,5.7,21,0.5,10,0.5,0.9,1,0.5,0.9,1
+IncursionVac,14.7,6.3,1.9,5.7,21,0.5,10,0.5,0.9,1,0.5,0.9,1
