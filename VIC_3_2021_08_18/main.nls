@@ -43,11 +43,6 @@ to go
   ;; Randomly turn suceptible agents into infected ones. Percentage chance = IncursionRate.
   incursion_update
   
-  ;; Vaccine loses effectiveness over time
-  ask simuls [
-    simul_waneVacEff
-  ]
-  
   ;;reset-timer
   ;; All the simulants independently either move outside or back to home
   ask simuls [
@@ -117,6 +112,11 @@ to go
   
   ;; Randomly vaccinate people and update vaccine phases.
   vaccine_update
+  
+  ;; Update vaccine dose countdown and waning
+  ask simuls [
+    simul_updateVaccine
+  ]
   
   ;show ( word " Simul Stuff " timer " seconds ")
   ;reset-timer

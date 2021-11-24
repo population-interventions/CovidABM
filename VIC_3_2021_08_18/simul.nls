@@ -81,6 +81,10 @@ simuls-own [
   vaccineIncursionOverride ;; Override the vaccine status of the simulant for as long as they have their incursion infection. This is worse than it sounds.
   vaccinePriority ;; Number that determines whether simulant will recieve a vaccination. Compared to uptake.
 
+  wane_1 ;; Waning for dose 1 on log odds scale
+  wane_2 ;; Waning for dose 2 on log odds scale
+  wane_3 ;; Waning for dose 3 on log odds scale
+
   infectVariant ;; Variant of SARS that I am infected with. Is > 0 iff color = red.
   variantTransMult ;; Transmissiblity multiplier for this variant
   recoveryVariant ;; The highest level of SARS recovered from. More recent and virulent versions have a higher level.
@@ -189,7 +193,6 @@ to simul_updateVacAndReinfectMult
     let store_recoveryVariant recoveryVariant
     let store_vacEffectCountdown vacEffectCountdown
     let store_vaccineIncursionOverride vaccineIncursionOverride
-    
     
     ifelse table:has-key? vaccineParamsTable vaccineIncursionOverride
     [
@@ -313,11 +316,41 @@ to simul_updateVacAndReinfectMult
   ]
 end
 
-to simul_waneVacEff
-  if selfVaccEff_raw_risk > 0 and param_vac_wane > 0 [
-    set selfVaccEff_raw_infect selfVaccEff_raw_infect * (1 - param_vac_wane)
-    set selfVaccEff_raw_risk selfVaccEff_raw_risk * (1 - param_vac_wane)
-    simul_updateVacAndReinfectMult
+to simul_updateVaccine
+  if selfVaccEff_raw_risk > 0 [
+    let effectiveDoseCount doseCount
+    if vacEffectCountdown > 0 [
+      set effectiveDoseCount effectiveDoseCount - 1
+    ]
+    if effectiveDoseCount >= 1 [
+      let waneAmount 0
+      (ifelse effectiveDoseCount = 1
+        [
+          set waneAmount wane_1
+        ]
+        effectiveDoseCount = 2
+        [
+          set waneAmount wane_2
+        ]
+        effectiveDoseCount = 3
+        [
+          set waneAmount wane_3
+        ]
+      )
+      set selfVaccEff_raw_infect AddLogOdds selfVaccEff_raw_infect waneAmount
+      set selfVaccEff_raw_risk AddLogOdds selfVaccEff_raw_risk waneAmount
+      simul_updateVacAndReinfectMult
+    ]
+  ]
+  
+  if vacEffectCountdown > 0 [
+    set vacEffectCountdown vacEffectCountdown - 1
+    if vacEffectCountdown = 0 [
+      let myVaccineData table:get vaccineParamsTable vaccineType
+      set selfVaccEff_raw_risk (item 0 myVaccineData) * (item doseCount (table:get vaccineParams_riskMult vaccineType))
+      set selfVaccEff_raw_infect (item 1 myVaccineData) * (item doseCount (table:get vaccineParams_infectMult vaccineType))
+      simul_updateVacAndReinfectMult
+    ]
   ]
 end
 

@@ -1,4 +1,9 @@
 
+to-report AddLogOdds [prob toAdd]
+  let odds exp ((ln (prob / ( 1 - prob))) + toAdd)
+  report odds / (odds + 1)
+end
+
 to setup_doseTable
   ifelse input_dose_rate_table != ""
   [
@@ -102,123 +107,9 @@ to setup_vaccineData
   ]
 end
 
-to setup_agentsByVaccPhase
-  set agentsByVaccPhase []
-  foreach table:keys vaccineRolloutTable [ x -> 
-    let phaseData table:get vaccineRolloutTable x
-    let local_branch (item 0 phaseData)
-    let local_vacPhase (item 1 phaseData)
-    let local_vacSubPhase (item 2 phaseData)
-    
-    set agentsByVaccPhase lput (list
-      local_branch
-      local_vacPhase
-      local_vacSubPhase
-      simuls with [
-        VaccPhase = local_vacPhase and 
-        VaccSubPhase = local_vacSubPhase and
-        vaccBranch = local_branch
-    ]) agentsByVaccPhase
-  ]
-end
-
-to vaccine_nextPhase [branch]
-  let index (table:get vaccinePhaseIndex branch) + 1
-  if index = 0 [
-    set index (table:get vaccineBranchStartIndex branch)
-  ]
-  
-  ifelse (table:has-key? vaccineRolloutTable index) and (item 0 (table:get vaccineRolloutTable index) = branch)
-  [
-    table:put vaccinePhaseIndex branch index
-    let phaseData table:get vaccineRolloutTable index
-    ifelse param_final_phase = -1 or (item 1 phaseData) <= param_final_phase [
-      ;print "Old vaccine total pop and unvaccinated pop"
-      ;print count simuls with [VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase]
-      ;print count simuls with [VaccPhase = global_vaccinePhase and VaccSubPhase = global_vaccineSubPhase and vaccinated = 0]
-      
-      let local_vacPhase (item 1 phaseData)
-      let local_vacSubPhase (item 2 phaseData)
-      table:put global_vaccinePerDay branch ((item 3 phaseData) * param_vac_rate_mult + 0.00001) ; Floats
-      table:put global_vaccineFirstDoseReserveProp branch (item 5 phaseData)
-      
-      let agentSet simuls with [
-        VaccPhase = local_vacPhase and 
-        VaccSubPhase = local_vacSubPhase and
-        vaccBranch = branch
-      ]
-      table:put global_vaccinePhase branch local_vacPhase
-      table:put global_vaccineSubPhase branch local_vacSubPhase
-      
-      let phaseSizeTotal count agentSet
-      set agentSet agentSet with [vaccineOffered = 0]
-      let phaseUnvaccinated count agentSet
-      
-      let phaseUptakeMult (item 4 phaseData) * param_vac_uptake_mult
-      let nextPhaseVacProp (item 6 phaseData)
-      let agentsToVaccinate agentSet with [ vaccinePriority < cohortVacUptake * phaseUptakeMult ]
-      
-      if nextPhaseVacProp > 0 [
-        set agentsToVaccinate n-of ((count agentsToVaccinate) * (1 - nextPhaseVacProp)) agentsToVaccinate
-      ]
-      table:put vaccineActiveAgentSet branch agentsToVaccinate
-      
-      ;print (word "New vaccine phase, branch: " branch)
-      ;print (word "day: " ticks)
-      ;print (word "total agents: " phaseSizeTotal ", phaseUnvaccinated: " phaseUnvaccinated)
-      ;print (word "phase: " (table:get global_vaccinePhase branch) (table:get global_vaccineSubPhase branch))
-      ;print (word "pending vaccine: " (table:get global_vaccinePending branch))
-      ;print (word "per day: " global_vaccinePerDay)
-      ;print (word "first priority: " (table:get global_vaccinePrioritiseFirstOverSecond branch))
-      if print_phase [
-       print (word "Day " ticks ", Branch " branch ", Phase " (table:get global_vaccinePhase branch) ", SubPhase " (table:get global_vaccineSubPhase branch))
-      ]
-    ]
-    [
-      table:put global_firstDoseDone branch true
-    ]
-  ]
-  [
-      table:put global_firstDoseDone branch true
-  ]
-end
-
-to simul_set_vaccine_params
-  if vaccineOffered = 1 [
-    let effectiveDoseCount doseCount
-    if vacEffectCountdown > 0 [
-      set effectiveDoseCount effectiveDoseCount - 1
-    ]
-    ifelse effectiveDoseCount <= 0 [
-      ; Recieved first dose and it has not yet taken effect.
-      set selfVaccEff_raw_infect 0
-      set selfVaccEff_raw_risk 0
-    ]
-    [
-      let myVaccineData table:get vaccineParamsTable vaccineType
-      set selfVaccEff_raw_risk (item 0 myVaccineData) * (item (effectiveDoseCount - 1) (table:get vaccineParams_riskMult vaccineType))
-      set selfVaccEff_raw_infect (item 1 myVaccineData) * (item (effectiveDoseCount - 1) (table:get vaccineParams_infectMult vaccineType))
-      
-      simul_updateVacAndReinfectMult
-      ;print vaccineType
-    ]
-  ]
-end
-
-to simul_admininster_vaccine
-  let myVaccineData table:get vaccineParamsTable vaccineType
-  simul_set_vaccine_params
-end
-
-to simul_vaccinate_me
-  set vaccineOffered 1
-  simul_admininster_vaccine
-end
-
-to simul_vaccinate_me_force
+to simul_vaccinate_me_force [daysSinceFirstDose daysSinceSecondDose effectDays]
   if Vaccine_Available = true [
     set vaccineOffered 1
-    simul_set_vaccine_params
     simul_updateVacAndReinfectMult
   ]
 end
@@ -252,7 +143,7 @@ to vaccineMode_micromanageDoses [branch]
         set vaccinateToday count askSimuls
       ]
       ask n-of (vaccinateToday) askSimuls [
-        simul_vaccinate_me
+        ;simul_vaccinate_me
       ]
       
       table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) - vaccinateToday)

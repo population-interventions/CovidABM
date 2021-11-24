@@ -121,6 +121,9 @@ to createSimulants
   let cohort_vaccineType 0
   let cohort_vaccineBranch 0
   let cohort_vaccineUptake 0
+  let cohort_wane_1 0
+  let cohort_wane_2 0
+  let cohort_wane_3 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of (Population) patches with [ pcolor = black ] [
@@ -151,6 +154,11 @@ to createSimulants
       set cohort_vaccineType item 18 cohortData
       set cohort_vaccineBranch item 19 cohortData
       set cohort_vaccineUptake item 20 cohortData
+      
+      ;; Wane is a downwards slope but is entered as a positive number in input data.
+      set cohort_wane_1 0 - (item 21 cohortData)
+      set cohort_wane_2 0 - (item 22 cohortData)
+      set cohort_wane_3 0 - (item 23 cohortData)
       
       if vacType_override != "off" [
         set cohort_vaccineType vacType_override
@@ -214,6 +222,11 @@ to createSimulants
       set vaccineType cohort_vaccineType
       set vaccBranch cohort_vaccineBranch
       set cohortVacUptake cohort_vaccineUptake
+      
+      set wane_1 cohort_wane_1
+      set wane_2 cohort_wane_2
+      set wane_3 cohort_wane_3
+      
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
@@ -303,6 +316,10 @@ to setupInitialVaccination
         let vacPrioIncrement 1 / cohort_pop
         let vacPrio vacPrioIncrement / 2
         
+        ;; Agents added to the vaccination queue first should be the ones with the most days waited.
+        let doseQueueOrder 1
+        let doseQueueIncrement 1 / vaccinatedCount
+        
         ;; Only pre-model vaccinate someone if they would take up the vaccine.
         ;; This ensures that the final vaccinated proportion matches init_vac_uptake.
         ask cohort [
@@ -311,32 +328,11 @@ to setupInitialVaccination
             let myVaccineData table:get vaccineParamsTable vaccineType
             let maxVaccineDoseDays item 2 myVaccineData
             let maxVaccineEffectDays item 3 myVaccineData
-            let progress round(maxVaccineDoseDays * (progMin + (progMax - progMin) * rngs:rnd-beta vaccineInitSeedID 1 1))
-            set vacEffectCountdown 0
-            
-            ifelse progress > 1
-            [
-              set doseCount 2
-              if progress < maxVaccineEffectDays [
-                set vacEffectCountdown maxVaccineEffectDays - progress
-              ]
-            ]
-            [
-              set doseCount 1
-              if progress < maxVaccineEffectDays + maxVaccineDoseDays [
-                set vacEffectCountdown maxVaccineDoseDays + maxVaccineEffectDays - progress
-              ]
-            ]
-            ;print (word "maxVaccineDoseDays " maxVaccineDoseDays ", maxVaccineEffectDays " maxVaccineEffectDays)
-            ;print (word "progress " progress ", vacEffectCountdown " vacEffectCountdown ", nextDoseTimer " nextDoseTimer)
-            ;if maxVaccineWaitDays < 80 [
-            ;  print (word "vacWaitDays " vacWaitDays)
-            ;]
-            ;print vacWaitDays
-            simul_vaccinate_me_force
+            let daysSinceFirst round(maxVaccineDoseDays * (progMin + (progMax - progMin) * doseQueueOrder))
+            simul_vaccinate_me_force daysSinceFirst (daysSinceFirst - maxVaccineEffectDays) maxVaccineEffectDays
             set toVaccinateNow toVaccinateNow - 1
-            set vacPrio vacPrio
             set vacPrio vacPrio + vacPrioIncrement
+            set doseQueueOrder doseQueueOrder - doseQueueIncrement
           ]
           [
             ;; Predestine people to uptake the vaccine or not
@@ -653,10 +649,9 @@ to setup
   let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
   set globalPopPerSimul popPerSimul
   ;; sets up the initial date for looking at policy-changes
-
+  
   createSimulants
   setupInitialVaccination
-  setup_agentsByVaccPhase
   
   ask n-of ( initial_primary / popPerSimul ) simuls [
     set color red
