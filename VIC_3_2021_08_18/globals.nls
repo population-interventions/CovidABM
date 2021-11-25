@@ -239,13 +239,7 @@ globals [
   draw_vacc_death_risk_mult
 
   ; Vaccine phase and subphase, as well as internal index and data table.
-  global_vaccinePhase
-  global_vaccineSubPhase
   global_vaccineAvailible
-  global_vaccineSecondAvailible
-  global_vaccinePerDay
-  global_vaccineFirstDoseReserveProp
-  global_firstDoseDone
   
   incursionTable
   incursionPhaseIndex
@@ -261,15 +255,14 @@ globals [
   variantList ;; List of variant indicies
   
   totalOverseasIncursions
-  vaccinePhaseIndex
-  vaccineBranchStartIndex
-  vaccineActiveAgentSet
-  vaccineRolloutTable
+  vaccineBranchQueue
   vaccineDoseRateTable
-  vaccineBranches
+  vaccineBranchNames
   vaccineParamsTable
   vaccineParams_riskMult
   vaccineParams_infectMult
+  vaccineNextBranch
+  vaccineBranchEffectDays
   
   agentsByVaccPhase
 

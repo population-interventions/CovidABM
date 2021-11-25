@@ -182,7 +182,6 @@ to createSimulants
       set timenow 0
       set noticeOwnInfection 0
       set IncubationPd int ownIncubationPeriod
-      set vaccineOffered 0
       set doseCount 0
       set selfVaccEff_raw_infect 0
       set selfVaccEff_raw_risk 0
@@ -311,7 +310,7 @@ to setupInitialVaccination
       let progMin item 14 cohortData
       let progMax item 15 cohortData
       
-      if cohort_pop > 0 [
+      if cohort_pop > 0 and vaccinatedCount > 0 [
         let toVaccinateNow vaccinatedCount
         let vacPrioIncrement 1 / cohort_pop
         let vacPrio vacPrioIncrement / 2
@@ -341,6 +340,10 @@ to setupInitialVaccination
           ]
         ]
       ]
+    ]
+    
+    ask simuls with [doseCount = 0] [
+      simul_addToBranchQueue
     ]
   ]
 end
@@ -521,10 +524,7 @@ to setGlobals
   set avoidAttempts 0
   
   ; Vaccine phase and subphase, as well as internal index and data table.
-  set global_vaccinePhase 0
-  set global_vaccineSubPhase 0
   set global_vaccineAvailible 0
-  set global_vaccinePerDay 0
   
   set incursionsSeedID 0
   set incursionPhaseIndex 0
@@ -532,7 +532,6 @@ to setGlobals
   
   set totalOverseasIncursions 0
   set vaccineEffseedID 0
-  set vaccinePhaseIndex 0
   
   set totalEndR table:make
   set totalEndCount table:make

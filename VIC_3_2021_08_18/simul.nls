@@ -70,7 +70,6 @@ simuls-own [
   sm_vac_uptake ;; Likelyhood of taking a vaccine if offered
   
   doseCount ;; Number of vaccine doses
-  vaccineOffered ;; Has the vaccine been offered?
   vacEffectCountdown ;; Timer for the vaccine (first or second dose) coming into effect.
   vaccineType ;; Name of vaccine being offered
   selfVaccEff_raw_infect ;; Duration times transmissibility of infection
@@ -317,7 +316,7 @@ to simul_updateVacAndReinfectMult
 end
 
 to simul_updateVaccine
-  if selfVaccEff_raw_risk > 0 [
+  if doseCount > 0 [
     let effectiveDoseCount doseCount
     if vacEffectCountdown > 0 [
       set effectiveDoseCount effectiveDoseCount - 1
@@ -337,9 +336,11 @@ to simul_updateVaccine
           set waneAmount wane_3
         ]
       )
-      set selfVaccEff_raw_infect AddLogOdds selfVaccEff_raw_infect waneAmount
-      set selfVaccEff_raw_risk AddLogOdds selfVaccEff_raw_risk waneAmount
-      simul_updateVacAndReinfectMult
+      if selfVaccEff_raw_infect > 0 [
+        set selfVaccEff_raw_infect AddLogOdds selfVaccEff_raw_infect waneAmount
+        set selfVaccEff_raw_risk AddLogOdds selfVaccEff_raw_risk waneAmount
+        simul_updateVacAndReinfectMult
+      ]
     ]
   ]
   
@@ -347,8 +348,8 @@ to simul_updateVaccine
     set vacEffectCountdown vacEffectCountdown - 1
     if vacEffectCountdown = 0 [
       let myVaccineData table:get vaccineParamsTable vaccineType
-      set selfVaccEff_raw_risk (item 0 myVaccineData) * (item doseCount (table:get vaccineParams_riskMult vaccineType))
-      set selfVaccEff_raw_infect (item 1 myVaccineData) * (item doseCount (table:get vaccineParams_infectMult vaccineType))
+      set selfVaccEff_raw_risk (item 0 myVaccineData) * (item (doseCount - 1) (table:get vaccineParams_riskMult vaccineType))
+      set selfVaccEff_raw_infect (item 1 myVaccineData) * (item (doseCount - 1) (table:get vaccineParams_infectMult vaccineType))
       simul_updateVacAndReinfectMult
     ]
   ]

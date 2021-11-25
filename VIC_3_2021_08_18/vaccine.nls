@@ -5,76 +5,51 @@ to-report AddLogOdds [prob toAdd]
 end
 
 to setup_doseTable
-  ifelse input_dose_rate_table != ""
-  [
-    let doseFileData csv:from-file input_dose_rate_table
-    set vaccineDoseRateTable table:make
-    let i -1
-    let j 0
-    let header 0
-    foreach doseFileData [ x -> 
-      ifelse i = -1
-      [
-        set header x
-        foreach x [ y -> 
-          table:put vaccineDoseRateTable y table:make
-        ]
+  let doseFileData csv:from-file input_dose_rate_table
+  set vaccineDoseRateTable table:make
+  let i -1
+  let j 0
+  let header 0
+  foreach doseFileData [ x -> 
+    ifelse i = -1
+    [
+      set header x
+      foreach x [ y -> 
+        table:put vaccineDoseRateTable y table:make
       ]
-      [
-        set j 0
-        foreach x [ y -> 
-          table:put (table:get vaccineDoseRateTable (item j header)) i y
-          set j j + 1
-        ]
-      ]
-      set i i + 1
     ]
-    ;print (word "vaccineDoseRateTable " vaccineDoseRateTable)
-  ]
-  [
-    set vaccineDoseRateTable false
-  ]
-end
-
-to setup_vaccineData
-  let inputFile (word input_vaccine_table data_suffix)
-  if not suffix_rollout [
-    set inputFile input_vaccine_table
-  ]
-  let vaccineTypeFileData remove-item 0 csv:from-file inputFile
-  set vaccineRolloutTable table:make
-  set vaccineBranches []
-  
-  set vaccinePhaseIndex table:make
-  set vaccineBranchStartIndex table:make
-  set global_vaccineAvailible table:make
-  set global_vaccineSecondAvailible table:make
-  set global_firstDoseDone table:make
-  
-  let i 0
-  foreach vaccineTypeFileData [ x -> 
-    table:put vaccineRolloutTable i x
-    let branch (item 0 x)
-    if not member? branch vaccineBranches  [
-      set vaccineBranches lput branch vaccineBranches
-      table:put vaccinePhaseIndex branch -1
-      table:put global_vaccineAvailible branch 0
-      table:put global_vaccineSecondAvailible branch 0
-      table:put vaccineBranchStartIndex branch i
-      table:put global_firstDoseDone branch false
+    [
+      set j 0
+      foreach x [ y -> 
+        table:put (table:get vaccineDoseRateTable (item j header)) i y
+        set j j + 1
+      ]
     ]
     set i i + 1
   ]
-  ;print (word "vaccineBranchStartIndex " vaccineBranchStartIndex)
-  ;print (word "vaccineBranches " vaccineBranches)
+  ;print (word "vaccineDoseRateTable " vaccineDoseRateTable)
+end
+
+to setup_vaccineData
+  let inputFile (word input_vac_branch data_suffix)
+  let branchFileData remove-item 0 csv:from-file inputFile
   
-  set vaccineActiveAgentSet table:make
-  set global_vaccinePhase table:make
-  set global_vaccineSubPhase table:make
-  set global_vaccinePerDay table:make
-  set global_vaccineFirstDoseReserveProp table:make
+  set vaccineBranchNames []
+  set vaccineNextBranch table:make
+  
+  set vaccineBranchQueue table:make
+  set global_vaccineAvailible table:make
   
   setup_doseTable
+  foreach branchFileData [ x ->
+    let branch (item 0 x)
+    set vaccineBranchNames lput branch vaccineBranchNames
+    table:put vaccineBranchQueue branch (list)
+    table:put global_vaccineAvailible branch 0
+    table:put vaccineNextBranch branch (item 1 x)
+  ]
+  ;print (word "vaccineBranchStartIndex " vaccineBranchStartIndex)
+  ;print (word "vaccineBranches " vaccineBranches)
   
   set vacineEff_nameOut []
   set vacineEff_transOut []
@@ -84,7 +59,7 @@ to setup_vaccineData
   set vaccineParamsTable table:make
   set vaccineParams_riskMult table:make
   set vaccineParams_infectMult table:make
-  set i 0
+  let i 0
   foreach vaccineParamsFileData [ rawData -> 
     let vacName item 0 rawData
     let vacRiskReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
@@ -107,53 +82,75 @@ to setup_vaccineData
   ]
 end
 
+to simul_addToBranchQueue
+  if table:has-key? vaccineBranchQueue vaccBranch [
+    table:put vaccineBranchQueue vaccBranch (lput self (table:get vaccineBranchQueue vaccBranch))
+  ]
+end
+
 to simul_vaccinate_me_force [daysSinceFirstDose daysSinceSecondDose effectDays]
   if Vaccine_Available = true [
-    set vaccineOffered 1
+    set doseCount 1
+    let daysSinceDose daysSinceFirstDose
+    if table:has-key? vaccineNextBranch vaccBranch [
+      set vaccBranch table:get vaccineNextBranch vaccBranch
+    ]
+    if daysSinceSecondDose >= 0 [
+      set doseCount 2
+      set daysSinceDose daysSinceSecondDose
+      if table:has-key? vaccineNextBranch vaccBranch [
+        set vaccBranch table:get vaccineNextBranch vaccBranch
+      ]
+    ]
+    
+    if daysSinceDose < effectDays [
+      set vacEffectCountdown (effectDays - daysSinceDose)
+    ]
+    simul_addToBranchQueue
     simul_updateVacAndReinfectMult
   ]
 end
 
-to add_vaccine [branch]
-  ifelse vaccineDoseRateTable = false
-  [
-    table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) + (table:get global_vaccinePerDay branch))
-  ]
-  [
-    ;; global_vaccinePerDay acts as a rate multiplier
-    let increase 0
-    if table:has-key? (table:get vaccineDoseRateTable branch) (ticks - start_day) [
-      set increase (table:get (table:get vaccineDoseRateTable branch) (ticks - start_day)) * (table:get global_vaccinePerDay branch)
-    ]
-    set increase increase
-    table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) + increase)  
+to simul_vaccinate_me
+  let myVaccineData table:get vaccineParamsTable vaccineType
+  let effectDays item 3 myVaccineData
+  set vacEffectCountdown effectDays
+  set doseCount doseCount + 1
+  if table:has-key? vaccineNextBranch vaccBranch [
+    set vaccBranch table:get vaccineNextBranch vaccBranch
+    simul_addToBranchQueue
+    ;; vacEffectCountdown is set so do not simul_updateVacAndReinfectMult here.
   ]
 end
 
-to vaccineMode_micromanageDoses [branch]
-  if (table:get global_vaccineAvailible branch) > -1 [
-    ;; Vaccine over if global_vaccineAvailible = -1
-    
-    add_vaccine branch
-    let vaccinateToday floor(table:get global_vaccineAvailible branch)
-
-    while [(table:get global_vaccineAvailible branch) >= 1] [
-      let askSimuls ((table:get vaccineActiveAgentSet branch) with [vaccineOffered = 0])
-      if count askSimuls < vaccinateToday [
-        set vaccinateToday count askSimuls
-      ]
-      ask n-of (vaccinateToday) askSimuls [
-        ;simul_vaccinate_me
-      ]
-      
-      table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) - vaccinateToday)
-    ]
+to add_vaccine [branch]
+  let increase 0
+  if table:has-key? (table:get vaccineDoseRateTable branch) (ticks - start_day) [
+    set increase (table:get (table:get vaccineDoseRateTable branch) (ticks - start_day))
   ]
+  set increase increase
+  table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) + increase)  
+end
+
+to vaccineMode_micromanageDoses [branch]
+  add_vaccine branch
+  let vaccinateToday floor(table:get global_vaccineAvailible branch)
+  table:put global_vaccineAvailible branch ((table:get global_vaccineAvailible branch) - vaccinateToday)
+  
+  let vacQueue ((table:get vaccineBranchQueue branch))
+  while [vaccinateToday >= 1 and not empty? vacQueue] [
+    ask first vacQueue [
+      simul_vaccinate_me
+    ]
+    set vacQueue but-first vacQueue
+    set vaccinateToday vaccinateToday - 1
+  ]
+  table:put vaccineBranchQueue branch vacQueue
 end
 
 to vaccine_update
   if start_case_threshold < 0 and Vaccine_Available = True [
-    foreach vaccineBranches [ branch -> 
+    foreach vaccineBranchNames [ branch -> 
       vaccineMode_micromanageDoses branch
     ]
   ]
