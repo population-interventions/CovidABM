@@ -236,7 +236,6 @@ globals [
   draw_isolationCompliance
   draw_maskWearEfficacy
   draw_borderIncursionRisk
-  draw_vacc_death_risk_mult
 
   ; Vaccine phase and subphase, as well as internal index and data table.
   global_vaccineAvailible
@@ -296,6 +295,7 @@ globals [
   infectNoVacArray
   infectVacArray
   dieArray
+  hospArray
   infectNoVacArray_listOut
   infectVacArray_listOut
   case_listOut
@@ -303,6 +303,7 @@ globals [
   case14_listOut
   case28_listOut
   dieArray_listOut
+  hospArray_listOut
   age_listOut
   atsi_listOut
   morbid_listOut

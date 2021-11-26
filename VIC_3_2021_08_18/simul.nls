@@ -7,9 +7,10 @@ breed [ simuls simul ]
 simuls-own [
   R ;; the estimated RNaught of individuals
   IncubationPd ;; the incubation perios of the illness ascribed to the person
-  RiskofDeath ;; the overall risk of deth for the person if they contract the illness based on their age
   Pace ;; the speed that pthe person moves around the environment
   contributeToR ;; Whether to contribute to average R reporting.
+  riskOfDeath
+  riskOfHosp
 
   ;; Cohort parameters
   spanMult
@@ -698,17 +699,17 @@ to simul_end_infection
       ]
     ]
     
-    ifelse (selfVaccEff_raw_risk = 0 and RiskofDeath > random-float 1) or (selfVaccEff_raw_risk > 0 and RiskofDeath * draw_vacc_death_risk_mult > random-float 1)
-    [
-      set deathcount deathcount + extraScaleFactor * (Scale_Factor ^ myScale)
-      array:set dieArray cohortIndex (array:item dieArray cohortIndex) + popPerSimul
+    let deathRiskMean riskOfDeath * popPerSimul
+    let hospRiskMean riskOfDeath * popPerSimul
+    
+    set deathcount deathcount + deathRiskMean
+    array:set dieArray cohortIndex (array:item dieArray cohortIndex) + deathRiskMean
+    array:set hospArray cohortIndex (array:item hospArray cohortIndex) + hospRiskMean
+    
+    if recoveryVariant = 0 [
+      set recoverCount recoverCount + (popPerSimul - deathRiskMean)
     ]
-    [
-      if recoveryVariant = 0 [
-        set recoverCount recoverCount + popPerSimul
-      ]
-      table:put recoverCountByVariant infectVariant ((table:get recoverCountByVariant infectVariant) + popPerSimul)
-    ]
+    table:put recoverCountByVariant infectVariant ((table:get recoverCountByVariant infectVariant) + (popPerSimul - deathRiskMean))
     
     if trace_calibration > 0 [
       set finished_infections finished_infections + popPerSimul

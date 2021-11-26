@@ -124,6 +124,8 @@ to createSimulants
   let cohort_wane_1 0
   let cohort_wane_2 0
   let cohort_wane_3 0
+  let cohort_riskOfDeath 0
+  let cohort_riskOfHosp 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of (Population) patches with [ pcolor = black ] [
@@ -159,6 +161,9 @@ to createSimulants
       set cohort_wane_1 0 - (item 21 cohortData)
       set cohort_wane_2 0 - (item 22 cohortData)
       set cohort_wane_3 0 - (item 23 cohortData)
+      
+      set cohort_riskOfDeath (item 24 cohortData)
+      set cohort_riskOfHosp (item 25 cohortData)
       
       if vacType_override != "off" [
         set cohort_vaccineType vacType_override
@@ -225,6 +230,9 @@ to createSimulants
       set wane_1 cohort_wane_1
       set wane_2 cohort_wane_2
       set wane_3 cohort_wane_3
+
+      set riskOfDeath cohort_riskOfDeath
+      set riskOfHosp cohort_riskOfHosp
       
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
@@ -283,7 +291,6 @@ to createSimulants
       ;print ownIncubationPeriod_raw
 
       setEssentialWorkerPriority
-      params_setdeathrisk
     ]
     
     if agentsOfThisIndex >= cohort_pop [
@@ -572,6 +579,7 @@ to setGlobals
   set infectNoVacArray_listOut []
   set infectVacArray_listOut []
   set dieArray_listOut []
+  set hospArray_listOut []
   set case_listOut []
   set case7_listOut []
   set case14_listOut []

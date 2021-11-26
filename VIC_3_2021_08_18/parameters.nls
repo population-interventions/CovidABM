@@ -249,7 +249,6 @@ to params_setDrawValues
   set Asymptomatic_Trans random-normal 0.75 0.03
   set Asymptom_Prop random-normal 0.33 0.03
   
-  set draw_vacc_death_risk_mult (1 - (rngs:rnd-beta stream_id 64 16))
   set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 20 20 ) * 2
   
   ;show ( word "draw_ppa_modifier " draw_ppa_modifier )
@@ -429,54 +428,6 @@ to params_setDrawValues
   if sensitivity = "OverrideAsympt" [
     set override_asympt_table true
   ]
-end
-
-to params_setdeathrisk
-  ;; risk of death associated with ageranges if they contract COVID-19
-  (ifelse agerange <= 5
-    [
-      set riskofDeath 0.0000068
-    ]
-    agerange <= 15
-    [
-      set riskofDeath 0.0000299
-    ]
-    agerange <= 25
-    [
-      set riskofDeath 0.0001112
-    ]
-    agerange <= 35
-    [
-      set riskofDeath 0.0004172
-    ]
-    agerange <= 45
-    [
-      set riskofDeath 0.0017904
-    ]
-    agerange <= 55
-    [
-      set riskofDeath 0.0071179
-    ]
-    agerange <= 65
-    [
-      set riskofDeath 0.0196950
-    ]
-    agerange <= 75
-    [
-      set riskofDeath 0.1350531
-    ]
-    agerange <= 85
-    [
-      set riskofDeath 0.3466041
-    ]
-    ;; updated from department of health Report 22 - does not map directly to age deciles here
-    agerange <= 95
-    [
-      set riskofDeath 0.4354866
-    ]
-    [
-      set riskofDeath 0.4354866
-  ])
 end
 
 to params_setOverrideAsympt

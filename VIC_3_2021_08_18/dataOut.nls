@@ -4,6 +4,7 @@ to setup_DataOut
   set infectNoVacArray array:from-list cohortLengthListOfZeros
   set infectVacArray array:from-list cohortLengthListOfZeros
   set dieArray array:from-list cohortLengthListOfZeros
+  set hospArray array:from-list cohortLengthListOfZeros
   
   set age_listOut []
   set atsi_listOut []
@@ -35,6 +36,7 @@ to calculateDataOut
     set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
     set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
     set dieArray_listOut lput array:to-list dieArray dieArray_listOut
+    set hospArray_listOut lput array:to-list hospArray hospArray_listOut
     set case_listOut lput casesReportedToday case_listOut
     set case7_listOut lput casesinperiod7 case7_listOut
     set case14_listOut lput casesinperiod14 case14_listOut
@@ -44,6 +46,7 @@ to calculateDataOut
     set infectNoVacArray array:from-list cohortLengthListOfZeros
     set infectVacArray array:from-list cohortLengthListOfZeros
     set dieArray array:from-list cohortLengthListOfZeros
+    set hospArray array:from-list cohortLengthListOfZeros
     
     if stage = 0 [
       set stage1time stage1time + 1
