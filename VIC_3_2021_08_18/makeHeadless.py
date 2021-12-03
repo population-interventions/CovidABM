@@ -29,5 +29,6 @@ def MakeHeadless():
 	
 	outputFile.close()
 	modelFile.close()
+	print("Made Headless")
 
 MakeHeadless()
