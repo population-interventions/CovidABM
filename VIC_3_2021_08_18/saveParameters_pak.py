@@ -36,7 +36,7 @@ def ToNetlogoStr(data):
 	return data
 
 
-def FindNameAndValue(file, nameLines, valueLines):
+def FindNameAndValue(file, nameLines, valueLines, extra=False):
 	foundName = False
 	while True:
 		line = file.readline().rstrip()
@@ -44,10 +44,17 @@ def FindNameAndValue(file, nameLines, valueLines):
 			nameLines -= 1
 			if nameLines == 0:
 				foundName = line.lower()
-		elif valueLines > 0:
+		else:
 			valueLines -= 1
 			if valueLines == 0:
-				return foundName, line 
+				retLine = line
+			
+			if valueLines <= 0:
+				if extra:
+					if extra <= -valueLines:
+						return foundName, retLine, line 
+				else:
+					return foundName, retLine 
 
 
 def GetChooserValue(optionString, choice):
@@ -89,13 +96,15 @@ def ReadModelFileAndWriteParams(startPart, endPart, valueOverwrite, topOfFile=[]
 			elif line == 'SWITCH':
 				name, value = FindNameAndValue(modelFile, 5, 2)
 				if int(value) == 0:
-					# Weird how netlogo stores switches packwards.
+					# Weird how netlogo stores switches backwards.
 					value = 'true'
 				else:
 					value = 'false'
 				parameters.append([name, value])
 			elif line == 'INPUTBOX':
-				name, value = FindNameAndValue(modelFile, 5, 1)
+				name, value, extra = FindNameAndValue(modelFile, 5, 1, extra=3)
+				if extra == 'String':
+					value = '"{}"'.format(value)
 				parameters.append([name, value])
 			elif line == 'CHOOSER':
 				name, value = FindNameAndValue(modelFile, 5, 2)
@@ -146,13 +155,7 @@ paramValues_mainTest = {**defaultParams, **{
 	'data_suffix' : listToStr([
 		'".csv"',
 	]),
-	'param_policy' : '"pak"',
-	
-	'input_region' : '"input/pak/region.csv"',
-	'input_incursion_table' : '"input/pak/incursion.csv"',
-	'input_population_table' : '"input/pak/pop"', 
-	'input_vaccine_table' : '"input/pak/vaccine_roll"',
-	'input_dose_rate_table' : '"input/pak/dose_rate.csv"',
+	'policy_switch' : '"pak"',
 	'end_day' : 574,
 }}
 
@@ -167,16 +170,10 @@ paramValues_rCalcSmall = {**defaultParams, **{
 	'data_suffix' : listToStr([
 		'".csv"',
 	]),
-	'param_policy' : '"pak"',
-	
-	'input_region' : '"input/pak/region.csv"',
-	'input_incursion_table' : '"input/pak/incursion.csv"',
-	'input_population_table' : '"input/pak/pop"', 
-	'input_vaccine_table' : '"input/pak/vaccine_roll"',
-	'input_dose_rate_table' : '"input/pak/dose_rate.csv"',
+	'policy_switch' : '"pak"',
 	'end_day' : 574,
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_mainTest,
+							paramValues_rCalcSmall,
 							topOfFile=topOfFile)

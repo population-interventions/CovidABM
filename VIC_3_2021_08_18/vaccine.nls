@@ -5,7 +5,7 @@ to-report AddLogOdds [prob toAdd]
 end
 
 to setup_doseTable
-  let doseFileData csv:from-file input_dose_rate_table
+  let doseFileData csv:from-file (word input_dose_rate_table data_suffix)
   set vaccineDoseRateTable table:make
   let i -1
   let j 0

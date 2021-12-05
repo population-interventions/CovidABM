@@ -41,10 +41,9 @@ def ProcessResults(outputName, nameList):
 	df = df.transpose().stack('rand_seed')
 	df = df.describe(percentiles=[0 + 0.05*i for i in range(20)] + [0.975, 0.99, 0.999])
 	print(df)
-	util.OutputToFile(df, 'output/rCalc/' + outputName, head=False)
+	util.OutputToFile(df, '../output_rcalc/' + outputName, head=False)
 
 
 #files = util.GetFiles('output/rCalc/2021_08_19/')
-files = ['output/rCalc/nsw_03']
-print(files)
+files = ['../../outputs_raw/rcalc']
 ProcessResults('desc_2021_08_19', files)
