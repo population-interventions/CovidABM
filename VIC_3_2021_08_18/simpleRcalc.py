@@ -50,4 +50,4 @@ def ProcessResults(outputName, path):
 	DoProcessRCalc(nameList, 'initial_infection_R', gitTime)
 
 
-ProcessResults('desc', '../../output_raw/')
+ProcessResults('desc', '../../output_raw/rcalc/')

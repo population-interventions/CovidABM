@@ -160,13 +160,13 @@ paramValues_mainTest = {**defaultParams, **{
 }}
 
 paramValues_rCalcSmall = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(100),
+	'rand_seed' : GetRandomListUnique(2000),
     'total_population' : '234000000',
 	'first_case_calibrate' : 'true',
 	
 	'init_cases_region' : listToStr([1, 2]),
 	'global_transmissibility' : listToStr([
-		0.15, 0.17
+		0.1, 0.12, 0.14, 0.16
 	]),
 	'data_suffix' : listToStr([
 		'".csv"',
