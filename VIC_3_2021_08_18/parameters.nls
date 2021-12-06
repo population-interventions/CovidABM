@@ -164,6 +164,7 @@ to params_setDrawValues
     set init_case_threshold -10
     set param_vacIncurMult 0
     set param_incurMult 0
+    set sympt_present_mult 0
   ]
 
   ;; New system
@@ -307,9 +308,12 @@ to params_setDrawValues
   set param_override_ve -1
   set param_override_ve_area -1
   set global_distance_mult 1
-  set sympt_present_mult 1
   set Isolation_Transmission 0.33
   set override_asympt_table false
+  
+  if not first_case_calibrate [
+    set sympt_present_mult 1
+  ]
   
   if sensitivity = "HouseResampleUp+" [
     set house_resample_scale_up 0.8
