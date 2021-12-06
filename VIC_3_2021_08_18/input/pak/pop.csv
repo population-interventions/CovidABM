@@ -1,4 +1,4 @@
-totalAgents,age,atsi,disability,essentialCount,workerCount,phase,subPhase,spanMult,gatherFreqMult,region,succeptibleMult,asymptomPropMult,vaccinatedCount,doesProgressMax,doesProgressMin,ignoreUptakeBoost,studentCount,vaccineType,vaccineBranch,uptake,wane_1,wane_2,wane_3,baseMort,baseHosp,vacMortLnOddReduct,vacMortLnOddReduct,comment
+totalAgents,age,atsi,disability,essentialCount,workerCount,phase,subPhase,spanMult,gatherFreqMult,region,succeptibleMult,asymptomPropMult,vaccinatedCount,doesProgressMax,doesProgressMin,ignoreUptakeBoost,studentCount,vaccineType,vaccineBranch,uptake,wane_1,wane_2,wane_3,baseMort,baseHosp,vacMortLnOddChange,vacMortLnOddChange,comment
 198,5,0,0,0,0,6,1,1,1,1,0.5,2,0,0,0,1,99,AZ,A,1,0.005,0.005,0.005,0.1,0.1,0.1,0.1,Urban
 203,15,0,0,0,0,6,1,1,1,1,0.5,2,0,0,0,1,203,AZ,A,1,0.005,0.005,0.005,0.1,0.1,0.1,0.1,Urban
 152,25,0,0,0,101,5,1,1,1,1,1,1,0,0,0,0,0,AZ,A,1,0.005,0.005,0.005,0.1,0.1,0.1,0.1,Urban
