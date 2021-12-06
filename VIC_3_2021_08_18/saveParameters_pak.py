@@ -160,7 +160,7 @@ paramValues_mainTest = {**defaultParams, **{
 }}
 
 paramValues_rCalcSmall = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(2000),
+	'rand_seed' : GetRandomListUnique(10000),
     'total_population' : '234000000',
 	'first_case_calibrate' : 'true',
 	

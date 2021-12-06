@@ -22,9 +22,11 @@ def ProcessResults(outputName, path):
 	index = [
 		'init_cases_region',
 		'global_transmissibility',
+		'param_policy',
 	]
 	notFloatCol = [
 		'sensitivity',
+		'param_policy',
 	]
 	metric = [
 		'initial_infection_R',

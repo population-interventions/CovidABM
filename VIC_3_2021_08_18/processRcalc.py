@@ -90,7 +90,7 @@ def MakePlot(
 		yminticks = [i/5 for i in range(int(5*yTop))]
 	
 	xLabel = df.columns.names[1]
-	transmit_vals = list(dict.fromkeys(['r{}_{}'.format(v[1], v[2]) for v in df.columns]))
+	transmit_vals = list(dict.fromkeys(['r{}_{}_{}'.format(v[1], v[2], v[3]) for v in df.columns]))
 	policy_vals = list(dict.fromkeys([v[2] for v in df.columns]))
 
 	dataCount = len(df.columns)
@@ -100,7 +100,7 @@ def MakePlot(
 	
 	fig, ax = pyplot.subplots(figsize=(figWidth, figHeight))
 	plt = sns.boxplot(data=df, fliersize=5, showmeans=True,
-					  meanprops={"marker":"+", 'markersize':360, "markerfacecolor":"black", "markeredgecolor":"black"})
+					  meanprops={"marker":".", 'markersize':25, "markerfacecolor":"black", "markeredgecolor":"black"})
 	#plt = sns.swarmplot(data=df, color=".25")
 	plt.set(xlim=(-1, dataCount + 1), ylim=yDomain)
 	sns.despine(ax=ax, offset=10)
