@@ -166,13 +166,14 @@ paramValues_rCalcSmall = {**defaultParams, **{
 	
 	'init_cases_region' : listToStr([1, 2]),
 	'global_transmissibility' : listToStr([
-		0.144497012
+		0.15, 0.17
 	]),
 	'data_suffix' : listToStr([
 		'".csv"',
 	]),
 	'policy_switch' : '"pak"',
 	'end_day' : 574,
+	'r0_range' : -1,
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',

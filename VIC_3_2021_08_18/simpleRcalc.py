@@ -13,7 +13,10 @@ import seaborn as sns
 import pathlib
 import utilities as util
 
-def ProcessResults(outputName, nameList):
+from processRcalc import DoProcessRCalc
+
+def ProcessResults(outputName, path):
+	nameList = util.GetFiles(path)
 	gitTime = util.GetGitTimeIdentifier()
 	
 	index = [
@@ -42,9 +45,9 @@ def ProcessResults(outputName, nameList):
 	df = df.transpose().stack('rand_seed')
 	df = df.describe(percentiles=[0 + 0.01*i for i in range(100)])
 	print(df)
-	util.OutputToFile(df, '../../output_rcalc/{}_{}'.format(outputName, gitTime), head=False)
+	util.OutputToFile(df, '../../output_rcalc/{}_{}'.format(gitTime, outputName), head=False)
+	
+	DoProcessRCalc(nameList, 'initial_infection_R', gitTime)
 
 
-#files = util.GetFiles('output/rCalc/2021_08_19/')
-files = ['../../output_raw/rcalc']
-ProcessResults('desc', files)
+ProcessResults('desc', '../../output_raw/')

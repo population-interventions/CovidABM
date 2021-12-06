@@ -22,6 +22,12 @@ def GetGitTimeIdentifier():
 	return '{}_g{}'.format(dateString, shortHash)
 
 
+def WriteRunIdFile(path, identifier):
+	MakePath(path)
+	with open(path + '.txt', 'w') as f:
+		f.write(identifier)
+
+
 def FindRepeat(listIn, threshold=1):
 	repeats = {}
 	for val in listIn:
