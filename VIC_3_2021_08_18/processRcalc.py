@@ -41,22 +41,19 @@ def AddIfVaryingValue(colName, df, desiredIndex, toUnstack):
 def ProcessVariableEnd(nameList, metricName):
 	interestingColumns = [
 		'rand_seed', metricName, 'param_policy', 
-		'global_transmissibility', 'init_cases_region', 'testName',
-		'gather_location_count',
+		'global_transmissibility', 'init_cases_region'
 	]
 	df = pd.DataFrame(columns=interestingColumns)
 	for v in nameList:
 		pdf = pd.read_csv(v + '.csv', header=6)
-		if 'testName' not in pdf.columns:
-			interestingColumns = filter(lambda x: x != 'testName', interestingColumns)
 		pdf = pdf[interestingColumns]
 		df  = df.append(pdf)
 	
 	desiredIndex = ['rand_seed', 'param_policy', 'global_transmissibility', 'init_cases_region']
 	toUnstack = 3
 	
-	df, desiredIndex, toUnstack = AddIfVaryingValue('testName', df, desiredIndex, toUnstack)
-	df, desiredIndex, toUnstack = AddIfVaryingValue('gather_location_count', df, desiredIndex, toUnstack)
+	#df, desiredIndex, toUnstack = AddIfVaryingValue('testName', df, desiredIndex, toUnstack)
+	#df, desiredIndex, toUnstack = AddIfVaryingValue('gather_location_count', df, desiredIndex, toUnstack)
 	
 	if 'testName' in desiredIndex:
 		df['testName'] = df['testName'].str.replace('Is0.8 Stage3', 'Is0.75 Stage3')  
@@ -101,6 +98,7 @@ def MakePlot(
 	fig, ax = pyplot.subplots(figsize=(figWidth, figHeight))
 	plt = sns.boxplot(data=df, fliersize=5, showmeans=True,
 					  meanprops={"marker":".", 'markersize':25, "markerfacecolor":"black", "markeredgecolor":"black"})
+
 	#plt = sns.swarmplot(data=df, color=".25")
 	plt.set(xlim=(-1, dataCount + 1), ylim=yDomain)
 	sns.despine(ax=ax, offset=10)

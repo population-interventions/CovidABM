@@ -700,7 +700,7 @@ to simul_end_infection
     ]
     
     let deathRiskMean riskOfDeath * popPerSimul
-    let hospRiskMean riskOfDeath * popPerSimul
+    let hospRiskMean riskOfHosp * popPerSimul
     
     set deathcount deathcount + deathRiskMean
     array:set dieArray cohortIndex (array:item dieArray cohortIndex) + deathRiskMean
