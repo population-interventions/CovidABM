@@ -153,7 +153,7 @@ def DoProcessRCalc(nameList, metric_name, saveID):
 		ProcessToPlot(dfProcessed),
 		metric_name,
 		yTop=14,
-		hlines=[1, 5.5, 6.5],
+		hlines=[1, 6, 7.5],
 		figWidth=30,
 		figHeight=20,
 		saveID=saveID,

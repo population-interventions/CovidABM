@@ -246,8 +246,8 @@ to params_setDrawValues
   ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
   ;; SqRoot of above
   set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60
-  set Asymptomatic_Trans random-normal 0.75 0.03
-  set Asymptom_Prop random-normal 0.33 0.03
+  set Asymptomatic_Trans rngs:rnd-beta stream_id 3.86 13.5
+  set Asymptom_Prop rngs:rnd-beta stream_id 17.5 40.8
   
   set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 20 20 ) * 2
   

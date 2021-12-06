@@ -166,7 +166,7 @@ paramValues_rCalcSmall = {**defaultParams, **{
 	
 	'init_cases_region' : listToStr([1, 2]),
 	'global_transmissibility' : listToStr([
-		0.1, 0.12, 0.14, 0.16
+		0.1, 0.14
 	]),
 	'data_suffix' : listToStr([
 		'".csv"',
