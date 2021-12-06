@@ -14,9 +14,10 @@ import pathlib
 import utilities as util
 
 def ProcessResults(outputName, nameList):
+	gitTime = util.GetGitTimeIdentifier()
 	
 	index = [
-		'sensitivity',
+		'init_cases_region',
 		'global_transmissibility',
 	]
 	notFloatCol = [
@@ -39,11 +40,11 @@ def ProcessResults(outputName, nameList):
 
 	df = df.set_index(index + ['rand_seed'])
 	df = df.transpose().stack('rand_seed')
-	df = df.describe(percentiles=[0 + 0.05*i for i in range(20)] + [0.975, 0.99, 0.999])
+	df = df.describe(percentiles=[0 + 0.01*i for i in range(100)])
 	print(df)
-	util.OutputToFile(df, '../output_rcalc/' + outputName, head=False)
+	util.OutputToFile(df, '../../output_rcalc/{}_{}'.format(outputName, gitTime), head=False)
 
 
 #files = util.GetFiles('output/rCalc/2021_08_19/')
-files = ['../../outputs_raw/rcalc']
-ProcessResults('desc_2021_08_19', files)
+files = ['../../output_raw/rcalc']
+ProcessResults('desc', files)

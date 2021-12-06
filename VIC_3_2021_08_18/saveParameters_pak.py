@@ -164,6 +164,7 @@ paramValues_rCalcSmall = {**defaultParams, **{
     'total_population' : '234000000',
 	'first_case_calibrate' : 'true',
 	
+	'init_cases_region' : listToStr([1, 2]),
 	'global_transmissibility' : listToStr([
 		0.144497012
 	]),

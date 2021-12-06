@@ -660,7 +660,12 @@ to setup
   createSimulants
   setupInitialVaccination
   
-  ask n-of ( initial_primary / popPerSimul ) simuls [
+  let potentialInitCases simuls
+  if init_cases_region != -1 [
+    set potentialInitCases simuls with [homeRegion = init_cases_region]
+  ]
+  
+  ask n-of ( initial_primary / popPerSimul ) potentialInitCases [
     set color red
     set isInitialInfection true
     set contributeToR false
@@ -698,7 +703,7 @@ to setup
   
   ;; this ensures that half the people in households with existing infections have also have an infection and prevents a big spike early-on
   let init_secondry_infect initial_secondary
-  ask simuls [
+  ask potentialInitCases [
     let nearSimuls (other simuls in-radius 2 with [ color = red ])
     if init_secondry_infect > popPerSimul and any? nearSimuls [
       set color red
