@@ -126,6 +126,8 @@ to createSimulants
   let cohort_wane_3 0
   let cohort_riskOfDeath 0
   let cohort_riskOfHosp 0
+  let cohort_vacMortChange 0
+  let cohort_vacHospChange 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of (Population) patches with [ pcolor = black ] [
@@ -164,6 +166,8 @@ to createSimulants
       
       set cohort_riskOfDeath (item 24 cohortData)
       set cohort_riskOfHosp (item 25 cohortData)
+      set cohort_vacMortChange (item 26 cohortData)
+      set cohort_vacHospChange (item 27 cohortData)
       
       if vacType_override != "off" [
         set cohort_vaccineType vacType_override
@@ -233,6 +237,8 @@ to createSimulants
 
       set riskOfDeath cohort_riskOfDeath
       set riskOfHosp cohort_riskOfHosp
+      set vacMortChange cohort_vacMortChange
+      set vacHospChange cohort_vacHospChange
       
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
@@ -247,7 +253,6 @@ to createSimulants
       set accept_isolation_draw random-float 1
       
       set asymptomatic_draw random-float 1
-      set asymptomaticFlag 0
       ifelse override_asympt_table
       [
         params_setOverrideAsympt
@@ -255,14 +260,10 @@ to createSimulants
       [
         ifelse cohort_asymptomPropMult <= 1
         [
-          if asymptomatic_draw < Asymptom_Prop * cohort_asymptomPropMult [
-            set asymptomaticFlag 1
-          ]
+          set asymptomatic_prop Asymptom_Prop * cohort_asymptomPropMult
         ]
         [
-          if asymptomatic_draw < 1 - (1 - Asymptom_Prop) / cohort_asymptomPropMult [
-            set asymptomaticFlag 1
-          ]
+          set asymptomatic_prop 1 - (1 - Asymptom_Prop) / cohort_asymptomPropMult
         ]
       ]
       
@@ -578,13 +579,39 @@ to setGlobals
   
   set infectNoVacArray_listOut []
   set infectVacArray_listOut []
-  set dieArray_listOut []
-  set hospArray_listOut []
   set case_listOut []
   set case7_listOut []
   set case14_listOut []
   set case28_listOut []
   set stage_listOut []
+  
+  set dieArray_listOut    []
+  set dieArray_listOut_0  []
+  set dieArray_listOut_1  []
+  set dieArray_listOut_2  []
+  set dieArray_listOut_3  []
+  set dieArray_listOut_4  []
+  set dieArray_listOut_5  []
+  set dieArray_listOut_6  []
+  set dieArray_listOut_7  []
+  set dieArray_listOut_8  []
+  set dieArray_listOut_9  []
+  set dieArray_listOut_10 []
+  set dieArray_listOut_11 []
+  set dieArray_listOut_12 []
+  set dieArray_listOut_13 []
+  
+  set hospArray_listOut   []
+  set hospArray_listOut_0 []
+  set hospArray_listOut_1 []
+  set hospArray_listOut_2 []
+  set hospArray_listOut_3 []
+  set hospArray_listOut_4 []
+  set hospArray_listOut_5 []
+  set hospArray_listOut_6 []
+  set hospArray_listOut_7 []
+  set hospArray_listOut_8 []
+  set hospArray_listOut_9 []
 end
 
 ;;*******************************************************************************************************************************

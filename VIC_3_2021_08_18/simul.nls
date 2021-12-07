@@ -11,6 +11,8 @@ simuls-own [
   contributeToR ;; Whether to contribute to average R reporting.
   riskOfDeath
   riskOfHosp
+  vacMortChange
+  vacHospChange
 
   ;; Cohort parameters
   spanMult
@@ -42,6 +44,7 @@ simuls-own [
   knownContactTime ;; Time at which a contact was known, to prevent double tracing on the traced step
   asymptomaticFlag ;; indicator identifying Asymptomatic cases
   asymptomatic_draw ;; Determines whether the agent will be asymptomatic
+  asymptomatic_prop ;; Proportion of people of this cohort who are asymptomatic
   symtomatic_present_day ;; When the simulant self-presents (if at all)
   symtomatic_present_day_draw ;; Store for the above for all simulants
   present_draw ;; Determines whether the agent will present
@@ -123,6 +126,32 @@ simuls-own [
 ;;*******************************************************************************************************************************
 ;;** Simul Utility Functions **
 ;;*******************************************************************************************************************************
+
+to simul_updateAsymptFlag
+  let effectiveAsymptProp asymptomatic_prop
+  if exposureSymptMult < 1 [
+    (ifelse color = yellow or recoverTime > 0
+      [
+        set effectiveAsymptProp 1 - (1 - effectiveAsymptProp) * exposureSymptMult
+      ]
+      doseCount > 0
+      [
+        let effectiveDoseCount doseCount
+        if vacEffectCountdown > 0 [
+          set effectiveDoseCount effectiveDoseCount - 1
+        ]
+        if effectiveDoseCount > 0 [
+          set effectiveAsymptProp 1 - (1 - effectiveAsymptProp) * exposureSymptMult
+        ]
+      ]
+    )
+  ]
+  set asymptomaticFlag 0
+  if asymptomatic_draw < effectiveAsymptProp [
+    set asymptomaticFlag 1
+  ]
+end
+
 
 to simul_updatepersonalvirulence
   ;; creates a triangular distribution of virulence that peaks at the end of the incubation period
@@ -257,6 +286,7 @@ to simul_updateVacAndReinfectMult
     ]
   ]
   
+  simul_updateAsymptFlag
   ifelse color = red
   [
     let effect_raw 1
@@ -324,6 +354,7 @@ to simul_resetSomeRandomParams
   set proportion_people_avoid_draw random 100
   set doSiteIsolation (random-float 1) < site_iso_prop
   set siteIsolateDay 1 + random site_iso_max_day
+  
   simul_updateVacAndReinfectMult
 end
 
@@ -392,6 +423,7 @@ to simul_do_scaleup
   set variantTransMult 0
   set infectVariant 0
   set recoveryVariant 0
+  set recoverTime 0
   simul_updateVacAndReinfectMult
 
   set timenow 0
@@ -521,10 +553,28 @@ to simul_infect
                 set patchVariant global_incursionVariant
               ]
             ]
+            let succeptibility (table:get succeptibilityTable patchVariant)
             
             ;; Check against lower succeptiblity for reinfection.
-            set binomChance 1 - (1 - baseSuccept * (table:get succeptibilityTable patchVariant) * x) ^ Daily_Infect_Binom
+            set binomChance 1 - (1 - baseSuccept * succeptibility * x) ^ Daily_Infect_Binom
             if binomChance > infectDraw [
+              let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
+              
+              ;; Add deaths and hosp at the start of infection. The counts are delayed
+              let adjDeathRisk riskOfDeath
+              let adjHospRisk riskOfHosp
+              if succeptibility < 1 [
+                set adjDeathRisk adjDeathRisk * (AddLogOdds succeptibility vacMortChange)
+                set adjHospRisk adjHospRisk * (AddLogOdds succeptibility vacHospChange)
+              ]
+              let deathRiskMean adjDeathRisk * popPerSimul
+              let hospRiskMean adjHospRisk * popPerSimul
+              
+              set deathcount deathcount + deathRiskMean
+              array:set dieArray cohortIndex (array:item dieArray cohortIndex) + deathRiskMean
+              array:set hospArray cohortIndex (array:item hospArray cohortIndex) + hospRiskMean
+              
+              ;; Set infection status
               set color red
               set contact_events 0
               set contributeToR true
@@ -546,7 +596,6 @@ to simul_infect
               ]
               set hasKnownContact (culpritTracked = 1)
               set myScale culpritScale
-              let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
 
               set isolating 0
               set timenow 0
@@ -699,17 +748,10 @@ to simul_end_infection
       ]
     ]
     
-    let deathRiskMean riskOfDeath * popPerSimul
-    let hospRiskMean riskOfHosp * popPerSimul
-    
-    set deathcount deathcount + deathRiskMean
-    array:set dieArray cohortIndex (array:item dieArray cohortIndex) + deathRiskMean
-    array:set hospArray cohortIndex (array:item hospArray cohortIndex) + hospRiskMean
-    
     if recoveryVariant = 0 [
-      set recoverCount recoverCount + (popPerSimul - deathRiskMean)
+      set recoverCount recoverCount + popPerSimul
     ]
-    table:put recoverCountByVariant infectVariant ((table:get recoverCountByVariant infectVariant) + (popPerSimul - deathRiskMean))
+    table:put recoverCountByVariant infectVariant ((table:get recoverCountByVariant infectVariant) + popPerSimul)
     
     if trace_calibration > 0 [
       set finished_infections finished_infections + popPerSimul

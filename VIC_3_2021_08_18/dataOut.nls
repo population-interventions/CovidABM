@@ -31,12 +31,38 @@ to setup_DataOut
 end
 
 to calculateDataOut
+  set dieArray_listOut_0 dieArray_listOut_1
+  set dieArray_listOut_1 dieArray_listOut_2
+  set dieArray_listOut_2 dieArray_listOut_3
+  set dieArray_listOut_3 dieArray_listOut_4
+  set dieArray_listOut_4 dieArray_listOut_5
+  set dieArray_listOut_5 dieArray_listOut_6
+  set dieArray_listOut_6 dieArray_listOut_7
+  set dieArray_listOut_7 dieArray_listOut_8
+  set dieArray_listOut_8 dieArray_listOut_9
+  set dieArray_listOut_9 dieArray_listOut_10
+  set dieArray_listOut_10 dieArray_listOut_11
+  set dieArray_listOut_11 dieArray_listOut_12
+  set dieArray_listOut_12 dieArray_listOut_13
+  set dieArray_listOut_13 dieArray_listOut
+  
+  set hospArray_listOut_0 hospArray_listOut_1
+  set hospArray_listOut_1 hospArray_listOut_2
+  set hospArray_listOut_2 hospArray_listOut_3
+  set hospArray_listOut_3 hospArray_listOut_4
+  set hospArray_listOut_4 hospArray_listOut_5
+  set hospArray_listOut_5 hospArray_listOut_6
+  set hospArray_listOut_6 hospArray_listOut_7
+  set hospArray_listOut_7 hospArray_listOut_8
+  set hospArray_listOut_8 hospArray_listOut_9
+  set hospArray_listOut_9 hospArray_listOut
+  
   if start_case_threshold < 0 [
     ;print "doDataOut"
     set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
     set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
-    set dieArray_listOut lput array:to-list dieArray dieArray_listOut
-    set hospArray_listOut lput array:to-list hospArray hospArray_listOut
+    set dieArray_listOut lput array:to-list dieArray dieArray_listOut_0
+    set hospArray_listOut lput array:to-list hospArray hospArray_listOut_0
     set case_listOut lput casesReportedToday case_listOut
     set case7_listOut lput casesinperiod7 case7_listOut
     set case14_listOut lput casesinperiod14 case14_listOut

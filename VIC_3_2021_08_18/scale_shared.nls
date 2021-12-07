@@ -12,6 +12,7 @@ to ShiftRecoveredTowardsTotalProportion
       ]
       ask n-of wantAsk yellowSet [
         set color cyan
+        set recoverTime 0
         set recoveryVariant 0
         simul_updateVacAndReinfectMult
       ]
@@ -24,6 +25,7 @@ to ShiftRecoveredTowardsTotalProportion
       ]
       ask n-of wantAsk cyanSet [
         set color yellow
+        set recoverTime reinfect_delay
         set recoveryVariant 1 ;; TODO this number should not always be 1 if this code is to be used.
         set isolating 0
         simul_updateVacAndReinfectMult
@@ -111,7 +113,7 @@ to-report GetUninfectedOfCohort [index wantedDoseCount wantedHomeRegion]
         report matchDose
       ]
       [
-        report  succSimuls
+        report succSimuls
       ]
     ]
   ]

@@ -150,8 +150,12 @@ paramValues_mainTest = {**defaultParams, **{
     'total_population' : '234000000',
 
 	'global_transmissibility' : listToStr([
-		0.144497012
+		0.219
 	]),
+	'R0_range' : listToStr([
+		6.5
+	]),
+	
 	'data_suffix' : listToStr([
 		'".csv"',
 	]),
@@ -177,5 +181,5 @@ paramValues_rCalcSmall = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_rCalcSmall,
+							paramValues_mainTest,
 							topOfFile=topOfFile)

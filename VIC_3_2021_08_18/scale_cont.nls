@@ -86,6 +86,7 @@ to do_scaledown_cont
     let my_traceAttempts            0
     let my_selfTraceEffMult         0
     let my_myScale                  0
+    let my_recoverTime              0
     
     let thisSimul 0
     let otherSimul 0
@@ -103,6 +104,7 @@ to do_scaledown_cont
         set my_hasKnownContact          hasKnownContact
         set my_traceAttempts            traceAttempts
         set my_selfTraceEffMult         selfTraceEffMult
+        set my_recoverTime              recoverTime
         
         let toAsk Scale_Factor ^ (myScale - scalePhase) - 1 + random-float 1
         set toScale toScale - 1 
@@ -125,6 +127,7 @@ to do_scaledown_cont
             set traceAttempts            my_traceAttempts
             set selfTraceEffMult         my_selfTraceEffMult
             set myScale                  my_myScale
+            set recoverTime              my_recoverTime
             
             table:put infectedContactList table:length infectedContactList thisSimul
             set otherSimul self
