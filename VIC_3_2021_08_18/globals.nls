@@ -34,8 +34,11 @@ globals [
   dailyRecoverMult
   recoverProportion ; Proportion of the living population that has recovered.
   casesReportedToday
-  totalCasesReported
   casesReportedToday_acc ; Accumulator for casesReportedToday
+  totalCasesReported
+  hospToday
+  hospToday_acc ; Accumulator for hospToday
+  totalHosp
   ICUBedsRequired
   scaled_Bed_Capacity
   currentInfections
@@ -55,6 +58,10 @@ globals [
   casesinperiod14
   casesinperiod7
   infectionsinperiod7
+  hospinperiod7
+  hospinperiod14
+  policymetric7
+  policymetric14
   resetDate ;; days after today that the policy is reviewed
   cashposition
   Objfunction ;; seeks to minimise the damage - totalinfection * stage * currentInfections
@@ -89,6 +96,31 @@ globals [
   prior26
   prior27
   prior28
+  
+  h_prior0
+  h_prior1
+  h_prior2
+  h_prior3
+  h_prior4
+  h_prior5
+  h_prior6
+  h_prior7
+  h_prior8
+  h_prior9
+  h_prior10
+  h_prior11
+  h_prior12
+  h_prior13
+  h_prior14
+  h_prior15
+  h_prior16
+  h_prior17
+  h_prior18
+  h_prior19
+  h_prior20
+  h_prior21
+  h_prior22
+  h_prior23
   
   midReport_cumulativeInfected_minusInit
   midReport_totalCasesReported

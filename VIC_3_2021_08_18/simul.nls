@@ -150,6 +150,8 @@ to simul_updateAsymptFlag
   if asymptomatic_draw < effectiveAsymptProp [
     set asymptomaticFlag 1
   ]
+  
+  simul_updatePresentDay
 end
 
 
@@ -573,6 +575,9 @@ to simul_infect
               set deathcount deathcount + deathRiskMean
               array:set dieArray cohortIndex (array:item dieArray cohortIndex) + deathRiskMean
               array:set hospArray cohortIndex (array:item hospArray cohortIndex) + hospRiskMean
+              
+              ;; Add hosp for dynamic policy
+              set hospToday_acc hospToday_acc + hospRiskMean
               
               ;; Set infection status
               set color red

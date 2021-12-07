@@ -8,7 +8,6 @@ to do_stages_nz
     set maskPolicy true
     set spatial_distance true
     set case_isolation true
-    set tracking true
     set quarantine true
     set isolate_on_inf_notice true
   ]

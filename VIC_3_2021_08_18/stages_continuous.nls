@@ -22,7 +22,6 @@ to do_stages_continuous
     set Essential_Workers 100
     set maskPolicy false
     set mask_wearing 0
-    set tracking true
     set spatial_distance false
     set traceMult 1
     set isolate_on_inf_notice false
@@ -32,7 +31,6 @@ to do_stages_continuous
     set maskPolicy true
     set spatial_distance true
     set case_isolation true
-    set tracking true
     set quarantine true
     set isolate_on_inf_notice true
     

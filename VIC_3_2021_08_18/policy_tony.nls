@@ -4,22 +4,22 @@
 ;;;*********************************************************************************************************************
 
 to policy_agressive_elim
-  (ifelse max_stage > 3 and stage <= 3 and casesinperiod7 > 7.5 * 7 * policyTriggerScale
+  (ifelse max_stage > 3 and stage <= 3 and policymetric7 > 7.5 * 7 * policyTriggerScale
     [
       set stage 4  
       set decisionDate ticks
     ]
-    max_stage > 2 and stage <= 2 and casesinperiod7 > 1.5 * 7 * policyTriggerScale
+    max_stage > 2 and stage <= 2 and policymetric7 > 1.5 * 7 * policyTriggerScale
     [
       set stage 3  
       set decisionDate ticks
     ]
-    max_stage > 1 and stage <= 1 and casesinperiod14 >= 2 * policyTriggerScale
+    max_stage > 1 and stage <= 1 and policymetric14 >= 2 * policyTriggerScale
     [
       set stage 2  
       set decisionDate ticks
     ]
-    max_stage > 0 and stage <= 0 and casesinperiod7 >= 1 * policyTriggerScale
+    max_stage > 0 and stage <= 0 and policymetric7 >= 1 * policyTriggerScale
     [
       set stage 1  
       set decisionDate ticks
@@ -27,22 +27,22 @@ to policy_agressive_elim
   )
   
   if decisionDate + 14 <= ticks [
-    (ifelse min_stage <= 3 and stage >= 4 and casesinperiod7 < 5 * 7 * policyTriggerScale
+    (ifelse min_stage <= 3 and stage >= 4 and policymetric7 < 5 * 7 * policyTriggerScale
       [
         set stage 3 
         set decisionDate ticks
       ]
-      min_stage <= 2 and stage >= 3 and casesinperiod7 < 1 * 7 * policyTriggerScale
+      min_stage <= 2 and stage >= 3 and policymetric7 < 1 * 7 * policyTriggerScale
       [
         set stage 2  
         set decisionDate ticks
       ]
-      min_stage <= 1 and stage >= 2 and casesinperiod7 <= 0 and casesinperiod14 < 2 * policyTriggerScale
+      min_stage <= 1 and stage >= 2 and policymetric7 <= 0 and policymetric14 < 2 * policyTriggerScale
       [
         set stage 1  
         set decisionDate ticks
       ]
-      min_stage <= 0 and stage >= 1 and casesinperiod28 <= 0
+      min_stage <= 0 and stage >= 1 and policymetric14 <= 0
       [
         set stage 0  
         set decisionDate ticks
@@ -65,22 +65,22 @@ to policy_moderate_elim
     ]
   ]
   [
-    (ifelse max_stage > 3 and stage <= 3 and casesinperiod7 > 30 * 7 * policyTriggerScale
+    (ifelse max_stage > 3 and stage <= 3 and policymetric7 > 30 * 7 * policyTriggerScale
       [
         set stage 4  
         set decisionDate ticks
       ]
-      max_stage > 2 and stage <= 2 and casesinperiod7 > 6 * 7 * policyTriggerScale
+      max_stage > 2 and stage <= 2 and policymetric7 > 6 * 7 * policyTriggerScale
       [
         set stage 3  
         set decisionDate ticks
       ]
-      max_stage > 1 and stage <= 1 and casesinperiod7 > 1 * 7 * policyTriggerScale
+      max_stage > 1 and stage <= 1 and policymetric7 > 1 * 7 * policyTriggerScale
       [
         set stage 2  
         set decisionDate ticks
       ]
-      max_stage > 0 and stage <= 0 and casesinperiod7 >= 2 * policyTriggerScale
+      max_stage > 0 and stage <= 0 and policymetric7 >= 2 * policyTriggerScale
       [
         set stage 1  
         set decisionDate ticks
@@ -88,22 +88,22 @@ to policy_moderate_elim
     )
     
     if decisionDate + 14 <= ticks [
-      (ifelse min_stage <= 3 and stage >= 4 and casesinperiod7 < 20 * 7 * policyTriggerScale
+      (ifelse min_stage <= 3 and stage >= 4 and policymetric7 < 20 * 7 * policyTriggerScale
         [
           set stage 3
           set decisionDate ticks
         ]
-        min_stage <= 2 and stage >= 3 and casesinperiod7 < 5 * 7 * policyTriggerScale
+        min_stage <= 2 and stage >= 3 and policymetric7 < 5 * 7 * policyTriggerScale
         [
           set stage 2  
           set decisionDate ticks
         ]
-        min_stage <= 1 and stage >= 2 and casesinperiod7 < 1 * 7 * policyTriggerScale
+        min_stage <= 1 and stage >= 2 and policymetric7 < 1 * 7 * policyTriggerScale
         [
           set stage 1  
           set decisionDate ticks
         ]
-        min_stage <= 0 and stage >= 1 and casesinperiod7 <= 0
+        min_stage <= 0 and stage >= 1 and policymetric7 <= 0
         [
           set stage 0  
           set decisionDate ticks
@@ -119,17 +119,17 @@ to policy_moderate_elim
 end
 
 to policy_tight_supress
-  (ifelse max_stage > 3 and stage <= 3 and casesinperiod7 > 20 * total_population / 1000000 * 7 * policyTriggerScale
+  (ifelse max_stage > 3 and stage <= 3 and policymetric7 > 20 * total_population / 1000000 * 7 * policyTriggerScale
     [
       set stage 4  
       set decisionDate ticks
     ]
-    max_stage > 2 and stage <= 2 and casesinperiod7 > 10 * total_population / 1000000 * 7 * policyTriggerScale
+    max_stage > 2 and stage <= 2 and policymetric7 > 10 * total_population / 1000000 * 7 * policyTriggerScale
     [
       set stage 3  
       set decisionDate ticks
     ]
-    stage < max_stage and stage <= 3 and casesinperiod7 > 5 * total_population / 1000000 * 7 * policyTriggerScale and decisionDate + 7 <= ticks
+    stage < max_stage and stage <= 3 and policymetric7 > 5 * total_population / 1000000 * 7 * policyTriggerScale and decisionDate + 7 <= ticks
     [
       set stage stage + 1
       set decisionDate ticks
@@ -137,7 +137,7 @@ to policy_tight_supress
   )
   
   if decisionDate + 14 <= ticks [
-    (if min_stage <= stage - 1 and stage >= 1 and casesinperiod7 < 2.5 * total_population / 1000000 * 7 * policyTriggerScale
+    (if min_stage <= stage - 1 and stage >= 1 and policymetric7 < 2.5 * total_population / 1000000 * 7 * policyTriggerScale
       [
         set stage stage - 1
         set decisionDate ticks
@@ -152,17 +152,17 @@ to policy_tight_supress
 end
 
 to policy_loose_supress
-  (ifelse max_stage > 3 and stage <= 3 and casesinperiod7 > 100 * total_population / 1000000 * 7 * policyTriggerScale
+  (ifelse max_stage > 3 and stage <= 3 and policymetric7 > 100 * total_population / 1000000 * 7 * policyTriggerScale
     [
       set stage 4  
       set decisionDate ticks
     ]
-    max_stage > 2 and stage <= 2 and casesinperiod7 > 50 * total_population / 1000000 * 7 * policyTriggerScale
+    max_stage > 2 and stage <= 2 and policymetric7 > 50 * total_population / 1000000 * 7 * policyTriggerScale
     [
       set stage 3  
       set decisionDate ticks
     ]
-    stage < max_stage and stage <= 3 and casesinperiod7 > 25 * total_population / 1000000 * 7 * policyTriggerScale and decisionDate + 7 <= ticks
+    stage < max_stage and stage <= 3 and policymetric7 > 25 * total_population / 1000000 * 7 * policyTriggerScale and decisionDate + 7 <= ticks
     [
       set stage stage + 1
       set decisionDate ticks
@@ -170,7 +170,7 @@ to policy_loose_supress
   )
   
   if decisionDate + 14 <= ticks [
-    (if min_stage <= stage - 1 and stage >= 1 and casesinperiod7 < 12.5 * total_population / 1000000 * 7 * policyTriggerScale
+    (if min_stage <= stage - 1 and stage >= 1 and policymetric7 < 12.5 * total_population / 1000000 * 7 * policyTriggerScale
       [
         set stage stage - 1
         set decisionDate ticks
@@ -185,17 +185,17 @@ to policy_loose_supress
 end
 
 to policy_barely_supress
-  (ifelse max_stage > 3 and stage <= 3 and casesinperiod7 > 2000 * total_population / 1000000 * 7 * policyTriggerScale
+  (ifelse max_stage > 3 and stage <= 3 and policymetric7 > 2000 * total_population / 1000000 * 7 * policyTriggerScale
     [
       set stage 4  
       set decisionDate ticks
     ]
-    max_stage > 2 and stage <= 2 and casesinperiod7 > 500 * total_population / 1000000 * 7 * policyTriggerScale
+    max_stage > 2 and stage <= 2 and policymetric7 > 500 * total_population / 1000000 * 7 * policyTriggerScale
     [
       set stage 3  
       set decisionDate ticks
     ]
-    stage < max_stage and stage <= 3 and casesinperiod7 > 100 * total_population / 1000000 * 7 * policyTriggerScale and decisionDate + 7 <= ticks
+    stage < max_stage and stage <= 3 and policymetric7 > 100 * total_population / 1000000 * 7 * policyTriggerScale and decisionDate + 7 <= ticks
     [
       set stage stage + 1
       set decisionDate ticks
@@ -203,17 +203,17 @@ to policy_barely_supress
   )
   
   if decisionDate + 14 <= ticks [
-    (ifelse min_stage <= 3 and stage >= 4 and casesinperiod7 < 350 * total_population / 1000000 * 7 * policyTriggerScale
+    (ifelse min_stage <= 3 and stage >= 4 and policymetric7 < 350 * total_population / 1000000 * 7 * policyTriggerScale
       [
         set stage 3
         set decisionDate ticks
       ]
-      min_stage <= 2 and stage >= 3 and casesinperiod7 < 100 * total_population / 1000000 * 7 * policyTriggerScale
+      min_stage <= 2 and stage >= 3 and policymetric7 < 100 * total_population / 1000000 * 7 * policyTriggerScale
       [
         set stage 2  
         set decisionDate ticks
       ]
-      min_stage <= 0 and stage >= 1 and casesinperiod7 < 50 * total_population / 1000000 * 7 * policyTriggerScale
+      min_stage <= 0 and stage >= 1 and policymetric7 < 50 * total_population / 1000000 * 7 * policyTriggerScale
       [
         set stage 0
         set decisionDate ticks

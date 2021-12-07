@@ -124,6 +124,7 @@ to go
   updateComplacency
 
   ;; Set casesinperiod7, which is only detected cases. Also sets casesinperiod14 and casesinperiod28.
+  calculateHospInLastPeriod
   calculateCasesInLastPeriod
   
   updateCounts

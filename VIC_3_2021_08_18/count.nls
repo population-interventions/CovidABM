@@ -23,6 +23,7 @@ to updateCounts
   
   ;let casesToday count simuls with [ color = red and tracked = 1 and caseReportTime = ticks ]
   set casesReportedToday casesReportedToday_acc
+  set hospToday hospToday_acc
   
   ;; calculates the number of infected people in the population
   let redLower simuls with [color = red and myScale = scalePhase]
@@ -55,6 +56,7 @@ to updateCounts
     set cumulativeInfected cumulativeInfected + infectionsToday
     set cumulativeInfected_minusInit cumulativeInfected - initial_cases
     set totalCasesReported totalCasesReported + casesReportedToday
+    set totalHosp totalHosp + hospToday
   ]
     
   ;; calculates death rate per infected person over the course of the pandemic
@@ -81,6 +83,7 @@ to resetAccumulators
   
   set infectionsToday_acc 0
   set casesReportedToday_acc 0
+  set hospToday_acc 0
   
   set new_case_real new_case_real_counter
   set new_case_real_counter 0
@@ -160,6 +163,48 @@ to outputLockdownCalibrate
       set infectedTrackSum infectedTrackSum + ((count simuls with [color = red and tracked = 1]) / redCount)
       set infectedTrackAverage infectedTrackSum / infectedTrackCount
     ]
+  ]
+end
+
+to calculateHospInLastPeriod
+  if ticks < IGNORE_CASE_UNTIL [
+    set hospToday preSimDailyHosp
+  ]
+  
+  set h_prior23 h_prior22
+  set h_prior22 h_prior21
+  set h_prior21 h_prior20
+  set h_prior20 h_prior19
+  set h_prior19 h_prior18
+  set h_prior18 h_prior17
+  set h_prior17 h_prior16
+  set h_prior16 h_prior15
+  set h_prior15 h_prior14
+  set h_prior14 h_prior13
+  set h_prior13 h_prior12
+  set h_prior12 h_prior11
+  set h_prior11 h_prior10
+  set h_prior10 h_prior9
+  set h_prior9 h_prior8
+  set h_prior8 h_prior7
+  set h_prior7 h_prior6
+  set h_prior6 h_prior5
+  set h_prior5 h_prior4
+  set h_prior4 h_prior3
+  set h_prior3 h_prior2
+  set h_prior2 h_prior1
+  set h_prior1 h_prior0
+  set h_prior0 hospToday
+
+  set hospinperiod7 h_prior10 + h_prior11 + h_prior12 + h_prior13
+  set hospinperiod7 hospinperiod7 + h_prior14 + h_prior15 + h_prior16
+  
+  set policymetric14 hospinperiod7 + h_prior17 + h_prior18 + h_prior19
+  set policymetric14 policymetric14 + h_prior20 + h_prior21 + h_prior22 + h_prior23
+  
+  if policyUseHosp [
+   set policymetric7 hospinperiod7
+   set policymetric14 hospinperiod14
   ]
 end
 
@@ -250,5 +295,10 @@ to calculateCasesInLastPeriod
   ]
   if casesinperiod7_min = -1 or casesinperiod7 < casesinperiod7_min [
    set casesinperiod7_min casesinperiod7
+  ]
+  
+  if not policyUseHosp [
+   set policymetric7 casesinperiod7
+   set policymetric14 casesinperiod14
   ]
 end

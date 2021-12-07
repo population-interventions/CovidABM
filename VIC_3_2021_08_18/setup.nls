@@ -387,6 +387,9 @@ to setGlobals
   set recoverProportion          0
   set casesReportedToday         0
   set casesReportedToday_acc     0
+  set hospToday                  0
+  set hospToday_acc              0
+  set totalHosp                  0
   set ICUBedsRequired            0
   set scaled_Bed_Capacity        0
   set currentInfections          0
@@ -406,11 +409,16 @@ to setGlobals
   set casesinperiod14            0
   set casesinperiod7             0
   set infectionsinperiod7        0
+  set hospinperiod7              0
+  set hospinperiod14             0
+  set policymetric7              0
+  set policymetric14             0
   set resetDate                  0
   set cashposition               0
   set Objfunction                0
   set decisionDate               0
   set policyTriggerScale         1
+  
   set prior0                     preSimDailyCases
   set prior1                     preSimDailyCases
   set prior2                     preSimDailyCases
@@ -440,6 +448,31 @@ to setGlobals
   set prior26                    preSimDailyCases
   set prior27                    preSimDailyCases
   set prior28                    preSimDailyCases
+  
+  set h_prior0                   preSimDailyHosp
+  set h_prior1                   preSimDailyHosp
+  set h_prior2                   preSimDailyHosp
+  set h_prior3                   preSimDailyHosp
+  set h_prior4                   preSimDailyHosp
+  set h_prior5                   preSimDailyHosp
+  set h_prior6                   preSimDailyHosp
+  set h_prior7                   preSimDailyHosp
+  set h_prior8                   preSimDailyHosp
+  set h_prior9                   preSimDailyHosp
+  set h_prior10                  preSimDailyHosp
+  set h_prior11                  preSimDailyHosp
+  set h_prior12                  preSimDailyHosp
+  set h_prior13                  preSimDailyHosp
+  set h_prior14                  preSimDailyHosp
+  set h_prior15                  preSimDailyHosp
+  set h_prior16                  preSimDailyHosp
+  set h_prior17                  preSimDailyHosp
+  set h_prior18                  preSimDailyHosp
+  set h_prior19                  preSimDailyHosp
+  set h_prior20                  preSimDailyHosp
+  set h_prior21                  preSimDailyHosp
+  set h_prior22                  preSimDailyHosp
+  set h_prior23                  preSimDailyHosp
   
   set start_case_threshold       init_case_threshold
   set start_day                  0
