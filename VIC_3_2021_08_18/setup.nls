@@ -801,8 +801,7 @@ to setup
   table:put recoverCountByVariant 1 recovercount
   set dailyRecoverMult exp(ln(1 - yearly_recover_prop_loss) / 365)
   ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
-    set color yellow
-    set recoverTime 0
+    simul_setNewRecover
     set recoveryVariant 1
     simul_updateVacAndReinfectMult
   ]

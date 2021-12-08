@@ -74,8 +74,9 @@ end
 
 to param_updateRecoverImmune
   let stream_id 1
-  set reinfect_risk (rngs:rnd-beta stream_id 8 2) * recover_immunity_mult
-  set reinfect_area (rngs:rnd-beta stream_id 10 10) * recover_immunity_mult
+  set reinfect_risk_base 0.85
+  set reinfect_area_base 0.85
+  set reinfect_wane_base 0.05
 end
 
 to params_setDrawValues
@@ -249,6 +250,8 @@ to params_setDrawValues
   set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60
   set Asymptomatic_Trans rngs:rnd-beta stream_id 3.86 13.5
   set Asymptom_Prop rngs:rnd-beta stream_id 17.5 40.8
+  
+  set exposureSymptMult rngs:rnd-beta stream_id 3.125 3.125
   
   set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 20 20 ) * 2
   

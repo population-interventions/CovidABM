@@ -24,8 +24,7 @@ to ShiftRecoveredTowardsTotalProportion
         set wantAsk count cyanSet 
       ]
       ask n-of wantAsk cyanSet [
-        set color yellow
-        set recoverTime reinfect_delay
+        simul_setNewRecover
         set recoveryVariant 1 ;; TODO this number should not always be 1 if this code is to be used.
         set isolating 0
         simul_updateVacAndReinfectMult

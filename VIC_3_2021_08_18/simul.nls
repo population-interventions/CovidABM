@@ -116,6 +116,12 @@ simuls-own [
   traceAttempts ;; How many times this simulant has attempted to be traced since the start of its last/current infection.
   selfTraceEffMult ;; Trace efficacy, used for multiple retraces.
   
+  ;; Yellow variables
+  reinfect_risk
+  reinfect_area
+  reinfect_wane
+  reinfect_delay
+  
   ;; Debug out
   contact_events
   
@@ -461,6 +467,16 @@ to simul_updatePresentDay
   ]
 end
 
+to simul_setNewRecover
+  set color yellow
+  set recoverTime 0
+  
+  set reinfect_risk  reinfect_risk_base
+  set reinfect_area  reinfect_area_base
+  set reinfect_wane  reinfect_wane_base
+  set reinfect_delay reinfect_delay_base
+end
+
 ;;*******************************************************************************************************************************
 ;;** Simul Once-A-Tick Functions **
 ;;*******************************************************************************************************************************
@@ -767,12 +783,11 @@ to simul_end_infection
     
     ;; May as well set color to yellow since dead and infected people have a similar effect on the simulation.
     ;; Very few people die in the low scales as a proportion of the total population.
-    set color yellow
+    simul_setNewRecover
     set isInitialInfection false
     set vaccineIncursionOverride 0
     set recoveryVariant infectVariant
-    set infectVariant 0
-    set recoverTime 0
+    set infectVariant 1
     simul_updateVacAndReinfectMult
   
     if print_contact_events [

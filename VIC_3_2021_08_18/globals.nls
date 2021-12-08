@@ -394,6 +394,10 @@ globals [
   vaccineInitSeedID
   moveInitSeedID
   presentInitSeedID
+  
+  reinfect_risk_base
+  reinfect_area_base
+  reinfect_wane_base
 ]
 
 patches-own [
