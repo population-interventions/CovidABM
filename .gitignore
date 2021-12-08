@@ -19,3 +19,7 @@
 /NZ/output
 /NZ/__pycache__
 /VIC_3_2021_08_18/__pycache__
+/process/shared/__pycache__/*.pyc
+/process/parallel/__pycache__/*.pyc
+/process/serial/__pycache__/*.pyc
+/abm/__pycache__/*.pyc
