@@ -38,6 +38,8 @@ def DoSpartanAggregate(dataDir, rawDataDir, measureCols, arraySize=100, skip=Fal
 	if skip:
 		indexList = util.ListRemove(indexList, skip)
 	
+	util.OutputToFile(util.GetCohortData(rawDataDir + '/step_1/processed_static_1').drop(columns='cohort'), dataDir + '/shared/cohortData')
+	
 	mortAgg = [
 		'noVac_daily',
 		'noVac_weeklyAgg',
@@ -70,8 +72,8 @@ def DoSpartanAggregate(dataDir, rawDataDir, measureCols, arraySize=100, skip=Fal
 			'case',
 			'case7',
 			'case14',
-			#'infectNoVac', # Takes too long
-			#'infectVac', # Takes too long
+			'infectNoVac',
+			'infectVac',
 			'stage',
 		],
 		header=3,

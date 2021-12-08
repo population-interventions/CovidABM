@@ -19,16 +19,16 @@ from serial.processedOutputToReport import DoProcessingForReport
 from serial.processPMSLTOutput import ProcessPMSLTResults
 from serial.processTraceStyleGraphs import DoPreProcessChecks
 
+import pak_conf as conf
+
 table5Rows = [
 	[False, False],
-	['param_policy', ['Stage2', 'Stage3', 'Stage4']],
-	['sympt_present_prop', [0.5, 0.3]],
+	['VacUptake', ['.csv']],
 ]
 
 healthPerspectiveRows = [
 	[False, False],
-	['param_policy', ['Stage2', 'Stage3', 'Stage4']],
-	['sympt_present_prop', [0.5, 0.3]],
+	['VacUptake', ['.csv']],
 ]
 
 heatmapStructure = {
@@ -114,53 +114,13 @@ heatAges = [
 	[0, 110],
 ]
 
-measureCols_raw = [
-	'r0_range',
-	'policy_pipeline',
-	'data_suffix',
-	'param_final_phase',
-	'param_vacincurmult',
-	'compound_trace',
-	'min_stage',
-	'sensitivity',
-]
-measureCols = [
-	'R0',
-	'Policy',
-	'VacUptake',
-	'AgeLimit',
-	'IncurRate',
-]
-
-def indexRenameFunc(chunk):
-	index = chunk.index.to_frame()
-	#index['R0'] = index['global_transmissibility_out'].apply(lambda x: 3.75 if x < 0.61333 else (4.17 if x < 0.681666 else 4.58))
-
-	index['data_suffix'] = index['data_suffix'].replace({
-		"_az_25.csv" : 0.80,
-		"_az_25_95.csv" : 0.95,
-		"_az_25_90.csv" : 0.9,
-		"_az_25_80.csv" : 0.8,
-		"_az_25_70.csv" : 0.7,
-	})
-	index['param_final_phase'] = index['param_final_phase'].replace({
-		3 : 'No',
-		4 : 'Yes',
-	})
-	index['min_stage'] = index['min_stage'].replace({
-		0 : '1a',
-		2 : '2',
-	})
-	
-	renameCols = {measureCols_raw[i] : measureCols[i] for i in range(len(measureCols))}
-	index = index.rename(columns=renameCols)
-	
-	chunk.index = pd.MultiIndex.from_frame(index)
-	return chunk
-
 
 # R0_range param_policy VacKids param_vacincurmult param_vac_uptake
 favouriteParams = [5, 'ME_TS_LS', 'No', 5, 0.7]
+
+measureCols_raw = conf.GetMeasureColsRaw()
+measureCols = conf.GetMeasureCols()
+indexRenameFunc = conf.GetIndexRenameFunc()
 
 #dataDir = '2021_05_04'
 rawDataDir = '../../output_post/pak_main'
@@ -186,11 +146,6 @@ if preChecks:
 		workingDir, rawDataDir, indexRenameFunc, measureCols, measureCols_raw,
 		defaultValues, firstOnly=dryRun)
 
-oldNonSpartan = False
-if oldNonSpartan:
-	DoAbmProcessing(workingDir, rawDataDir, indexRenameFunc, measureCols, measureCols_raw, firstOnly=dryRun, day_override=day_override)
-	#PreProcessMortHosp(workingDir, measureCols)
-
 if aggregateSpartan:
 	DoSpartanAggregate(workingDir, rawDataDir, measureCols, arraySize=1)
 
@@ -199,6 +154,8 @@ if doDraws:
 
 if doFinaliseCohortAgg:
 	FinaliseMortHosp(workingDir, measureCols, heatAges)
+
+DoProcessingForReport(workingDir, inputDir, measureCols, table5Rows, 'R0', months=24)
 
 if makeOutput:
 	MakeMortHospHeatmapRange(workingDir, measureCols, heatAges, heatmapStructure, 'weeklyAgg', 0, 82, aggSize=7, describe=True)
@@ -230,8 +187,6 @@ if makeComparison:
 	MakeComparisionHeatmap(workingDir, heatmapStructure, compareStages, divide=False)
 
 #DoProcessingForPMSLT(workingDir, inputDir, measureCols, months=24)
-#DoProcessingForReport(workingDir, inputDir, measureCols, table5Rows, 'param_vac_uptake', months=24)
-
 filterIndex = [
 	('R0', 6.5),
 	('Essential', 'Extreme'),

@@ -275,6 +275,7 @@ def ProcessAverageOverSeeds(subfolder, measureCols):
 ############### Median Table Processing ###############
 
 def SplitDfByMeasure(df, measure=False, formatFunc=False):
+	print(df)
 	if measure:
 		df = df.unstack(measure)
 		
@@ -416,22 +417,22 @@ def ProcessInfectionCohorts(subfolder, measureCols, months):
 	print('Processing vaccination infection for PMSLT')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/ABM_process/processed_infectVac',
-		subfolder + '/ABM_process/processed_static',
+		subfolder + '/Traces/processed_infectVac',
+		subfolder + '/shared/cohortData',
 		subfolder + '/Report_process/infect_vac',
 		months)
 	print('Processing non-vaccination infection for PMSLT')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/ABM_process/processed_infectNoVac',
-		subfolder + '/ABM_process/processed_static',
+		subfolder + '/Traces/processed_infectNoVac',
+		subfolder + '/shared/cohortData',
 		subfolder + '/Report_process/infect_noVac',
 		months)
 
 
 def ProcessStages(subfolder, measureCols):
 	ProcessStageCohorts(measureCols,
-						subfolder + '/ABM_process/processed_stage',
+						subfolder + '/Traces/processed_stage',
 						subfolder + '/Report_process/stage')
 
 

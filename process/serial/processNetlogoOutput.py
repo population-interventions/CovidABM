@@ -76,7 +76,7 @@ def ProcessAbmChunk(
 def ProcessAbmOutput(
 		subfolder, rawDataDir, indexRenameFunc, measureCols_raw,
 		firstOnly=False, day_override=False):
-	outputFile = subfolder + '/ABM_process/' + 'processed'
+	outputFile = subfolder + '/Traces/' + 'processed'
 	inputPath = pathlib.Path(rawDataDir)
 	suffix = '.csv'
 	pathList = sorted(inputPath.glob('*{}'.format(suffix)))
@@ -125,7 +125,7 @@ def ToVisualisation(chunk, filename, append, measureCols, divisor=False, dayStar
 
 def ProcessFileToVisualisation(subfolder, append, measureCols, divisor=False, dayStartOffset=None, outputDay=False):
 	chunksize = 4 ** 7
-	filename = subfolder + '/ABM_process/' + 'processed'
+	filename = subfolder + '/Traces/' + 'processed'
 	for chunk in tqdm(pd.read_csv(
 				filename + '_' + append + '.csv', chunksize=chunksize,
 				index_col=list(range(2 + len(measureCols))),
@@ -140,10 +140,10 @@ def InfectionsAndStageVisualise(dataDir, measureCols, dayStartOffset=0):
 	ProcessFileToVisualisation(dataDir, 'infectNoVac', measureCols, dayStartOffset=dayStartOffset) 
 	print('Processing infectVac')
 	ProcessFileToVisualisation(dataDir, 'infectVac', measureCols, dayStartOffset=dayStartOffset)
-	AddFiles(dataDir + '/ABM_process/' + 'infect_unique_weeklyAgg',
+	AddFiles(dataDir + '/Traces/' + 'infect_unique_weeklyAgg',
 		[
-			dataDir + '/ABM_process/' + 'processed_infectNoVac_weeklyAgg',
-			dataDir + '/ABM_process/' + 'processed_infectVac_weeklyAgg',
+			dataDir + '/Traces/' + 'processed_infectNoVac_weeklyAgg',
+			dataDir + '/Traces/' + 'processed_infectVac_weeklyAgg',
 		],
 		index=(2 + len(measureCols))
 	)

@@ -122,14 +122,14 @@ def ProcessInfectionCohorts(subfolder, measureCols):
 	print('Processing vaccination infection for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/ABM_process/processed_infectVac',
-		subfolder + '/ABM_process/processed_static',
+		subfolder + '/Traces/processed_infectVac',
+		subfolder + '/Traces/processed_static',
 		subfolder + '/Mort_process/infect_vac')
 	print('Processing non-vaccination infection for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/ABM_process/processed_infectNoVac',
-		subfolder + '/ABM_process/processed_static',
+		subfolder + '/Traces/processed_infectNoVac',
+		subfolder + '/Traces/processed_static',
 		subfolder + '/Mort_process/infect_noVac')
 
 

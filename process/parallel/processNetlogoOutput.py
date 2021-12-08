@@ -32,7 +32,6 @@ def ProcessAbmChunk(
 	# Drop colums that are probably never useful.
 	
 	filename = outputDir + 'processed'
-	filenameBig = outputDir + '/big' + 'processed'
 	
 	chunk = chunk[[
 		'[run number]', 'rand_seed',
@@ -72,8 +71,8 @@ def ProcessAbmChunk(
 	SplitOutDailyData(chunk, 1, days, arrayIndex, 'case7', filename, 'case7', fillTo=day_override)
 	SplitOutDailyData(chunk, 1, days, arrayIndex, 'case14', filename, 'case14', fillTo=day_override)
 	SplitOutDailyData(chunk, 1, days, arrayIndex, 'stage', filename, 'stage', fillTo=day_override)
-	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectNoVacArray', filenameBig, 'infectNoVac', fillTo=day_override)
-	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectVacArray', filenameBig, 'infectVac', fillTo=day_override)
+	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectNoVacArray', filename, 'infectNoVac', fillTo=day_override)
+	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectVacArray', filename, 'infectVac', fillTo=day_override)
 
 
 def ProcessAbmOutput(
@@ -134,9 +133,9 @@ def ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, append, measureC
 
 def InfectionsAndStageVisualise(inputDir, outputDir, arrayIndex, measureCols, dayStartOffset=0):
 	print('Processing infectNoVac')
-	ProcessFileToVisualisation(inputDir + '/big', outputDir, arrayIndex, 'infectNoVac', measureCols, dayStartOffset=dayStartOffset)
+	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'infectNoVac', measureCols, dayStartOffset=dayStartOffset)
 	print('Processing infectVac')
-	ProcessFileToVisualisation(inputDir + '/big', outputDir, arrayIndex, 'infectVac', measureCols, dayStartOffset=dayStartOffset)
+	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'infectVac', measureCols, dayStartOffset=dayStartOffset)
 
 	print('Processing stage')
 	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'stage', measureCols, dayStartOffset=dayStartOffset)
@@ -267,15 +266,15 @@ def ProcessInfectionCohorts(inputDir, outputDir, arrayIndex, measureCols):
 	print('Processing vaccination infection for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		inputDir + '/big' + 'processed_infectVac' + '_' + str(arrayIndex),
+		inputDir + 'processed_infectVac' + '_' + str(arrayIndex),
 		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'infect_vac', outputDir + '/big' + 'infect_vac', arrayIndex)
+		outputDir + 'infect_vac', outputDir + 'infect_vac', arrayIndex)
 	print('Processing non-vaccination infection for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		inputDir + '/big' + 'processed_infectNoVac' + '_' + str(arrayIndex),
+		inputDir + 'processed_infectNoVac' + '_' + str(arrayIndex),
 		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'infect_noVac', outputDir + '/big' + 'infect_noVac', arrayIndex)
+		outputDir + 'infect_noVac', outputDir + 'infect_noVac', arrayIndex)
 
 
 ############### Cohort outputs for mort/hosp ###############

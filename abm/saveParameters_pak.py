@@ -181,5 +181,5 @@ paramValues_rCalcSmall = {**defaultParams, **{
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_mainTest,
+							paramValues_rCalcSmall,
 							topOfFile=topOfFile)

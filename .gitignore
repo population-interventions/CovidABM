@@ -24,3 +24,4 @@
 /process/serial/__pycache__/*.pyc
 /abm/__pycache__/*.pyc
 /process/rcalc/__pycache__/*.pyc
+/process/__pycache__/*.pyc
