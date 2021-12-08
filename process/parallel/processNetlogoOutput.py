@@ -37,6 +37,8 @@ def ProcessAbmChunk(
 		'[run number]', 'rand_seed',
 		'stage_listOut', 'scalephase', 'cumulativeInfected',
 		'infectNoVacArray_listOut', 'infectVacArray_listOut',
+		'dieArray_listOut',
+		'hospArray_listOut',
 		'case_listOut', 'case7_listOut',
 		'case14_listOut', 'case28_listOut',
 		'age_listOut', 'atsi_listOut', 'morbid_listOut'
@@ -73,6 +75,8 @@ def ProcessAbmChunk(
 	SplitOutDailyData(chunk, 1, days, arrayIndex, 'stage', filename, 'stage', fillTo=day_override)
 	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectNoVacArray', filename, 'infectNoVac', fillTo=day_override)
 	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectVacArray', filename, 'infectVac', fillTo=day_override)
+	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'dieArray', filename, 'mort', fillTo=day_override)
+	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'hospArray', filename, 'hosp', fillTo=day_override)
 
 
 def ProcessAbmOutput(
@@ -136,6 +140,11 @@ def InfectionsAndStageVisualise(inputDir, outputDir, arrayIndex, measureCols, da
 	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'infectNoVac', measureCols, dayStartOffset=dayStartOffset)
 	print('Processing infectVac')
 	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'infectVac', measureCols, dayStartOffset=dayStartOffset)
+	
+	print('Processing hosp')
+	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'hosp', measureCols, dayStartOffset=dayStartOffset)
+	print('Processing mort')
+	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'mort', measureCols, dayStartOffset=dayStartOffset)
 
 	print('Processing stage')
 	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'stage', measureCols, dayStartOffset=dayStartOffset)
@@ -273,6 +282,19 @@ def ProcessInfectionCohorts(inputDir, outputDir, arrayIndex, measureCols):
 	ProcessInfectCohorts(
 		measureCols,
 		inputDir + 'processed_infectNoVac' + '_' + str(arrayIndex),
+		inputDir + 'processed_static' + '_' + str(arrayIndex),
+		outputDir + 'infect_noVac', outputDir + 'infect_noVac', arrayIndex)
+	
+	print('Processing mort for MortHosp')
+	ProcessInfectCohorts(
+		measureCols,
+		inputDir + 'processed_mort' + '_' + str(arrayIndex),
+		inputDir + 'processed_static' + '_' + str(arrayIndex),
+		outputDir + 'infect_vac', outputDir + 'infect_vac', arrayIndex)
+	print('Processing hosp for MortHosp')
+	ProcessInfectCohorts(
+		measureCols,
+		inputDir + 'processed_hosp' + '_' + str(arrayIndex),
 		inputDir + 'processed_static' + '_' + str(arrayIndex),
 		outputDir + 'infect_noVac', outputDir + 'infect_noVac', arrayIndex)
 

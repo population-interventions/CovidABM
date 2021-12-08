@@ -74,6 +74,8 @@ def DoSpartanAggregate(dataDir, rawDataDir, measureCols, arraySize=100, skip=Fal
 			'case14',
 			'infectNoVac',
 			'infectVac',
+			'mort',
+			'hosp',
 			'stage',
 		],
 		header=3,
@@ -90,6 +92,8 @@ def DoSpartanAggregate(dataDir, rawDataDir, measureCols, arraySize=100, skip=Fal
 			'case14_weeklyAgg',
 			'infectNoVac_weeklyAgg',
 			'infectVac_weeklyAgg',
+			'mort_weeklyAgg',
+			'hosp_weeklyAgg',
 			'stage_weeklyAgg',
 		],
 	)

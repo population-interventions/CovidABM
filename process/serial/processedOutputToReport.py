@@ -192,24 +192,25 @@ def ConstructGroupedMedianCompare(df, groupMeasure, measure, compareCol, outFile
 
 ############### Median Table Processing ###############
 
-def OutputInfectReportTables(subfolder, measureCols, groupMeasure, compareCol=False):
-	infectFile = subfolder + '/Report_process/infect_total'
-	infectDf = pd.read_csv(
-		infectFile + '.csv', 
-		index_col=list(range(1 + len(measureCols))),
+def OutputReportTables(subfolder, name, measureCols, groupMeasure, compareCol=False, dropRun=False):
+	filePath = subfolder + '/Report_process/' + name
+	df = pd.read_csv(
+		filePath + '.csv', 
+		index_col=list(range((2 if dropRun else 1) + len(measureCols))),
 		header=list(range(2)))
 	
 	measure = ['year', 'age_min']
+	if dropRun:
+		df = df.droplevel('run', axis=0)
 	
 	#print('ConstructMedian Infect')
-	#ConstructMedian(infectDf, measure, subfolder + '/Report_out/medianAll')
-	print('ConstructGroupedMedian Infect')
-	ConstructGroupedMedian(infectDf, groupMeasure, measure, subfolder + '/Report_out/medianAverage')
+	print('ConstructGroupedMedian', name)
+	ConstructGroupedMedian(df, groupMeasure, measure, subfolder + '/Report_out/{}_medianAverage'.format(name))
 	if compareCol:
-		print('ConstructGroupedMedianCompare Infect')
+		print('ConstructGroupedMedianCompare', name)
 		ConstructGroupedMedianCompare(
-			infectDf, groupMeasure, measure, 
-			subfolder + '/Report_out/medianAverage_diff', compareCol=compareCol)
+			df, groupMeasure, measure, 
+			subfolder + '/Report_out/{}_medianAverage_diff'.format(name), compareCol=compareCol)
 
 	
 def OutputStageReportTables(subfolder, measureCols, groupMeasure, compareCol=False):
@@ -270,8 +271,8 @@ def ProcessAverageOverSeeds(subfolder, measureCols):
 
 	infectDf = GroupedMedianByVaccinationSpeed_sum(infectDf, ['year', 'age_min'])
 	OutputToFile(infectDf, subfolder + '/Report_process/average_seeds_infect')
-	
-	
+
+
 ############### Median Table Processing ###############
 
 def SplitDfByMeasure(df, measure=False, formatFunc=False):
@@ -428,6 +429,20 @@ def ProcessInfectionCohorts(subfolder, measureCols, months):
 		subfolder + '/shared/cohortData',
 		subfolder + '/Report_process/infect_noVac',
 		months)
+	print('Processing mort for PMSLT')
+	ProcessInfectCohorts(
+		measureCols,
+		subfolder + '/Traces/processed_mort',
+		subfolder + '/shared/cohortData',
+		subfolder + '/Report_process/mort',
+		months)
+	print('Processing hosp PMSLT')
+	ProcessInfectCohorts(
+		measureCols,
+		subfolder + '/Traces/processed_hosp',
+		subfolder + '/shared/cohortData',
+		subfolder + '/Report_process/hosp',
+		months)
 
 
 def ProcessStages(subfolder, measureCols):
@@ -446,7 +461,9 @@ def DoProcessingForReport(subfolder, inputDir, measureCols, table5Rows, groupMea
 	ProcessInfection(subfolder, measureCols, months)
 	AddAndCleanInfections(subfolder, measureCols)
 	
-	OutputInfectReportTables(subfolder, measureCols, groupMeasure, compareCol=compareCol)
+	OutputReportTables(subfolder, 'infect_total', measureCols, groupMeasure, compareCol=compareCol)
+	OutputReportTables(subfolder, 'mort', measureCols, groupMeasure, compareCol=compareCol, dropRun=True)
+	OutputReportTables(subfolder, 'hosp', measureCols, groupMeasure, compareCol=compareCol, dropRun=True)
 	OutputStageReportTables(subfolder, measureCols, groupMeasure, compareCol=compareCol)
 	
 	ProcessAverageOverSeeds(subfolder, measureCols)

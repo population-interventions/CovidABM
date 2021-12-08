@@ -149,11 +149,11 @@ if preChecks:
 if aggregateSpartan:
 	DoSpartanAggregate(workingDir, rawDataDir, measureCols, arraySize=1)
 
-if doDraws:
-	DrawMortHospDistributions(workingDir, inputDir, measureCols, drawCount=100, padMult=1)
-
-if doFinaliseCohortAgg:
-	FinaliseMortHosp(workingDir, measureCols, heatAges)
+#if doDraws:
+#	DrawMortHospDistributions(workingDir, inputDir, measureCols, drawCount=100, padMult=1)
+#
+#if doFinaliseCohortAgg:
+#	FinaliseMortHosp(workingDir, measureCols, heatAges)
 
 DoProcessingForReport(workingDir, inputDir, measureCols, table5Rows, 'R0', months=24)
 
