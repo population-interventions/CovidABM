@@ -275,7 +275,7 @@ def ProcessInfectionCohorts(inputDir, outputDir, arrayIndex, measureCols):
 		measureCols,
 		inputDir + '/big' + 'processed_infectNoVac' + '_' + str(arrayIndex),
 		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + '/big' + 'infect_noVac', outputDir + 'infect_noVac', arrayIndex)
+		outputDir + 'infect_noVac', outputDir + '/big' + 'infect_noVac', arrayIndex)
 
 
 ############### Cohort outputs for mort/hosp ###############
