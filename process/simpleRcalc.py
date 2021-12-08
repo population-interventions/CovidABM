@@ -11,9 +11,9 @@ from matplotlib import pyplot as plt
 import matplotlib.ticker as ticker
 import seaborn as sns
 import pathlib
-import utilities as util
+import shared.utilities as util
 
-from processRcalc import DoProcessRCalc
+from rcalc.processRcalc import DoProcessRCalc
 
 def ProcessResults(outputName, path):
 	nameList = util.GetFiles(path)
