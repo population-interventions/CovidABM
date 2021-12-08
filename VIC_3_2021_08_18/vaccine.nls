@@ -137,7 +137,7 @@ to simul_vaccinate_me
   ]
 end
 
-to simul_updateVaccine
+to simul_updateVaccineAndRecover
   if doseCount > 0 [
     let effectiveDoseCount doseCount
     if vacEffectCountdown > 0 [
@@ -163,6 +163,15 @@ to simul_updateVaccine
         set selfVaccEff_raw_risk AddLogOdds selfVaccEff_raw_risk waneAmount
         simul_updateVacAndReinfectMult
       ]
+    ]
+  ]
+  
+  if color = yellow [
+    if reinfect_risk > 0 and reinfect_risk < 1 [
+      set reinfect_risk AddLogOdds reinfect_risk reinfect_wane
+    ]
+    if reinfect_area > 0 and reinfect_area < 1 [
+      set reinfect_area AddLogOdds reinfect_area reinfect_wane
     ]
   ]
   
