@@ -138,7 +138,7 @@ def SplitNetlogoList(chunk, cohorts, name, outputName):
   
 def SplitNetlogoNestedList(chunk, cohorts, days, colName, name, fillTo=365):
 	split_names = [(name, j, i) for j in range(0, days) for i in range(0, cohorts)]
-	df = chunk[colName].str.replace('\[', '').str.replace('\]', '').str.split(' ', expand=True)
+	df = chunk[colName].str.replace('\[', '', regex=True).str.replace('\]', '', regex=True).str.split(' ', expand=True)
 	df = df.copy() # de-fragment frame.
 	if days * cohorts - 1 not in df:
 		for i in range(days * cohorts):
