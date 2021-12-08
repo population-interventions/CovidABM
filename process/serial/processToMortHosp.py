@@ -198,6 +198,23 @@ def AggregateAgeAndVacDraw(
 	OutputToFile(dfMetric, fileName)
 
 
+def AggregateAgeAndVac(
+		dfMetric, timeName, heatAge, outFile,
+		metric, measureCols):
+	wantedAges = [i*5 for i in range(int(heatAge[0]/5), int(heatAge[1]/5))]
+	
+	dfMetric = dfMetric.transpose()
+	dfMetric = dfMetric.stack(level=['rand_seed'])
+	dfMetric = dfMetric.unstack(level=[timeName])
+	dfMetric = dfMetric[wantedAges]
+	dfMetric = dfMetric.groupby(level=[timeName], axis=1).sum()
+	dfMetric = dfMetric.reorder_levels(['rand_seed'] + measureCols).sort_index()
+	
+	fileName = (outFile + '_{}_age_{}_{}').format(timeName, heatAge[0], heatAge[1])
+	print(fileName)
+	OutputToFile(dfMetric, fileName)
+	
+
 def OutputTimeTablesDraw(
 		subfolder, dataPath, measureCols, heatAges, timeName):
 	
@@ -262,6 +279,39 @@ def OutputTimeTablesDraw(
 				inName, measureCols, noVacOnly=True)
 
 
+def OutputTimeTables(
+		subfolder, dataPath, measureCols, heatAges, timeName):
+	
+	print('loading DF', timeName)
+	start_time = time.time()
+	
+	dfVac = LoadDf(dataPath, measureCols, timeName, 'vac')
+	dfNoVac = LoadDf(dataPath, measureCols, timeName, 'noVac')
+	dfMort = LoadDf(dataPath, measureCols, timeName, 'vac') #TODO: LOAD THESE TABLES. Also look at the missing first entries of processed_hosp.csv and processed_mort.csv
+	dfHosp = LoadDf(dataPath, measureCols, timeName, 'vac') #TODO: LOAD THESE TABLES
+	
+	dfVac.columns = dfVac.columns.droplevel('run')
+	dfNoVac.columns = dfNoVac.columns.droplevel('run')
+
+	print('Aggregating', timeName)
+	
+	for heatAge in heatAges:
+		for metric in ['infect', 'icu', 'hospital', 'deaths']:
+			inName = nameMap.get(metric) if metric in nameMap else metric
+			AggregateAgeAndVac(
+				dfVac + dfNoVac, cohortEffect, timeName, heatAge,
+				subfolder + '/Mort_out/' + metric,
+				inName, measureCols)
+			AggregateAgeAndVac(
+				dfVac, dfNoVac, cohortEffect, timeName, heatAge,
+				subfolder + '/Mort_out/' + metric + '_vac',
+				inName, measureCols, vacOnly=True)
+			AggregateAgeAndVac(
+				dfVac, dfNoVac, cohortEffect, timeName, heatAge,
+				subfolder + '/Mort_out/' + metric + '_noVac',
+				inName, measureCols, noVacOnly=True)
+
+
 def ApplyCohortEffectsUncertainty(subfolder, measureCols, heatAges, doTenday=False):
 	print('ApplyCohortEffects yearlyAgg')
 	OutputTimeTablesDraw(subfolder, subfolder + '/Mort_process/', measureCols, heatAges, 'yearlyAgg')
@@ -269,6 +319,13 @@ def ApplyCohortEffectsUncertainty(subfolder, measureCols, heatAges, doTenday=Fal
 		OutputTimeTablesDraw(subfolder, subfolder + '/Mort_process/', measureCols, heatAges, 'tendayAgg')
 	OutputTimeTablesDraw(subfolder, subfolder + '/Mort_process/', measureCols, heatAges, 'weeklyAgg')
 
+
+def CopyInfMortHosp(subfolder, measureCols, heatAges, doTenday=False):
+	print('CopyInfMortHosp yearlyAgg')
+	OutputTimeTables(subfolder, subfolder + '/Mort_process/', measureCols, heatAges, 'yearlyAgg')
+	if doTenday:
+		OutputTimeTables(subfolder, subfolder + '/Mort_process/', measureCols, heatAges, 'tendayAgg')
+	OutputTimeTables(subfolder, subfolder + '/Mort_process/', measureCols, heatAges, 'weeklyAgg')
 
 ############### Draw ###############
 
@@ -588,6 +645,10 @@ def DrawMortHospDistributions(subfolder, inputDir, measureCols, **kwargs):
 
 def FinaliseMortHosp(subfolder, measureCols, heatAges, doTenday=False):
 	ApplyCohortEffectsUncertainty(subfolder, measureCols, heatAges, doTenday=doTenday)
+
+
+def FinaliseMortHosp_NoDraw(subfolder, measureCols, heatAges, doTenday=False):
+	CopyInfMortHosp(subfolder, measureCols, heatAges, doTenday=doTenday)
 
 
 def MakeIcuHeatmaps(

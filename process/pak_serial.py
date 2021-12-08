@@ -32,60 +32,13 @@ healthPerspectiveRows = [
 ]
 
 heatmapStructure = {
-	'index_rows' : ['sensitivity', 'TracePower', 'Policy', 'R0', 'Kids'],
-	'index_cols' : ['MinStage', 'VacUptake', 'IncurRate'],
+	'index_rows' : ['R0', 'Policy', 'VacUptake'],
+	'index_cols' : ['AgeLimit', 'IncurRate'],
 	'base_value' : {
-		'MinStage' : '1a',
-		'Policy' : 'ME_TS_LS',
-		'R0' : 6.5,
-		'Kids' : 'No',
-		'VacUptake' : 0.8,
-		'IncurRate' : 1.0,
 	},
 	'sort_rows' : [
-		['sensitivity', {
-			'None' : '_',
-		}],
-		['TracePower', {
-			'ass200_90at5' : 'a',
-			'ass100_90at5_iso' : 'b',
-			'ass100_90at5' : 'c',
-			'ass50_70at5' : 'd',
-		}],
-		['Policy', {
-			'ME_ME_TS' : 'a',
-			'ME_TS_LS' : 'b',
-			'ME_TS_BS' : 'c',
-		}],
-		['R0', {
-			5 : 'a',
-			6.5 : 'b',
-			8 : 'c',
-		}],
-		['Kids', {
-			'Yes' : 'a',
-			'No' : 'b',
-		}],
 	], 
 	'sort_cols' : [
-		['MinStage', {
-			2 : 'b',
-			'2' : 'b',
-			'1a' : 'a',
-		}],
-		['VacUptake', {
-			0.95 : 'a',
-			0.9 : 'b',
-			0.8 : 'c',
-			0.7 : 'd',
-			0.3 : 'e',
-		}],
-		['IncurRate', {
-			0.2 : 'a',
-			1 : 'b',
-			5 : 'c',
-			25 : 'd',
-		}],
 	]
 }
 
@@ -151,9 +104,9 @@ if aggregateSpartan:
 
 #if doDraws:
 #	DrawMortHospDistributions(workingDir, inputDir, measureCols, drawCount=100, padMult=1)
-#
-#if doFinaliseCohortAgg:
-#	FinaliseMortHosp(workingDir, measureCols, heatAges)
+
+if doFinaliseCohortAgg:
+	FinaliseMortHosp_NoDraw(workingDir, measureCols, heatAges)
 
 DoProcessingForReport(workingDir, inputDir, measureCols, table5Rows, 'R0', months=24)
 
