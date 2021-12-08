@@ -57,7 +57,7 @@ to calculateDataOut
   set hospArray_listOut_8 hospArray_listOut_9
   set hospArray_listOut_9 hospArray_listOut
   
-  if start_case_threshold < 0 [
+  if start_metric_threshold < 0 [
     ;print "doDataOut"
     set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
     set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
@@ -90,7 +90,7 @@ to calculateDataOut
       set stage4time stage4time + 1
     ]
     
-    if start_case_threshold < 0 and ticks < param_stage1_time [
+    if start_metric_threshold < 0 and ticks < param_stage1_time [
       set casesinperiod7_switchTime casesinperiod7
       set cumulativeInfected_switchTime cumulativeInfected
     ]

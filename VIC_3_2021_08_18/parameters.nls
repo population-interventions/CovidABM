@@ -161,7 +161,7 @@ to params_setDrawValues
     set param_policy "None"
     set policy_pipeline "None"
     set init_timenow_limit 0
-    set init_case_threshold -10
+    set start_metric_threshold -10
     set param_vacIncurMult 0
     set param_incurMult 0
     set sympt_present_mult 0

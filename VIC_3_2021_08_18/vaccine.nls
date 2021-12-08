@@ -203,7 +203,7 @@ to vaccineMode_micromanageDoses [branch]
 end
 
 to vaccine_update
-  if start_case_threshold < 0 and Vaccine_Available = True [
+  if start_metric_threshold < 0 and Vaccine_Available = True [
     foreach vaccineBranchNames [ branch -> 
       vaccineMode_micromanageDoses branch
     ]

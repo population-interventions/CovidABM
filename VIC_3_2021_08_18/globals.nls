@@ -135,7 +135,7 @@ globals [
   initial_primary
   initial_secondary
   start_day
-  start_case_threshold
+  start_metric_threshold
 
   global_trans_a
   global_trans_b

@@ -474,7 +474,7 @@ to setGlobals
   set h_prior22                  preSimDailyHosp
   set h_prior23                  preSimDailyHosp
   
-  set start_case_threshold       init_case_threshold
+  set start_metric_threshold     init_metric_threshold
   set start_day                  0
   
   set real_prior0                0

@@ -51,7 +51,7 @@ to updateComplacency
     ]
   ]
   
-  if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
+  if vac_restrict_ease_day > -1 and start_metric_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
     if vac_ease_avoid > vac_ease_avoid_compBound [
       set vac_ease_avoid vac_ease_avoid - complacency_loss
       if vac_ease_avoid < vac_ease_avoid_compBound [
@@ -63,7 +63,7 @@ end
 
 to update_vacRestrictionEasing
   set vacRestrictionEase false
-  if vac_restrict_ease_day > -1 and start_case_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
+  if vac_restrict_ease_day > -1 and start_metric_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
     set vacRestrictionEase true
   ]
 end
@@ -72,7 +72,7 @@ end
 ;;;*********************************************************************************************************************
 
 to updatePolicyPipeline
-  if start_case_threshold < 0 [
+  if start_metric_threshold < 0 [
     if policy_pipeline = "ME_TS_S1" [
       ifelse ticks - start_day < 2 * policy_pipe_time 
       [
@@ -168,7 +168,7 @@ end
 to COVIDPolicyTriggers
   updatePolicyPipeline
   
-  ifelse start_case_threshold > -1
+  ifelse start_metric_threshold > -1
   [
     set stage init_stage
   ]
