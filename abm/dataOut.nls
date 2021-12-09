@@ -6,6 +6,32 @@ to setup_DataOut
   set dieArray array:from-list cohortLengthListOfZeros
   set hospArray array:from-list cohortLengthListOfZeros
   
+  set dieArray_listOut_0 cohortLengthListOfZeros
+  set dieArray_listOut_1 cohortLengthListOfZeros
+  set dieArray_listOut_2 cohortLengthListOfZeros
+  set dieArray_listOut_3 cohortLengthListOfZeros
+  set dieArray_listOut_4 cohortLengthListOfZeros
+  set dieArray_listOut_5 cohortLengthListOfZeros
+  set dieArray_listOut_6 cohortLengthListOfZeros
+  set dieArray_listOut_7 cohortLengthListOfZeros
+  set dieArray_listOut_8 cohortLengthListOfZeros
+  set dieArray_listOut_9 cohortLengthListOfZeros
+  set dieArray_listOut_10 cohortLengthListOfZeros
+  set dieArray_listOut_11 cohortLengthListOfZeros
+  set dieArray_listOut_12 cohortLengthListOfZeros
+  set dieArray_listOut_13 cohortLengthListOfZeros
+  
+  set hospArray_listOut_0 cohortLengthListOfZeros
+  set hospArray_listOut_1 cohortLengthListOfZeros
+  set hospArray_listOut_2 cohortLengthListOfZeros
+  set hospArray_listOut_3 cohortLengthListOfZeros
+  set hospArray_listOut_4 cohortLengthListOfZeros
+  set hospArray_listOut_5 cohortLengthListOfZeros
+  set hospArray_listOut_6 cohortLengthListOfZeros
+  set hospArray_listOut_7 cohortLengthListOfZeros
+  set hospArray_listOut_8 cohortLengthListOfZeros
+  set hospArray_listOut_9 cohortLengthListOfZeros
+  
   set age_listOut []
   set atsi_listOut []
   set morbid_listOut []
