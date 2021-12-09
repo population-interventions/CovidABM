@@ -308,7 +308,7 @@ to simul_updateVacAndReinfectMult
       ;; Set reduced infectiveness based on previously having an infection.
       ifelse infectVariant > recoveryVariant
       [
-        set effect_raw effect_raw * (1 - prev_var_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
+        set effect_raw effect_raw * (1 - reinfect_area * prev_var_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
       ]
       [
         set effect_raw effect_raw * (1 - reinfect_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
@@ -336,7 +336,7 @@ to simul_updateVacAndReinfectMult
         if recoveryVariant > 0 [
           ifelse variant > recoveryVariant 
           [
-            set effect_raw effect_raw * (1 - prev_var_risk)
+            set effect_raw effect_raw * (1 - reinfect_risk * prev_var_risk)
           ]
           [
             set effect_raw effect_raw * (1 - reinfect_risk) 

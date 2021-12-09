@@ -1,4 +1,4 @@
 name,reduceRisk_a,reduceRisk_b,reduceInfect_a,reduceInfect_b,partialDays,vacEffectDays,risk_dose_1,risk_dose_2,risk_dose_3,infect_dose_1,infect_dose_2,infect_dose_3
-AZ,40,26.66666667,1.9,5.7,42,10,0.5,0.9,1,0.5,0.9,1
-Pfizer,35.55555556,8.888888889,1.9,5.7,21,10,0.5,0.9,1,0.5,0.9,1
-IncursionVac,14.7,6.3,1.9,5.7,21,10,0.5,0.9,1,0.5,0.9,1
+vac_0,40,26.66666667,7.3,14.8,28,10,0.5,0.9,1,1,1,1
+vac_60,35.55555556,8.888888889,7.3,14.8,28,10,0.5,0.9,1,1,1,1
+IncursionVac,14.7,6.3,1.9,5.7,28,10,0.5,0.9,1,0.5,0.9,1

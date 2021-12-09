@@ -75,7 +75,7 @@ end
 to param_updateRecoverImmune
   let stream_id 1
   set reinfect_risk_base 0.85
-  set reinfect_area_base 0.85
+  set reinfect_area_base rngs:rnd-beta stream_id 7.3 14.8
   set reinfect_wane_base -0.01
 end
 
