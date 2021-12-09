@@ -92,6 +92,8 @@ def OutputToFile(df, path, index=True, head=True):
 	fullFilePath = path + '.csv'
 	MakePath(path)
 	#print('OUTPUT', path)
+	#if path == '../../output_post/pak_main/cohort/infect_vac_yearlyAgg_1':
+	#	print(df)
 	
 	if fileCreated.get(fullFilePath):
 		# Append

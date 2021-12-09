@@ -205,7 +205,7 @@ def OutputYear(df, outputPrefix, arrayIndex):
 	OutputToFile(df, outputPrefix + '_yearlyAgg' + '_' + str(arrayIndex), head=False)
 
 
-def ProcessInfectChunk(df, chortDf, outputPrefix, outputPrefixBig, arrayIndex, doTenday=False):
+def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doTenday=False):
 	df.columns = df.columns.set_levels(df.columns.levels[1].astype(int), level=1)
 	df.columns = df.columns.set_levels(df.columns.levels[2].astype(int), level=2)
 	df = df.sort_values(['cohort', 'day'], axis=1)
@@ -248,7 +248,7 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, outputPrefixBig, arrayIndex, d
 		df = df.join(df1)
 	
 	df = df.stack(level=['age'])
-	OutputToFile(df, outputPrefixBig + '_' + str(arrayIndex), head=False)
+	OutputToFile(df, outputPrefix + '_' + str(arrayIndex), head=False)
 	OutputWeek(df.copy(), outputPrefix, arrayIndex)
 	if doTenday:
 		OutputTenday(df.copy(), outputPrefix, arrayIndex)
@@ -256,7 +256,7 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, outputPrefixBig, arrayIndex, d
 	return df
 
 
-def ProcessInfectCohorts(measureCols, filename, cohortFile, outputPrefix, outputPrefixBig, arrayIndex):
+def ProcessInfectCohorts(measureCols, filename, cohortFile, outputPrefix, arrayIndex):
 	cohortData = GetCohortData(cohortFile)
 	chunksize = 4 ** 7
 	
@@ -267,7 +267,7 @@ def ProcessInfectCohorts(measureCols, filename, cohortFile, outputPrefix, output
 				dtype={'day' : int, 'cohort' : int},
 				chunksize=chunksize),
 			total=4):
-		df = ProcessInfectChunk(chunk, cohortData, outputPrefix, outputPrefixBig, arrayIndex)
+		df = ProcessInfectChunk(chunk, cohortData, outputPrefix, arrayIndex)
 		OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
 
 
@@ -277,26 +277,26 @@ def ProcessInfectionCohorts(inputDir, outputDir, arrayIndex, measureCols):
 		measureCols,
 		inputDir + 'processed_infectVac' + '_' + str(arrayIndex),
 		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'infect_vac', outputDir + 'infect_vac', arrayIndex)
+		outputDir + 'infect_vac', arrayIndex)
 	print('Processing non-vaccination infection for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
 		inputDir + 'processed_infectNoVac' + '_' + str(arrayIndex),
 		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'infect_noVac', outputDir + 'infect_noVac', arrayIndex)
+		outputDir + 'infect_noVac', arrayIndex)
 	
 	print('Processing mort for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
 		inputDir + 'processed_mort' + '_' + str(arrayIndex),
 		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'infect_vac', outputDir + 'infect_vac', arrayIndex)
+		outputDir + 'mort', arrayIndex)
 	print('Processing hosp for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
 		inputDir + 'processed_hosp' + '_' + str(arrayIndex),
 		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'infect_noVac', outputDir + 'infect_noVac', arrayIndex)
+		outputDir + 'hosp', arrayIndex)
 
 
 ############### Cohort outputs for mort/hosp ###############

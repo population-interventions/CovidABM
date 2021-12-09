@@ -150,8 +150,8 @@ def GetEffectsData(file):
 	return df
 
 
-def LoadDf(subfolder, measureCols, timeName, vacName):
-	df = pd.read_csv(subfolder + 'infect_' + vacName + '_' + timeName + '.csv')
+def LoadDf(subfolder, measureCols, timeName, metric):
+	df = pd.read_csv(subfolder + metric + '_' + timeName + '.csv')
 	df = df.set_index(list(df.columns)[0:(3 + len(measureCols))])
 	df.columns.name = timeName
 	df.columns = df.columns.astype(float).astype(int)
@@ -198,9 +198,8 @@ def AggregateAgeAndVacDraw(
 	OutputToFile(dfMetric, fileName)
 
 
-def AggregateAgeAndVac(
-		dfMetric, timeName, heatAge, outFile,
-		metric, measureCols):
+def AggregateByAge(
+		dfMetric, timeName, heatAge, outFile, measureCols):
 	wantedAges = [i*5 for i in range(int(heatAge[0]/5), int(heatAge[1]/5))]
 	
 	dfMetric = dfMetric.transpose()
@@ -224,8 +223,8 @@ def OutputTimeTablesDraw(
 	print('loading DF', timeName)
 	start_time = time.time()
 	
-	dfVac = LoadDf(dataPath, measureCols, timeName, 'vac')
-	dfNoVac = LoadDf(dataPath, measureCols, timeName, 'noVac')
+	dfVac = LoadDf(dataPath, measureCols, timeName, 'infect_vac')
+	dfNoVac = LoadDf(dataPath, measureCols, timeName, 'infect_noVac')
 	
 	dfVac.columns = dfVac.columns.droplevel('run')
 	dfNoVac.columns = dfNoVac.columns.droplevel('run')
@@ -285,31 +284,53 @@ def OutputTimeTables(
 	print('loading DF', timeName)
 	start_time = time.time()
 	
-	dfVac = LoadDf(dataPath, measureCols, timeName, 'vac')
-	dfNoVac = LoadDf(dataPath, measureCols, timeName, 'noVac')
-	dfMort = LoadDf(dataPath, measureCols, timeName, 'vac') #TODO: LOAD THESE TABLES. Also look at the missing first entries of processed_hosp.csv and processed_mort.csv
-	dfHosp = LoadDf(dataPath, measureCols, timeName, 'vac') #TODO: LOAD THESE TABLES
+	dfVac = LoadDf(dataPath, measureCols, timeName, 'infect_vac')
+	dfNoVac = LoadDf(dataPath, measureCols, timeName, 'infect_noVac')
+	dfMort = LoadDf(dataPath, measureCols, timeName, 'mort')
+	dfHosp = LoadDf(dataPath, measureCols, timeName, 'hosp')
 	
 	dfVac.columns = dfVac.columns.droplevel('run')
 	dfNoVac.columns = dfNoVac.columns.droplevel('run')
+	dfMort.columns = dfMort.columns.droplevel('run')
+	dfHosp.columns = dfHosp.columns.droplevel('run')
+
+	order = ['rand_seed'] + [timeName] + measureCols
+	dfVac = dfVac.reorder_levels(order, axis=1).sort_index(axis=1)
+	dfNoVac = dfNoVac.reorder_levels(order, axis=1).sort_index(axis=1)
+	dfMort = dfMort.reorder_levels(order, axis=1).sort_index(axis=1)
+	dfHosp = dfHosp.reorder_levels(order, axis=1).sort_index(axis=1)
+	#print(dfVac)
+	
+	dfVac = dfVac.transpose().unstack('rand_seed').transpose()
+	dfNoVac = dfNoVac.transpose().unstack('rand_seed').transpose()
+	dfMort = dfMort.transpose().unstack('rand_seed').transpose()
+	dfHosp = dfHosp.transpose().unstack('rand_seed').transpose()
 
 	print('Aggregating', timeName)
 	
 	for heatAge in heatAges:
-		for metric in ['infect', 'icu', 'hospital', 'deaths']:
-			inName = nameMap.get(metric) if metric in nameMap else metric
-			AggregateAgeAndVac(
-				dfVac + dfNoVac, cohortEffect, timeName, heatAge,
-				subfolder + '/Mort_out/' + metric,
-				inName, measureCols)
-			AggregateAgeAndVac(
-				dfVac, dfNoVac, cohortEffect, timeName, heatAge,
-				subfolder + '/Mort_out/' + metric + '_vac',
-				inName, measureCols, vacOnly=True)
-			AggregateAgeAndVac(
-				dfVac, dfNoVac, cohortEffect, timeName, heatAge,
-				subfolder + '/Mort_out/' + metric + '_noVac',
-				inName, measureCols, noVacOnly=True)
+			AggregateByAge(
+				dfVac + dfNoVac, timeName, heatAge,
+				subfolder + '/Mort_out/' + 'infect',
+				measureCols)
+			
+			AggregateAgeAndVacDraw(
+				dfVac, dfNoVac, False, timeName, heatAge,
+				subfolder + '/Mort_out/' + 'infect_vac',
+				'infect', measureCols, vacOnly=True)
+			AggregateAgeAndVacDraw(
+				dfVac, dfNoVac, False, timeName, heatAge,
+				subfolder + '/Mort_out/' + 'infect_noVac',
+				'infect', measureCols, noVacOnly=True)
+			
+			AggregateByAge(
+				dfMort, timeName, heatAge,
+				subfolder + '/Mort_out/' + 'mort',
+				measureCols)
+			AggregateByAge(
+				dfHosp, timeName, heatAge,
+				subfolder + '/Mort_out/' + 'hosp',
+				measureCols)
 
 
 def ApplyCohortEffectsUncertainty(subfolder, measureCols, heatAges, doTenday=False):
@@ -674,40 +695,24 @@ def MakeMortHospHeatmapRange(
 	DoTraceHeatmaps(subfolder, measureCols, heatStruct, timeName, aggSize, start, end, describe=describe)
 	
 	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'icu_vac',
-		start, end, describe=describe)
-	DoHeatmapsDrawRange(
 		subfolder, measureCols, heatStruct, heatAges, timeName, 'infect_vac',
 		start, end, describe=describe)
-	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'hospital_vac',
-			start, end, describe=describe)
-	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'deaths_vac',
-		max(0, start - deathLag), end - deathLag, describe=describe)
 	DoHeatmapsDrawRange(
 		subfolder, measureCols, heatStruct, heatAges, timeName, 'infect_noVac',
 		start, end, describe=describe)
 	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'icu_noVac',
+		subfolder, measureCols, heatStruct, heatAges, timeName, 'infect',
 		start, end, describe=describe)
 	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'hospital_noVac',
+		subfolder, measureCols, heatStruct, heatAges, timeName, 'hosp',
 			start, end, describe=describe)
 	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'deaths_noVac',
-		max(0, start - deathLag), end - deathLag, describe=describe)
-
-	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'deaths',
-		max(0, start - deathLag), end - deathLag, describe=describe)
-	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'infect',
+		subfolder, measureCols, heatStruct, heatAges, timeName, 'mort',
 		start, end, describe=describe)
 	
 	if doIfr:
 		DoHeatmapsDrawRange(
-			subfolder, measureCols, heatStruct, heatAges, timeName, 'deaths',
+			subfolder, measureCols, heatStruct, heatAges, timeName, 'mort',
 			max(0, start - deathLag), end - deathLag, describe=describe, rateDivide='infect')
 	
 	if doVacSplit:
@@ -720,15 +725,4 @@ def MakeMortHospHeatmapRange(
 		DoHeatmapsDrawRange(
 			subfolder, measureCols, heatStruct, heatAges, timeName, 'infect_vac',
 			start, end, describe=describe, rateDivide='infect_noVac')
-	
-	if doExtras:
-		DoHeatmapsDrawRange(
-			subfolder, measureCols, heatStruct, heatAges, timeName, 'infect',
-			start, end, divide=totalDays, describe=describe)
-		DoHeatmapsDrawRange(
-			subfolder, measureCols, heatStruct, heatAges, timeName, 'hospital',
-			start, end, describe=describe)
-		DoHeatmapsDrawRange(
-			subfolder, measureCols, heatStruct, heatAges, timeName, 'icu',
-			start, end, describe=describe)
 

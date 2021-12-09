@@ -9,7 +9,7 @@ import numpy as np
 
 from serial.processNetlogoOutput import DoAbmProcessing
 from serial.aggregateSpartan import DoSpartanAggregate
-from serial.processToMortHosp import PreProcessMortHosp, FinaliseMortHosp, DrawMortHospDistributions
+from serial.processToMortHosp import PreProcessMortHosp, FinaliseMortHosp_NoDraw, DrawMortHospDistributions
 from serial.processToMortHosp import MakeMortHospHeatmapRange, MakeIcuHeatmaps
 from serial.makeHeatmaps import MakeStagesHeatmap, MakeComparisionHeatmap
 from serial.makeGraphs import MakePrettyGraphs, MakeFavouriteGraph, MakeDailyGraphs

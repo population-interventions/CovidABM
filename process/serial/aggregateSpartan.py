@@ -23,10 +23,14 @@ import shared.utilities as util
 
 def AppendParallels(dataDir, rawDataDir, outDir, measureCols, outputSubdir, prefix, indexList, fileNames, header=1):
 	for file in fileNames:
+		if prefix:
+			thisPrefix = prefix + '_'
+		else:
+			thisPrefix = ''
 		print('\n' + file)
 		AppendFiles(
-			dataDir + outDir + prefix + '_' + file,
-			[rawDataDir + outputSubdir + prefix + '_' + file + '_' + str(x) for x in indexList],
+			dataDir + outDir + thisPrefix + file,
+			[rawDataDir + outputSubdir + thisPrefix + file + '_' + str(x) for x in indexList],
 			doTqdm=True,
 			index=len(measureCols) + 2,
 			header=header,
@@ -41,30 +45,40 @@ def DoSpartanAggregate(dataDir, rawDataDir, measureCols, arraySize=100, skip=Fal
 	util.OutputToFile(util.GetCohortData(rawDataDir + '/step_1/processed_static_1').drop(columns='cohort'), dataDir + '/shared/cohortData')
 	
 	mortAgg = [
-		'noVac_daily',
-		'noVac_weeklyAgg',
-		'noVac_yearlyAgg',
-		'vac_daily',
-		'vac_weeklyAgg',
-		'vac_yearlyAgg',
+		'infect_noVac_daily',
+		'infect_noVac_weeklyAgg',
+		'infect_noVac_yearlyAgg',
+		'infect_vac_daily',
+		'infect_vac_weeklyAgg',
+		'infect_vac_yearlyAgg',
+		'mort_daily',
+		'mort_weeklyAgg',
+		'mort_yearlyAgg',
+		'hosp_daily',
+		'hosp_weeklyAgg',
+		'hosp_yearlyAgg',
 	]
 	
 	if doTenday:
 		mortAgg = mortAgg + [
-			'noVac_tendayAgg',
-			'vac_tendayAgg',
+			'infect_noVac_tendayAgg',
+			'infect_vac_tendayAgg',
+			'mort_tendayAgg',
+			'hosp_tendayAgg',
 		]
 	
 	if doLong:
 		# May not exist as these files are large.
 		mortAgg = mortAgg + [
-			'noVac',
-			'vac',
+			'infect_noVac',
+			'infect_vac',
+			'mort',
+			'hosp',
 		]
 	
 	AppendParallels(
 		dataDir, rawDataDir, '/Mort_process/', measureCols,
-		'/cohort/', 'infect', indexList, mortAgg)
+		'/cohort/', False, indexList, mortAgg)
 	
 	AppendParallels(
 		dataDir, rawDataDir, '/Traces/', measureCols,
