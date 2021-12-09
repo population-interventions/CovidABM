@@ -503,9 +503,11 @@ to simul_record_patch_infectiveness
     let myPatch patch-here
     let thisSimul self
     let localVariant infectVariant
+    let localPatchScale myScale
     ask myPatch [
       if lastInfectionUpdate < ticks [
         set infectionList []
+        set patchScale localPatchScale
         set lastInfectionUpdate ticks
         ;set infectionCulprit table:make ;; Slow, but while technically correct, unlikely to cause issues.
       ]
@@ -535,10 +537,12 @@ to simul_infect
     let myPatch patch-here
     let localInfectionList 0
     let localInfectionCulprit 0
+    let localPatchScale 0
     ask myPatch [
       if lastInfectionUpdate >= ticks [
         set localInfectionList infectionList
         set localInfectionCulprit infectionCulprit
+        set localPatchScale patchScale
       ]
     ]
     
@@ -547,7 +551,7 @@ to simul_infect
         ;print "x"
         ;print x
         if color != red [
-          set transmission_count transmission_count + extraScaleFactor * (Scale_Factor ^ myScale)
+          set transmission_count transmission_count + extraScaleFactor * (Scale_Factor ^ localPatchScale)
           set transmission_sum transmission_sum + baseSuccept * succeptibilityTableMax * x
           let infectDraw random-float 1
           let binomChance 1 - (1 - baseSuccept * succeptibilityTableMax * x) ^ Daily_Infect_Binom
@@ -576,6 +580,7 @@ to simul_infect
             ;; Check against lower succeptiblity for reinfection.
             set binomChance 1 - (1 - baseSuccept * succeptibility * x) ^ Daily_Infect_Binom
             if binomChance > infectDraw [
+              set myScale localPatchScale
               let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
               
               ;; Add deaths and hosp at the start of infection. The counts are delayed

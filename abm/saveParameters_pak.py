@@ -155,12 +155,15 @@ paramValues_mainTest = {**defaultParams, **{
 	'R0_range' : listToStr([
 		6.5
 	]),
+	'param_policy' : '"TightSupress_No_4"',
 	
+	'in_dose1' : listToStr(['"_{}"'.format(x + 1) for x in range(6)]),
+	'in_dose2' : listToStr(['"_60"', '"_70"', '"_80"']),
 	'data_suffix' : listToStr([
 		'".csv"',
 	]),
 	'policy_switch' : '"pak"',
-	'end_day' : 574,
+	'end_day' : 390,
 }}
 
 paramValues_rCalcSmall = {**defaultParams, **{
@@ -176,7 +179,7 @@ paramValues_rCalcSmall = {**defaultParams, **{
 		'".csv"',
 	]),
 	'policy_switch' : '"pak"',
-	'end_day' : 574,
+	'end_day' : 390,
 	'r0_range' : -1,
 }}
 

@@ -409,4 +409,5 @@ patches-own [
   lastUtilTime ;; Last tick that the patch was occupied
   lastHouseGatherTime ;; Last tick that a house gathered here.
   houseGatherIndex ;; Last house that gathered here. -1 indicates more than one house.
+  patchScale ;; Scale of infective simulant
 ]
