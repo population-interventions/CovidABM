@@ -56,7 +56,16 @@ def LoadTable(scenario, vac):
 		"18 to 59 booster - one shot" : '_3',
 	})
 	
-	setupNeedDoseTwo = [1, 2, 3, 4, 5, 6, 7, 8] # TODO, calculate
+	setupNeedDoseTwo = [
+		0,
+		9,
+		76,
+		11,
+		0,
+		8,
+		66,
+		9,
+	] # See Init Vaccine sheet.
 	
 	# Finalise loading reasonable index.
 	df = df.set_index(['shot', 'region', 'age'])
@@ -68,6 +77,7 @@ def LoadTable(scenario, vac):
 	df2 = df[['']].rename(columns={'' : '_2'}).transpose()
 	df2.columns = (df2.columns.astype(int) + 1).astype(str)
 	df2['1'] = setupNeedDoseTwo
+	print(df2)
 	df = df.join(df2.transpose())
 	df = df.transpose()
 	
