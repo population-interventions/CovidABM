@@ -251,6 +251,9 @@ to params_setDrawValues
   set Asymptomatic_Trans rngs:rnd-beta stream_id 3.86 13.5
   set Asymptom_Prop rngs:rnd-beta stream_id 17.5 40.8
   
+  set draw_wane_multiplier rngs:rnd-norm stream_id 1 0.229226
+  set draw_wane_boost_multiplier draw_wane_multiplier * rngs:rnd-beta stream_id 3.125 3.125
+  
   set exposureSymptMult rngs:rnd-beta stream_id 3.125 3.125
   
   set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 20 20 ) * 2

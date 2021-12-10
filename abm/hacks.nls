@@ -1,0 +1,15 @@
+
+to hacks_modifyVaccine
+  let stream_id 1
+  
+  ;; Replace vac over 60 table with vac 0-60, but with reduced risk reduction
+  let vac0 table:get vaccineParamsTable "vac_0"
+  let riskReduct item 0 vac0
+  let lnOdds ln (riskReduct / (1 - riskReduct))
+  set lnOdds lnOdds - rngs:rnd-norm stream_id 0.288 0.1
+  
+  table:put vaccineParamsTable "vac_60" (list riskReduct (item 1 vac0) (item 2 vac0) (item 3 vac0))
+  
+  ;; Set risk reduction from being infected based on VE (see report, idk why).
+  set reinfect_risk_base riskReduct + (1 - riskReduct) * rngs:rnd-beta stream_id 1 1
+end

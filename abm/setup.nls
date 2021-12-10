@@ -160,9 +160,11 @@ to createSimulants
       set cohort_vaccineUptake item 20 cohortData
       
       ;; Wane is a downwards slope but is entered as a positive number in input data.
-      set cohort_wane_1 0 - (item 21 cohortData)
-      set cohort_wane_2 0 - (item 22 cohortData)
-      set cohort_wane_3 0 - (item 23 cohortData)
+      set cohort_wane_1 0 - (item 21 cohortData) * draw_wane_multiplier
+      set cohort_wane_2 0 - (item 22 cohortData) * draw_wane_multiplier
+      set cohort_wane_3 0 - (item 23 cohortData) * draw_wane_boost_multiplier
+      
+      ;print (word "cohort_wane_1: " cohort_wane_1 ", cohort_wane_2: " cohort_wane_2 ", cohort_wane_3: " cohort_wane_3)
       
       set cohort_riskOfDeath (item 24 cohortData)
       set cohort_riskOfHosp (item 25 cohortData)

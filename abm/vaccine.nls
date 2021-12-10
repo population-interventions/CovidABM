@@ -80,6 +80,8 @@ to setup_vaccineData
     set vacineEff_transOut lput vacRiskReduct vacineEff_transOut
     set vacineEff_areaOut lput vacInfectReduct vacineEff_areaOut
   ]
+  
+  hacks_modifyVaccine
 end
 
 to simul_addToBranchQueue

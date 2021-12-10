@@ -268,6 +268,9 @@ globals [
   draw_isolationCompliance
   draw_maskWearEfficacy
   draw_borderIncursionRisk
+  
+  draw_wane_multiplier
+  draw_wane_boost_multiplier
 
   ; Vaccine phase and subphase, as well as internal index and data table.
   global_vaccineAvailible
