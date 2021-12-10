@@ -19,21 +19,20 @@ from serial.processedOutputToReport import DoProcessingForReport
 from serial.processPMSLTOutput import ProcessPMSLTResults
 from serial.processTraceStyleGraphs import DoPreProcessChecks
 
+import shared.utilities as util
 import pak_conf as conf
 
 table5Rows = [
 	[False, False],
-	['VacUptake', ['.csv']],
 ]
 
 healthPerspectiveRows = [
 	[False, False],
-	['VacUptake', ['.csv']],
 ]
 
 heatmapStructure = {
-	'index_rows' : ['R0', 'Policy', 'VacUptake'],
-	'index_cols' : ['AgeLimit', 'IncurRate'],
+	'index_rows' : ['Scenario'],
+	'index_cols' : ['VacUptake'],
 	'base_value' : {
 	},
 	'sort_rows' : [
@@ -91,7 +90,6 @@ doDraws = True
 doFinaliseCohortAgg = True
 makeOutput = True
 outputStages = True
-processIcu = False
 makeComparison = False
 
 if preChecks:
@@ -100,7 +98,9 @@ if preChecks:
 		defaultValues, firstOnly=dryRun)
 
 if aggregateSpartan:
-	DoSpartanAggregate(workingDir, rawDataDir, measureCols, arraySize=1)
+	arraySize = len(util.GetFiles('../../output_raw/pak_main/'))
+	print('arraySize', arraySize)
+	DoSpartanAggregate(workingDir, rawDataDir, measureCols, arraySize=arraySize)
 
 #if doDraws:
 #	DrawMortHospDistributions(workingDir, inputDir, measureCols, drawCount=100, padMult=1)
@@ -108,12 +108,8 @@ if aggregateSpartan:
 if doFinaliseCohortAgg:
 	FinaliseMortHosp_NoDraw(workingDir, measureCols, heatAges)
 
-DoProcessingForReport(workingDir, inputDir, measureCols, table5Rows, 'R0', months=24)
-
 if makeOutput:
-	MakeMortHospHeatmapRange(workingDir, measureCols, heatAges, heatmapStructure, 'weeklyAgg', 0, 82, aggSize=7, describe=True)
-	MakeMortHospHeatmapRange(workingDir, measureCols, heatAges, heatmapStructure, 'weeklyAgg', 0, 30, aggSize=7, describe=True)
-	MakeMortHospHeatmapRange(workingDir, measureCols, heatAges, heatmapStructure, 'weeklyAgg', 30, 52, aggSize=7, describe=True)
+	MakeMortHospHeatmapRange(workingDir, measureCols, heatAges, heatmapStructure, 'weeklyAgg', 0, 56, aggSize=7, describe=True)
 
 if outputStages:
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 210, describe=True)
@@ -121,18 +117,16 @@ if outputStages:
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 574, describe=True)
 
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 182, 28, describe=True)
-	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, describe=True)
+	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 392, describe=True)
 	
-	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=0, describe=True)
-	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=1, describe=True)
+	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 392, stage_set=0, describe=True)
+	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 392, stage_set=1, describe=True)
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=2, describe=True)
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=3, describe=True)
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=4, describe=True)
 
+DoProcessingForReport(workingDir, inputDir, measureCols, table5Rows, 'Scenario', months=24)
 
-if processIcu:
-	MakeIcuHeatmaps(workingDir, measureCols, heatmapStructure, 0, 82, describe=True)
-	MakeIcuHeatmaps(workingDir, measureCols, heatmapStructure, 30, 52, describe=True)
 
 if makeComparison:
 	MakeComparisionHeatmap(workingDir, heatmapStructure, compareHeatmap)

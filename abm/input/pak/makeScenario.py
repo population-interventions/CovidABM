@@ -9,6 +9,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.append('../../../process/')
 
 import shared.utilities as util
+sys.path.pop()
 
 def LoadTable(scenario, vac):
 	print('pre/scenario{}_{}.csv'.format(scenario, vac))

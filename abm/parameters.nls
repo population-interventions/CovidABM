@@ -159,7 +159,6 @@ to params_setDrawValues
     set initial_cases 1
     set param_incur_phase_limit 0
     set Vaccine_Available false
-    set param_policy "None"
     set policy_pipeline "None"
     set init_timenow_limit 0
     set start_metric_threshold -10

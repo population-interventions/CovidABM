@@ -176,6 +176,7 @@ paramValues_rCalcSmall = {**defaultParams, **{
 		0.219
 	]),
 	'param_policy' : listToStr([
+		'"None"',
 		'"Stage1"',
 		'"Stage1b"',
 		'"Stage2"',
@@ -185,7 +186,7 @@ paramValues_rCalcSmall = {**defaultParams, **{
 		'".csv"',
 	]),
 	'policy_switch' : '"pak"',
-	'end_day' : 390,
+	'end_day' : 392,
 	'r0_range' : -1,
 	'param_recovered_prop' : 0,
 }}

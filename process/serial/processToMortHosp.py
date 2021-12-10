@@ -301,6 +301,7 @@ def OutputTimeTables(
 	dfHosp = dfHosp.reorder_levels(order, axis=1).sort_index(axis=1)
 	#print(dfVac)
 	
+	print(dfVac)
 	dfVac = dfVac.transpose().unstack('rand_seed').transpose()
 	dfNoVac = dfNoVac.transpose().unstack('rand_seed').transpose()
 	dfMort = dfMort.transpose().unstack('rand_seed').transpose()
