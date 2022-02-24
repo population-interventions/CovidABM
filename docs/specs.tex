@@ -1,0 +1,159 @@
+\documentclass[]{article}
+
+\usepackage[margin=3.4cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.2cm}
+\renewcommand{\baselinestretch}{1}
+\usepackage[obeyspaces]{url}
+\usepackage{listings}
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=small]{todonotes}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{conj}{Conjecture}
+\newtheorem{lemma}{Lemma}
+
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{8} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{8}  % for normal
+
+% Tabular stretch
+\def\arraystretch{1.5}
+
+\usepackage{xltabular}
+\usepackage{xcolor}
+\newcommand\textr[1]{\textcolor{red}{#1}}
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\usepackage{listings}
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+		language=Python,
+		basicstyle=\ttm,
+		morekeywords={self},              % Add keywords here
+		keywordstyle=\ttb\color{deepblue},
+		emph={MyClass,__init__},          % Custom highlighting
+		emphstyle=\ttb\color{deepred},    % Custom highlighting style
+		stringstyle=\color{deepgreen},
+		frame=tb,                         % Any extra options here
+		showstringspaces=false
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+	\pythonstyle
+	\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+		\pythonstyle
+		\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+%opening
+\title{Covid ABM Model Specs}
+\author{Tim Wilson}
+
+\begin{document}
+	
+\maketitle
+
+\section{setup.setup}
+Setup the simulation.
+
+\section{main.go}
+The main simulation loop.
+
+\subsection{scale.CheckScale\_cont}
+Scale up or down individual simulants to accommodate the current caseload.
+
+\subsection{stages.setupstages}
+Set policy parameters (such as mask wearing, person-avoidance) based on current stage.
+
+\subsection{policy.update\_vacRestrictionEasing}
+Update whether vaccinated simulants have eased restrictions.
+
+\subsection{policy.CovidPolicyTriggers}
+Set current stage based on fixed model parameters, or recent reported cases.
+
+\subsection{incursion.incursion\_update}
+Randomly add incursions. These are simulants that override an existing susceptible with an infection and vaccination status. The simulant reverts at the end of the infection.
+
+\subsection{simul.simul\_updateIsolationResponse}
+Update whether or not the simulant stays at home this day.
+
+\subsection{simul.simul\_move}
+Randomly either teleport home or move to a nearby location.
+
+\subsection{simul.simul\_visitDestination}
+Possibly teleport to a random gather location within visiting radius.
+
+\subsection{simul.simul\_update\_patch\_utilisation}
+Record when a patch last had a simulant on it.
+
+\subsection{simul.simul\_avoid}
+Simulants potentially move to a nearby empty patch if they are in the same position as someone they are trying to avoid.
+
+\subsection{simul.simul\_superSpread}
+Possibly teleport to a random gather location.
+
+\subsection{simul.simul\_updatepersonalvirulence}
+Update the infectivity of the simulant.
+
+\subsection{simul.simul\_checkMask}
+Update infectivity and transmission resistance based on mask wearing.
+
+\subsection{simul.simul\_record\_patch\_infectiveness}
+Record my infectiousness on the diseased simulants on the patch.
+
+\subsection{simul.simul\_infect}
+Susceptible simulants get infected from the recorded infectiousness of their patch.
+
+\subsection{simul.simul\_updateHouseTrackedCase}
+Update last time each household had a tracked case.
+
+\subsection{simul.simul\_isolateAndTrackFromHouseHold}
+Potentially set isolation state based on household tracking.
+
+\subsection{scale\_shared.ShiftRecoveredTowardsTotalProportion}
+Recovered people slowly become susceptible, moving the proportion of recovered people in the simulation towards the proportion of recovered people in the population. This treats the agents as a 'window' into the entire population, and the shift assumes that people in the population filter in and out of this window. All infection happens in the window, so it is unrealistic to, indefinitely, have a higher proportion of recovered people in proximity to the infected people.
+
+This gets around the fact that scaling does not affect recovered people.
+
+\subsection{trace.trace\_doTrace}
+Recursive contract tracing system for simulants.
+
+\subsection{simul.simul\_settime}
+Update case reporting and recovery immunity waning.
+
+\subsection{simul.simul\_end\_infection}
+End infections and collect resulting stats.
+
+\subsection{vaccine.vaccine\_update}
+Vaccinate people as appropriate for stages.
+
+\subsection{simul.simul\_updateVaccineAndRecover}
+Update immunity and vaccine waning.
+
+\subsection{policy.updateComplacency}
+Reduce avoidance behaviour due to complacency.
+
+\subsection{Various end of step cleanups and calculation}
+
+\subsection{trace.traceadjust}
+Modify track chance based on tracked cases.
+
+\end{document}

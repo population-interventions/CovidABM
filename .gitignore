@@ -25,3 +25,6 @@
 /abm/__pycache__/*.pyc
 /process/rcalc/__pycache__/*.pyc
 /process/__pycache__/*.pyc
+/docs/specs.log
+/docs/specs.synctex.gz
+/docs/specs.aux
