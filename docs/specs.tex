@@ -69,7 +69,116 @@
 
 \begin{document}
 	
-\maketitle
+%\maketitle
+
+\section{Patchs}
+The model is of agents at locations, the world is a grid of patches. There are $2,500$ agents and $5,041$ patches.
+
+\section{Infectivity}
+Every day, every infected agent has a chance to infect everyone else on its patch.
+\begin{align*}
+	\text{patchInfectivity} = \text{virulenceTriangle} * \text{mask} * \text{variantMult} * \text{asymptFactor} * \text{isoFactor}
+\end{align*}
+\begin{itemize}
+\item Agents draw infection duration and peak infectivity.
+\item Distribution of peak infectivity is main lever for $R_0$.
+\item $\text{virulenceTriangle}$ is $0$ 1.5ish days, reaches peak after 4ish days, back to $0$ after 18ish days.
+\end{itemize}
+
+The duration and peak of the triangle are scaled down proportionally with vaccination and lingering immunity.
+
+\section{Susceptibility}
+Each susceptible agent has five chances (simulated with a binomial distribution) per infected agent per day to be infected.
+
+\begin{align*}
+	\text{susceptibility} = \text{mask} * \text{vaccineRisk} * \text{vaccinationVariantMult}
+\end{align*}
+
+\section{Cohorts}
+Every agent is part of a cohort. These set parameters such as age, base susceptibility, vaccination status, vaccination branch, worker/student status, and region.
+
+Agents are part of households, which each have their own home patch that they are likely to spend most of their time around.
+
+\section{Vaccination}
+Configuration determines when agents are vaccinated and with how many doses. The system has become increasingly micromanaged. 
+\begin{itemize}
+	\item Vaccines have infectivity and risk modification, with infectivity modifying peak infectivity and duration.
+	\item Vaccines take some number of days to come into effect.
+	\item Vaccine efficacy and immunity from infection wanes over time.
+	\item People can be vaccinated while sick.
+\end{itemize}
+
+\section{Movement}
+Movement has the following steps.
+\begin{enumerate}
+	\item \textbf{Move} - Flip a coin then either teleport home, or turn slightly and take a step of a random small distance.
+	\item \textbf{Visit gather location} - Randomly decide to teleport to a gather location patch within a local radius (about $200$ such patches).
+	\item \textbf{Avoid} - If the simulant wants to avoid people, then move to an adjacent  empty patch (if there is one).
+	\item \textbf{Super spread} - Randomly decide to teleport to a random gather location.
+\end{enumerate}
+Isolation compliant agents teleport home then skip steps 2-4. An agent wants to avoid all of the following are satisfied.
+\begin{itemize}
+	\item The patch has agents not from their household.
+	\item Their predestined propensity to avoid others is below the global avoidance threshold.
+	\item They pass a random check against the global avoidance chance.
+	\item They are not an essential worker, or they pass a random check for essential workers to do avoidance.
+	\item They are not a student, or schools are closed, or the patch has non-student agents not from their household.
+\end{itemize}
+
+\section{Stages}
+A stage is a set of public health measures designed to impact transmission. Stages contain parameters for:
+\begin{itemize}
+	\item Maximum move distance in Step 1 of movement.
+	\item Global avoidance threshold.
+	\item Global avoidance chance.
+	\item Complacency bound - A lower bound on the above two parameters, as they decay as time is spent in a stage.
+	\item The proportion of the workforce considered to be essential.
+	\item Global mash wearing threshold, compared to agents mask wearing propensity.
+	\item Visit radius and frequency for Step 2 of movement.
+	\item Probability of super spreading for Step 4 of movement.
+	\item Whether schools are open.
+\end{itemize}
+
+\section{Policies}
+A policy determines how to move between stages. Policies are informed by case numbers averaged over the last week or two. Many more things are possible than make sense. Poorly formed policies lead to models that fluctuate between stages too rapidly.
+
+\section{Case reporting and tracking}
+All infected agents flow through case reporting in the following order. Not all agents reach the end.
+
+\paragraph{Infected}  Unknown to the case reporting system or themselves.
+
+\paragraph{Contact} Makes a random check each day to become tracked. Only makes three attempts. The check is harder for asymptomatic agents.
+
+\paragraph{Tracked} An agent that becomes tracked upgrades the agent that infected it and the agents that it has infected to Contact. Agents that are already at level Contact have their track attempt counter reset. Tracked agents make random checks to isolate each day and upgrade to Reported the day after they become tracked.
+
+\paragraph{Reported} Agents add to the global case tally when they become Reported. They otherwise behave the same as Tracked agents.
+
+If an agent becomes tracked then the Contact check is run on new contacts, to allow powerful tracing to go down multiple levels in one day. The primary factor in the Contact to Tracked random check is trace efficacy, which scales down drastically as reported cases increases. The trace efficacy equation is currently parameterised as two points and an asymptote that sets the maximum number of cases tracked per day (in expectation)
+
+Steps can be skipped.
+\begin{itemize}
+	\item Infected agents in the same household as a Tracked agent become Tracked.
+	\item Symptomatic agents have a random check to become Tracked on days seven, eight and nine of their infection.
+\end{itemize}
+
+\section{Incursions}
+Incursions work by overwriting the vaccination and infection status of an existing non-infected agent. The parameters of the agent revert after the infection is over.
+
+\section{Scale}
+Conceptually the model is a window into the part of the region with all the infection. This is represented by the same set of $2,500$ agents. As infections increase we scale the agents so that each agent represents more than $1$ person. The model tries to keep the number of infected agents around $100$, unless the maximum scale is reached, at which point each agent is one $2,500^{\text{th}}$ of the population.
+
+For some $n$, each infected agent in the model represent either $2^n$ or $2^{n+1}$ people. Attributing a number of people to the non-infected agents is not required and just makes things harder. When an agent infects someone, the number of people represented by the new infected agent matches that of its infector.
+
+If there are too many infected agents in the model, it \textit{scales up} by selecting two infected agents, $A$ and $B$, that each represent $2^n$ people, from the same cohort if possible. It then copies the contract tracing information from $B$ to $A$, makes $A$ represent $2^{n+1}$ people, and removes the infection from $B$.
+
+Similarly, if there are too few infected agents, it \textit{scales down} by selecting an infected agent, $A$, that represents $2^{n+1}$ people, and a susceptible agent, $B$, of the same cohort. It then makes $A$ represent $2^n$ people, and copies all the infection parameters of $A$ to $B$.
+
+\section{Recover proportion matching}
+Scaling up then down increases the number of recovered agents in the population. This results in an unrealistically high number of recovered agents mixing with the infected agents, which unrealistically slows the pandemic.
+
+The recover proportion matching system gradually shifts the proportion of recovered agents to the fraction of recovered people in the overall population. It does so by flipping whether an agent is recovered or susceptible at some rate that produces a decay curve.
+
+\pagebreak
 
 \section{setup.setup}
 Setup the simulation.
