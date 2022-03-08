@@ -254,30 +254,16 @@ to simul_updateVacAndReinfectMult
   ]
   
   if set_shape [
-    ifelse recoveryVariant > 1 or infectVariant > 1
+    ifelse recoveryVariant != 0 or infectVariant != 0
     [
-      ifelse recoveryVariant > 2 or infectVariant > 2
+      ifelse selfVaccEff_raw_risk = 0
       [
-        ifelse selfVaccEff_raw_risk = 0
-        [
-          set shape "airplane" 
-          set size 2.2 / 1.3
-        ]
-        [
-          set shape "car"  
-          set size 2.1 / 1.3
-        ]
+        set shape "star" 
+        set size 1.5 / 1.3
       ]
       [
-        ifelse selfVaccEff_raw_risk = 0
-        [
-          set shape "star" 
-          set size 1.5 / 1.3
-        ]
-        [
-          set shape "person"  
-          set size 2 / 1.3
-        ]
+        set shape "person"  
+        set size 2 / 1.3
       ]
     ]
     [
@@ -302,10 +288,11 @@ to simul_updateVacAndReinfectMult
     if selfVaccEff_raw_risk > 0 [
       set effect_raw effect_raw * (1 - selfVaccEff_raw_infect)
     ]
-    if recoveryVariant > 0 [
-      ;; Set reduced infectiveness based on previously having an infection.
-      set effect_raw effect_raw * (1 - reinfect_area)
-    ]
+    ; TODO Update infectivity of various variants
+    ;if recoveryVariant > 0 [
+    ;  ;; Set reduced infectiveness based on previously having an infection.
+    ;  set effect_raw effect_raw * (1 - reinfect_area)
+    ;]
     
     ;; Use transmiss_skew and duration_skew to stretch the triangle in a direction.
     set transmitFromVacAndReinfect effect_raw ^ (1 / 2) * transmit_skew
@@ -315,7 +302,8 @@ to simul_updateVacAndReinfectMult
   [
     set succeptibilityTableMax 0
     ;; Set succeptibility to each variant
-    foreach variantList [ variant ->
+    ; TODO Update succeptibility of various variants
+    foreach variantNames [ variant ->
       ifelse color = yellow and recoverTime < reinfect_delay
       [
         table:put succeptibilityTable variant 0
@@ -325,9 +313,9 @@ to simul_updateVacAndReinfectMult
         if selfVaccEff_raw_risk > 0 [
           set effect_raw effect_raw * (1 - selfVaccEff_raw_risk)
         ]
-        if recoveryVariant > 0 [
-          set effect_raw effect_raw * (1 - reinfect_risk)
-        ]
+        ;if recoveryVariant > 0 [
+        ;  set effect_raw effect_raw * (1 - reinfect_risk)
+        ;]
         ;set effect_raw (effect_raw ^ (1 / 3))
         let succeptibility effect_raw
         if succeptibility > succeptibilityTableMax [
@@ -590,7 +578,10 @@ to simul_infect
               set contact_events 0
               set contributeToR true
               set infectVariant patchVariant
+              
+              simul_updateVariantParams
               simul_updateVacAndReinfectMult
+              
               set infectedContactList table:make
               set traceAttempts 0
               set selfTraceEffMult 1
@@ -751,7 +742,7 @@ to simul_end_infection
     ]
     
     let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
-    if recoveryVariant > 0 [
+    if recoveryVariant != 0 [
       table:put recoverCountByVariant recoveryVariant ((table:get recoverCountByVariant recoveryVariant) - popPerSimul)
       if table:get recoverCountByVariant recoveryVariant < 0 [
         set recoverCount recoverCount - table:get recoverCountByVariant recoveryVariant
@@ -777,7 +768,7 @@ to simul_end_infection
     set isInitialInfection false
     set vaccineIncursionOverride 0
     set recoveryVariant infectVariant
-    set infectVariant 1
+    set infectVariant 0
     simul_updateVacAndReinfectMult
   
     if print_contact_events [

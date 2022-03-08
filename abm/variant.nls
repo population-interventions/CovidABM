@@ -1,0 +1,62 @@
+
+to-report getRandomInitVariant
+  let stream_id variantSeedID
+  ; TODO, read init_prop
+  report "alpha"
+end
+
+to-report getInitRecoverVariant
+  ; TODO, read init_prop
+  report "alpha"
+end
+
+to simul_updateVariantParams
+  
+  
+end
+
+to setup_variantData
+  let stream_id variantSeedID
+  
+  let inputFile (word input_variant)
+  let variantFileData remove-item 0 csv:from-file inputFile
+  
+  set variantNames []
+  set variantData table:make
+  
+  foreach variantFileData [ x ->
+    let name (item 0 x)
+    set variantNames lput name variantNames
+    let data table:make
+    
+    let trans_mean      (item 1 x)
+    let trans_std       (item 2 x)
+    let asympt_trans_a  (item 3 x)
+    let asympt_trans_b  (item 4 x)
+    let asympt_prop_a   (item 5 x)
+    let asympt_prop_b   (item 6 x)
+    let non_infect_time (item 7 x)
+    let incubation_time (item 8 x)
+    let infection_time  (item 9 x)
+    let init_prop       (item 10 x)
+    
+    ; Parameters for simulants to draw their own transmissibility
+    let trans_n trans_mean * ( 1 - trans_mean ) / (trans_std ^ 2)
+    table:put data "trans_a" trans_mean * trans_n
+    table:put data "trans_b" (1 - trans_mean) * trans_n
+    
+    table:put data "asympt_trans" rngs:rnd-beta stream_id asympt_trans_a asympt_trans_b
+    table:put data "asympt_prop" rngs:rnd-beta stream_id asympt_prop_a asympt_prop_b
+    
+    table:put data "non_infect_time" non_infect_time
+    table:put data "incubation_time" incubation_time
+    table:put data "asympt_prop" infection_time
+    
+    table:put data "init_prop" init_prop
+    
+    table:put variantData name data
+    table:put recoverCountByVariant name 0
+  ]
+  ;print (word "variantNames " variantNames)
+  ;print (word "variantData " variantData)
+end

@@ -675,6 +675,7 @@ to setup
   set days 0 ; used to count days
 
   processPopulationData
+  setup_variantData
   setup_vaccineData
   setup_incursionData
   setup_DataOut
@@ -732,10 +733,11 @@ to setup
     set color red
     set isInitialInfection true
     set contributeToR false
-    set infectVariant 1
+    set infectVariant getRandomInitVariant
     set infectedContactList table:make
     set hasKnownContact false
     set myScale scalePhase
+    simul_updateVariantParams
     simul_updateVacAndReinfectMult
     
     set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
@@ -769,7 +771,7 @@ to setup
       set color red
       set isInitialInfection true
       set contributeToR false
-      set infectVariant 1
+      set infectVariant getRandomInitVariant
       set infectedContactList table:make
       set hasKnownContact false
       set myScale scalePhase
@@ -784,6 +786,7 @@ to setup
       if random-float 1 < init_trace_prop [
        simul_applyTrace 
       ]
+      simul_updateVariantParams
       simul_updateVacAndReinfectMult
       
       set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
@@ -795,11 +798,12 @@ to setup
   ]
 
   set recovercount param_recovered_prop * total_population
-  table:put recoverCountByVariant 1 recovercount
+  table:put recoverCountByVariant getInitRecoverVariant recovercount
   set dailyRecoverMult exp(ln(1 - yearly_recover_prop_loss) / 365)
   ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
     simul_setNewRecover
-    set recoveryVariant 1
+    set recoveryVariant getInitRecoverVariant
+    simul_updateVariantParams
     simul_updateVacAndReinfectMult
   ]
   ;;set tracking false ;; ensures this is set to false each time the model starts

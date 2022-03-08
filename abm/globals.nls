@@ -287,8 +287,6 @@ globals [
   global_incursionVariant
   global_incursionReplaceChance
   
-  variantList ;; List of variant indicies
-  
   totalOverseasIncursions
   vaccineBranchQueue
   vaccineDoseRateTable
@@ -298,6 +296,9 @@ globals [
   vaccineParams_infectMult
   vaccineNextBranch
   vaccineBranchEffectDays
+  
+  variantNames
+  variantData
   
   agentsByVaccPhase
 
@@ -398,6 +399,7 @@ globals [
   vaccineInitSeedID
   moveInitSeedID
   presentInitSeedID
+  variantSeedID
   
   reinfect_risk_base
   reinfect_area_base

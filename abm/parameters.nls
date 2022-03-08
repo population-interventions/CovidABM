@@ -91,6 +91,7 @@ to params_setDrawValues
   set vaccineInitSeedID 5
   set moveInitSeedID 6
   set presentInitSeedID 6
+  set variantSeedID 10
   
   rngs:set-seed stream_id random-float 999
   rngs:set-seed incursionsSeedID random-float 999
@@ -99,6 +100,7 @@ to params_setDrawValues
   rngs:set-seed vaccineInitSeedID random-float 999
   rngs:set-seed moveInitSeedID random-float 999
   rngs:set-seed presentInitSeedID random-float 999
+  rngs:set-seed variantSeedID random-float 999
   
   param_updateRecoverImmune
   

@@ -22,6 +22,7 @@ __includes[
   "trace.nls"
   "count.nls"
   "vaccine.nls"
+  "variant.nls"
   "incursion.nls"
   "debug.nls"
   "dataOut.nls"
@@ -914,7 +915,7 @@ false
 "" ""
 PENS
 "Stage" 1.0 0 -5298144 true "" "plot stage"
-"LS" 1.0 0 -8990512 true "" "plot Log (max (list (scaledPopulation / Population) 1)) Scale_Factor"
+"LS" 1.0 0 -8990512 true "" "plot Log (max (list (scaledPopulation / Population) 1)) * Scale_Factor"
 "Scale" 1.0 0 -14454117 true "" "plot scalePhase"
 
 MONITOR
@@ -1836,7 +1837,7 @@ MONITOR
 279
 910
 % Red First
-100 * (count simuls with [color = red and infectVariant = 1]) / Population
+100 * (count simuls with [color = red and infectVariant = \"alpha\"]) / Population
 2
 1
 11
@@ -1847,7 +1848,7 @@ MONITOR
 277
 957
 % Red Second
-100 * (count simuls with [color = red and infectVariant = 2]) / Population
+100 * (count simuls with [color = red and infectVariant = \"beta\"]) / Population
 2
 1
 11
@@ -3636,6 +3637,17 @@ recoverCount
 0
 1
 14
+
+INPUTBOX
+2177
+492
+2336
+552
+input_variant
+input/vic/variant.csv
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?
