@@ -98,7 +98,6 @@ to do_scaledown_cont
         set my_tracked                  tracked
         set my_R                        R
         set my_infectVariant            infectVariant
-        set my_variantTransMult         variantTransMult
         set my_contributeToR            contributeToR
         set my_vaccineIncursionOverride vaccineIncursionOverride
         set my_hasKnownContact          hasKnownContact
@@ -120,7 +119,6 @@ to do_scaledown_cont
             set tracked                  my_tracked
             set R                        my_R
             set infectVariant            my_infectVariant
-            set variantTransMult         my_variantTransMult
             set contributeToR            my_contributeToR
             set vaccineIncursionOverride my_vaccineIncursionOverride
             set hasKnownContact          my_hasKnownContact
@@ -150,7 +148,6 @@ to do_scaledown_cont
           set my_tracked                  tracked
           set my_R                        R
           set my_infectVariant            infectVariant
-          set my_variantTransMult         variantTransMult
           set my_contributeToR            contributeToR
           set my_vaccineIncursionOverride vaccineIncursionOverride
           set my_hasKnownContact          hasKnownContact
@@ -171,7 +168,6 @@ to do_scaledown_cont
               set tracked                  my_tracked
               set R                        my_R
               set infectVariant            my_infectVariant
-              set variantTransMult         my_variantTransMult
               set contributeToR            my_contributeToR
               set vaccineIncursionOverride my_vaccineIncursionOverride
               set hasKnownContact          my_hasKnownContact

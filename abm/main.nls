@@ -13,13 +13,7 @@ end
 
 to go
   ;; Check whether to scale up, which occurs when 10% of the agents are infected.
-  ifelse cont_scale
-  [
-    CheckScale_cont
-  ]
-  [
-    CheckScale
-  ]
+  CheckScale
   
   ;set test_acc 0
   ;reset-timer

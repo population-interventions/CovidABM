@@ -297,8 +297,6 @@ to params_setDrawValues
   
   ;; Sensitivity overrides
   ;set max_stage 4
-  set house_resample_scale_up 0
-  set house_resample_red_group 0.3
   set Non_Infective_Time 0
   set trace_eff_override -1
   set vac_trans_mult 1
@@ -319,19 +317,7 @@ to params_setDrawValues
   if not first_case_calibrate [
     set sympt_present_mult 1
   ]
-  
-  if sensitivity = "HouseResampleUp+" [
-    set house_resample_scale_up 0.8
-  ]
-  if sensitivity = "HouseResampleUp-" [
-    set house_resample_scale_up 0.4
-  ]
-  if sensitivity = "HouseResample+" [
-    set house_resample_red_group 0.9
-  ]
-  if sensitivity = "HouseResample-" [
-    set house_resample_red_group 0.5
-  ]
+
   if sensitivity = "NoInfect_1" [
     set Non_Infective_Time 1
   ]
@@ -389,14 +375,6 @@ to params_setDrawValues
   ]
   if sensitivity = "LetItRipStage2" [
     set pipe_end_override "Stage2"
-  ]
-  if sensitivity = "ScaleBoost_20" [
-    set house_resample_scale_up house_resample_scale_up + 0.2
-    set house_resample_red_group house_resample_red_group + 0.2
-  ]
-  if sensitivity = "ScaleSet_70" [
-    set house_resample_scale_up 0.7
-    set house_resample_red_group 0.7
   ]
   if sensitivity = "SetVacArea50" [
     set param_override_ve_area 0.5

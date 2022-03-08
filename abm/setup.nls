@@ -680,6 +680,7 @@ to setup
   setup_DataOut
   
   set resetdate 7
+  set Scale_Factor 2
   
   ;; illness period estimation using ln transform
   set Illness_Periodvariance se_Illnesspd
@@ -735,9 +736,6 @@ to setup
     set infectedContactList table:make
     set hasKnownContact false
     set myScale scalePhase
-    if random-float 1 < initial_variant_2_prop [
-      set infectVariant 2
-    ]
     simul_updateVacAndReinfectMult
     
     set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
@@ -783,9 +781,6 @@ to setup
         table:put infectedContactList table:length infectedContactList thisSimul
       ]
       
-      if random-float 1 < initial_variant_2_prop [
-        set infectVariant 2
-      ]
       if random-float 1 < init_trace_prop [
        simul_applyTrace 
       ]

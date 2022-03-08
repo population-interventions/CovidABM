@@ -89,7 +89,6 @@ simuls-own [
   wane_3 ;; Waning for dose 3 on log odds scale
 
   infectVariant ;; Variant of SARS that I am infected with. Is > 0 iff color = red.
-  variantTransMult ;; Transmissiblity multiplier for this variant
   recoveryVariant ;; The highest level of SARS recovered from. More recent and virulent versions have a higher level.
   
   wearsMask ;; for use in determining if the person wears a face mask
@@ -170,10 +169,10 @@ to simul_updatepersonalvirulence
     ifelse ownIllnessPeriod > 0
     [
       if timenow > Non_Infective_Time and timenow <= ownIncubationPeriod [
-        set currentVirulence variantTransMult * personalVirulence * (((timenow - Non_Infective_Time) / (ownIncubationPeriod - Non_Infective_Time) ) * (1 - prepeak_vir_boost) + prepeak_vir_boost)
+        set currentVirulence personalVirulence * (((timenow - Non_Infective_Time) / (ownIncubationPeriod - Non_Infective_Time) ) * (1 - prepeak_vir_boost) + prepeak_vir_boost)
       ]
       if timenow > ownIncubationPeriod [
-        set currentVirulence variantTransMult * personalVirulence * (( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))
+        set currentVirulence personalVirulence * (( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))
       ]
       if selfVaccEff_raw_risk > 0 and vac_trans_mult != 1 [
         set currentVirulence currentVirulence * vac_trans_mult
@@ -298,21 +297,14 @@ to simul_updateVacAndReinfectMult
   ifelse color = red
   [
     let effect_raw 1
-    set variantTransMult variant_transmiss_growth ^ (infectVariant - 1)
     
     ;; Contribute vaccine effect
     if selfVaccEff_raw_risk > 0 [
-      set effect_raw effect_raw * (1 - selfVaccEff_raw_infect * (vac_variant_eff_prop ^ (infectVariant - 1)))
+      set effect_raw effect_raw * (1 - selfVaccEff_raw_infect)
     ]
     if recoveryVariant > 0 [
       ;; Set reduced infectiveness based on previously having an infection.
-      ifelse infectVariant > recoveryVariant
-      [
-        set effect_raw effect_raw * (1 - reinfect_area * prev_var_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
-      ]
-      [
-        set effect_raw effect_raw * (1 - reinfect_area * (vac_variant_eff_prop ^ (infectVariant - 1)))
-      ]
+      set effect_raw effect_raw * (1 - reinfect_area)
     ]
     
     ;; Use transmiss_skew and duration_skew to stretch the triangle in a direction.
@@ -331,16 +323,10 @@ to simul_updateVacAndReinfectMult
       [
         let effect_raw 1
         if selfVaccEff_raw_risk > 0 [
-          set effect_raw effect_raw * (1 - selfVaccEff_raw_risk * (vac_variant_eff_prop ^ (variant - 1)))
+          set effect_raw effect_raw * (1 - selfVaccEff_raw_risk)
         ]
         if recoveryVariant > 0 [
-          ifelse variant > recoveryVariant 
-          [
-            set effect_raw effect_raw * (1 - reinfect_risk * prev_var_risk)
-          ]
-          [
-            set effect_raw effect_raw * (1 - reinfect_risk) 
-          ]
+          set effect_raw effect_raw * (1 - reinfect_risk)
         ]
         ;set effect_raw (effect_raw ^ (1 / 3))
         let succeptibility effect_raw
@@ -428,7 +414,6 @@ end
 to simul_do_scaleup
   set size 2
   set color cyan
-  set variantTransMult 0
   set infectVariant 0
   set recoveryVariant 0
   set recoverTime 0
@@ -483,7 +468,7 @@ end
 
 to simul_record_patch_infectiveness
   if color = red and currentVirulence > 0 [
-    let localInfectiveness currentVirulence * transmitFromVacAndReinfect * variantTransMult
+    let localInfectiveness currentVirulence * transmitFromVacAndReinfect
     if wearingMask = 1 and Mask_Efficacy_Mult > 0 [
       set localInfectiveness (localInfectiveness * (1 - draw_maskWearEfficacy * Mask_Efficacy_Mult))
     ]

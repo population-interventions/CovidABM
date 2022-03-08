@@ -26,6 +26,7 @@ globals [
   scalePhaseExtra
   globalPopPerSimul
   extraScaleFactor
+  Scale_Factor
   Days
   CaseFatalityRate
   DeathCount
