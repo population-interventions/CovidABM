@@ -582,18 +582,6 @@ to setGlobals
   set endR_count table:make
   set endR_mean_metric table:make
   set average_R table:make
-  
-  ;; log transform illness period variables
-  set Illness_PeriodVariance 0
-  set M 0
-  set BetaillnessPd 0
-  set S 0
-
-  ;; log transform incubation period variables
-  set Incubation_PeriodVariance 0
-  set MInc 0
-  set BetaIncubationPd 0
-  set SInc 0
 
   ;; log transform compliance period variables
   set Compliance_PeriodVariance 0
@@ -683,18 +671,6 @@ to setup
   set resetdate 7
   set Scale_Factor 2
   
-  ;; illness period estimation using ln transform
-  set Illness_Periodvariance se_Illnesspd
-  set BetaIllnessPd ln (1 + (illness_PeriodVariance / illness_period ^ 2))
-  set M (ln illness_period) - (BetaillnessPd / 2)
-  set S sqrt BetaIllnessPd
-
-  ;; illness period estimation using ln transform
-  set Incubation_Periodvariance se_Incubation
-  set BetaIncubationPd ln (1 + (incubation_PeriodVariance / incubation_period ^ 2))
-  set MInc (ln incubation_period) - (BetaincubationPd / 2)
-  set SInc sqrt BetaIncubationPd
-
   ask patches [
     set pcolor black
     set houseIndex -1
@@ -803,7 +779,6 @@ to setup
   ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
     simul_setNewRecover
     set recoveryVariant getInitRecoverVariant
-    simul_updateVariantParams
     simul_updateVacAndReinfectMult
   ]
   ;;set tracking false ;; ensures this is set to false each time the model starts

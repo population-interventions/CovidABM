@@ -148,7 +148,7 @@ Span
 Span
 0
 30
-10.0
+5.0
 1
 1
 NIL
@@ -174,21 +174,6 @@ PENS
 "Susceptible" 1.0 0 -14070903 true "" "plot count simuls with [ color = 85 ] * (Total_Population / 100 / count Simuls)"
 "Recovered" 1.0 0 -987046 true "" "plot count simuls with [ color = yellow ] * (Total_Population / 100 / count Simuls)"
 "New Infections" 1.0 0 -11221820 true "" "plot count simuls with [ color = red and timenow = Incubation_Period ] * ( Total_Population / 100 / count Simuls )"
-
-SLIDER
-2603
-1009
-2815
-1042
-Illness_period
-Illness_period
-0
-25
-21.2
-.1
-1
-NIL
-HORIZONTAL
 
 BUTTON
 283
@@ -249,7 +234,7 @@ superspreaders
 superspreaders
 0
 1
-0.08
+0.04
 0.01
 1
 NIL
@@ -304,7 +289,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-15.0
+50.0
 .5
 1
 NIL
@@ -319,7 +304,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-15.0
+50.0
 .5
 1
 NIL
@@ -415,21 +400,6 @@ AverageContacts
 2
 1
 11
-
-SLIDER
-2602
-970
-2815
-1003
-Incubation_Period
-Incubation_Period
-0
-10
-4.4
-.1
-1
-NIL
-HORIZONTAL
 
 PLOT
 1833
@@ -599,28 +569,6 @@ false
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [ ownIllnessPeriod ] of simuls "
 
-INPUTBOX
-2760
-453
-2918
-518
-se_illnesspd
-4.0
-1
-0
-Number
-
-INPUTBOX
-2760
-519
-2918
-582
-se_incubation
-2.25
-1
-0
-Number
-
 PLOT
 2442
 42
@@ -674,7 +622,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-70.0
+35.0
 1
 1
 NIL
@@ -715,7 +663,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-35.0
+60.0
 1
 1
 NIL
@@ -833,7 +781,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+5.0
 1
 1
 NIL
@@ -1310,7 +1258,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-15.0
+50.0
 1
 1
 NIL
@@ -1902,10 +1850,10 @@ MONITOR
 11
 
 SLIDER
-2603
-1052
-2803
-1085
+2598
+974
+2798
+1007
 complacency_loss
 complacency_loss
 0
@@ -3322,7 +3270,7 @@ vac_ease_avoid
 vac_ease_avoid
 0
 100
-30.0
+15.0
 1
 1
 NIL

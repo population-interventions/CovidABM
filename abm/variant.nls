@@ -11,8 +11,12 @@ to-report getInitRecoverVariant
 end
 
 to simul_updateVariantParams
+  let var table:get variantData infectVariant
   
-  
+  set ownIllnessPeriod_raw ( exp random-normal table:get var "durationMean" table:get var "durationStd" ) ;; log transform of illness period
+  set ownIncubationPeriod_raw ( exp random-normal table:get var "incubationMean" table:get var "incubationStd" ) ;;; log transform of incubation period
+  set ownIllnessPeriod ownIllnessPeriod_raw
+  set ownIncubationPeriod ownIncubationPeriod_raw
 end
 
 to setup_variantData
@@ -29,16 +33,18 @@ to setup_variantData
     set variantNames lput name variantNames
     let data table:make
     
-    let trans_mean      (item 1 x)
-    let trans_std       (item 2 x)
-    let asympt_trans_a  (item 3 x)
-    let asympt_trans_b  (item 4 x)
-    let asympt_prop_a   (item 5 x)
-    let asympt_prop_b   (item 6 x)
-    let non_infect_time (item 7 x)
-    let incubation_time (item 8 x)
-    let infection_time  (item 9 x)
-    let init_prop       (item 10 x)
+    let trans_mean        (item 1 x)
+    let trans_std         (item 2 x)
+    let asympt_trans_a    (item 3 x)
+    let asympt_trans_b    (item 4 x)
+    let asympt_prop_a     (item 5 x)
+    let asympt_prop_b     (item 6 x)
+    let non_infect_time   (item 7 x)
+    let incubation_mean   (item 8 x)
+    let incubation_spread (item 9 x)
+    let duration_mean     (item 10 x)
+    let duration_spread   (item 11 x)
+    let init_variant      (item 12 x)
     
     ; Parameters for simulants to draw their own transmissibility
     let trans_n trans_mean * ( 1 - trans_mean ) / (trans_std ^ 2)
@@ -48,11 +54,17 @@ to setup_variantData
     table:put data "asympt_trans" rngs:rnd-beta stream_id asympt_trans_a asympt_trans_b
     table:put data "asympt_prop" rngs:rnd-beta stream_id asympt_prop_a asympt_prop_b
     
-    table:put data "non_infect_time" non_infect_time
-    table:put data "incubation_time" incubation_time
-    table:put data "asympt_prop" infection_time
+    ;; illness period estimation using ln transform
+    let BetaIllnessPd ln (1 + (duration_spread / duration_mean ^ 2))
+    table:put data "durationMean" (ln duration_mean) - (BetaillnessPd / 2)
+    table:put data "durationStd" sqrt BetaIllnessPd
     
-    table:put data "init_prop" init_prop
+    ;; illness period estimation using ln transform
+    let BetaIncubationPd ln (1 + (incubation_spread / incubation_mean ^ 2))
+    table:put data "incubationMean" (ln incubation_mean) - (BetaincubationPd / 2)
+    table:put data "incubationStd" sqrt BetaIncubationPd
+    
+    table:put data "init_variant" init_variant
     
     table:put variantData name data
     table:put recoverCountByVariant name 0

@@ -329,10 +329,6 @@ to simul_updateVacAndReinfectMult
 end
 
 to simul_resetSomeRandomParams
-  set ownIllnessPeriod_raw ( exp random-normal M S ) ;; log transform of illness period
-  set ownIncubationPeriod_raw ( exp random-normal Minc Sinc ) ;;; log transform of incubation period
-  set ownIllnessPeriod ownIllnessPeriod_raw
-  set ownIncubationPeriod ownIncubationPeriod_raw
   set proportion_people_avoid_draw random 100
   set doSiteIsolation (random-float 1) < site_iso_prop
   set siteIsolateDay 1 + random site_iso_max_day

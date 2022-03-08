@@ -304,18 +304,6 @@ globals [
 
   global_schoolActive ;; Whether students ignore avoiding each other to go to school
 
-  ;; log transform illness period variables
-  Illness_PeriodVariance
-  M
-  BetaillnessPd
-  S
-
-  ;; log transform incubation period variables
-  Incubation_PeriodVariance
-  MInc
-  BetaIncubationPd
-  SInc
-
   ;; log transform compliance period variables
   Compliance_PeriodVariance
   MComp
