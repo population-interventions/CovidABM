@@ -1,2 +1,2 @@
-name,trans_mean,trans_std,asympt_trans_a,asympt_trans_b,asympt_prop_a,asympt_prop_b,non_infect_time,incubation_time,infection_time,init_prop
+name,trans_mean,trans_std,asympt_trans_a,asympt_trans_b,asympt_prop_a,asympt_prop_b,non_infect_time,incubation_time,infection_time,init_variant
 alpha,0.218,0.12,3.86,13.5,17.5,40.8,0,4.4,21.2,1
