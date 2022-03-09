@@ -260,13 +260,7 @@ to createSimulants
         params_setOverrideAsympt
       ]
       [
-        ifelse cohort_asymptomPropMult <= 1
-        [
-          set asymptomatic_prop Asymptom_Prop * cohort_asymptomPropMult
-        ]
-        [
-          set asymptomatic_prop 1 - (1 - Asymptom_Prop) / cohort_asymptomPropMult
-        ]
+        set asymptomatic_prop_mult cohort_asymptomPropMult
       ]
       
       ifelse self_iso_at_peak

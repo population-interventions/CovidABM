@@ -35,6 +35,8 @@ simuls-own [
   ownIllnessPeriod_raw ;; without vaccination
   ownIncubationPeriod_raw ;; without vaccination
   personalVirulence ;; the infectivity of the person
+  nonInfectivePeriod
+  Asymptomatic_Trans
 
   timenow ;; the number of days since initial infection
   caseReportTime ;; Day on which the case will be reported
@@ -44,7 +46,8 @@ simuls-own [
   knownContactTime ;; Time at which a contact was known, to prevent double tracing on the traced step
   asymptomaticFlag ;; indicator identifying Asymptomatic cases
   asymptomatic_draw ;; Determines whether the agent will be asymptomatic
-  asymptomatic_prop ;; Proportion of people of this cohort who are asymptomatic
+  asymptomatic_prop ;; Proportion of people who are symptomatic
+  asymptomatic_prop_mult ;; Pre-variant cohort multiplier
   symtomatic_present_day ;; When the simulant self-presents (if at all)
   symtomatic_present_day_draw ;; Store for the above for all simulants
   present_draw ;; Determines whether the agent will present
@@ -163,13 +166,13 @@ end
 to simul_updatepersonalvirulence
   ;; creates a triangular distribution of virulence that peaks at the end of the incubation period
   if color = red and (isInitialInfection or not first_case_calibrate) [
-    if timenow <= Non_Infective_Time [
+    if timenow <= nonInfectivePeriod [
       set currentVirulence 0
     ]
     ifelse ownIllnessPeriod > 0
     [
-      if timenow > Non_Infective_Time and timenow <= ownIncubationPeriod [
-        set currentVirulence personalVirulence * (((timenow - Non_Infective_Time) / (ownIncubationPeriod - Non_Infective_Time) ) * (1 - prepeak_vir_boost) + prepeak_vir_boost)
+      if timenow > nonInfectivePeriod and timenow <= ownIncubationPeriod [
+        set currentVirulence personalVirulence * (((timenow - nonInfectivePeriod) / (ownIncubationPeriod - nonInfectivePeriod) ) * (1 - prepeak_vir_boost) + prepeak_vir_boost)
       ]
       if timenow > ownIncubationPeriod [
         set currentVirulence personalVirulence * (( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))

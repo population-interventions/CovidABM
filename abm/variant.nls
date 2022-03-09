@@ -17,6 +17,20 @@ to simul_updateVariantParams
   set ownIncubationPeriod_raw ( exp random-normal table:get var "incubationMean" table:get var "incubationStd" ) ;;; log transform of incubation period
   set ownIllnessPeriod ownIllnessPeriod_raw
   set ownIncubationPeriod ownIncubationPeriod_raw
+  
+  set nonInfectivePeriod table:get var "non_infect_time"
+  set Asymptomatic_Trans table:get var "asympt_trans"
+  
+  let varAsymptProp table:get var "asympt_prop"
+  ifelse asymptomatic_prop_mult <= 1
+  [
+    set asymptomatic_prop varAsymptProp * asymptomatic_prop_mult
+  ]
+  [
+    set asymptomatic_prop 1 - (1 - varAsymptProp) / asymptomatic_prop_mult
+  ]
+  
+  set personalVirulence rngs:rnd-beta moveInitSeedID (table:get var "trans_a" / hetro_mult) (table:get var "trans_b" / hetro_mult)
 end
 
 to setup_variantData
@@ -64,6 +78,7 @@ to setup_variantData
     table:put data "incubationMean" (ln incubation_mean) - (BetaincubationPd / 2)
     table:put data "incubationStd" sqrt BetaIncubationPd
     
+    table:put data "non_infect_time" non_infect_time
     table:put data "init_variant" init_variant
     
     table:put variantData name data

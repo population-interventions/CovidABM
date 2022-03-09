@@ -249,8 +249,6 @@ to params_setDrawValues
   ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
   ;; SqRoot of above
   set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60
-  set Asymptomatic_Trans rngs:rnd-beta stream_id 3.86 13.5
-  set Asymptom_Prop rngs:rnd-beta stream_id 17.5 40.8
   
   set draw_wane_multiplier rngs:rnd-norm stream_id 1 0.229226
   set draw_wane_boost_multiplier draw_wane_multiplier * rngs:rnd-beta stream_id 3.125 3.125
@@ -299,7 +297,6 @@ to params_setDrawValues
   
   ;; Sensitivity overrides
   ;set max_stage 4
-  set Non_Infective_Time 0
   set trace_eff_override -1
   set vac_trans_mult 1
   set pipe_end_override "off"
@@ -320,12 +317,6 @@ to params_setDrawValues
     set sympt_present_mult 1
   ]
 
-  if sensitivity = "NoInfect_1" [
-    set Non_Infective_Time 1
-  ]
-  if sensitivity = "NoInfect_2" [
-    set Non_Infective_Time 2
-  ]
   if sensitivity = "UniformContact_054" [
     set trace_eff_override 0.5358
   ]
@@ -391,9 +382,6 @@ to params_setDrawValues
   if sensitivity = "DistMult_2" [
     set global_distance_mult 2
   ]
-  if sensitivity = "Asmpyt_66" [
-    set Asymptom_Prop random-normal 0.66 0.03
-  ]
   if sensitivity = "PresentPropMult_050" [
     set sympt_present_mult 0.5
   ]
@@ -422,46 +410,46 @@ end
 to params_setOverrideAsympt
   (ifelse agerange <= 5
     [
-      set asymptomatic_prop 1 - 0.28
+      set asymptomatic_prop_mult 1 - 0.28
     ]
     agerange <= 15
     [
-      set asymptomatic_prop 1 - 0.2
+      set asymptomatic_prop_mult 1 - 0.2
     ]
     agerange <= 25
     [
-      set asymptomatic_prop 1 - 0.26
+      set asymptomatic_prop_mult 1 - 0.26
     ]
     agerange <= 35
     [
-      set asymptomatic_prop 1 - 0.33
+      set asymptomatic_prop_mult 1 - 0.33
     ]
     agerange <= 45
     [
-      set asymptomatic_prop 1 - 0.40
+      set asymptomatic_prop_mult 1 - 0.40
     ]
     agerange <= 55
     [
-      set asymptomatic_prop 1 - 0.49
+      set asymptomatic_prop_mult 1 - 0.49
     ]
     agerange <= 65
     [
-      set asymptomatic_prop 1 - 0.63
+      set asymptomatic_prop_mult 1 - 0.63
     ]
     agerange <= 75
     [
-      set asymptomatic_prop 1 - 0.69
+      set asymptomatic_prop_mult 1 - 0.69
     ]
     agerange <= 85
     [
-      set asymptomatic_prop 1 - 0.69
+      set asymptomatic_prop_mult 1 - 0.69
     ]
     agerange <= 95
     [
-      set asymptomatic_prop 1 - 0.69
+      set asymptomatic_prop_mult 1 - 0.69
     ]
     [
-      set asymptomatic_prop 1 - 0.69
+      set asymptomatic_prop_mult 1 - 0.69
     ]
   )
 end
