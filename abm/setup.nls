@@ -218,7 +218,6 @@ to createSimulants
       set move_chance_multiplier 2 * rngs:rnd-beta moveInitSeedID (10 / hetro_mult) (10 / hetro_mult)
       set visit_chance_multiplier 5 * rngs:rnd-beta moveInitSeedID (1 / hetro_mult) (4 / hetro_mult)
       set superSpread_chance_multiplier 6 * rngs:rnd-beta moveInitSeedID (0.6 / hetro_mult) (3 / hetro_mult)
-      set personalVirulence rngs:rnd-beta moveInitSeedID (global_trans_a / hetro_mult) (global_trans_b / hetro_mult)
 
       set cohortIndex pop_index
       set agerange cohort_age
