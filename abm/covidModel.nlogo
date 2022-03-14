@@ -148,7 +148,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -170,10 +170,9 @@ true
 true
 "" ""
 PENS
-"Infected Proportion" 1.0 0 -2674135 true "" "plot count simuls with [ color = red ] * (Total_Population / 100 / count Simuls) "
-"Susceptible" 1.0 0 -14070903 true "" "plot count simuls with [ color = 85 ] * (Total_Population / 100 / count Simuls)"
-"Recovered" 1.0 0 -987046 true "" "plot count simuls with [ color = yellow ] * (Total_Population / 100 / count Simuls)"
-"New Infections" 1.0 0 -11221820 true "" "plot count simuls with [ color = red and timenow = Incubation_Period ] * ( Total_Population / 100 / count Simuls )"
+"Infected Proportion" 1.0 0 -2674135 true "" "plot count simuls with [ color = red ] * (Total_Population / 100 / max (list count Simuls 1)) "
+"Susceptible" 1.0 0 -14070903 true "" "plot count simuls with [ color = 85 ] * (Total_Population / 100 / max (list count Simuls 1)) "
+"Recovered" 1.0 0 -987046 true "" "plot count simuls with [ color = yellow ] * (Total_Population / 100 / max (list count Simuls 1)) "
 
 BUTTON
 283
@@ -234,7 +233,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.1
 0.01
 1
 NIL
@@ -289,7 +288,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-50.0
+5.0
 .5
 1
 NIL
@@ -304,7 +303,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-50.0
+5.0
 .5
 1
 NIL
@@ -607,7 +606,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -648,7 +647,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+15.0
 1
 1
 NIL
@@ -766,7 +765,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -786,7 +785,7 @@ currentinfections
 MONITOR
 3034
 917
-3088
+3089
 962
 Average Illness time
 mean [ timenow ] of simuls with [ color = red ]
@@ -833,7 +832,7 @@ false
 "" ""
 PENS
 "Stage" 1.0 0 -5298144 true "" "plot stage"
-"LS" 1.0 0 -8990512 true "" "plot Log (max (list (scaledPopulation / Population) 1)) * Scale_Factor"
+"LS" 1.0 0 -8990512 true "" "plot Log ((max (list (scaledPopulation / Population) 1)) * (max (list Scale_Factor 1))) 2"
 "Scale" 1.0 0 -14454117 true "" "plot scalePhase"
 
 MONITOR
@@ -1109,7 +1108,6 @@ PENS
 "Total" 1.0 0 -7500403 true "" "plot count simuls with [ color = red ] * globalPopPerSimul"
 "Reported" 1.0 0 -2674135 true "" "plot count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion] * globalPopPerSimul"
 "KnowContact" 1.0 0 -13840069 true "" "plot count simuls with [hasKnownContact and color = red] * globalPopPerSimul"
-"Infective" 1.0 0 -1184463 true "" "plot count simuls with [ color = red and timenow > non_infective_time ] * globalPopPerSimul"
 
 SLIDER
 568
@@ -1202,7 +1200,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -1630,25 +1628,6 @@ param_recovered_prop
 NIL
 HORIZONTAL
 
-PLOT
-2864
-964
-3092
-1084
-Average R 1
-NIL
-NIL
-0.0
-10.0
-0.0
-2.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "ifelse table:get totalEndCount 1 > 0 [plot table:get totalEndR 1 / table:get totalEndCount 1][plot 0]"
-"pen-1" 1.0 0 -7500403 true "" "plot table:get endR_mean_metric 1"
-
 INPUTBOX
 224
 455
@@ -1674,28 +1653,6 @@ yearly_recover_prop_loss
 1
 NIL
 HORIZONTAL
-
-MONITOR
-18
-948
-172
-1005
-% Recovered First
-recoverProportion * 100 * (table:get recoverCountByVariant 1) / (table:get recoverCountByVariant 1 + table:get recoverCountByVariant 2)
-2
-1
-14
-
-MONITOR
-363
-1012
-517
-1069
-% Recovered Second
-recoverProportion * 100 * (table:get recoverCountByVariant 2) / (table:get recoverCountByVariant 1 + table:get recoverCountByVariant 2)
-2
-1
-14
 
 MONITOR
 177
@@ -3154,7 +3111,7 @@ vac_ease_avoid
 vac_ease_avoid
 0
 100
-15.0
+30.0
 1
 1
 NIL
