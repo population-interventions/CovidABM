@@ -639,8 +639,8 @@ to setup
   reset-ticks
   
   setGlobals
-  random-seed RAND_SEED ;; Read from a behaviourSpace variable.
   
+  params_readStaticDraws
   params_readDrawTable
   params_setDrawValues
 

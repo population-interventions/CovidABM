@@ -1,8 +1,8 @@
 
 to params_readDrawTable
-  let regionFileData remove-item 0 csv:from-file "input/draw_params.csv"
+  let fileData remove-item 0 csv:from-file (word input_draws "/draw_params.csv")
   
-  foreach regionFileData [ x ->
+  foreach fileData [ x ->
     if (item 0 x) = "symptPresent" [
       set sympt_present_a (item 1 x)
       set sympt_present_b (item 2 x)
@@ -10,6 +10,15 @@ to params_readDrawTable
       set sympt_present_max (item 4 x)
     ]
   ]
+end
+
+to params_readStaticDraws
+  let fileData remove-item 0 csv:from-file (word input_draws "/draw_static.csv")
+  let draw (item draw_index fileData)
+  
+  let rand_seed (item 1 draw)
+  
+  random-seed rand_seed
 end
 
 to params_updateTrace

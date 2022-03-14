@@ -91,10 +91,10 @@ NIL
 1
 
 BUTTON
-2867
-875
-2969
-910
+2869
+865
+2971
+900
 Trace_Patterns
 ask n-of 1 simuls with [ color != black ] [ pen-down ] 
 NIL
@@ -108,10 +108,10 @@ NIL
 1
 
 BUTTON
-2974
-875
-3074
-909
+2983
+864
+3083
+898
 UnTrace
 ask turtles [ pen-up ]
 NIL
@@ -148,17 +148,17 @@ Span
 Span
 0
 30
-10.0
+5.0
 1
 1
 NIL
 HORIZONTAL
 
 PLOT
-3112
-917
-3524
-1091
+3120
+842
+3515
+1017
 Susceptible, Infected and Recovered - 000's
 Days from March 10th
 Numbers of people
@@ -192,10 +192,10 @@ NIL
 1
 
 MONITOR
-3324
-838
-3473
-895
+3333
+763
+3482
+820
 Deaths
 Deathcount
 0
@@ -233,7 +233,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.04
 0.01
 1
 NIL
@@ -262,10 +262,10 @@ caseFatalityRate * 100
 11
 
 PLOT
-3277
-694
-3505
-824
+3528
+337
+3756
+467
 Case Fatality Rate %
 NIL
 NIL
@@ -288,7 +288,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+50.0
 .5
 1
 NIL
@@ -303,7 +303,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+50.0
 .5
 1
 NIL
@@ -485,10 +485,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1753
-993
-1855
-1038
+1759
+920
+1861
+965
 Red (raw)
 count simuls with [ color = red ]
 0
@@ -606,7 +606,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+35.0
 1
 1
 NIL
@@ -647,7 +647,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+60.0
 1
 1
 NIL
@@ -765,7 +765,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+5.0
 1
 1
 NIL
@@ -783,10 +783,10 @@ currentinfections
 11
 
 MONITOR
-3034
-917
-3089
-962
+3043
+907
+3098
+952
 Average Illness time
 mean [ timenow ] of simuls with [ color = red ]
 1
@@ -836,10 +836,10 @@ PENS
 "Scale" 1.0 0 -14454117 true "" "plot scalePhase"
 
 MONITOR
-1754
-1040
-1854
-1085
+1760
+967
+1860
+1012
 Yellow (raw)
 count simuls with [ color = yellow ]
 0
@@ -904,21 +904,6 @@ Vac1 %
 2
 1
 11
-
-SLIDER
-13
-15
-296
-48
-RAND_SEED
-RAND_SEED
-0
-10000000
-6462264.0
-1
-1
-NIL
-HORIZONTAL
 
 MONITOR
 1404
@@ -1155,9 +1140,9 @@ transmission_count_metric * transmission_average
 
 PLOT
 1865
-887
-2334
-1081
+888
+2335
+1051
 States (scaled)
 NIL
 NIL
@@ -1200,7 +1185,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+50.0
 1
 1
 NIL
@@ -1487,10 +1472,10 @@ Tracked Infection %
 11
 
 SLIDER
-15
-1010
-205
-1043
+18
+967
+208
+1000
 calibrate_stage_switch
 calibrate_stage_switch
 0
@@ -1502,10 +1487,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-18
-1050
-318
-1083
+22
+1007
+322
+1040
 stage_test_index
 stage_test_index
 0
@@ -1525,7 +1510,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.6125933763356122
+0.7272154957008586
 0.01
 1
 NIL
@@ -1725,10 +1710,10 @@ incursionPhaseEndDay
 11
 
 MONITOR
-175
-962
-277
-1007
+285
+823
+387
+868
 % Yellow Third
 100 * (count simuls with [color = yellow and recoveryVariant = 3]) / Population
 17
@@ -1792,10 +1777,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1268
-1029
-1441
-1062
+1265
+1027
+1438
+1060
 report_proportion
 report_proportion
 0
@@ -1848,10 +1833,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-213
-1010
-317
-1043
+217
+967
+321
+1000
 calibrate
 calibrate
 1
@@ -1859,10 +1844,10 @@ calibrate
 -1000
 
 MONITOR
-1752
-944
-1854
-989
+1758
+872
+1860
+917
 NIL
 extraScaleFactor
 3
@@ -2005,10 +1990,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-3112
-875
-3315
-908
+3120
+799
+3323
+832
 trace_calibration
 trace_calibration
 0
@@ -2155,20 +2140,20 @@ NIL
 HORIZONTAL
 
 CHOOSER
-1468
-1042
-1601
-1087
+1570
+1008
+1703
+1053
 param_force_vaccine
 param_force_vaccine
 "Disabled" "AZ" "Pfizer"
 0
 
 SLIDER
-3109
-838
-3316
-871
+3118
+763
+3325
+796
 success_14day_cases
 success_14day_cases
 -1
@@ -2435,10 +2420,10 @@ print_vac
 -1000
 
 SLIDER
-1259
-993
-1461
-1026
+1257
+990
+1459
+1023
 house_init_group
 house_init_group
 0
@@ -2714,10 +2699,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-2827
-837
-2999
-870
+2829
+828
+3001
+861
 print_contact_events
 print_contact_events
 1
@@ -2889,8 +2874,8 @@ HORIZONTAL
 SLIDER
 1597
 863
-1776
-896
+1752
+897
 Scale_Up_Threshold
 Scale_Up_Threshold
 0
@@ -2904,8 +2889,8 @@ HORIZONTAL
 SLIDER
 1597
 900
-1776
-933
+1751
+934
 Scale_Down_Threshold
 Scale_Down_Threshold
 0
@@ -3111,7 +3096,7 @@ vac_ease_avoid
 vac_ease_avoid
 0
 100
-30.0
+15.0
 1
 1
 NIL
@@ -3189,10 +3174,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-834
-1047
-1022
-1080
+375
+965
+563
+998
 vac_ease_schools_open
 vac_ease_schools_open
 0
@@ -3309,17 +3294,6 @@ table:get average_R 1
 1
 11
 
-MONITOR
-1650
-475
-1790
-520
-NIL
-table:get average_R 2
-4
-1
-11
-
 INPUTBOX
 1858
 473
@@ -3351,7 +3325,7 @@ exposureSymptMult
 exposureSymptMult
 0
 1
-0.6486482613794431
+0.5930588695588881
 0.1
 1
 NIL
@@ -3437,6 +3411,32 @@ input/vic/variant.csv
 1
 0
 String
+
+INPUTBOX
+2180
+564
+2322
+624
+input_draws
+input/vic
+1
+0
+String
+
+SLIDER
+12
+13
+285
+47
+draw_index
+draw_index
+0
+100
+0.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
