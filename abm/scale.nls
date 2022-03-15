@@ -90,7 +90,7 @@ end
 
 to-report GetUninfectedOfCohort [index wantedVaccine wantedHomeRegion]
   let cohortSimuls (table:get populationCohortCache index) with [color != red]
-  let matchDose cohortSimuls with [vaccineType = wantedVaccine]
+  let matchDose cohortSimuls with [currentVaccine = wantedVaccine]
   ifelse any? matchDose
   [
     report matchDose
@@ -98,13 +98,13 @@ to-report GetUninfectedOfCohort [index wantedVaccine wantedHomeRegion]
   [
     let succSimuls simuls with [color != red]
     let regionSimuls succSimuls with [homeRegion = wantedHomeRegion]
-    set matchDose regionSimuls with [vaccineType = wantedVaccine]
+    set matchDose regionSimuls with [currentVaccine = wantedVaccine]
     ifelse any? matchDose
     [
       report matchDose
     ]
     [
-      set matchDose succSimuls with [vaccineType = wantedVaccine]
+      set matchDose succSimuls with [currentVaccine = wantedVaccine]
       ifelse any? matchDose
       [
         report matchDose
@@ -227,7 +227,6 @@ to do_scaledown
         set my_R                        R
         set my_infectVariant            infectVariant
         set my_contributeToR            contributeToR
-        set my_vaccineIncursionOverride vaccineIncursionOverride
         set my_hasKnownContact          hasKnownContact
         set my_traceAttempts            traceAttempts
         set my_selfTraceEffMult         selfTraceEffMult
@@ -240,7 +239,7 @@ to do_scaledown
         set thisSimul self
         
         if toAsk > random-float 1 [
-          ask n-of 1 (GetUninfectedOfCohort cohortIndex vaccineType homeRegion) [
+          ask n-of 1 (GetUninfectedOfCohort cohortIndex currentVaccine homeRegion) [
             set color red
             set timenow                  my_timenow
             set caseReportTime           my_caseReportTime
@@ -248,7 +247,6 @@ to do_scaledown
             set R                        my_R
             set infectVariant            my_infectVariant
             set contributeToR            my_contributeToR
-            set vaccineIncursionOverride my_vaccineIncursionOverride
             set hasKnownContact          my_hasKnownContact
             set traceAttempts            my_traceAttempts
             set selfTraceEffMult         my_selfTraceEffMult
@@ -277,7 +275,6 @@ to do_scaledown
           set my_R                        R
           set my_infectVariant            infectVariant
           set my_contributeToR            contributeToR
-          set my_vaccineIncursionOverride vaccineIncursionOverride
           set my_hasKnownContact          hasKnownContact
           set my_traceAttempts            traceAttempts
           set my_selfTraceEffMult         selfTraceEffMult
@@ -289,7 +286,7 @@ to do_scaledown
           set thisSimul self
           
           if toAsk > random-float 1 [
-            ask n-of 1 (GetUninfectedOfCohort cohortIndex vaccineType homeRegion) [
+            ask n-of 1 (GetUninfectedOfCohort cohortIndex currentVaccine homeRegion) [
               set color red
               set timenow                  my_timenow
               set caseReportTime           my_caseReportTime
@@ -297,7 +294,6 @@ to do_scaledown
               set R                        my_R
               set infectVariant            my_infectVariant
               set contributeToR            my_contributeToR
-              set vaccineIncursionOverride my_vaccineIncursionOverride
               set hasKnownContact          my_hasKnownContact
               set traceAttempts            my_traceAttempts
               set selfTraceEffMult         my_selfTraceEffMult

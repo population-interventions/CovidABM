@@ -192,14 +192,9 @@ to createSimulants
       set knownContactTime -1
       set timenow 0
       set noticeOwnInfection 0
-      set selfVaccEff_raw_infect 0
-      set selfVaccEff_raw_risk 0
       set R 0
-      set vacEffectCountdown 0
       set isolating 0
-      set succeptibilityTable table:make
       set hasNewHouse false
-      set vaccineIncursionOverride 0
       set update_lock false
       set isInitialInfection false
       set BeAvoided true
@@ -226,7 +221,7 @@ to createSimulants
       set isStudent (agentsOfThisIndex <= cohort_studentCount)
       set VaccPhase cohort_phase
       set VaccSubPhase cohort_subPhase
-      set vaccineType cohort_vaccineType
+      set currentVaccine cohort_vaccineType
       set vaccBranch cohort_vaccineBranch
       set cohortVacUptake cohort_vaccineUptake
       
@@ -313,7 +308,7 @@ to setupInitialVaccination
         ask cohort [
           ifelse toVaccinateNow > 0
           [
-            let myVaccineData table:get vaccineParamsTable vaccineType
+            let myVaccineData table:get vaccineParamsTable currentVaccine
             let maxVaccineDoseDays item 2 myVaccineData
             let maxVaccineEffectDays item 3 myVaccineData
             let daysSinceFirst round(maxVaccineDoseDays * (progMin + (progMax - progMin) * doseQueueOrder))

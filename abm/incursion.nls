@@ -60,7 +60,6 @@ to incursion_update
         set myScale scalephase
         
         set infectVariant global_incursionVariant
-        set vaccineIncursionOverride "none"
         simul_updateVariantParams
         set timenow random (floor min (list incur_timenow_limit ownIllnessPeriod)) ; Set after update vaccine update because it changes illnessPeriod
         
@@ -88,7 +87,6 @@ to incursion_update
         set myScale scalephase
         
         set infectVariant global_incursionVariant
-        set vaccineIncursionOverride global_incursionVaccType
         simul_updateVariantParams
         set timenow random (floor min (list incur_timenow_limit ownIllnessPeriod)) ; Set after update vaccine update because it changes illnessPeriod
         

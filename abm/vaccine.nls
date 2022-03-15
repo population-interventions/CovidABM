@@ -107,7 +107,7 @@ to simul_vaccinate_me_force [daysSinceFirstDose daysSinceSecondDose effectDays]
 end
 
 to simul_vaccinate_me
-  let myVaccineData table:get vaccineParamsTable vaccineType
+  let myVaccineData table:get vaccineParamsTable currentVaccine
   if table:has-key? vaccineNextBranch vaccBranch [
     simul_addToBranchQueue
     ;; vacEffectCountdown is set so do not simul_updateVacAndReinfectMult here.
