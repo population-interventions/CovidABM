@@ -14,7 +14,6 @@ to ShiftRecoveredTowardsTotalProportion
         set color cyan
         set recoverTime 0
         set recoveryVariant 0
-        simul_updateVacAndReinfectMult
       ]
     ]
     if repYellowCount > yellowSetCount [
@@ -27,7 +26,6 @@ to ShiftRecoveredTowardsTotalProportion
         simul_setNewRecover
         set recoveryVariant 1 ;; TODO this number should not always be 1 if this code is to be used.
         set isolating 0
-        simul_updateVacAndReinfectMult
       ]
     ]
   ]
@@ -90,9 +88,9 @@ to scale_setup
   ;print scalePhaseMax
 end
 
-to-report GetUninfectedOfCohort [index wantedDoseCount wantedHomeRegion]
+to-report GetUninfectedOfCohort [index wantedVaccine wantedHomeRegion]
   let cohortSimuls (table:get populationCohortCache index) with [color != red]
-  let matchDose cohortSimuls with [doseCount = wantedDoseCount]
+  let matchDose cohortSimuls with [vaccineType = wantedVaccine]
   ifelse any? matchDose
   [
     report matchDose
@@ -100,13 +98,13 @@ to-report GetUninfectedOfCohort [index wantedDoseCount wantedHomeRegion]
   [
     let succSimuls simuls with [color != red]
     let regionSimuls succSimuls with [homeRegion = wantedHomeRegion]
-    set matchDose regionSimuls with [doseCount = wantedDoseCount]
+    set matchDose regionSimuls with [vaccineType = wantedVaccine]
     ifelse any? matchDose
     [
       report matchDose
     ]
     [
-      set matchDose succSimuls with [doseCount = wantedDoseCount]
+      set matchDose succSimuls with [vaccineType = wantedVaccine]
       ifelse any? matchDose
       [
         report matchDose
@@ -242,7 +240,7 @@ to do_scaledown
         set thisSimul self
         
         if toAsk > random-float 1 [
-          ask n-of 1 (GetUninfectedOfCohort cohortIndex doseCount homeRegion) [
+          ask n-of 1 (GetUninfectedOfCohort cohortIndex vaccineType homeRegion) [
             set color red
             set timenow                  my_timenow
             set caseReportTime           my_caseReportTime
@@ -291,7 +289,7 @@ to do_scaledown
           set thisSimul self
           
           if toAsk > random-float 1 [
-            ask n-of 1 (GetUninfectedOfCohort cohortIndex doseCount homeRegion) [
+            ask n-of 1 (GetUninfectedOfCohort cohortIndex vaccineType homeRegion) [
               set color red
               set timenow                  my_timenow
               set caseReportTime           my_caseReportTime

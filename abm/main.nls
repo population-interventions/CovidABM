@@ -29,8 +29,6 @@ to go
     set stageHasChanged 0 
   ]
   
-  update_vacRestrictionEasing
-  
   ;; Set lockdown stage and easing date, bases mostly on casesinperiod7
   CovidPolicyTriggers
   
@@ -66,8 +64,6 @@ to go
   ;; Simulants update how effective they are at spreading or receiving the virus, then add their infectiveness to the patch infectiveness
   ;; list (if they are infective).
   ask simuls [
-    ;; creates a triangular distribution of virulence that peaks at the end of the incubation period
-    simul_updatepersonalvirulence
     ;; Set a proprtion of people to wear masks when not home  (uses mask_Wearing (0-100) policy param)
     simul_checkMask
     ;; Tell the patch I am on whether I am infected
@@ -106,11 +102,6 @@ to go
   
   ;; Randomly vaccinate people and update vaccine phases.
   vaccine_update
-  
-  ;; Update vaccine dose countdown and waning
-  ask simuls [
-    simul_updateVaccineAndRecover
-  ]
   
   ;show ( word " Simul Stuff " timer " seconds ")
   ;reset-timer

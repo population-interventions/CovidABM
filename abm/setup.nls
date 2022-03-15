@@ -192,8 +192,6 @@ to createSimulants
       set knownContactTime -1
       set timenow 0
       set noticeOwnInfection 0
-      set IncubationPd int ownIncubationPeriod
-      set doseCount 0
       set selfVaccEff_raw_infect 0
       set selfVaccEff_raw_risk 0
       set R 0
@@ -232,15 +230,6 @@ to createSimulants
       set vaccBranch cohort_vaccineBranch
       set cohortVacUptake cohort_vaccineUptake
       
-      set wane_1 cohort_wane_1
-      set wane_2 cohort_wane_2
-      set wane_3 cohort_wane_3
-
-      set riskOfDeath cohort_riskOfDeath
-      set riskOfHosp cohort_riskOfHosp
-      set vacMortChange cohort_vacMortChange
-      set vacHospChange cohort_vacHospChange
-      
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
@@ -270,7 +259,6 @@ to createSimulants
         set symtomatic_present_day_draw round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
       ]
       
-      set rat_draw random-float 1
       set present_draw random-float 1
       set symtomatic_present_day_draw round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
 
@@ -283,8 +271,6 @@ to createSimulants
       ;;set ownComplianceWithIsolation ( exp random-normal Mcomp SComp ) ;; log transform of compliance with isolation
 
       simul_resetSomeRandomParams
-      simul_updatePresentDay
-      ;print ownIncubationPeriod_raw
 
       setEssentialWorkerPriority
     ]
@@ -345,9 +331,10 @@ to setupInitialVaccination
       ]
     ]
     
-    ask simuls with [doseCount = 0] [
-      simul_addToBranchQueue
-    ]
+    ; TODO replace doseCount with vaccine
+    ;ask simuls with [doseCount = 0] [
+    ;  simul_addToBranchQueue
+    ;]
   ]
 end
 
@@ -707,7 +694,6 @@ to setup
     set hasKnownContact false
     set myScale scalePhase
     simul_updateVariantParams
-    simul_updateVacAndReinfectMult
     
     set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
     if trace_calibration > 0 [
@@ -718,7 +704,6 @@ to setup
     if random-float 1 < init_trace_prop [
       simul_applyTrace 
     ]
-    simul_updatepersonalvirulence
     set infectionsToday_acc infectionsToday_acc + 1
     ;; Do not add to infection output as it makes for poor traces.
     ;array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
@@ -756,7 +741,6 @@ to setup
        simul_applyTrace 
       ]
       simul_updateVariantParams
-      simul_updateVacAndReinfectMult
       
       set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
       set init_secondry_infect init_secondry_infect - popPerSimul
@@ -772,7 +756,6 @@ to setup
   ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
     simul_setNewRecover
     set recoveryVariant getInitRecoverVariant
-    simul_updateVacAndReinfectMult
   ]
   ;;set tracking false ;; ensures this is set to false each time the model starts
   ;;set link_switch false ;; ensures this is set to false each timme the model starts

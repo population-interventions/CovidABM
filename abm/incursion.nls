@@ -43,9 +43,6 @@ to incursion_update
         let redrawPresentProp_b item 9 phaseData
         if redrawPresentProp_a > 0 [
           set sympt_present_prop rngs:rnd-beta incursionsSeedID redrawPresentProp_a redrawPresentProp_b
-          ask simuls [
-            simul_updatePresentDay
-          ]
         ]
       ]
     ]
@@ -65,7 +62,6 @@ to incursion_update
         set infectVariant global_incursionVariant
         set vaccineIncursionOverride "none"
         simul_updateVariantParams
-        simul_updateVacAndReinfectMult
         set timenow random (floor min (list incur_timenow_limit ownIllnessPeriod)) ; Set after update vaccine update because it changes illnessPeriod
         
         set timenow 0
@@ -94,7 +90,6 @@ to incursion_update
         set infectVariant global_incursionVariant
         set vaccineIncursionOverride global_incursionVaccType
         simul_updateVariantParams
-        simul_updateVacAndReinfectMult
         set timenow random (floor min (list incur_timenow_limit ownIllnessPeriod)) ; Set after update vaccine update because it changes illnessPeriod
         
         set timenow 0

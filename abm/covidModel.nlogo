@@ -2875,7 +2875,7 @@ SLIDER
 1597
 863
 1752
-897
+896
 Scale_Up_Threshold
 Scale_Up_Threshold
 0
@@ -2890,7 +2890,7 @@ SLIDER
 1597
 900
 1751
-934
+933
 Scale_Down_Threshold
 Scale_Down_Threshold
 0
@@ -3073,21 +3073,6 @@ realNotCaseThres
 -1000
 
 SLIDER
-838
-750
-1021
-783
-vac_restrict_ease_day
-vac_restrict_ease_day
--1
-200
-77.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
 834
 825
 1017
@@ -3210,16 +3195,6 @@ Days - start_day
 1
 11
 
-CHOOSER
-890
-699
-1022
-744
-vac_ease_stage
-vac_ease_stage
-"off" "None" "1b" "2a_mask3a" "1b_mask2a"
-2
-
 SLIDER
 834
 1010
@@ -3234,17 +3209,6 @@ vac_ease_mask_wear
 1
 NIL
 HORIZONTAL
-
-SWITCH
-720
-697
-884
-730
-vac_ease_everyone
-vac_ease_everyone
-0
-1
--1000
 
 SLIDER
 13
@@ -3427,7 +3391,7 @@ SLIDER
 12
 13
 285
-47
+46
 draw_index
 draw_index
 0

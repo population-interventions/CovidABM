@@ -50,22 +50,6 @@ to updateComplacency
       set proportion_time_avoid Complacency_Bound
     ]
   ]
-  
-  if vac_restrict_ease_day > -1 and start_metric_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
-    if vac_ease_avoid > vac_ease_avoid_compBound [
-      set vac_ease_avoid vac_ease_avoid - complacency_loss
-      if vac_ease_avoid < vac_ease_avoid_compBound [
-        set vac_ease_avoid vac_ease_avoid_compBound
-      ]
-    ]
-  ]
-end
-
-to update_vacRestrictionEasing
-  set vacRestrictionEase false
-  if vac_restrict_ease_day > -1 and start_metric_threshold < 0 and ticks - start_day >= vac_restrict_ease_day [
-    set vacRestrictionEase true
-  ]
 end
 
 ;;;*********************************************************************************************************************
@@ -264,10 +248,6 @@ to COVIDPolicyTriggers
     ]
     if ticks < param_stage1_time [
       set stage 4
-    ]
-    
-    if vac_ease_schools_open and ticks - start_day >= vac_restrict_ease_day [
-      set schoolsOpen true
     ]
   ]
 end
