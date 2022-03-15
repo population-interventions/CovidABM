@@ -289,8 +289,6 @@ globals [
   vaccineDoseRateTable
   vaccineBranchNames
   vaccineParamsTable
-  vaccineParams_riskMult
-  vaccineParams_infectMult
   vaccineNextBranch
   vaccineBranchEffectDays
   

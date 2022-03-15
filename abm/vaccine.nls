@@ -64,13 +64,11 @@ to setup_vaccineData
   set vacineEff_transOut []
   set vacineEff_areaOut []
   
-  let vaccineParamsFileData remove-item 0 csv:from-file input_vac_params
+  let vaccineParamsFileData remove-item 0 csv:from-file (word input_vac_params "_" "alpha" ".csv") ; TODO LOAD per variant
   set vaccineParamsTable table:make
-  set vaccineParams_riskMult table:make
-  set vaccineParams_infectMult table:make
   let i 0
   foreach vaccineParamsFileData [ rawData -> 
-    let vacName item 0 rawData
+    let vacName (item 0 rawData)
     let vacRiskReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
     let vacInfectReduct rngs:rnd-beta vaccineEffseedID (item 3 rawData) (item 4 rawData)
     if param_override_ve >= 0 [
@@ -79,18 +77,13 @@ to setup_vaccineData
     if param_override_ve_area >= 0 [
       set vacInfectReduct param_override_ve_area
     ]
-    let partialDays item 5 rawData
-    let vacEffectDays item 6 rawData
-    table:put vaccineParamsTable vacName (list vacRiskReduct vacInfectReduct partialDays vacEffectDays)
-    table:put vaccineParams_riskMult vacName (list (item 7 rawData) (item 8 rawData) (item 9 rawData))
-    table:put vaccineParams_infectMult vacName (list (item 10 rawData) (item 11 rawData) (item 12 rawData))
+    let vacEffectDays item 7 rawData
+    table:put vaccineParamsTable vacName (list vacRiskReduct vacInfectReduct vacEffectDays)
     
     set vacineEff_nameOut lput vacName vacineEff_nameOut
     set vacineEff_transOut lput vacRiskReduct vacineEff_transOut
     set vacineEff_areaOut lput vacInfectReduct vacineEff_areaOut
   ]
-  
-  hacks_modifyVaccine
 end
 
 to simul_addToBranchQueue
