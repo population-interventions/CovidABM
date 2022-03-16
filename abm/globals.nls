@@ -387,6 +387,10 @@ globals [
   reinfect_risk_base
   reinfect_area_base
   reinfect_wane_base
+  
+  temp_1
+  temp_2
+  temp_3
 ]
 
 patches-own [

@@ -96,6 +96,10 @@ to simul_addToBranchQueue
   ]
 end
 
+to simul_applyVaccine
+  
+end
+
 to simul_vaccinate_me_force [daysSinceFirstDose daysSinceSecondDose effectDays]
   if Vaccine_Available = true [
     ; TODO vaccination

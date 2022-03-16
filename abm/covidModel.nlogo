@@ -91,10 +91,10 @@ NIL
 1
 
 BUTTON
-2869
-865
-2971
-900
+2799
+870
+2901
+905
 Trace_Patterns
 ask n-of 1 simuls with [ color != black ] [ pen-down ] 
 NIL
@@ -108,10 +108,10 @@ NIL
 1
 
 BUTTON
-2983
-864
-3083
-898
+2913
+870
+3013
+904
 UnTrace
 ask turtles [ pen-up ]
 NIL
@@ -192,10 +192,10 @@ NIL
 1
 
 MONITOR
-3333
-763
-3482
-820
+3344
+758
+3493
+815
 Deaths
 Deathcount
 0
@@ -1912,21 +1912,6 @@ NIL
 HORIZONTAL
 
 SLIDER
-364
-695
-549
-728
-R0_range
-R0_range
--1
-10
-6.5
-0.5
-1
-NIL
-HORIZONTAL
-
-SLIDER
 220
 564
 329
@@ -1942,10 +1927,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-3120
-799
-3323
-832
+3130
+794
+3333
+827
 trace_calibration
 trace_calibration
 0
@@ -2102,10 +2087,10 @@ param_force_vaccine
 0
 
 SLIDER
-3118
-763
-3325
-796
+3129
+758
+3336
+791
 success_14day_cases
 success_14day_cases
 -1
@@ -2647,10 +2632,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-2829
-828
-3001
-861
+2759
+834
+2931
+867
 print_contact_events
 print_contact_events
 1
@@ -2971,17 +2956,6 @@ start_day
 17
 1
 11
-
-SWITCH
-563
-697
-673
-730
-precise_R0
-precise_R0
-0
-1
--1000
 
 MONITOR
 1303
