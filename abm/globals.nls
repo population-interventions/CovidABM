@@ -290,6 +290,7 @@ globals [
   vaccineBranchNames
   vaccineParamsTable
   vaccineNextBranch
+  vaccineBranchParams
   vaccineBranchEffectDays
   
   variantNames

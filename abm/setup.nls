@@ -149,17 +149,17 @@ to createSimulants
       set cohort_succeptMult item 11 cohortData
       set cohort_asymptomPropMult item 12 cohortData
       ;; Items 13, 14 and 15 are for pre-model vaccination so are dealt with in setupInitialVaccination.
-      set cohort_ignoreUptakeOverride item 15 cohortData
-      set cohort_studentCount item 16 cohortData
-      set cohort_vaccineBranch item 17 cohortData
-      set cohort_vaccineUptake item 18 cohortData
+      set cohort_ignoreUptakeOverride item 14 cohortData
+      set cohort_studentCount item 15 cohortData
+      set cohort_vaccineBranch item 16 cohortData
+      set cohort_vaccineUptake item 17 cohortData
       
       ;print (word "cohort_wane_1: " cohort_wane_1 ", cohort_wane_2: " cohort_wane_2 ", cohort_wane_3: " cohort_wane_3)
       
-      set cohort_riskOfDeath (item 19 cohortData)
-      set cohort_riskOfHosp (item 20 cohortData)
-      set cohort_vacMortChange (item 21 cohortData)
-      set cohort_vacHospChange (item 22 cohortData)
+      set cohort_riskOfDeath (item 18 cohortData)
+      set cohort_riskOfHosp (item 19 cohortData)
+      set cohort_vacMortChange (item 20 cohortData)
+      set cohort_vacHospChange (item 21 cohortData)
       
       set oldCohortIndex pop_index
     ]
@@ -201,9 +201,6 @@ to createSimulants
       set essentialJob (agentsOfThisIndex <= cohort_essentialCount)
       set isWorker (agentsOfThisIndex <= cohort_workerCount)
       set isStudent (agentsOfThisIndex <= cohort_studentCount)
-      set VaccPhase cohort_phase
-      set VaccSubPhase cohort_subPhase
-      set vaccBranch cohort_vaccineBranch
       set cohortVacUptake cohort_vaccineUptake
       
       set spanMult cohort_spanMult
@@ -214,7 +211,6 @@ to createSimulants
       
       move-to one-of patches with [ pcolor = black ]
       
-      set sm_vac_uptake random-float 1
       set report_case_draw random-float 1
       set accept_isolation_draw random-float 1
       
@@ -273,34 +269,80 @@ to setupInitialVaccination
       let cohort_pop item 0 cohortData
       let preDoseCount item 13 cohortData
       let preDoseDays item 14 cohortData
+      let initCohortBranch item 17 cohortData
+      let uptake item 18 cohortData
       
-      if cohort_pop > 0 and vaccinatedCount > 0 [
-        let toVaccinateNow vaccinatedCount
-        let vacPrioIncrement 1 / cohort_pop
-        let vacPrio vacPrioIncrement / 2
+      if cohort_pop > 0 [
+        let wantVacCount round cohort_pop * param_vac_uptake_mult * uptake
+        let upperDoseCount preDoseCount
         
-        ;; Agents added to the vaccination queue first should be the ones with the most days waited.
-        let doseQueueOrder 1
-        let doseQueueIncrement 1 / vaccinatedCount
+        ;; Calculate how many people recieve each vaccine, and which branch they are in.
+        let vacBranchPrev 0 ; The vaccine that the least vaccinated people had previously.
+        let vacBranchLower 0 ; The vaccine that the least vaccinated people of the cohort have.
+        let vacBranchUpper 0 ; The vaccine that the most vaccinated people of the cohort have. The least vaccinated people are in this branch to recieve this vaccine.
+        let vacBranchNext initCohortBranch ; The branch that the most vaccinated people of the cohort are in.
+        while [upperDoseCount > wantVacCount] [
+          let firstDay table:get table:get vaccineBranchParams (GetNextBranchIfExists vacBranchNext) "firstDay"
+          ifelse firstDay >= 0
+          [
+            set vacBranchPrev vacBranchLower
+            set vacBranchLower vacBranchUpper
+            set vacBranchUpper vacBranchNext
+            set vacBranchNext GetNextBranchIfExists vacBranchNext
+            set upperDoseCount upperDoseCount - wantVacCount
+          ]
+          [
+            set upperDoseCount wantVacCount
+          ]
+        ]
+        
+        ; Upper branch is the lowest level, so set everyone to be upper
+        if vacBranchUpper = 0 [
+          set upperDoseCount wantVacCount
+        ]
+        
+        ; Determine how far in the past people had their vaccinations
+        let lowerVacDay -1 * preDoseDays
+        let upperVacDay lowerVacDay * upperDoseCount / wantVacCount
+        let dayIncrement preDoseDays / wantVacCount
+        
+        ; Cache vaccine associated with branches
+        let prevVac GetBranchVacIfExists vacBranchPrev
+        let lowerVac GetBranchVacIfExists vacBranchLower
+        let upperVac GetBranchVacIfExists vacBranchUpper
         
         ;; Only pre-model vaccinate someone if they would take up the vaccine.
         ;; This ensures that the final vaccinated proportion matches init_vac_uptake.
         ask cohort [
-          ifelse toVaccinateNow > 0
+          ifelse wantVacCount > 0
           [
-            let myVaccineData table:get vaccineParamsTable currentVaccine
-            let maxVaccineDoseDays item 2 myVaccineData
-            let maxVaccineEffectDays item 3 myVaccineData
-            let daysSinceFirst round(maxVaccineDoseDays * (progMin + (progMax - progMin) * doseQueueOrder))
-            simul_vaccinate_me_force daysSinceFirst (daysSinceFirst - maxVaccineEffectDays) maxVaccineEffectDays
-            set toVaccinateNow toVaccinateNow - 1
-            set vacPrio vacPrio + vacPrioIncrement
-            set doseQueueOrder doseQueueOrder - doseQueueIncrement
+            ifelse upperDoseCount > 0
+            [
+              set vaccineDay upperVacDay
+              set prevVaccineDay upperVacDay - preDoseDays
+             
+              set vacBranch vacBranchNext
+              set currentVaccine upperVac
+              set prevVaccine lowerVac
+              simul_addToBranchQueue
+              
+              set upperDoseCount upperDoseCount - 1
+              set upperVacDay upperVacDay + dayIncrement
+            ]
+            [
+              set vaccineDay lowerVacDay
+              set prevVaccineDay lowerVacDay - preDoseDays
+              ;; TODO set vaccine parameters here
+              set vacBranch vacBranchUpper
+              set currentVaccine lowerVac
+              set prevVaccine prevVac
+              simul_addToBranchQueue
+              
+              set lowerVacDay lowerVacDay + dayIncrement
+            ]
           ]
           [
-            ;; Predestine people to uptake the vaccine or not
-            set vaccinePriority vacPrio
-            set vacPrio vacPrio + vacPrioIncrement
+            set currentVaccine 0
           ]
         ]
       ]

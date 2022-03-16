@@ -13,6 +13,26 @@ to-report AddLogOdds [prob toAdd]
   report odds / (odds + 1)
 end
 
+to-report GetNextBranchIfExists [branch]
+  ifelse table:has-key? vaccineNextBranch branch
+  [
+    report table:get vaccineNextBranch branch
+  ]
+  [
+   report branch
+  ]
+end
+
+to-report GetBranchVacIfExists [branch]
+  ifelse table:has-key? vaccineBranchParams branch
+  [
+    report table:get table:get vaccineBranchParams branch "vacType"
+  ]
+  [
+   report 0
+  ]
+end
+
 to setup_doseTable
   let doseFileData csv:from-file (word input_dose_rate_table in_dose1 in_dose2 data_suffix)
   set vaccineDoseRateTable table:make
@@ -45,6 +65,7 @@ to setup_vaccineData
   
   set vaccineBranchNames []
   set vaccineNextBranch table:make
+  set vaccineBranchParams table:make
   
   set vaccineBranchQueue table:make
   set global_vaccineAvailible table:make
@@ -56,6 +77,11 @@ to setup_vaccineData
     table:put vaccineBranchQueue branch (list)
     table:put global_vaccineAvailible branch 0
     table:put vaccineNextBranch branch (item 1 x)
+    
+    let branchData table:make
+    table:put branchData "vacType" (item 2 x)
+    table:put branchData "firstDay" (item 3 x)
+    table:put vaccineBranchParams branch branchData
   ]
   ;print (word "vaccineBranchStartIndex " vaccineBranchStartIndex)
   ;print (word "vaccineBranches " vaccineBranches)
@@ -91,8 +117,8 @@ to simul_updateVaccineParams
 end
 
 to simul_addToBranchQueue
-  if table:has-key? vaccineBranchQueue vaccBranch [
-    table:put vaccineBranchQueue vaccBranch (lput self (table:get vaccineBranchQueue vaccBranch))
+  if table:has-key? vaccineBranchQueue vacBranch [
+    table:put vaccineBranchQueue vacBranch (lput self (table:get vaccineBranchQueue vacBranch))
   ]
 end
 
@@ -109,7 +135,7 @@ end
 
 to simul_vaccinate_me
   let myVaccineData table:get vaccineParamsTable currentVaccine
-  if table:has-key? vaccineNextBranch vaccBranch [
+  if table:has-key? vaccineNextBranch vacBranch [
     simul_addToBranchQueue
     ;; vacEffectCountdown is set so do not simul_updateVacAndReinfectMult here.
   ]

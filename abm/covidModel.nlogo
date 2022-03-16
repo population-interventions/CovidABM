@@ -288,7 +288,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-10.0
+5.0
 .5
 1
 NIL
@@ -303,7 +303,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-10.0
+5.0
 .5
 1
 NIL

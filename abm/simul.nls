@@ -65,19 +65,15 @@ simuls-own [
   essentialJob ;; Static indicator of whether the agent's job is most essential, which gives it higher EssentialWorkerPriority (ie closer to zero).
   isWorker
   
-  VaccPhase ;; phase at which this person would receive vaccine
-  VaccSubPhase ;; subphase at which this person would receive vaccine (1a, 1b etc)
-  vaccBranch ;; Brach of vaccination to take second doses from
-  sm_vac_uptake ;; Likelyhood of taking a vaccine if offered
+  vacBranch ;; Brach of vaccination currently queued in
   
   recoverDay ;; Day of recovery.
   vaccineDay ;; Day of last vaccine
   prevVaccineDay ;; Day of previous vaccine
   
-  ;recoverVaccine ;; Name of the 'vaccine' gained by recovering
-  ;currentVaccine ;; Name of most recent vaccine
-  ;prevVaccine ;; Name of previous vaccine, for when the new one is not yet in effect
-  currentVacTemp
+  recoverVaccine ;; Name of the 'vaccine' gained by recovering
+  currentVaccine ;; Name of most recent vaccine
+  prevVaccine ;; Name of previous vaccine, for when the new one is not yet in effect
   
   incursionVaccine
   incursionVaccineDay
