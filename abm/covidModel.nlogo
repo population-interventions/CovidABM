@@ -148,7 +148,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -233,17 +233,17 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.1
 0.01
 1
 NIL
 HORIZONTAL
 
 MONITOR
-17
-830
-166
-887
+15
+835
+164
+892
 % Total Infections
 cumulativeInfected / Total_Population * 100
 2
@@ -288,7 +288,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-50.0
+10.0
 .5
 1
 NIL
@@ -303,28 +303,17 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-50.0
+10.0
 .5
 1
 NIL
 HORIZONTAL
 
-MONITOR
-2638
-722
-2697
-767
-R0
-mean [ R ] of simuls with [ color = red and timenow = int Illness_Period ]
-2
-1
-11
-
 PLOT
 2345
-718
+715
 2752
-840
+837
 Estimated count of deceased across age ranges (not scaled)
 NIL
 NIL
@@ -417,7 +406,6 @@ false
 "" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [ agerange ] of simuls"
-"pen-1" 1.0 0 -13840069 true "" "histogram [ agerange ] of simuls with [ selfVaccEff_raw_infect > 0 ]"
 "pen-2" 1.0 0 -2674135 true "" "histogram [ agerange ] of simuls with [ color = red ]"
 
 PLOT
@@ -586,17 +574,6 @@ false
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [ ownIncubationPeriod ] of simuls"
 
-MONITOR
-1535
-715
-1600
-760
-Virulence
-mean [ personalvirulence] of simuls
-1
-1
-11
-
 SLIDER
 1627
 179
@@ -606,7 +583,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -647,7 +624,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+15.0
 1
 1
 NIL
@@ -765,7 +742,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -779,17 +756,6 @@ MONITOR
 NIL
 currentinfections
 17
-1
-11
-
-MONITOR
-3043
-907
-3098
-952
-Average Illness time
-mean [ timenow ] of simuls with [ color = red ]
-1
 1
 11
 
@@ -900,7 +866,7 @@ MONITOR
 1292
 58
 Vac1 %
-( count simuls with [ agerange > 15 and selfVaccEff_raw_risk > 0 or vacEffectCountdown > 0 ]) / (count simuls with [agerange > 15] + 0.25 * count simuls with [agerange = 15]) * 100
+4
 2
 1
 11
@@ -911,7 +877,7 @@ MONITOR
 1477
 58
 Vaccinated
-count simuls with [ selfVaccEff_raw_risk > 0 ]
+6
 17
 1
 11
@@ -932,9 +898,6 @@ true
 false
 "" ""
 PENS
-"1st Administered" 1.0 0 -16777216 true "" "plot count simuls with [doseCount > 0] / 25"
-"1st Effective" 1.0 0 -14439633 true "" "plot count simuls with [doseCount > 1] / 25"
-"2nd Administered" 1.0 0 -2674135 true "" "plot count simuls with [doseCount > 2] / 25"
 
 MONITOR
 1480
@@ -1185,7 +1148,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -1368,10 +1331,10 @@ cumulativeInfected
 14
 
 MONITOR
-17
-890
-172
-947
+15
+895
+170
+952
 % Living Recovered
 recoverProportion * 100
 2
@@ -1459,17 +1422,6 @@ false
 PENS
 "default" 1.0 0 -16777216 true "" "plot slopeAverage * 100"
 "pen-1" 1.0 0 -7500403 true "" "plot slope * 100"
-
-MONITOR
-3523
-844
-3626
-889
-Tracked Infection %
-100 * (count simuls with [color = red and tracked = 1]) / (count simuls with [color = red])
-2
-1
-11
 
 SLIDER
 18
@@ -1662,10 +1614,10 @@ MONITOR
 11
 
 MONITOR
-175
-912
-277
-957
+178
+913
+280
+958
 % Red Second
 100 * (count simuls with [color = red and infectVariant = \"beta\"]) / Population
 2
@@ -1797,7 +1749,7 @@ MONITOR
 1216
 258
 Case report %
-100 * (count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion]) / (count simuls with [ color = red ])
+100 * (count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion]) / (max (list (count simuls with [ color = red ]) 1))
 2
 1
 11
@@ -2319,10 +2271,6 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" "plot count simuls with [ (selfVaccEff_raw_risk > 0 or vacEffectCountdown > 0) and vaccBranch = \"P\"] / 25"
-"pen-1" 1.0 0 -14439633 true "" "plot count simuls with [ selfVaccEff_raw_risk > 0 and vaccBranch = \"P\" and doseCount >= 2] / 25"
-"pen-3" 1.0 0 -2674135 true "" "plot count simuls with [ selfVaccEff_raw_risk > 0 and vaccBranch = \"P\" and doseCount >= 2 and vacEffectCountdown = 0] / 25"
-"pen-4" 1.0 0 -14070903 true "" "plot count simuls with [ (selfVaccEff_raw_risk > 0) and vaccBranch = \"P\"] / 25"
 
 MONITOR
 1742
@@ -3041,7 +2989,7 @@ MONITOR
 1371
 58
 Vac2 %
-( count simuls with [ agerange > 15 and doseCount >= 2 ] / ((count simuls with [agerange > 15] + 0.25 * count simuls with [agerange = 15]) )) * 100
+5
 2
 1
 11
@@ -3242,21 +3190,10 @@ INPUTBOX
 2337
 488
 input_vac_params
-input/vic/vaccine_params.csv
+input/vic/vaccine_params
 1
 0
 String
-
-MONITOR
-1650
-429
-1790
-474
-NIL
-table:get average_R 1
-4
-1
-11
 
 INPUTBOX
 1858

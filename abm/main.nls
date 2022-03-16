@@ -64,6 +64,7 @@ to go
   ;; Simulants update how effective they are at spreading or receiving the virus, then add their infectiveness to the patch infectiveness
   ;; list (if they are infective).
   ask simuls [
+    simul_updatepersonalvirulence
     ;; Set a proprtion of people to wear masks when not home  (uses mask_Wearing (0-100) policy param)
     simul_checkMask
     ;; Tell the patch I am on whether I am infected

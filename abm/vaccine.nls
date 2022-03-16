@@ -86,6 +86,10 @@ to setup_vaccineData
   ]
 end
 
+to simul_updateVaccineParams
+  
+end
+
 to simul_addToBranchQueue
   if table:has-key? vaccineBranchQueue vaccBranch [
     table:put vaccineBranchQueue vaccBranch (lput self (table:get vaccineBranchQueue vaccBranch))
