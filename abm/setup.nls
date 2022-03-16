@@ -274,7 +274,7 @@ to setupInitialVaccination
       
       if cohort_pop > 0 [
         let wantVacCount round cohort_pop * param_vac_uptake_mult * uptake
-        let upperDoseCount preDoseCount
+        let upperDoseCount preDoseCount * wantVacCount ;; TODO change spreadsheets to reflect this
         
         ;; Calculate how many people recieve each vaccine, and which branch they are in.
         let vacBranchPrev 0 ; The vaccine that the least vaccinated people had previously.
