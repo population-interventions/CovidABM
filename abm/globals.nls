@@ -269,9 +269,6 @@ globals [
   
   draw_wane_multiplier
   draw_wane_boost_multiplier
-
-  ; Vaccine phase and subphase, as well as internal index and data table.
-  global_vaccineAvailible
   
   incursionTable
   incursionPhaseIndex
@@ -285,13 +282,7 @@ globals [
   global_incursionReplaceChance
   
   totalOverseasIncursions
-  vaccineBranchQueue
-  vaccineDoseRateTable
-  vaccineBranchNames
   vaccineParamsTable
-  vaccineNextBranch
-  vaccineBranchParams
-  vaccineBranchEffectDays
   
   variantNames
   variantData

@@ -233,7 +233,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.08
 0.01
 1
 NIL
@@ -288,7 +288,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+15.0
 .5
 1
 NIL
@@ -303,7 +303,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+15.0
 .5
 1
 NIL
@@ -583,7 +583,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+70.0
 1
 1
 NIL
@@ -624,7 +624,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+35.0
 1
 1
 NIL
@@ -856,7 +856,7 @@ SWITCH
 415
 Vaccine_Available
 Vaccine_Available
-1
+0
 1
 -1000
 
@@ -866,7 +866,7 @@ MONITOR
 1292
 58
 Vac1 %
-4
+100 * count simuls with [currentVaccine = \"OLD_2\"] / population
 2
 1
 11
@@ -1148,7 +1148,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+15.0
 1
 1
 NIL
@@ -2229,17 +2229,6 @@ casesReportedToday
 1
 11
 
-INPUTBOX
-1856
-537
-2048
-597
-input_dose_rate_table
-input/vic/dose_rate
-1
-0
-String
-
 PLOT
 1224
 208
@@ -2963,7 +2952,7 @@ MONITOR
 1371
 58
 Vac2 %
-5
+100 * count simuls with [currentVaccine = \"OLD_3\"] / population
 2
 1
 11
@@ -3165,17 +3154,6 @@ INPUTBOX
 488
 input_vac_params
 input/vic/vaccine_params
-1
-0
-String
-
-INPUTBOX
-1858
-473
-2073
-533
-input_vac_branch
-input/vic/vac_branch
 1
 0
 String

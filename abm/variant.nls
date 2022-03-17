@@ -31,6 +31,10 @@ to simul_updateVariantParams
   ]
   
   set personalVirulence rngs:rnd-beta moveInitSeedID (table:get varData "trans_a" / hetro_mult) (table:get varData "trans_b" / hetro_mult)
+  
+  ;; Vaccine and previous infection
+  set personalVirulence personalVirulence * (vaccine_getTransmissMult infectVariant currentVaccine vaccineDay prevVaccine prevVaccineDay)
+  set personalVirulence personalVirulence * (vaccine_getTransmissMult infectVariant recoverVaccine recoverDay 0 0)
 end
 
 to setup_variantData
@@ -86,4 +90,31 @@ to setup_variantData
   ]
   ;print (word "variantNames " variantNames)
   ;print (word "variantData " variantData)
+end
+
+to simul_updatepersonalvirulence
+  ;; creates a triangular distribution of virulence that peaks at the end of the incubation period
+  if color = red and (isInitialInfection or not first_case_calibrate) [
+    if timenow <= nonInfectivePeriod [
+      set currentVirulence 0
+    ]
+    ifelse ownIllnessPeriod_raw > 0
+    [
+      if timenow > nonInfectivePeriod and timenow <= ownIncubationPeriod [
+        set currentVirulence personalVirulence * (((timenow - nonInfectivePeriod) / (ownIncubationPeriod - nonInfectivePeriod) ) * (1 - prepeak_vir_boost) + prepeak_vir_boost)
+      ]
+      if timenow > ownIncubationPeriod [
+        set currentVirulence personalVirulence * (( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))
+      ]
+    ]
+    [
+      set currentVirulence 0
+    ]
+    ;if vaccinated = 1 [
+    ;  show (word "cine " vaccinated ",time " timenow ",VIR " (currentVirulence / personalVirulence) ",unscale " currentVirulence)
+    ;]
+    ;set currentVirulence 0
+    ;show (word "timenow " timenow ", personalVirulence " personalVirulence ", ownIncubationPeriod " ownIncubationPeriod ", ownIllnessPeriod " ownIllnessPeriod)
+    ;show (word "timenow " timenow ", currentVirulenceProp " (currentVirulence / personalVirulence))
+  ]
 end

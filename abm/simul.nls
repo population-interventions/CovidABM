@@ -18,6 +18,7 @@ simuls-own [
   update_lock
   isInitialInfection
   cohortVacUptake
+  cohortVacSuffix
   
   myScale
   
@@ -64,8 +65,6 @@ simuls-own [
   comorbidityState ;; does the person have a comorbidity
   essentialJob ;; Static indicator of whether the agent's job is most essential, which gives it higher EssentialWorkerPriority (ie closer to zero).
   isWorker
-  
-  vacBranch ;; Brach of vaccination currently queued in
   
   recoverDay ;; Day of recovery.
   vaccineDay ;; Day of last vaccine
@@ -239,33 +238,6 @@ end
 ;;** Simul Once-A-Tick Functions **
 ;;*******************************************************************************************************************************
 
-to simul_updatepersonalvirulence
-  ;; creates a triangular distribution of virulence that peaks at the end of the incubation period
-  if color = red and (isInitialInfection or not first_case_calibrate) [
-    if timenow <= nonInfectivePeriod [
-      set currentVirulence 0
-    ]
-    ifelse ownIllnessPeriod_raw > 0
-    [
-      if timenow > nonInfectivePeriod and timenow <= ownIncubationPeriod [
-        set currentVirulence personalVirulence * (((timenow - nonInfectivePeriod) / (ownIncubationPeriod - nonInfectivePeriod) ) * (1 - prepeak_vir_boost) + prepeak_vir_boost)
-      ]
-      if timenow > ownIncubationPeriod [
-        set currentVirulence personalVirulence * (( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))
-      ]
-    ]
-    [
-      set currentVirulence 0
-    ]
-    ;if vaccinated = 1 [
-    ;  show (word "cine " vaccinated ",time " timenow ",VIR " (currentVirulence / personalVirulence) ",unscale " currentVirulence)
-    ;]
-    ;set currentVirulence 0
-    ;show (word "timenow " timenow ", personalVirulence " personalVirulence ", ownIncubationPeriod " ownIncubationPeriod ", ownIllnessPeriod " ownIllnessPeriod)
-    ;show (word "timenow " timenow ", currentVirulenceProp " (currentVirulence / personalVirulence))
-  ]
-end
-
 to simul_record_patch_infectiveness
   if color = red and currentVirulence > 0 [
     let localInfectiveness currentVirulence
@@ -336,8 +308,9 @@ to simul_infect
         ;print "x"
         ;print x
         if color != red [
+          let succeptibility baseSuccept * x ;; TODO calculate succeptiblity based on patchVariant
           set transmission_count transmission_count + extraScaleFactor * (Scale_Factor ^ localPatchScale)
-          set transmission_sum transmission_sum + baseSuccept * x
+          set transmission_sum transmission_sum + succeptibility
           let infectDraw random-float 1
           
           if print_contact_events [
@@ -358,71 +331,76 @@ to simul_infect
               set patchVariant global_incursionVariant
             ]
           ]
-          let succeptibility 1 ;; TODO calculate succeptiblity based on patchVariant
           
           ;; Check against lower succeptiblity for reinfection.
-          let binomChance 1 - (1 - baseSuccept * succeptibility * x) ^ Daily_Infect_Binom
-          if binomChance > infectDraw [
-            set myScale localPatchScale
-            let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
-            
-            ;; Add deaths and hosp at the start of infection. The counts are delayed
-            ;; TODO add deaths and hosp
-            ;let adjDeathRisk riskOfDeath
-            ;let adjHospRisk riskOfHosp
-            ;if succeptibility < 1 [
-            ;  set adjDeathRisk adjDeathRisk * (AddLogOdds succeptibility vacMortChange)
-            ;  set adjHospRisk adjHospRisk * (AddLogOdds succeptibility vacHospChange)
-            ;]
-            ;let deathRiskMean adjDeathRisk * popPerSimul
-            ;let hospRiskMean adjHospRisk * popPerSimul
-            ; 
-            ;set deathcount deathcount + deathRiskMean
-            ;array:set dieArray cohortIndex (array:item dieArray cohortIndex) + deathRiskMean
-            ;array:set hospArray cohortIndex (array:item hospArray cohortIndex) + hospRiskMean
-            ;
-            ;; Add hosp for dynamic policy
-            ;set hospToday_acc hospToday_acc + hospRiskMean
-            
-            ;; Set infection status
-            set color red
-            set contact_events 0
-            set contributeToR true
-            set infectVariant patchVariant
-            
-            simul_updateVariantParams
-            
-            set infectedContactList table:make
-            set traceAttempts 0
-            set selfTraceEffMult 1
-            
-            let culpritSimul table:get localInfectionCulprit x
-            let culpritTracked false
-            let culpritScale 0
-            let thisSimul self
-            table:put infectedContactList table:length infectedContactList culpritSimul
-            ask culpritSimul [
-              set culpritTracked tracked
-              set culpritScale myScale
-              table:put infectedContactList table:length infectedContactList thisSimul
-            ]
-            set hasKnownContact (culpritTracked = 1)
-            set myScale culpritScale
-            
-            set isolating 0
-            set timenow 0
-            set infectionsToday_acc infectionsToday_acc + popPerSimul
-            set new_case_real_counter new_case_real_counter + popPerSimul
-            ifelse true ;; TODO check if vaccinated
-            [
-              array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + popPerSimul
-            ]
-            [
-              array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
-            ]
-            if track_R [
-              ask culpritSimul [
-                set R R + 1
+          let binomChance 1 - (1 - succeptibility) ^ Daily_Infect_Binom
+          if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
+            set succeptibility succeptibility * (vaccine_getSucceptMult patchVariant currentVaccine vaccineDay prevVaccine prevVaccineDay)
+            if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
+              set succeptibility succeptibility * (vaccine_getSucceptMult patchVariant recoverVaccine recoverDay 0 0)
+              if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
+                set myScale localPatchScale
+                let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
+                
+                ;; Add deaths and hosp at the start of infection. The counts are delayed
+                ;; TODO add deaths and hosp
+                ;let adjDeathRisk riskOfDeath
+                ;let adjHospRisk riskOfHosp
+                ;if succeptibility < 1 [
+                ;  set adjDeathRisk adjDeathRisk * (AddLogOdds succeptibility vacMortChange)
+                ;  set adjHospRisk adjHospRisk * (AddLogOdds succeptibility vacHospChange)
+                ;]
+                ;let deathRiskMean adjDeathRisk * popPerSimul
+                ;let hospRiskMean adjHospRisk * popPerSimul
+                ; 
+                ;set deathcount deathcount + deathRiskMean
+                ;array:set dieArray cohortIndex (array:item dieArray cohortIndex) + deathRiskMean
+                ;array:set hospArray cohortIndex (array:item hospArray cohortIndex) + hospRiskMean
+                ;
+                ;; Add hosp for dynamic policy
+                ;set hospToday_acc hospToday_acc + hospRiskMean
+                
+                ;; Set infection status
+                set color red
+                set contact_events 0
+                set contributeToR true
+                set infectVariant patchVariant
+                
+                simul_updateVariantParams
+                
+                set infectedContactList table:make
+                set traceAttempts 0
+                set selfTraceEffMult 1
+                
+                let culpritSimul table:get localInfectionCulprit x
+                let culpritTracked false
+                let culpritScale 0
+                let thisSimul self
+                table:put infectedContactList table:length infectedContactList culpritSimul
+                ask culpritSimul [
+                  set culpritTracked tracked
+                  set culpritScale myScale
+                  table:put infectedContactList table:length infectedContactList thisSimul
+                ]
+                set hasKnownContact (culpritTracked = 1)
+                set myScale culpritScale
+                
+                set isolating 0
+                set timenow 0
+                set infectionsToday_acc infectionsToday_acc + popPerSimul
+                set new_case_real_counter new_case_real_counter + popPerSimul
+                ifelse true ;; TODO check if vaccinated
+                [
+                  array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + popPerSimul
+                ]
+                [
+                  array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
+                ]
+                if track_R [
+                  ask culpritSimul [
+                    set R R + 1
+                  ]
+                ]
               ]
             ]
           ]
