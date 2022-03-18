@@ -746,7 +746,7 @@ to setup
   set dailyRecoverMult exp(ln(1 - yearly_recover_prop_loss) / 365)
   ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
     simul_setNewRecover
-    set recoveryVariant getInitRecoverVariant
+    set recoverVariant getInitRecoverVariant
   ]
   ;;set tracking false ;; ensures this is set to false each time the model starts
   ;;set link_switch false ;; ensures this is set to false each timme the model starts

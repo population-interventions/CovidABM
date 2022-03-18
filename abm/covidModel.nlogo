@@ -1342,10 +1342,10 @@ recoverProportion * 100
 14
 
 SLIDER
-568
-882
-770
-915
+579
+845
+781
+878
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
@@ -1454,10 +1454,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-567
-772
-740
-805
+582
+734
+755
+767
 sympt_present_prop
 sympt_present_prop
 0
@@ -1551,15 +1551,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-1998
-654
-2201
-687
+390
+697
+568
+731
 param_recovered_prop
 param_recovered_prop
 0
 1
-0.45
+0.1
 0.05
 1
 NIL
@@ -1592,21 +1592,21 @@ NIL
 HORIZONTAL
 
 MONITOR
-177
-818
-277
-863
-% Yellow
-100 * (count simuls with [color = yellow]) / Population
+302
+884
+411
+929
+% Yellow Second
+100 * (count simuls with [color = yellow and recoverVariant = \"beta\"]) / Population
 2
 1
 11
 
 MONITOR
-177
-865
-279
-910
+188
+838
+290
+883
 % Red First
 100 * (count simuls with [color = red and infectVariant = \"alpha\"]) / Population
 2
@@ -1614,10 +1614,10 @@ MONITOR
 11
 
 MONITOR
-178
-913
-280
-958
+189
+887
+291
+932
 % Red Second
 100 * (count simuls with [color = red and infectVariant = \"beta\"]) / Population
 2
@@ -1625,15 +1625,15 @@ MONITOR
 11
 
 SLIDER
-3454
-279
-3652
-312
+575
+883
+773
+916
 Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
 1
-0.0
+0.58
 0.01
 1
 NIL
@@ -1662,12 +1662,12 @@ incursionPhaseEndDay
 11
 
 MONITOR
-285
-823
-387
-868
-% Yellow Third
-100 * (count simuls with [color = yellow and recoveryVariant = 3]) / Population
+300
+837
+402
+882
+% Yellow First
+100 * (count simuls with [color = yellow and recoverVariant = \"alpha\"]) / Population
 17
 1
 11
@@ -1770,10 +1770,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-568
-845
-767
-878
+583
+807
+782
+840
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -1875,7 +1875,7 @@ param_vacIncurMult
 param_vacIncurMult
 0
 2
-0.0
+1.0
 0.1
 1
 NIL
@@ -2117,10 +2117,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-565
-735
-755
-768
+579
+697
+769
+730
 init_trace_prop
 init_trace_prop
 0
@@ -2779,10 +2779,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-567
-808
-740
-841
+582
+770
+755
+803
 sympt_present_mult
 sympt_present_mult
 0
@@ -2983,21 +2983,6 @@ realNotCaseThres
 1
 -1000
 
-SLIDER
-834
-825
-1017
-858
-vac_ease_avoid
-vac_ease_avoid
-0
-100
-15.0
-1
-1
-NIL
-HORIZONTAL
-
 MONITOR
 15
 772
@@ -3024,77 +3009,6 @@ mid_report_day
 NIL
 HORIZONTAL
 
-SLIDER
-834
-900
-1021
-933
-vac_ease_span
-vac_ease_span
-0
-20
-10.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-834
-938
-1022
-971
-vac_ease_visit_rad
-vac_ease_visit_rad
-0
-20
-8.8
-0.1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-834
-975
-1021
-1008
-vac_ease_spread
-vac_ease_spread
-0
-0.5
-0.08
-0.01
-1
-NIL
-HORIZONTAL
-
-SWITCH
-375
-965
-563
-998
-vac_ease_schools_open
-vac_ease_schools_open
-0
-1
--1000
-
-SLIDER
-818
-863
-1028
-896
-vac_ease_avoid_compBound
-vac_ease_avoid_compBound
-0
-100
-15.0
-5
-1
-NIL
-HORIZONTAL
-
 MONITOR
 850
 13
@@ -3107,21 +3021,6 @@ Days - start_day
 11
 
 SLIDER
-834
-1010
-1023
-1043
-vac_ease_mask_wear
-vac_ease_mask_wear
-0
-100
-35.0
-10
-1
-NIL
-HORIZONTAL
-
-SLIDER
 13
 130
 162
@@ -3130,7 +3029,7 @@ param_incurMult
 param_incurMult
 0
 1
-0.0
+1.0
 0.05
 1
 NIL
@@ -3207,10 +3106,10 @@ policyUseHosp
 -1000
 
 SLIDER
-363
-887
-553
-920
+783
+698
+973
+731
 reinfect_delay_base
 reinfect_delay_base
 0

@@ -1,2 +1,3 @@
-name,trans_mean,trans_std,asympt_trans_a,asympt_trans_b,asympt_prop_a,asympt_prop_b,non_infect_time,incubation_mean,incubation_spread,duration_mean,duration_spread,init_variant
-alpha,0.218,0.12,3.86,13.5,17.5,40.8,0,4.4,2.25,21.2,4,1
+name,trans_mean,trans_std,asympt_trans_a,asympt_trans_b,asympt_prop_a,asympt_prop_b,non_infect_time,incubation_mean,incubation_spread,duration_mean,duration_spread,init_variant,recover
+alpha,0.218,0.12,3.86,13.5,17.5,40.8,0,4.4,2.25,21.2,4,1,alpha_post
+beta,0.218,0.12,3.86,13.5,17.5,40.8,0,4.4,2.25,21.2,4,0,beta_post

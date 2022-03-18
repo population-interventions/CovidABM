@@ -1,0 +1,8 @@
+name,reduceTrans_a,reduceTrans_b,reduceArea_a,reduceArea_b,reduceOutcome_a,reduceOutcome_b,vacEffectDays
+OLD_2,1,20,1,20,1.9,5.7,10
+OLD_3,1,20,1,20,1.9,5.7,10
+TARGET,1,20,1,20,1.9,5.7,10
+MULTI,1000,1,1000,1,1.9,5.7,10
+IncursionVac,1,20,1,20,1.9,5.7,10
+alpha_post,1,20,1,20,1.9,5.7,0
+beta_post,14.7,6.3,1.9,5.7,1.9,5.7,0

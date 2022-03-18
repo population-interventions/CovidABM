@@ -12,20 +12,7 @@ to ShiftRecoveredTowardsTotalProportion
       ]
       ask n-of wantAsk yellowSet [
         set color cyan
-        set recoverTime 0
-        set recoveryVariant 0
-      ]
-    ]
-    if repYellowCount > yellowSetCount [
-      let wantAsk (Recovered_Match_Rate * (repYellowCount - yellowSetCount) + random-float 1)
-      let cyanSet simuls with [ color = cyan ]
-      if wantAsk > count cyanSet [
-        set wantAsk count cyanSet 
-      ]
-      ask n-of wantAsk cyanSet [
-        simul_setNewRecover
-        set recoveryVariant 1 ;; TODO this number should not always be 1 if this code is to be used.
-        set isolating 0
+        set recoverVariant getInitRecoverVariant
       ]
     ]
   ]
@@ -50,7 +37,7 @@ to ShiftRecoveredTowardsTotalProportion
     let wantMostProp 0
     if yellowSetCount > 0 [
       foreach variantKeys [ variant ->
-        let myYellow yellowSet with [recoveryVariant = variant]
+        let myYellow yellowSet with [recoverVariant = variant]
         let myProp (count myYellow) / yellowSetCount
         let desiredProp (table:get recoverCountByVariant variant) / totalRecoverByVariant
         if desiredProp > myProp [
@@ -69,7 +56,7 @@ to ShiftRecoveredTowardsTotalProportion
       ;; variant that has the largest shortfall.
       foreach table:keys variantPropDiff [ variant ->
         ask n-of ((table:get variantPropDiff variant) * Recov_Var_Match_Rate * yellowSetCount) table:get variantSet variant [
-          set recoveryVariant wantMostVariant
+          set recoverVariant wantMostVariant
         ]
       ]
     ]
@@ -230,7 +217,6 @@ to do_scaledown
         set my_hasKnownContact          hasKnownContact
         set my_traceAttempts            traceAttempts
         set my_selfTraceEffMult         selfTraceEffMult
-        set my_recoverTime              recoverTime
         
         let toAsk Scale_Factor ^ (myScale - scalePhase) - 1 + random-float 1
         set toScale toScale - 1 
@@ -251,7 +237,6 @@ to do_scaledown
             set traceAttempts            my_traceAttempts
             set selfTraceEffMult         my_selfTraceEffMult
             set myScale                  my_myScale
-            set recoverTime              my_recoverTime
             
             table:put infectedContactList table:length infectedContactList thisSimul
             set otherSimul self

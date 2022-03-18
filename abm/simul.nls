@@ -36,7 +36,6 @@ simuls-own [
 
   timenow ;; the number of days since initial infection
   caseReportTime ;; Day on which the case will be reported
-  recoverTime ;; Days since recovery
   
   tracked ;; whether the person has been tracked by the health system
   knownContactTime ;; Time at which a contact was known, to prevent double tracing on the traced step
@@ -82,7 +81,7 @@ simuls-own [
   vaccinePriority ;; Number that determines whether simulant will recieve a vaccination. Compared to uptake.
 
   infectVariant ;; Variant of SARS that I am infected with. Is > 0 iff color = red.
-  recoveryVariant
+  recoverVariant
 
   wearsMask ;; for use in determining if the person wears a face mask
   wearingMask ;; identifies if the person is wearing a mask or not
@@ -216,7 +215,6 @@ to simul_do_scaleup
   set size 2
   set color cyan
   set infectVariant 0
-  set recoverTime 0
 
   set timenow 0
   set noticeOwnInfection 0
@@ -234,7 +232,6 @@ end
 
 to simul_setNewRecover
   set color yellow
-  set recoverTime 0
 end
 
 ;;*******************************************************************************************************************************
@@ -505,9 +502,6 @@ to simul_settime
       set casesReportedToday_acc casesReportedToday_acc + popPerSimul
     ]
   ]
-  if color = yellow [
-    set recoverTime recoverTime + 1
-  ]
 end
 
 to simul_end_infection
@@ -518,15 +512,15 @@ to simul_end_infection
     ]
     
     let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
-    if recoveryVariant != 0 [
-      table:put recoverCountByVariant recoveryVariant ((table:get recoverCountByVariant recoveryVariant) - popPerSimul)
-      if table:get recoverCountByVariant recoveryVariant < 0 [
-        set recoverCount recoverCount - table:get recoverCountByVariant recoveryVariant
-        table:put recoverCountByVariant recoveryVariant 0
+    if recoverVariant != 0 [
+      table:put recoverCountByVariant recoverVariant ((table:get recoverCountByVariant recoverVariant) - popPerSimul)
+      if table:get recoverCountByVariant recoverVariant < 0 [
+        set recoverCount recoverCount - table:get recoverCountByVariant recoverVariant
+        table:put recoverCountByVariant recoverVariant 0
       ]
     ]
     
-    if recoveryVariant = 0 [
+    if recoverVariant = 0 [
       set recoverCount recoverCount + popPerSimul
     ]
     table:put recoverCountByVariant infectVariant ((table:get recoverCountByVariant infectVariant) + popPerSimul)
@@ -542,7 +536,7 @@ to simul_end_infection
     ;; Very few people die in the low scales as a proportion of the total population.
     simul_setNewRecover
     set isInitialInfection false
-    set recoveryVariant infectVariant
+    set recoverVariant infectVariant
     set infectVariant 0
   
     if print_contact_events [

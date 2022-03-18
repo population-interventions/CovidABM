@@ -58,6 +58,7 @@ to incursion_update
         set hasKnownContact false
         set traceAttempts 0
         set myScale scalephase
+TODO Remove previous infection?
         
         set infectVariant global_incursionVariant
         simul_updateVariantParams
@@ -85,6 +86,7 @@ to incursion_update
         set hasKnownContact false
         set traceAttempts 0
         set myScale scalephase
+TODO Add temporary vaccination and remove previous infection?
         
         set infectVariant global_incursionVariant
         simul_updateVariantParams
