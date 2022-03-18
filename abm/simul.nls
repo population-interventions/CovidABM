@@ -74,6 +74,9 @@ simuls-own [
   currentVaccine ;; Name of most recent vaccine
   prevVaccine ;; Name of previous vaccine, for when the new one is not yet in effect
   
+  vaccBanch
+  vaccReceptive
+  
   incursionVaccine
   incursionVaccineDay
   vaccinePriority ;; Number that determines whether simulant will recieve a vaccination. Compared to uptake.

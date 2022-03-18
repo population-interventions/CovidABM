@@ -854,8 +854,8 @@ SWITCH
 382
 181
 415
-Vaccine_Available
-Vaccine_Available
+Vaccine_Enabled
+Vaccine_Enabled
 0
 1
 -1000
@@ -3290,6 +3290,17 @@ draw_index
 1
 NIL
 HORIZONTAL
+
+INPUTBOX
+1857
+472
+2074
+532
+input_vaccine_schedule
+input/vic/rollout_both.csv
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?

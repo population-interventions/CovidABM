@@ -208,6 +208,9 @@ to createSimulants
       set cohortVacUptake cohort_vaccineUptake
       set cohortVacSuffix cohort_vaccineSuffix
       
+      set vaccBanch cohort_vaccineBranch
+      set vaccReceptive false
+      
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
@@ -266,7 +269,7 @@ to createSimulants
 end
 
 to setupInitialVaccination
-  if Vaccine_Available [
+  if Vaccine_Enabled [
     foreach popDivisionTable_keys [ popIndex ->
       let cohort table:get populationCohortCache popIndex
       let cohortData table:get popDivisionTable popIndex
@@ -296,19 +299,22 @@ to setupInitialVaccination
               set vaccineDay currentDay_2
               set prevVaccineDay currentDay_2 - doseDays_2
               
-              set currentVaccine doseName_2
-              set prevVaccine doseName_2
+              set currentVaccine (word doseName_2 cohortVacSuffix)
+              set prevVaccine (word doseName_2 cohortVacSuffix)
               
               set doseCount_2 doseCount_2 - 1
               set currentDay_2 currentDay_2 + increment_2
             ]
             doseCount_3 > 0
             [
+              if param_vac_uptake_mult * cohortVacUptake > random-float 1 [
+                set vaccReceptive true ; Only the most vaccinated are receptive to recieving another vaccine
+              ]
               set vaccineDay currentDay_3
               set prevVaccineDay currentDay_3 - doseDays_2
               
-              set currentVaccine doseName_3
-              set prevVaccine doseName_3
+              set currentVaccine (word doseName_3 cohortVacSuffix)
+              set prevVaccine (word doseName_3 cohortVacSuffix)
               
               set doseCount_3 doseCount_3 - 1
               set currentDay_3 currentDay_3 + increment_3
@@ -509,7 +515,6 @@ to setGlobals
   set stageHasChanged 0
   set stageToday 0
   set stageYesterday 0
-  set vacRestrictionEase false
   set PrimaryUpper 0
   set SecondaryLower 0
   

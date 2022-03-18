@@ -211,7 +211,6 @@ globals [
   stageHasChanged
   stageToday
   stageYesterday
-  vacRestrictionEase
   
   houseTrackedCaseTimeTable
   houseLocationTable
@@ -283,6 +282,11 @@ globals [
   
   totalOverseasIncursions
   vaccineParamsTable
+  vaccineSchedule
+  vaccineBranchDoseRate
+  vaccineBranchAvailible
+  vaccineBranchVaccType
+  vaccineBranchQueue
   
   variantNames
   variantData

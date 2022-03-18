@@ -1,5 +1,7 @@
 name,reduceTrans_a,reduceTrans_b,reduceArea_a,reduceArea_b,reduceOutcome_a,reduceOutcome_b,vacEffectDays
 OLD_2,40,26.66666667,1.9,5.7,1.9,5.7,10
 OLD_3,35.55555556,8.888888889,1.9,5.7,1.9,5.7,10
+TARGET,40,26.66666667,1.9,5.7,1.9,5.7,10
+MULTI,35.55555556,8.888888889,1.9,5.7,1.9,5.7,10
 IncursionVac,14.7,6.3,1.9,5.7,1.9,5.7,10
 alphaPost,14.7,6.3,1.9,5.7,1.9,5.7,0

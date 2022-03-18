@@ -17,6 +17,16 @@ to-report vaccine_binomCheck [draw succeptibility repeats]
   report 1 - (1 - succeptibility) ^ repeats > draw
 end
 
+to setup_vaccineSchedule
+  let fileData remove-item 0 csv:from-file (word input_vaccine_schedule)
+  set vaccineSchedule fileData
+  
+  set vaccineBranchDoseRate table:make
+  set vaccineBranchAvailible table:make
+  set vaccineBranchQueue table:make
+  set vaccineBranchVaccType table:make
+end
+
 to setup_vaccineData
   set vacineEff_nameOut []
   set vacineEff_transOut []
@@ -24,7 +34,7 @@ to setup_vaccineData
   
   set vaccineParamsTable table:make
   foreach variantNames [ variant ->
-    let vaccineParamsFileData remove-item 0 csv:from-file (word input_vac_params "_" variant ".csv") ; TODO LOAD per variant
+    let vaccineParamsFileData remove-item 0 csv:from-file (word input_vac_params "_" variant ".csv")
     let paramsTable table:make
     let i 0
     foreach vaccineParamsFileData [ rawData -> 
@@ -46,6 +56,8 @@ to setup_vaccineData
     ]
     table:put vaccineParamsTable variant paramsTable
   ]
+  
+  setup_vaccineSchedule
 end
 
 to-report vaccine_getSucceptMult [variant vac day prevVac prevDay]
@@ -90,10 +102,66 @@ to simul_updateVaccineParams
   
 end
 
-to simul_applyVaccine
+to simul_applyVaccine [vaccinateType]
+  if 1 - param_vac_uptake_mult * cohortVacUptake > random-float 1 [
+    ;; Each vaccine sees some receptive people decide this is their last shot
+    set vaccReceptive false
+  ]
   
+  set prevVaccineDay vaccineDay
+  set prevVaccine currentVaccine
+  
+  set vaccineDay days
+  set currentVaccine (word vaccinateType cohortVacSuffix)
+end
+
+to add_vaccine [branch]
+  let increase (table:get vaccineBranchDoseRate branch)
+  table:put vaccineBranchAvailible branch ((table:get vaccineBranchAvailible branch) + increase)  
+end
+
+to vaccineMode_micromanageDoses [branch]
+  add_vaccine branch
+  let vaccinateToday floor(table:get vaccineBranchAvailible branch)
+  let vaccinateType table:get vaccineBranchVaccType branch
+  table:put vaccineBranchAvailible branch ((table:get vaccineBranchAvailible branch) - vaccinateToday)
+  
+  let vacQueue (table:get vaccineBranchQueue branch)
+  while [vaccinateToday >= 1 and not empty? vacQueue] [
+    ask first vacQueue [
+      simul_applyVaccine vaccinateType
+    ]
+    set vacQueue but-first vacQueue
+    set vaccinateToday vaccinateToday - 1
+  ]
+  table:put vaccineBranchQueue branch vacQueue
+end
+
+to vaccine_updateSchedule
+  while [not empty? vaccineSchedule and (item 0 item 0 vaccineSchedule) = days] [
+    let data (item 0 vaccineSchedule)
+    
+    let vaccDays (item 1 data)
+    let branch (item 2 data)
+    let vaccineType (item 3 data)
+    
+    let wantVaccine simuls with [vaccBanch = branch and vaccReceptive = true]
+    
+    table:put vaccineBranchDoseRate branch (count wantVaccine) / vaccDays
+    table:put vaccineBranchAvailible branch 0
+    table:put vaccineBranchQueue branch (sort-on [-1 * agerange] wantVaccine)
+    table:put vaccineBranchVaccType branch vaccineType
+    
+    set vaccineSchedule but-first vaccineSchedule
+  ]
 end
 
 to vaccine_update
-  
+  if Vaccine_Enabled = True [
+    vaccine_updateSchedule
+    
+    foreach table:keys vaccineBranchAvailible [ branch -> 
+      vaccineMode_micromanageDoses branch
+    ]
+  ]
 end
