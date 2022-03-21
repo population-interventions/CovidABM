@@ -33,8 +33,8 @@ to simul_updateVariantParams
   set personalVirulence rngs:rnd-beta moveInitSeedID (table:get varData "trans_a" / hetro_mult) (table:get varData "trans_b" / hetro_mult)
   
   ;; Vaccine and previous infection
-  set personalVirulence personalVirulence * (vaccine_getTransmissMult infectVariant currentVaccine vaccineDay prevVaccine prevVaccineDay)
-  set personalVirulence personalVirulence * (vaccine_getTransmissMult infectVariant recoverVaccine recoverDay 0 0)
+  set personalVirulence personalVirulence * (vaccine_getWanedParameter "infectReduct" infectVariant currentVaccine vaccineDay prevVaccine prevVaccineDay)
+  set personalVirulence personalVirulence * (vaccine_getWanedParameter "infectReduct" infectVariant recoverVaccine recoverDay 0 0)
 end
 
 to setup_variantData

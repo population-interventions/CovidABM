@@ -26,7 +26,6 @@ __includes[
   "incursion.nls"
   "debug.nls"
   "dataOut.nls"
-  "hacks.nls"
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -233,7 +232,7 @@ superspreaders
 superspreaders
 0
 1
-0.08
+0.1
 0.01
 1
 NIL
@@ -288,7 +287,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-15.0
+5.0
 .5
 1
 NIL
@@ -303,7 +302,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-15.0
+5.0
 .5
 1
 NIL
@@ -483,17 +482,6 @@ count simuls with [ color = red ]
 1
 11
 
-SWITCH
-1477
-800
-1580
-833
-scale
-scale
-0
-1
--1000
-
 MONITOR
 773
 14
@@ -583,7 +571,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-70.0
+100.0
 1
 1
 NIL
@@ -624,7 +612,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-35.0
+15.0
 1
 1
 NIL
@@ -1148,7 +1136,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-15.0
+5.0
 1
 1
 NIL
@@ -1554,7 +1542,7 @@ SLIDER
 390
 697
 568
-731
+730
 param_recovered_prop
 param_recovered_prop
 0
@@ -1714,15 +1702,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-14
-54
-189
-87
+819
+882
+994
+915
 param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
-0.0
+-1.0
 1
 1
 NIL
@@ -1770,10 +1758,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-583
-807
-782
-840
+819
+919
+1018
+952
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -1815,7 +1803,7 @@ initial_primary_prop
 initial_primary_prop
 0
 1
-0.66
+0.26
 0.01
 1
 NIL
@@ -1867,15 +1855,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-13
-93
-187
-126
+817
+958
+991
+991
 param_vacIncurMult
 param_vacIncurMult
 0
 2
-1.0
+0.0
 0.1
 1
 NIL
@@ -2350,7 +2338,7 @@ house_init_group
 house_init_group
 0
 1
-0.0
+0.15
 0.05
 1
 NIL
@@ -2802,7 +2790,7 @@ Scale_Up_Threshold
 Scale_Up_Threshold
 0
 200
-120.0
+150.0
 1
 1
 NIL
@@ -2817,7 +2805,7 @@ Scale_Down_Threshold
 Scale_Down_Threshold
 0
 200
-90.0
+130.0
 1
 1
 NIL
@@ -2914,7 +2902,7 @@ init_metric_threshold
 init_metric_threshold
 -10
 12000
-240.0
+270.0
 10
 1
 NIL
@@ -2929,7 +2917,7 @@ init_stage
 init_stage
 0
 4
-1.0
+0.0
 0.1
 1
 NIL
@@ -2979,7 +2967,7 @@ SWITCH
 202
 realNotCaseThres
 realNotCaseThres
-1
+0
 1
 -1000
 
@@ -3021,15 +3009,15 @@ Days - start_day
 11
 
 SLIDER
-13
-130
-162
-163
+817
+994
+966
+1027
 param_incurMult
 param_incurMult
 0
 1
-1.0
+0.0
 0.05
 1
 NIL

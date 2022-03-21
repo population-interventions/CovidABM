@@ -335,9 +335,9 @@ to simul_infect
           ;; Check against lower succeptiblity for reinfection.
           let binomChance 1 - (1 - succeptibility) ^ Daily_Infect_Binom
           if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
-            set succeptibility succeptibility * (vaccine_getSucceptMult patchVariant currentVaccine vaccineDay prevVaccine prevVaccineDay)
+            set succeptibility succeptibility * (vaccine_getWanedParameter "riskReduct" patchVariant currentVaccine vaccineDay prevVaccine prevVaccineDay)
             if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
-              set succeptibility succeptibility * (vaccine_getSucceptMult patchVariant recoverVaccine recoverDay 0 0)
+              set succeptibility succeptibility * (vaccine_getWanedParameter "riskReduct" patchVariant recoverVaccine recoverDay 0 0)
               if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
                 set myScale localPatchScale
                 let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)

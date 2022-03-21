@@ -1,8 +1,8 @@
-name,reduceTrans_a,reduceTrans_b,reduceArea_a,reduceArea_b,reduceOutcome_a,reduceOutcome_b,vacEffectDays
-OLD_2,1,20,1,20,1.9,5.7,10
-OLD_3,1,20,1,20,1.9,5.7,10
-TARGET,1,20,1,20,1.9,5.7,10
-MULTI,1000,1,1000,1,1.9,5.7,10
-IncursionVac,1,20,1,20,1.9,5.7,10
-alpha_post,1,20,1,20,1.9,5.7,0
-beta_post,14.7,6.3,1.9,5.7,1.9,5.7,0
+name,reduceTrans,reduceArea,reduceHosp,reduceMort,vacEffectDays,waneLnOdds
+OLD_2,0.5,0.5,0.5,0.5,10,0.01
+OLD_3,0.5,0.5,0.5,0.5,10,0.01
+TARGET,0.5,0.5,0.5,0.5,10,0.01
+MULTI,0.5,0.5,0.5,0.5,10,0.01
+IncursionVac,0.5,0.5,0.5,0.5,10,0.01
+alpha_post,0.5,0.5,0.5,0.5,0,0.01
+beta_post,0.5,0.5,0.5,0.5,0,0.01

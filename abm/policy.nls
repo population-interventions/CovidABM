@@ -150,13 +150,13 @@ end
 ;;;*********************************************************************************************************************
 
 to COVIDPolicyTriggers
-  updatePolicyPipeline
   
-  ifelse start_metric_threshold > -1
+  ifelse days = 0
   [
     set stage init_stage
   ]
   [
+    updatePolicyPipeline
     if policy_switch = "tony" or policy_switch = "nz" [
       if param_policy = "TightSupress" [
         policy_tight_supress

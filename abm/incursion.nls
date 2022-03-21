@@ -23,7 +23,7 @@ end
 
 to incursion_update
   ;; Happens at the start of the first 'go', since days = 0
-  if (start_metric_threshold < 0 or days = 0) and days - start_day >= incursionPhaseEndDay [
+  if days >= incursionPhaseEndDay [
     if table:has-key? incursionTable (incursionPhaseIndex + 1) [
       set incursionPhaseIndex incursionPhaseIndex + 1
       if param_incur_phase_limit = -1 or incursionPhaseIndex <= param_incur_phase_limit [
@@ -58,7 +58,6 @@ to incursion_update
         set hasKnownContact false
         set traceAttempts 0
         set myScale scalephase
-TODO Remove previous infection?
         
         set infectVariant global_incursionVariant
         simul_updateVariantParams
@@ -86,7 +85,6 @@ TODO Remove previous infection?
         set hasKnownContact false
         set traceAttempts 0
         set myScale scalephase
-TODO Add temporary vaccination and remove previous infection?
         
         set infectVariant global_incursionVariant
         simul_updateVariantParams

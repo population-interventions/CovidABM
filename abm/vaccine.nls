@@ -38,21 +38,20 @@ to setup_vaccineData
     let paramsTable table:make
     let i 0
     foreach vaccineParamsFileData [ rawData -> 
-      let vacName (item 0 rawData)
-      let vacRiskReduct rngs:rnd-beta vaccineEffseedID (item 1 rawData) (item 2 rawData)
-      let vacInfectReduct rngs:rnd-beta vaccineEffseedID (item 3 rawData) (item 4 rawData)
-      if param_override_ve >= 0 [
-        set vacRiskReduct param_override_ve
-      ]
-      if param_override_ve_area >= 0 [
-        set vacInfectReduct param_override_ve_area
-      ]
-      let vacEffectDays item 7 rawData
-      table:put paramsTable vacName (list vacRiskReduct vacInfectReduct vacEffectDays)
+      let vacTable table:make      
+      table:put vacTable "name" (item 0 rawData)
+      table:put vacTable "riskReduct" PrToLnOdds (item 1 rawData)
+      table:put vacTable "infectReduct" PrToLnOdds (item 2 rawData)
+      table:put vacTable "hospReduct" PrToLnOdds (item 3 rawData)
+      table:put vacTable "mortReduct" PrToLnOdds (item 4 rawData)
+      table:put vacTable "effectDays" (item 5 rawData)
+      table:put vacTable "waneRate" (item 6 rawData)
       
-      set vacineEff_nameOut lput (word variant "_" vacName) vacineEff_nameOut
-      set vacineEff_transOut lput vacRiskReduct vacineEff_transOut
-      set vacineEff_areaOut lput vacInfectReduct vacineEff_areaOut
+      table:put paramsTable (item 0 rawData) vacTable
+      
+      set vacineEff_nameOut lput (word variant "_" (table:get vacTable "name")) vacineEff_nameOut
+      set vacineEff_transOut lput (table:get vacTable "riskReduct") vacineEff_transOut
+      set vacineEff_areaOut lput (table:get vacTable "infectReduct") vacineEff_areaOut
     ]
     table:put vaccineParamsTable variant paramsTable
   ]
@@ -60,42 +59,27 @@ to setup_vaccineData
   setup_vaccineSchedule
 end
 
-to-report vaccine_getSucceptMult [variant vac day prevVac prevDay]
+to-report vaccine_getWanedParameter [paramName variant vac day prevVac prevDay]
   if vac = 0 [
     report 1
   ]
   
   let paramsTable table:get vaccineParamsTable variant
   let vacParams table:get paramsTable vac
-  if (item 2 vacParams) + day > ticks [
+  let effDays (table:get vacParams "effectDays")
+  if effDays + day > days [
     if prevVac = 0 [
       report 1
     ]
     set vacParams table:get paramsTable prevVac
+    set effDays (table:get vacParams "effectDays")
     set day prevDay
   ]
   
+  let vacEff table:get vacParams paramName
+  set vacEff vacEff - (days - (effDays + day)) * (table:get vacParams "waneRate")
   ;; TODO waning based on day
-  report 1 - (item 0 vacParams)
-end
-
-to-report vaccine_getTransmissMult [variant vac day prevVac prevDay]
-  if vac = 0 [
-    report 1
-  ]
-  
-  let paramsTable table:get vaccineParamsTable variant
-  let vacParams table:get paramsTable vac
-  if (item 2 vacParams) + day > ticks [
-    if prevVac = 0 [
-      report 1
-    ]
-    set vacParams table:get paramsTable prevVac
-    set day prevDay
-  ]
-  
-  ;; TODO waning based on day
-  report 1 - (item 1 vacParams)
+  report 1 - LnOddsToPr (vacEff)
 end
 
 to simul_updateVaccineParams
@@ -157,7 +141,7 @@ to vaccine_updateSchedule
 end
 
 to vaccine_update
-  if Vaccine_Enabled = True [
+  if Vaccine_Enabled = True and days > 0 [
     vaccine_updateSchedule
     
     foreach table:keys vaccineBranchAvailible [ branch -> 

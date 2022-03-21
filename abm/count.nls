@@ -297,8 +297,8 @@ to checkStartThreshold
     if realNotCaseThres [
       set compareNumber infectionsinperiod7 / 7
     ]
+    set start_day ticks
     if compareNumber > start_metric_threshold [
-      set start_day ticks
       set start_metric_threshold -1
       ;print (word "start_day " start_day ", cases " (casesinperiod7 / 7))
     ]
