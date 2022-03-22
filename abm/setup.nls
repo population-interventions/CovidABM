@@ -289,7 +289,7 @@ to setupInitialVaccination
         let currentDay_2 -1 * doseDays_2
         let increment_2 doseDays_2 / max (list doseCount_2 1)
         let currentDay_3 -1 * doseDays_3
-        let increment_3 doseDays_3 /max (list doseCount_3 1)
+        let increment_3 doseDays_3 / max (list doseCount_3 1)
         
         ;; Only pre-model vaccinate someone if they would take up the vaccine.
         ;; This ensures that the final vaccinated proportion matches init_vac_uptake.
