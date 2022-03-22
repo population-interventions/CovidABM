@@ -603,7 +603,7 @@ to simul_isolateAndTrackFromHouseHold
   ]
   
   if color != red or (color = red and tracked = 0) [
-    ifelse table:get houseTrackedCaseTimeTable householdunit = ticks
+    ifelse table:has-key? houseTrackedCaseTimeTable householdunit and table:get houseTrackedCaseTimeTable householdunit = ticks
     [
       if color != red [
         set isolating 1

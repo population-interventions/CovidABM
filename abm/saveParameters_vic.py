@@ -129,7 +129,7 @@ def ReadModelFileAndWriteParams(startPart, endPart, valueOverwrite, topOfFile=[]
   
 
 topOfFile = [
-	'rand_seed',
+	'draw_index',
 	'Gather_Location_Count',
 	'param_policy',
 	'policy_pipeline',
@@ -149,11 +149,16 @@ paramValues_mainTest = {**defaultParams, **{
 	'rand_seed' : GetRandomListUnique(100),
     'total_population' : '234000000',
 
-	'global_transmissibility' : listToStr([
-		0.219
+	'draw_index' : listToStr(list(range(10))),
+	'incursion_phase_speed_mult' : listToStr([
+		0.5,
+		1,
+		1.5
 	]),
-	'R0_range' : listToStr([
-		6.5
+	'param_vac_uptake_mult' : listToStr([
+		0.75,
+		0.85,
+		0.95
 	]),
 	'param_policy' : '"TightSupress_No_4"',
 	

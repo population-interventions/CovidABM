@@ -154,10 +154,10 @@ NIL
 HORIZONTAL
 
 PLOT
-3120
-842
-3515
-1017
+3250
+845
+3645
+1020
 Susceptible, Infected and Recovered - 000's
 Days from March 10th
 Numbers of people
@@ -202,10 +202,10 @@ Deathcount
 14
 
 MONITOR
-2743
-352
-2898
-409
+2853
+970
+3008
+1027
 # simuls
 count simuls * (Total_Population / population)
 0
@@ -361,7 +361,7 @@ INPUTBOX
 373
 263
 initial_cases
-1000.0
+3000.0
 1
 0
 Number
@@ -692,10 +692,10 @@ MaskPolicy
 -1000
 
 SLIDER
-568
-998
-768
-1031
+432
+988
+632
+1021
 Case_Reporting_Delay
 Case_Reporting_Delay
 0
@@ -871,11 +871,11 @@ Vaccinated
 11
 
 PLOT
-1218
-63
-1477
-201
-Vaccinated AZ
+1839
+524
+2188
+684
+Vaccination Rates
 NIL
 NIL
 0.0
@@ -883,9 +883,13 @@ NIL
 0.0
 10.0
 true
-false
+true
 "" ""
 PENS
+"OLD2" 1.0 0 -16777216 true "" "plot 100 * count simuls with [currentVaccine = \"OLD_2\"] / population"
+"OLD3" 1.0 0 -2674135 true "" "plot 100 * count simuls with [currentVaccine = \"OLD_3\"] / population"
+"TARGET" 1.0 0 -13791810 true "" "plot 100 * count simuls with [currentVaccine = \"TARGET\"] / population"
+"MULTI" 1.0 0 -11085214 true "" "plot 100 * count simuls with [currentVaccine = \"MULTI\"] / population"
 
 MONITOR
 1480
@@ -1046,10 +1050,10 @@ PENS
 "KnowContact" 1.0 0 -13840069 true "" "plot count simuls with [hasKnownContact and color = red] * globalPopPerSimul"
 
 SLIDER
-568
-920
-767
-953
+432
+909
+631
+942
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
 0
@@ -1113,10 +1117,10 @@ PENS
 "KnownContact" 1.0 0 -13297659 true "" "plot count simuls with [hasKnownContact and color = red] * globalPopPerSimul "
 
 SLIDER
-2722
-590
-2930
-623
+3023
+900
+3231
+933
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1189,10 +1193,10 @@ NIL
 1
 
 SWITCH
-3473
-97
-3580
-130
+3408
+59
+3515
+92
 profile_on
 profile_on
 1
@@ -1225,17 +1229,17 @@ End_Day
 End_Day
 -1
 730
-390.0
+365.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-2533
-395
-2731
-428
+2748
+394
+2946
+427
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -1258,10 +1262,10 @@ floor (policymetric7 / 7)
 11
 
 PLOT
-1832
-200
-2105
-320
+3490
+193
+3763
+313
 OverseasIncursions
 NIL
 NIL
@@ -1330,10 +1334,10 @@ recoverProportion * 100
 14
 
 SLIDER
-579
-845
-781
-878
+443
+834
+645
+867
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
@@ -1382,10 +1386,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1628
-529
-1731
-574
+1624
+488
+1727
+533
 slopeAverage %
 slopeAverage * 100
 3
@@ -1393,10 +1397,10 @@ slopeAverage * 100
 11
 
 PLOT
-1620
-658
-1827
-778
+1599
+693
+1857
+813
 slope %
 NIL
 NIL
@@ -1450,7 +1454,7 @@ sympt_present_prop
 sympt_present_prop
 0
 1
-0.7272154957008586
+0.686503926264771
 0.01
 1
 NIL
@@ -1468,10 +1472,10 @@ isolate_on_inf_notice
 -1000
 
 SLIDER
-2533
-435
-2733
-468
+2748
+434
+2948
+467
 Household_Iso_Factor
 Household_Iso_Factor
 0
@@ -1483,9 +1487,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-2533
+2748
 508
-2730
+2945
 541
 Infect_Iso_Factor
 Infect_Iso_Factor
@@ -1498,9 +1502,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-2533
+2748
 473
-2731
+2946
 506
 Track_Iso_Factor
 Track_Iso_Factor
@@ -1513,10 +1517,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-1734
-622
-1849
-655
+1727
+819
+1842
+852
 track_slope
 track_slope
 0
@@ -1613,10 +1617,10 @@ MONITOR
 11
 
 SLIDER
-575
-883
-773
-916
+438
+873
+636
+906
 Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
@@ -1702,10 +1706,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-819
-882
-994
-915
+3572
+65
+3747
+98
 param_incur_phase_limit
 param_incur_phase_limit
 -1
@@ -1743,10 +1747,10 @@ Case report %
 11
 
 SLIDER
-2533
-545
-2726
-578
+2748
+544
+2941
+577
 accept_isolation_prop
 accept_isolation_prop
 0
@@ -1758,10 +1762,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-819
-919
-1018
-952
+10
+133
+209
+166
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
@@ -1855,10 +1859,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-817
-958
-991
-991
+3570
+107
+3744
+140
 param_vacIncurMult
 param_vacIncurMult
 0
@@ -1870,10 +1874,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2339
-560
-2512
-593
+2554
+559
+2727
+592
 param_trace_mult
 param_trace_mult
 0
@@ -1885,10 +1889,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2339
-630
-2512
-663
+2554
+629
+2727
+662
 trace_attempt_limit
 trace_attempt_limit
 -1
@@ -1930,9 +1934,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-2522
+2737
 357
-2729
+2944
 390
 isoComply_override
 isoComply_override
@@ -2120,10 +2124,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-1856
-406
-2071
-466
+2132
+425
+2347
+485
 input_population_table
 input/vic/pop
 1
@@ -2217,28 +2221,11 @@ casesReportedToday
 1
 11
 
-PLOT
-1224
-208
-1479
-352
-Vaccinated Pfizer
-NIL
-NIL
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-
 MONITOR
-1742
-530
-1851
-575
+1632
+432
+1741
+477
 NIL
 initial_infection_R
 17
@@ -2257,10 +2244,10 @@ first_case_calibrate
 -1000
 
 SLIDER
-2742
-413
-2942
-446
+2852
+1032
+3052
+1065
 prepeak_vir_boost
 prepeak_vir_boost
 0
@@ -2272,20 +2259,20 @@ NIL
 HORIZONTAL
 
 CHOOSER
-1857
-601
-2029
-646
+2204
+557
+2376
+602
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_az_25_95.csv" "_az_25_90.csv" "_az_25_80.csv" "_az_25_70.csv" "_70" "_80" "_90" "_95" ".csv"
 12
 
 SLIDER
-568
-958
-767
-991
+432
+948
+631
+981
 pre_present_iso
 pre_present_iso
 0
@@ -2355,10 +2342,10 @@ sensitivity
 0
 
 SLIDER
-2339
-595
-2512
-628
+2554
+594
+2727
+627
 trace_eff_override
 trace_eff_override
 -1
@@ -2370,9 +2357,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-2532
+2747
 583
-2705
+2920
 616
 vac_trans_mult
 vac_trans_mult
@@ -2385,9 +2372,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-2340
+2554
 488
-2513
+2727
 521
 trace_at_5
 trace_at_5
@@ -2400,10 +2387,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2340
-525
-2513
-558
+2554
+524
+2727
+557
 trace_assymtote
 trace_assymtote
 0
@@ -2415,20 +2402,20 @@ NIL
 HORIZONTAL
 
 CHOOSER
-2342
-405
-2515
-450
+2557
+404
+2730
+449
 compound_trace
 compound_trace
 "None" "ass50_70at5" "ass100_90at5" "ass100_90at5_iso" "ass200_90at5"
 2
 
 SLIDER
-2533
-620
-2706
-653
+2748
+619
+2921
+652
 site_iso_prop
 site_iso_prop
 0
@@ -2440,9 +2427,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-2532
+2747
 658
-2705
+2920
 691
 site_iso_max_day
 site_iso_max_day
@@ -2455,9 +2442,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-2340
+2554
 453
-2513
+2727
 486
 trace_at_1
 trace_at_1
@@ -2470,9 +2457,9 @@ NIL
 HORIZONTAL
 
 SWITCH
-2343
+2558
 368
-2457
+2672
 401
 trace_print
 trace_print
@@ -2481,10 +2468,10 @@ trace_print
 -1000
 
 CHOOSER
-1856
-648
-1994
-693
+2203
+604
+2341
+649
 data_suffix_2
 data_suffix_2
 "None" "_5.csv" "_12.csv"
@@ -2501,10 +2488,10 @@ policy_switch
 2
 
 SWITCH
-2033
-603
-2161
-636
+2275
+650
+2403
+683
 suffix_rollout
 suffix_rollout
 0
@@ -2512,10 +2499,10 @@ suffix_rollout
 -1000
 
 SWITCH
-1707
-583
-1845
-616
+3497
+304
+3635
+337
 count_incursion
 count_incursion
 1
@@ -2523,10 +2510,10 @@ count_incursion
 -1000
 
 SLIDER
-2723
-630
-2931
-663
+3024
+940
+3232
+973
 transmit_skew
 transmit_skew
 0.2
@@ -2538,10 +2525,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2723
-668
-2930
-701
+3024
+979
+3231
+1012
 duration_skew
 duration_skew
 1
@@ -2620,10 +2607,10 @@ print_contact_events
 -1000
 
 SLIDER
-1622
-623
-1732
-656
+1602
+820
+1712
+853
 cont_stage
 cont_stage
 0
@@ -2741,10 +2728,10 @@ reducedStageFour
 -1000
 
 INPUTBOX
-1855
-340
-2070
-400
+2132
+359
+2347
+419
 input_incursion_table
 input/vic/incursion.csv
 1
@@ -2853,10 +2840,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1620
-783
-1793
-816
+1615
+605
+1788
+638
 slope_track_start
 slope_track_start
 0
@@ -2868,10 +2855,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1620
-820
-1793
-853
+1615
+642
+1788
+675
 slope_track_end
 slope_track_end
 0
@@ -2901,8 +2888,8 @@ SLIDER
 init_metric_threshold
 init_metric_threshold
 -10
-12000
-270.0
+1200
+390.0
 10
 1
 NIL
@@ -3009,10 +2996,10 @@ Days - start_day
 11
 
 SLIDER
-817
-994
-966
-1027
+3570
+143
+3719
+176
 param_incurMult
 param_incurMult
 0
@@ -3024,10 +3011,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2143
-363
-2336
-423
+2382
+362
+2557
+422
 input_region
 input/vic/region.csv
 1
@@ -3035,9 +3022,9 @@ input/vic/region.csv
 String
 
 INPUTBOX
-2143
+2379
 428
-2337
+2553
 488
 input_vac_params
 input/vic/vaccine_params
@@ -3057,15 +3044,15 @@ init_cases_region
 Number
 
 SLIDER
-2342
+2557
 668
-2515
+2730
 701
 exposureSymptMult
 exposureSymptMult
 0
 1
-0.5930588695588881
+0.4775673414039653
 0.1
 1
 NIL
@@ -3109,10 +3096,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2052
-538
-2106
-598
+2415
+632
+2469
+692
 in_dose1
 _1
 1
@@ -3120,10 +3107,10 @@ _1
 String
 
 INPUTBOX
-2110
-538
-2163
-598
+2473
+632
+2526
+692
 in_dose2
 _60
 1
@@ -3142,9 +3129,9 @@ recoverCount
 14
 
 INPUTBOX
-2177
+2392
 492
-2336
+2551
 552
 input_variant
 input/vic/variant.csv
@@ -3153,9 +3140,9 @@ input/vic/variant.csv
 String
 
 INPUTBOX
-2180
+2394
 564
-2322
+2536
 624
 input_draws
 input/vic
@@ -3172,22 +3159,59 @@ draw_index
 draw_index
 0
 100
-0.0
+1.0
 1
 1
 NIL
 HORIZONTAL
 
 INPUTBOX
-1857
-472
-2074
-532
+2204
+493
+2381
+553
 input_vaccine_schedule
 input/vic/rollout_both.csv
 1
 0
 String
+
+PLOT
+1833
+202
+2138
+352
+Vaccine Eff vs. Infection
+NIL
+NIL
+0.0
+1.0
+0.0
+1.0
+true
+true
+"" ""
+PENS
+"alpha" 0.02 1 -16777216 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"alpha\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"beta" 0.02 1 -14454117 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"beta\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+
+PLOT
+1837
+367
+2121
+517
+Days Since Vac
+NIL
+NIL
+0.0
+150.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "" "histogram [ days - vaccineDay ] of simuls"
 
 @#$#@#$#@
 ## WHAT IS IT?
