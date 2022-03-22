@@ -648,6 +648,7 @@ to setup
     set lastInfectionUpdate -1
     set lastUtilTime -1
     set infectionCulprit table:make
+    set destRadiusCache table:make
   ]
   
   ;; a beta function for testing locating many people in one place at a single time

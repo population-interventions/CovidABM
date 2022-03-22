@@ -433,7 +433,13 @@ to simul_visitDestination
     if EssentialWorkerFlag and myRadius < ess_radius_anchor [
       set myRadius (myRadius + ess_radius_anchor) * 0.5
     ]
-    let movePatch one-of destination_patches in-radius myRadius
+    let movePatch 2
+    ask patch-here [
+      if not table:has-key? destRadiusCache myRadius [
+        table:put destRadiusCache myRadius (destination_patches in-radius myRadius)
+      ]
+      set movePatch one-of table:get destRadiusCache myRadius 
+    ]
     if is-patch? movePatch [
       move-to movePatch
     ]

@@ -391,6 +391,7 @@ globals [
 
 patches-own [
   destination ;; indicator of whether this location is a place that people might gather
+  destRadiusCache ;; Cache for destinations within particular radii. A table indexed by radius.
   houseIndex ;; indicator that the patch is a house.
   lastInfectionUpdate ;; Update indicator for stale simulantCount data
   infectionList ;; List of infectivities of simulants on the patch
