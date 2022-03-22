@@ -6,7 +6,7 @@ Created on Thu Feb 11 12:11:03 2021
 """
 
 def MakeHeadless():
-	modelFile = open('COVID SIMULS VIC JAN Vaccination Model.nlogo', 'r')
+	modelFile = open('covidModel.nlogo', 'r')
 	outputFile = open('headless.nlogo', 'w')
 	ignore = False
 	
