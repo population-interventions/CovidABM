@@ -66,9 +66,9 @@ measureCols = conf.GetMeasureCols()
 indexRenameFunc = conf.GetIndexRenameFunc()
 
 #dataDir = '2021_05_04'
-rawDataDir = '../../output/vic_main/raw'
-postDataDir = '../../output/vic_main/post_parallel'
-workingDir = '../../output/vic_main/process'
+rawDataDir = '../../scratch/vic_main/raw'
+postDataDir = '../../scratch/vic_main/post_parallel'
+workingDir = '../../scratch/vic_main/process'
 inputDir = 'serial_data/vic/other_input'
 
 compareHeatmap = 'weeklyAgg_infect_from_30_to_82_age_0_110_total_percentile_050'

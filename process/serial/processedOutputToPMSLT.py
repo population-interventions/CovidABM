@@ -157,7 +157,7 @@ def MultiplyByCohortEffect(measureCols, df, multDf):
 	return df
 	
 
-def AddAndFinalisePmsltInputs(measureCols, subfolder, inputDir, path, output, months=12):
+def AddAndFinalisePmsltInputs(measureCols, subfolder, inputDir, path, scratch, months=12):
 	cohortEffect = GetEffectsData(inputDir + '/chort_effects')
 	
 	df_infect_vac = CombineDrawColumnsAndFindDraw0(path + 'infect_results/', 'infect_vac',
@@ -175,9 +175,9 @@ def AddAndFinalisePmsltInputs(measureCols, subfolder, inputDir, path, output, mo
 	df_expd_vac   = MultiplyByCohortEffect(measureCols, df_infect_vac, cohortEffect.loc[1]['expenditure'])
 	df_expd_noVac = MultiplyByCohortEffect(measureCols, df_infect_NoVac, cohortEffect.loc[0]['expenditure'])
 	
-	OutputToFile(df_mort_vac + df_mort_noVac, output + '/acute_disease.covid.mortality')
-	OutputToFile(df_morb_vac + df_morb_noVac, output + '/acute_disease.covid.morbidity')
-	OutputToFile(df_expd_vac + df_expd_noVac, output + '/acute_disease.covid.expenditure')
+	OutputToFile(df_mort_vac + df_mort_noVac, scratch + '/acute_disease.covid.mortality')
+	OutputToFile(df_morb_vac + df_morb_noVac, scratch + '/acute_disease.covid.morbidity')
+	OutputToFile(df_expd_vac + df_expd_noVac, scratch + '/acute_disease.covid.expenditure')
 
 
 ############### Stages Step 1 - Output each random seed to csv ###############     
@@ -215,7 +215,7 @@ def ProcessStageCohorts(measureCols, filename, outputPrefix):
 
 ############### Stages Step 2 - Combine and Process ###############
 
-def CombineDrawsStageAndFinalise(measureCols, subfolder, path, output, months=12):
+def CombineDrawsStageAndFinalise(measureCols, subfolder, path, scratch, months=12):
 	df = CombineDrawColumnsAndFindDraw0(path, 'stage', index_size=(1 + len(measureCols)))
 	
 	index = df.index.to_frame()
@@ -233,7 +233,7 @@ def CombineDrawsStageAndFinalise(measureCols, subfolder, path, output, months=12
 	enddf.index = pd.MultiIndex.from_frame(index)
 	df = df.append(enddf)
 	
-	OutputToFile(df, output + '/lockdown_stage')
+	OutputToFile(df, scratch + '/lockdown_stage')
 
 
 ############### Aggregates ###############

@@ -343,7 +343,7 @@ def GetFiles(subfolder):
 
 
 nameStr = 'run048'
-namePath = 'output/trace/'
+namePath = 'scratch/trace/'
 
 #ProcessResults(namePath, ['run002', 'run003', 'run004'])
 #ProcessResults(namePath, ['run005'])
@@ -351,5 +351,5 @@ namePath = 'output/trace/'
 #ProcessResults(namePath, [nameStr, 'run047', 'run048'])
 #ProcessResults(namePath, ['run049'])
 #ProcessResultsOne(namePath, [nameStr, 'run047', 'run048'])
-ProcessResults(['output/trace/trace_11'])
+ProcessResults(['scratch/trace/trace_11'])
 

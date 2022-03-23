@@ -9,8 +9,8 @@ measureCols_raw = conf.GetMeasureColsRaw()
 measureCols = conf.GetMeasureCols()
 indexRenameFunc = conf.GetIndexRenameFunc()
 
-inputDir = '../../output/vic_main/raw'
-outputDir = '../../output/vic_main/post_parallel'
+inputDir = '../../scratch/vic_main/raw'
+outputDir = '../../scratch/vic_main/post_parallel'
 
 def main(arrayIndex):
 	DoAbmProcessing(inputDir, outputDir, arrayIndex, indexRenameFunc, measureCols, measureCols_raw)
