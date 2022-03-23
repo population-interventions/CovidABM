@@ -1,7 +1,7 @@
-from source.main import RunModelFromJson, RunWithProfile
 import sys
+import shared.utilities as util
 
-def WriteRunId(name)
+def WriteRunId(name):
 	runId = '{}_{}'.format(name, util.GetGitTimeIdentifier())
 	util.WriteRunIdFile('../../output/{}/run_id'.format(name), runId)
 

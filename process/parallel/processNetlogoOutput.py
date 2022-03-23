@@ -83,7 +83,7 @@ def ProcessAbmOutput(
 		inputDir, outputDir, arrayIndex,
 		indexRenameFunc, measureCols_raw,
 		day_override=False):
-	filelist = [(inputDir + '{}_table_{}').format(str(arrayIndex), str(arrayIndex))]
+	filelist = [(inputDir + '/{}_table_{}').format(str(arrayIndex), str(arrayIndex))]
 		
 	print("Processing Files", filelist)
 	chunksize = 4 ** 7
