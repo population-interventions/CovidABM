@@ -31,7 +31,7 @@ def ProcessAbmChunk(
 		measureCols_raw, indexRenameFunc, day_override=False):
 	# Drop colums that are probably never useful.
 	
-	filename = outputDir + 'processed'
+	filename = outputDir + '/processed'
 	
 	chunk = chunk[[
 		'[run number]', 'draw_index',
@@ -110,7 +110,7 @@ def ToVisualisation(chunk, outputDir, arrayIndex, append, measureCols, divisor=F
 	if outputDay:
 		chunk_day = chunk.copy()
 		chunk_day.columns = chunk_day.columns.droplevel(level=0)
-		OutputToFile(chunk_day, outputDir + 'processed_' + append + '_daily_' + str(arrayIndex), head=False)
+		OutputToFile(chunk_day, outputDir + '/processed_' + append + '_daily_' + str(arrayIndex), head=False)
 		
 	index = chunk.columns.to_frame()
 	index['week'] = np.floor((index['day'] - dayStartOffset)/7)
@@ -120,12 +120,12 @@ def ToVisualisation(chunk, outputDir, arrayIndex, append, measureCols, divisor=F
 	chunk.columns = chunk.columns.droplevel(level=0)
 	chunk = chunk.groupby(level=[1], axis=1).sum()
 	
-	OutputToFile(chunk, outputDir + 'processed_' + append + '_weeklyAgg_' + str(arrayIndex), head=False)
+	OutputToFile(chunk, outputDir + '/processed_' + append + '_weeklyAgg_' + str(arrayIndex), head=False)
 
 
 def ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, append, measureCols, divisor=False, dayStartOffset=None, outputDay=False):
 	chunksize = 4 ** 7
-	fileIn = (inputDir + 'processed').format(str(arrayIndex))
+	fileIn = (inputDir + '/processed').format(str(arrayIndex))
 	for chunk in tqdm(pd.read_csv(
 				fileIn + '_' + append + '_' + str(arrayIndex) + '.csv', chunksize=chunksize,
 				index_col=list(range(2 + len(measureCols))),
@@ -275,39 +275,39 @@ def ProcessInfectionCohorts(inputDir, outputDir, arrayIndex, measureCols):
 	print('Processing vaccination infection for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		inputDir + 'processed_infectVac' + '_' + str(arrayIndex),
-		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'infect_vac', arrayIndex)
+		inputDir + '/processed_infectVac' + '_' + str(arrayIndex),
+		inputDir + '/processed_static' + '_' + str(arrayIndex),
+		outputDir + '/infect_vac', arrayIndex)
 	print('Processing non-vaccination infection for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		inputDir + 'processed_infectNoVac' + '_' + str(arrayIndex),
-		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'infect_noVac', arrayIndex)
+		inputDir + '/processed_infectNoVac' + '_' + str(arrayIndex),
+		inputDir + '/processed_static' + '_' + str(arrayIndex),
+		outputDir + '/infect_noVac', arrayIndex)
 	
 	print('Processing mort for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		inputDir + 'processed_mort' + '_' + str(arrayIndex),
-		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'mort', arrayIndex)
+		inputDir + '/processed_mort' + '_' + str(arrayIndex),
+		inputDir + '/processed_static' + '_' + str(arrayIndex),
+		outputDir + '/mort', arrayIndex)
 	print('Processing hosp for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		inputDir + 'processed_hosp' + '_' + str(arrayIndex),
-		inputDir + 'processed_static' + '_' + str(arrayIndex),
-		outputDir + 'hosp', arrayIndex)
+		inputDir + '/processed_hosp' + '_' + str(arrayIndex),
+		inputDir + '/processed_static' + '_' + str(arrayIndex),
+		outputDir + '/hosp', arrayIndex)
 
 
 ############### Cohort outputs for mort/hosp ###############
 
 def DoAbmProcessing(inputDir, outputDir, arrayIndex, indexRenameFunc, measureCols, measureCols_raw, day_override=False, dayStartOffset=0):
 	print('Processing ABM Output', inputDir, arrayIndex)
-	ProcessAbmOutput(inputDir, outputDir + 'step_1/', arrayIndex, indexRenameFunc, measureCols_raw, day_override=day_override)
+	ProcessAbmOutput(inputDir, outputDir + '/step_1', arrayIndex, indexRenameFunc, measureCols_raw, day_override=day_override)
 	
-	CasesVisualise(outputDir + 'step_1/', outputDir + 'visualise/', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
-	InfectionsAndStageVisualise(outputDir + 'step_1/', outputDir + 'visualise/', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
+	CasesVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
+	InfectionsAndStageVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
 	
 	print('ProcessInfectionCohorts', inputDir, arrayIndex)
-	ProcessInfectionCohorts(outputDir + 'step_1/', outputDir + 'cohort/', arrayIndex, measureCols)
+	ProcessInfectionCohorts(outputDir + '/step_1', outputDir + '/cohort', arrayIndex, measureCols)
 
