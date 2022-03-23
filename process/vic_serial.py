@@ -30,16 +30,7 @@ healthPerspectiveRows = [
 	[False, False],
 ]
 
-heatmapStructure = {
-	'index_rows' : ['Scenario'],
-	'index_cols' : ['VacUptake'],
-	'base_value' : {
-	},
-	'sort_rows' : [
-	], 
-	'sort_cols' : [
-	]
-}
+heatmapStructure = conf.heatmapStructure
 
 defaultValues = [
 	{
@@ -75,10 +66,10 @@ measureCols = conf.GetMeasureCols()
 indexRenameFunc = conf.GetIndexRenameFunc()
 
 #dataDir = '2021_05_04'
-rawDataDir = '../../output_post/vic_main'
-workingDir = '../../output_process/vic_main'
+rawDataDir = '../../output/vic_main/raw'
+postDataDir = '../../output/vic_main/post_parallel'
+workingDir = '../../output/vic_main/process'
 inputDir = 'serial_data/vic/other_input'
-day_override = 574
 
 compareHeatmap = 'weeklyAgg_infect_from_30_to_82_age_0_110_total_percentile_050'
 compareStages = 'stageAbove_2_from_210_to_574_percentile_050'
@@ -94,13 +85,13 @@ makeComparison = False
 
 if preChecks:
 	DoPreProcessChecks(
-		workingDir, rawDataDir, indexRenameFunc, measureCols, measureCols_raw,
+		workingDir, postDataDir, indexRenameFunc, measureCols, measureCols_raw,
 		defaultValues, firstOnly=dryRun)
 
 if aggregateSpartan:
-	arraySize = len(util.GetFiles('../../output_raw/vic_main/'))
+	arraySize = len(util.GetFiles(rawDataDir))
 	print('arraySize', arraySize)
-	DoSpartanAggregate(workingDir, rawDataDir, measureCols, arraySize=arraySize)
+	DoSpartanAggregate(workingDir, postDataDir, measureCols, arraySize=arraySize)
 
 #if doDraws:
 #	DrawMortHospDistributions(workingDir, inputDir, measureCols, drawCount=100, padMult=1)
@@ -117,15 +108,15 @@ if outputStages:
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 574, describe=True)
 
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 182, 28, describe=True)
-	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 392, describe=True)
+	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 390, describe=True)
 	
-	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 392, stage_set=0, describe=True)
-	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 392, stage_set=1, describe=True)
+	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 390, stage_set=0, describe=True)
+	MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 390, stage_set=1, describe=True)
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=2, describe=True)
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=3, describe=True)
 	#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=4, describe=True)
 
-DoProcessingForReport(workingDir, inputDir, measureCols, table5Rows, 'Scenario', months=24)
+DoProcessingForReport(workingDir, inputDir, measureCols, table5Rows, 'IncursionSpeed', months=24)
 
 
 if makeComparison:

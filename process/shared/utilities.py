@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Mar 31 12:14:53 2021
-
-@author: wilsonte
-"""
-
 import pandas as pd
+import numpy as np
+import scipy
+import math
+import pdb
 import os
-import pathlib
-from tqdm import tqdm
+import json
+
+from pathlib import Path
+import importlib
+import copy
 
 from datetime import datetime, timezone
 import subprocess
@@ -23,10 +23,18 @@ def GetGitTimeIdentifier():
 	return '{}_g{}'.format(dateString, shortHash)
 
 
-def WriteRunIdFile(path, identifier):
+def WriteListToFile(path, data, addNewline=True):
+	#print('Writing to', path)
 	MakePath(path)
 	with open(path + '.txt', 'w') as f:
-		f.write(identifier)
+		for line in data:
+			f.write(line)
+			if addNewline:
+				f.write('\n')
+
+
+def WriteRunIdFile(path, identifier):
+	WriteListToFile(path, [identifier], addNewline=False)
 
 
 def isfloat(value):
@@ -74,6 +82,7 @@ def MakePath(path):
 
 
 def GetFiles(subfolder, firstOnly=False):
+	subfolder = subfolder + '/'
 	inputPath = pathlib.Path(subfolder)
 	print('Reading files from {}'.format(inputPath))
 	suffix = '.csv'

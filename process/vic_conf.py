@@ -10,6 +10,17 @@ measureCols = [
 	'VacUptake',
 ]
 
+heatmapStructure = {
+	'index_rows' : ['IncursionSpeed'],
+	'index_cols' : ['VacUptake'],
+	'base_value' : {
+	},
+	'sort_rows' : [
+	], 
+	'sort_cols' : [
+	]
+}
+
 def indexRenameFunc(chunk):
 	index = chunk.index.to_frame()
 	#index['R0'] = index['global_transmissibility_out'].apply(lambda x: 3.75 if x < 0.61333 else (4.17 if x < 0.681666 else 4.58))
