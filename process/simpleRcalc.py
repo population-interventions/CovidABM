@@ -31,7 +31,7 @@ def ProcessResults(outputName, path):
 	metric = [
 		'initial_infection_R',
 	]
-	interestingColumns = index + ['rand_seed'] + metric
+	interestingColumns = index + ['draw_index'] + metric
 	
 	df = pd.DataFrame(columns=interestingColumns)
 	for v in nameList:
@@ -43,8 +43,8 @@ def ProcessResults(outputName, path):
 		if colName not in notFloatCol:
 			df[colName] = df[colName].astype(float)
 
-	df = df.set_index(index + ['rand_seed'])
-	df = df.transpose().stack('rand_seed')
+	df = df.set_index(index + ['draw_index'])
+	df = df.transpose().stack('draw_index')
 	df = df.describe(percentiles=[0 + 0.01*i for i in range(100)])
 	print(df)
 	util.OutputToFile(df, '../../output_rcalc/{}_{}'.format(gitTime, outputName), head=False)

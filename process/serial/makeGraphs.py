@@ -59,7 +59,7 @@ def MakeDailyGraphs(
 	
 	#df = df.drop(columns=[str(weeks) + '.0']) # The last week is incomplete)
 	df.index = df.index.droplevel(['run'])
-	df = df.reorder_levels(measureCols + ['rand_seed'], axis=0)
+	df = df.reorder_levels(measureCols + ['draw_index'], axis=0)
 	df = df.sort_index()
 	
 	for toFilter in filterIndex:
@@ -121,7 +121,7 @@ def MakePrettyGraphs(
 	
 	#df = df.drop(columns=[str(weeks) + '.0']) # The last week is incomplete)
 	df.index = df.index.droplevel(['run'])
-	df = df.reorder_levels(measureCols + ['rand_seed'], axis=0)
+	df = df.reorder_levels(measureCols + ['draw_index'], axis=0)
 	df = df.sort_index()
 	
 	df = df
@@ -193,7 +193,7 @@ def MakeMultiSplitGraphs(
 	df = df.xs('Stage2b', level='param_policy')
 	
 	df.columns.name = 'week'
-	df = df.stack('week').unstack('rand_seed')
+	df = df.stack('week').unstack('draw_index')
 	df = df.mean(axis=1)
 	df = df.unstack('week')
 	
@@ -262,7 +262,7 @@ def MakeStageGraphs(dataDir, measureCols, filterParams, splitParam,
 		
 	df = df.applymap(lambda x: 100 if x >= 3 else 0)
 	
-	df = df.stack('day').unstack('rand_seed')
+	df = df.stack('day').unstack('draw_index')
 	df = df.mean(axis=1)
 	df = df.unstack('day')
 	

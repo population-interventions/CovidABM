@@ -32,7 +32,7 @@ def ProcessAbmChunk(
 	# Drop colums that are probably never useful.
 	
 	chunk = chunk[[
-		'[run number]', 'rand_seed',
+		'[run number]', 'draw_index',
 		'stage_listOut', 'scalephase', 'cumulativeInfected',
 		'infectNoVacArray_listOut', 'infectVacArray_listOut',
 		'case_listOut', 'case7_listOut',
@@ -55,7 +55,7 @@ def ProcessAbmChunk(
 	
 	chunk = chunk.drop(['age_listOut', 'atsi_listOut', 'morbid_listOut'], axis=1)
 	chunk = chunk.rename(mapper={'[run number]' : 'run'}, axis=1)
-	chunk = chunk.set_index(['run', 'rand_seed',] + measureCols_raw)
+	chunk = chunk.set_index(['run', 'draw_index',] + measureCols_raw)
 	
 	secondaryData = [
 		'scalephase', 'cumulativeInfected',

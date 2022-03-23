@@ -187,11 +187,11 @@ def AggregateAgeAndVacDraw(
 	wantedAges = [i*5 for i in range(int(heatAge[0]/5), int(heatAge[1]/5))]
 	
 	dfMetric = dfMetric.transpose()
-	dfMetric = dfMetric.stack(level=['rand_seed'])
+	dfMetric = dfMetric.stack(level=['draw_index'])
 	dfMetric = dfMetric.unstack(level=[timeName])
 	dfMetric = dfMetric[wantedAges]
 	dfMetric = dfMetric.groupby(level=[timeName], axis=1).sum()
-	dfMetric = dfMetric.reorder_levels(['rand_seed'] + measureCols).sort_index()
+	dfMetric = dfMetric.reorder_levels(['draw_index'] + measureCols).sort_index()
 	
 	fileName = (outFile + '_{}_age_{}_{}').format(timeName, heatAge[0], heatAge[1])
 	print(fileName)
@@ -203,11 +203,11 @@ def AggregateByAge(
 	wantedAges = [i*5 for i in range(int(heatAge[0]/5), int(heatAge[1]/5))]
 	
 	dfMetric = dfMetric.transpose()
-	dfMetric = dfMetric.stack(level=['rand_seed'])
+	dfMetric = dfMetric.stack(level=['draw_index'])
 	dfMetric = dfMetric.unstack(level=[timeName])
 	dfMetric = dfMetric[wantedAges]
 	dfMetric = dfMetric.groupby(level=[timeName], axis=1).sum()
-	dfMetric = dfMetric.reorder_levels(['rand_seed'] + measureCols).sort_index()
+	dfMetric = dfMetric.reorder_levels(['draw_index'] + measureCols).sort_index()
 	
 	fileName = (outFile + '_{}_age_{}_{}').format(timeName, heatAge[0], heatAge[1])
 	print(fileName)
@@ -234,14 +234,14 @@ def OutputTimeTablesDraw(
 	start_time = time.time()
 	print('reoder levels and transpose', timeName)
 	
-	dfVac = dfVac.reorder_levels(['rand_seed'] + [timeName] + measureCols, axis=1).sort_index(axis=1)
-	dfNoVac = dfNoVac.reorder_levels(['rand_seed'] + [timeName] + measureCols, axis=1).sort_index(axis=1)
+	dfVac = dfVac.reorder_levels(['draw_index'] + [timeName] + measureCols, axis=1).sort_index(axis=1)
+	dfNoVac = dfNoVac.reorder_levels(['draw_index'] + [timeName] + measureCols, axis=1).sort_index(axis=1)
 	#print(dfVac)
 	#print(dfNoVac)
 	
 	# unstack is 20x faster than stack here.
-	dfVac = dfVac.transpose().unstack('rand_seed').transpose()
-	dfNoVac = dfNoVac.transpose().unstack('rand_seed').transpose()
+	dfVac = dfVac.transpose().unstack('draw_index').transpose()
+	dfNoVac = dfNoVac.transpose().unstack('draw_index').transpose()
 	
 	elapsed_time = time.time() - start_time
 	print('elapsed_time {}'.format(elapsed_time))
@@ -249,9 +249,9 @@ def OutputTimeTablesDraw(
 	print('mapping draws', timeName)
 	
 	# Map draw to random seeds
-	drawToSeed = { i:k for i,k in enumerate(list(dfVac.index.unique(level='rand_seed')))}
+	drawToSeed = { i:k for i,k in enumerate(list(dfVac.index.unique(level='draw_index')))}
 	index = cohortEffect.index.to_frame()
-	index['rand_seed'] = index['draw'].replace(drawToSeed)
+	index['draw_index'] = index['draw'].replace(drawToSeed)
 	index = index.drop(columns=['draw'])
 	cohortEffect.index = pd.MultiIndex.from_frame(index)
 	cohortEffect = cohortEffect.sort_index(axis=0)
@@ -294,7 +294,7 @@ def OutputTimeTables(
 	dfMort.columns = dfMort.columns.droplevel('run')
 	dfHosp.columns = dfHosp.columns.droplevel('run')
 
-	order = ['rand_seed'] + [timeName] + measureCols
+	order = ['draw_index'] + [timeName] + measureCols
 	dfVac = dfVac.reorder_levels(order, axis=1).sort_index(axis=1)
 	dfNoVac = dfNoVac.reorder_levels(order, axis=1).sort_index(axis=1)
 	dfMort = dfMort.reorder_levels(order, axis=1).sort_index(axis=1)
@@ -302,10 +302,10 @@ def OutputTimeTables(
 	#print(dfVac)
 	
 	print(dfVac)
-	dfVac = dfVac.transpose().unstack('rand_seed').transpose()
-	dfNoVac = dfNoVac.transpose().unstack('rand_seed').transpose()
-	dfMort = dfMort.transpose().unstack('rand_seed').transpose()
-	dfHosp = dfHosp.transpose().unstack('rand_seed').transpose()
+	dfVac = dfVac.transpose().unstack('draw_index').transpose()
+	dfNoVac = dfNoVac.transpose().unstack('draw_index').transpose()
+	dfMort = dfMort.transpose().unstack('draw_index').transpose()
+	dfHosp = dfHosp.transpose().unstack('draw_index').transpose()
 
 	print('Aggregating', timeName)
 	

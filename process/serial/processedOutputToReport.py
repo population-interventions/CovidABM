@@ -19,10 +19,10 @@ def Output(df, path):
 	
 	# Consider the following as a nicer replacement:
 	#"for name, subDf in df.groupby(level=0):"
-	for value in index.rand_seed.unique():
+	for value in index.draw_index.unique():
 		rdf = df[df.index.isin([value], level=0)]
 		rdf = rdf.reset_index()
-		rdf = rdf.drop(columns='rand_seed')
+		rdf = rdf.drop(columns='draw_index')
 		OutputToFile(rdf, path + '_' + str(value), index=False)
 
 
@@ -176,14 +176,14 @@ def ConstructMedian(df, groupMeasure, measure, outFile):
 	
 
 def ConstructGroupedMedian(df, groupMeasure, measure, outFile):
-	df = df.unstack('rand_seed').stack(measure)
+	df = df.unstack('draw_index').stack(measure)
 	df = df.transpose().describe().transpose()['mean']
 	df = df.unstack([groupMeasure] + measure)
 	OutputMedianUncertainTables(df, outFile, groupMeasure, measure)
 	
 
 def ConstructGroupedMedianCompare(df, groupMeasure, measure, compareCol, outFile):
-	df = df.unstack('rand_seed').stack(measure)
+	df = df.unstack('draw_index').stack(measure)
 	df = df.transpose().describe().transpose()['mean']
 	df = df.unstack([groupMeasure] + measure)
 	df = df.sub(df[0], axis=0) * -1
@@ -238,14 +238,14 @@ def OutputStageReportTables(subfolder, measureCols, groupMeasure, compareCol=Fal
 
 
 def GroupedMedianByVaccinationSpeed_sum(df, measure):
-	df = df.unstack('rand_seed').stack(measure)
+	df = df.unstack('draw_index').stack(measure)
 	df = df.transpose().describe().transpose()['mean']
 	df = df.unstack(measure)
 	return df
 
 
 def GroupedMedianByVaccinationSpeed_mean(df, measure):
-	df = df.unstack('rand_seed').stack(measure)
+	df = df.unstack('draw_index').stack(measure)
 	df = df.transpose().describe().transpose()['mean']
 	df = df.unstack(measure)
 	return df

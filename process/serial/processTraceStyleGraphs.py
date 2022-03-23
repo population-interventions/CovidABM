@@ -51,7 +51,7 @@ def PickOutIndexAndMetric(
 		else:
 			df[axis] = np.floor(df[axis] / bucketWidth) * bucketWidth + bucketWidth/2
 	# splitNames should only have one entry.
-	df = df.set_index(['rand_seed', axis] + splitNames)
+	df = df.set_index(['draw_index', axis] + splitNames)
 	df = df[[metric]]
 	return df, splitNames[0]
 
@@ -60,11 +60,11 @@ def PrintMetrics(
 		subfolder, df, axis, index, indexVals, name=False,
 		describeList=[x*0.01 for x in range(1, 100)]):
 	df = PickOutIndex(df, indexVals)
-	indexList = ['rand_seed'] + index
+	indexList = ['draw_index'] + index
 	df = df[indexList + [axis]].set_index(indexList)
 	#print(df)
 	util.PrintDuplicateRows(df.index.to_frame())
-	df = df.unstack('rand_seed').transpose()
+	df = df.unstack('draw_index').transpose()
 	df = df.describe(percentiles=describeList)
 	if not name:
 		name = axis
@@ -322,7 +322,7 @@ def ProcessResults(
 	name = nameList[0]
 	interestingColumns = [
 		'param_trace_mult', 'sympt_present_prop',
-		'rand_seed', 'isocomply_override', 'End_Day', 'pre_stop_day',
+		'draw_index', 'isocomply_override', 'End_Day', 'pre_stop_day',
 		'infectionsToday', 'first_trace_day', 'first_trace_infections',
 		'currentInfections', 'tracked_simuls',
 		'finished_infections', 'finished_tracked',
@@ -378,7 +378,7 @@ def ProcessResults(
 		'midReport_casesinperiod7_max' : 'mid_maxCasesDailyOverWeek',
 	})
 	
-	df = df.set_index(['rand_seed'] + measureCols_raw)
+	df = df.set_index(['draw_index'] + measureCols_raw)
 	df = indexRenameFunc(df)
 	
 	df['IncurPresentDay'] = df['IncurPresentDay'].replace(

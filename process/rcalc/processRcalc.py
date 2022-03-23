@@ -13,12 +13,12 @@ import seaborn as sns
 
 def Process(path, name):
 	df = pd.read_csv(path + name + '.csv', header=6)
-	df = df[['rand_seed', '[step]', 'average_R', 'global_transmissibility', 'init_cases_region']]
+	df = df[['draw_index', '[step]', 'average_R', 'global_transmissibility', 'init_cases_region']]
 	lastStep = df['[step]'].max()
 	df = df[df['[step]'] == lastStep]
-	df = df[['rand_seed', 'average_R_all_regions', 'global_transmissibility', 'init_cases_region']]
+	df = df[['draw_index', 'average_R_all_regions', 'global_transmissibility', 'init_cases_region']]
 	
-	df = df.set_index(['rand_seed', 'global_transmissibility', 'init_cases_region'])
+	df = df.set_index(['draw_index', 'global_transmissibility', 'init_cases_region'])
 	
 	df = df.unstack(level=-1)
 	df.columns = df.columns.get_level_values(1)
@@ -40,7 +40,7 @@ def AddIfVaryingValue(colName, df, desiredIndex, toUnstack):
 
 def ProcessVariableEnd(nameList, metricName):
 	interestingColumns = [
-		'rand_seed', metricName, 'param_policy', 
+		'draw_index', metricName, 'param_policy', 
 		'global_transmissibility', 'init_cases_region'
 	]
 	df = pd.DataFrame(columns=interestingColumns)
@@ -49,7 +49,7 @@ def ProcessVariableEnd(nameList, metricName):
 		pdf = pdf[interestingColumns]
 		df  = df.append(pdf)
 	
-	desiredIndex = ['rand_seed', 'param_policy', 'global_transmissibility', 'init_cases_region']
+	desiredIndex = ['draw_index', 'param_policy', 'global_transmissibility', 'init_cases_region']
 	toUnstack = 3
 	
 	#df, desiredIndex, toUnstack = AddIfVaryingValue('testName', df, desiredIndex, toUnstack)

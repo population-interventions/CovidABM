@@ -45,7 +45,7 @@ def PickOutIndexAndMetric(df, axis, metric, index, indexVals, bucketWidth=False,
 		else:
 			df[axis] = np.floor(df[axis] / bucketWidth) * bucketWidth + bucketWidth/2
 	# splitNames should only have one entry.
-	df = df.set_index(['rand_seed', axis] + splitNames)
+	df = df.set_index(['draw_index', axis] + splitNames)
 	df = df[[metric]]
 	return df, splitNames[0]
 
@@ -207,7 +207,7 @@ def ProcessResults(nameList):
 	name = nameList[0]
 	interestingColumns = [
 		'param_trace_mult', 'sympt_present_prop',
-		'rand_seed', 'isocomply_override', 'End_Day', 'pre_stop_day',
+		'draw_index', 'isocomply_override', 'End_Day', 'pre_stop_day',
 		'infectionsToday', 'first_trace_day', 'first_trace_infections',
 		'currentInfections', 'cumulativeInfected', 'tracked_simuls',
 		'finished_infections', 'finished_tracked',
@@ -251,7 +251,7 @@ def ProcessResults(nameList):
 		'casesinperiod7_switchTime' : 'intCasesWeekDaily',
 	})
 	
-	df = df.set_index(['rand_seed', 'TraceMult', 'param_policy'])
+	df = df.set_index(['draw_index', 'TraceMult', 'param_policy'])
 	df['IncurPresentDay'] = df['IncurPresentDay'].replace(
 		{-1 : 'None'})
 	
