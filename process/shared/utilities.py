@@ -5,6 +5,7 @@ import math
 import pdb
 import os
 import json
+import tqdm
 
 import pathlib
 import importlib
@@ -179,7 +180,7 @@ def GetCohortData(cohortFile):
 
 def AddFiles(outputName, fileList, index=1, header=1, doTqdm=False):
 	first = True
-	for fileName in (tqdm(fileList) if doTqdm else fileList):
+	for fileName in (tqdm.tqdm(fileList) if doTqdm else fileList):
 		if first:
 			first = False
 			df = pd.read_csv(
@@ -196,7 +197,7 @@ def AddFiles(outputName, fileList, index=1, header=1, doTqdm=False):
 
 def AppendFiles(outputName, fileList, index=1, header=1, doTqdm=False):
 	first = True
-	for fileName in (tqdm(fileList) if doTqdm else fileList):
+	for fileName in (tqdm.tqdm(fileList) if doTqdm else fileList):
 		if first:
 			first = False
 			df = pd.read_csv(
