@@ -121,10 +121,6 @@ to createSimulants
   let cohort_vaccineBranch 0
   let cohort_vaccineSuffix ""
   let cohort_vaccineUptake 0
-  let cohort_riskOfDeath 0
-  let cohort_riskOfHosp 0
-  let cohort_vacMortChange 0
-  let cohort_vacHospChange 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of (Population) patches with [ pcolor = black ] [
@@ -155,12 +151,6 @@ to createSimulants
       set index index + 1    set cohort_ignoreUptakeOverride item index cohortData
       set index index + 1    set cohort_vaccineBranch item index cohortData
       set index index + 1    set cohort_vaccineSuffix item index cohortData
-      
-      set index index + 1    set cohort_riskOfDeath (item index cohortData)
-      set index index + 1    set cohort_riskOfHosp (item index cohortData)
-      set index index + 1    set cohort_vacMortChange (item index cohortData)
-      set index index + 1    set cohort_vacHospChange (item index cohortData)
-      
       
       ;print (word "cohort_wane_1: " cohort_wane_1 ", cohort_wane_2: " cohort_wane_2 ", cohort_wane_3: " cohort_wane_3)
       
@@ -270,13 +260,17 @@ end
 
 to setupInitialVaccination
   if Vaccine_Enabled [
+    let initRecoverVar getInitRecoverVariant
     foreach popDivisionTable_keys [ popIndex ->
       let cohort table:get populationCohortCache popIndex
       let cohortData table:get popDivisionTable popIndex
       
       let cohort_pop item 0 cohortData
       
-      let index 22 - 1
+      let index 18 - 1
+      set index index + 1    let recover_noVac item index cohortData
+      set index index + 1    let recover_dose2 item index cohortData
+      set index index + 1    let recover_dose3 item index cohortData
       set index index + 1    let doseCount_2 item index cohortData
       set index index + 1    let doseDays_2 item index cohortData
       set index index + 1    let doseName_2 item index cohortData
@@ -304,6 +298,12 @@ to setupInitialVaccination
               
               set doseCount_2 doseCount_2 - 1
               set currentDay_2 currentDay_2 + increment_2
+              
+              if recover_dose2 > 0 [
+                simul_setNewRecover
+                set recoverVariant initRecoverVar
+                set recover_dose2 recover_dose2 - 1
+              ]
             ]
             doseCount_3 > 0
             [
@@ -318,9 +318,19 @@ to setupInitialVaccination
               
               set doseCount_3 doseCount_3 - 1
               set currentDay_3 currentDay_3 + increment_3
+              
+              if recover_dose3 > 0 [
+                simul_setNewRecover
+                set recoverVariant initRecoverVar
+                set recover_dose3 recover_dose3 - 1
+              ]
             ]
             [
-              
+              if recover_noVac > 0 [
+                simul_setNewRecover
+                set recoverVariant initRecoverVar
+                set recover_noVac recover_noVac - 1
+              ]
           ])
         ]
       ]
@@ -742,13 +752,9 @@ to setup
     ]
   ]
 
-  set recovercount param_recovered_prop * total_population
+  set recovercount (count simuls with [color = yellow]) * total_population / Population
   table:put recoverCountByVariant getInitRecoverVariant recovercount
   set dailyRecoverMult exp(ln(1 - yearly_recover_prop_loss) / 365)
-  ask n-of ( Population * param_recovered_prop ) simuls with [color = cyan] [
-    simul_setNewRecover
-    set recoverVariant getInitRecoverVariant
-  ]
   ;;set tracking false ;; ensures this is set to false each time the model starts
   ;;set link_switch false ;; ensures this is set to false each timme the model starts
   ;;set schoolsOpen false ;; ensures that the schools settings don't begin before the policy trigger starts

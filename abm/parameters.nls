@@ -175,7 +175,6 @@ to params_setDrawValues
     set start_metric_threshold -10
     set param_vacIncurMult 0
     set param_incurMult 0
-    set sympt_present_mult 0
   ]
   
   if param_policy_force_preset > 0 [
@@ -205,12 +204,6 @@ to params_setDrawValues
   ;set draw_maskWearEfficacy rngs:rnd-beta stream_id 24.3 8.08
   ;; SqRoot of above
   set draw_maskWearEfficacy rngs:rnd-beta stream_id 40 60
-  
-  set draw_wane_multiplier rngs:rnd-norm stream_id 1 0.229226
-  set draw_wane_boost_multiplier draw_wane_multiplier * rngs:rnd-beta stream_id 3.125 3.125
-  
-  set exposureSymptMult rngs:rnd-beta stream_id 3.125 3.125
-  
   set draw_borderIncursionRisk ( rngs:rnd-beta stream_id 20 20 ) * 2
   
   ;show ( word "draw_ppa_modifier " draw_ppa_modifier )
@@ -234,10 +227,6 @@ to params_setDrawValues
   set global_distance_mult 1
   set Isolation_Transmission 0.33
   set override_asympt_table false
-  
-  if not first_case_calibrate [
-    set sympt_present_mult 1
-  ]
 
   if sensitivity = "UniformContact_054" [
     set trace_eff_override 0.5358
@@ -304,25 +293,11 @@ to params_setDrawValues
   if sensitivity = "DistMult_2" [
     set global_distance_mult 2
   ]
-  if sensitivity = "PresentPropMult_050" [
-    set sympt_present_mult 0.5
-  ]
   if sensitivity = "IsoTransmit_05" [
     set Isolation_Transmission 0.5
   ]
   if sensitivity = "IsoTransmit_1" [
     set Isolation_Transmission 1
-  ]
-  if sensitivity = "PPM_050_Stage3" [
-    set sympt_present_mult 0.5
-    set max_stage 3
-  ]
-  if sensitivity = "PPM_050_Stage3b" [
-    set sympt_present_mult 0.5
-    set reducedStageFour true
-  ]
-  if sensitivity = "TestVic" [
-    set sympt_present_mult 0.8
   ]
   if sensitivity = "OverrideAsympt" [
     set override_asympt_table true

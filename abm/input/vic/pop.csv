@@ -1,18 +1,18 @@
-totalAgents,age,atsi,disability,essentialCount,workerCount,studentCount,phase,subPhase,spanMult,gatherFreqMult,region,succeptibleMult,asymptomPropMult,uptake,ignoreUptakeBoost,vaccineBranch,vaccineSuffix,baseMort,baseHosp,vacMortLnOddChange,vacHospLnOddChange,dose_2,daysDose_2,nameDose_2,dose_3,daysDose_3,nameDose_3,comment
-333,5,0,0,0,0,0,6,1,1,1,1,0.5,2,1,1,young,,0.1,0.1,0.1,0.1,0,100,OLD_2,283,100,OLD_2,Age 0 to 4
-333,5,0,0,0,0,99,6,1,1,1,1,0.5,2,1,1,young,,0.1,0.1,0.1,0.1,0,100,OLD_2,283,100,OLD_2,Ages 5 to 9
-113,15,0,0,0,0,41,6,1,1,1,1,0.5,2,1,1,young,,0.1,0.1,0.1,0.1,0,100,OLD_2,96,100,OLD_2,Ages 10 and 11
-339,15,0,0,0,0,122,6,1,1,1,1,0.5,2,1,1,young,,0.1,0.1,0.1,0.1,0,100,OLD_2,288,100,OLD_2,Ages 12 to 17
-112,15,0,0,0,0,40,6,1,1,1,1,0.5,2,1,1,young,,0.1,0.1,0.1,0.1,0,100,OLD_2,95,100,OLD_2,Ages 18 and 19
-373,25,0,0,0,101,0,5,1,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,37,100,OLD_2,317,100,OLD_3,Urban
-25,35,0,0,9,9,0,1,1,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,3,100,OLD_2,21,100,OLD_3,Frontline workers
-267,35,0,0,0,66,0,4,1,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,27,100,OLD_2,227,100,OLD_3,Urban
-189,45,0,0,0,49,0,3,1,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,19,100,OLD_2,161,100,OLD_3,Urban
-174,55,0,0,0,44,0,2,1,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,17,100,OLD_2,148,100,OLD_3,Urban
-61,65,0,0,0,13,0,2,1,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,6,100,OLD_2,52,100,OLD_3,Ages 60 to 64
-43,65,0,0,0,10,0,1,2,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,4,100,OLD_2,37,100,OLD_3,Ages 65 to 69
-52,75,0,0,0,12,0,1,2,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,5,100,OLD_2,44,100,OLD_3,Urban
-15,85,0,0,0,0,0,1,2,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,2,100,OLD_2,13,100,OLD_3,Urban
-36,25,0,0,0,4,0,6,1,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,4,100,OLD_2,31,100,OLD_3,Pregnant Urban
-23,35,0,0,0,3,0,6,1,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,2,100,OLD_2,20,100,OLD_3,Pregnant Urban
-12,45,0,0,0,1,0,6,1,1,1,1,1,1,1,0,old,,0.1,0.1,0.1,0.1,1,100,OLD_2,10,100,OLD_3,Pregnant Urban
+totalAgents,age,atsi,disability,essentialCount,workerCount,studentCount,phase,subPhase,spanMult,gatherFreqMult,region,succeptibleMult,asymptomPropMult,uptake,ignoreUptakeBoost,vaccineBranch,vaccineSuffix,recover_noVac,recover_dose2,recover_dose3,dose_2,daysDose_2,nameDose_2,dose_3,daysDose_3,nameDose_3,comment
+333,5,0,0,0,0,0,6,1,1,1,1,0.5,2,1,1,young,,25,0,141,0,100,OLD_2,283,100,OLD_2,Age 0 to 4
+333,5,0,0,0,0,99,6,1,1,1,1,0.5,2,1,1,young,,25,0,141,0,100,OLD_2,283,100,OLD_2,Ages 5 to 9
+113,15,0,0,0,0,41,6,1,1,1,1,0.5,2,1,1,young,,8,0,48,0,100,OLD_2,96,100,OLD_2,Ages 10 and 11
+339,15,0,0,0,0,122,6,1,1,1,1,0.5,2,1,1,young,,25,0,144,0,100,OLD_2,288,100,OLD_2,Ages 12 to 17
+112,15,0,0,0,0,40,6,1,1,1,1,0.5,2,1,1,young,,8,0,47,0,100,OLD_2,95,100,OLD_2,Ages 18 and 19
+373,25,0,0,0,101,0,5,1,1,1,1,1,1,1,0,old,,9,18,158,37,100,OLD_2,317,100,OLD_3,Urban
+25,35,0,0,9,9,0,1,1,1,1,1,1,1,1,0,old,,0,1,10,3,100,OLD_2,21,100,OLD_3,Frontline workers
+267,35,0,0,0,66,0,4,1,1,1,1,1,1,1,0,old,,6,13,113,27,100,OLD_2,227,100,OLD_3,Urban
+189,45,0,0,0,49,0,3,1,1,1,1,1,1,1,0,old,,4,9,80,19,100,OLD_2,161,100,OLD_3,Urban
+174,55,0,0,0,44,0,2,1,1,1,1,1,1,1,0,old,,4,8,74,17,100,OLD_2,148,100,OLD_3,Urban
+61,65,0,0,0,13,0,2,1,1,1,1,1,1,1,0,old,,1,3,26,6,100,OLD_2,52,100,OLD_3,Ages 60 to 64
+43,65,0,0,0,10,0,1,2,1,1,1,1,1,1,0,old,,1,2,18,4,100,OLD_2,37,100,OLD_3,Ages 65 to 69
+52,75,0,0,0,12,0,1,2,1,1,1,1,1,1,0,old,,1,2,22,5,100,OLD_2,44,100,OLD_3,Urban
+15,85,0,0,0,0,0,1,2,1,1,1,1,1,1,0,old,,0,1,6,2,100,OLD_2,13,100,OLD_3,Urban
+36,25,0,0,0,4,0,6,1,1,1,1,1,1,1,0,old,,0,2,15,4,100,OLD_2,31,100,OLD_3,Pregnant Urban
+23,35,0,0,0,3,0,6,1,1,1,1,1,1,1,0,old,,0,1,10,2,100,OLD_2,20,100,OLD_3,Pregnant Urban
+12,45,0,0,0,1,0,6,1,1,1,1,1,1,1,0,old,,0,0,5,1,100,OLD_2,10,100,OLD_3,Pregnant Urban

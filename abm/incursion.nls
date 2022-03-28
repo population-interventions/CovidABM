@@ -38,12 +38,6 @@ to incursion_update
         set global_incursionVaccType item 5 phaseData
         set global_incursionVariant item 6 phaseData
         set global_incursionReplaceChance item 7 phaseData
-        
-        let redrawPresentProp_a item 8 phaseData
-        let redrawPresentProp_b item 9 phaseData
-        if redrawPresentProp_a > 0 [
-          set sympt_present_prop rngs:rnd-beta incursionsSeedID redrawPresentProp_a redrawPresentProp_b
-        ]
       ]
     ]
   ]

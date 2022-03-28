@@ -42,10 +42,11 @@ to setup_vaccineData
       table:put vacTable "name" (item 0 rawData)
       table:put vacTable "riskReduct" PrToLnOdds (item 1 rawData)
       table:put vacTable "infectReduct" PrToLnOdds (item 2 rawData)
-      table:put vacTable "hospReduct" PrToLnOdds (item 3 rawData)
-      table:put vacTable "mortReduct" PrToLnOdds (item 4 rawData)
-      table:put vacTable "effectDays" (item 5 rawData)
-      table:put vacTable "waneRate" (item 6 rawData)
+      table:put vacTable "reduceSympt" PrToLnOdds (item 3 rawData)
+      table:put vacTable "hospReduct" PrToLnOdds (item 4 rawData)
+      table:put vacTable "mortReduct" PrToLnOdds (item 5 rawData)
+      table:put vacTable "effectDays" (item 6 rawData)
+      table:put vacTable "waneRate" (item 7 rawData)
       
       table:put paramsTable (item 0 rawData) vacTable
       

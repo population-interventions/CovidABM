@@ -1,0 +1,21 @@
+Worker and student breakdown
+Succeptibility multiplier
+
+R0 6, 7, 9
+
+Courtney:
+ Age breakdown by 10 year age groups.
+ How many people to vaccinate at the start of the model (1st April) and how long ago they had it.
+    This is number of people with dose 2/3, when people with dose 2/3 started recieving it.
+
+Proportion of people who have recovered
+
+Josh (Tony?) to write:
+ f: age,variant -> symptomatic chance
+ f: age,variant -> hosp chance
+ f: age,variant -> icu chance
+ f: age,variant -> death chance
+
+Mask efficacy of both types
+Revisit stage specifications
+Revisit policy triggers based on hospitatlisations

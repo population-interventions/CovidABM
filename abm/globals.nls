@@ -266,9 +266,6 @@ globals [
   draw_maskWearEfficacy
   draw_borderIncursionRisk
   
-  draw_wane_multiplier
-  draw_wane_boost_multiplier
-  
   incursionTable
   incursionPhaseIndex
   incursionPhaseEndDay

@@ -406,6 +406,7 @@ false
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [ agerange ] of simuls"
 "pen-2" 1.0 0 -2674135 true "" "histogram [ agerange ] of simuls with [ color = red ]"
+"pen-3" 1.0 0 -15040220 true "" "histogram [ agerange ] of simuls with [ color = yellow ]"
 
 PLOT
 1040
@@ -455,21 +456,6 @@ false
 "" ""
 PENS
 "LN New Cases" 1.0 1 -5298144 true "" "plot Log (1 + (globalPopPerSimul * (count simuls with [ color = red and timenow = 1]))) 2.618"
-
-SLIDER
-1672
-17
-1806
-50
-Age_Isolation
-Age_Isolation
-0
-100
-0.0
-1
-1
-NIL
-HORIZONTAL
 
 MONITOR
 1759
@@ -1370,21 +1356,6 @@ policyTriggerScale
 1
 11
 
-SLIDER
-1039
-57
-1212
-90
-End_R_Reported
-End_R_Reported
--1
-100
--1.0
-1
-1
-NIL
-HORIZONTAL
-
 MONITOR
 1624
 488
@@ -1441,21 +1412,6 @@ stage_test_index
 70
 0.0
 1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-582
-734
-755
-767
-sympt_present_prop
-sympt_present_prop
-0
-1
-0.7272154957008586
-0.01
 1
 NIL
 HORIZONTAL
@@ -1526,36 +1482,6 @@ track_slope
 0
 1
 -1000
-
-SLIDER
-10
-290
-185
-323
-param_vac_rate_mult
-param_vac_rate_mult
-0
-3
-1.0
-0.05
-1
-NIL
-HORIZONTAL
-
-SLIDER
-390
-697
-568
-730
-param_recovered_prop
-param_recovered_prop
-0
-1
-0.1
-0.05
-1
-NIL
-HORIZONTAL
 
 INPUTBOX
 224
@@ -1689,21 +1615,6 @@ average_R_all_regions
 4
 1
 11
-
-SLIDER
-10
-168
-187
-201
-param_final_phase
-param_final_phase
--1
-10
-3.0
-1
-1
-NIL
-HORIZONTAL
 
 SLIDER
 3572
@@ -2067,16 +1978,6 @@ MinMaskWearing
 1
 NIL
 HORIZONTAL
-
-CHOOSER
-1570
-1008
-1703
-1053
-param_force_vaccine
-param_force_vaccine
-"Disabled" "AZ" "Pfizer"
-0
 
 SLIDER
 3129
@@ -2478,10 +2379,10 @@ data_suffix_2
 0
 
 CHOOSER
-10
-205
-148
-250
+12
+175
+150
+220
 policy_switch
 policy_switch
 "tony" "nz" "pak" "continuous"
@@ -2754,21 +2655,6 @@ NIL
 HORIZONTAL
 
 SLIDER
-582
-770
-755
-803
-sympt_present_mult
-sympt_present_mult
-0
-1
-1.0
-0.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
 1597
 863
 1752
@@ -2823,21 +2709,6 @@ extraScaleFactor * 100 * scaledPopulation / total_population
 2
 1
 11
-
-SLIDER
-1595
-975
-1749
-1008
-scale_up_limit
-scale_up_limit
-0
-1
-0.9
-0.01
-1
-NIL
-HORIZONTAL
 
 SLIDER
 1615
@@ -3043,21 +2914,6 @@ init_cases_region
 0
 Number
 
-SLIDER
-2557
-668
-2730
-701
-exposureSymptMult
-exposureSymptMult
-0
-1
-0.5930588695588881
-0.1
-1
-NIL
-HORIZONTAL
-
 INPUTBOX
 305
 454
@@ -3079,21 +2935,6 @@ policyUseHosp
 0
 1
 -1000
-
-SLIDER
-783
-698
-973
-731
-reinfect_delay_base
-reinfect_delay_base
-0
-28
-0.0
-1
-1
-NIL
-HORIZONTAL
 
 INPUTBOX
 2415
@@ -3212,6 +3053,16 @@ false
 "" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [ days - vaccineDay ] of simuls"
+
+CHOOSER
+1598
+985
+1731
+1030
+param_force_vaccine
+param_force_vaccine
+"Disabled" "AZ" "Pfizer"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
