@@ -14,7 +14,6 @@ simuls-own [
   gatherFreqMult
   homeRegion
   succeptMult
-  ignoreUptakeOverride
   update_lock
   isInitialInfection
   cohortVacUptake
@@ -42,7 +41,6 @@ simuls-own [
   asymptomaticFlag ;; indicator identifying Asymptomatic cases
   asymptomatic_draw ;; Determines whether the agent will be asymptomatic
   asymptomatic_prop ;; Proportion of people who are symptomatic
-  asymptomatic_prop_mult ;; Pre-variant cohort multiplier
   symtomatic_present_day ;; When the simulant self-presents (if at all)
   symtomatic_present_day_draw ;; Store for the above for all simulants
   present_draw ;; Determines whether the agent will present
@@ -60,8 +58,6 @@ simuls-own [
   
   cohortIndex ;; The row of population.csv that this simulant is based on
   agerange ;; the age of the person
-  atsi
-  comorbidityState ;; does the person have a comorbidity
   essentialJob ;; Static indicator of whether the agent's job is most essential, which gives it higher EssentialWorkerPriority (ie closer to zero).
   isWorker
   

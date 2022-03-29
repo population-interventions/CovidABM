@@ -25,11 +25,33 @@ to loadPopDivisionTable
   ]
   let populationFileData remove-item 0 csv:from-file fileName
   set popDivisionTable table:make
-  set popDivisionTable_keys []
   let i 0
   foreach populationFileData [ x -> 
-    table:put popDivisionTable i x
-    set popDivisionTable_keys lput i popDivisionTable_keys
+    let cohortData table:make
+    let index -1
+    set index index + 1    table:put cohortData "pop" item index x
+    set index index + 1    table:put cohortData "age" item index x
+    set index index + 1    table:put cohortData "essentialCount" item index x
+    set index index + 1    table:put cohortData "workerCount" item index x
+    set index index + 1    table:put cohortData "studentCount" item index x
+    set index index + 1    table:put cohortData "spanMult" item index x
+    set index index + 1    table:put cohortData "gatherFreqMult" item index x
+    set index index + 1    table:put cohortData "region" item index x
+    set index index + 1    table:put cohortData "succeptMult" item index x
+    set index index + 1    table:put cohortData "vaccineUptake" item index x
+    set index index + 1    table:put cohortData "vaccineBranch" item index x
+    set index index + 1    table:put cohortData "vaccineSuffix" item index x
+    set index index + 1    table:put cohortData "recover_noVac" item index x
+    set index index + 1    table:put cohortData "recover_dose2" item index x
+    set index index + 1    table:put cohortData "recover_dose3" item index x
+    set index index + 1    table:put cohortData "doseCount_2" item index x
+    set index index + 1    table:put cohortData "doseDays_2" item index x
+    set index index + 1    table:put cohortData "doseName_2" item index x
+    set index index + 1    table:put cohortData "doseCount_3" item index x
+    set index index + 1    table:put cohortData "doseDays_3" item index x
+    set index index + 1    table:put cohortData "doseName_3" item index x
+    
+    table:put popDivisionTable i cohortData
     set i i + 1
   ]
 end
@@ -59,16 +81,16 @@ end
 
 
 to processPopulationData
-  let tableData table:values popDivisionTable
   let regionPopulation table:make
   
   set totalWorkers 0
   set totalEssentialWorkers 0
-  foreach tableData [ data -> 
-    set totalWorkers totalWorkers + item 5 data
-    set totalEssentialWorkers totalEssentialWorkers + item 4 data
-    let region item 10 data
-    let pop item 0 data
+  foreach table:keys popDivisionTable [ index -> 
+    let data table:get popDivisionTable index
+    set totalWorkers totalWorkers + table:get data "workerCount"
+    set totalEssentialWorkers totalEssentialWorkers + table:get data "essentialCount"
+    let region table:get data "region"
+    let pop table:get data "pop"
     if not table:has-key? regionPopulation region [
       table:put regionPopulation region 0
     ]
@@ -105,22 +127,16 @@ to createSimulants
   
   let cohort_pop 0
   let cohort_age 0
-  let cohort_asti 0
-  let cohort_disability 0
   let cohort_essentialCount 0
   let cohort_workerCount 0
-  let cohort_phase 0
-  let cohort_subPhase 0
+  let cohort_studentCount 0
   let cohort_spanMult 0
   let cohort_gatherFreqMult 0
   let cohort_region 0
   let cohort_succeptMult 0
-  let cohort_asymptomPropMult 0
-  let cohort_ignoreUptakeOverride 0
-  let cohort_studentCount 0
+  let cohort_vaccineUptake 0
   let cohort_vaccineBranch 0
   let cohort_vaccineSuffix ""
-  let cohort_vaccineUptake 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of (Population) patches with [ pcolor = black ] [
@@ -131,26 +147,18 @@ to createSimulants
         print "totalAgents in population.csv sums to less than Population (2500)." 
       ]
       let cohortData table:get popDivisionTable pop_index
-      
-      let index -1
-      set index index + 1    set cohort_pop item index cohortData
-      set index index + 1    set cohort_age item index cohortData
-      set index index + 1    set cohort_asti item index cohortData
-      set index index + 1    set cohort_disability item index cohortData
-      set index index + 1    set cohort_essentialCount item index cohortData
-      set index index + 1    set cohort_workerCount item index cohortData
-      set index index + 1    set cohort_studentCount item index cohortData
-      set index index + 1    set cohort_phase item index cohortData
-      set index index + 1    set cohort_subPhase item index cohortData
-      set index index + 1    set cohort_spanMult item index cohortData
-      set index index + 1    set cohort_gatherFreqMult item index cohortData
-      set index index + 1    set cohort_region item index cohortData
-      set index index + 1    set cohort_succeptMult item index cohortData
-      set index index + 1    set cohort_asymptomPropMult item index cohortData
-      set index index + 1    set cohort_vaccineUptake item index cohortData
-      set index index + 1    set cohort_ignoreUptakeOverride item index cohortData
-      set index index + 1    set cohort_vaccineBranch item index cohortData
-      set index index + 1    set cohort_vaccineSuffix item index cohortData
+      set cohort_pop table:get cohortData "pop"
+      set cohort_age table:get cohortData "age"
+      set cohort_essentialCount table:get cohortData "essentialCount"
+      set cohort_workerCount table:get cohortData "workerCount"
+      set cohort_studentCount table:get cohortData "studentCount"
+      set cohort_spanMult table:get cohortData "spanMult"
+      set cohort_gatherFreqMult table:get cohortData "gatherFreqMult"
+      set cohort_region table:get cohortData "region"
+      set cohort_succeptMult table:get cohortData "succeptMult"
+      set cohort_vaccineUptake table:get cohortData "vaccineUptake"
+      set cohort_vaccineBranch table:get cohortData "vaccineBranch"
+      set cohort_vaccineSuffix table:get cohortData "vaccineSuffix"
       
       ;print (word "cohort_wane_1: " cohort_wane_1 ", cohort_wane_2: " cohort_wane_2 ", cohort_wane_3: " cohort_wane_3)
       
@@ -190,8 +198,6 @@ to createSimulants
 
       set cohortIndex pop_index
       set agerange cohort_age
-      set atsi cohort_asti
-      set comorbidityState cohort_disability
       set essentialJob (agentsOfThisIndex <= cohort_essentialCount)
       set isWorker (agentsOfThisIndex <= cohort_workerCount)
       set isStudent (agentsOfThisIndex <= cohort_studentCount)
@@ -205,7 +211,6 @@ to createSimulants
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
       set succeptMult cohort_succeptMult
-      set ignoreUptakeOverride cohort_ignoreUptakeOverride
       
       move-to one-of patches with [ pcolor = black ]
       
@@ -213,13 +218,6 @@ to createSimulants
       set accept_isolation_draw random-float 1
       
       set asymptomatic_draw random-float 1
-      ifelse override_asympt_table
-      [
-        params_setOverrideAsympt
-      ]
-      [
-        set asymptomatic_prop_mult cohort_asymptomPropMult
-      ]
       
       ifelse self_iso_at_peak
       [
@@ -253,7 +251,7 @@ to createSimulants
   
   ;; Cache the population cohorts.
   set populationCohortCache table:make
-  foreach popDivisionTable_keys [ index ->
+  foreach table:keys popDivisionTable [ index ->
     table:put populationCohortCache index simuls with [ cohortIndex = index ]
   ]
 end
@@ -261,22 +259,20 @@ end
 to setupInitialVaccination
   if Vaccine_Enabled [
     let initRecoverVar getInitRecoverVariant
-    foreach popDivisionTable_keys [ popIndex ->
+    foreach table:keys popDivisionTable [ popIndex ->
       let cohort table:get populationCohortCache popIndex
       let cohortData table:get popDivisionTable popIndex
       
-      let cohort_pop item 0 cohortData
-      
-      let index 18 - 1
-      set index index + 1    let recover_noVac item index cohortData
-      set index index + 1    let recover_dose2 item index cohortData
-      set index index + 1    let recover_dose3 item index cohortData
-      set index index + 1    let doseCount_2 item index cohortData
-      set index index + 1    let doseDays_2 item index cohortData
-      set index index + 1    let doseName_2 item index cohortData
-      set index index + 1    let doseCount_3 item index cohortData
-      set index index + 1    let doseDays_3 item index cohortData
-      set index index + 1    let doseName_3 item index cohortData
+      let cohort_pop table:get cohortData "pop"
+      let recover_noVac table:get cohortData "recover_noVac"
+      let recover_dose2 table:get cohortData "recover_dose2"
+      let recover_dose3 table:get cohortData "recover_dose3"
+      let doseCount_2 table:get cohortData "doseCount_2"
+      let doseDays_2 table:get cohortData "doseDays_2"
+      let doseName_2 table:get cohortData "doseName_2"
+      let doseCount_3 table:get cohortData "doseCount_3"
+      let doseDays_3 table:get cohortData "doseDays_3"
+      let doseName_3 table:get cohortData "doseName_3"
 
       if cohort_pop > 0 [
         ; Determine how far in the past people had their vaccinations

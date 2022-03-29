@@ -20,15 +20,7 @@ to simul_updateVariantParams
   
   set nonInfectivePeriod table:get varData "non_infect_time"
   set Asymptomatic_Trans table:get varData "asympt_trans"
-  
   let varAsymptProp table:get varData "asympt_prop"
-  ifelse asymptomatic_prop_mult <= 1
-  [
-    set asymptomatic_prop varAsymptProp * asymptomatic_prop_mult
-  ]
-  [
-    set asymptomatic_prop 1 - (1 - varAsymptProp) / asymptomatic_prop_mult
-  ]
   
   set personalVirulence rngs:rnd-beta moveInitSeedID (table:get varData "trans_a" / hetro_mult) (table:get varData "trans_b" / hetro_mult)
   

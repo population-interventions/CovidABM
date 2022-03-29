@@ -225,7 +225,6 @@ globals [
   SecondaryLower
 
   popDivisionTable ; Table of population cohort data
-  popDivisionTable_keys ; length of table.
   populationCohortCache ; Filters for the population
 
   regionTable
@@ -316,8 +315,6 @@ globals [
   case14_listOut
   case28_listOut
   age_listOut
-  atsi_listOut
-  morbid_listOut
   stage_listOut
   vacineEff_nameOut
   vacineEff_transOut
