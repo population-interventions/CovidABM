@@ -38,9 +38,7 @@ simuls-own [
   
   tracked ;; whether the person has been tracked by the health system
   knownContactTime ;; Time at which a contact was known, to prevent double tracing on the traced step
-  asymptomaticFlag ;; indicator identifying Asymptomatic cases
-  asymptomatic_draw ;; Determines whether the agent will be asymptomatic
-  asymptomatic_prop ;; Proportion of people who are symptomatic
+  asymptomaticFlag ;; indicator identifying whether this simulant is asymptomatic
   symtomatic_present_day ;; When the simulant self-presents (if at all)
   symtomatic_present_day_draw ;; Store for the above for all simulants
   present_draw ;; Determines whether the agent will present
@@ -232,6 +230,15 @@ to simul_setNewRecover [variant]
   set recoverDay days
 end
 
+to simul_setNewInfection [variant]
+  set color red
+  set infectVariant variant
+  set asymptomaticFlag true
+  if random-float 1 > (LnOddsToPr (GetVariantSymptomaticLnOdds agerange variant)) [
+    set asymptomaticFlag false
+  ]
+end
+
 ;;*******************************************************************************************************************************
 ;;** Simul Once-A-Tick Functions **
 ;;*******************************************************************************************************************************
@@ -242,7 +249,7 @@ to simul_record_patch_infectiveness
     if wearingMask = 1 and Mask_Efficacy_Mult > 0 [
       set localInfectiveness (localInfectiveness * (1 - draw_maskWearEfficacy * Mask_Efficacy_Mult))
     ]
-    if asymptomaticFlag = 1 [
+    if asymptomaticFlag [
       set localInfectiveness (localInfectiveness * Asymptomatic_Trans)
     ]
     if isolateCompliant = 1 [
@@ -359,11 +366,9 @@ to simul_infect
                 ;set hospToday_acc hospToday_acc + hospRiskMean
                 
                 ;; Set infection status
-                set color red
+                simul_setNewInfection patchVariant
                 set contact_events 0
                 set contributeToR true
-                set infectVariant patchVariant
-                
                 simul_updateVariantParams
                 
                 set infectedContactList table:make

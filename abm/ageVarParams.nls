@@ -1,0 +1,16 @@
+
+to-report GetVariantSymptomaticLnOdds [age variant]
+  report 1 * age / 10
+end
+
+to-report GetVariantHospLnOdds [age variant]
+  report age / 100
+end
+
+to-report GetVariantIcuLnOdds [age variant]
+  report age / 100
+end
+
+to-report GetVariantDeathLnOdds [age variant]
+  report age / 100
+end

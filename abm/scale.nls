@@ -202,6 +202,7 @@ to do_scaledown
     let my_selfTraceEffMult         0
     let my_myScale                  0
     let my_recoverTime              0
+    let my_asymptomaticFlag         0
     
     let thisSimul 0
     let otherSimul 0
@@ -217,6 +218,7 @@ to do_scaledown
         set my_hasKnownContact          hasKnownContact
         set my_traceAttempts            traceAttempts
         set my_selfTraceEffMult         selfTraceEffMult
+        set my_asymptomaticFlag         asymptomaticFlag
         
         let toAsk Scale_Factor ^ (myScale - scalePhase) - 1 + random-float 1
         set toScale toScale - 1 
@@ -227,6 +229,7 @@ to do_scaledown
         if toAsk > random-float 1 [
           ask n-of 1 (GetUninfectedOfCohort cohortIndex currentVaccine homeRegion) [
             set color red
+            set myScale                  my_myScale
             set timenow                  my_timenow
             set caseReportTime           my_caseReportTime
             set tracked                  my_tracked
@@ -236,7 +239,7 @@ to do_scaledown
             set hasKnownContact          my_hasKnownContact
             set traceAttempts            my_traceAttempts
             set selfTraceEffMult         my_selfTraceEffMult
-            set myScale                  my_myScale
+            set asymptomaticFlag         my_asymptomaticFlag
             
             table:put infectedContactList table:length infectedContactList thisSimul
             set otherSimul self
@@ -263,6 +266,7 @@ to do_scaledown
           set my_hasKnownContact          hasKnownContact
           set my_traceAttempts            traceAttempts
           set my_selfTraceEffMult         selfTraceEffMult
+          set my_asymptomaticFlag         asymptomaticFlag
           
           let toAsk Scale_Factor ^ (myScale - scalePhase) - 1
           set toScale toScale - 1 
@@ -273,6 +277,7 @@ to do_scaledown
           if toAsk > random-float 1 [
             ask n-of 1 (GetUninfectedOfCohort cohortIndex currentVaccine homeRegion) [
               set color red
+              set myScale                  my_myScale
               set timenow                  my_timenow
               set caseReportTime           my_caseReportTime
               set tracked                  my_tracked
@@ -282,7 +287,7 @@ to do_scaledown
               set hasKnownContact          my_hasKnownContact
               set traceAttempts            my_traceAttempts
               set selfTraceEffMult         my_selfTraceEffMult
-              set myScale                  my_myScale
+              set asymptomaticFlag         my_asymptomaticFlag
               
               table:put infectedContactList table:length infectedContactList thisSimul
               set otherSimul self

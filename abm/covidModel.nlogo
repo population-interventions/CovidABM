@@ -26,6 +26,7 @@ __includes[
   "incursion.nls"
   "debug.nls"
   "dataOut.nls"
+  "ageVarParams.nls"
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -407,6 +408,7 @@ PENS
 "default" 1.0 1 -16777216 true "" "histogram [ agerange ] of simuls"
 "pen-2" 1.0 0 -2674135 true "" "histogram [ agerange ] of simuls with [ color = red ]"
 "pen-3" 1.0 0 -15040220 true "" "histogram [ agerange ] of simuls with [ color = yellow ]"
+"pen-4" 1.0 0 -1184463 true "" "histogram [ agerange ] of simuls with [ color = red and asymptomaticFlag]"
 
 PLOT
 1040
@@ -1551,7 +1553,7 @@ Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
 1
-0.58
+0.57
 0.01
 1
 NIL
@@ -3064,6 +3066,25 @@ param_force_vaccine
 param_force_vaccine
 "Disabled" "AZ" "Pfizer"
 0
+
+PLOT
+1244
+125
+1444
+275
+plot 1
+NIL
+NIL
+0.0
+100.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "histogram [ agerange ] of simuls with [ color = red and asymptomaticFlag]"
+"pen-1" 1.0 0 -7500403 true "" "histogram [ agerange ] of simuls with [ color = red]"
 
 @#$#@#$#@
 ## WHAT IS IT?

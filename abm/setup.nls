@@ -218,8 +218,6 @@ to createSimulants
       set report_case_draw random-float 1
       set accept_isolation_draw random-float 1
       
-      set asymptomatic_draw random-float 1
-      
       ifelse self_iso_at_peak
       [
         set symtomatic_present_day_draw floor (ownIncubationPeriod_raw + pre_present_iso + random-float 1)
@@ -689,10 +687,9 @@ to setup
   ]
   
   ask n-of ( initial_primary / popPerSimul ) potentialInitCases [
-    set color red
+    simul_setNewInfection getRandomInitVariant
     set isInitialInfection true
     set contributeToR false
-    set infectVariant getRandomInitVariant
     set infectedContactList table:make
     set hasKnownContact false
     set myScale scalePhase
@@ -725,10 +722,9 @@ to setup
   ask potentialInitCases [
     let nearSimuls (other simuls in-radius 2 with [ color = red ])
     if init_secondry_infect > popPerSimul and any? nearSimuls [
-      set color red
+      simul_setNewInfection getRandomInitVariant
       set isInitialInfection true
       set contributeToR false
-      set infectVariant getRandomInitVariant
       set infectedContactList table:make
       set hasKnownContact false
       set myScale scalePhase
