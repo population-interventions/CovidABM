@@ -226,8 +226,10 @@ to simul_do_scaleup
   set returntoschool random 100
 end
 
-to simul_setNewRecover
+to simul_setNewRecover [variant]
   set color yellow
+  set recoverVaccine getVariantRecoverVaccine variant
+  set recoverDay days
 end
 
 ;;*******************************************************************************************************************************
@@ -536,7 +538,7 @@ to simul_end_infection
     
     ;; May as well set color to yellow since dead and infected people have a similar effect on the simulation.
     ;; Very few people die in the low scales as a proportion of the total population.
-    simul_setNewRecover
+    simul_setNewRecover infectVariant
     set isInitialInfection false
     set recoverVariant infectVariant
     set infectVariant 0

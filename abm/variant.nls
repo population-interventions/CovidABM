@@ -20,7 +20,6 @@ to simul_updateVariantParams
   
   set nonInfectivePeriod table:get varData "non_infect_time"
   set Asymptomatic_Trans table:get varData "asympt_trans"
-  let varAsymptProp table:get varData "asympt_prop"
   
   set personalVirulence rngs:rnd-beta moveInitSeedID (table:get varData "trans_a" / hetro_mult) (table:get varData "trans_b" / hetro_mult)
   
@@ -43,18 +42,18 @@ to setup_variantData
     set variantNames lput name variantNames
     let data table:make
     
-    let trans_mean        (item 1 x)
-    let trans_std         (item 2 x)
-    let asympt_trans_a    (item 3 x)
-    let asympt_trans_b    (item 4 x)
-    let asympt_prop_a     (item 5 x)
-    let asympt_prop_b     (item 6 x)
-    let non_infect_time   (item 7 x)
-    let incubation_mean   (item 8 x)
-    let incubation_spread (item 9 x)
-    let duration_mean     (item 10 x)
-    let duration_spread   (item 11 x)
-    let init_variant      (item 12 x)
+    let index 0 ;; Name is set above
+    set index index + 1    let trans_mean        (item index x)
+    set index index + 1    let trans_std         (item index x)
+    set index index + 1    let asympt_trans_a    (item index x)
+    set index index + 1    let asympt_trans_b    (item index x)
+    set index index + 1    let non_infect_time   (item index x)
+    set index index + 1    let incubation_mean   (item index x)
+    set index index + 1    let incubation_spread (item index x)
+    set index index + 1    let duration_mean     (item index x)
+    set index index + 1    let duration_spread   (item index x)
+    set index index + 1    let init_variant      (item index x)
+    set index index + 1    let recoverVac        (item index x)
     
     ; Parameters for simulants to draw their own transmissibility
     let trans_n trans_mean * ( 1 - trans_mean ) / (trans_std ^ 2)
@@ -62,7 +61,6 @@ to setup_variantData
     table:put data "trans_b" (1 - trans_mean) * trans_n
     
     table:put data "asympt_trans" rngs:rnd-beta stream_id asympt_trans_a asympt_trans_b
-    table:put data "asympt_prop" rngs:rnd-beta stream_id asympt_prop_a asympt_prop_b
     
     ;; illness period estimation using ln transform
     let BetaIllnessPd ln (1 + (duration_spread / duration_mean ^ 2))
@@ -76,12 +74,18 @@ to setup_variantData
     
     table:put data "non_infect_time" non_infect_time
     table:put data "init_variant" init_variant
+    table:put data "recoverVac" recoverVac
     
     table:put variantData name data
     table:put recoverCountByVariant name 0
   ]
   ;print (word "variantNames " variantNames)
   ;print (word "variantData " variantData)
+end
+
+to-report getVariantRecoverVaccine [variant]
+  let data table:get variantData variant
+  report table:get data "recoverVac"
 end
 
 to simul_updatepersonalvirulence

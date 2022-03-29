@@ -44,6 +44,7 @@ to loadPopDivisionTable
     set index index + 1    table:put cohortData "recover_noVac" item index x
     set index index + 1    table:put cohortData "recover_dose2" item index x
     set index index + 1    table:put cohortData "recover_dose3" item index x
+    set index index + 1    table:put cohortData "recoverMaxDay" item index x
     set index index + 1    table:put cohortData "doseCount_2" item index x
     set index index + 1    table:put cohortData "doseDays_2" item index x
     set index index + 1    table:put cohortData "doseName_2" item index x
@@ -267,6 +268,7 @@ to setupInitialVaccination
       let recover_noVac table:get cohortData "recover_noVac"
       let recover_dose2 table:get cohortData "recover_dose2"
       let recover_dose3 table:get cohortData "recover_dose3"
+      let recoverMaxDay table:get cohortData "recoverMaxDay"
       let doseCount_2 table:get cohortData "doseCount_2"
       let doseDays_2 table:get cohortData "doseDays_2"
       let doseName_2 table:get cohortData "doseName_2"
@@ -296,7 +298,8 @@ to setupInitialVaccination
               set currentDay_2 currentDay_2 + increment_2
               
               if recover_dose2 > 0 [
-                simul_setNewRecover
+                simul_setNewRecover initRecoverVar
+                set recoverDay -1 * floor random-float recoverMaxDay
                 set recoverVariant initRecoverVar
                 set recover_dose2 recover_dose2 - 1
               ]
@@ -316,14 +319,16 @@ to setupInitialVaccination
               set currentDay_3 currentDay_3 + increment_3
               
               if recover_dose3 > 0 [
-                simul_setNewRecover
+                simul_setNewRecover initRecoverVar
+                set recoverDay -1 * floor random-float recoverMaxDay
                 set recoverVariant initRecoverVar
                 set recover_dose3 recover_dose3 - 1
               ]
             ]
             [
               if recover_noVac > 0 [
-                simul_setNewRecover
+                simul_setNewRecover initRecoverVar
+                set recoverDay -1 * floor random-float recoverMaxDay
                 set recoverVariant initRecoverVar
                 set recover_noVac recover_noVac - 1
               ]

@@ -361,7 +361,7 @@ INPUTBOX
 373
 263
 initial_cases
-3000.0
+5000.0
 1
 0
 Number
@@ -3035,6 +3035,7 @@ true
 PENS
 "alpha" 0.02 1 -16777216 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"alpha\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
 "beta" 0.02 1 -14454117 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"beta\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"a-rec" 0.02 1 -2674135 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"alpha\" recoverVaccine recoverDay 0 0) ] of simuls"
 
 PLOT
 1837
