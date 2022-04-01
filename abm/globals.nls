@@ -306,8 +306,6 @@ globals [
   cohortLengthListOfZeros
   infectNoVacArray
   infectVacArray
-  dieArray
-  hospArray
   infectNoVacArray_listOut
   infectVacArray_listOut
   case_listOut
@@ -321,33 +319,13 @@ globals [
   vacineEff_areaOut
   global_transmissibility_out
   
-  dieArray_listOut
-  dieArray_listOut_0
-  dieArray_listOut_1
-  dieArray_listOut_2
-  dieArray_listOut_3
-  dieArray_listOut_4
-  dieArray_listOut_5
-  dieArray_listOut_6
-  dieArray_listOut_7
-  dieArray_listOut_8
-  dieArray_listOut_9
-  dieArray_listOut_10
-  dieArray_listOut_11
-  dieArray_listOut_12
-  dieArray_listOut_13
+  dieArray
+  icuArray
+  hospArray
   
+  dieArray_listOut
+  icuArray_listOut
   hospArray_listOut
-  hospArray_listOut_0
-  hospArray_listOut_1
-  hospArray_listOut_2
-  hospArray_listOut_3
-  hospArray_listOut_4
-  hospArray_listOut_5
-  hospArray_listOut_6
-  hospArray_listOut_7
-  hospArray_listOut_8
-  hospArray_listOut_9
   
   R_measure_time
   stop_simulation

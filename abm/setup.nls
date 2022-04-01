@@ -41,6 +41,9 @@ to loadPopDivisionTable
     set index index + 1    table:put cohortData "vaccineUptake" item index x
     set index index + 1    table:put cohortData "vaccineBranch" item index x
     set index index + 1    table:put cohortData "vaccineSuffix" item index x
+    set index index + 1    table:put cohortData "hospTime" item index x
+    set index index + 1    table:put cohortData "icuTime" item index x
+    set index index + 1    table:put cohortData "deathTime" item index x
     set index index + 1    table:put cohortData "recover_noVac" item index x
     set index index + 1    table:put cohortData "recover_dose2" item index x
     set index index + 1    table:put cohortData "recover_dose3" item index x
@@ -138,6 +141,13 @@ to createSimulants
   let cohort_vaccineUptake 0
   let cohort_vaccineBranch 0
   let cohort_vaccineSuffix ""
+  let cohort_hospTime 0
+  let cohort_icuTime 0
+  let cohort_deathTime 0
+  
+  let maxHospTime  0
+  let maxIcuTime   0
+  let maxDeathTime 0
   
   ;; set up people in the environment and allocates characteristics to them
   ask n-of (Population) patches with [ pcolor = black ] [
@@ -160,11 +170,22 @@ to createSimulants
       set cohort_vaccineUptake table:get cohortData "vaccineUptake"
       set cohort_vaccineBranch table:get cohortData "vaccineBranch"
       set cohort_vaccineSuffix table:get cohortData "vaccineSuffix"
+      set cohort_hospTime table:get cohortData "hospTime"
+      set cohort_icuTime table:get cohortData "icuTime"
+      set cohort_deathTime table:get cohortData "deathTime"
       
       ;print (word "cohort_wane_1: " cohort_wane_1 ", cohort_wane_2: " cohort_wane_2 ", cohort_wane_3: " cohort_wane_3)
-      
-      
       set oldCohortIndex pop_index
+      
+      if maxHospTime < cohort_hospTime [
+        set maxHospTime cohort_hospTime
+      ]
+      if maxIcuTime < cohort_icuTime [
+        set maxIcuTime cohort_icuTime
+      ]
+      if maxDeathTime < cohort_deathTime [
+        set maxDeathTime cohort_deathTime
+      ]
     ]
     set agentsOfThisIndex agentsOfThisIndex + 1
     
@@ -204,6 +225,9 @@ to createSimulants
       set isStudent (agentsOfThisIndex <= cohort_studentCount)
       set cohortVacUptake cohort_vaccineUptake
       set cohortVacSuffix cohort_vaccineSuffix
+      set cohortHospTime cohort_hospTime
+      set cohortIcuTime cohort_icuTime
+      set cohortDeathTime cohort_deathTime
       
       set vaccBanch cohort_vaccineBranch
       set vaccReceptive false
@@ -253,7 +277,11 @@ to createSimulants
   foreach table:keys popDivisionTable [ index ->
     table:put populationCohortCache index simuls with [ cohortIndex = index ]
   ]
+  
+  
+  setup_DataOut maxHospTime maxIcuTime maxDeathTime
 end
+
 
 to setupInitialVaccination
   if Vaccine_Enabled [
@@ -589,32 +617,8 @@ to setGlobals
   set stage_listOut []
   
   set dieArray_listOut    []
-  set dieArray_listOut_0  []
-  set dieArray_listOut_1  []
-  set dieArray_listOut_2  []
-  set dieArray_listOut_3  []
-  set dieArray_listOut_4  []
-  set dieArray_listOut_5  []
-  set dieArray_listOut_6  []
-  set dieArray_listOut_7  []
-  set dieArray_listOut_8  []
-  set dieArray_listOut_9  []
-  set dieArray_listOut_10 []
-  set dieArray_listOut_11 []
-  set dieArray_listOut_12 []
-  set dieArray_listOut_13 []
-  
+  set icuArray_listOut    []
   set hospArray_listOut   []
-  set hospArray_listOut_0 []
-  set hospArray_listOut_1 []
-  set hospArray_listOut_2 []
-  set hospArray_listOut_3 []
-  set hospArray_listOut_4 []
-  set hospArray_listOut_5 []
-  set hospArray_listOut_6 []
-  set hospArray_listOut_7 []
-  set hospArray_listOut_8 []
-  set hospArray_listOut_9 []
 end
 
 ;;*******************************************************************************************************************************
@@ -646,7 +650,6 @@ to setup
   setup_variantData
   setup_vaccineData
   setup_incursionData
-  setup_DataOut
   
   set resetdate 7
   set Scale_Factor 2

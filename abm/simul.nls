@@ -16,6 +16,9 @@ simuls-own [
   succeptMult
   update_lock
   isInitialInfection
+  cohortHospTime
+  cohortIcuTime
+  cohortDeathTime
   cohortVacUptake
   cohortVacSuffix
   
@@ -39,6 +42,7 @@ simuls-own [
   tracked ;; whether the person has been tracked by the health system
   knownContactTime ;; Time at which a contact was known, to prevent double tracing on the traced step
   asymptomaticFlag ;; indicator identifying whether this simulant is asymptomatic
+  hospFlag ;; indicator identifying whether this simulant is to be hospitalised (increases isolation)
   symtomatic_present_day ;; When the simulant self-presents (if at all)
   symtomatic_present_day_draw ;; Store for the above for all simulants
   present_draw ;; Determines whether the agent will present
@@ -158,7 +162,7 @@ end
 to simul_updateIsolationResponse
   set pace span * spanMult * global_distance_mult
   set isolateCompliant 0
-  if accept_isolation_draw < accept_isolation_prop and not always_spread [
+  if (accept_isolation_draw < accept_isolation_prop and not always_spread) or (color = red and hospFlag and timenow >= cohortHospTime) [
     if (Case_Isolation and (isolating = 1 or tracked = 1)) or (isolate_on_inf_notice and noticeOwnInfection = 1)[
       ifelse isolating = 1 and color != red
       [
@@ -233,9 +237,45 @@ end
 to simul_setNewInfection [variant]
   set color red
   set infectVariant variant
-  set asymptomaticFlag true
-  if random-float 1 > (LnOddsToPr (GetVariantSymptomaticLnOdds agerange variant)) [
-    set asymptomaticFlag false
+  
+  let symptProp (LnOddsToPr (GetVariantSymptomaticLnOdds agerange variant)) * 
+                (vaccine_getWanedParameter "reduceSympt" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
+                (vaccine_getWanedParameter "reduceSympt" variant recoverVaccine recoverDay 0 0)
+  let hospProp  (LnOddsToPr (GetVariantHospLnOdds agerange variant)) * 
+                (vaccine_getWanedParameter "reduceHosp" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
+                (vaccine_getWanedParameter "reduceHosp" variant recoverVaccine recoverDay 0 0)
+  let icuProp   (LnOddsToPr (GetVariantIcuLnOdds agerange variant)) * 
+                (vaccine_getWanedParameter "reduceHosp" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
+                (vaccine_getWanedParameter "reduceHosp" variant recoverVaccine recoverDay 0 0)
+  let mortProp  (LnOddsToPr (GetVariantDeathLnOdds agerange variant)) * 
+                (vaccine_getWanedParameter "reduceMort" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
+                (vaccine_getWanedParameter "reduceMort" variant recoverVaccine recoverDay 0 0)
+  
+  let severityDraw random-float 1
+  set asymptomaticFlag not (severityDraw < symptProp)
+  set hospFlag (severityDraw < hospProp)
+  
+  ;; Add deaths and hosp at the start of infection. The counts are delayed
+  let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
+  
+  let hospRiskMean  hospProp * popPerSimul
+  let icuRiskMean   icuProp * popPerSimul
+  let deathRiskMean mortProp * popPerSimul
+  
+  ;; Add hosp for dynamic policy
+  set hospToday_acc hospToday_acc + hospRiskMean
+  set deathcount deathcount + deathRiskMean
+  
+  ;; Add to data output metrics
+  array:set (item cohortHospTime hospArray) cohortIndex ((array:item (item cohortHospTime hospArray) cohortIndex) + hospRiskMean)
+  array:set (item cohortIcuTime icuArray) cohortIndex ((array:item (item cohortIcuTime icuArray) cohortIndex) + deathRiskMean)
+  array:set (item cohortDeathTime dieArray) cohortIndex ((array:item (item cohortDeathTime dieArray) cohortIndex) + deathRiskMean)
+  ifelse currentVaccine = 0
+  [
+    array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
+  ]
+  [
+    array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + popPerSimul
   ]
 end
 
@@ -244,7 +284,7 @@ end
 ;;*******************************************************************************************************************************
 
 to simul_record_patch_infectiveness
-  if color = red and currentVirulence > 0 [
+  if color = red and currentVirulence > 0 and not hospFlag [
     let localInfectiveness currentVirulence
     if wearingMask = 1 and Mask_Efficacy_Mult > 0 [
       set localInfectiveness (localInfectiveness * (1 - draw_maskWearEfficacy * Mask_Efficacy_Mult))
@@ -347,24 +387,6 @@ to simul_infect
                 set myScale localPatchScale
                 let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
                 
-                ;; Add deaths and hosp at the start of infection. The counts are delayed
-                ;; TODO add deaths and hosp
-                ;let adjDeathRisk riskOfDeath
-                ;let adjHospRisk riskOfHosp
-                ;if succeptibility < 1 [
-                ;  set adjDeathRisk adjDeathRisk * (AddLogOdds succeptibility vacMortChange)
-                ;  set adjHospRisk adjHospRisk * (AddLogOdds succeptibility vacHospChange)
-                ;]
-                ;let deathRiskMean adjDeathRisk * popPerSimul
-                ;let hospRiskMean adjHospRisk * popPerSimul
-                ; 
-                ;set deathcount deathcount + deathRiskMean
-                ;array:set dieArray cohortIndex (array:item dieArray cohortIndex) + deathRiskMean
-                ;array:set hospArray cohortIndex (array:item hospArray cohortIndex) + hospRiskMean
-                ;
-                ;; Add hosp for dynamic policy
-                ;set hospToday_acc hospToday_acc + hospRiskMean
-                
                 ;; Set infection status
                 simul_setNewInfection patchVariant
                 set contact_events 0
@@ -392,13 +414,6 @@ to simul_infect
                 set timenow 0
                 set infectionsToday_acc infectionsToday_acc + popPerSimul
                 set new_case_real_counter new_case_real_counter + popPerSimul
-                ifelse true ;; TODO check if vaccinated
-                [
-                  array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + popPerSimul
-                ]
-                [
-                  array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
-                ]
                 if track_R [
                   ask culpritSimul [
                     set R R + 1
@@ -605,8 +620,9 @@ to simul_isolateAndTrackFromHouseHold
     set tracked 1
   ]
   
+  ;; Track infected people in hospital or the household of a known case
   if color != red or (color = red and tracked = 0) [
-    ifelse table:has-key? houseTrackedCaseTimeTable householdunit and table:get houseTrackedCaseTimeTable householdunit = ticks
+    ifelse (table:has-key? houseTrackedCaseTimeTable householdunit and table:get houseTrackedCaseTimeTable householdunit = ticks) or (color = red and hospFlag and timenow >= cohortHospTime)
     [
       if color != red [
         set isolating 1

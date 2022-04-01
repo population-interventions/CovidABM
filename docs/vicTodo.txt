@@ -8,6 +8,7 @@ Courtney:
  How many people to vaccinate at the start of the model (1st April) and how long ago they had it.
     This is number of people with dose 2/3, when people with dose 2/3 started recieving it.
 
+Hospital length of stay per age (and for ICU too)
 Proportion of people who have recovered
 
 Josh (Tony?) to write:
@@ -16,6 +17,10 @@ Josh (Tony?) to write:
  f: age,variant -> icu chance
  f: age,variant -> death chance
 
-Mask efficacy of both types
+Asymptomatic trans estimate
 Revisit stage specifications
-Revisit policy triggers based on hospitatlisations
+Static offset in days for hosp, icu, mort
+mega isolation if hospitalised
+Revisit policy triggers based on hospitatlisations (hosp caculated at time of infection, take length of stay into account)
+
+Mask efficacy of both types (when you hit stage 2, a proportion of worn masks are upgraded).

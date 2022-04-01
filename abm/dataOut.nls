@@ -1,36 +1,23 @@
 
-to setup_DataOut
+to setup_DataOut [maxHospTime maxIcuTime maxDeathTime]
   set cohortLengthListOfZeros n-values length table:keys popDivisionTable [0]
   set infectNoVacArray array:from-list cohortLengthListOfZeros
   set infectVacArray array:from-list cohortLengthListOfZeros
-  set dieArray array:from-list cohortLengthListOfZeros
-  set hospArray array:from-list cohortLengthListOfZeros
   
-  set dieArray_listOut_0 cohortLengthListOfZeros
-  set dieArray_listOut_1 cohortLengthListOfZeros
-  set dieArray_listOut_2 cohortLengthListOfZeros
-  set dieArray_listOut_3 cohortLengthListOfZeros
-  set dieArray_listOut_4 cohortLengthListOfZeros
-  set dieArray_listOut_5 cohortLengthListOfZeros
-  set dieArray_listOut_6 cohortLengthListOfZeros
-  set dieArray_listOut_7 cohortLengthListOfZeros
-  set dieArray_listOut_8 cohortLengthListOfZeros
-  set dieArray_listOut_9 cohortLengthListOfZeros
-  set dieArray_listOut_10 cohortLengthListOfZeros
-  set dieArray_listOut_11 cohortLengthListOfZeros
-  set dieArray_listOut_12 cohortLengthListOfZeros
-  set dieArray_listOut_13 cohortLengthListOfZeros
+  set hospArray []
+  repeat maxHospTime + 1 [
+    set hospArray lput array:from-list cohortLengthListOfZeros hospArray
+  ]
   
-  set hospArray_listOut_0 cohortLengthListOfZeros
-  set hospArray_listOut_1 cohortLengthListOfZeros
-  set hospArray_listOut_2 cohortLengthListOfZeros
-  set hospArray_listOut_3 cohortLengthListOfZeros
-  set hospArray_listOut_4 cohortLengthListOfZeros
-  set hospArray_listOut_5 cohortLengthListOfZeros
-  set hospArray_listOut_6 cohortLengthListOfZeros
-  set hospArray_listOut_7 cohortLengthListOfZeros
-  set hospArray_listOut_8 cohortLengthListOfZeros
-  set hospArray_listOut_9 cohortLengthListOfZeros
+  set icuArray []
+  repeat maxIcuTime + 1 [
+    set icuArray lput array:from-list cohortLengthListOfZeros icuArray
+  ]
+  
+  set dieArray []
+  repeat maxDeathTime + 1 [
+    set dieArray lput array:from-list cohortLengthListOfZeros dieArray
+  ]
   
   set age_listOut []
   
@@ -51,38 +38,17 @@ to setup_DataOut
 end
 
 to calculateDataOut
-  set dieArray_listOut_0 dieArray_listOut_1
-  set dieArray_listOut_1 dieArray_listOut_2
-  set dieArray_listOut_2 dieArray_listOut_3
-  set dieArray_listOut_3 dieArray_listOut_4
-  set dieArray_listOut_4 dieArray_listOut_5
-  set dieArray_listOut_5 dieArray_listOut_6
-  set dieArray_listOut_6 dieArray_listOut_7
-  set dieArray_listOut_7 dieArray_listOut_8
-  set dieArray_listOut_8 dieArray_listOut_9
-  set dieArray_listOut_9 dieArray_listOut_10
-  set dieArray_listOut_10 dieArray_listOut_11
-  set dieArray_listOut_11 dieArray_listOut_12
-  set dieArray_listOut_12 dieArray_listOut_13
-  set dieArray_listOut_13 array:to-list dieArray
-  
-  set hospArray_listOut_0 hospArray_listOut_1
-  set hospArray_listOut_1 hospArray_listOut_2
-  set hospArray_listOut_2 hospArray_listOut_3
-  set hospArray_listOut_3 hospArray_listOut_4
-  set hospArray_listOut_4 hospArray_listOut_5
-  set hospArray_listOut_5 hospArray_listOut_6
-  set hospArray_listOut_6 hospArray_listOut_7
-  set hospArray_listOut_7 hospArray_listOut_8
-  set hospArray_listOut_8 hospArray_listOut_9
-  set hospArray_listOut_9 array:to-list hospArray
+  set hospArray lput array:from-list cohortLengthListOfZeros (but-first hospArray)
+  set icuArray lput array:from-list cohortLengthListOfZeros (but-first icuArray)
+  set dieArray lput array:from-list cohortLengthListOfZeros (but-first dieArray)
   
   if start_metric_threshold < 0 [
     ;print "doDataOut"
     set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
     set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
-    set dieArray_listOut lput dieArray_listOut_0 dieArray_listOut
-    set hospArray_listOut lput hospArray_listOut_0 hospArray_listOut
+    set dieArray_listOut lput (array:to-list item 0 dieArray) dieArray_listOut
+    set icuArray_listOut lput (array:to-list item 0 icuArray) icuArray_listOut
+    set hospArray_listOut lput (array:to-list item 0 hospArray) hospArray_listOut
     set case_listOut lput casesReportedToday case_listOut
     set case7_listOut lput casesinperiod7 case7_listOut
     set case14_listOut lput casesinperiod14 case14_listOut
@@ -91,8 +57,6 @@ to calculateDataOut
     
     set infectNoVacArray array:from-list cohortLengthListOfZeros
     set infectVacArray array:from-list cohortLengthListOfZeros
-    set dieArray array:from-list cohortLengthListOfZeros
-    set hospArray array:from-list cohortLengthListOfZeros
     
     if stage = 0 [
       set stage1time stage1time + 1
