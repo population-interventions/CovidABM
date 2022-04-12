@@ -1,0 +1,7 @@
+
+to-report AddToList [myList myIndex myValue]
+  if myIndex < 0 [
+    report myList 
+  ]
+  report (replace-item myIndex myList (myValue + item myIndex myList))
+end

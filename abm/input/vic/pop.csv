@@ -1,11 +1,12 @@
-totalAgents,age,essentialCount,workerCount,studentCount,spanMult,gatherFreqMult,region,succeptibleMult,uptake,vaccineBranch,vaccineSuffix,hospTime,icuTime,deathTime,recover_noVac,recover_dose2,recover_dose3,recoverMaxDay,dose_2,daysDose_2,doseName_2,dose_3,daysDose_3,doseName_3,comment
-330,5,0,0,160,1,1,1,0.5,1,young,,9,3,6,17,33,92,100,66,100,cur_2,231,100,cur_2,
-222,15,0,60,200,1,1,1,0.5,1,young,,9,3,6,12,22,62,100,44,100,cur_2,155,100,cur_2,
-384,25,114,322,0,1,1,1,0.5,1,old,,9,3,6,19,39,108,100,77,100,cur_2,269,100,cur_3,
-338,35,92,284,0,1,1,1,0.5,1,old,,9,3,6,17,34,95,100,68,100,cur_2,237,100,cur_3,
-311,45,78,274,0,1,1,1,0.5,1,old,,9,3,6,16,31,87,100,62,100,cur_2,218,100,cur_3,
-342,55,16,212,0,1,1,1,1,1,old,,9,3,6,18,34,96,100,68,100,cur_2,239,100,cur_3,
-291,65,0,68,9,1,1,1,1,1,old,_60,9,3,6,15,29,82,100,58,100,cur_2,204,100,cur_3,
-180,75,0,23,0,1,1,1,1,1,old,_60,9,3,6,9,18,50,100,36,100,cur_2,126,100,cur_3,
-82,85,0,12,0,1,1,1,1,1,old,_60,9,3,6,5,8,23,100,16,100,cur_2,57,100,cur_3,
-20,95,0,3,0,1,1,1,1,1,old,_60,9,3,6,1,2,6,100,4,100,cur_2,14,100,cur_3,
+totalAgents,age,essentialCount,workerCount,studentCount,spanMult,gatherFreqMult,region,succeptibleMult,uptake,vaccineBranch,vaccineSuffix,hospTime,icuTime,deathTime,hospLengthBase,recover_noVac,recover_dose2,recover_dose3,recoverMaxDay,dose_2,daysDose_2,doseName_2,dose_3,daysDose_3,doseName_3,comment
+301,5,0,0,160,1,1,1,0.5,1,young,,14,17,20,7,17,33,92,100,0,0,cur_2,65,23,cur_2,
+289,15,0,60,200,1,1,1,0.5,1,young,,14,17,20,7,12,22,62,100,0,0,cur_2,186,251,cur_2,"10-20 yr olds with dose 2 should receive dose 3 during the simulation, so they are put in the ""dose 3"" vaccination as this is required for them to be considered for further vaccination."
+48,15,0,48,48,1,1,1,0.5,1,old,,14,17,20,7,12,22,62,100,0,0,cur_2,48,65,cur_3,10-20 yr olds with dose 3
+356,25,114,322,0,1,1,1,0.5,1,old,,14,17,20,7,19,39,108,100,152,254,cur_2,158,81,cur_3,
+387,35,92,284,0,1,1,1,0.5,1,old,,14,17,20,7,17,34,95,100,145,261,cur_2,217,89,cur_3,
+321,45,78,274,0,1,1,1,0.5,1,old,,14,17,20,7,16,31,87,100,90,335,cur_2,219,111,cur_3,
+300,55,16,212,0,1,1,1,1,1,old,,14,17,20,7,18,34,96,100,66,324,cur_2,223,108,cur_3,
+256,65,0,68,9,1,1,1,1,1,old,_60,14,17,20,7,15,29,82,100,41,321,cur_2,208,110,cur_3,
+182,75,0,23,0,1,1,1,1,1,old,_60,14,17,20,7,9,18,50,100,20,350,cur_2,160,117,cur_3,
+81,85,0,12,0,1,1,1,1,1,old,_60,14,17,20,7,5,8,23,100,9,350,cur_2,71,117,cur_3,
+27,95,0,3,0,1,1,1,1,1,old,_60,14,17,20,7,1,2,6,100,3,350,cur_2,24,117,cur_3,

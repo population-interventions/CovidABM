@@ -19,8 +19,23 @@ Josh (Tony?) to write:
 
 Asymptomatic trans estimate
 Revisit stage specifications
-Static offset in days for hosp, icu, mort
-mega isolation if hospitalised
+Static offset in days for hosp, icu, mort - Done
+mega isolation if hospitalised - Done
 Revisit policy triggers based on hospitatlisations (hosp caculated at time of infection, take length of stay into account)
 
 Mask efficacy of both types (when you hit stage 2, a proportion of worn masks are upgraded).
+
+=== My notes and todo ===
+R0 8 may be too low, there are a lot of things driving down transmission.
+
+Todo:
+ - Mask input parameters and stage 2 application of mask++
+ - Calibration
+
+==================
+Drawing outcomes
+Masks
+Mention vaccination time
+Infection time?
+
+length of stay mult in variant

@@ -27,6 +27,8 @@ __includes[
   "debug.nls"
   "dataOut.nls"
   "ageVarParams.nls"
+  "util.nls"
+  "mask.nls"
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -362,7 +364,7 @@ INPUTBOX
 373
 263
 initial_cases
-5000.0
+20000.0
 1
 0
 Number
@@ -373,7 +375,7 @@ INPUTBOX
 335
 437
 total_population
-2.34E8
+6649066.0
 1
 0
 Number
@@ -680,10 +682,10 @@ MaskPolicy
 -1000
 
 SLIDER
-432
-988
-632
-1021
+808
+1027
+1008
+1060
 Case_Reporting_Delay
 Case_Reporting_Delay
 0
@@ -826,10 +828,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-12
-382
-181
-415
+463
+704
+655
+738
 Vaccine_Enabled
 Vaccine_Enabled
 0
@@ -992,7 +994,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4" "continuous"
-5
+4
 
 MONITOR
 1473
@@ -1038,10 +1040,10 @@ PENS
 "KnowContact" 1.0 0 -13840069 true "" "plot count simuls with [hasKnownContact and color = red] * globalPopPerSimul"
 
 SLIDER
-432
-909
-631
-942
+807
+944
+1006
+977
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
 0
@@ -1322,10 +1324,10 @@ recoverProportion * 100
 14
 
 SLIDER
-443
-834
-645
-867
+818
+869
+1020
+902
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
@@ -1545,10 +1547,10 @@ MONITOR
 11
 
 SLIDER
-438
-873
-636
-906
+813
+908
+1011
+941
 Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
@@ -1627,7 +1629,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
--1.0
+0.0
 1
 1
 NIL
@@ -1847,10 +1849,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2737
-357
-2944
-390
+2748
+358
+2952
+391
 isoComply_override
 isoComply_override
 -0.01
@@ -2012,10 +2014,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-579
-697
-769
-730
+464
+789
+654
+822
 init_trace_prop
 init_trace_prop
 0
@@ -2048,15 +2050,15 @@ compound_input
 0
 
 SLIDER
-8
-253
-198
-286
+464
+744
+654
+777
 param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.75
+0.8
 0.05
 1
 NIL
@@ -2172,10 +2174,10 @@ data_suffix
 12
 
 SLIDER
-432
-948
-631
-981
+808
+987
+1007
+1020
 pre_present_iso
 pre_present_iso
 0
@@ -3048,14 +3050,14 @@ Days Since Vac
 NIL
 NIL
 0.0
-150.0
+250.0
 0.0
 10.0
 true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "" "histogram [ days - vaccineDay ] of simuls"
+"default" 5.0 1 -16777216 true "" "histogram [ days - vaccineDay ] of simuls with [currentVaccine != 0]"
 
 CHOOSER
 1598
@@ -3068,10 +3070,10 @@ param_force_vaccine
 0
 
 PLOT
-1244
-125
-1444
-275
+1240
+63
+1460
+183
 plot 1
 NIL
 NIL
@@ -3085,6 +3087,24 @@ false
 PENS
 "default" 1.0 0 -16777216 true "" "histogram [ agerange ] of simuls with [ color = red and asymptomaticFlag]"
 "pen-1" 1.0 0 -7500403 true "" "histogram [ agerange ] of simuls with [ color = red]"
+
+PLOT
+1240
+200
+1440
+350
+plot 2
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "" "histogram [ myScale ] of simuls with [ color = red ]"
 
 @#$#@#$#@
 ## WHAT IS IT?

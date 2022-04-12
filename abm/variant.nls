@@ -1,6 +1,5 @@
 
 to-report getRandomInitVariant
-  let stream_id variantSeedID
   ; TODO, read init_prop
   report "alpha"
 end
@@ -52,6 +51,7 @@ to setup_variantData
     set index index + 1    let incubation_spread (item index x)
     set index index + 1    let duration_mean     (item index x)
     set index index + 1    let duration_spread   (item index x)
+    set index index + 1    let hospLengthMult    (item index x)
     set index index + 1    let init_variant      (item index x)
     set index index + 1    let recoverVac        (item index x)
     
@@ -75,6 +75,7 @@ to setup_variantData
     table:put data "non_infect_time" non_infect_time
     table:put data "init_variant" init_variant
     table:put data "recoverVac" recoverVac
+    table:put data "hospLengthMult" hospLengthMult
     
     table:put variantData name data
     table:put recoverCountByVariant name 0

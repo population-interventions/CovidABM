@@ -41,9 +41,10 @@ to loadPopDivisionTable
     set index index + 1    table:put cohortData "vaccineUptake" item index x
     set index index + 1    table:put cohortData "vaccineBranch" item index x
     set index index + 1    table:put cohortData "vaccineSuffix" item index x
-    set index index + 1    table:put cohortData "hospTime" item index x
-    set index index + 1    table:put cohortData "icuTime" item index x
-    set index index + 1    table:put cohortData "deathTime" item index x
+    set index index + 1    table:put cohortData "hospDay" item index x
+    set index index + 1    table:put cohortData "icuDay" item index x
+    set index index + 1    table:put cohortData "deathDay" item index x
+    set index index + 1    table:put cohortData "hospLengthBase" item index x
     set index index + 1    table:put cohortData "recover_noVac" item index x
     set index index + 1    table:put cohortData "recover_dose2" item index x
     set index index + 1    table:put cohortData "recover_dose3" item index x
@@ -144,6 +145,7 @@ to createSimulants
   let cohort_hospTime 0
   let cohort_icuTime 0
   let cohort_deathTime 0
+  let cohort_hospLengthBase 0
   
   let maxHospTime  0
   let maxIcuTime   0
@@ -157,22 +159,23 @@ to createSimulants
       if not table:has-key? popDivisionTable pop_index [
         print "totalAgents in population.csv sums to less than Population (2500)." 
       ]
-      let cohortData table:get popDivisionTable pop_index
-      set cohort_pop table:get cohortData "pop"
-      set cohort_age table:get cohortData "age"
+      let cohortData            table:get popDivisionTable pop_index
+      set cohort_pop            table:get cohortData "pop"
+      set cohort_age            table:get cohortData "age"
       set cohort_essentialCount table:get cohortData "essentialCount"
-      set cohort_workerCount table:get cohortData "workerCount"
-      set cohort_studentCount table:get cohortData "studentCount"
-      set cohort_spanMult table:get cohortData "spanMult"
+      set cohort_workerCount    table:get cohortData "workerCount"
+      set cohort_studentCount   table:get cohortData "studentCount"
+      set cohort_spanMult       table:get cohortData "spanMult"
       set cohort_gatherFreqMult table:get cohortData "gatherFreqMult"
-      set cohort_region table:get cohortData "region"
-      set cohort_succeptMult table:get cohortData "succeptMult"
-      set cohort_vaccineUptake table:get cohortData "vaccineUptake"
-      set cohort_vaccineBranch table:get cohortData "vaccineBranch"
-      set cohort_vaccineSuffix table:get cohortData "vaccineSuffix"
-      set cohort_hospTime table:get cohortData "hospTime"
-      set cohort_icuTime table:get cohortData "icuTime"
-      set cohort_deathTime table:get cohortData "deathTime"
+      set cohort_region         table:get cohortData "region"
+      set cohort_succeptMult    table:get cohortData "succeptMult"
+      set cohort_vaccineUptake  table:get cohortData "vaccineUptake"
+      set cohort_vaccineBranch  table:get cohortData "vaccineBranch"
+      set cohort_vaccineSuffix  table:get cohortData "vaccineSuffix"
+      set cohort_hospTime       table:get cohortData "hospDay"
+      set cohort_icuTime        table:get cohortData "icuDay"
+      set cohort_deathTime      table:get cohortData "deathDay"
+      set cohort_hospLengthBase table:get cohortData "hospLengthBase"
       
       ;print (word "cohort_wane_1: " cohort_wane_1 ", cohort_wane_2: " cohort_wane_2 ", cohort_wane_3: " cohort_wane_3)
       set oldCohortIndex pop_index
@@ -228,6 +231,7 @@ to createSimulants
       set cohortHospTime cohort_hospTime
       set cohortIcuTime cohort_icuTime
       set cohortDeathTime cohort_deathTime
+      set cohortHospLengthBase cohort_hospLengthBase
       
       set vaccBanch cohort_vaccineBranch
       set vaccReceptive false
@@ -402,7 +406,6 @@ to setGlobals
   set casesReportedToday         0
   set casesReportedToday_acc     0
   set hospToday                  0
-  set hospToday_acc              0
   set totalHosp                  0
   set ICUBedsRequired            0
   set scaled_Bed_Capacity        0
@@ -642,6 +645,8 @@ to setup
   loadPopDivisionTable
   loadRegionTable
   resetAccumulators
+  setupPipes
+  setup_mask
 
   ;;import-drawing "Background1.png" ;; imports MSD image
   set days 0 ; used to count days
@@ -690,15 +695,14 @@ to setup
   ]
   
   ask n-of ( initial_primary / popPerSimul ) potentialInitCases [
-    simul_setNewInfection getRandomInitVariant
+    set myScale scalePhase
+    simul_setNewInfection getRandomInitVariant (random (floor min (list init_timenow_limit ownIllnessPeriod)))
     set isInitialInfection true
     set contributeToR false
     set infectedContactList table:make
     set hasKnownContact false
-    set myScale scalePhase
     simul_updateVariantParams
     
-    set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
     if trace_calibration > 0 [
       set cali_timenow timenow
       set cali_asymptomaticFlag asymptomaticFlag
@@ -725,12 +729,12 @@ to setup
   ask potentialInitCases [
     let nearSimuls (other simuls in-radius 2 with [ color = red ])
     if init_secondry_infect > popPerSimul and any? nearSimuls [
-      simul_setNewInfection getRandomInitVariant
+      set myScale scalePhase
+      simul_setNewInfection getRandomInitVariant (random (floor min (list init_timenow_limit ownIllnessPeriod)))
       set isInitialInfection true
       set contributeToR false
       set infectedContactList table:make
       set hasKnownContact false
-      set myScale scalePhase
       
       let nearSimul one-of nearSimuls
       let thisSimul self
@@ -744,7 +748,6 @@ to setup
       ]
       simul_updateVariantParams
       
-      set timenow random (floor min (list init_timenow_limit ownIllnessPeriod))
       set init_secondry_infect init_secondry_infect - popPerSimul
       set infectionsToday_acc infectionsToday_acc + popPerSimul
       ;; Do not add to infection output as it makes for poor traces.

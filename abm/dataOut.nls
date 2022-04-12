@@ -38,10 +38,6 @@ to setup_DataOut [maxHospTime maxIcuTime maxDeathTime]
 end
 
 to calculateDataOut
-  set hospArray lput array:from-list cohortLengthListOfZeros (but-first hospArray)
-  set icuArray lput array:from-list cohortLengthListOfZeros (but-first icuArray)
-  set dieArray lput array:from-list cohortLengthListOfZeros (but-first dieArray)
-  
   if start_metric_threshold < 0 [
     ;print "doDataOut"
     set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
@@ -86,6 +82,10 @@ to calculateDataOut
       set midReport_casesinperiod7_max           casesinperiod7_max
     ]
   ]
+  
+  set hospArray lput array:from-list cohortLengthListOfZeros (but-first hospArray)
+  set icuArray lput array:from-list cohortLengthListOfZeros (but-first icuArray)
+  set dieArray lput array:from-list cohortLengthListOfZeros (but-first dieArray)
 end
 
 to checkCalibrationStop

@@ -29,17 +29,25 @@ globals [
   Scale_Factor
   Days
   CaseFatalityRate
+  defaultStream
+  
+  deathTodayPipe
+  hospTodayPipe
+  hospUsagePipe
+  
   DeathCount
+  hospToday
+  totalHosp
+  hospUsage
+  
   recovercount
   recoverCountByVariant
+  
   dailyRecoverMult
   recoverProportion ; Proportion of the living population that has recovered.
   casesReportedToday
   casesReportedToday_acc ; Accumulator for casesReportedToday
   totalCasesReported
-  hospToday
-  hospToday_acc ; Accumulator for hospToday
-  totalHosp
   ICUBedsRequired
   scaled_Bed_Capacity
   currentInfections
@@ -263,6 +271,9 @@ globals [
   draw_pta_modifier
   draw_isolationCompliance
   draw_maskWearEfficacy
+  draw_maskWearEfficacy_upgraded
+  draw_maskUpgradeProp
+  draw_maskUpgradeStage
   draw_borderIncursionRisk
   
   incursionTable

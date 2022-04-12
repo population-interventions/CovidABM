@@ -2,6 +2,40 @@
 ;;** Counting things, often with scale involved **
 ;;*******************************************************************************************************************************
 
+to setupPipes
+  let pipeZeros n-values 40 [0]
+  
+  set deathTodayPipe pipeZeros
+  set hospTodayPipe  pipeZeros
+  set hospUsagePipe  pipeZeros
+end
+
+to updatePipes
+  set deathCount (item 0 deathTodayPipe)
+  set hospToday  (item 0 hospTodayPipe)
+  set hospUsage  (item 0 hospUsagePipe)
+  
+  set deathTodayPipe lput 0 (but-first deathTodayPipe)
+  set hospTodayPipe  lput 0 (but-first hospTodayPipe)
+  set hospUsagePipe  lput 0 (but-first hospUsagePipe)
+end
+
+to simul_AddDeathHospToPipes [hasHosp popPerSimul varHospLengthMult deathMean]
+  set deathTodayPipe AddToList deathTodayPipe (cohortHospTime - timenow) deathMean
+  
+  if hasHosp [
+    set hospTodayPipe AddToList hospTodayPipe (cohortHospTime - timenow) popPerSimul
+    let i 0
+    let hospLength floor (varHospLengthMult * cohortHospLengthBase + 0.5 * rngs:rnd-beta defaultStream 1 1)
+    repeat hospLength [
+      if cohortHospTime - timenow + i >= 0 [
+        set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + 1) popPerSimul
+      ]
+      set i i + 1 
+    ]
+  ]
+end
+
 to printVaccineProgress
   ;let doubleDoseAdult count simuls with [ doseCount >= 2 and agerange > 15 ]
   ;let doubleDose16_17 count simuls with [ doseCount >= 2 and agerange = 15 ]
@@ -23,7 +57,7 @@ to updateCounts
   
   ;let casesToday count simuls with [ color = red and tracked = 1 and caseReportTime = ticks ]
   set casesReportedToday casesReportedToday_acc
-  set hospToday hospToday_acc
+  updatePipes
   
   ;; calculates the number of infected people in the population
   let redLower simuls with [color = red and myScale = scalePhase]
@@ -83,7 +117,6 @@ to resetAccumulators
   
   set infectionsToday_acc 0
   set casesReportedToday_acc 0
-  set hospToday_acc 0
   
   set new_case_real new_case_real_counter
   set new_case_real_counter 0

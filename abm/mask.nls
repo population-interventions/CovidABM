@@ -1,0 +1,17 @@
+
+to setup_mask
+  
+  ;set sqrt of rngs:rnd-beta stream_id 24.3 8.08
+  set draw_maskWearEfficacy rngs:rnd-beta defaultStream 40 60
+  
+  set draw_maskWearEfficacy_upgraded rngs:rnd-beta defaultStream 70 30
+  set draw_maskUpgradeProp 0.8
+  set draw_maskUpgradeStage 2
+end
+
+to-report simul_getMaskEfficacy
+  if stage < draw_maskUpgradeStage or rngs:rnd-beta defaultStream 1 1 < draw_maskUpgradeProp [
+    report draw_maskWearEfficacy * Mask_Efficacy_Mult
+  ]
+  report draw_maskWearEfficacy_upgraded * Mask_Efficacy_Mult
+end
