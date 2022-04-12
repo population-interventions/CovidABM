@@ -246,17 +246,21 @@ to createSimulants
       set report_case_draw random-float 1
       set accept_isolation_draw random-float 1
       
-      ifelse self_iso_at_peak
+      ifelse random-float 1 < _sympt_iso_prop
       [
-        set symtomatic_present_day_draw floor (ownIncubationPeriod_raw + pre_present_iso + random-float 1)
+        ifelse self_iso_at_peak
+        [
+          set symtomatic_present_day floor (ownIncubationPeriod_raw + pre_present_iso + random-float 1)
+        ]
+        [
+          set symtomatic_present_day round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
+        ]
+        set symtomatic_present_day round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
       ]
       [
-        set symtomatic_present_day_draw round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
+        set symtomatic_present_day -1
       ]
       
-      set present_draw random-float 1
-      set symtomatic_present_day_draw round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
-
       set requireICU 0
       set requireICU_draw random-float 1
 
@@ -288,7 +292,7 @@ end
 
 
 to setupInitialVaccination
-  if Vaccine_Enabled [
+  if _vaccine_enabled [
     let initRecoverVar getInitRecoverVariant
     foreach table:keys popDivisionTable [ popIndex ->
       let cohort table:get populationCohortCache popIndex
@@ -491,7 +495,6 @@ to setGlobals
   set h_prior22                  preSimDailyHosp
   set h_prior23                  preSimDailyHosp
   
-  set start_metric_threshold     init_metric_threshold
   set start_day                  0
   
   set real_prior0                0
@@ -675,8 +678,8 @@ to setup
   ]
   set destination_patches patches with [ destination = 1 ]
 
-  set initial_primary ceiling (initial_primary_prop * initial_cases)
-  set initial_secondary (initial_cases - initial_primary)
+  set initial_primary ceiling (initial_primary_prop * _initial_cases)
+  set initial_secondary (_initial_cases - initial_primary)
   
   ;; set up initial infected people
   scale_setup
@@ -708,7 +711,7 @@ to setup
       set cali_asymptomaticFlag asymptomaticFlag
       set cali_symtomatic_present_day symtomatic_present_day
     ]
-    if random-float 1 < init_trace_prop [
+    if random-float 1 < _init_trace_prop [
       simul_applyTrace 
     ]
     set infectionsToday_acc infectionsToday_acc + 1
@@ -743,7 +746,7 @@ to setup
         table:put infectedContactList table:length infectedContactList thisSimul
       ]
       
-      if random-float 1 < init_trace_prop [
+      if random-float 1 < _init_trace_prop [
        simul_applyTrace 
       ]
       simul_updateVariantParams

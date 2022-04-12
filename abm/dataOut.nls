@@ -38,7 +38,7 @@ to setup_DataOut [maxHospTime maxIcuTime maxDeathTime]
 end
 
 to calculateDataOut
-  if start_metric_threshold < 0 [
+  if _init_metric_threshold < 0 [
     ;print "doDataOut"
     set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
     set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
@@ -70,7 +70,7 @@ to calculateDataOut
       set stage4time stage4time + 1
     ]
     
-    if start_metric_threshold < 0 and ticks < param_stage1_time [
+    if _init_metric_threshold < 0 and ticks < param_stage1_time [
       set casesinperiod7_switchTime casesinperiod7
       set cumulativeInfected_switchTime cumulativeInfected
     ]

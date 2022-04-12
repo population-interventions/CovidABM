@@ -112,6 +112,19 @@ to params_setDrawValues
   
   param_updateRecoverImmune
   
+  ;; Copy UI variables so as to no overwrite their modification
+  ;; Ideally UI variables would be read-only to cut down on misspecifictation
+  set _initial_cases           initial_cases
+  set _param_incur_phase_limit param_incur_phase_limit
+  set _vaccine_enabled         vaccine_enabled
+  set _policy_pipeline         policy_pipeline
+  set _init_timenow_limit      init_timenow_limit
+  set _init_metric_threshold   init_metric_threshold
+  set _param_vacIncurMult      param_vacIncurMult
+  set _param_incurMult         param_incurMult
+  set _init_trace_prop         init_trace_prop
+  set _sympt_iso_prop          sympt_iso_prop
+  
   ;; Ignore cases reported before this day, due to initial spike
   set IGNORE_CASE_UNTIL 3
   params_updateTrace
@@ -166,14 +179,15 @@ to params_setDrawValues
   
   ;; R calibration
   if first_case_calibrate [
-    set initial_cases 1
-    set param_incur_phase_limit 0
-    set Vaccine_Enabled false
-    set policy_pipeline "None"
-    set init_timenow_limit 0
-    set start_metric_threshold -10
-    set param_vacIncurMult 0
-    set param_incurMult 0
+    set _initial_cases 1
+    set _param_incur_phase_limit 0
+    set _vaccine_enabled false
+    set _policy_pipeline "None"
+    set _init_timenow_limit 0
+    set _init_metric_threshold -10
+    set _init_trace_prop 0
+    set _param_vacIncurMult 0
+    set _param_incurMult 0
   ]
   
   if param_policy_force_preset > 0 [

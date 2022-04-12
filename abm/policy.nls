@@ -56,7 +56,7 @@ end
 ;;;*********************************************************************************************************************
 
 to updatePolicyPipeline
-  if start_metric_threshold < 0 [
+  if _init_metric_threshold < 0 [
     if policy_pipeline = "ME_TS_S1" [
       ifelse ticks - start_day < 2 * policy_pipe_time 
       [

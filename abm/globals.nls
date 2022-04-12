@@ -144,7 +144,17 @@ globals [
   initial_primary
   initial_secondary
   start_day
-  start_metric_threshold
+  
+  _initial_cases
+  _param_incur_phase_limit
+  _vaccine_enabled
+  _policy_pipeline
+  _init_timenow_limit
+  _init_metric_threshold
+  _param_vacIncurMult
+  _param_incurMult
+  _init_trace_prop
+  _sympt_iso_prop
   
   real_prior0
   real_prior1

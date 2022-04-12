@@ -65,7 +65,7 @@ to simul_traceme
   ;; Symtomatic people automatically trace themselves on symtomatic_present_day of their infection (with the day of infection being day 0) 
   ifelse color = red 
   [
-    if noticeOwnInfection = 0 and (symtomatic_present_day > -1 and timenow >= symtomatic_present_day - pre_present_iso) [
+    if noticeOwnInfection = 0 and (not asymptomaticFlag) and (symtomatic_present_day > -1 and timenow >= symtomatic_present_day - pre_present_iso) [
       set noticeOwnInfection 1
     ]
     if tracking and tracked != 1 [

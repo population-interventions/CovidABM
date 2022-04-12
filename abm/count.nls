@@ -86,9 +86,9 @@ to updateCounts
   set globalPopPerSimul scaledPopulation / Population
 
   ;; calculates the number of people infected and recorded today
-  if start_metric_threshold < 0 [
+  if _init_metric_threshold < 0 [
     set cumulativeInfected cumulativeInfected + infectionsToday
-    set cumulativeInfected_minusInit cumulativeInfected - initial_cases
+    set cumulativeInfected_minusInit cumulativeInfected - _initial_cases
     set totalCasesReported totalCasesReported + casesReportedToday
     set totalHosp totalHosp + hospToday
   ]
@@ -175,7 +175,7 @@ to outputLockdownCalibrate
    set stop_simulation true 
   ]
   
-  if start_metric_threshold < 0 and slope_track_start > ticks - start_day and (slope_prior0 > 0 and slope_prior1 > 0 and 
+  if _init_metric_threshold < 0 and slope_track_start > ticks - start_day and (slope_prior0 > 0 and slope_prior1 > 0 and 
       slope_prior2 > 0 and slope_prior3 > 0 and slope_prior4 > 0 and slope_prior5 > 0 and slope_prior6 > 0)  [
     ;show ( word "4: " slope_prior4 ", 3: " slope_prior3 ", 2: " slope_prior2 ", 1: " slope_prior1 ", 0: " slope_prior0 )
     let linearRegress matrix:forecast-linear-growth ( list ln(slope_prior6) ln(slope_prior5) ln(slope_prior4) ln(slope_prior3) ln(slope_prior2) ln(slope_prior1) ln(slope_prior0) )
@@ -325,14 +325,14 @@ to calculateCasesInLastPeriod
 end
 
 to checkStartThreshold
-  if start_metric_threshold > -1 [
+  if _init_metric_threshold > -1 [
     let compareNumber casesinperiod7 / 7
     if realNotCaseThres [
       set compareNumber infectionsinperiod7 / 7
     ]
     set start_day ticks
-    if compareNumber > start_metric_threshold [
-      set start_metric_threshold -1
+    if compareNumber > _init_metric_threshold [
+      set _init_metric_threshold -1
       ;print (word "start_day " start_day ", cases " (casesinperiod7 / 7))
     ]
   ]

@@ -55,6 +55,9 @@ to setup_variantData
     set index index + 1    let init_variant      (item index x)
     set index index + 1    let recoverVac        (item index x)
     
+    if trans_override > 0 [
+     set trans_mean trans_override 
+    ]
     ; Parameters for simulants to draw their own transmissibility
     let trans_n trans_mean * ( 1 - trans_mean ) / (trans_std ^ 2)
     table:put data "trans_a" trans_mean * trans_n

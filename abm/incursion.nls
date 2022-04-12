@@ -26,7 +26,7 @@ to incursion_update
   if days >= incursionPhaseEndDay [
     if table:has-key? incursionTable (incursionPhaseIndex + 1) [
       set incursionPhaseIndex incursionPhaseIndex + 1
-      if param_incur_phase_limit = -1 or incursionPhaseIndex <= param_incur_phase_limit [
+      if _param_incur_phase_limit = -1 or incursionPhaseIndex <= _param_incur_phase_limit [
         let phaseData table:get incursionTable incursionPhaseIndex
         let phaseDays (item 0 phaseData) * incursion_phase_speed_mult
         
@@ -44,7 +44,7 @@ to incursion_update
   
   let peoplePerSimul scaledPopulation * extraScaleFactor / Population
   if global_incursionArrivals > 0 [
-    ask n-of (floor (global_incursionArrivals * param_incurMult + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
+    ask n-of (floor (global_incursionArrivals * _param_incurMult + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
       if draw_borderIncursionRisk * global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
         set color red
         set contributeToR true
@@ -71,7 +71,7 @@ to incursion_update
   ]
   
   if global_incursionVaccArrivals > 0 [
-    ask n-of (floor ((global_incursionVaccArrivals * param_vacIncurMult) + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
+    ask n-of (floor ((global_incursionVaccArrivals * _param_vacIncurMult) + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
       if global_incursionVaccRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
         set color red
         set contributeToR true

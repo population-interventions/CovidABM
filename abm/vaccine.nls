@@ -142,7 +142,7 @@ to vaccine_updateSchedule
 end
 
 to vaccine_update
-  if Vaccine_Enabled = True and days > 0 [
+  if _vaccine_enabled and days > 0 [
     vaccine_updateSchedule
     
     foreach table:keys vaccineBranchAvailible [ branch -> 

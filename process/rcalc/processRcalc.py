@@ -11,21 +11,6 @@ import matplotlib.ticker as ticker
 import seaborn as sns
 #from tqdm import tqdm
 
-def Process(path, name):
-	df = pd.read_csv(path + name + '.csv', header=6)
-	df = df[['draw_index', '[step]', 'average_R', 'global_transmissibility', 'init_cases_region']]
-	lastStep = df['[step]'].max()
-	df = df[df['[step]'] == lastStep]
-	df = df[['draw_index', 'average_R_all_regions', 'global_transmissibility', 'init_cases_region']]
-	
-	df = df.set_index(['draw_index', 'global_transmissibility', 'init_cases_region'])
-	
-	df = df.unstack(level=-1)
-	df.columns = df.columns.get_level_values(1)
-	df.to_csv(path + name + '_process.csv')
-	df.describe().to_csv(path + name + '_metric.csv')
-	print(df.describe())
-
 
 def AddIfVaryingValue(colName, df, desiredIndex, toUnstack):
 	inTest = (colName in df.columns and (len(df[colName].unique()) > 1))
@@ -38,19 +23,16 @@ def AddIfVaryingValue(colName, df, desiredIndex, toUnstack):
 	return df, desiredIndex, toUnstack
 
 
-def ProcessVariableEnd(nameList, metricName):
-	interestingColumns = [
-		'draw_index', metricName, 'param_policy', 
-		'global_transmissibility', 'init_cases_region'
-	]
+def ProcessVariableEnd(nameList, metricName, simIndex, index):
+	interestingColumns = [simIndex, metricName] + index
 	df = pd.DataFrame(columns=interestingColumns)
 	for v in nameList:
 		pdf = pd.read_csv(v + '.csv', header=6)
 		pdf = pdf[interestingColumns]
 		df  = df.append(pdf)
 	
-	desiredIndex = ['draw_index', 'param_policy', 'global_transmissibility', 'init_cases_region']
-	toUnstack = 3
+	desiredIndex = [simIndex] + index
+	toUnstack = len(desiredIndex) - 1
 	
 	#df, desiredIndex, toUnstack = AddIfVaryingValue('testName', df, desiredIndex, toUnstack)
 	#df, desiredIndex, toUnstack = AddIfVaryingValue('gather_location_count', df, desiredIndex, toUnstack)
@@ -70,7 +52,7 @@ def ProcessVariableEnd(nameList, metricName):
 	
 
 def MakePlot(
-		df, varName,
+		df, varName, simIndex, index,
 		topLevelFilter=False,
 		yTop=False,
 		yDomain=(-0.2, 9.2),
@@ -79,7 +61,8 @@ def MakePlot(
 		hlines=False,
 		figWidth=48.5,
 		figHeight= 40,
-		saveID=False):
+		saveID=False,
+		path=''):
 	
 	if yTop:
 		yDomain = (-0.2, yTop - 0.8)
@@ -87,8 +70,8 @@ def MakePlot(
 		yminticks = [i/5 for i in range(int(5*yTop))]
 	
 	xLabel = df.columns.names[1]
-	transmit_vals = list(dict.fromkeys(['r{}_{}_{}'.format(v[1], v[2], v[3]) for v in df.columns]))
-	policy_vals = list(dict.fromkeys([v[2] for v in df.columns]))
+	transmit_vals = list(dict.fromkeys(['r{}_{}'.format(v[1], v[2]) for v in df.columns]))
+	policy_vals = list(dict.fromkeys([v[1] for v in df.columns]))
 
 	dataCount = len(df.columns)
 	
@@ -135,7 +118,7 @@ def MakePlot(
 	ax.grid(which='minor', alpha=0.4, linewidth=1.5, zorder=-1, axis="y")
 	ax.grid(which='major', alpha=0.7, linewidth=2, zorder=-1)
 	if saveID:
-		pyplot.savefig('../../output_rcalc/{}_plot.png'.format(saveID))
+		pyplot.savefig('{}/{}_plot.png'.format(path, saveID))
 	else:
 		pyplot.show()
 
@@ -147,14 +130,17 @@ def ProcessToPlot(df, indexReorder=False):
 	return df
 
 
-def DoProcessRCalc(nameList, metric_name, saveID):
-	dfProcessed = ProcessVariableEnd(nameList, metric_name)
+def DoProcessRCalc(nameList, metric_name, simIndex, index, path, saveID):
+	dfProcessed = ProcessVariableEnd(nameList, metric_name, simIndex, index)
 	MakePlot(
 		ProcessToPlot(dfProcessed),
 		metric_name,
+		simIndex,
+		index,
 		yTop=14,
 		hlines=[1, 6, 7.5],
 		figWidth=30,
 		figHeight=20,
 		saveID=saveID,
+		path=path,
 	)

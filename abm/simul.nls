@@ -45,8 +45,7 @@ simuls-own [
   asymptomaticFlag ;; indicator identifying whether this simulant is asymptomatic
   hospFlag ;; indicator identifying whether this simulant is to be hospitalised (increases isolation)
   symtomatic_present_day ;; When the simulant self-presents (if at all)
-  symtomatic_present_day_draw ;; Store for the above for all simulants
-  present_draw ;; Determines whether the agent will present
+  symtomatic_present_day ;; Store for the above for all simulants
   report_case_draw ;; Draw for whether the case successfully reaches the reported counts. Note that the case still isolates regardless of whether it is reported, this is just for policy.
   accept_isolation_draw ;; Draw for accepting isolation. Use this to simulate ineffective tracking.
   
@@ -285,7 +284,7 @@ end
 ;;*******************************************************************************************************************************
 
 to simul_record_patch_infectiveness
-  if color = red and currentVirulence > 0 and not hospFlag [
+  if color = red and currentVirulence > 0 and not (hospFlag and timenow >= cohortHospTime) [
     let localInfectiveness currentVirulence
     if wearingMask = 1 [
       set localInfectiveness (localInfectiveness * (1 - simul_getMaskEfficacy))

@@ -16,22 +16,18 @@ import shared.utilities as util
 from rcalc.processRcalc import DoProcessRCalc
 
 def ProcessResults(outputName, path):
-	nameList = util.GetFiles(path)
+	nameList = util.GetFiles(path + '/raw/')
 	gitTime = util.GetGitTimeIdentifier()
 	
 	index = [
-		'init_cases_region',
-		'global_transmissibility',
-		'param_policy',
+		'trans_override',
+		'sympt_iso_prop',
 	]
 	notFloatCol = [
-		'sensitivity',
-		'param_policy',
 	]
-	metric = [
-		'initial_infection_R',
-	]
-	interestingColumns = index + ['draw_index'] + metric
+	simIndex = 'draw_index'
+	metric = 'initial_infection_R'
+	interestingColumns = index + [simIndex, metric]
 	
 	df = pd.DataFrame(columns=interestingColumns)
 	for v in nameList:
@@ -43,13 +39,17 @@ def ProcessResults(outputName, path):
 		if colName not in notFloatCol:
 			df[colName] = df[colName].astype(float)
 
-	df = df.set_index(index + ['draw_index'])
-	df = df.transpose().stack('draw_index')
+	df = df.set_index(index + [simIndex])
+	df = df.transpose().stack(simIndex)
 	df = df.describe(percentiles=[0 + 0.01*i for i in range(100)])
 	print(df)
-	util.OutputToFile(df, '../../output_rcalc/{}_{}'.format(gitTime, outputName), head=False)
 	
-	DoProcessRCalc(nameList, 'initial_infection_R', gitTime)
+	outPath = '../../scratch/vic_rcalc/process'
+	util.OutputToFile(df, '{}/{}_{}'.format(outPath, gitTime, outputName), head=False)
+	DoProcessRCalc(
+		nameList, metric,
+		simIndex, index,
+		outPath, gitTime)
 
 
-ProcessResults('desc', '../../output_raw/rcalc/')
+ProcessResults('desc', '../../scratch/vic_rcalc')

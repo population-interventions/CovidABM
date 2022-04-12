@@ -39,3 +39,5 @@ Mention vaccination time
 Infection time?
 
 length of stay mult in variant
+
+ASK about isolation during calibration.

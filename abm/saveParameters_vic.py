@@ -170,30 +170,13 @@ paramValues_mainTest = {**defaultParams, **{
 }}
 
 paramValues_rCalcSmall = {**defaultParams, **{
-	'rand_seed' : GetRandomListUnique(5000),
-    'total_population' : '234000000',
+	'draw_index' : listToStr(list(range(1000))),
+    'total_population' : '6649066',
 	'first_case_calibrate' : 'true',
-	
-	'init_cases_region' : listToStr([1, 2]),
-	'global_transmissibility' : listToStr([
-		0.219
-	]),
-	'param_policy' : listToStr([
-		'"None"',
-		'"Stage1"',
-		'"Stage1b"',
-		'"Stage2"',
-		'"Stage3"',
-	]),
-	'data_suffix' : listToStr([
-		'".csv"',
-	]),
-	'policy_switch' : '"pak"',
-	'end_day' : 392,
-	'r0_range' : -1,
-	'param_recovered_prop' : 0,
+	'trans_override' : listToStr([0.25, 0.5, 0.75]),
+	'sympt_iso_prop' : listToStr([0, 1]),
 }}
 
 ReadModelFileAndWriteParams('GRAPHICS-WINDOW', '@#$#@#$#@',
-							paramValues_mainTest,
+							paramValues_rCalcSmall,
 							topOfFile=topOfFile)
