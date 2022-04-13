@@ -10,19 +10,19 @@ GRAPHICS_START = 'GRAPHICS-WINDOW'
 SEPARATOR = '<experiments>'
 BEHAVIOUR_END = '</experiments>'
 
-def LoadModelSpecs(specFile):
+def LoadModelSpecs(specFile, runCount):
 	modelData = util.LoadJsonFile('specs/{}'.format(specFile))
 	
 	overrideParams = modelData['indexParams'].copy()
 	overrideParams.update({k : [v] for (k, v) in modelData['paramOverrides'].items()})
-	overrideParams[modelData['runIndexer']] = list(range(modelData['runs']))
+	overrideParams[modelData['runIndexer']] = list(range(runCount))
 	overrideParams = nl.ToNetlogoType(overrideParams)
 	
 	defaultParams = util.LoadJsonFile('specs/default/{}'.format(modelData['defaultParamFile']))
 	
 	modelData['modelParams'] = util.ApplyDefaultToDict(overrideParams, defaultParams)
 	modelData['netlogoFileName'] = 'abm/{}.nlogo'.format(modelData['netlogoFile'])
-	modelData['headlessFileName'] = 'abm/{}.nlogo'.format(modelData['headlessFile'])
+	modelData['headlessFileName'] = 'abm/headless_{}.nlogo'.format(modelData['scratchDir'])
 	
 	return modelData
 
@@ -88,8 +88,8 @@ def MakeHeadlessWithCustomBehaviourSpace(modelData):
 	modelFile.close()
 	
 
-def MakeHeadlessWithParameters(specFile):
-	modelData = LoadModelSpecs(specFile)
+def MakeHeadlessWithParameters(specFile, runCount):
+	modelData = LoadModelSpecs(specFile, runCount)
 	
 	# Useful for checking validity
 	OutputCurrentNetlogoValues(modelData['netlogoFileName'])

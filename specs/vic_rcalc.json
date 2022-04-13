@@ -1,8 +1,8 @@
 {
 	"netlogoFile" : "covidModel",
-	"headlessFile" : "headless",
 	"defaultParamFile" : "rcalc",
 	"copyExperimentMetrics" : "vic_rcalc",
+	"scratchDir" : "vic_rcalc",
 	"indexParams" : {
 		"trans_override" : [
 			0.25,
@@ -13,6 +13,5 @@
 	"paramOverrides" : {
 		"first_case_calibrate" : true
 	},
-	"runs" : 1000,
 	"runIndexer" : "draw_index"
 }
