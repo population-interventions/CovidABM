@@ -41,3 +41,6 @@ Infection time?
 length of stay mult in variant
 
 ASK about isolation during calibration.
+ - Only Isolate case (check)
+
+Draw proportion of sympt cases that track themselves.

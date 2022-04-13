@@ -28,3 +28,9 @@
 /docs/specs.log
 /docs/specs.synctex.gz
 /docs/specs.aux
+/docs/~$inputParams.xlsx
+/setup/__init__.py
+/setup/__pycache__/__init__.cpython-38.pyc
+/setup/__pycache__/makeModelXmls.cpython-38.pyc
+/setup/__pycache__/modelSetup.cpython-38.pyc
+/setup/__pycache__/readNetlogo.cpython-38.pyc

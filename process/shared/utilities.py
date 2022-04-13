@@ -11,11 +11,43 @@ import pathlib
 import importlib
 import copy
 
+from numpy import random
+import random as baseRandom
+
 from datetime import datetime, timezone
 import subprocess
 
 fileCreated = {}
 HEAD_MODE = True
+
+def ApplyDefaultToDict(override, default):
+	out = default.copy()
+	for key, value in override.items():
+		out[key] = value
+	return out
+
+
+def ListListToDictList(data):
+	out = {}
+	for value in data:
+		key = value.pop(0)
+		out[key] = value
+	return out
+
+
+def SwapToPos(data, match, pos):
+	for i in range(len(data)):
+		if data[i][0] == match:
+			data[i], data[pos] = data[pos], data[i]
+			return
+
+
+def GetRandomListUnique(listSize, maxIntSize=10000000):
+	randList = baseRandom.sample(range(maxIntSize), listSize)
+	while len(FindRepeat(randList)) > 0:
+		randList = baseRandom.sample(range(maxIntSize), listSize)
+	return randList
+
 
 def GetGitTimeIdentifier():
 	now = datetime.now()
@@ -37,6 +69,19 @@ def WriteListToFile(path, data, addNewline=True):
 def WriteRunIdFile(path, identifier):
 	WriteListToFile(path, [identifier], addNewline=False)
 
+
+def StringToFile(path, string):
+	MakePath(path)
+	with open(path, 'w') as outfile:
+		   outfile.write(string)
+
+
+def LoadJsonFile(path):
+	path = path + '.json'
+	with open(path) as json_file:
+		jsonData = json.load(json_file)
+	return jsonData
+	
 
 def isfloat(value):
 	try:

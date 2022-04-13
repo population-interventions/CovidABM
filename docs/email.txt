@@ -1,0 +1,92 @@
+
+Hi Tim,
+
+In relation to some of the items below, gathering here some of what I think you might need:
+1.	IFR:
+a.	For people ≥10 years, the base function (based on the Wuhan strain) is logit(IFR) = 0.1049.age - 11.293 but this is adjusted for the more and less virulent variants to be 0.1049.age - 10.5999 and 0.1049.age - 11.9861 respectively.
+b.	For people <10, log(IFR) = -11.6051 and -10.2189.
+c.	UI = SD 0.205 for ≥10 year-olds, SD 0.269
+2.	ICU:
+a.	For people ≥25 years, logit(ICU | inf) = 0.126.age – 12.2455 and logit(ICU | inf) = 0.126.age – 13.6318 for the more and less virulent variants.
+b.	For people 0-9 years, logit(ICU | inf) = -8.5698 and -9.9560.
+c.	For people 10-24 years, logit(ICU | inf) = -10.2226 and -11.6088.
+d.	UI = SD 0.1 on logit scale.
+3.	Hospitalisation:
+a.	For people ≥25 years, logit(hosp | inf) = 0.0968.age – 8.3745 and logit(hosp | inf) = 0.0968.age – 9.0677 for the more and less virulent variants.
+b.	For people 0-9 years, -5.6842 and -6.3774.
+c.	For people 10-24 years, -7.2046 and -7.8978.
+d.	UI = SD 0.1 on logit scale.
+4.	Pr of symptomatic infection:
+a.	Age 0-19, 0.49 for less virulent and 0.576 for more virulent.
+b.	Age 20-59, 0.64 and 0.716.
+c.	Age 60+, 0.774 and 0.829.
+5.	Relative susceptibility by age (OR for infection given exposure):
+a.	0 – 14 years, 0.34
+b.	15 - 64 years, 1 (ref)
+c.	≥65 years, 1.47
+Other updates so you're kept in the loop:
+ - For hybrid immunity (vaccination plus infection) we have confirmed we are going to use 1 - (1 - VE).(1 - nat protection) and will just do sensitivity analysis using max(VE, nat protection).
+ - For fourth and subsequent current gen vaccine doses immunity will go back to third dose and wane again as per the third dose (the literature is mixed so we're keeping it simple - just letting you know as you might have seen some back and forth about this yesterday).
+ - For the integrated immunity/waning equation (i.e. combining VE and natural immunity, number of doses, waning, age etc.), Tony and I are still working on it and will get that to you next week.
+ - For calculating thresholds for stage escalation (number of projected hospitalisations) we are going with mean length of hospital stay (age groups 0-39, 40-69 and 70+ respectively) of 3.60 (95% CI: 3.48–3.81), 5.78 (95% CI: 5.59–5.99) and 12.31 days (95% CI: 11.75–12.95) for more virulent variant and 2.05 (95% CI: 1.80–2.30), 2.92 (95% CI: 2.50–3.67) and 6.02 days (95% CI: 4.91–7.01) for the less virulent variant.
+
+Hopefully this helps but let me know if other things are missing that you need urgently. I know you also need % recovered by age and when they recovered (as of April 1st) - can you bring this up on Monday or Wednesday next week so we can discuss? I think Tony has some ideas about how to handle this.
+
+OK! Have a great weekend,
+
+Joshua Szanyi | Public Health Medicine Registrar 
+Population Interventions Unit | Melbourne School of Population and Global Health 
+Level 3, 207 Bouverie Street
+The University of Melbourne, Victoria 3010 Australia 
+E: joshua.szanyi@unimelb.edu.au 
+unimelb.edu.au | facebook.com/unimelb | twitter.com/unimelb
+________________________________________
+From: Tony Blakely <antony.blakely@unimelb.edu.au>
+Sent: Friday, April 1, 2022 1:13 PM
+To: Joshua Szanyi <joshua.szanyi@unimelb.edu.au>
+Cc: Tim Wilson <tim.wilson@unimelb.edu.au>
+Subject: RE: Questions for follow-up 
+ 
+Hi Josh,
+ 
+1.	Answered in separate email
+2.	Functions:
+a.	Use the meta-analysis that Burnet uses.  Then we nudge it up and down as per email a few days ago (i.e. OR = 2^0.25=  and 0.5^0.25).  See attached.
+b.	Yes.  For hosp, logit = 0.0968.age - 8.7211.  As per email the other day, I suggest for virulent is OR = 2^0.5 = 1.414.  Which in logit is 0.34657359.  So the equation becomes 0.0968.age – 8.3745.  For less virulent, use 0.5^ 0.5= 0.707 = 1/1.414, so ln = -0.3466, so equation = 0.0968.age – -9.0677.  For both these equations, the UI is SD = 0.1 on logit scale (i.e. +/- 10% sd).
+                                                               i.      For less than 25 year olds:
+1.	Starting values are now in IFR by age workbook (-6.0308 for 0-9 yrs, and -7.5512 for 10-24.  They then get shifted up by 0.3466 or virulent, and down by 0.3466 for less virulent.
+c.	For ICU, exactly as above, but now using ln(2^0.75) and ln(0.5^0.75) to alter intercept equation. For <24, same as above (and averages in excel for you)
+d.	Re IFR, below correct.  Except now perturbating the intercept by ln(2) and ln(0.5)
+e.	Possibly.  I think it easier to build into the logit equations from the get go (as above)
+3.	Yes.  But this is a little complicated (and why I am cc’ing Tim given he spotted this too).  When the vaccine (and natural infection) works on the proportion symptomatic (i.e. we have VE for any infection, sympt, hosp, [we put ICU half way between hosp and death] death) this will change (i.e. increase) the proportion of cases that are asymptomatic.  Which will reduce transmissibility.  But I think we just have this susceptibility one constant, and focus on transmissibility next week with a full set of VE (including by any, sympt, hosp, death).
+4.	Correct.  We need to look at literature, and get an average sense of the differences in VE for any:sympt, and hosp:death.  Convert them to OR and logits.  Simply add them into intercepts, respectively, of sympt  any, and hosp death. Discuss more next week.
+5.	Yes, I think so – for parsimony.
+6.	If easy, allow lag of 3 days from ‘hit go’ for everyone.  If not easy, then no lag.
+7.	If we have good estimates of LoS by age, then lets use them.  Discuss on Monday.
+8.	I think what you are talking about is that 1 – (1-VE).(1-nat inf protection) may give too high a protection?  Some studies suggest this, some not.  Given we have waning in now for everything, I suggest we treat the above equation as what we use for main analyses.  For sensitivity analyses, we just select max(VE, Nat Prot) at each point in time – I suggest.
+ 
+More next week.
+ 
+T 
+ 
+From: Joshua Szanyi <joshua.szanyi@unimelb.edu.au> 
+Sent: Wednesday, 30 March 2022 3:27 PM
+To: Tony Blakely <antony.blakely@unimelb.edu.au>
+Subject: Questions for follow-up
+ 
+Hi Tony, gathering all of my questions in one list (also so I've got a summary of where we're at):
+1.	In estimating natural infection immunity by age, we need to use the % of infections among those 65 years and older from Hansen et. al. Previously we put in 22% but I think it should be 9.2% (see Table 2). Do you agree? Once clarified, this is done.
+2.	Regarding the functions for Tim:
+a.	Asymptomatic infections. These are not provided by Knock et. al. as far as I can tell, in their paper they refer to data from the REACT study in the UK which they then develop a function for (see graph attached). The Burnet are using estimates from a meta-analysis using data through to April 2021 (here) which gives probability of being asymptomatic for three age strata - the symptomatic fraction in the Knock paper is lower in younger ages, similar in middle age and lower in older age. For a less virulent variant (e.g. Omicron) there isn't much information around as others have noted but this preprint from South Africa points to 2.6% asymptomatic carriage for Beta and Delta and 16% for Omicron. In your previous JAMA paper (eTable 13) percentage symptomatic increases in 10 year age strata but I'm not clear where this data has come from. My question is whether we should keep things consistent with the Burnet and use the meta-analysis (no function, just three asymptomatic estimates) and then multiply these by the odds ratios for the high/low virulence variants? Unsure re. the best approach here.
+b.	Hospitalisations. For age 27 and above, we will use a linear function describing ln(odds) hosp | infection as in the spreadsheet. Correct? For <27 should we use point estimates for each age or an average or something else?
+c.	ICU. For age 27 and above, we will use a linear function describing ln(odds) ICU | infection as in the spreadsheet. Correct? For <27 what is the best approach?
+d.	IFR. For age 10 and under we will use the average, and for >10 years we'll use a linear function describing ln(odds) IFR as in the spreadsheet (from IHME). Correct?
+e.	For all of the above, we will then just provide a table of OR multipliers for the high and low virulence variants to apply to the functions. Is that correct?
+3.	Susceptibility to infection by age. Burnet estimates are from Zhang et. al. There are no meta-analyses I can find, and the Zhang ones are reasonably similar to some others (e.g. here). Therefore again for consistency shall we use the same as the Burnet?
+4.	I know we've briefly discussed this (in adding them as additional main effects and then using existing slopes for sympt to estimate any and hosp to estimate death), but can we talk about the methodology for extending our VE equations to include any infection and death? We will need to do the same for natural infection immunity. Not sure how best to proceed here - Jessie has some data related to VE for any infection and death for example from her capstone research which might help us.
+5.	Escape from natural immunity - we touched on this on Monday but then moved on to something else. Should we use the same system for escape from vaccine-derived immunity (i.e. the table of ORs)?
+6.	Masks - I'm assuming we are not factoring in time taken for rollout once policy activated. As I understand it we will just have a % of people who are wearing masks at various stages and then a % of those (12 years and older) just switch to a better quality mask when the policy is activated, right?
+7.	In relation to infectivity, Tim mentioned we may need to have separate estimates of infectivity if vaccinated and symptomatic v. vaccinated and asymptomatic. Do you agree?
+8.	For length of stay, Sami mentioned some of the estimates are stratified by age which Tim mentioned might be useful to use in the model. Previously overall estimates were used across all age strata. Do you agree with Tim or is this too much additional complexity for minimal gain?
+9.	 Re. the vaccination by infection status system that you flagged as being incorrect - just adding that to this list to remind me to chat to you about it (perhaps tomorrow if time).
+OK! That's all for now. Had a good inputs meeting earlier, students all progressing well it seems.
