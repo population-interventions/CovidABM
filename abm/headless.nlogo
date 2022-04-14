@@ -2545,7 +2545,7 @@ NetLogo 6.2.0
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="headless_experiment" repetitions="1" runMetricsEveryStep="false">
+  <experiment name="vic_rcalc" repetitions="1" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go</go>
     <metric>average_R_all_regions</metric>
@@ -2590,6 +2590,7 @@ NetLogo 6.2.0
     <metric>cumulativeInfected_switchTime</metric>
     <metric>cumulativeInfected_minusInit</metric>
     <enumeratedValueSet variable="population">
+lation">
       <value value="2500.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="span">
