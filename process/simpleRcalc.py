@@ -11,23 +11,21 @@ from matplotlib import pyplot as plt
 import matplotlib.ticker as ticker
 import seaborn as sns
 import pathlib
-import shared.utilities as util
+import process.shared.utilities as util
 
-from rcalc.processRcalc import DoProcessRCalc
+from process.rcalc.processRcalc import DoProcessRCalc
 
-def ProcessResults(outputName, path):
-	nameList = util.GetFiles(path + '/raw/')
+def ProcessResults(modelData):
+	nameList = util.GetFiles(modelData['scratchDir'] + '/raw/')
 	gitTime = util.GetGitTimeIdentifier()
 	
-	index = [
-		'trans_override',
-		'sympt_iso_prop',
-	]
+	index = list(modelData['indexParams'].keys())
 	notFloatCol = [
 	]
-	simIndex = 'draw_index'
-	metric = 'initial_infection_R'
+	simIndex = modelData['runIndexer']
+	metric = modelData['postSeries']['rcalc']['metric']
 	interestingColumns = index + [simIndex, metric]
+	print('interestingColumns', interestingColumns)
 	
 	df = pd.DataFrame(columns=interestingColumns)
 	for v in nameList:
@@ -44,12 +42,9 @@ def ProcessResults(outputName, path):
 	df = df.describe(percentiles=[0 + 0.01*i for i in range(100)])
 	print(df)
 	
-	outPath = '../../scratch/vic_rcalc/process'
-	util.OutputToFile(df, '{}/{}_{}'.format(outPath, gitTime, outputName), head=False)
+	outPath = modelData['scratchDir'] + '/process'
+	util.OutputToFile(df, '{}/{}_{}'.format(outPath, gitTime, 'desc'), head=False)
 	DoProcessRCalc(
 		nameList, metric,
 		simIndex, index,
 		outPath, gitTime)
-
-
-ProcessResults('desc', '../../scratch/vic_rcalc')

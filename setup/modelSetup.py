@@ -4,27 +4,12 @@ import random as baseRandom
 import json
 
 import process.shared.utilities as util
+import process.shared.modelData as md
 import setup.readNetlogo as nl
 
 GRAPHICS_START = 'GRAPHICS-WINDOW'
 SEPARATOR = '<experiments>'
 BEHAVIOUR_END = '</experiments>'
-
-def LoadModelSpecs(specFile, runCount):
-	modelData = util.LoadJsonFile('specs/{}'.format(specFile))
-	
-	overrideParams = modelData['indexParams'].copy()
-	overrideParams.update({k : [v] for (k, v) in modelData['paramOverrides'].items()})
-	overrideParams[modelData['runIndexer']] = list(range(runCount))
-	overrideParams = nl.ToNetlogoType(overrideParams)
-	
-	defaultParams = util.LoadJsonFile('specs/default/{}'.format(modelData['defaultParamFile']))
-	
-	modelData['modelParams'] = util.ApplyDefaultToDict(overrideParams, defaultParams)
-	modelData['netlogoFileName'] = 'abm/{}.nlogo'.format(modelData['netlogoFile'])
-	modelData['headlessFileName'] = 'abm/headless_{}.nlogo'.format(modelData['scratchDir'])
-	
-	return modelData
 
 
 def OutputCurrentNetlogoValues(netlogoFileName):
@@ -89,7 +74,7 @@ def MakeHeadlessWithCustomBehaviourSpace(modelData):
 	
 
 def MakeHeadlessWithParameters(specFile, runCount):
-	modelData = LoadModelSpecs(specFile, runCount)
+	modelData = md.LoadModelDatWithExperimentInput(specFile, runCount)
 	
 	# Useful for checking validity
 	OutputCurrentNetlogoValues(modelData['netlogoFileName'])
