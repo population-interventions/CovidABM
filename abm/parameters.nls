@@ -209,6 +209,8 @@ to params_setDrawValues
   ;set immune_from_prev_variant rngs:rnd-beta stream_id 32 8
   ;set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
   
+  set _sympt_iso_prop (rngs:rnd-beta defaultStream 6 6) * sympt_iso_prop
+  
   set draw_isolationCompliance rngs:rnd-beta defaultStream 450.3 23.7
   if isoComply_override >= 0 [
     set draw_isolationCompliance isoComply_override

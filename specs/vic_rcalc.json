@@ -11,6 +11,11 @@
 		"sympt_iso_prop" : [
 			0,
 			1
+		],
+		"gather_location_count" : [
+			150,
+			200,
+			250
 		]
 	},
 	"paramOverrides" : {
