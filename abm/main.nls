@@ -127,14 +127,14 @@ to go
   ;; counts days per tick, likely redundant at present as days are not used for anything right now.
   calculateDataOut
   checkCalibrationStop
+  
+  tick
   if stop_simulation [
     Stop 
   ]
   if first_case_calibrate and initial_infection_R > -1 [
     Stop
   ]
-  
-  tick
   
   checkStartThreshold
   set days (ticks - start_day)

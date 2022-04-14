@@ -9,6 +9,7 @@ import pandas as pd
 from matplotlib import pyplot
 import matplotlib.ticker as ticker
 import seaborn as sns
+import process.shared.utilities as util
 #from tqdm import tqdm
 
 
@@ -70,7 +71,7 @@ def MakePlot(
 		yminticks = [i/5 for i in range(int(5*yTop))]
 	
 	xLabel = df.columns.names[1]
-	transmit_vals = list(dict.fromkeys(['r{}_{}'.format(v[1], v[2]) for v in df.columns]))
+	transmit_vals = list(dict.fromkeys(['_'.join([str(x) for x in v[1:]]) for v in df.columns]))
 	policy_vals = list(dict.fromkeys([v[1] for v in df.columns]))
 
 	dataCount = len(df.columns)
