@@ -4,18 +4,9 @@
 	"copyExperimentMetrics" : "vic_rcalc",
 	"indexParams" : {
 		"trans_override" : [
-			0.25,
+			0.2,
 			0.5,
-			0.75
-		],
-		"sympt_iso_prop" : [
-			0,
-			1
-		],
-		"gather_location_count" : [
-			120,
-			160,
-			200
+			0.8
 		]
 	},
 	"paramOverrides" : {
@@ -24,7 +15,13 @@
 	"runIndexer" : "draw_index",
 	"postSeries" : {
 		"rcalc" : {
-			"metric" : "initial_infection_R"
+			"metric" : "initial_infection_R",
+			"targets" : [
+				8.5,
+				10,
+				11.5
+			],
+			"repetionLimit" : 5
 		}
 	}
 }

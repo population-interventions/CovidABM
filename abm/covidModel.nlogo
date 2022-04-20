@@ -1115,8 +1115,8 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-200.0
-50
+160.0
+10
 1
 NIL
 HORIZONTAL
@@ -3004,7 +3004,7 @@ draw_index
 draw_index
 0
 4000
-293.0
+1843.0
 1
 1
 NIL

@@ -39,3 +39,7 @@ Mention vaccination time
 Infection time?
 
 length of stay mult in variant
+
+Add python after the tarball in postprocessing that checks for repetionLimit in model specs.
+Read the output and modify the indexParam appropriately.
+Output a new model spec with decremented repetionLimit, then run the model again the usual way.

@@ -60,7 +60,7 @@
         "0.66"
     ],
     "gather_location_count": [
-        "200.0"
+        "160.0"
     ],
     "complacency_bound": [
         "5.0"
@@ -417,6 +417,6 @@
         "0.25"
     ],
     "sympt_iso_prop": [
-        "0.0"
+        "1.0"
     ]
 }
