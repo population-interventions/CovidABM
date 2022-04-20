@@ -2,10 +2,18 @@
 import setup.readNetlogo as nl
 import process.shared.utilities as util
 
+
+def LoadRawModelDataFile(specFile):
+	return util.LoadJsonFile('specs/{}'.format(specFile))
+
 def LoadModelData(specFile):
-	modelData = util.LoadJsonFile('specs/{}'.format(specFile))
+	modelData = LoadRawModelDataFile(specFile)
 	modelData['name'] = specFile
+	if 'baseName' not in modelData:
+		modelData['baseName'] = modelData['name']
 	modelData['scratchDir'] = '../scratch/{}'.format(specFile)
+	if 'handlerName' in modelData:
+		modelData['handlerDir'] = '../scratch/{}'.format(modelData['handlerName'])
 	
 	return modelData
 

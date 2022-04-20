@@ -20,6 +20,29 @@ import subprocess
 fileCreated = {}
 HEAD_MODE = True
 
+
+def GuessAtFunctionInverse(indexList, valueList, target):
+	if target < valueList[0]:
+		return indexList[0]/2
+	if target > valueList[len(valueList) - 1]:
+		maxIn = indexList[len(indexList) - 1]
+		if maxIn < 1:
+			return 1 - (1 - maxIn) / 2
+		else:
+			return maxIn + (maxIn - indexList[len(indexList) - 1])
+		
+	for i in range(len(indexList) - 1):
+		inVal = indexList[i]
+		outVal = valueList[i]
+		if target > outVal:
+			inValNext = indexList[i + 1]
+			outValNext = valueList[i + 1]
+			
+			midProp = (target - outVal) / (outValNext - outVal)
+			interoplate = inVal + midProp * (inValNext - inVal)
+			return interoplate
+
+
 def ApplyDefaultToDict(override, default):
 	out = default.copy()
 	for key, value in override.items():
@@ -141,7 +164,7 @@ def GetFiles(subfolder, firstOnly=False):
 	return filelist
 
 
-def OutputToFile(df, path, index=True, head=True):
+def OutputToFile(df, path, index=True, head=True, appendToExisting=False):
 	# Write dataframe to a file.
 	# Appends dataframe when called with the same name.
 	fullFilePath = path + '.csv'
@@ -149,6 +172,9 @@ def OutputToFile(df, path, index=True, head=True):
 	#print('OUTPUT', path)
 	#if path == '../../output_post/pak_main/cohort/infect_vac_yearlyAgg_1':
 	#	print(df)
+	
+	if appendToExisting and os.path.exists(fullFilePath):
+		fileCreated[fullFilePath] = True
 	
 	if fileCreated.get(fullFilePath):
 		# Append
