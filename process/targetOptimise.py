@@ -74,6 +74,6 @@ def ProcessResults(modelData, runs, pernode):
 	md.WriteSpecFile(specName, rawModel)
 	
 	## Start the new model run.
-	callList = ['sh', './run.sh', format(specName), str(runs), str(pernode)]
+	callList = ['sh', './../run.sh', format(specName), str(runs), str(pernode)]
 	print(callList)
 	subprocess.call(callList) # Requires HPC to run.
