@@ -15,6 +15,9 @@
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {
+		"rcalc" : {
+			"metric" : "initial_infection_R"
+		},
 		"targetOptimise" : {
 			"metric" : "initial_infection_R",
 			"targets" : [
