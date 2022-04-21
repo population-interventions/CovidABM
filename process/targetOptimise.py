@@ -17,7 +17,9 @@ import process.shared.utilities as util
 import process.shared.helpers as helpers
 import process.shared.modelData as md
 
-def ProcessResults(modelData):
+import subprocess
+
+def ProcessResults(modelData, runs, pernode):
 	## Load the results
 	nameList = util.GetFiles(modelData['scratchDir'] + '/raw/')
 	gitTime = util.GetGitTimeIdentifier()
@@ -68,6 +70,10 @@ def ProcessResults(modelData):
 	rawModel['indexParams'][index[0]] = guesses
 	rawModel['baseName'] = modelData['baseName']
 	
-	util.StringToFile('specs/{}_{}.json'.format(modelData['baseName'], repetitionLimit), json.dumps(rawModel, indent=4))
+	specName = '{}_{}'.format(modelData['baseName'], repetitionLimit)
+	md.WriteSpecFile(specName, rawModel)
 	
-	
+	## Start the new model run.
+	callList = ['sh', './run.sh', format(specName), str(runs), str(pernode)]
+	print(callList)
+	subprocess.call(callList) # Requires HPC to run.

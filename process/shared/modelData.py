@@ -1,10 +1,23 @@
 
+import os
+
 import setup.readNetlogo as nl
 import process.shared.utilities as util
 
 
 def LoadRawModelDataFile(specFile):
-	return util.LoadJsonFile('specs/{}'.format(specFile))
+	if os.path.exists('specs/{}.json'.format(specFile)):
+		return util.LoadJsonFile('specs/{}'.format(specFile))
+	return util.LoadJsonFile('../scratch/specs/{}'.format(specFile))
+
+
+def WriteSpecFile(name, data, toScratch=True):
+	if toScratch:
+		path = '../scratch/specs/{}'.format(name)
+	else:
+		path = 'specs/{}'.format(name)
+	util.WriteJsonFile(path, data)
+
 
 def LoadModelData(specFile):
 	modelData = LoadRawModelDataFile(specFile)
@@ -16,6 +29,7 @@ def LoadModelData(specFile):
 		modelData['handlerDir'] = '../scratch/{}'.format(modelData['handlerName'])
 	
 	return modelData
+
 
 def LoadModelDatWithExperimentInput(specFile, runCount):
 	modelData = LoadModelData(specFile)
