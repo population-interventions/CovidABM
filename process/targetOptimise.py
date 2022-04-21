@@ -34,10 +34,12 @@ def ProcessResults(modelData, runs, pernode):
 	
 	## Apply the results to the input-output file.
 	df = df.loc['mean'].to_frame()
+	firstRun = (modelData['name'] == modelData['baseName'])
+	print('firstRun', firstRun)
 	print(df)
 	
 	outPath = modelData['handlerDir'] + '/raw'
-	util.OutputToFile(df, outPath + '/targetValues', appendToExisting=True, head=False)
+	util.OutputToFile(df, outPath + '/targetValues', appendToExisting=(not firstRun), head=False)
 	
 	## Read the input-output file that has been built up.
 	df = pd.read_csv(outPath + '/targetValues' + '.csv', index_col=0)
