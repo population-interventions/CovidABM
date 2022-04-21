@@ -47,11 +47,13 @@ def ProcessResults(modelData, runs, pernode):
 	df = df.sort_index()
 	
 	## Make guesses for the next model run.
+	print(df)
 	inList = list(df['mean'].keys())
 	outList = list(df['mean'].values)
 	guesses = [
 		util.GuessAtFunctionInverse(inList, outList, x) 
 		for x in modelData['postSeries']['targetOptimise']['targets']]
+	print('guesses', guesses)
 	
 	## Check whether the repetion limit has been reached, and output final guess.
 	repetitionLimit = modelData['postSeries']['targetOptimise']['repetionLimit']

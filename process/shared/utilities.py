@@ -32,14 +32,15 @@ def GuessAtFunctionInverse(indexList, valueList, target):
 			return maxIn + (maxIn - indexList[len(indexList) - 1])
 		
 	for i in range(len(indexList) - 1):
-		inVal = indexList[i]
-		outVal = valueList[i]
-		if target > outVal:
+		outValNext = valueList[i + 1]
+		if target < outValNext:
+			inVal = indexList[i]
+			outVal = valueList[i]
 			inValNext = indexList[i + 1]
-			outValNext = valueList[i + 1]
 			
 			midProp = (target - outVal) / (outValNext - outVal)
 			interoplate = inVal + midProp * (inValNext - inVal)
+			print('interoplate', target, inVal, inValNext, outVal, outValNext)
 			return interoplate
 
 
