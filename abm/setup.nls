@@ -31,6 +31,7 @@ to loadPopDivisionTable
     let index -1
     set index index + 1    table:put cohortData "pop" item index x
     set index index + 1    table:put cohortData "age" item index x
+    set index index + 1    table:put cohortData "preGroup" item index x
     set index index + 1    table:put cohortData "essentialCount" item index x
     set index index + 1    table:put cohortData "workerCount" item index x
     set index index + 1    table:put cohortData "studentCount" item index x
@@ -132,6 +133,7 @@ to createSimulants
   
   let cohort_pop 0
   let cohort_age 0
+  let cohort_preGroup 0
   let cohort_essentialCount 0
   let cohort_workerCount 0
   let cohort_studentCount 0
@@ -162,6 +164,7 @@ to createSimulants
       let cohortData            table:get popDivisionTable pop_index
       set cohort_pop            table:get cohortData "pop"
       set cohort_age            table:get cohortData "age"
+      set cohort_preGroup       table:get cohortData "preGroup"
       set cohort_essentialCount table:get cohortData "essentialCount"
       set cohort_workerCount    table:get cohortData "workerCount"
       set cohort_studentCount   table:get cohortData "studentCount"
@@ -221,6 +224,7 @@ to createSimulants
 
       set cohortIndex pop_index
       set agerange cohort_age
+      set prevacinfect_group cohort_preGroup
       set essentialJob (agentsOfThisIndex <= cohort_essentialCount)
       set isWorker (agentsOfThisIndex <= cohort_workerCount)
       set isStudent (agentsOfThisIndex <= cohort_studentCount)
@@ -288,91 +292,104 @@ to createSimulants
   setup_DataOut maxHospTime maxIcuTime maxDeathTime
 end
 
+to setupInitialVaccination_uniformMethod
+  let initRecoverVar getInitRecoverVariant
+  foreach table:keys popDivisionTable [ popIndex ->
+    let cohort table:get populationCohortCache popIndex
+    let cohortData table:get popDivisionTable popIndex
+    
+    let cohort_pop table:get cohortData "pop"
+    let recover_noVac table:get cohortData "recover_noVac"
+    let recover_dose2 table:get cohortData "recover_dose2"
+    let recover_dose3 table:get cohortData "recover_dose3"
+    let recoverMaxDay table:get cohortData "recoverMaxDay"
+    let doseCount_2 table:get cohortData "doseCount_2"
+    let doseDays_2 table:get cohortData "doseDays_2"
+    let doseName_2 table:get cohortData "doseName_2"
+    let doseCount_3 table:get cohortData "doseCount_3"
+    let doseDays_3 table:get cohortData "doseDays_3"
+    let doseName_3 table:get cohortData "doseName_3"
+    
+    if cohort_pop > 0 [
+      ; Determine how far in the past people had their vaccinations
+      let currentDay_2 -1 * doseDays_2
+      let increment_2 doseDays_2 / max (list doseCount_2 1)
+      let currentDay_3 -1 * doseDays_3
+      let increment_3 doseDays_3 / max (list doseCount_3 1)
+      
+      ;; Only pre-model vaccinate someone if they would take up the vaccine.
+      ;; This ensures that the final vaccinated proportion matches init_vac_uptake.
+      ask cohort [
+        (ifelse doseCount_2 > 0
+          [
+            set vaccineDay currentDay_2
+            set prevVaccineDay currentDay_2 - doseDays_2
+            
+            set currentVaccine (word doseName_2 cohortVacSuffix)
+            set prevVaccine (word doseName_2 cohortVacSuffix)
+            
+            set doseCount_2 doseCount_2 - 1
+            set currentDay_2 currentDay_2 + increment_2
+            
+            if recover_dose2 > 0 [
+              simul_setNewRecover initRecoverVar
+              set recoverDay -1 * floor random-float recoverMaxDay
+              set recoverVariant initRecoverVar
+              set recover_dose2 recover_dose2 - 1
+            ]
+          ]
+          doseCount_3 > 0
+          [
+            if param_vac_uptake_mult * cohortVacUptake > random-float 1 [
+              set vaccReceptive true ; Only the most vaccinated are receptive to recieving another vaccine
+            ]
+            set vaccineDay currentDay_3
+            set prevVaccineDay currentDay_3 - doseDays_2
+            
+            set currentVaccine (word doseName_3 cohortVacSuffix)
+            set prevVaccine (word doseName_3 cohortVacSuffix)
+            
+            set doseCount_3 doseCount_3 - 1
+            set currentDay_3 currentDay_3 + increment_3
+            
+            if recover_dose3 > 0 [
+              simul_setNewRecover initRecoverVar
+              set recoverDay -1 * floor random-float recoverMaxDay
+              set recoverVariant initRecoverVar
+              set recover_dose3 recover_dose3 - 1
+            ]
+          ]
+          [
+            if recover_noVac > 0 [
+              simul_setNewRecover initRecoverVar
+              set recoverDay -1 * floor random-float recoverMaxDay
+              set recoverVariant initRecoverVar
+              set recover_noVac recover_noVac - 1
+            ]
+        ])
+      ]
+    ]
+  ]
+  
+  ; TODO replace doseCount with vaccine
+  ;ask simuls with [doseCount = 0] [
+  ;  simul_addToBranchQueue
+  ;]
+end
+
+to setupInitialVaccination_micromangedMethod
+  
+end
 
 to setupInitialVaccination
   if _vaccine_enabled [
-    let initRecoverVar getInitRecoverVariant
-    foreach table:keys popDivisionTable [ popIndex ->
-      let cohort table:get populationCohortCache popIndex
-      let cohortData table:get popDivisionTable popIndex
-      
-      let cohort_pop table:get cohortData "pop"
-      let recover_noVac table:get cohortData "recover_noVac"
-      let recover_dose2 table:get cohortData "recover_dose2"
-      let recover_dose3 table:get cohortData "recover_dose3"
-      let recoverMaxDay table:get cohortData "recoverMaxDay"
-      let doseCount_2 table:get cohortData "doseCount_2"
-      let doseDays_2 table:get cohortData "doseDays_2"
-      let doseName_2 table:get cohortData "doseName_2"
-      let doseCount_3 table:get cohortData "doseCount_3"
-      let doseDays_3 table:get cohortData "doseDays_3"
-      let doseName_3 table:get cohortData "doseName_3"
-
-      if cohort_pop > 0 [
-        ; Determine how far in the past people had their vaccinations
-        let currentDay_2 -1 * doseDays_2
-        let increment_2 doseDays_2 / max (list doseCount_2 1)
-        let currentDay_3 -1 * doseDays_3
-        let increment_3 doseDays_3 / max (list doseCount_3 1)
-        
-        ;; Only pre-model vaccinate someone if they would take up the vaccine.
-        ;; This ensures that the final vaccinated proportion matches init_vac_uptake.
-        ask cohort [
-          (ifelse doseCount_2 > 0
-            [
-              set vaccineDay currentDay_2
-              set prevVaccineDay currentDay_2 - doseDays_2
-              
-              set currentVaccine (word doseName_2 cohortVacSuffix)
-              set prevVaccine (word doseName_2 cohortVacSuffix)
-              
-              set doseCount_2 doseCount_2 - 1
-              set currentDay_2 currentDay_2 + increment_2
-              
-              if recover_dose2 > 0 [
-                simul_setNewRecover initRecoverVar
-                set recoverDay -1 * floor random-float recoverMaxDay
-                set recoverVariant initRecoverVar
-                set recover_dose2 recover_dose2 - 1
-              ]
-            ]
-            doseCount_3 > 0
-            [
-              if param_vac_uptake_mult * cohortVacUptake > random-float 1 [
-                set vaccReceptive true ; Only the most vaccinated are receptive to recieving another vaccine
-              ]
-              set vaccineDay currentDay_3
-              set prevVaccineDay currentDay_3 - doseDays_2
-              
-              set currentVaccine (word doseName_3 cohortVacSuffix)
-              set prevVaccine (word doseName_3 cohortVacSuffix)
-              
-              set doseCount_3 doseCount_3 - 1
-              set currentDay_3 currentDay_3 + increment_3
-              
-              if recover_dose3 > 0 [
-                simul_setNewRecover initRecoverVar
-                set recoverDay -1 * floor random-float recoverMaxDay
-                set recoverVariant initRecoverVar
-                set recover_dose3 recover_dose3 - 1
-              ]
-            ]
-            [
-              if recover_noVac > 0 [
-                simul_setNewRecover initRecoverVar
-                set recoverDay -1 * floor random-float recoverMaxDay
-                set recoverVariant initRecoverVar
-                set recover_noVac recover_noVac - 1
-              ]
-          ])
-        ]
-      ]
+    ifelse input_pre_vacinfect = ""
+    [
+     setupInitialVaccination_uniformMethod 
     ]
-    
-    ; TODO replace doseCount with vaccine
-    ;ask simuls with [doseCount = 0] [
-    ;  simul_addToBranchQueue
-    ;]
+    [
+      setupInitialVaccination_micromangedMethod
+    ]
   ]
 end
 

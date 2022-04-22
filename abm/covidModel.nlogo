@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-10.0
+5.0
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.04
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+50.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+50.0
 .5
 1
 NIL
@@ -364,7 +364,7 @@ INPUTBOX
 373
 263
 initial_cases
-20000.0
+3000.0
 1
 0
 Number
@@ -561,7 +561,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+35.0
 1
 1
 NIL
@@ -602,7 +602,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-15.0
+60.0
 1
 1
 NIL
@@ -615,7 +615,7 @@ SWITCH
 313
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -720,7 +720,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+5.0
 1
 1
 NIL
@@ -994,7 +994,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4" "continuous"
-4
+5
 
 MONITOR
 1473
@@ -1115,7 +1115,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-160.0
+200.0
 10
 1
 NIL
@@ -1130,7 +1130,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+50.0
 1
 1
 NIL
@@ -1555,7 +1555,7 @@ Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
 1
-0.57
+0.58
 0.01
 1
 NIL
@@ -1629,7 +1629,7 @@ param_incur_phase_limit
 param_incur_phase_limit
 -1
 10
-0.0
+-1.0
 1
 1
 NIL
@@ -1685,7 +1685,7 @@ incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
 2
-0.5
+1.0
 0.01
 1
 NIL
@@ -1789,10 +1789,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2554
-559
-2727
-592
+2558
+540
+2731
+573
 param_trace_mult
 param_trace_mult
 0
@@ -1804,10 +1804,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2554
-629
-2727
-662
+2558
+610
+2731
+643
 trace_attempt_limit
 trace_attempt_limit
 -1
@@ -2058,7 +2058,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.8
+0.75
 0.05
 1
 NIL
@@ -2144,7 +2144,7 @@ SWITCH
 737
 first_case_calibrate
 first_case_calibrate
-0
+1
 1
 -1000
 
@@ -2247,10 +2247,10 @@ sensitivity
 0
 
 SLIDER
-2554
-594
-2727
-627
+2558
+575
+2731
+608
 trace_eff_override
 trace_eff_override
 -1
@@ -2277,10 +2277,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2554
-488
-2727
-521
+2558
+469
+2731
+502
 trace_at_5
 trace_at_5
 0
@@ -2292,10 +2292,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2554
-524
-2727
-557
+2558
+505
+2731
+538
 trace_assymtote
 trace_assymtote
 0
@@ -2307,10 +2307,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-2557
-404
-2730
-449
+2560
+385
+2733
+430
 compound_trace
 compound_trace
 "None" "ass50_70at5" "ass100_90at5" "ass100_90at5_iso" "ass200_90at5"
@@ -2347,10 +2347,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2554
-453
-2727
-486
+2558
+434
+2731
+467
 trace_at_1
 trace_at_1
 0
@@ -2362,10 +2362,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-2558
-368
-2672
-401
+2562
+349
+2676
+382
 trace_print
 trace_print
 1
@@ -3004,7 +3004,7 @@ draw_index
 draw_index
 0
 4000
-1843.0
+1.0
 1
 1
 NIL
@@ -3135,6 +3135,17 @@ sympt_iso_prop
 1
 NIL
 HORIZONTAL
+
+INPUTBOX
+2553
+653
+2737
+713
+input_pre_vacinfect
+input/vic/prevacinfect.csv
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -5011,6 +5022,8 @@ NetLogo 6.2.0
   <experiment name="vic_main" repetitions="1" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go</go>
+    <metric>average_R_all_regions</metric>
+    <metric>trans_override</metric>
     <metric>days</metric>
     <metric>totalEndCount</metric>
     <metric>scalephase</metric>
@@ -5040,15 +5053,11 @@ NetLogo 6.2.0
     <metric>stage_listOut</metric>
     <metric>infectNoVacArray_listOut</metric>
     <metric>infectVacArray_listOut</metric>
-    <metric>dieArray_listOut</metric>
-    <metric>hospArray_listOut</metric>
     <metric>case_listOut</metric>
     <metric>case7_listOut</metric>
     <metric>case14_listOut</metric>
     <metric>case28_listOut</metric>
     <metric>age_listOut</metric>
-    <metric>atsi_listOut</metric>
-    <metric>morbid_listOut</metric>
     <metric>casesinperiod7_min</metric>
     <metric>pre_stop_day</metric>
     <metric>casesinperiod7_switchTime</metric>
@@ -5132,9 +5141,6 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="end_day">
       <value value="390"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="end_r_reported">
-      <value value="-1"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="ess_radius_anchor">
       <value value="8.8"/>
     </enumeratedValueSet>
@@ -5147,16 +5153,10 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="essential_workers">
       <value value="100"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="exposuresymptmult">
-      <value value="0.4775673414039653"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="first_case_calibrate">
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="gather_loc_trans_red">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="age_isolation">
       <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_distance_mult">
@@ -5266,9 +5266,6 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="override_asympt_table">
       <value value="false"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="param_final_phase">
-      <value value="3"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="param_force_vaccine">
       <value value="&quot;Disabled&quot;"/>
     </enumeratedValueSet>
@@ -5296,9 +5293,6 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="param_policy_force_stage">
       <value value="-1"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="param_recovered_prop">
-      <value value="0.1"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="param_stage1_time">
       <value value="-1"/>
     </enumeratedValueSet>
@@ -5307,9 +5301,6 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_trigger_loosen">
       <value value="false"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="param_vac_rate_mult">
-      <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_vac_uptake_mult">
       <value value="0.75"/>
@@ -5388,9 +5379,6 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="reducedstagefour">
       <value value="false"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="reinfect_delay_base">
-      <value value="0"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="report_proportion">
       <value value="1"/>
     </enumeratedValueSet>
@@ -5399,9 +5387,6 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="scale_down_threshold">
       <value value="130"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="scale_up_limit">
-      <value value="0.9"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="scale_up_threshold">
       <value value="150"/>
@@ -5447,15 +5432,6 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="superspreaders">
       <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="sympt_present_mult">
-      <value value="1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="sympt_present_prop">
-      <value value="0.686503926264771"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="total_population">
-      <value value="234000000"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_assymtote">
       <value value="100"/>

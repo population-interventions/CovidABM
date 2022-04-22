@@ -60,6 +60,7 @@ simuls-own [
   
   cohortIndex ;; The row of population.csv that this simulant is based on
   agerange ;; the age of the person
+  prevacinfect_group ;; The group for micromanging pre-simulation dose and infection day
   essentialJob ;; Static indicator of whether the agent's job is most essential, which gives it higher EssentialWorkerPriority (ie closer to zero).
   isWorker
   
