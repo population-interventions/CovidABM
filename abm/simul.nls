@@ -67,6 +67,7 @@ simuls-own [
   recoverDay ;; Day of recovery.
   vaccineDay ;; Day of last vaccine
   prevVaccineDay ;; Day of previous vaccine
+  initPreSetup ;; Whether pre simulation dose and vaccine has been set up
   
   recoverVaccine ;; Name of the 'vaccine' gained by recovering
   currentVaccine ;; Name of most recent vaccine

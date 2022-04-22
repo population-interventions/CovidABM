@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.1
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-50.0
+5.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-50.0
+5.0
 .5
 1
 NIL
@@ -561,7 +561,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -602,7 +602,7 @@ Mask_Wearing
 Mask_Wearing
 0
 100
-60.0
+15.0
 1
 1
 NIL
@@ -615,7 +615,7 @@ SWITCH
 313
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -720,7 +720,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -844,7 +844,7 @@ MONITOR
 1292
 58
 Vac1 %
-100 * count simuls with [currentVaccine = \"OLD_2\"] / population
+100 * count simuls with [currentVaccine = \"cur_2\"] / population
 2
 1
 11
@@ -1130,7 +1130,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -1497,21 +1497,6 @@ preSimDailyCases
 1
 0
 Number
-
-SLIDER
-2597
-932
-2806
-965
-yearly_recover_prop_loss
-yearly_recover_prop_loss
-0
-0.999
-0.0
-0.01
-1
-NIL
-HORIZONTAL
 
 MONITOR
 302
@@ -2802,7 +2787,7 @@ MONITOR
 1371
 58
 Vac2 %
-100 * count simuls with [currentVaccine = \"OLD_3\"] / population
+100 * count simuls with [currentVaccine = \"cur_3\"] / population
 2
 1
 11
@@ -3146,6 +3131,21 @@ input/vic/prevacinfect.csv
 1
 0
 String
+
+SLIDER
+2604
+917
+2799
+951
+yearly_recover_prop_loss
+yearly_recover_prop_loss
+0
+100
+0.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

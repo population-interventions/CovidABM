@@ -378,7 +378,36 @@ to setupInitialVaccination_uniformMethod
 end
 
 to setupInitialVaccination_micromangedMethod
+  let initRecoverVar getInitRecoverVariant
+  let preVacInfectData remove-item 0 csv:from-file input_pre_vacinfect
   
+  foreach preVacInfectData [ x -> 
+    ask n-of 1 simuls with [initPreSetup = 0 and prevacinfect_group = (item 0 x)] [
+      set initPreSetup True
+      if (item 1 x) >= 0 [
+        simul_setNewRecover (item 4 x)
+        set recoverDay -1 * (item 1 x)
+      ]
+      ifelse (item 3 x) >= 0
+      [
+        if param_vac_uptake_mult * cohortVacUptake > random-float 1 [
+          set vaccReceptive true ; Only the most vaccinated are receptive to recieving another vaccine
+        ]
+        set vaccineDay -1 * (item 3 x)
+        set currentVaccine (word (item 6 x) cohortVacSuffix)
+        if (item 2 x) >= 0 [
+          set prevVaccineDay -1 * (item 2 x)
+          set prevVaccine (word (item 5 x) cohortVacSuffix)
+        ] 
+      ]
+      [
+        if (item 2 x) >= 0 [
+          set vaccineDay -1 * (item 2 x)
+          set currentVaccine (word (item 5 x) cohortVacSuffix)
+        ] 
+      ]
+    ]
+  ]
 end
 
 to setupInitialVaccination
@@ -420,7 +449,6 @@ to setGlobals
   set DeathCount                 0
   set recovercount               0
   set recoverCountByVariant      table:make
-  set dailyRecoverMult           0
   set recoverProportion          0
   set casesReportedToday         0
   set casesReportedToday_acc     0
