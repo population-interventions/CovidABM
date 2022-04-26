@@ -157,10 +157,10 @@ NIL
 HORIZONTAL
 
 PLOT
-3250
-845
-3645
-1020
+3242
+865
+3637
+1040
 Susceptible, Infected and Recovered - 000's
 Days from March 10th
 Numbers of people
@@ -265,9 +265,9 @@ caseFatalityRate * 100
 
 PLOT
 3528
-337
+330
 3756
-467
+460
 Case Fatality Rate %
 NIL
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+10.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+10.0
 .5
 1
 NIL
@@ -959,10 +959,10 @@ transmission_count_metric
 11
 
 PLOT
-2964
-504
-3371
-678
+2970
+502
+3377
+676
 Potential transmission interactions per day (scaled)
 NIL
 NIL
@@ -1055,10 +1055,10 @@ NIL
 HORIZONTAL
 
 PLOT
-2964
-352
-3372
-502
+2970
+349
+3378
+499
 Average Interaction Infectivity
 NIL
 NIL
@@ -1252,10 +1252,10 @@ floor (policymetric7 / 7)
 11
 
 PLOT
-3490
-193
-3763
-313
+3489
+187
+3762
+307
 OverseasIncursions
 NIL
 NIL
@@ -2871,10 +2871,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2382
-362
-2557
-422
+2383
+344
+2558
+404
 input_region
 input/vic/region.csv
 1
@@ -2882,10 +2882,10 @@ input/vic/region.csv
 String
 
 INPUTBOX
-2379
-428
-2553
-488
+2384
+399
+2558
+459
 input_vac_params
 input/vic/vaccine_params
 1
@@ -2927,9 +2927,9 @@ policyUseHosp
 
 INPUTBOX
 2415
-632
+650
 2469
-692
+710
 in_dose1
 _1
 1
@@ -2937,10 +2937,10 @@ _1
 String
 
 INPUTBOX
-2473
-632
-2526
-692
+2477
+655
+2530
+715
 in_dose2
 _60
 1
@@ -2959,10 +2959,10 @@ recoverCount
 14
 
 INPUTBOX
-2392
-492
-2551
-552
+2390
+459
+2549
+519
 input_variant
 input/vic/variant.csv
 1
@@ -2970,10 +2970,10 @@ input/vic/variant.csv
 String
 
 INPUTBOX
-2394
-564
-2536
-624
+2392
+520
+2534
+580
 input_draws
 input/vic
 1
@@ -3142,6 +3142,47 @@ yearly_recover_prop_loss
 0
 100
 0.0
+1
+1
+NIL
+HORIZONTAL
+
+INPUTBOX
+2380
+585
+2559
+645
+input_maskFile
+input/vic/mask_params.csv
+1
+0
+String
+
+SLIDER
+468
+925
+641
+959
+mask_upgradeProp
+mask_upgradeProp
+0
+1
+0.8
+0.1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+469
+965
+642
+999
+mask_upgradeStage
+mask_upgradeStage
+0
+5
+2.0
 1
 1
 NIL
