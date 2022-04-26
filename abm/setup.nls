@@ -38,9 +38,11 @@ to loadPopDivisionTable
     set index index + 1    table:put cohortData "spanMult" item index x
     set index index + 1    table:put cohortData "gatherFreqMult" item index x
     set index index + 1    table:put cohortData "region" item index x
-    set index index + 1    table:put cohortData "succeptMult" item index x
+    set index index + 1    table:put cohortData "succeptOr" item index x
+    set index index + 1    table:put cohortData "uptakeFromDose2" item index x
     set index index + 1    table:put cohortData "vaccineUptake" item index x
     set index index + 1    table:put cohortData "vaccineBranch" item index x
+    set index index + 1    table:put cohortData "branchFrom2" item index x
     set index index + 1    table:put cohortData "vaccineSuffix" item index x
     set index index + 1    table:put cohortData "hospDay" item index x
     set index index + 1    table:put cohortData "icuDay" item index x
@@ -140,9 +142,11 @@ to createSimulants
   let cohort_spanMult 0
   let cohort_gatherFreqMult 0
   let cohort_region 0
-  let cohort_succeptMult 0
+  let cohort_succeptOr 0
+  let cohort_uptakeFromDose2 0
   let cohort_vaccineUptake 0
   let cohort_vaccineBranch 0
+  let cohort_branchFrom2 0
   let cohort_vaccineSuffix ""
   let cohort_hospTime 0
   let cohort_icuTime 0
@@ -161,24 +165,26 @@ to createSimulants
       if not table:has-key? popDivisionTable pop_index [
         print "totalAgents in population.csv sums to less than Population (2500)." 
       ]
-      let cohortData            table:get popDivisionTable pop_index
-      set cohort_pop            table:get cohortData "pop"
-      set cohort_age            table:get cohortData "age"
-      set cohort_preGroup       table:get cohortData "preGroup"
-      set cohort_essentialCount table:get cohortData "essentialCount"
-      set cohort_workerCount    table:get cohortData "workerCount"
-      set cohort_studentCount   table:get cohortData "studentCount"
-      set cohort_spanMult       table:get cohortData "spanMult"
-      set cohort_gatherFreqMult table:get cohortData "gatherFreqMult"
-      set cohort_region         table:get cohortData "region"
-      set cohort_succeptMult    table:get cohortData "succeptMult"
-      set cohort_vaccineUptake  table:get cohortData "vaccineUptake"
-      set cohort_vaccineBranch  table:get cohortData "vaccineBranch"
-      set cohort_vaccineSuffix  table:get cohortData "vaccineSuffix"
-      set cohort_hospTime       table:get cohortData "hospDay"
-      set cohort_icuTime        table:get cohortData "icuDay"
-      set cohort_deathTime      table:get cohortData "deathDay"
-      set cohort_hospLengthBase table:get cohortData "hospLengthBase"
+      let cohortData             table:get popDivisionTable pop_index
+      set cohort_pop             table:get cohortData "pop"
+      set cohort_age             table:get cohortData "age"
+      set cohort_preGroup        table:get cohortData "preGroup"
+      set cohort_essentialCount  table:get cohortData "essentialCount"
+      set cohort_workerCount     table:get cohortData "workerCount"
+      set cohort_studentCount    table:get cohortData "studentCount"
+      set cohort_spanMult        table:get cohortData "spanMult"
+      set cohort_gatherFreqMult  table:get cohortData "gatherFreqMult"
+      set cohort_region          table:get cohortData "region"
+      set cohort_succeptOr       table:get cohortData "succeptOr"
+      set cohort_uptakeFromDose2 table:get cohortData "uptakeFromDose2"
+      set cohort_vaccineUptake   table:get cohortData "vaccineUptake"
+      set cohort_vaccineBranch   table:get cohortData "vaccineBranch"
+      set cohort_branchFrom2     table:get cohortData "branchFrom2"
+      set cohort_vaccineSuffix   table:get cohortData "vaccineSuffix"
+      set cohort_hospTime        table:get cohortData "hospDay"
+      set cohort_icuTime         table:get cohortData "icuDay"
+      set cohort_deathTime       table:get cohortData "deathDay"
+      set cohort_hospLengthBase  table:get cohortData "hospLengthBase"
       
       ;print (word "cohort_wane_1: " cohort_wane_1 ", cohort_wane_2: " cohort_wane_2 ", cohort_wane_3: " cohort_wane_3)
       set oldCohortIndex pop_index
@@ -235,13 +241,15 @@ to createSimulants
       set cohortDeathTime cohort_deathTime
       set cohortHospLengthBase cohort_hospLengthBase
       
-      set vaccBanch cohort_vaccineBranch
+      set vaccBranch cohort_vaccineBranch
+      set vaccBranchFrom2 cohort_branchFrom2
       set vaccReceptive false
       
       set spanMult cohort_spanMult
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
-      set succeptMult cohort_succeptMult
+      set succeptOr cohort_succeptOr
+      set cohortVacUptakeDose2 cohort_uptakeFromDose2
       
       move-to one-of patches with [ pcolor = black ]
       
@@ -322,6 +330,10 @@ to setupInitialVaccination_uniformMethod
       ask cohort [
         (ifelse doseCount_2 > 0
           [
+            if param_vac_uptake_mult * cohortVacUptakeDose2 > random-float 1 [ 
+              set vaccReceptive true ; A member of a cohort may continue on to further vaccination after only dose 2
+              set vaccBranch vaccBranchFrom2
+            ]
             set vaccineDay currentDay_2
             set prevVaccineDay currentDay_2 - doseDays_2
             
@@ -380,7 +392,6 @@ end
 to setupInitialVaccination_micromangedMethod
   let initRecoverVar getInitRecoverVariant
   let preVacInfectData remove-item 0 csv:from-file input_pre_vacinfect
-  
   foreach preVacInfectData [ x -> 
     ask n-of 1 simuls with [initPreSetup = 0 and prevacinfect_group = (item 0 x)] [
       set initPreSetup True
@@ -402,6 +413,10 @@ to setupInitialVaccination_micromangedMethod
       ]
       [
         if (item 2 x) >= 0 [
+          if param_vac_uptake_mult * cohortVacUptakeDose2 > random-float 1 [ 
+            set vaccReceptive true ; A member of a cohort may continue on to further vaccination after only dose 2
+            set vaccBranch vaccBranchFrom2
+          ]
           set vaccineDay -1 * (item 2 x)
           set currentVaccine (word (item 5 x) cohortVacSuffix)
         ] 

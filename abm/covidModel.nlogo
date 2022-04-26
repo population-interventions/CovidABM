@@ -364,7 +364,7 @@ INPUTBOX
 373
 263
 initial_cases
-3000.0
+63000.0
 1
 0
 Number
@@ -3136,7 +3136,7 @@ SLIDER
 2604
 917
 2799
-951
+950
 yearly_recover_prop_loss
 yearly_recover_prop_loss
 0

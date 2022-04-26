@@ -1,4 +1,26 @@
 
+to-report LnOddsToPr [lnOdd]
+  let odds exp lnOdd
+  report odds / (1 + odds)
+end
+
+to-report PrToLnOdds [pr]
+  report ln (pr / (1 - pr))
+end
+
+to-report OddsToPr [odds]
+  report odds / (1 + odds)
+end
+
+to-report PrToOdds [pr]
+  report pr / (1 - pr)
+end
+
+to-report AddLogOdds [prob toAdd]
+  let odds exp ((ln (prob / ( 1 - prob))) + toAdd)
+  report odds / (odds + 1)
+end
+
 to-report AddToList [myList myIndex myValue]
   if myIndex < 0 [
     report myList 

@@ -1,17 +1,4 @@
 
-to-report LnOddsToPr [lnOdd]
-  let odds exp lnOdd
-  report odds / (1 + odds)
-end
-
-to-report PrToLnOdds [pr]
-  report ln (pr / (1 - pr))
-end
-
-to-report AddLogOdds [prob toAdd]
-  let odds exp ((ln (prob / ( 1 - prob))) + toAdd)
-  report odds / (odds + 1)
-end
 
 to-report vaccine_binomCheck [draw succeptibility repeats]
   report 1 - (1 - succeptibility) ^ repeats > draw
@@ -130,7 +117,7 @@ to vaccine_updateSchedule
     let branch (item 2 data)
     let vaccineType (item 3 data)
     
-    let wantVaccine simuls with [vaccBanch = branch and vaccReceptive = true]
+    let wantVaccine simuls with [vaccBranch = branch and vaccReceptive = true]
     
     table:put vaccineBranchDoseRate branch (count wantVaccine) / vaccDays
     table:put vaccineBranchAvailible branch 0
@@ -145,7 +132,7 @@ to vaccine_update
   if _vaccine_enabled and days > 0 [
     vaccine_updateSchedule
     
-    foreach table:keys vaccineBranchAvailible [ branch -> 
+    foreach table:keys vaccineBranchAvailible [ branch ->
       vaccineMode_micromanageDoses branch
     ]
   ]

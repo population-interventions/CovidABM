@@ -1,5 +1,7 @@
 day,duration,branch,vaccine
+91,91,young_2,target
 91,91,young,target
 91,91,old,target
+180,91,young_2,target
 180,91,young,multi
 180,91,old,multi

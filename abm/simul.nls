@@ -13,7 +13,7 @@ simuls-own [
   spanMult
   gatherFreqMult
   homeRegion
-  succeptMult
+  succeptOr
   update_lock
   isInitialInfection
   cohortHospTime
@@ -21,6 +21,7 @@ simuls-own [
   cohortDeathTime
   cohortHospLengthBase
   cohortVacUptake
+  cohortVacUptakeDose2
   cohortVacSuffix
   
   myScale
@@ -73,7 +74,8 @@ simuls-own [
   currentVaccine ;; Name of most recent vaccine
   prevVaccine ;; Name of previous vaccine, for when the new one is not yet in effect
   
-  vaccBanch
+  vaccBranch
+  vaccBranchFrom2
   vaccReceptive
   
   incursionVaccine
@@ -323,7 +325,7 @@ end
 
 to simul_infect
   if color != red [
-    let baseSuccept succeptMult
+    let baseSuccept 1
     if wearingMask = 1 [
       set baseSuccept baseSuccept * (1 - simul_getMaskEfficacy)
     ]
@@ -346,6 +348,9 @@ to simul_infect
         ;print x
         if color != red [
           let succeptibility baseSuccept * x ;; TODO calculate succeptiblity based on patchVariant
+          if succeptibility < 1 [
+            set succeptibility OddsToPr (succeptOr * PrToOdds succeptibility)
+          ]
           set transmission_count transmission_count + extraScaleFactor * (Scale_Factor ^ localPatchScale)
           set transmission_sum transmission_sum + succeptibility
           let infectDraw random-float 1
@@ -370,7 +375,6 @@ to simul_infect
           ]
           
           ;; Check against lower succeptiblity for reinfection.
-          let binomChance 1 - (1 - succeptibility) ^ Daily_Infect_Binom
           if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
             set succeptibility succeptibility * (vaccine_getWanedParameter "riskReduct" patchVariant currentVaccine vaccineDay prevVaccine prevVaccineDay)
             if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
