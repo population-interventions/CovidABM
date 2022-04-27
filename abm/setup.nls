@@ -664,7 +664,6 @@ to setGlobals
   ;; file reading and draw handling
   set drawNumber 0
   set drawRandomSeed 0
-  set drawList 0
   
   set initial_infection_R -1
   set stop_simulation false

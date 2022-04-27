@@ -3162,7 +3162,7 @@ SLIDER
 468
 925
 641
-959
+958
 mask_upgradeProp
 mask_upgradeProp
 0
@@ -3177,7 +3177,7 @@ SLIDER
 469
 965
 642
-999
+998
 mask_upgradeStage
 mask_upgradeStage
 0

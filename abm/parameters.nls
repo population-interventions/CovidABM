@@ -13,11 +13,18 @@ to params_readDrawTable
 end
 
 to params_readStaticDraws
-  let fileData remove-item 0 csv:from-file (word input_draws "/draw_static.csv")
-  let draw (item draw_index fileData)
+  let fileData csv:from-file (word input_draws "/draw_static.csv")
   
-  let rand_seed (item 1 draw)
+  let colNames (item 0 fileData)
+  let drawParamList (item (draw_index + 1) fileData)
+  set drawParams table:make
   
+  foreach range length colNames [ x ->
+    table:put drawParams (item x colNames) (item x drawParamList)
+  ]
+  ;print drawParams
+  
+  let rand_seed (item 1 drawParamList)
   random-seed rand_seed
 end
 

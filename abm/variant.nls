@@ -1,12 +1,12 @@
 
 to-report getRandomInitVariant
   ; TODO, read init_prop
-  report "alpha"
+  report "base"
 end
 
 to-report getInitRecoverVariant
   ; TODO, read init_prop
-  report "alpha"
+  report "base"
 end
 
 to simul_updateVariantParams

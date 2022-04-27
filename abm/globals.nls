@@ -321,7 +321,7 @@ globals [
   ;; file reading and draw handling
   drawNumber
   drawRandomSeed
-  drawList
+  drawParams
 
   ;; Data output
   cohortLengthListOfZeros

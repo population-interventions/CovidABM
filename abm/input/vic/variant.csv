@@ -1,3 +1,6 @@
 name,trans_mean,trans_std,asympt_trans_a,asympt_trans_b,non_infect_time,incubation_mean,incubation_spread,duration_mean,duration_spread,hospLengthMult,init_variant,recoverVac
-alpha,0.8,0.12,3.86,13.5,0,4.4,2.25,11,2,1,1,alpha_post
-beta,0.318,0.12,3.86,13.5,0,4.4,2.25,11,2,1,0,beta_post
+base,0.8,0.12,3.86,13.5,0,4.4,2.25,11,2,1,1,base_post
+omlike,0.318,0.12,3.86,13.5,0,4.4,2.25,11,2,1,0,omlike_post
+novel,0.318,0.12,3.86,13.5,0,4.4,2.25,11,2,1,0,novel_post
+omlike_high,0.318,0.12,3.86,13.5,0,4.4,2.25,11,2,1,0,omlike_high_post
+novel_high,0.318,0.12,3.86,13.5,0,4.4,2.25,11,2,1,0,novel_high_post
