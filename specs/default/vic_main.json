@@ -117,7 +117,7 @@
         "1.0"
     ],
     "param_incur_phase_limit": [
-        "-1.0"
+        "0.0"
     ],
     "report_proportion": [
         "1.0"
@@ -195,7 +195,7 @@
         "-1.0"
     ],
     "init_trace_prop": [
-        "0.3"
+        "1.0"
     ],
     "input_population_table": [
         "\"input/vic/pop\""
@@ -204,7 +204,7 @@
         "\"None\""
     ],
     "param_vac_uptake_mult": [
-        "0.8"
+        "0.75"
     ],
     "compound_essential": [
         "\"Extreme\""
@@ -219,7 +219,7 @@
         "0.08"
     ],
     "first_case_calibrate": [
-        "false"
+        "true"
     ],
     "prepeak_vir_boost": [
         "0.1"
@@ -411,7 +411,7 @@
         "\"Disabled\""
     ],
     "trans_override": [
-        "0.0"
+        "0.25"
     ],
     "sympt_iso_prop": [
         "0.0"
@@ -430,8 +430,5 @@
     ],
     "mask_upgradestage": [
         "2.0"
-    ],
-    "input_vaccine_base": [
-        "\"input/vic/vaccine_underlying_params\""
     ]
 }

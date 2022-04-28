@@ -205,10 +205,10 @@ Deathcount
 14
 
 MONITOR
-2853
-970
-3008
-1027
+3077
+842
+3232
+899
 # simuls
 count simuls * (Total_Population / population)
 0
@@ -312,10 +312,10 @@ NIL
 HORIZONTAL
 
 PLOT
-2345
-715
-2752
-837
+2552
+932
+2819
+1052
 Estimated count of deceased across age ranges (not scaled)
 NIL
 NIL
@@ -1115,7 +1115,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-200.0
+160.0
 10
 1
 NIL
@@ -1580,10 +1580,10 @@ MONITOR
 11
 
 SLIDER
-2598
-974
-2798
-1007
+2814
+914
+3014
+947
 complacency_loss
 complacency_loss
 0
@@ -2007,7 +2007,7 @@ init_trace_prop
 init_trace_prop
 0
 1
-1.0
+0.3
 0.05
 1
 NIL
@@ -2043,7 +2043,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.75
+0.8
 0.05
 1
 NIL
@@ -2134,10 +2134,10 @@ first_case_calibrate
 -1000
 
 SLIDER
-2852
-1032
-3052
-1065
+2815
+957
+3015
+990
 prepeak_vir_boost
 prepeak_vir_boost
 0
@@ -2149,10 +2149,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-2204
-557
-2376
-602
+2208
+555
+2353
+600
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_az_25_95.csv" "_az_25_90.csv" "_az_25_80.csv" "_az_25_70.csv" "_70" "_80" "_90" "_95" ".csv"
@@ -2378,10 +2378,10 @@ policy_switch
 2
 
 SWITCH
-2275
-650
-2403
-683
+2210
+657
+2338
+690
 suffix_rollout
 suffix_rollout
 0
@@ -2926,10 +2926,10 @@ policyUseHosp
 -1000
 
 INPUTBOX
-2415
-650
-2469
-710
+2349
+783
+2403
+843
 in_dose1
 _1
 1
@@ -2937,10 +2937,10 @@ _1
 String
 
 INPUTBOX
-2477
-655
-2530
-715
+2410
+784
+2463
+844
 in_dose2
 _60
 1
@@ -3022,9 +3022,9 @@ true
 true
 "" ""
 PENS
-"alpha" 0.02 1 -16777216 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"alpha\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
-"beta" 0.02 1 -14454117 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"beta\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
-"a-rec" 0.02 1 -2674135 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"alpha\" recoverVaccine recoverDay 0 0) ] of simuls"
+"alpha" 0.02 1 -16777216 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"beta" 0.02 1 -14454117 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"omlike\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"a-rec" 0.02 1 -2674135 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" recoverVaccine recoverDay 0 0) ] of simuls"
 
 PLOT
 1837
@@ -3100,7 +3100,7 @@ trans_override
 trans_override
 0
 0.999
-0.25
+0.0
 0.01
 1
 NIL
@@ -3122,10 +3122,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2553
-653
-2737
-713
+2350
+652
+2534
+712
 input_pre_vacinfect
 input/vic/prevacinfect.csv
 1
@@ -3133,10 +3133,10 @@ input/vic/prevacinfect.csv
 String
 
 SLIDER
-2604
-917
-2799
-950
+2592
+873
+2787
+906
 yearly_recover_prop_loss
 yearly_recover_prop_loss
 0
@@ -3148,10 +3148,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2380
-585
-2559
-645
+2362
+587
+2541
+647
 input_maskFile
 input/vic/mask_params.csv
 1
@@ -3187,6 +3187,17 @@ mask_upgradeStage
 1
 NIL
 HORIZONTAL
+
+INPUTBOX
+2350
+715
+2537
+775
+input_vaccine_base
+input/vic/vaccine_underlying_params
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?

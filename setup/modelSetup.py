@@ -12,12 +12,6 @@ SEPARATOR = '<experiments>'
 BEHAVIOUR_END = '</experiments>'
 
 
-def OutputCurrentNetlogoValues(netlogoFileName):
-	parameters = util.ListListToDictList(
-		nl.GetModelDefaults(netlogoFileName, GRAPHICS_START, SEPARATOR))
-	util.StringToFile('specs/default/temp.json', json.dumps(parameters, indent=4))
-
-
 def MakeHeadlessWithCustomBehaviourSpace(modelData):
 	modelFile = open(modelData['netlogoFileName'], 'r')
 	outputFile = open(modelData['headlessFileName'], 'w')
@@ -77,7 +71,7 @@ def MakeHeadlessWithParameters(specFile, runCount):
 	modelData = md.LoadModelDatWithExperimentInput(specFile, runCount)
 	
 	# Useful for checking validity
-	OutputCurrentNetlogoValues(modelData['netlogoFileName'])
+	nl.OutputCurrentNetlogoValues(modelData['netlogoFileName'], 'specs/default/temp.json')
 	
 	MakeHeadlessWithCustomBehaviourSpace(modelData)
 	

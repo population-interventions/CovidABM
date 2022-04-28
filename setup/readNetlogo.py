@@ -1,7 +1,12 @@
 
 import re
+import json
 
 import process.shared.utilities as util
+
+GRAPHICS_START = 'GRAPHICS-WINDOW'
+SEPARATOR = '<experiments>'
+BEHAVIOUR_END = '</experiments>'
 
 def listToStr(input):
 	return " ".join(str(x) for x in input)
@@ -125,3 +130,8 @@ def GetModelDefaults(modelName, startPart, endPart):
 	modelFile.close()
 	return parameters
 
+
+def OutputCurrentNetlogoValues(netlogoFileName, outFile):
+	parameters = util.ListListToDictList(
+		GetModelDefaults(netlogoFileName, GRAPHICS_START, SEPARATOR))
+	util.StringToFile(outFile, json.dumps(parameters, indent=4))

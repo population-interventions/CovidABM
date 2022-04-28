@@ -1,0 +1,25 @@
+{
+	"netlogoFile" : "covidModel",
+	"defaultParamFile" : "vic_main",
+	"copyExperimentMetrics" : "vic_main",
+	"indexParams" : {
+		"param_vac_uptake_mult" : [
+			0.6,
+			0.8,
+			0.95
+		],
+		"param_policy" : [
+			"TightSupress",
+			"LooseSupress",
+			"BarelySupress"
+		]
+	},
+	"paramOverrides" : {
+		"first_case_calibrate" : false
+	},
+	"runIndexer" : "draw_index",
+	"postSeries" : {
+		"process" : {
+		}
+	}
+}
