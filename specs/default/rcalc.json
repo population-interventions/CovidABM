@@ -9,13 +9,13 @@
         "0.1"
     ],
     "proportion_people_avoid": [
-        "10.0"
+        "5.0"
     ],
     "proportion_time_avoid": [
-        "10.0"
+        "5.0"
     ],
     "initial_cases": [
-        "20000.0"
+        "63000.0"
     ],
     "total_population": [
         "6649066.0"
@@ -54,7 +54,7 @@
         "true"
     ],
     "param_policy": [
-        "\"BarelySupress\""
+        "\"TightSupress_No_4\""
     ],
     "asymptom_trace_mult": [
         "0.66"
@@ -107,11 +107,8 @@
     "presimdailycases": [
         "0.0"
     ],
-    "yearly_recover_prop_loss": [
-        "0.0"
-    ],
     "recov_var_match_rate": [
-        "0.57"
+        "0.58"
     ],
     "set_shape": [
         "false"
@@ -129,7 +126,7 @@
         "1.0"
     ],
     "incursion_phase_speed_mult": [
-        "0.5"
+        "1.0"
     ],
     "calibrate": [
         "false"
@@ -207,7 +204,7 @@
         "\"None\""
     ],
     "param_vac_uptake_mult": [
-        "0.8"
+        "0.75"
     ],
     "compound_essential": [
         "\"Extreme\""
@@ -405,7 +402,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "293.0"
+        "1.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_both.csv\""
@@ -417,6 +414,21 @@
         "0.25"
     ],
     "sympt_iso_prop": [
-        "1.0"
+        "0.0"
+    ],
+    "input_pre_vacinfect": [
+        "\"input/vic/prevacinfect.csv\""
+    ],
+    "yearly_recover_prop_loss": [
+        "0.0"
+    ],
+    "input_maskfile": [
+        "\"input/vic/mask_params.csv\""
+    ],
+    "mask_upgradeprop": [
+        "0.8"
+    ],
+    "mask_upgradestage": [
+        "2.0"
     ]
 }

@@ -307,6 +307,10 @@ globals [
   
   variantNames
   variantData
+  variantUI_hosp
+  variantUI_ICU
+  variantUI_IFR
+  variantUI_IFR_young
   
   agentsByVaccPhase
 

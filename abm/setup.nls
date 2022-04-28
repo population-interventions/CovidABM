@@ -697,6 +697,7 @@ to setup
   params_readStaticDraws
   params_readDrawTable
   params_setDrawValues
+  ageVariant_setup
 
   profiler:reset
   if profile_on [
