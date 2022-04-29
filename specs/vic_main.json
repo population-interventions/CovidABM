@@ -15,7 +15,8 @@
 		]
 	},
 	"paramOverrides" : {
-		"first_case_calibrate" : false
+		"first_case_calibrate" : false,
+		"end_day" : 100
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {
