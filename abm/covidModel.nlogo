@@ -5543,6 +5543,434 @@ NetLogo 6.2.0
       <value value="0"/>
     </enumeratedValueSet>
   </experiment>
+  <experiment name="vic_no_report" repetitions="1" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <enumeratedValueSet variable="draw_index">
+      <value value="0"/>
+      <value value="1"/>
+      <value value="2"/>
+      <value value="3"/>
+      <value value="4"/>
+      <value value="5"/>
+      <value value="6"/>
+      <value value="7"/>
+      <value value="8"/>
+      <value value="9"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="gather_location_count">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_policy">
+      <value value="&quot;TightSupress_No_4&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="policy_pipeline">
+      <value value="&quot;None&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="avoid_essential">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="compound_essential">
+      <value value="&quot;Extreme&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="calibrate_stage_switch">
+      <value value="300"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="case_reporting_delay">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_vacincurmult">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="stage_test_index">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="calibrate">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="compound_input">
+      <value value="&quot;None&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="compound_mask_param">
+      <value value="&quot;Normal&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="compound_param">
+      <value value="&quot;None&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="compound_trace">
+      <value value="&quot;ass100_90at5&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cont_stage">
+      <value value="3.25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="count_incursion">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="daily_infect_binom">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="data_suffix">
+      <value value="&quot;.csv&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="data_suffix_2">
+      <value value="&quot;None&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="accept_isolation_prop">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="duration_skew">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="end_day">
+      <value value="390"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="ess_radius_anchor">
+      <value value="8.8"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="ess_spread_anchor">
+      <value value="0.08"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="ess_w_risk_reduction">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="essential_workers">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="first_case_calibrate">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="gather_loc_trans_red">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="global_distance_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="hetro_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="house_init_group">
+      <value value="0.15"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="household_iso_factor">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="in_dose1">
+      <value value="&quot;_1&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="in_dose2">
+      <value value="&quot;_60&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="incur_timenow_limit">
+      <value value="4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="incursion_phase_speed_mult">
+      <value value="0.5"/>
+      <value value="1"/>
+      <value value="1.5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="infect_iso_factor">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init_cases_region">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init_metric_threshold">
+      <value value="390"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init_stage">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init_timenow_limit">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init_trace_prop">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial_cases">
+      <value value="3000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial_primary_prop">
+      <value value="0.26"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="input_draws">
+      <value value="&quot;input/vic&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="input_incursion_table">
+      <value value="&quot;input/vic/incursion.csv&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="input_population_table">
+      <value value="&quot;input/vic/pop&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="input_region">
+      <value value="&quot;input/vic/region.csv&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="input_vac_params">
+      <value value="&quot;input/vic/vaccine_params&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="input_vaccine_schedule">
+      <value value="&quot;input/vic/rollout_both.csv&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="input_variant">
+      <value value="&quot;input/vic/variant.csv&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="isocomply_override">
+      <value value="0.93"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="isolate_on_inf_notice">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="isolation_transmission">
+      <value value="0.33"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="mask_efficacy_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="mask_wear_boost">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="mask_wearing">
+      <value value="15"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="maskpolicy">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="max_stage">
+      <value value="3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="mid_report_day">
+      <value value="42"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="min_stage">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="minmaskwearing">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="override_asympt_table">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_force_vaccine">
+      <value value="&quot;Disabled&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_incur_phase_limit">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_incurmult">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_override_ve">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_override_ve_area">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="always_spread">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_policy_force_days">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_policy_force_preset">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_policy_force_stage">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_stage1_time">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_trace_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_trigger_loosen">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="param_vac_uptake_mult">
+      <value value="0.75"/>
+      <value value="0.85"/>
+      <value value="0.95"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="complacency_bound">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="pipe_end_override">
+      <value value="&quot;off&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="policy_pipe_time">
+      <value value="105"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="asymptom_trace_mult">
+      <value value="0.66"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="policy_switch">
+      <value value="&quot;pak&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="policyusehosp">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="population">
+      <value value="2500"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="pre_present_iso">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="prepeak_vir_boost">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="presimdailycases">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="presimdailyhosp">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="print_contact_events">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="print_phase">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="print_vac">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="profile_on">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="proportion_people_avoid">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="proportion_time_avoid">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="rat_day_max">
+      <value value="7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="rat_prop">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="realnotcasethres">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="recov_var_match_rate">
+      <value value="0.58"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="recover_immunity_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="recovered_match_rate">
+      <value value="0.33"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="reducedstagefour">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="report_proportion">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="scale_cont_buffer">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="scale_down_threshold">
+      <value value="130"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="scale_up_threshold">
+      <value value="150"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="schoolsopen">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="self_iso_at_peak">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sensitivity">
+      <value value="&quot;None&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="set_shape">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sim_seed">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="site_iso_max_day">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="site_iso_prop">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="slope_track_end">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="slope_track_start">
+      <value value="23"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="span">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="complacency_loss">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="success_14day_cases">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="suffix_rollout">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="superspreaders">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trace_assymtote">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trace_at_1">
+      <value value="0.98"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trace_at_5">
+      <value value="0.9"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trace_attempt_limit">
+      <value value="3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trace_calibration">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trace_eff_override">
+      <value value="-1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trace_print">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="track_iso_factor">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="track_r">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="track_slope">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tracking">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="transmit_skew">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="vac_trans_mult">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="vaccine_enabled">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="vactype_override">
+      <value value="&quot;off&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="visit_frequency">
+      <value value="0.1428"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="visit_radius">
+      <value value="8.8"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="yearly_recover_prop_loss">
+      <value value="0"/>
+    </enumeratedValueSet>
+  </experiment>
 </experiments>
 @#$#@#$#@
 @#$#@#$#@
