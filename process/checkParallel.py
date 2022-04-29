@@ -9,16 +9,16 @@ def DoParallelCheck(runIndex, modelName, runs, pernode):
 	modelData = md.LoadModelData(modelName)
 	
 	if 'postSeries' in modelData:
-		if 'process' in modelData['postSeries']:
+		if 'processMain' in modelData['postSeries']:
 			measureCols_raw = list(modelData['indexParams'].keys())
-			measureCols = [data['name'] for data in modelData['postSeries']['process']['indexRename'].values()]
+			measureCols = [data['name'] for data in modelData['postSeries']['processMain']['indexRename'].values()]
 		
 			inputDir = '{}/raw'.format(modelData['scratchDir'])
 			outputDir = '{}/post_parallel'.format(modelData['scratchDir'])
 			
 			DoAbmProcessing(
 				inputDir, outputDir, runIndex,
-				modelData['postSeries']['process']['indexRename'],
+				modelData['postSeries']['processMain']['indexRename'],
 				measureCols, measureCols_raw)
 	
 

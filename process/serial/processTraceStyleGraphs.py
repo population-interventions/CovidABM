@@ -12,7 +12,7 @@ import matplotlib.ticker as ticker
 import matplotlib
 import seaborn as sns
 import pathlib
-import shared.utilities as util
+import process.shared.utilities as util
 #from tqdm import tqdm
 
 
@@ -316,7 +316,7 @@ def PrintSomeStats(df, indexVals):
 
 
 def ProcessResults(
-		subfolder, indexRenameFunc, measureCols, measureCols_raw,
+		subfolder, indexRename, measureCols, measureCols_raw,
 		defaultValues, nameList):
 	print(nameList)
 	name = nameList[0]
@@ -379,7 +379,7 @@ def ProcessResults(
 	})
 	
 	df = df.set_index(['draw_index'] + measureCols_raw)
-	df = indexRenameFunc(df)
+	df = util.DoIndexRename(df, indexRename)
 	
 	df['IncurPresentDay'] = df['IncurPresentDay'].replace(
 		{-1 : 'None'})
@@ -493,9 +493,9 @@ def ProcessResults(
 
 
 def DoPreProcessChecks(
-		subfolder, rawDataDir, indexRenameFunc, measureCols, measureCols_raw,
+		subfolder, rawDataDir, indexRename, measureCols, measureCols_raw,
 		defaultValues, firstOnly=False):
 	ProcessResults(
-		subfolder, indexRenameFunc, measureCols, measureCols_raw,
+		subfolder, indexRename, measureCols, measureCols_raw,
 		defaultValues,
 		util.GetFiles(rawDataDir, firstOnly=firstOnly))

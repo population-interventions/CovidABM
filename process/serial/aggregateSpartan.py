@@ -13,12 +13,12 @@ import pathlib
 import time
 import os
 
-from shared.utilities import SplitNetlogoList
-from shared.utilities import SplitNetlogoNestedList
-from shared.utilities import OutputToFile
-from shared.utilities import AddFiles, AppendFiles
-from shared.utilities import ToHeatmap
-import shared.utilities as util
+from process.shared.utilities import SplitNetlogoList
+from process.shared.utilities import SplitNetlogoNestedList
+from process.shared.utilities import OutputToFile
+from process.shared.utilities import AddFiles, AppendFiles
+from process.shared.utilities import ToHeatmap
+import process.shared.utilities as util
 
 
 def AppendParallels(dataDir, rawDataDir, outDir, measureCols, outputSubdir, prefix, indexList, fileNames, header=1):

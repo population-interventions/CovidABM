@@ -15,10 +15,10 @@ import time
 import os
 import gc
 
-from shared.utilities import AddFiles
-from shared.utilities import ToHeatmap, CrossIndex
-from shared.utilities import OutputToFile, GetCohortData, ListRemove
-import shared.utilities as util
+from process.shared.utilities import AddFiles
+from process.shared.utilities import ToHeatmap, CrossIndex
+from process.shared.utilities import OutputToFile, GetCohortData, ListRemove
+import process.shared.utilities as util
 
 nameMap = {
 	'hospital' : 'hosp',

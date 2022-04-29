@@ -27,6 +27,9 @@ def LoadModelData(specFile):
 	modelData['scratchDir'] = '../scratch/{}'.format(specFile)
 	if 'handlerName' in modelData:
 		modelData['handlerDir'] = '../scratch/{}'.format(modelData['handlerName'])
+	if 'postInputDir' in modelData:
+		modelData['postInputDir'] = '../CovidABM/post_input/{}'.format(modelData['postInputDir'])
+		
 	
 	return modelData
 

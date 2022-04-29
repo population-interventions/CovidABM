@@ -7,8 +7,8 @@ from matplotlib import pyplot as plt
 import matplotlib.ticker as ticker
 import seaborn as sns
 
-from shared.utilities import OutputToFile
-from shared.utilities import ToHeatmap
+from process.shared.utilities import OutputToFile
+from process.shared.utilities import ToHeatmap
 
 def MakeFavouriteGraph(dataDir, dataName, measureCols, favParams, median=True, mean=True, si=False):
 	processDir = dataDir + '/Traces/'

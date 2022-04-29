@@ -3,9 +3,9 @@ import math
 import pandas as pd
 import numpy as np
 
-from shared.utilities import OutputToFile
-from shared.utilities import ToHeatmap
-from serial.processedOutputToReport import OutputLineCompare
+from process.shared.utilities import OutputToFile
+from process.shared.utilities import ToHeatmap
+from process.serial.processedOutputToReport import OutputLineCompare
 
 
 def HeatmapProcessNoRollout(df, heatmapStructure):

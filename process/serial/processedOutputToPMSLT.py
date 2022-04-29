@@ -6,7 +6,7 @@ import time
 import os
 import re
 
-from shared.utilities import OutputToFile, GetCohortData
+from process.shared.utilities import OutputToFile, GetCohortData
 
 ############### Shared ###############
 

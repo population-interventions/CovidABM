@@ -3,9 +3,9 @@ import math
 import pandas as pd
 import numpy as np
 
-from shared.utilities import OutputToFile
-from shared.utilities import ToHeatmap
-import shared.utilities as util
+from process.shared.utilities import OutputToFile
+from process.shared.utilities import ToHeatmap
+import process.shared.utilities as util
 
 ############### Stages ###############
 

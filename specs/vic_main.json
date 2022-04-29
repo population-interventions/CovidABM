@@ -2,6 +2,7 @@
 	"netlogoFile" : "covidModel",
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_main",
+	"postInputDir" : "vic",
 	"indexParams" : {
 		"param_vac_uptake_mult" : [
 			0.6,
@@ -19,7 +20,20 @@
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {
-		"process" : {
+		"processMain" : {
+			"params" : {
+				"dryRun" : false,
+				"preChecks" : false,
+				"aggregateSpartan" : true,
+				"doDraws" : true,
+				"doFinaliseCohortAgg" : true,
+				"makeOutput" : true,
+				"outputStages" : true,
+				"makeComparison" : false
+			},
+			"heatAges" : [
+				[0, 110]
+			],
 			"heatmapStructure" : {
 				"index_rows" : ["Policy"],
 				"index_cols" : ["VacUptake"],

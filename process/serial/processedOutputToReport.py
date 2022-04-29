@@ -6,7 +6,7 @@ import time
 import os
 import re
 
-from shared.utilities import OutputToFile, GetCohortData
+from process.shared.utilities import OutputToFile, GetCohortData
 
 
 ############### Shared ###############
@@ -52,7 +52,6 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, months):
 		on='cohort',
 		how='left',
 		sort=False)
-	col_index = col_index.drop(columns=['atsi', 'morbid'])
 	col_index['age_min'] = col_index['age'].apply(SetAgeRange)
 	df.columns = pd.MultiIndex.from_frame(col_index)
 	
