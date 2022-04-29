@@ -24,6 +24,7 @@ to loadPopDivisionTable
     set fileName (word fileName data_suffix_2)
   ]
   let populationFileData remove-item 0 csv:from-file fileName
+  file-close
   set popDivisionTable table:make
   let i 0
   foreach populationFileData [ x -> 
@@ -66,6 +67,7 @@ end
 
 to loadRegionTable
   let regionFileData remove-item 0 csv:from-file input_region
+  file-close
   set regionTable table:make
   set regionTable_keys []
   set regionTable_list []
@@ -392,6 +394,7 @@ end
 to setupInitialVaccination_micromangedMethod
   let initRecoverVar getInitRecoverVariant
   let preVacInfectData remove-item 0 csv:from-file input_pre_vacinfect
+  file-close
   foreach preVacInfectData [ x -> 
     ask n-of 1 simuls with [initPreSetup = 0 and prevacinfect_group = (item 0 x)] [
       set initPreSetup True

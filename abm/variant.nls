@@ -32,6 +32,7 @@ to setup_variantData
   
   let inputFile (word input_variant)
   let variantFileData remove-item 0 csv:from-file inputFile
+  file-close
   
   set variantNames []
   set variantData table:make

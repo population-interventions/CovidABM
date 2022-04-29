@@ -1,6 +1,7 @@
 
 to params_readDrawTable
   let fileData remove-item 0 csv:from-file (word input_draws "/draw_params.csv")
+  file-close
   
   foreach fileData [ x ->
     if (item 0 x) = "symptPresent" [
@@ -14,6 +15,7 @@ end
 
 to params_readStaticDraws
   let fileData csv:from-file (word input_draws "/draw_static.csv")
+  file-close
   
   let colNames (item 0 fileData)
   let drawParamList (item (draw_index + 1) fileData)
