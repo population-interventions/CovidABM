@@ -1,6 +1,6 @@
 {
 	"netlogoFile" : "covidModel",
-	"defaultParamFile" : "vic_main",
+	"defaultParamFile" : "rcalc",
 	"copyExperimentMetrics" : "vic_rcalc",
 	"indexParams" : {
 		"param_vac_uptake_mult" : [
