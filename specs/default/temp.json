@@ -15,7 +15,7 @@
         "5.0"
     ],
     "initial_cases": [
-        "63000.0"
+        "3000.0"
     ],
     "total_population": [
         "6649066.0"
@@ -60,7 +60,7 @@
         "0.66"
     ],
     "gather_location_count": [
-        "160.0"
+        "200.0"
     ],
     "complacency_bound": [
         "5.0"
@@ -126,7 +126,7 @@
         "1.0"
     ],
     "incursion_phase_speed_mult": [
-        "1.0"
+        "0.5"
     ],
     "calibrate": [
         "false"
@@ -195,7 +195,7 @@
         "-1.0"
     ],
     "init_trace_prop": [
-        "0.3"
+        "1.0"
     ],
     "input_population_table": [
         "\"input/vic/pop\""
@@ -204,7 +204,7 @@
         "\"None\""
     ],
     "param_vac_uptake_mult": [
-        "0.8"
+        "0.85"
     ],
     "compound_essential": [
         "\"Extreme\""
@@ -402,7 +402,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "1.0"
+        "0.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_both.csv\""

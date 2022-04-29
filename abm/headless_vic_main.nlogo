@@ -234,7 +234,7 @@ INPUTBOX
 373
 263
 initial_cases
-63000.0
+3000.0
 1
 0
 Number
@@ -482,7 +482,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-160.0
+200.0
 10
 1
 NIL
@@ -835,7 +835,7 @@ incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
 2
-1.0
+0.5
 0.01
 1
 NIL
@@ -1162,7 +1162,7 @@ init_trace_prop
 init_trace_prop
 0
 1
-0.3
+1.0
 0.05
 1
 NIL
@@ -1198,7 +1198,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.8
+0.85
 0.05
 1
 NIL
@@ -2064,7 +2064,7 @@ draw_index
 draw_index
 0
 4000
-1.0
+0.0
 1
 1
 NIL
@@ -2652,6 +2652,9 @@ NetLogo 6.2.0
     <metric>casesinperiod7_switchTime</metric>
     <metric>cumulativeInfected_switchTime</metric>
     <metric>cumulativeInfected_minusInit</metric>
+    <metric>dieArray_listOut</metric>
+    <metric>icuArray_listOut</metric>
+    <metric>hospArray_listOut</metric>
     <enumeratedValueSet variable="population">
       <value value="2500.0"/>
     </enumeratedValueSet>
@@ -2772,7 +2775,7 @@ NetLogo 6.2.0
       <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_incur_phase_limit">
-      <value value="0.0"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="report_proportion">
       <value value="1.0"/>
@@ -2850,7 +2853,7 @@ NetLogo 6.2.0
       <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init_trace_prop">
-      <value value="1.0"/>
+      <value value="0.3"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="input_population_table">
       <value value="&quot;input/vic/pop&quot;"/>
@@ -3061,104 +3064,6 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>
-      <value value="2"/>
-      <value value="3"/>
-      <value value="4"/>
-      <value value="5"/>
-      <value value="6"/>
-      <value value="7"/>
-      <value value="8"/>
-      <value value="9"/>
-      <value value="10"/>
-      <value value="11"/>
-      <value value="12"/>
-      <value value="13"/>
-      <value value="14"/>
-      <value value="15"/>
-      <value value="16"/>
-      <value value="17"/>
-      <value value="18"/>
-      <value value="19"/>
-      <value value="20"/>
-      <value value="21"/>
-      <value value="22"/>
-      <value value="23"/>
-      <value value="24"/>
-      <value value="25"/>
-      <value value="26"/>
-      <value value="27"/>
-      <value value="28"/>
-      <value value="29"/>
-      <value value="30"/>
-      <value value="31"/>
-      <value value="32"/>
-      <value value="33"/>
-      <value value="34"/>
-      <value value="35"/>
-      <value value="36"/>
-      <value value="37"/>
-      <value value="38"/>
-      <value value="39"/>
-      <value value="40"/>
-      <value value="41"/>
-      <value value="42"/>
-      <value value="43"/>
-      <value value="44"/>
-      <value value="45"/>
-      <value value="46"/>
-      <value value="47"/>
-      <value value="48"/>
-      <value value="49"/>
-      <value value="50"/>
-      <value value="51"/>
-      <value value="52"/>
-      <value value="53"/>
-      <value value="54"/>
-      <value value="55"/>
-      <value value="56"/>
-      <value value="57"/>
-      <value value="58"/>
-      <value value="59"/>
-      <value value="60"/>
-      <value value="61"/>
-      <value value="62"/>
-      <value value="63"/>
-      <value value="64"/>
-      <value value="65"/>
-      <value value="66"/>
-      <value value="67"/>
-      <value value="68"/>
-      <value value="69"/>
-      <value value="70"/>
-      <value value="71"/>
-      <value value="72"/>
-      <value value="73"/>
-      <value value="74"/>
-      <value value="75"/>
-      <value value="76"/>
-      <value value="77"/>
-      <value value="78"/>
-      <value value="79"/>
-      <value value="80"/>
-      <value value="81"/>
-      <value value="82"/>
-      <value value="83"/>
-      <value value="84"/>
-      <value value="85"/>
-      <value value="86"/>
-      <value value="87"/>
-      <value value="88"/>
-      <value value="89"/>
-      <value value="90"/>
-      <value value="91"/>
-      <value value="92"/>
-      <value value="93"/>
-      <value value="94"/>
-      <value value="95"/>
-      <value value="96"/>
-      <value value="97"/>
-      <value value="98"/>
-      <value value="99"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="input_vaccine_schedule">
       <value value="&quot;input/vic/rollout_both.csv&quot;"/>
@@ -3167,7 +3072,7 @@ NetLogo 6.2.0
       <value value="&quot;Disabled&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trans_override">
-      <value value="0.25"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sympt_iso_prop">
       <value value="0.0"/>
@@ -3186,6 +3091,9 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="mask_upgradestage">
       <value value="2.0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="input_vaccine_base">
+      <value value="&quot;input/vic/vaccine_underlying_params&quot;"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>

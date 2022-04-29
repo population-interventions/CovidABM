@@ -33,11 +33,10 @@ def ProcessAbmChunk(
 		'[run number]', 'draw_index',
 		'stage_listOut', 'scalephase', 'cumulativeInfected',
 		'infectNoVacArray_listOut', 'infectVacArray_listOut',
-		'dieArray_listOut',
-		'hospArray_listOut',
+		'dieArray_listOut', 'icuArray_listOut', 'hospArray_listOut',
 		'case_listOut', 'case7_listOut',
 		'case14_listOut', 'case28_listOut',
-		'age_listOut', 'atsi_listOut', 'morbid_listOut'
+		'age_listOut'
 	] + measureCols_raw]
 	
 	cohorts = len(chunk.iloc[0].age_listOut.split(' '))
