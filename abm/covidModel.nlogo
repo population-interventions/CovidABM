@@ -364,7 +364,7 @@ INPUTBOX
 373
 263
 initial_cases
-63000.0
+3000.0
 1
 0
 Number
@@ -1115,7 +1115,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-160.0
+200.0
 10
 1
 NIL
@@ -1670,7 +1670,7 @@ incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
 2
-1.0
+0.5
 0.01
 1
 NIL
@@ -2007,7 +2007,7 @@ init_trace_prop
 init_trace_prop
 0
 1
-0.3
+1.0
 0.05
 1
 NIL
@@ -2043,7 +2043,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.8
+0.85
 0.05
 1
 NIL
@@ -2989,7 +2989,7 @@ draw_index
 draw_index
 0
 4000
-1.0
+0.0
 1
 1
 NIL
@@ -5115,6 +5115,9 @@ NetLogo 6.2.0
     <metric>casesinperiod7_switchTime</metric>
     <metric>cumulativeInfected_switchTime</metric>
     <metric>cumulativeInfected_minusInit</metric>
+    <metric>dieArray_listOut</metric>
+    <metric>icuArray_listOut</metric>
+    <metric>hospArray_listOut</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>

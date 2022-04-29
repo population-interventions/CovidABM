@@ -20,6 +20,31 @@
 	"runIndexer" : "draw_index",
 	"postSeries" : {
 		"process" : {
+			"heatmapStructure" : {
+				"index_rows" : ["Policy"],
+				"index_cols" : ["VacUptake"],
+				"base_value" : {
+				},
+				"sort_rows" : [
+				], 
+				"sort_cols" : [
+				]
+			},
+			"indexRename" : {
+				"param_vac_uptake_mult" : {
+					"name" : "VacUptake",
+					"values" : {
+						"0.6" : "60%",
+						"0.8" : "80%",
+						"0.95" : "95%"
+					}
+				},
+				"param_policy" : {
+					"name" : "Policy",
+					"values" : {
+					}
+				}
+			}
 		}
 	}
 }
