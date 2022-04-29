@@ -46,13 +46,13 @@ def ProcessAbmChunk(
 	
 	if outputStaticData:
 		staticData = pd.DataFrame(
-			chunk[['age_listOut', 'atsi_listOut', 'morbid_listOut']].transpose()[0])
+			chunk[['age_listOut']].transpose()[0])
 		staticData = util.SplitNetlogoList(staticData, cohorts, 0, '').transpose()
 		staticData = staticData.rename(
-			columns={'age_listOut': 'age', 'atsi_listOut': 'atsi', 'morbid_listOut': 'morbid'})
+			columns={'age_listOut': 'age'})
 		util.OutputToFile(staticData, filename + '_static' + '_' + str(arrayIndex), head=False) 
 	
-	chunk = chunk.drop(['age_listOut', 'atsi_listOut', 'morbid_listOut'], axis=1)
+	chunk = chunk.drop(['age_listOut'], axis=1)
 	chunk = chunk.rename(mapper={'[run number]' : 'run'}, axis=1)
 	chunk = chunk.set_index(['run', 'draw_index',] + measureCols_raw)
 	
@@ -212,7 +212,6 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doTenday=False):
 		on='cohort',
 		how='left',
 		sort=False)
-	col_index = col_index.drop(columns=['atsi', 'morbid'])
 	df.columns = pd.MultiIndex.from_frame(col_index)
 	
 	df = df.groupby(level=[3, 1], axis=1).sum()

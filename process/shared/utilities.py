@@ -25,7 +25,7 @@ def DoIndexRename(df, indexRename):
 	index = df.index.to_frame()
 	
 	for name, data in indexRename.items():
-		index[name] = index[name].replace(data['values'])
+		index[name] = index[name].astype(str).replace(data['values'])
 	index = index.rename(columns={name : data['name'] for name, data in indexRename.items()})
 		
 	df.index = pd.MultiIndex.from_frame(index)	
