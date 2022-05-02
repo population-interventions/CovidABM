@@ -241,8 +241,8 @@ to simul_setNewInfection [variant startDay]
                 (vaccine_getWanedParameter "reduceHosp" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
                 (vaccine_getWanedParameter "reduceHosp" variant recoverVaccine recoverDay 0 0)
   let icuProp   (LnOddsToPr (GetVariantIcuLnOdds agerange variant)) * 
-                (vaccine_getWanedParameter "reduceHosp" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
-                (vaccine_getWanedParameter "reduceHosp" variant recoverVaccine recoverDay 0 0)
+                (vaccine_getWanedParameter "reduceIcu" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
+                (vaccine_getWanedParameter "reduceIcu" variant recoverVaccine recoverDay 0 0)
   let mortProp  (LnOddsToPr (GetVariantDeathLnOdds agerange variant)) * 
                 (vaccine_getWanedParameter "reduceMort" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
                 (vaccine_getWanedParameter "reduceMort" variant recoverVaccine recoverDay 0 0)
