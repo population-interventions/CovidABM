@@ -3,6 +3,7 @@
 	"defaultParamFile" : "rcalc",
 	"copyExperimentMetrics" : "vic_rcalc",
 	"handlerName" : "rc_auto_handler",
+	"threads" : 1,
 	"indexParams" : {
 		"trans_override" : [
 			0.2,
