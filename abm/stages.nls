@@ -3,10 +3,10 @@
 ;;*************************************************************************************************************************************************************************************************************************
 
 to do_stages
-  if stage = -2 [
+  if stage = -1 [
     do_stages_test
   ]
-  if stage = -1 [
+  if stage = 0 [
     ;; Stage 0 - nothing, no change
     set span 10
     set Visit_Radius 8.8
@@ -73,9 +73,9 @@ to do_stages_test
   set testName "None"
   
 
-  set stage -1
+  set stage 0
   do_stages_tony
-  set stage -2
+  set stage -1
 
   if stage_test_index = 1 [
     set testName "Span 5"
@@ -290,45 +290,45 @@ to do_stages_test
   ]
   if stage_test_index = 41 [
     set testName "Iso0.75 Stage1"
-    set stage 0
+    set stage 1
     do_stages_tony
-    set stage -2
+    set stage -1
     
     set Track_Iso_Factor 0.75
     set Household_Iso_Factor 0.75
   ]
   if stage_test_index = 42 [
-    set testName "Iso0.75 Stage1b"
-    set stage 1
+    set testName "Iso0.75 Stage2"
+    set stage 2
     do_stages_tony
-    set stage -2
+    set stage -1
     
     set Track_Iso_Factor 0.75
     set Household_Iso_Factor 0.75
   ]
   if stage_test_index = 43 [
-    set testName "Iso0.75 Stage2"
-    set stage 2
+    set testName "Iso0.75 Stage3"
+    set stage 3
     do_stages_tony
-    set stage -2
+    set stage -1
     
     set Track_Iso_Factor 0.75
     set Household_Iso_Factor 0.75
   ]
   if stage_test_index = 44 [
-    set testName "Iso0.75 Stage3"
-    set stage 3
+    set testName "Iso0.75 Stage4"
+    set stage 4
     do_stages_tony
-    set stage -2
+    set stage -1
     
     set Track_Iso_Factor 0.75
     set Household_Iso_Factor 0.75
   ]
   if stage_test_index = 45 [
-    set testName "Iso0.75 Stage4"
-    set stage 4
+    set testName "Iso0.75 Stage5"
+    set stage 5
     do_stages_tony
-    set stage -2
+    set stage -1
     
     set Track_Iso_Factor 0.75
     set Household_Iso_Factor 0.75
@@ -389,33 +389,33 @@ to do_stages_test
   
   if stage_test_index = 55 [
     set testName "Stage1"
-    set stage 0
-    do_stages_tony
-    set stage -2
-  ]
-  if stage_test_index = 56 [
-    set testName "Stage1b"
     set stage 1
     do_stages_tony
-    set stage -2
+    set stage -1
   ]
-  if stage_test_index = 57 [
+  if stage_test_index = 56 [
     set testName "Stage2"
     set stage 2
     do_stages_tony
-    set stage -2
+    set stage -1
   ]
-  if stage_test_index = 58 [
+  if stage_test_index = 57 [
     set testName "Stage3"
     set stage 3
     do_stages_tony
-    set stage -2
+    set stage -1
   ]
-  if stage_test_index = 59 [
+  if stage_test_index = 58 [
     set testName "Stage4"
     set stage 4
     do_stages_tony
-    set stage -2
+    set stage -1
+  ]
+  if stage_test_index = 59 [
+    set testName "Stage5"
+    set stage 5
+    do_stages_tony
+    set stage -1
   ]
   
   

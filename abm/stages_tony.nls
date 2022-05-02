@@ -4,10 +4,10 @@
 ;; this section for Tony
 
 to do_stages_tony
-  if stage = -2 [
+  if stage = -1 [
     do_stages_test
   ]
-  if stage = -1 [
+  if stage = 0 [
     ;; Stage 0 - nothing, no change
     set span 10
     set Visit_Radius 8.8
@@ -38,7 +38,7 @@ to do_stages_tony
     set mask_wearing_surgical_a20 0
   ]
   
-  if stage >= 0 [
+  if stage >= 1 [
     set maskPolicy true
     set spatial_distance true
     set case_isolation true
@@ -65,7 +65,7 @@ to do_stages_tony
     set mask_wearing_surgical_a20 0.5
   ]
   
-  if stage = 0 [
+  if stage = 1 [
     ;; Stage 1
     set span                    10
     set proportion_people_avoid 10
@@ -82,8 +82,8 @@ to do_stages_tony
     set mask_wearing_a20        0.15
   ]
 
-  if stage = 1 [
-    ;; Stage 1b
+  if stage = 2 [
+    ;; Stage 2
     set span                    10
     set proportion_people_avoid 30
     set proportion_time_avoid   30
@@ -99,8 +99,8 @@ to do_stages_tony
     set mask_wearing_a20        0.35
   ]
 
-  if stage = 2 [
-    ;; Stage 2
+  if stage = 3 [
+    ;; Stage 3
     set span                    8
     set proportion_people_avoid 45
     set proportion_time_avoid   45
@@ -116,8 +116,8 @@ to do_stages_tony
     set mask_wearing_a20        0.6
   ]
 
-  if stage = 3 [
-    ;; Stage 3
+  if stage = 4 [
+    ;; Stage 4
     set span                    5
     set proportion_people_avoid 60
     set proportion_time_avoid   60
@@ -132,22 +132,9 @@ to do_stages_tony
     set mask_wearing_a10        0.375
     set mask_wearing_a20        0.75
   ]
-  
-  if stage = 3.5 or (reducedStageFour and stage = 4) [
-    ;; Stage 3b
-    set span                    4
-    set proportion_people_avoid 72.5
-    set proportion_time_avoid   72.5
-    set Complacency_Bound       64
-    set Essential_Workers       27.5
-    set Visit_Radius            4.3
-    set Visit_Frequency         0.1428
-    set superspreaders          0.03
-    set schoolsOpen false
-  ]
 
-  if stage = 4 and not reducedStageFour [
-    ;; Stage 4
+  if stage = 5 [
+    ;; Stage 5
     set span                    3
     set proportion_people_avoid 85
     set proportion_time_avoid   85

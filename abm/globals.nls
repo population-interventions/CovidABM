@@ -197,10 +197,10 @@ globals [
 
   new_case_real
   new_case_real_counter
+  stage5time
   stage4time
   stage3time
   stage2time
-  stage1btime
   stage1time
   casesinperiod7_max
   casesReportedToday_max

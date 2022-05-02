@@ -596,10 +596,10 @@ to setGlobals
   set new_case_real 0
   set new_case_real_counter 0
   
+  set stage5time 0
   set stage4time 0
   set stage3time 0
   set stage2time 0
-  set stage1btime 0
   set stage1time 0
   set casesinperiod7_min -1
   set casesReportedToday_min -1

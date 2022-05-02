@@ -978,8 +978,8 @@ CHOOSER
 375
 param_policy
 param_policy
-"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_4" "LooseSupress_No_4" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_1b" "StageCal_2" "StageCal_3" "StageCal_4" "continuous"
-5
+"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "continuous"
+4
 
 MONITOR
 1473
@@ -1796,8 +1796,8 @@ SLIDER
 max_stage
 max_stage
 0
-4
-3.0
+5
+5.0
 1
 1
 NIL
@@ -3158,7 +3158,7 @@ SWITCH
 667
 748
 837
-782
+781
 policy_mask_n95
 policy_mask_n95
 1
@@ -3596,10 +3596,10 @@ NetLogo 6.2.0
     <metric>initial_infection_R</metric>
     <metric>casesinperiod7_max</metric>
     <metric>casesReportedToday_max</metric>
+    <metric>stage5time</metric>
     <metric>stage4time</metric>
     <metric>stage3time</metric>
     <metric>stage2time</metric>
-    <metric>stage1btime</metric>
     <metric>stage1time</metric>
     <metric>stage_listOut</metric>
     <metric>infectNoVacArray_listOut</metric>
@@ -5063,10 +5063,10 @@ NetLogo 6.2.0
     <metric>initial_infection_R</metric>
     <metric>casesinperiod7_max</metric>
     <metric>casesReportedToday_max</metric>
+    <metric>stage5time</metric>
     <metric>stage4time</metric>
     <metric>stage3time</metric>
     <metric>stage2time</metric>
-    <metric>stage1btime</metric>
     <metric>stage1time</metric>
     <metric>stage_listOut</metric>
     <metric>infectNoVacArray_listOut</metric>

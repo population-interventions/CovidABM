@@ -3,10 +3,10 @@
 ;; Tony stages with interpolation
 
 to do_stages_continuous
-  if stage = -2 [
+  if stage = -1 [
     do_stages_test
   ]
-  if stage = -1 [
+  if stage = 0 [
     ;; Stage 0 - nothing, no change
     set span 10
     set Visit_Radius 8.8
@@ -37,16 +37,16 @@ to do_stages_continuous
     set mask_wearing_surgical_a20 0
   ]
   
-  if stage >= 0 [
+  if stage >= 1 [
     set maskPolicy true
     set spatial_distance true
     set case_isolation true
     set quarantine true
     set isolate_on_inf_notice true
     
-    (ifelse stage <= 1
+    (ifelse stage <= 2
       [
-        let prop stage
+        let prop stage - 1
         set span                    (1 - prop) * 10     + prop * 10
         set proportion_people_avoid (1 - prop) * 10     + prop * 30
         set proportion_time_avoid   (1 - prop) * 10     + prop * 30
@@ -57,9 +57,9 @@ to do_stages_continuous
         set superspreaders          (1 - prop) * 0.1    + prop * 0.08
         set schoolsOpen true
       ]
-      stage <= 2
+      stage <= 3
       [
-        let prop stage - 1
+        let prop stage - 2
         set span                    (1 - prop) * 10     + prop * 8
         set proportion_people_avoid (1 - prop) * 30     + prop * 45
         set proportion_time_avoid   (1 - prop) * 30     + prop * 45
@@ -70,9 +70,9 @@ to do_stages_continuous
         set superspreaders          (1 - prop) * 0.08   + prop * 0.06
         set schoolsOpen true
       ]
-      stage <= 3
+      stage <= 4
       [
-        let prop stage - 2
+        let prop stage - 3
         set span                    (1 - prop) * 8      + prop * 5
         set proportion_people_avoid (1 - prop) * 45     + prop * 60
         set proportion_time_avoid   (1 - prop) * 45     + prop * 60
@@ -83,9 +83,9 @@ to do_stages_continuous
         set superspreaders          (1 - prop) * 0.06   + prop * 0.04
         set schoolsOpen true
       ]
-      stage <= 4
+      stage <= 5
       [
-        let prop stage - 3
+        let prop stage - 4
         set span                    (1 - prop) * 5      + prop * 3
         set proportion_people_avoid (1 - prop) * 60     + prop * 85
         set proportion_time_avoid   (1 - prop) * 60     + prop * 85

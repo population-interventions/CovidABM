@@ -4,7 +4,7 @@
 ;; this section for Alex
 
 to do_stages_nz
-  if stage >= 0 [
+  if stage >= 1 [
     set maskPolicy true
     set spatial_distance true
     set case_isolation true
@@ -12,7 +12,7 @@ to do_stages_nz
     set isolate_on_inf_notice true
   ]
   
-  if stage = 0 [
+  if stage = 1 [
     ;; Stage 1
     set span 10
     set proportion_people_avoid 10
@@ -25,8 +25,8 @@ to do_stages_nz
     set superspreaders 0.1
   ]
 
-  if stage = 1 [
-    ;; Stage 1b
+  if stage = 2 [
+    ;; Stage 2
     set span 10
     set proportion_people_avoid 30
     set proportion_time_avoid 30
@@ -38,8 +38,8 @@ to do_stages_nz
     set superspreaders 0.08
   ]
 
-  if stage = 2 [
-    ;; Stage 2
+  if stage = 3 [
+    ;; Stage 3
     set span 8
     set proportion_people_avoid 25
     set proportion_time_avoid 25
@@ -51,8 +51,8 @@ to do_stages_nz
     set superspreaders 0.1
   ]
 
-  if stage = 3 [
-    ;; Stage 3
+  if stage = 4 [
+    ;; Stage 4
     set span 5
     set proportion_people_avoid 90
     set proportion_time_avoid 90
@@ -63,8 +63,8 @@ to do_stages_nz
     set Visit_Frequency 0.1428
     set superspreaders 0.03
   ]
-  if stage = 3.5 [
-    ;; Stage 3b
+  if stage = 4.5 [
+    ;; Stage 4.5
     set span 4
     set proportion_people_avoid 72.5
     set proportion_time_avoid 72.5
@@ -76,8 +76,8 @@ to do_stages_nz
     set superspreaders 0.03
   ]
 
-  if stage = 4 [
-    ;; Stage 4
+  if stage = 5 [
+    ;; Stage 5
     set span 3
     set proportion_people_avoid 95
     set proportion_time_avoid 95

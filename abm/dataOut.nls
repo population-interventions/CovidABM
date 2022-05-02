@@ -54,11 +54,8 @@ to calculateDataOut
     set infectNoVacArray array:from-list cohortLengthListOfZeros
     set infectVacArray array:from-list cohortLengthListOfZeros
     
-    if stage = 0 [
-      set stage1time stage1time + 1
-    ]
     if stage = 1 [
-      set stage1btime stage1btime + 1
+      set stage1time stage1time + 1
     ]
     if stage = 2 [
       set stage2time stage2time + 1
@@ -68,6 +65,9 @@ to calculateDataOut
     ]
     if stage = 4 [
       set stage4time stage4time + 1
+    ]
+    if stage = 5 [
+      set stage5time stage5time + 1
     ]
     
     if _init_metric_threshold < 0 and ticks < param_stage1_time [
