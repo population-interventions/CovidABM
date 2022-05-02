@@ -21,6 +21,10 @@ to-report AddLogOdds [prob toAdd]
   report odds / (odds + 1)
 end
 
+to-report ApplyOrToPr [prob oddsRatio]
+  report OddsToPr (oddsRatio * PrToOdds prob)
+end
+
 to-report AddToList [myList myIndex myValue]
   if myIndex < 0 [
     report myList 

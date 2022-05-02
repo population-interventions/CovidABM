@@ -3,6 +3,7 @@
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_main",
 	"postInputDir" : "vic",
+	"threads" : 1,
 	"indexParams" : {
 		"param_vac_uptake_mult" : [
 			0.6,

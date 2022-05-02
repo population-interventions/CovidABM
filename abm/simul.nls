@@ -85,8 +85,9 @@ simuls-own [
   infectVariant ;; Variant of SARS that I am infected with. Is > 0 iff color = red.
   recoverVariant
 
-  wearsMask ;; for use in determining if the person wears a face mask
+  wearsMask_draw ;; for use in determining if the person wears a face mask
   wearingMask ;; identifies if the person is wearing a mask or not
+  wornMaskOr ;; Odds ratio for worn mask
 
   householdUnit ;; the id of the household the person belongs to
   isStudent ;; identifies if the person is a student or not
@@ -280,9 +281,6 @@ end
 to simul_record_patch_infectiveness
   if color = red and currentVirulence > 0 and not (hospFlag and timenow >= cohortHospTime) [
     let localInfectiveness currentVirulence
-    if wearingMask = 1 [
-      set localInfectiveness (localInfectiveness * (1 - simul_getMaskEfficacy))
-    ]
     if asymptomaticFlag [
       set localInfectiveness (localInfectiveness * Asymptomatic_Trans)
     ]
@@ -300,6 +298,8 @@ to simul_record_patch_infectiveness
     let thisSimul self
     let localVariant infectVariant
     let localPatchScale myScale
+    let localWearingMask wearingMask
+    let localWornMaskOr wornMaskOr
     ask myPatch [
       if lastInfectionUpdate < ticks [
         set infectionList []
@@ -309,6 +309,9 @@ to simul_record_patch_infectiveness
       ]
       if gather_loc_trans_red > 0 and destination = 1 [
         set localInfectiveness (localInfectiveness * (1 - gather_loc_trans_red))
+      ]
+      if localWearingMask [
+        set localInfectiveness ApplyOrToPr localInfectiveness localWornMaskOr
       ]
       set infectionList lput localInfectiveness infectionList
       table:put infectionCulprit localInfectiveness thisSimul
@@ -326,9 +329,6 @@ end
 to simul_infect
   if color != red [
     let baseSuccept 1
-    if wearingMask = 1 [
-      set baseSuccept baseSuccept * (1 - simul_getMaskEfficacy)
-    ]
 
     let myPatch patch-here
     let localInfectionList 0
@@ -348,9 +348,10 @@ to simul_infect
         ;print x
         if color != red [
           let succeptibility baseSuccept * x ;; TODO calculate succeptiblity based on patchVariant
-          if succeptibility < 1 [
-            set succeptibility OddsToPr (succeptOr * PrToOdds succeptibility)
-          ]
+          ;print (word "succeptibility " succeptibility ", after " (ApplyOrToPr succeptibility wornMaskOr))
+          ;print (word "first " (ApplyOrToPr (ApplyOrToPr succeptibility succeptOr) wornMaskOr) ", second " (ApplyOrToPr (ApplyOrToPr succeptibility wornMaskOr) succeptOr) ", mult " ApplyOrToPr succeptibility (wornMaskOr * succeptOr))
+          set succeptibility ApplyOrToPr succeptibility (wornMaskOr * succeptOr)
+          
           set transmission_count transmission_count + extraScaleFactor * (Scale_Factor ^ localPatchScale)
           set transmission_sum transmission_sum + succeptibility
           let infectDraw random-float 1
@@ -588,13 +589,14 @@ end
 
 to simul_checkMask
   ;; identifies people who waear a mask
-  let myMaskWear mask_Wearing + Mask_Wear_Boost
-  ifelse maskPolicy and wearsMask <= myMaskWear and patch-here != homelocation
+  ifelse maskPolicy and patch-here != homelocation and simul_getWantWearMask
   [
-    set wearingMask 1
+    set wearingMask true
+    set wornMaskOr simul_getMaskEfficacyOr
   ]
   [
-    set wearingMask 0
+    set wearingMask false
+    set wornMaskOr 1
   ]
 end
 

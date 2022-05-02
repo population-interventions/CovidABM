@@ -22,10 +22,20 @@ to do_stages_tony
     set quarantine false
     set Essential_Workers 100
     set maskPolicy false
-    set mask_wearing 0
     set spatial_distance false
     set traceMult 1
     set isolate_on_inf_notice false
+    
+    ;; Cascading probabilities. Check mask wearing, then n95, then surgical, otherwise default to cloth.
+    set mask_wearing_a0           0
+    set mask_wearing_a10          0
+    set mask_wearing_a20          0
+    set mask_wearing_n95_a0       0
+    set mask_wearing_n95_a10      0
+    set mask_wearing_n95_a20      0
+    set mask_wearing_surgical_a0  0
+    set mask_wearing_surgical_a10 0
+    set mask_wearing_surgical_a20 0
   ]
   
   if stage >= 0 [
@@ -36,6 +46,25 @@ to do_stages_tony
     set isolate_on_inf_notice true
   ]
   
+  ;; Mask proportions
+  ifelse stage >= 3 and policy_mask_n95
+  [
+    set mask_wearing_n95_a0       0.2
+    set mask_wearing_n95_a10      mask_n95_prop_draw
+    set mask_wearing_n95_a20      mask_n95_prop_draw
+    set mask_wearing_surgical_a0  0.5
+    set mask_wearing_surgical_a10 0.5
+    set mask_wearing_surgical_a20 0.5
+  ]
+  [
+    set mask_wearing_n95_a0       0.2
+    set mask_wearing_n95_a10      0.2
+    set mask_wearing_n95_a20      0.2
+    set mask_wearing_surgical_a0  0.5
+    set mask_wearing_surgical_a10 0.5
+    set mask_wearing_surgical_a20 0.5
+  ]
+  
   if stage = 0 [
     ;; Stage 1
     set span                    10
@@ -43,11 +72,14 @@ to do_stages_tony
     set proportion_time_avoid   10
     set Complacency_Bound       5
     set Essential_Workers       100
-    set mask_wearing            15
     set Visit_Radius            8.8
     set Visit_Frequency         0.1428
     set superspreaders          0.1
     set schoolsOpen true
+    
+    set mask_wearing_a0         0.0375
+    set mask_wearing_a10        0.075
+    set mask_wearing_a20        0.15
   ]
 
   if stage = 1 [
@@ -57,11 +89,14 @@ to do_stages_tony
     set proportion_time_avoid   30
     set Complacency_Bound       15
     set Essential_Workers       70
-    set mask_wearing            35
     set Visit_Radius            8.8
     set Visit_Frequency         0.1428
     set superspreaders          0.08
     set schoolsOpen true
+    
+    set mask_wearing_a0         0.0875
+    set mask_wearing_a10        0.175
+    set mask_wearing_a20        0.35
   ]
 
   if stage = 2 [
@@ -71,11 +106,14 @@ to do_stages_tony
     set proportion_time_avoid   45
     set Complacency_Bound       30
     set Essential_Workers       50
-    set mask_wearing            50
     set Visit_Radius            6.2
     set Visit_Frequency         0.1428
     set superspreaders          0.06
     set schoolsOpen true
+    
+    set mask_wearing_a0         0.15
+    set mask_wearing_a10        0.3
+    set mask_wearing_a20        0.6
   ]
 
   if stage = 3 [
@@ -85,11 +123,14 @@ to do_stages_tony
     set proportion_time_avoid   60
     set Complacency_Bound       50
     set Essential_Workers       35
-    set mask_wearing            60
     set Visit_Radius            5.0
     set Visit_Frequency         0.1428
     set superspreaders          0.04
     set schoolsOpen false
+    
+    set mask_wearing_a0         0.1825
+    set mask_wearing_a10        0.375
+    set mask_wearing_a20        0.75
   ]
   
   if stage = 3.5 or (reducedStageFour and stage = 4) [
@@ -99,7 +140,6 @@ to do_stages_tony
     set proportion_time_avoid   72.5
     set Complacency_Bound       64
     set Essential_Workers       27.5
-    set mask_wearing            72.5
     set Visit_Radius            4.3
     set Visit_Frequency         0.1428
     set superspreaders          0.03
@@ -113,11 +153,14 @@ to do_stages_tony
     set proportion_time_avoid   85
     set Complacency_Bound       78
     set Essential_Workers       20
-    set mask_wearing            85
     set Visit_Radius            3.6
     set Visit_Frequency         0.1428
     set superspreaders          0.02
     set schoolsOpen false
+    
+    set mask_wearing_a0         0.2125
+    set mask_wearing_a10        0.425
+    set mask_wearing_a20        0.85
   ]
 end
 

@@ -21,10 +21,19 @@ to do_stages
     set quarantine false
     set Essential_Workers 100
     set maskPolicy false
-    set mask_wearing 0
     set spatial_distance false
     set traceMult 1
     set isolate_on_inf_notice false
+    
+    set mask_wearing_a0 0
+    set mask_wearing_a10 0
+    set mask_wearing_a20 0
+    set mask_wearing_n95_a0 0
+    set mask_wearing_n95_a10 0
+    set mask_wearing_n95_a20 0
+    set mask_wearing_surgical_a0 0
+    set mask_wearing_surgical_a10 0
+    set mask_wearing_surgical_a20 0
   ]
   
   if policy_switch = "continuous" [
@@ -42,9 +51,7 @@ to do_stages
 end
 
 to set_policy_overrides
-  if Mask_Wearing < MinMaskWearing [
-   set Mask_Wearing MinMaskWearing 
-  ]
+  
 end
 
 ;;*************************************************************************************************************************************************************************************************************************
@@ -140,17 +147,14 @@ to do_stages_test
   if stage_test_index = 13 [
     set testName "Mask 040"
     set maskPolicy true
-    set mask_wearing 40
   ]
   if stage_test_index = 14 [
     set testName "Mask 080"
     set maskPolicy true
-    set mask_wearing 80
   ]
   if stage_test_index = 15 [
     set testName "Mask 100"
     set maskPolicy true
-    set mask_wearing 100
   ]
   if stage_test_index = 16 [
     set testName "SSprd 0.0"
@@ -283,7 +287,6 @@ to do_stages_test
   if stage_test_index = 40 [
     set testName "Mask 060"
     set maskPolicy true
-    set mask_wearing 60
   ]
   if stage_test_index = 41 [
     set testName "Iso0.75 Stage1"
@@ -451,7 +454,6 @@ to do_stages_test
     set stage 2
     do_stages_tony
     set stage -2
-    set mask_wearing 75
   ]
   if stage_test_index = 65 [
     set testName "Stage2 3 Visit_Radius"

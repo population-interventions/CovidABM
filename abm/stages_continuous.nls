@@ -21,10 +21,20 @@ to do_stages_continuous
     set quarantine false
     set Essential_Workers 100
     set maskPolicy false
-    set mask_wearing 0
     set spatial_distance false
     set traceMult 1
     set isolate_on_inf_notice false
+    
+    ;; Cascading probabilities. Check mask wearing, then n95, then surgical, otherwise default to cloth.
+    set mask_wearing_a0 0
+    set mask_wearing_a10 0
+    set mask_wearing_a20 0
+    set mask_wearing_n95_a0 0
+    set mask_wearing_n95_a10 0
+    set mask_wearing_n95_a20 0
+    set mask_wearing_surgical_a0 0
+    set mask_wearing_surgical_a10 0
+    set mask_wearing_surgical_a20 0
   ]
   
   if stage >= 0 [
@@ -42,7 +52,6 @@ to do_stages_continuous
         set proportion_time_avoid   (1 - prop) * 10     + prop * 30
         set Complacency_Bound       (1 - prop) * 5      + prop * 15
         set Essential_Workers       (1 - prop) * 100    + prop * 70
-        set mask_wearing            (1 - prop) * 15     + prop * 35
         set Visit_Radius            (1 - prop) * 8.8    + prop * 8.8
         set Visit_Frequency         (1 - prop) * 0.1428 + prop * 0.1428
         set superspreaders          (1 - prop) * 0.1    + prop * 0.08
@@ -56,7 +65,6 @@ to do_stages_continuous
         set proportion_time_avoid   (1 - prop) * 30     + prop * 45
         set Complacency_Bound       (1 - prop) * 15     + prop * 30
         set Essential_Workers       (1 - prop) * 70     + prop * 50
-        set mask_wearing            (1 - prop) * 35     + prop * 50
         set Visit_Radius            (1 - prop) * 8.8    + prop * 6.2
         set Visit_Frequency         (1 - prop) * 0.1428 + prop * 0.1428
         set superspreaders          (1 - prop) * 0.08   + prop * 0.06
@@ -70,7 +78,6 @@ to do_stages_continuous
         set proportion_time_avoid   (1 - prop) * 45     + prop * 60
         set Complacency_Bound       (1 - prop) * 30     + prop * 50
         set Essential_Workers       (1 - prop) * 50     + prop * 35
-        set mask_wearing            (1 - prop) * 50     + prop * 60
         set Visit_Radius            (1 - prop) * 6.2    + prop * 5.0
         set Visit_Frequency         (1 - prop) * 0.1428 + prop * 0.1428
         set superspreaders          (1 - prop) * 0.06   + prop * 0.04
@@ -84,7 +91,6 @@ to do_stages_continuous
         set proportion_time_avoid   (1 - prop) * 60     + prop * 85
         set Complacency_Bound       (1 - prop) * 50     + prop * 78
         set Essential_Workers       (1 - prop) * 35     + prop * 20
-        set mask_wearing            (1 - prop) * 60     + prop * 85
         set Visit_Radius            (1 - prop) * 5.0    + prop * 3.6
         set Visit_Frequency         (1 - prop) * 0.1428 + prop * 0.1428
         set superspreaders          (1 - prop) * 0.04   + prop * 0.02

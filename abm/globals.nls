@@ -280,11 +280,23 @@ globals [
   draw_ppa_modifier
   draw_pta_modifier
   draw_isolationCompliance
-  draw_maskWearEfficacy
-  draw_maskWearEfficacy_upgraded
-  draw_maskUpgradeProp
-  draw_maskUpgradeStage
   draw_borderIncursionRisk
+  
+  draw_maskWearEfficacy_cloth
+  draw_maskWearEfficacy_surgical
+  draw_maskWearEfficacy_n95
+  mask_n95_prop_draw
+  
+  mask_wearing_a0
+  mask_wearing_a10
+  mask_wearing_a20
+  mask_wearing_surgical_a0
+  mask_wearing_surgical_a10
+  mask_wearing_surgical_a20
+  mask_wearing_n95_a0
+  mask_wearing_n95_a10
+  mask_wearing_n95_a20
+  
   
   incursionTable
   incursionPhaseIndex

@@ -5,26 +5,112 @@ to setup_mask
   
   foreach fileData [ x -> 
     let name item 0 x
-    (ifelse name = "standard"
+    (ifelse name = "cloth"
       [
-        set draw_maskWearEfficacy rngs:rnd-beta defaultStream (item 1 x) (item 2 x)
+        set draw_maskWearEfficacy_cloth rngs:rnd-norm defaultStream (item 1 x) (item 2 x)
       ]
-      name = "upgraded"
+      name = "surgical"
       [
-        set draw_maskWearEfficacy_upgraded rngs:rnd-beta defaultStream (item 1 x) (item 2 x)
+        set draw_maskWearEfficacy_surgical rngs:rnd-norm defaultStream (item 1 x) (item 2 x)
+      ]
+      name = "n95"
+      [
+        set draw_maskWearEfficacy_n95 rngs:rnd-norm defaultStream (item 1 x) (item 2 x)
       ]
     )
   ]
-  ;print draw_maskWearEfficacy
-  ;print draw_maskWearEfficacy_upgraded
+  set mask_n95_prop_draw rngs:rnd-beta defaultStream 80 20
   
-  set draw_maskUpgradeProp mask_upgradeProp
-  set draw_maskUpgradeStage mask_upgradeStage
+  ;print draw_maskWearEfficacy_cloth
+  ;print draw_maskWearEfficacy_surgical
+  ;print draw_maskWearEfficacy_n95
+  ;print mask_n95_prop_draw
 end
 
-to-report simul_getMaskEfficacy
-  if stage < draw_maskUpgradeStage or rngs:rnd-beta defaultStream 1 1 < draw_maskUpgradeProp [
-    report draw_maskWearEfficacy * Mask_Efficacy_Mult
-  ]
-  report draw_maskWearEfficacy_upgraded * Mask_Efficacy_Mult
+to-report simul_getWantWearMask
+  (ifelse agerange = 5
+    [
+      report wearsMask_draw < mask_wearing_a0
+    ]
+    agerange = 15
+    [
+      report wearsMask_draw < mask_wearing_a10
+    ]
+    [
+      report wearsMask_draw < mask_wearing_a20
+    ]
+  )
+end
+
+to-report simul_getMaskEfficacyOr
+  let drawTest wearsMask_draw
+  
+  ;; Rescale drawTest to [0, 1) for people who wear masks.
+  (ifelse agerange = 5
+    [
+      set drawTest drawTest / mask_wearing_a0
+    ]
+    agerange = 15
+    [
+      set drawTest drawTest / mask_wearing_a10
+    ]
+    [
+      set drawTest drawTest / mask_wearing_a20
+    ]
+  )
+  
+  ;; Check n95, rescale to [0, 1) if n95 not worn
+  (ifelse agerange = 5
+    [
+      ifelse wearsMask_draw < mask_wearing_n95_a0
+      [
+        report draw_maskWearEfficacy_n95
+      ]      
+      [
+        set drawTest (wearsMask_draw - mask_wearing_n95_a0) / (1 - mask_wearing_n95_a0)
+      ]
+    ]
+    agerange = 15
+    [
+      ifelse wearsMask_draw < mask_wearing_n95_a10
+      [
+        report draw_maskWearEfficacy_n95
+      ]      
+      [
+        set drawTest (wearsMask_draw - mask_wearing_n95_a10) / (1 - mask_wearing_n95_a0)
+      ]
+    ]
+    [
+      ifelse wearsMask_draw < mask_wearing_n95_a20
+      [
+        report draw_maskWearEfficacy_n95
+      ]      
+      [
+        set drawTest (wearsMask_draw - mask_wearing_n95_a20) / (1 - mask_wearing_n95_a0)
+      ]
+    ]
+  )
+  
+  ;; Check surgical
+  (ifelse agerange = 5
+    [
+      if wearsMask_draw < mask_wearing_surgical_a0 [
+        report draw_maskWearEfficacy_surgical
+      ]
+    ]
+    agerange = 15
+    [
+      if wearsMask_draw < mask_wearing_surgical_a10 [
+        report draw_maskWearEfficacy_surgical
+      ]  
+    ]
+    [
+      if wearsMask_draw < mask_wearing_surgical_a20 [
+        report draw_maskWearEfficacy_surgical
+      ] 
+    ]
+  )
+  
+  ;; Else wear cloth
+  report draw_maskWearEfficacy_cloth
 end

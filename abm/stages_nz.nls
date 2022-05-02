@@ -20,7 +20,6 @@ to do_stages_nz
     set Complacency_Bound 5
     set Essential_Workers 100
     set schoolsOpen true
-    set mask_wearing 15
     set Visit_Radius 8.8
     set Visit_Frequency 0.1428
     set superspreaders 0.1
@@ -34,7 +33,6 @@ to do_stages_nz
     set Complacency_Bound 15
     set Essential_Workers 70
     set schoolsOpen true
-    set mask_wearing 35
     set Visit_Radius 8.8
     set Visit_Frequency 0.1428
     set superspreaders 0.08
@@ -48,7 +46,6 @@ to do_stages_nz
     set Complacency_Bound 20
     set Essential_Workers 90
     set schoolsOpen true
-    set mask_wearing 50
     set Visit_Radius 6.2
     set Visit_Frequency 0.1428
     set superspreaders 0.1
@@ -62,7 +59,6 @@ to do_stages_nz
     set Complacency_Bound 72
     set Essential_Workers 45
     set schoolsOpen false
-    set mask_wearing 60
     set Visit_Radius 5.0
     set Visit_Frequency 0.1428
     set superspreaders 0.03
@@ -75,7 +71,6 @@ to do_stages_nz
     set Complacency_Bound 64
     set Essential_Workers 27.5
     set schoolsOpen false
-    set mask_wearing 72.5
     set Visit_Radius 4.3
     set Visit_Frequency 0.1428
     set superspreaders 0.03
@@ -89,7 +84,6 @@ to do_stages_nz
     set Complacency_Bound 86
     set Essential_Workers 20
     set schoolsOpen false
-    set mask_wearing 85
     set Visit_Radius 3.6
     set Visit_Frequency 0.1428
     set superspreaders 0.02

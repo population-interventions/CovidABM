@@ -264,10 +264,10 @@ caseFatalityRate * 100
 11
 
 PLOT
-3528
-330
-3756
-460
+3529
+362
+3757
+492
 Case Fatality Rate %
 NIL
 NIL
@@ -584,35 +584,20 @@ HORIZONTAL
 
 SWITCH
 1477
-412
+378
 1612
-445
+411
 tracking
 tracking
 1
 1
 -1000
 
-SLIDER
-1480
-92
-1614
-125
-Mask_Wearing
-Mask_Wearing
-0
-100
-15.0
-1
-1
-NIL
-HORIZONTAL
-
 SWITCH
 1484
-280
+245
 1619
-313
+278
 schoolsOpen
 schoolsOpen
 0
@@ -672,9 +657,9 @@ studentInfections / Population
 
 SWITCH
 1484
-320
+285
 1618
-353
+318
 MaskPolicy
 MaskPolicy
 0
@@ -882,10 +867,10 @@ PENS
 "MULTI" 1.0 0 -11085214 true "" "plot 100 * count simuls with [currentVaccine = \"MULTI\"] / population"
 
 MONITOR
-1480
-130
-1617
-175
+1479
+95
+1616
+140
 NIL
 spatial_distance
 17
@@ -893,10 +878,10 @@ spatial_distance
 11
 
 MONITOR
-1480
-178
-1614
-223
+1479
+144
+1613
+189
 NIL
 case_isolation
 17
@@ -905,9 +890,9 @@ case_isolation
 
 MONITOR
 1484
-228
+194
 1617
-273
+239
 NIL
 quarantine
 17
@@ -1242,9 +1227,9 @@ HORIZONTAL
 
 MONITOR
 1477
-362
+328
 1617
-407
+373
 NIL
 floor (policymetric7 / 7)
 17
@@ -1954,21 +1939,6 @@ compound_mask_param
 0
 
 SLIDER
-3415
-599
-3602
-632
-MinMaskWearing
-MinMaskWearing
-0
-100
-0.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
 3129
 758
 3336
@@ -2375,7 +2345,7 @@ CHOOSER
 policy_switch
 policy_switch
 "tony" "nz" "pak" "continuous"
-2
+0
 
 SWITCH
 2210
@@ -2587,21 +2557,6 @@ gather_loc_trans_red
 1
 0.0
 0.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-3043
-275
-3216
-308
-Mask_Wear_Boost
-Mask_Wear_Boost
-0
-100
-0.0
-1
 1
 NIL
 HORIZONTAL
@@ -2916,9 +2871,9 @@ Number
 
 SWITCH
 1477
-453
+419
 1612
-486
+452
 policyUseHosp
 policyUseHosp
 0
@@ -3198,6 +3153,17 @@ input/vic/vaccine_underlying_params
 1
 0
 String
+
+SWITCH
+667
+748
+837
+782
+policy_mask_n95
+policy_mask_n95
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?

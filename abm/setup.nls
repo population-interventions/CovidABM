@@ -276,7 +276,7 @@ to createSimulants
       set requireICU 0
       set requireICU_draw random-float 1
 
-      set wearsMask random 100 ;; resethealth resetincome immune_from_reinfect calculateexpenditureperday resettrust
+      set wearsMask_draw random-float 1
       set returntoschool random 100
 
       ;;set ownComplianceWithIsolation ( exp random-normal Mcomp SComp ) ;; log transform of compliance with isolation

@@ -1,4 +1,4 @@
-name,eff_a,eff_b
-cloth,40,60
-surgical,55,30
-n95,55,30
+name,or_mean,or_std
+cloth,0.53,0.05
+surgical,0.41,0.05
+n95,0.2,0.05

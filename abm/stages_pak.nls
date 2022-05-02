@@ -22,7 +22,6 @@ to do_stages_pak
     set quarantine false
     set Essential_Workers 100
     set maskPolicy false
-    set mask_wearing 0
     set spatial_distance false
     set traceMult 1
     set isolate_on_inf_notice false
@@ -43,7 +42,6 @@ to do_stages_pak
     set proportion_time_avoid   10
     set Complacency_Bound       5
     set Essential_Workers       100
-    set mask_wearing            15
     set Visit_Radius            8.8
     set Visit_Frequency         0.1428
     set superspreaders          0.1
@@ -57,7 +55,6 @@ to do_stages_pak
     set proportion_time_avoid   30
     set Complacency_Bound       15
     set Essential_Workers       70
-    set mask_wearing            35
     set Visit_Radius            8.8
     set Visit_Frequency         0.1428
     set superspreaders          0.08
@@ -71,7 +68,6 @@ to do_stages_pak
     set proportion_time_avoid   45
     set Complacency_Bound       30
     set Essential_Workers       50
-    set mask_wearing            50
     set Visit_Radius            6.2
     set Visit_Frequency         0.1428
     set superspreaders          0.06
@@ -85,7 +81,6 @@ to do_stages_pak
     set proportion_time_avoid   60
     set Complacency_Bound       50
     set Essential_Workers       35
-    set mask_wearing            60
     set Visit_Radius            5.0
     set Visit_Frequency         0.1428
     set superspreaders          0.04
@@ -99,7 +94,6 @@ to do_stages_pak
     set proportion_time_avoid   72.5
     set Complacency_Bound       64
     set Essential_Workers       27.5
-    set mask_wearing            72.5
     set Visit_Radius            4.3
     set Visit_Frequency         0.1428
     set superspreaders          0.03
@@ -113,7 +107,6 @@ to do_stages_pak
     set proportion_time_avoid   85
     set Complacency_Bound       78
     set Essential_Workers       20
-    set mask_wearing            85
     set Visit_Radius            3.6
     set Visit_Frequency         0.1428
     set superspreaders          0.02
