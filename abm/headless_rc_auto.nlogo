@@ -2618,32 +2618,29 @@ NetLogo 6.2.0
     <metric>casesinperiod7_switchTime</metric>
     <metric>cumulativeInfected_switchTime</metric>
     <metric>cumulativeInfected_minusInit</metric>
-    <metric>dieArray_listOut</metric>
-    <metric>icuArray_listOut</metric>
-    <metric>hospArray_listOut</metric>
     <enumeratedValueSet variable="population">
       <value value="2500.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="span">
-      <value value="10.0"/>
+      <value value="3.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="superspreaders">
-      <value value="0.1"/>
+      <value value="0.02"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="proportion_people_avoid">
-      <value value="5.0"/>
+      <value value="78.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="proportion_time_avoid">
-      <value value="5.0"/>
+      <value value="78.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="initial_cases">
-      <value value="63000.0"/>
+      <value value="3000.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="total_population">
       <value value="6649066.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="essential_workers">
-      <value value="100.0"/>
+      <value value="20.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="ess_w_risk_reduction">
       <value value="0.0"/>
@@ -2651,11 +2648,8 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="tracking">
       <value value="false"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="mask_wearing">
-      <value value="15.0"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="schoolsopen">
-      <value value="true"/>
+      <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="maskpolicy">
       <value value="true"/>
@@ -2667,7 +2661,7 @@ NetLogo 6.2.0
       <value value="0.1428"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="visit_radius">
-      <value value="8.8"/>
+      <value value="3.6"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="mask_efficacy_mult">
       <value value="1.0"/>
@@ -2676,18 +2670,16 @@ NetLogo 6.2.0
       <value value="true"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_policy">
-      <value value="&quot;TightSupress&quot;"/>
-      <value value="&quot;LooseSupress&quot;"/>
       <value value="&quot;BarelySupress&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="asymptom_trace_mult">
       <value value="0.66"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="gather_location_count">
-      <value value="160.0"/>
+      <value value="120.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="complacency_bound">
-      <value value="5.0"/>
+      <value value="78.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="profile_on">
       <value value="false"/>
@@ -2750,7 +2742,7 @@ NetLogo 6.2.0
       <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="incursion_phase_speed_mult">
-      <value value="1.0"/>
+      <value value="0.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="calibrate">
       <value value="false"/>
@@ -2777,7 +2769,7 @@ NetLogo 6.2.0
       <value value="3.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="max_stage">
-      <value value="3.0"/>
+      <value value="5.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_calibration">
       <value value="0.0"/>
@@ -2809,9 +2801,6 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="compound_mask_param">
       <value value="&quot;Normal&quot;"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="minmaskwearing">
-      <value value="0.0"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="success_14day_cases">
       <value value="-1.0"/>
     </enumeratedValueSet>
@@ -2819,7 +2808,7 @@ NetLogo 6.2.0
       <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init_trace_prop">
-      <value value="0.3"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="input_population_table">
       <value value="&quot;input/vic/pop&quot;"/>
@@ -2828,9 +2817,7 @@ NetLogo 6.2.0
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_vac_uptake_mult">
-      <value value="0.6"/>
-      <value value="0.8"/>
-      <value value="0.95"/>
+      <value value="0.85"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="compound_essential">
       <value value="&quot;Extreme&quot;"/>
@@ -2845,7 +2832,7 @@ NetLogo 6.2.0
       <value value="0.08"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="first_case_calibrate">
-      <value value="false"/>
+      <value value="true"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="prepeak_vir_boost">
       <value value="0.1"/>
@@ -2952,9 +2939,6 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="gather_loc_trans_red">
       <value value="0.0"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="mask_wear_boost">
-      <value value="0.0"/>
-    </enumeratedValueSet>
     <enumeratedValueSet variable="reducedstagefour">
       <value value="false"/>
     </enumeratedValueSet>
@@ -3038,7 +3022,9 @@ NetLogo 6.2.0
       <value value="&quot;Disabled&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trans_override">
-      <value value="0.0"/>
+      <value value="0.2"/>
+      <value value="0.5"/>
+      <value value="0.8"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sympt_iso_prop">
       <value value="0.0"/>
@@ -3060,6 +3046,9 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="input_vaccine_base">
       <value value="&quot;input/vic/vaccine_underlying_params&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="policy_mask_n95">
+      <value value="false"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>

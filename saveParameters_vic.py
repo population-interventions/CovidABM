@@ -30,6 +30,7 @@ def ReadModelFileAndWriteParams(startPart, endPart, valueOverwrite, topOfFile=[]
 		
 	
 	outputFile.close()
+	nl.OutputCurrentNetlogoValues('abm/covidModel.nlogo', 'specs/default/currentAbm.json')
   
 
 topOfFile = [

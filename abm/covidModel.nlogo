@@ -34,8 +34,8 @@ __includes[
 GRAPHICS-WINDOW
 388
 63
-1012
-688
+951
+627
 -1
 -1
 8.68
@@ -49,9 +49,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-70
+63
 0
-70
+63
 1
 1
 1
@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-10.0
+3.0
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.02
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+78.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+78.0
 .5
 1
 NIL
@@ -561,7 +561,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+20.0
 1
 1
 NIL
@@ -600,7 +600,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -705,7 +705,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+3.6
 1
 1
 NIL
@@ -1092,15 +1092,15 @@ PENS
 "KnownContact" 1.0 0 -13297659 true "" "plot count simuls with [hasKnownContact and color = red] * globalPopPerSimul "
 
 SLIDER
-3023
-900
-3231
-933
+465
+660
+667
+693
 Gather_Location_Count
 Gather_Location_Count
 0
 1000
-200.0
+120.0
 10
 1
 NIL
@@ -1115,7 +1115,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+78.0
 1
 1
 NIL
