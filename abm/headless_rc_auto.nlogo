@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-3.0
+10.0
 1
 1
 NIL
@@ -186,7 +186,7 @@ superspreaders
 superspreaders
 0
 1
-0.02
+0.1
 0.01
 1
 NIL
@@ -204,7 +204,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-78.0
+5.0
 .5
 1
 NIL
@@ -219,7 +219,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-78.0
+5.0
 .5
 1
 NIL
@@ -271,7 +271,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-20.0
+100.0
 1
 1
 NIL
@@ -299,7 +299,7 @@ SWITCH
 411
 tracking
 tracking
-1
+0
 1
 -1000
 
@@ -310,7 +310,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -368,7 +368,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+8.8
 1
 1
 NIL
@@ -396,10 +396,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-463
-704
-655
-737
+465
+684
+657
+717
 Vaccine_Enabled
 Vaccine_Enabled
 0
@@ -459,10 +459,10 @@ HORIZONTAL
 
 
 SLIDER
-465
-660
-667
-693
+467
+639
+669
+672
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -482,7 +482,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-78.0
+5.0
 1
 1
 NIL
@@ -544,7 +544,7 @@ End_Day
 End_Day
 -1
 730
-390.0
+546.0
 1
 1
 NIL
@@ -750,10 +750,10 @@ set_shape
 
 
 SLIDER
-2814
-914
-3014
-947
+2830
+913
+3030
+946
 complacency_loss
 complacency_loss
 0
@@ -812,15 +812,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-10
-133
-209
-166
+3357
+698
+3556
+731
 incursion_phase_speed_mult
 incursion_phase_speed_mult
 0
 2
-0.5
+1.0
 0.01
 1
 NIL
@@ -1124,15 +1124,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-464
-789
-654
-822
+465
+988
+655
+1021
 init_trace_prop
 init_trace_prop
 0
 1
-1.0
+0.5
 0.05
 1
 NIL
@@ -1160,15 +1160,15 @@ compound_input
 0
 
 SLIDER
-464
-744
-654
-777
+467
+724
+657
+757
 param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.85
+0.8
 0.05
 1
 NIL
@@ -1228,10 +1228,10 @@ HORIZONTAL
 
 
 SWITCH
-664
-704
-838
-737
+843
+642
+1017
+675
 first_case_calibrate
 first_case_calibrate
 1
@@ -1239,10 +1239,10 @@ first_case_calibrate
 -1000
 
 SLIDER
-2815
-957
-3015
-990
+2830
+955
+3030
+988
 prepeak_vir_boost
 prepeak_vir_boost
 0
@@ -1279,10 +1279,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-3243
-138
-3418
-171
+464
+949
+657
+983
 self_iso_at_peak
 self_iso_at_peak
 0
@@ -1494,10 +1494,10 @@ suffix_rollout
 -1000
 
 SWITCH
-3497
-304
-3635
-337
+3602
+313
+3740
+346
 count_incursion
 count_incursion
 1
@@ -1505,10 +1505,10 @@ count_incursion
 -1000
 
 SLIDER
-3024
-940
+3063
+953
 3232
-973
+986
 transmit_skew
 transmit_skew
 0.2
@@ -1520,10 +1520,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-3024
-979
-3231
-1012
+3063
+993
+3232
+1026
 duration_skew
 duration_skew
 1
@@ -1625,7 +1625,7 @@ min_stage
 min_stage
 0
 4
-0.0
+1.0
 1
 1
 NIL
@@ -1713,7 +1713,7 @@ INPUTBOX
 2347
 419
 input_incursion_table
-input/vic/incursion.csv
+NIL
 1
 0
 String
@@ -1844,7 +1844,7 @@ init_stage
 init_stage
 0
 4
-0.0
+1.0
 0.1
 1
 NIL
@@ -2031,7 +2031,7 @@ INPUTBOX
 2381
 553
 input_vaccine_schedule
-input/vic/rollout_both.csv
+input/vic/rollout_target_multi.csv
 1
 0
 String
@@ -2066,15 +2066,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-625
-1027
-798
-1060
+465
+1024
+659
+1058
 sympt_iso_prop
 sympt_iso_prop
 0
 1
-0.0
+0.5
 0.01
 1
 NIL
@@ -2092,10 +2092,10 @@ input/vic/prevacinfect.csv
 String
 
 SLIDER
-2592
-873
-2787
-906
+2835
+1022
+3030
+1055
 yearly_recover_prop_loss
 yearly_recover_prop_loss
 0
@@ -2117,36 +2117,6 @@ input/vic/mask_params.csv
 0
 String
 
-SLIDER
-468
-925
-641
-958
-mask_upgradeProp
-mask_upgradeProp
-0
-1
-0.8
-0.1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-469
-965
-642
-998
-mask_upgradeStage
-mask_upgradeStage
-0
-5
-2.0
-1
-1
-NIL
-HORIZONTAL
-
 INPUTBOX
 2350
 715
@@ -2159,15 +2129,93 @@ input/vic/vaccine_underlying_params
 String
 
 SWITCH
-667
-748
-837
-781
+845
+685
+1015
+718
 policy_mask_n95
 policy_mask_n95
 1
 1
 -1000
+
+INPUTBOX
+2559
+648
+2682
+708
+incur_name_part_1
+omlike
+1
+0
+String
+
+INPUTBOX
+2559
+715
+2683
+775
+incur_name_part_2
+_escape
+1
+0
+String
+
+INPUTBOX
+2559
+779
+2686
+839
+incur_name_part_3
+_high
+1
+0
+String
+
+SLIDER
+2560
+844
+2733
+877
+incur_day
+incur_day
+0
+300
+39.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+2560
+885
+2735
+918
+incur_replace_chance
+incur_replace_chance
+0
+0.2
+0.02
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+467
+764
+655
+797
+param_vac_uptake_std
+param_vac_uptake_std
+0
+0.4
+0.1
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

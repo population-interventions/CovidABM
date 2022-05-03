@@ -31,3 +31,8 @@ to-report AddToList [myList myIndex myValue]
   ]
   report (replace-item myIndex myList (myValue + item myIndex myList))
 end
+
+to-report MeanStdToBeta [meanVal stdVal]
+  let nFactor meanVal * (1 - meanVal) / (stdVal * stdVal)
+  report (list (meanVal * nFactor) ((1 - meanVal) * nFactor))
+end

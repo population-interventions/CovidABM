@@ -15,7 +15,7 @@
         "5.0"
     ],
     "initial_cases": [
-        "63000.0"
+        "3000.0"
     ],
     "total_population": [
         "6649066.0"
@@ -27,10 +27,7 @@
         "0.0"
     ],
     "tracking": [
-        "false"
-    ],
-    "mask_wearing": [
-        "15.0"
+        "true"
     ],
     "schoolsopen": [
         "true"
@@ -54,13 +51,13 @@
         "true"
     ],
     "param_policy": [
-        "\"TightSupress_No_4\""
+        "\"BarelySupress\""
     ],
     "asymptom_trace_mult": [
         "0.66"
     ],
     "gather_location_count": [
-        "160.0"
+        "120.0"
     ],
     "complacency_bound": [
         "5.0"
@@ -69,7 +66,7 @@
         "false"
     ],
     "end_day": [
-        "390.0"
+        "546.0"
     ],
     "isolation_transmission": [
         "0.33"
@@ -153,7 +150,7 @@
         "3.0"
     ],
     "max_stage": [
-        "3.0"
+        "5.0"
     ],
     "trace_calibration": [
         "0.0"
@@ -185,9 +182,6 @@
     "compound_mask_param": [
         "\"Normal\""
     ],
-    "minmaskwearing": [
-        "0.0"
-    ],
     "success_14day_cases": [
         "-1.0"
     ],
@@ -195,7 +189,7 @@
         "-1.0"
     ],
     "init_trace_prop": [
-        "0.3"
+        "0.5"
     ],
     "input_population_table": [
         "\"input/vic/pop\""
@@ -309,7 +303,7 @@
         "3.25"
     ],
     "min_stage": [
-        "0.0"
+        "1.0"
     ],
     "pipe_end_override": [
         "\"off\""
@@ -326,14 +320,11 @@
     "gather_loc_trans_red": [
         "0.0"
     ],
-    "mask_wear_boost": [
-        "0.0"
-    ],
     "reducedstagefour": [
         "false"
     ],
     "input_incursion_table": [
-        "\"input/vic/incursion.csv\""
+        "\"none\""
     ],
     "param_override_ve_area": [
         "-1.0"
@@ -360,7 +351,7 @@
         "390.0"
     ],
     "init_stage": [
-        "0.0"
+        "1.0"
     ],
     "sim_seed": [
         "-1.0"
@@ -402,10 +393,10 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "1.0"
+        "0.0"
     ],
     "input_vaccine_schedule": [
-        "\"input/vic/rollout_both.csv\""
+        "\"input/vic/rollout_target_multi.csv\""
     ],
     "param_force_vaccine": [
         "\"Disabled\""
@@ -414,7 +405,7 @@
         "0.0"
     ],
     "sympt_iso_prop": [
-        "0.0"
+        "0.5"
     ],
     "input_pre_vacinfect": [
         "\"input/vic/prevacinfect.csv\""
@@ -425,13 +416,28 @@
     "input_maskfile": [
         "\"input/vic/mask_params.csv\""
     ],
-    "mask_upgradeprop": [
-        "0.8"
-    ],
-    "mask_upgradestage": [
-        "2.0"
-    ],
     "input_vaccine_base": [
         "\"input/vic/vaccine_underlying_params\""
+    ],
+    "policy_mask_n95": [
+        "false"
+    ],
+    "incur_name_part_1": [
+        "\"omlike\""
+    ],
+    "incur_name_part_2": [
+        "\"_escape\""
+    ],
+    "incur_name_part_3": [
+        "\"_high\""
+    ],
+    "incur_day": [
+        "39.0"
+    ],
+    "incur_replace_chance": [
+        "0.02"
+    ],
+    "param_vac_uptake_std": [
+        "0.1"
     ]
 }

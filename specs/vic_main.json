@@ -3,15 +3,39 @@
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_main",
 	"postInputDir" : "vic",
-	"threads" : 1,
+	"threads" : 4,
 	"indexParams" : {
-		"param_vac_uptake_mult" : [
-			0.6,
-			0.8,
-			0.95
+		"input_vaccine_schedule" : [
+			"input/vic/rollout_none.csv",
+			"input/vic/rollout_current.csv",
+			"input/vic/rollout_target_early.csv",
+			"input/vic/rollout_target_mid.csv",
+			"input/vic/rollout_multi_mid.csv",
+			"input/vic/rollout_target_multi.csv"
+		],
+		"incur_name_part_1" : [
+			"omlike",
+			"novel"
+		],
+		"incur_name_part_2" : [
+			"",
+			"_high"
+		],
+		"incur_name_part_3" : [
+			"",
+			"_escape"
+		],
+		"incur_day" : [
+			80,
+			160,
+			240,
+			320
+		],
+		"policy_mask_n95" : [
+			false,
+			true
 		],
 		"param_policy" : [
-			"TightSupress",
 			"LooseSupress",
 			"BarelySupress"
 		]
@@ -36,8 +60,8 @@
 				[0, 110]
 			],
 			"heatmapStructure" : {
-				"index_rows" : ["Policy"],
-				"index_cols" : ["VacUptake"],
+				"index_rows" : ["Variant", "Infectiousness", "Immune escape", "Incursion day"],
+				"index_cols" : ["Vaccine schedule", "Mask policy", "Stage policy"],
 				"base_value" : {
 				},
 				"sort_rows" : [
@@ -46,17 +70,59 @@
 				]
 			},
 			"indexRename" : {
-				"param_vac_uptake_mult" : {
-					"name" : "VacUptake",
+				"input_vaccine_schedule" : {
+					"name" : "Vaccine schedule",
 					"values" : {
-						"0.6" : "60%",
-						"0.8" : "80%",
-						"0.95" : "95%"
+						"input/vic/rollout_none.csv"         : "Stop at three",
+						"input/vic/rollout_current.csv"      : "Ongoing current",
+						"input/vic/rollout_target_early.csv" : "Omicron 3rd quarter",
+						"input/vic/rollout_target_mid.csv"   : "Omicron 4th quarter",
+						"input/vic/rollout_multi_mid.csv"    : "Multivalent 4th quarter",
+						"input/vic/rollout_target_multi.csv" : "Omicron 3rd, multivalent 5th"
+					}
+				},
+				"incur_name_part_1" : {
+					"name" : "Variant",
+					"values" : {
+						"omlike" : "Omicron-like",
+						"novel"  : "Novel"
+					}
+				},
+				"incur_name_part_2" : {
+					"name" : "Infectiousness",
+					"values" : {
+						"" : "Current",
+						"_high"  : "Higher"
+					}
+				},
+				"incur_name_part_3" : {
+					"name" : "Immune escape",
+					"values" : {
+						"" : "Low",
+						"_escape"  : "High"
+					}
+				},
+				"incur_day" : {
+					"name" : "Incursion day",
+					"values" : {
+						"80"  : "80",
+						"160" : "160",
+						"240" : "240",
+						"320" : "320"
+					}
+				},
+				"policy_mask_n95" : {
+					"name" : "Mask policy",
+					"values" : {
+						"false" : "Current",
+						"true"  : "Stockpile N95"
 					}
 				},
 				"param_policy" : {
-					"name" : "Policy",
+					"name" : "Stage policy",
 					"values" : {
+						"LooseSupress" : "LooseSupress",
+						"BarelySupress" : "BarelySupress"
 					}
 				}
 			}

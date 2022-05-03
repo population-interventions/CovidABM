@@ -262,7 +262,7 @@ to createSimulants
       [
         ifelse self_iso_at_peak
         [
-          set symtomatic_present_day floor (ownIncubationPeriod_raw + pre_present_iso + random-float 1)
+          set symtomatic_present_day floor (ownIncubationPeriod + pre_present_iso + random-float 1)
         ]
         [
           set symtomatic_present_day round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
@@ -332,7 +332,7 @@ to setupInitialVaccination_uniformMethod
       ask cohort [
         (ifelse doseCount_2 > 0
           [
-            if param_vac_uptake_mult * cohortVacUptakeDose2 > random-float 1 [ 
+            if _param_vac_uptake_mult * cohortVacUptakeDose2 > random-float 1 [ 
               set vaccReceptive true ; A member of a cohort may continue on to further vaccination after only dose 2
               set vaccBranch vaccBranchFrom2
             ]
@@ -354,7 +354,7 @@ to setupInitialVaccination_uniformMethod
           ]
           doseCount_3 > 0
           [
-            if param_vac_uptake_mult * cohortVacUptake > random-float 1 [
+            if _param_vac_uptake_mult * cohortVacUptake > random-float 1 [
               set vaccReceptive true ; Only the most vaccinated are receptive to recieving another vaccine
             ]
             set vaccineDay currentDay_3
@@ -404,7 +404,7 @@ to setupInitialVaccination_micromangedMethod
       ]
       ifelse (item 3 x) >= 0
       [
-        if param_vac_uptake_mult * cohortVacUptake > random-float 1 [
+        if _param_vac_uptake_mult * cohortVacUptake > random-float 1 [
           set vaccReceptive true ; Only the most vaccinated are receptive to recieving another vaccine
         ]
         set vaccineDay -1 * (item 3 x)
@@ -416,7 +416,7 @@ to setupInitialVaccination_micromangedMethod
       ]
       [
         if (item 2 x) >= 0 [
-          if param_vac_uptake_mult * cohortVacUptakeDose2 > random-float 1 [ 
+          if _param_vac_uptake_mult * cohortVacUptakeDose2 > random-float 1 [ 
             set vaccReceptive true ; A member of a cohort may continue on to further vaccination after only dose 2
             set vaccBranch vaccBranchFrom2
           ]
@@ -462,7 +462,7 @@ to setGlobals
   set ScalePhase                 0
   set ScalePhaseMax              0
   set extraScaleFactor           1
-  set Days                       0
+  set Days                       -1
   set CaseFatalityRate           0
   set DeathCount                 0
   set recovercount               0

@@ -155,6 +155,7 @@ globals [
   _param_incurMult
   _init_trace_prop
   _sympt_iso_prop
+  _param_vac_uptake_mult
   
   real_prior0
   real_prior1

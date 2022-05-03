@@ -14,17 +14,26 @@ to simul_updateVariantParams
   
   set ownIllnessPeriod_raw ( exp random-normal table:get varData "durationMean" table:get varData "durationStd" ) ;; log transform of illness period
   set ownIncubationPeriod_raw ( exp random-normal table:get varData "incubationMean" table:get varData "incubationStd" ) ;;; log transform of incubation period
-  set ownIllnessPeriod ownIllnessPeriod_raw
-  set ownIncubationPeriod ownIncubationPeriod_raw
-  
+
   set nonInfectivePeriod table:get varData "non_infect_time"
   set Asymptomatic_Trans table:get varData "asympt_trans"
   
   set personalVirulence rngs:rnd-beta moveInitSeedID (table:get varData "trans_a" / hetro_mult) (table:get varData "trans_b" / hetro_mult)
+  ;print (word "rawBat " ownIllnessPeriod_raw ", rawIll " ownIllnessPeriod_raw ", rawV " personalVirulence)
   
   ;; Vaccine and previous infection
-  set personalVirulence personalVirulence * (vaccine_getWanedParameter "infectReduct" infectVariant currentVaccine vaccineDay prevVaccine prevVaccineDay)
-  set personalVirulence personalVirulence * (vaccine_getWanedParameter "infectReduct" infectVariant recoverVaccine recoverDay 0 0)
+  let infectivityReduction (vaccine_getWanedParameter "infectReduct" infectVariant currentVaccine vaccineDay prevVaccine prevVaccineDay) * (vaccine_getWanedParameter "infectReduct" infectVariant recoverVaccine recoverDay 0 0)
+  let sqrtInfectivityReduction sqrt infectivityReduction
+  
+  set ownIllnessPeriod ownIllnessPeriod_raw * sqrtInfectivityReduction
+  set ownIncubationPeriod ownIncubationPeriod_raw * sqrtInfectivityReduction
+  set personalVirulence personalVirulence * sqrtInfectivityReduction
+  
+  ;print (word "Bat " ownIncubationPeriod ", Ill " ownIllnessPeriod ", V " personalVirulence ", Red " infectivityReduction)
+  
+  if self_iso_at_peak and symtomatic_present_day > -1 [
+    set symtomatic_present_day floor (ownIncubationPeriod + pre_present_iso + random-float 1)
+  ]
 end
 
 to setup_variantData
@@ -96,26 +105,27 @@ end
 to simul_updatepersonalvirulence
   ;; creates a triangular distribution of virulence that peaks at the end of the incubation period
   if color = red and (isInitialInfection or not first_case_calibrate) [
-    if timenow <= nonInfectivePeriod [
-      set currentVirulence 0
-    ]
-    ifelse ownIllnessPeriod_raw > 0
-    [
-      if timenow > nonInfectivePeriod and timenow <= ownIncubationPeriod [
+    (ifelse timenow <= nonInfectivePeriod 
+      [
+        set currentVirulence 0
+      ]
+      timenow < ownIncubationPeriod
+      [
         set currentVirulence personalVirulence * (((timenow - nonInfectivePeriod) / (ownIncubationPeriod - nonInfectivePeriod) ) * (1 - prepeak_vir_boost) + prepeak_vir_boost)
       ]
-      if timenow > ownIncubationPeriod [
+      timenow < ownIllnessPeriod
+      [
         set currentVirulence personalVirulence * (( ownIllnessPeriod - timenow ) / ( ownIllnessPeriod - ownIncubationPeriod ))
       ]
-    ]
-    [
-      set currentVirulence 0
-    ]
+      [
+        set currentVirulence 0
+      ]
+    )
+  ]
     ;if vaccinated = 1 [
     ;  show (word "cine " vaccinated ",time " timenow ",VIR " (currentVirulence / personalVirulence) ",unscale " currentVirulence)
     ;]
     ;set currentVirulence 0
     ;show (word "timenow " timenow ", personalVirulence " personalVirulence ", ownIncubationPeriod " ownIncubationPeriod ", ownIllnessPeriod " ownIllnessPeriod)
     ;show (word "timenow " timenow ", currentVirulenceProp " (currentVirulence / personalVirulence))
-  ]
 end

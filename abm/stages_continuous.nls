@@ -24,6 +24,7 @@ to do_stages_continuous
     set spatial_distance false
     set traceMult 1
     set isolate_on_inf_notice false
+    set tracking false
     
     ;; Cascading probabilities. Check mask wearing, then n95, then surgical, otherwise default to cloth.
     set mask_wearing_a0 0
@@ -43,6 +44,7 @@ to do_stages_continuous
     set case_isolation true
     set quarantine true
     set isolate_on_inf_notice true
+    set tracking true
     
     (ifelse stage <= 2
       [

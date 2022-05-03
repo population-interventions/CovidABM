@@ -133,6 +133,12 @@ to params_setDrawValues
   set _param_incurMult         param_incurMult
   set _init_trace_prop         init_trace_prop
   set _sympt_iso_prop          sympt_iso_prop
+  set _param_vac_uptake_mult   param_vac_uptake_mult
+  
+  if param_vac_uptake_std > 0 [
+    let betaParams MeanStdToBeta _param_vac_uptake_mult param_vac_uptake_std
+    set _param_vac_uptake_mult rngs:rnd-beta defaultStream (item 0 betaParams) (item 1 betaParams)
+  ]
   
   ;; Ignore cases reported before this day, due to initial spike
   set IGNORE_CASE_UNTIL 3
