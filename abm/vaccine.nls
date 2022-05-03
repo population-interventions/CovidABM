@@ -15,11 +15,22 @@ to setup_vaccineSchedule
   set vaccineBranchVaccType table:make
 end
 
-to-report ApplyOddsRatio [vacTable baseParams paramName]
+to-report ApplyOddsRatio [vacTable baseParams uncertainty paramName]
   let basePr table:get baseParams paramName
   let oddsRatio table:get vacTable paramName
   
-  let resultLnOdds ln ((PrToOdds basePr) * oddsRatio)
+  let lowerOr oddsRatio * (1 - uncertainty)
+  let upperOr oddsRatio * (1 + uncertainty * 1.14121)
+
+  let lowerLnOdd OddsToLnOdds lowerOr
+  let upperLnOdd OddsToLnOdds upperOr
+  
+  let drawLnOdds lowerLnOdd + (upperLnOdd - lowerLnOdd) * (random-float 1)
+  let resultLnOdds (PrToLnOdds basePr) + drawLnOdds
+  
+  ;if paramName = "infectReduct" [
+  ;  print (word oddsRatio ", " uncertainty ", " basePr ", " (LnOddsToPr resultLnOdds) ", " (PrToLnOdds basePr) ", " (LnOddsToOdds drawLnOdds) ", " drawLnOdds ", " resultLnOdds)
+  ;]
   table:put vacTable paramName resultLnOdds
   report vacTable
 end
@@ -54,6 +65,10 @@ to setup_vaccineData
       table:put baseParamsTable (item 0 rawData) vacTable
   ]
   
+  ;; Load OR uncertainty
+  let uncertParamsData csv:from-file (word input_matchup_uncertainty)
+  let uncertParamsTable LoadCsvListListToTableTable uncertParamsData
+  
   ;; Load each vaccine table, applying the values as OR to base params.
   set vacineEff_nameOut []
   set vacineEff_transOut []
@@ -67,7 +82,8 @@ to setup_vaccineData
     let i 0
     foreach vaccineParamsFileData [ rawData -> 
       let vacTable table:make      
-      table:put vacTable "name"         (item 0 rawData)
+      let vacName (item 0 rawData)
+      table:put vacTable "name"         vacName
       table:put vacTable "infectReduct" (item 1 rawData)
       table:put vacTable "riskReduct"   (item 2 rawData)
       table:put vacTable "reduceSympt"  (item 3 rawData)
@@ -78,13 +94,15 @@ to setup_vaccineData
       table:put vacTable "waneRate"     (item 8 rawData)
       let baseParamName (item 9 rawData)
       
+      let uncertaintyValue table:get (table:get uncertParamsTable variant) vacName
+      
       let myBaseParams table:get baseParamsTable baseParamName
-      set vacTable ApplyOddsRatio vacTable myBaseParams "infectReduct"
-      set vacTable ApplyOddsRatio vacTable myBaseParams "riskReduct"
-      set vacTable ApplyOddsRatio vacTable myBaseParams "reduceSympt"
-      set vacTable ApplyOddsRatio vacTable myBaseParams "reduceHosp"
-      set vacTable ApplyOddsRatio vacTable myBaseParams "reduceIcu"
-      set vacTable ApplyOddsRatio vacTable myBaseParams "reduceMort"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "infectReduct"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "riskReduct"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "reduceSympt"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "reduceHosp"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "reduceIcu"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "reduceMort"
       set vacTable ApplyMultiplier vacTable myBaseParams "effectDays"
       set vacTable ApplyMultiplier vacTable myBaseParams "waneRate"
       

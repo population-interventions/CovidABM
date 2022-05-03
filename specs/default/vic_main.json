@@ -439,5 +439,8 @@
     ],
     "param_vac_uptake_std": [
         "0.1"
+    ],
+    "input_matchup_uncertainty": [
+        "\"input/vic/vaccine_params_or_uncertainty.csv\""
     ]
 }

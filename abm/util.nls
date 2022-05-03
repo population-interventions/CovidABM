@@ -8,6 +8,15 @@ to-report PrToLnOdds [pr]
   report ln (pr / (1 - pr))
 end
 
+to-report LnOddsToOdds [lnOdd]
+  report exp lnOdd
+end
+
+to-report OddsToLnOdds [odds]
+  report ln odds
+end
+
+
 to-report OddsToPr [odds]
   report odds / (1 + odds)
 end
@@ -35,4 +44,25 @@ end
 to-report MeanStdToBeta [meanVal stdVal]
   let nFactor meanVal * (1 - meanVal) / (stdVal * stdVal)
   report (list (meanVal * nFactor) ((1 - meanVal) * nFactor))
+end
+
+to-report LoadCsvListListToTableTable [listList]
+  let outTable table:make
+  let colNames remove-item 0 item 0 listList
+  
+  foreach colNames [ x ->
+    table:put outTable x table:make
+  ]
+  
+  foreach remove-item 0 listList [ x ->
+    let i 0
+    let row item 0 x
+    foreach remove-item 0 x [ y ->
+      let col item i colNames
+      table:put (table:get outTable col) row y
+      set i i + 1
+    ]
+  ]
+  
+  report outTable
 end

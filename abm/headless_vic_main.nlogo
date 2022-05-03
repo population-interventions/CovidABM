@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-10.0
+8.0
 1
 1
 NIL
@@ -186,7 +186,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.06
 0.01
 1
 NIL
@@ -204,7 +204,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+35.0
 .5
 1
 NIL
@@ -219,7 +219,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+35.0
 .5
 1
 NIL
@@ -271,7 +271,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+50.0
 1
 1
 NIL
@@ -368,7 +368,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+6.2
 1
 1
 NIL
@@ -482,7 +482,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+30.0
 1
 1
 NIL
@@ -914,10 +914,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2558
-540
-2731
-573
+2565
+502
+2738
+535
 param_trace_mult
 param_trace_mult
 0
@@ -929,10 +929,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2558
-610
-2731
-643
+2559
+888
+2732
+921
 trace_attempt_limit
 trace_attempt_limit
 -1
@@ -1228,10 +1228,10 @@ HORIZONTAL
 
 
 SWITCH
-843
-642
-1017
-675
+819
+649
+993
+682
 first_case_calibrate
 first_case_calibrate
 1
@@ -1337,10 +1337,10 @@ sensitivity
 0
 
 SLIDER
-2558
-575
-2731
-608
+2559
+853
+2732
+886
 trace_eff_override
 trace_eff_override
 -1
@@ -1367,10 +1367,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2558
-469
-2731
-502
+2565
+432
+2738
+465
 trace_at_5
 trace_at_5
 0
@@ -1382,10 +1382,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2558
-505
-2731
-538
+2565
+467
+2738
+500
 trace_assymtote
 trace_assymtote
 0
@@ -1397,10 +1397,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-2560
-385
-2733
-430
+2567
+347
+2740
+392
 compound_trace
 compound_trace
 "None" "ass50_70at5" "ass100_90at5" "ass100_90at5_iso" "ass200_90at5"
@@ -1437,10 +1437,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2558
-434
-2731
-467
+2565
+397
+2738
+430
 trace_at_1
 trace_at_1
 0
@@ -1452,10 +1452,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-2562
-349
-2676
-382
+3057
+278
+3171
+311
 trace_print
 trace_print
 1
@@ -1880,10 +1880,10 @@ realNotCaseThres
 
 
 SLIDER
-834
-788
-1018
-821
+832
+817
+1016
+850
 mid_report_day
 mid_report_day
 0
@@ -1966,10 +1966,10 @@ policyUseHosp
 -1000
 
 INPUTBOX
-2349
-783
-2403
-843
+3129
+682
+3183
+742
 in_dose1
 _1
 1
@@ -1977,10 +1977,10 @@ _1
 String
 
 INPUTBOX
-2410
-784
-2463
-844
+3189
+683
+3242
+743
 in_dose2
 _60
 1
@@ -1990,9 +1990,9 @@ String
 
 INPUTBOX
 2390
-459
+462
 2549
-519
+522
 input_variant
 input/vic/variant.csv
 1
@@ -2000,10 +2000,10 @@ input/vic/variant.csv
 String
 
 INPUTBOX
-2392
-520
-2534
-580
+2393
+522
+2535
+582
 input_draws
 input/vic
 1
@@ -2051,10 +2051,10 @@ param_force_vaccine
 
 
 SLIDER
-469
-867
-642
-900
+819
+687
+992
+720
 trans_override
 trans_override
 0
@@ -2082,9 +2082,9 @@ HORIZONTAL
 
 INPUTBOX
 2350
-652
+654
 2534
-712
+714
 input_pre_vacinfect
 input/vic/prevacinfect.csv
 1
@@ -2107,10 +2107,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2362
-587
-2541
-647
+2363
+589
+2542
+649
 input_maskFile
 input/vic/mask_params.csv
 1
@@ -2119,9 +2119,9 @@ String
 
 INPUTBOX
 2350
-715
+717
 2537
-775
+777
 input_vaccine_base
 input/vic/vaccine_underlying_params
 1
@@ -2129,10 +2129,10 @@ input/vic/vaccine_underlying_params
 String
 
 SWITCH
-845
-685
-1015
-718
+472
+894
+642
+927
 policy_mask_n95
 policy_mask_n95
 1
@@ -2140,10 +2140,10 @@ policy_mask_n95
 -1000
 
 INPUTBOX
-2559
-648
-2682
-708
+2560
+547
+2683
+607
 incur_name_part_1
 omlike
 1
@@ -2151,10 +2151,10 @@ omlike
 String
 
 INPUTBOX
-2559
-715
-2683
-775
+2560
+613
+2684
+673
 incur_name_part_2
 _escape
 1
@@ -2162,10 +2162,10 @@ _escape
 String
 
 INPUTBOX
-2559
-779
-2686
-839
+2560
+678
+2687
+738
 incur_name_part_3
 _high
 1
@@ -2173,10 +2173,10 @@ _high
 String
 
 SLIDER
-2560
-844
-2733
-877
+470
+809
+643
+842
 incur_day
 incur_day
 0
@@ -2188,10 +2188,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2560
-885
-2735
-918
+470
+849
+645
+882
 incur_replace_chance
 incur_replace_chance
 0
@@ -2216,6 +2216,17 @@ param_vac_uptake_std
 1
 NIL
 HORIZONTAL
+
+INPUTBOX
+2350
+778
+2633
+848
+input_matchup_uncertainty
+input/vic/vaccine_params_or_uncertainty.csv
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -3123,6 +3134,9 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_vac_uptake_std">
       <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="input_matchup_uncertainty">
+      <value value="&quot;input/vic/vaccine_params_or_uncertainty.csv&quot;"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>

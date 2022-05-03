@@ -34,5 +34,4 @@ Todo:
 
 ==================
 
-Uncertainty for lnOdds for downstreatm variant vaccine interactions.
 Policy thresholds based on expected hospitalisation.
