@@ -236,8 +236,8 @@ to calculateHospInLastPeriod
   set policymetric14 policymetric14 + h_prior20 + h_prior21 + h_prior22 + h_prior23
   
   if policyUseHosp [
-   set policymetric7 hospinperiod7
-   set policymetric14 hospinperiod14
+    set policymetric7 (item 0 hospUsagePipe) + (item 1 hospUsagePipe) + (item 2 hospUsagePipe) + (item 3 hospUsagePipe) + (item 4 hospUsagePipe) + (item 5 hospUsagePipe) + (item 6 hospUsagePipe)
+    set policymetric14 policymetric7 + (item 7 hospUsagePipe) + (item 8 hospUsagePipe) + (item 9 hospUsagePipe) + (item 10 hospUsagePipe) + (item 11 hospUsagePipe) + (item 12 hospUsagePipe) + (item 13 hospUsagePipe)
   ]
 end
 
