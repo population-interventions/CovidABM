@@ -2147,7 +2147,7 @@ SWITCH
 464
 949
 657
-983
+982
 self_iso_at_peak
 self_iso_at_peak
 0
@@ -2578,7 +2578,7 @@ INPUTBOX
 2347
 419
 input_incursion_table
-NIL
+none
 1
 0
 String
@@ -3066,7 +3066,7 @@ SLIDER
 465
 1024
 659
-1058
+1057
 sympt_iso_prop
 sympt_iso_prop
 0

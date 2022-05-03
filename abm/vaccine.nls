@@ -104,7 +104,6 @@ to-report vaccine_getWanedParameter [paramName variant vac day prevVac prevDay]
   if vac = 0 [
     report 1
   ]
-  print vaccineParamsTable
   let paramsTable table:get vaccineParamsTable variant
   let vacParams table:get paramsTable vac
   let effDays (table:get vacParams "effectDays")
