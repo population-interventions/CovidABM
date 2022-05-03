@@ -156,6 +156,7 @@ Span
 NIL
 HORIZONTAL
 
+
 BUTTON
 283
 108
@@ -173,6 +174,9 @@ NIL
 NIL
 1
 
+
+
+
 SLIDER
 1627
 219
@@ -187,6 +191,9 @@ superspreaders
 1
 NIL
 HORIZONTAL
+
+
+
 
 SLIDER
 1625
@@ -218,6 +225,9 @@ Proportion_Time_Avoid
 NIL
 HORIZONTAL
 
+
+
+
 INPUTBOX
 239
 200
@@ -239,6 +249,18 @@ total_population
 1
 0
 Number
+
+
+
+
+
+
+
+
+
+
+
+
 
 SLIDER
 1627
@@ -291,6 +313,10 @@ schoolsOpen
 0
 1
 -1000
+
+
+
+
 
 SWITCH
 1484
@@ -348,6 +374,12 @@ Visit_Radius
 NIL
 HORIZONTAL
 
+
+
+
+
+
+
 SLIDER
 3415
 634
@@ -374,6 +406,17 @@ Vaccine_Enabled
 1
 -1000
 
+
+
+
+
+
+
+
+
+
+
+
 TEXTBOX
 1493
 27
@@ -392,7 +435,10 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "continuous"
-3
+4
+
+
+
 
 SLIDER
 807
@@ -408,6 +454,9 @@ Asymptom_Trace_Mult
 1
 NIL
 HORIZONTAL
+
+
+
 
 SLIDER
 467
@@ -438,6 +487,8 @@ Complacency_Bound
 1
 NIL
 HORIZONTAL
+
+
 
 BUTTON
 3357
@@ -514,6 +565,8 @@ Isolation_Transmission
 NIL
 HORIZONTAL
 
+
+
 SWITCH
 1474
 763
@@ -524,6 +577,9 @@ track_R
 0
 1
 -1000
+
+
+
 
 SLIDER
 818
@@ -550,6 +606,9 @@ param_trigger_loosen
 1
 1
 -1000
+
+
+
 
 SLIDER
 18
@@ -659,6 +718,9 @@ preSimDailyCases
 0
 Number
 
+
+
+
 SLIDER
 813
 908
@@ -685,6 +747,8 @@ set_shape
 1
 -1000
 
+
+
 SLIDER
 2830
 913
@@ -699,6 +763,7 @@ complacency_loss
 1
 NIL
 HORIZONTAL
+
 
 SLIDER
 3572
@@ -729,6 +794,7 @@ report_proportion
 1
 NIL
 HORIZONTAL
+
 
 SLIDER
 2748
@@ -770,6 +836,7 @@ calibrate
 1
 1
 -1000
+
 
 SLIDER
 228
@@ -1158,6 +1225,8 @@ ess_spread_anchor
 NIL
 HORIZONTAL
 
+
+
 SWITCH
 843
 642
@@ -1213,7 +1282,7 @@ SWITCH
 464
 949
 657
-982
+983
 self_iso_at_peak
 self_iso_at_peak
 0
@@ -1644,7 +1713,7 @@ INPUTBOX
 2347
 419
 input_incursion_table
-none
+NIL
 1
 0
 String
@@ -1708,6 +1777,7 @@ scale_cont_buffer
 1
 NIL
 HORIZONTAL
+
 
 SLIDER
 1615
@@ -1780,6 +1850,8 @@ init_stage
 NIL
 HORIZONTAL
 
+
+
 SLIDER
 305
 15
@@ -1806,6 +1878,7 @@ realNotCaseThres
 1
 -1000
 
+
 SLIDER
 834
 788
@@ -1820,6 +1893,7 @@ mid_report_day
 1
 NIL
 HORIZONTAL
+
 
 SLIDER
 3570
@@ -1913,6 +1987,7 @@ _60
 0
 String
 
+
 INPUTBOX
 2390
 459
@@ -1956,10 +2031,12 @@ INPUTBOX
 2381
 553
 input_vaccine_schedule
-input/vic/rollout_none.csv
+input/vic/rollout_target_multi.csv
 1
 0
 String
+
+
 
 CHOOSER
 1598
@@ -1970,6 +2047,8 @@ param_force_vaccine
 param_force_vaccine
 "Disabled" "AZ" "Pfizer"
 0
+
+
 
 SLIDER
 469
@@ -1990,7 +2069,7 @@ SLIDER
 465
 1024
 659
-1057
+1058
 sympt_iso_prop
 sympt_iso_prop
 0
@@ -2077,7 +2156,7 @@ INPUTBOX
 2683
 775
 incur_name_part_2
-NIL
+_escape
 1
 0
 String
@@ -2088,7 +2167,7 @@ INPUTBOX
 2686
 839
 incur_name_part_3
-NIL
+_high
 1
 0
 String
@@ -2102,7 +2181,7 @@ incur_day
 incur_day
 0
 300
-160.0
+39.0
 1
 1
 NIL
@@ -2591,31 +2670,31 @@ NetLogo 6.2.0
     <metric>icuArray_listOut</metric>
     <metric>hospArray_listOut</metric>
     <enumeratedValueSet variable="population">
-      <value value="2500"/>
+      <value value="2500.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="span">
-      <value value="10"/>
+      <value value="10.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="superspreaders">
       <value value="0.1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="proportion_people_avoid">
-      <value value="5"/>
+      <value value="5.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="proportion_time_avoid">
-      <value value="5"/>
+      <value value="5.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="initial_cases">
-      <value value="3000"/>
+      <value value="3000.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="total_population">
-      <value value="6649066"/>
+      <value value="6649066.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="essential_workers">
-      <value value="100"/>
+      <value value="100.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="ess_w_risk_reduction">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="tracking">
       <value value="true"/>
@@ -2627,7 +2706,7 @@ NetLogo 6.2.0
       <value value="true"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="case_reporting_delay">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="visit_frequency">
       <value value="0.1428"/>
@@ -2636,7 +2715,7 @@ NetLogo 6.2.0
       <value value="8.8"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="mask_efficacy_mult">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="vaccine_enabled">
       <value value="true"/>
@@ -2649,16 +2728,16 @@ NetLogo 6.2.0
       <value value="0.66"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="gather_location_count">
-      <value value="120"/>
+      <value value="120.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="complacency_bound">
-      <value value="5"/>
+      <value value="5.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="profile_on">
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="end_day">
-      <value value="546"/>
+      <value value="546.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="isolation_transmission">
       <value value="0.33"/>
@@ -2673,28 +2752,28 @@ NetLogo 6.2.0
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="calibrate_stage_switch">
-      <value value="300"/>
+      <value value="300.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="stage_test_index">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="isolate_on_inf_notice">
       <value value="true"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="household_iso_factor">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="infect_iso_factor">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="track_iso_factor">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="track_slope">
       <value value="true"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="presimdailycases">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="recov_var_match_rate">
       <value value="0.58"/>
@@ -2703,19 +2782,19 @@ NetLogo 6.2.0
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="complacency_loss">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_incur_phase_limit">
-      <value value="-1"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="report_proportion">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="accept_isolation_prop">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="incursion_phase_speed_mult">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="calibrate">
       <value value="false"/>
@@ -2724,49 +2803,49 @@ NetLogo 6.2.0
       <value value="0.26"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_policy_force_days">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_policy_force_stage">
-      <value value="-1"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_policy_force_preset">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_vacincurmult">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_trace_mult">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_attempt_limit">
-      <value value="3"/>
+      <value value="3.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="max_stage">
-      <value value="5"/>
+      <value value="5.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_calibration">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="isocomply_override">
       <value value="0.93"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init_timenow_limit">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="policy_pipeline">
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="policy_pipe_time">
-      <value value="105"/>
+      <value value="105.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="incur_timenow_limit">
-      <value value="4"/>
+      <value value="4.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="hetro_mult">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="daily_infect_binom">
-      <value value="5"/>
+      <value value="5.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="compound_param">
       <value value="&quot;None&quot;"/>
@@ -2775,10 +2854,10 @@ NetLogo 6.2.0
       <value value="&quot;Normal&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="success_14day_cases">
-      <value value="-1"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_stage1_time">
-      <value value="-1"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init_trace_prop">
       <value value="0.5"/>
@@ -2814,7 +2893,7 @@ NetLogo 6.2.0
       <value value="&quot;.csv&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="pre_present_iso">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="self_iso_at_peak">
       <value value="true"/>
@@ -2832,25 +2911,25 @@ NetLogo 6.2.0
       <value value="&quot;None&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_eff_override">
-      <value value="-1"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="vac_trans_mult">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_at_5">
       <value value="0.9"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_assymtote">
-      <value value="100"/>
+      <value value="100.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="compound_trace">
       <value value="&quot;ass100_90at5&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="site_iso_prop">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="site_iso_max_day">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trace_at_1">
       <value value="0.98"/>
@@ -2871,22 +2950,22 @@ NetLogo 6.2.0
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="transmit_skew">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="duration_skew">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="global_distance_mult">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="recover_immunity_mult">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="always_spread">
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_override_ve">
-      <value value="-1"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="print_contact_events">
       <value value="false"/>
@@ -2895,22 +2974,22 @@ NetLogo 6.2.0
       <value value="3.25"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="min_stage">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="pipe_end_override">
       <value value="&quot;off&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="rat_prop">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="rat_day_max">
-      <value value="7"/>
+      <value value="7.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="vactype_override">
       <value value="&quot;off&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="gather_loc_trans_red">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="reducedstagefour">
       <value value="false"/>
@@ -2919,43 +2998,43 @@ NetLogo 6.2.0
       <value value="&quot;none&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_override_ve_area">
-      <value value="-1"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="scale_up_threshold">
-      <value value="150"/>
+      <value value="150.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="scale_down_threshold">
-      <value value="130"/>
+      <value value="130.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="scale_cont_buffer">
-      <value value="10"/>
+      <value value="10.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="slope_track_start">
-      <value value="23"/>
+      <value value="23.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="slope_track_end">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="override_asympt_table">
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init_metric_threshold">
-      <value value="390"/>
+      <value value="390.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init_stage">
-      <value value="1"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sim_seed">
-      <value value="-1"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="realnotcasethres">
       <value value="true"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="mid_report_day">
-      <value value="42"/>
+      <value value="42.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="param_incurmult">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="input_region">
       <value value="&quot;input/vic/region.csv&quot;"/>
@@ -2964,10 +3043,10 @@ NetLogo 6.2.0
       <value value="&quot;input/vic/vaccine_params&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init_cases_region">
-      <value value="-1"/>
+      <value value="-1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="presimdailyhosp">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="policyusehosp">
       <value value="true"/>
@@ -3000,7 +3079,7 @@ NetLogo 6.2.0
       <value value="&quot;Disabled&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="trans_override">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sympt_iso_prop">
       <value value="0.5"/>
@@ -3009,7 +3088,7 @@ NetLogo 6.2.0
       <value value="&quot;input/vic/prevacinfect.csv&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="yearly_recover_prop_loss">
-      <value value="0"/>
+      <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="input_maskfile">
       <value value="&quot;input/vic/mask_params.csv&quot;"/>
@@ -3027,11 +3106,11 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="incur_name_part_2">
       <value value="&quot;&quot;"/>
-      <value value="&quot;_high&quot;"/>
+      <value value="&quot;_escape&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="incur_name_part_3">
       <value value="&quot;&quot;"/>
-      <value value="&quot;_escape&quot;"/>
+      <value value="&quot;_high&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="incur_day">
       <value value="80"/>

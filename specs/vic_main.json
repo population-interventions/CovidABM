@@ -19,11 +19,11 @@
 		],
 		"incur_name_part_2" : [
 			"",
-			"_high"
+			"_escape"
 		],
 		"incur_name_part_3" : [
 			"",
-			"_escape"
+			"_high"
 		],
 		"incur_day" : [
 			80,
@@ -89,17 +89,17 @@
 					}
 				},
 				"incur_name_part_2" : {
-					"name" : "Infectiousness",
-					"values" : {
-						"" : "Current",
-						"_high"  : "Higher"
-					}
-				},
-				"incur_name_part_3" : {
 					"name" : "Immune escape",
 					"values" : {
 						"" : "Low",
 						"_escape"  : "High"
+					}
+				},
+				"incur_name_part_3" : {
+					"name" : "Infectiousness",
+					"values" : {
+						"" : "Current",
+						"_high"  : "Higher"
 					}
 				},
 				"incur_day" : {
