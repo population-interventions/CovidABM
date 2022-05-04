@@ -100,7 +100,8 @@ def RunSeriesPost(modelData, runs, pernode):
 		#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=3, describe=True)
 		#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 210, 364, stage_set=4, describe=True)
 
-	DoProcessingForReport(workingDir, postInputDir, measureCols, table5Rows, 'VacUptake', months=24)
+	if 'splitTableIndexName' in modelData:
+		DoProcessingForReport(workingDir, postInputDir, measureCols, table5Rows, modelData['splitTableIndexName'], months=24)
 
 	if makeComparison:
 		compareHeatmap = 'weeklyAgg_infect_from_30_to_82_age_0_110_total_percentile_050'

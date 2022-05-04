@@ -69,6 +69,7 @@
 				"sort_cols" : [
 				]
 			},
+			"splitTableIndexName" : "Vaccine schedule",
 			"indexRename" : {
 				"input_vaccine_schedule" : {
 					"name" : "Vaccine schedule",
@@ -114,8 +115,8 @@
 				"policy_mask_n95" : {
 					"name" : "Mask policy",
 					"values" : {
-						"false" : "Current",
-						"true"  : "Stockpile N95"
+						"False" : "Current",
+						"True"  : "Stockpile N95"
 					}
 				},
 				"param_policy" : {

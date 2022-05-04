@@ -33,5 +33,3 @@ Todo:
  - Calibration
 
 ==================
-
-Policy thresholds based on expected hospitalisation.

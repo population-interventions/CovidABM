@@ -83,9 +83,14 @@ def ProcessAbmOutput(
 	print("Processing Files", filelist)
 	chunksize = 4 ** 7
 	firstProcess = True
+	# Do keep_default_na=False because empty string is a valid input for models
+	# however, the index values need to be renamed via indexRename in the spec
+	# file for further processing.
 	for filename in filelist:
 		for chunk in tqdm(pd.read_csv(
-					filename + '.csv', chunksize=chunksize, header=6),
+					filename + '.csv',
+					chunksize=chunksize, header=6,
+					keep_default_na=False),
 				total=4):
 			ProcessAbmChunk(
 				chunk, firstProcess, outputDir, arrayIndex,
@@ -259,7 +264,8 @@ def ProcessInfectCohorts(measureCols, filename, cohortFile, outputPrefix, arrayI
 				index_col=list(range(2 + len(measureCols))),
 				header=list(range(3)),
 				dtype={'day' : int, 'cohort' : int},
-				chunksize=chunksize),
+				chunksize=chunksize,
+				keep_default_na=False),
 			total=4):
 		df = ProcessInfectChunk(chunk, cohortData, outputPrefix, arrayIndex)
 		OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)

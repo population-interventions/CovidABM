@@ -2,7 +2,7 @@ import sys
 import process.shared.modelData as md
 import process.simpleRcalc as rcalc
 import process.targetOptimise as targetOptimise
-import process.runMainSeriesPost as mainPost
+import process.mainPostProcessing as mainPost
 
 modelName = sys.argv[1] if len(sys.argv) > 1 else 'vic_main'
 runs = sys.argv[2] if len(sys.argv) > 2 else 10
