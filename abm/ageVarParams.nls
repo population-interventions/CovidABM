@@ -1,7 +1,9 @@
 
 to ageVariant_setup
-  set variantUI_IFR random-normal 0 0.269
-  set variantUI_IFR_young random-normal 0 0.205
+  let IFR_base random-normal 0 1
+  set variantUI_IFR IFR_base * 0.269
+  set variantUI_IFR_young IFR_base * 0.205
+  
   set variantUI_ICU random-normal 0 0.1
   set variantUI_hosp random-normal 0 0.1
 end
@@ -44,28 +46,28 @@ to-report GetVariantHospLnOdds [age variant]
     [ ;; Low virulence
       (ifelse age < 10
         [
-          report -6.3774 + variantUI_hosp 
+          report LnPrToLnOdds (-6.3774 + variantUI_hosp)
         ]
         age < 20
         [
-          report -7.8978 + variantUI_hosp
+          report LnPrToLnOdds (-7.8978 + variantUI_hosp)
         ]
         [
-          report 0.0968 * age - 9.0677 + variantUI_hosp
+          report LnPrToLnOdds (0.0968 * age - 9.0677 + variantUI_hosp)
         ]
       )
     ]
     [ ;; High virulence
       (ifelse age < 10
         [
-          report -5.6842 + variantUI_hosp 
+          report LnPrToLnOdds (-5.6842 + variantUI_hosp)
         ]
         age < 20
         [
-          report -7.2046 + variantUI_hosp
+          report LnPrToLnOdds (-7.2046 + variantUI_hosp)
         ]
         [
-          report 0.0968 * age - 8.3745 + variantUI_hosp
+          report LnPrToLnOdds (0.0968 * age - 8.3745 + variantUI_hosp)
         ]
       )
     ]
@@ -77,28 +79,28 @@ to-report GetVariantIcuLnOdds [age variant]
     [ ;; Low virulence
       (ifelse age < 10
         [
-          report -9.9560 + variantUI_ICU 
+          report LnPrToLnOdds (-9.9560 + variantUI_ICU)
         ]
         age < 20
         [
-          report -11.6088 + variantUI_ICU
+          report LnPrToLnOdds (-11.6088 + variantUI_ICU)
         ]
         [
-          report 0.0968 * age - 9.0677 + variantUI_ICU
+          report LnPrToLnOdds (0.0968 * age - 9.0677 + variantUI_ICU)
         ]
       )
     ]
     [ ;; High virulence
       (ifelse age < 10
         [
-          report -10.2226 + variantUI_ICU 
+          report LnPrToLnOdds (-10.2226 + variantUI_ICU)
         ]
         age < 20
         [
-          report -8.5698 + variantUI_ICU
+          report LnPrToLnOdds (-8.5698 + variantUI_ICU)
         ]
         [
-          report 0.126 * age - 12.2455 + variantUI_ICU
+          report LnPrToLnOdds (0.126 * age - 12.2455 + variantUI_ICU)
         ]
       )
     ]
@@ -110,20 +112,20 @@ to-report GetVariantDeathLnOdds [age variant]
     [ ;; Low virulence
       (ifelse age < 10
         [
-          report -10.2189 + variantUI_IFR_young 
+          report LnPrToLnOdds (-10.2189 + variantUI_IFR_young)
         ]
         [
-          report 0.1049 * age - 11.9861 + variantUI_IFR
+          report LnPrToLnOdds (0.1049 * age - 11.9861 + variantUI_IFR)
         ]
       )
     ]
     [ ;; High virulence
       (ifelse age < 10
         [
-          report -11.6051 + variantUI_IFR_young 
+          report LnPrToLnOdds (-11.6051 + variantUI_IFR_young)
         ]
         [
-          report 0.1049 * age - 10.5999 + variantUI_IFR
+          report LnPrToLnOdds (0.1049 * age - 10.5999 + variantUI_IFR)
         ]
       )
     ]

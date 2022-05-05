@@ -33,3 +33,5 @@ Todo:
  - Calibration
 
 ==================
+
+Uncertainty for symptomatic reduction

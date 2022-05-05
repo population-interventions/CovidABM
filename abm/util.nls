@@ -16,13 +16,33 @@ to-report OddsToLnOdds [odds]
   report ln odds
 end
 
-
 to-report OddsToPr [odds]
   report odds / (1 + odds)
 end
 
 to-report PrToOdds [pr]
   report pr / (1 - pr)
+end
+
+to-report PrToLnPr [pr]
+  if pr <= 0 [
+   report -10000000000000
+  ]
+  if pr >= 1 [
+   report -0.0000000000001 
+  ]
+  report ln pr
+end
+
+to-report LnPrToPr [lnPr]
+  if lnPr >= 0 [
+    report 0.9999999999999
+  ]
+  report exp lnPr
+end
+
+to-report LnPrToLnOdds [lnPr]
+  report PrToLnOdds LnPrToPr lnPr
 end
 
 to-report AddLogOdds [prob toAdd]
