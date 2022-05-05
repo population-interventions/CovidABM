@@ -1,25 +1,32 @@
 
 to setup_incursionData
-  ifelse input_incursion_table = "none"
-  [
-    ;; Implement simple incursion parameters
-    set incursionTable table:make
-    let varName (word incur_name_part_1 incur_name_part_2 incur_name_part_3)
-    table:put incursionTable 0 (list incur_day 0 0 0 0 0 0 0 1 1)
-    table:put incursionTable 1 (list 0 0 0 0 0 0 varName incur_replace_chance 1 1)
-  ]
-  [
-    ;; Implement full incursion progression file
-    let incursionFileData remove-item 0 csv:from-file input_incursion_table
-    file-close
-    set incursionTable table:make
-    let i 0
-    foreach incursionFileData [ x -> 
-      table:put incursionTable i x
-      table:put recoverCountByVariant (item 6 x) 0
-      set i i + 1
+  (ifelse first_case_calibrate
+    [
+      ;; No incursion
+      set incursionTable table:make
+      table:put incursionTable 0 (list incur_day 0 0 0 0 0 0 0 1 1)
+      table:put incursionTable 1 (list 0 0 0 0 0 0 0 0 1 1)
     ]
-  ]
+    input_incursion_table = "none"
+    [
+      ;; Implement simple incursion parameters
+      set incursionTable table:make
+      let varName (word incur_name_part_1 incur_name_part_2 incur_name_part_3)
+      table:put incursionTable 0 (list incur_day 0 0 0 0 0 0 0 1 1)
+      table:put incursionTable 1 (list 0 0 0 0 0 0 varName incur_replace_chance 1 1)
+    ]
+    [
+      ;; Implement full incursion progression file
+      let incursionFileData remove-item 0 csv:from-file input_incursion_table
+      file-close
+      set incursionTable table:make
+      let i 0
+      foreach incursionFileData [ x -> 
+        table:put incursionTable i x
+        table:put recoverCountByVariant (item 6 x) 0
+        set i i + 1
+      ]
+  ])
   
   set incursionPhaseIndex -1 ; Not yet initialised
   set incursionPhaseEndDay 0

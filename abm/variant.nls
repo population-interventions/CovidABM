@@ -45,6 +45,7 @@ to setup_variantData
   
   set variantNames []
   set variantData table:make
+  let correlateAsympt table:make
   
   foreach variantFileData [ x ->
     let name (item 0 x)
@@ -64,6 +65,7 @@ to setup_variantData
     set index index + 1    let hospLengthMult    (item index x)
     set index index + 1    let init_variant      (item index x)
     set index index + 1    let recoverVac        (item index x)
+    set index index + 1    let correlateKey      (item index x)
     
     if trans_override > 0 [
      set trans_mean trans_override 
@@ -73,7 +75,11 @@ to setup_variantData
     table:put data "trans_a" trans_mean * trans_n
     table:put data "trans_b" (1 - trans_mean) * trans_n
     
-    table:put data "asympt_trans" rngs:rnd-beta stream_id asympt_trans_a asympt_trans_b
+    ;; Draw asymptomatic transmissibility factor.
+    if not table:has-key? correlateAsympt correlateKey [
+      table:put correlateAsympt correlateKey rngs:rnd-beta stream_id asympt_trans_a asympt_trans_b
+    ]
+    table:put data "asympt_trans" table:get correlateAsympt correlateKey
     
     ;; illness period estimation using ln transform
     let BetaIllnessPd ln (1 + (duration_spread / duration_mean ^ 2))

@@ -1100,7 +1100,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-130.0
+120.0
 10
 1
 NIL
