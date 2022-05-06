@@ -748,8 +748,13 @@ to setup
   
   let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
   set globalPopPerSimul popPerSimul
-  ;; sets up the initial date for looking at policy-changes
+
+  ;; Optionallly change random seed for simulation to compare simulation uncertainty to draw uncertainty
+  if SIM_SEED > -1 [
+    random-seed SIM_SEED
+  ]
   
+  ;; Create simulants etc
   createSimulants
   setupInitialVaccination
   
@@ -829,11 +834,6 @@ to setup
   ;;set assignAppEss false ;; that the assigning the App to EssentialWorkers doesn't begin before the policy trigger starts
   
   setupstages ;; setting up for the MJA runs
-  
-  if SIM_SEED > -1 [
-    ;; Optionallly change random seed for simulation to compare simulation uncertainty to draw uncertainty
-    random-seed SIM_SEED
-  ]
   
   ;; Output infection rates 
   if trace_print [

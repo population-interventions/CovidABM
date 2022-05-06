@@ -1,0 +1,4 @@
+
+Replacing variant sheets
+(cur_2_60,([^_]*)_2_60\ncur_3_60([^_]*)_3_60\ntarget_60([^_]*)_2_60\nmulti_60([^_]*)_2_60)
+cur_2_60,\2_2_60\ncur_3_60\3_3_60\ntarget_60\4_3_60\nmulti_60\5_3_60\ncur_2_70,\2_2_70\ncur_3_70\3_3_70\ntarget_70\4_3_70\nmulti_70\5_3_70
