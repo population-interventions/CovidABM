@@ -105,7 +105,7 @@ end
 
 to-report getVariantRecoverVaccine [variant]
   let data table:get variantData variant
-  report table:get data "recoverVac"
+  report (word table:get data "recoverVac" cohortVacSuffix)
 end
 
 to simul_updatepersonalvirulence

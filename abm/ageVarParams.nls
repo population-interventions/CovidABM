@@ -8,8 +8,19 @@ to ageVariant_setup
   set variantUI_hosp random-normal 0 0.1
 end
 
+to-report GetHospStayLength [age variant]
+  (ifelse variant = "base" or not high_incur_virulence
+    [ ;; Low virulence
+      report 10
+    ]
+    [ ;; High virulence
+      report 14
+    ]
+  )
+end
+
 to-report GetVariantSymptomaticLnOdds [age variant]
-  (ifelse variant = "omlike" or variant = "novel" or variant = "base"
+  (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age < 20
         [
@@ -42,7 +53,7 @@ to-report GetVariantSymptomaticLnOdds [age variant]
 end
 
 to-report GetVariantHospLnOdds [age variant]
-  (ifelse variant = "omlike" or variant = "novel" or variant = "base"
+  (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age < 10
         [
@@ -75,7 +86,7 @@ to-report GetVariantHospLnOdds [age variant]
 end
 
 to-report GetVariantIcuLnOdds [age variant]
-  (ifelse variant = "omlike" or variant = "novel" or variant = "base"
+  (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age < 10
         [
@@ -108,7 +119,7 @@ to-report GetVariantIcuLnOdds [age variant]
 end
 
 to-report GetVariantDeathLnOdds [age variant]
-  (ifelse variant = "omlike" or variant = "novel" or variant = "base"
+  (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age < 10
         [

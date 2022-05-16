@@ -34,4 +34,9 @@ Todo:
 
 ==================
 
+Think about incursion
+
 Uncertainty for symptomatic reduction
+Use vac pre as base file then read down the sheet to fix cohort name and size differences.
+Make continuous stages from specs files.
+Run calibtrate test for stages with and without vaccine.

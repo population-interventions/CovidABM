@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+0.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+0.0
 .5
 1
 NIL
@@ -589,7 +589,7 @@ SWITCH
 411
 tracking
 tracking
-0
+1
 1
 -1000
 
@@ -662,7 +662,7 @@ SWITCH
 318
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -1069,9 +1069,9 @@ transmission_count_metric * transmission_average
 11
 
 PLOT
-1865
+1869
 888
-2335
+2339
 1051
 States (scaled)
 NIL
@@ -1115,7 +1115,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+0.0
 1
 1
 NIL
@@ -1412,7 +1412,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-0
+1
 1
 -1000
 
@@ -3224,6 +3224,17 @@ input/vic/vaccine_params_or_uncertainty.csv
 1
 0
 String
+
+SWITCH
+819
+749
+984
+783
+high_incur_virulence
+high_incur_virulence
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?

@@ -348,7 +348,6 @@ to setupInitialVaccination_uniformMethod
             if recover_dose2 > 0 [
               simul_setNewRecover initRecoverVar
               set recoverDay -1 * floor random-float recoverMaxDay
-              set recoverVariant initRecoverVar
               set recover_dose2 recover_dose2 - 1
             ]
           ]
@@ -369,7 +368,6 @@ to setupInitialVaccination_uniformMethod
             if recover_dose3 > 0 [
               simul_setNewRecover initRecoverVar
               set recoverDay -1 * floor random-float recoverMaxDay
-              set recoverVariant initRecoverVar
               set recover_dose3 recover_dose3 - 1
             ]
           ]
@@ -377,7 +375,6 @@ to setupInitialVaccination_uniformMethod
             if recover_noVac > 0 [
               simul_setNewRecover initRecoverVar
               set recoverDay -1 * floor random-float recoverMaxDay
-              set recoverVariant initRecoverVar
               set recover_noVac recover_noVac - 1
             ]
         ])

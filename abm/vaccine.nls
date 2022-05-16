@@ -61,6 +61,7 @@ to setup_vaccineData
       table:put vacTable "reduceMort"   (item 6 rawData)
       table:put vacTable "effectDays"   (item 7 rawData)
       table:put vacTable "waneRate"     (item 8 rawData)
+      table:put vacTable "waneRateOut"  (item 9 rawData)
     
       table:put baseParamsTable (item 0 rawData) vacTable
   ]
@@ -92,7 +93,8 @@ to setup_vaccineData
       table:put vacTable "reduceMort"   (item 6 rawData)
       table:put vacTable "effectDays"   (item 7 rawData)
       table:put vacTable "waneRate"     (item 8 rawData)
-      let baseParamName (item 9 rawData)
+      table:put vacTable "waneRateOut"  (item 9 rawData)
+      let baseParamName                 (item 10 rawData)
       
       let uncertaintyValue table:get (table:get uncertParamsTable variant) vacName
       
@@ -105,6 +107,7 @@ to setup_vaccineData
       set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "reduceMort"
       set vacTable ApplyMultiplier vacTable myBaseParams "effectDays"
       set vacTable ApplyMultiplier vacTable myBaseParams "waneRate"
+      set vacTable ApplyMultiplier vacTable myBaseParams "waneRateOut"
       
       table:put paramsTable (item 0 rawData) vacTable
       
@@ -135,7 +138,13 @@ to-report vaccine_getWanedParameter [paramName variant vac day prevVac prevDay]
   ]
   
   let vacEff table:get vacParams paramName
-  set vacEff vacEff - (days - (effDays + day)) * (table:get vacParams "waneRate")
+  ifelse paramName = "reduceHosp" or paramName = "reduceIcu" or paramName = "reduceMort"
+  [
+    set vacEff vacEff - (days - (effDays + day)) * (table:get vacParams "waneRateOut")
+  ]
+  [
+    set vacEff vacEff - (days - (effDays + day)) * (table:get vacParams "waneRate")
+  ]
   ;; TODO waning based on day
   report 1 - LnOddsToPr (vacEff)
 end

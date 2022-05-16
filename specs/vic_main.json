@@ -25,6 +25,10 @@
 			"",
 			"_high"
 		],
+		"high_incur_virulence" : [
+			false,
+			true
+		],
 		"incur_day" : [
 			80,
 			160,
@@ -101,6 +105,13 @@
 					"values" : {
 						"" : "Current",
 						"_high"  : "Higher"
+					}
+				},
+				"high_incur_virulence" : {
+					"name" : "Virulence",
+					"values" : {
+						"False" : "Low",
+						"True"  : "High"
 					}
 				},
 				"incur_day" : {
