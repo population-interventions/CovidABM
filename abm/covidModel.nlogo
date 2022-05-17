@@ -3083,7 +3083,7 @@ INPUTBOX
 2534
 714
 input_pre_vacinfect
-input/vic/prevacinfect.csv
+input/vic/prevac/draw_
 1
 0
 String
@@ -3120,7 +3120,7 @@ INPUTBOX
 2537
 777
 input_vaccine_base
-input/vic/vaccine_underlying_params
+input/vic/vaccine/draw_
 1
 0
 String
@@ -3137,10 +3137,10 @@ policy_mask_n95
 -1000
 
 INPUTBOX
-2560
-547
-2683
-607
+2617
+540
+2740
+600
 incur_name_part_1
 omlike
 1
@@ -3148,10 +3148,10 @@ omlike
 String
 
 INPUTBOX
-2560
-613
-2684
-673
+2617
+607
+2741
+667
 incur_name_part_2
 _escape
 1
@@ -3159,10 +3159,10 @@ _escape
 String
 
 INPUTBOX
-2560
-678
-2687
-738
+2617
+672
+2744
+732
 incur_name_part_3
 _high
 1
@@ -3217,7 +3217,7 @@ HORIZONTAL
 INPUTBOX
 2350
 778
-2633
+2539
 848
 input_matchup_uncertainty
 input/vic/vaccine_params_or_uncertainty.csv
@@ -3229,12 +3229,42 @@ SWITCH
 819
 749
 984
-783
+782
 high_incur_virulence
 high_incur_virulence
 1
 1
 -1000
+
+SLIDER
+2569
+749
+2742
+783
+in_prevac_count
+in_prevac_count
+0
+1000
+1000.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+2570
+788
+2743
+822
+in_vaccine_count
+in_vaccine_count
+0
+1000
+2.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

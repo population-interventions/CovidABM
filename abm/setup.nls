@@ -390,35 +390,47 @@ end
 
 to setupInitialVaccination_micromangedMethod
   let initRecoverVar getInitRecoverVariant
-  let preVacInfectData remove-item 0 csv:from-file input_pre_vacinfect
+  let preVacInfectData 0
+  ifelse in_prevac_count > 0
+  [
+    set preVacInfectData remove-item 0 csv:from-file (word input_pre_vacinfect ((draw_index mod in_prevac_count) + 1) ".csv")
+  ]
+  [
+    set preVacInfectData remove-item 0 csv:from-file (word input_pre_vacinfect )
+  ]
   file-close
-  foreach preVacInfectData [ x -> 
-    ask n-of 1 simuls with [initPreSetup = 0 and prevacinfect_group = (item 0 x)] [
+  
+  let rowIndex 0
+  foreach sort-on [agerange] simuls [ sim -> 
+    ask sim [
+      let row item rowIndex preVacInfectData
+      set rowIndex rowIndex + 1
+      
       set initPreSetup True
-      if (item 1 x) >= 0 [
-        simul_setNewRecover (item 4 x)
-        set recoverDay -1 * (item 1 x)
+      if (item 2 row) >= 0 [
+        simul_setNewRecover (item 4 row)
+        set recoverDay -1 * (item 2 row)
       ]
-      ifelse (item 3 x) >= 0
+      ifelse (item 3 row) >= 0
       [
         if _param_vac_uptake_mult * cohortVacUptake > random-float 1 [
           set vaccReceptive true ; Only the most vaccinated are receptive to recieving another vaccine
         ]
-        set vaccineDay -1 * (item 3 x)
-        set currentVaccine (word (item 6 x) cohortVacSuffix)
-        if (item 2 x) >= 0 [
-          set prevVaccineDay -1 * (item 2 x)
-          set prevVaccine (word (item 5 x) cohortVacSuffix)
+        set vaccineDay -1 * (item 3 row)
+        set currentVaccine (word (item 6 row) cohortVacSuffix)
+        if (item 1 row) >= 0 [
+          set prevVaccineDay -1 * (item 1 row)
+          set prevVaccine (word (item 5 row) cohortVacSuffix)
         ] 
       ]
       [
-        if (item 2 x) >= 0 [
+        if (item 1 row) >= 0 [
           if _param_vac_uptake_mult * cohortVacUptakeDose2 > random-float 1 [ 
             set vaccReceptive true ; A member of a cohort may continue on to further vaccination after only dose 2
             set vaccBranch vaccBranchFrom2
           ]
-          set vaccineDay -1 * (item 2 x)
-          set currentVaccine (word (item 5 x) cohortVacSuffix)
+          set vaccineDay -1 * (item 1 row)
+          set currentVaccine (word (item 5 row) cohortVacSuffix)
         ] 
       ]
     ]

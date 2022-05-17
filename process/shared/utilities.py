@@ -20,6 +20,13 @@ import subprocess
 fileCreated = {}
 HEAD_MODE = True
 
+def UniqueLevelValueList(df, level):
+	return list(set(df.index.get_level_values(level)))
+
+def SetLevelType(df, level, newType):
+	df.index = df.index.set_levels(df.index.levels[level].astype(newType), level=level)
+	return df
+
 
 def DoIndexRename(df, indexRename):
 	index = df.index.to_frame()
@@ -154,6 +161,10 @@ def FindRepeat(listIn, threshold=1):
 def PrintDuplicateRows(df):
 	df = df[df.duplicated()]
 	print(df)
+
+
+def PrintDuplicateIndex(df):
+	print(PrintDuplicateRows(df.index.to_frame()))
 
 
 def HasDuplicateIndex(df):

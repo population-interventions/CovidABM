@@ -34,3 +34,4 @@
 /setup/__pycache__/makeModelXmls.cpython-38.pyc
 /setup/__pycache__/modelSetup.cpython-38.pyc
 /setup/__pycache__/readNetlogo.cpython-38.pyc
+/setup/__pycache__/*.pyc

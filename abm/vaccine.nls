@@ -48,7 +48,15 @@ end
 to setup_vaccineData
   ;; Load base parameters.
   let baseParamsTable table:make
-  let baseParamsData remove-item 0 csv:from-file (word input_vaccine_base ".csv")
+  let baseParamsData 0
+  ifelse in_prevac_count > 0
+  [
+    set baseParamsData remove-item 0 csv:from-file (word input_vaccine_base ((draw_index mod in_vaccine_count) + 1) ".csv")
+  ]
+  [
+    set baseParamsData remove-item 0 csv:from-file (word input_vaccine_base ".csv")
+  ]
+  
   file-close
   foreach baseParamsData [ rawData ->
       let vacTable table:make      
