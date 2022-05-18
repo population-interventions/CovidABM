@@ -34,8 +34,8 @@ __includes[
 GRAPHICS-WINDOW
 388
 63
-899
-575
+916
+592
 -1
 -1
 8.68
@@ -49,9 +49,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-57
+59
 0
-57
+59
 1
 1
 1
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-5.0
+0.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-5.0
+0.0
 .5
 1
 NIL
@@ -589,7 +589,7 @@ SWITCH
 411
 tracking
 tracking
-0
+1
 1
 -1000
 
@@ -662,7 +662,7 @@ SWITCH
 318
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -1100,7 +1100,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-70.0
+110.0
 10
 1
 NIL
@@ -1115,7 +1115,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-5.0
+0.0
 1
 1
 NIL
@@ -1412,7 +1412,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-0
+1
 1
 -1000
 
