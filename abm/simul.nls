@@ -259,7 +259,7 @@ to simul_setNewInfection [variant startDay]
   let deathRiskMean mortProp * popPerSimul
   
   ;; Add hosp for dynamic policy
-  simul_AddDeathHospToPipes hospFlag popPerSimul (table:get (table:get variantData variant) "hospLengthMult") deathRiskMean
+  simul_AddDeathHospToPipes hospFlag popPerSimul variant deathRiskMean
   
   ;; Add to data output metrics
   array:set (item cohortHospTime hospArray) cohortIndex ((array:item (item cohortHospTime  hospArray) cohortIndex) + hospRiskMean)

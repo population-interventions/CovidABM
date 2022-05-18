@@ -324,6 +324,7 @@ globals [
   variantUI_ICU
   variantUI_IFR
   variantUI_IFR_young
+  variantUI_length
   
   agentsByVaccPhase
 

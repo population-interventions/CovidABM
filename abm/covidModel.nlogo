@@ -34,8 +34,8 @@ __includes[
 GRAPHICS-WINDOW
 388
 63
-951
-627
+917
+593
 -1
 -1
 8.68
@@ -49,9 +49,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-63
+59
 0
-63
+59
 1
 1
 1
@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-10.0
+5.0
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.04
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-0.0
+56.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-0.0
+56.0
 .5
 1
 NIL
@@ -561,7 +561,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+35.0
 1
 1
 NIL
@@ -589,7 +589,7 @@ SWITCH
 411
 tracking
 tracking
-1
+0
 1
 -1000
 
@@ -600,7 +600,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -662,7 +662,7 @@ SWITCH
 318
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
@@ -705,7 +705,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+5.0
 1
 1
 NIL
@@ -1115,7 +1115,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-0.0
+50.0
 1
 1
 NIL
@@ -1412,7 +1412,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-1
+0
 1
 -1000
 
@@ -3240,7 +3240,7 @@ SLIDER
 2569
 749
 2742
-783
+782
 in_prevac_count
 in_prevac_count
 0
@@ -3255,7 +3255,7 @@ SLIDER
 2570
 788
 2743
-822
+821
 in_vaccine_count
 in_vaccine_count
 0

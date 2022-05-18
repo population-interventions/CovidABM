@@ -6,15 +6,97 @@ to ageVariant_setup
   
   set variantUI_ICU random-normal 0 0.1
   set variantUI_hosp random-normal 0 0.1
+  
+  set variantUI_length random-normal 0 1
 end
 
-to-report GetHospStayLength [age variant]
+to-report GetVariantDeathLnOdds [age variant]
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
-      report 10
+      (ifelse age > 10
+        [
+          report LnPrToLnOdds (0.1049 * age - 11.9861 + variantUI_IFR)
+        ]
+        [
+          report LnPrToLnOdds (-11.6051 + variantUI_IFR_young)
+        ]
+      )
     ]
     [ ;; High virulence
-      report 14
+      (ifelse age > 10
+        [
+          report LnPrToLnOdds (0.1049 * age - 10.5999 + variantUI_IFR)
+        ]
+        [
+          report LnPrToLnOdds (-10.2189 + variantUI_IFR_young)
+        ]
+      )
+    ]
+  )
+end
+
+to-report GetVariantIcuLnOdds [age variant]
+  (ifelse variant = "base" or not high_incur_virulence
+    [ ;; Low virulence
+      (ifelse age > 30
+        [
+          report LnPrToLnOdds (0.129 * age - 13.386 + variantUI_ICU) 
+        ]
+        age > 10
+        [
+          report LnPrToLnOdds (-10.943 + variantUI_ICU)
+        ]
+        [
+          report LnPrToLnOdds (-9.783 + variantUI_ICU)
+        ]
+      )
+    ]
+    [ ;; High virulence
+      (ifelse age > 30
+        [
+          report LnPrToLnOdds (0.129 * age - 12.346 + variantUI_ICU) 
+        ]
+        age > 10
+        [
+          report LnPrToLnOdds (-9.904 + variantUI_ICU)
+        ]
+        [
+          report LnPrToLnOdds (-8.743 + variantUI_ICU)
+        ]
+      )
+    ]
+  )
+end
+
+to-report GetVariantHospLnOdds [age variant]
+  (ifelse variant = "base" or not high_incur_virulence
+    [ ;; Low virulence
+      (ifelse age > 30
+        [
+          report LnPrToLnOdds (0.0997 * age - 9.258 + variantUI_hosp)
+        ]
+        age > 10
+        [
+          report LnPrToLnOdds (-7.470 + variantUI_hosp)
+        ]
+        [
+          report LnPrToLnOdds (-6.377 + variantUI_hosp)
+        ]
+      )
+    ]
+    [ ;; High virulence
+      (ifelse age > 30
+        [
+          report LnPrToLnOdds (0.0997 * age - 8.5647 + variantUI_hosp)
+        ]
+        age > 10
+        [
+          report LnPrToLnOdds (-6.777 + variantUI_hosp)
+        ]
+        [
+          report LnPrToLnOdds (-5.684 + variantUI_hosp)
+        ]
+      )
     ]
   )
 end
@@ -52,91 +134,33 @@ to-report GetVariantSymptomaticLnOdds [age variant]
   )
 end
 
-to-report GetVariantHospLnOdds [age variant]
+to-report GetHospStayLength [age variant]
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
-      (ifelse age < 10
+      (ifelse age < 40
         [
-          report LnPrToLnOdds (-6.3774 + variantUI_hosp)
+          report 2.05 + variantUI_length * 0.1276
         ]
-        age < 20
+        age < 70
         [
-          report LnPrToLnOdds (-7.8978 + variantUI_hosp)
+          report 2.92 + variantUI_length * 0.2985
         ]
         [
-          report LnPrToLnOdds (0.0968 * age - 9.0677 + variantUI_hosp)
+          report 6.02 + variantUI_length * 0.5358
         ]
       )
     ]
     [ ;; High virulence
-      (ifelse age < 10
+      (ifelse age < 40
         [
-          report LnPrToLnOdds (-5.6842 + variantUI_hosp)
+          report 3.6 + variantUI_length * 0.0842
         ]
-        age < 20
+        age < 70
         [
-          report LnPrToLnOdds (-7.2046 + variantUI_hosp)
-        ]
-        [
-          report LnPrToLnOdds (0.0968 * age - 8.3745 + variantUI_hosp)
-        ]
-      )
-    ]
-  )
-end
-
-to-report GetVariantIcuLnOdds [age variant]
-  (ifelse variant = "base" or not high_incur_virulence
-    [ ;; Low virulence
-      (ifelse age < 10
-        [
-          report LnPrToLnOdds (-9.9560 + variantUI_ICU)
-        ]
-        age < 20
-        [
-          report LnPrToLnOdds (-11.6088 + variantUI_ICU)
+          report 5.78 + variantUI_length * 0.1020
         ]
         [
-          report LnPrToLnOdds (0.0968 * age - 9.0677 + variantUI_ICU)
-        ]
-      )
-    ]
-    [ ;; High virulence
-      (ifelse age < 10
-        [
-          report LnPrToLnOdds (-10.2226 + variantUI_ICU)
-        ]
-        age < 20
-        [
-          report LnPrToLnOdds (-8.5698 + variantUI_ICU)
-        ]
-        [
-          report LnPrToLnOdds (0.126 * age - 12.2455 + variantUI_ICU)
-        ]
-      )
-    ]
-  )
-end
-
-to-report GetVariantDeathLnOdds [age variant]
-  (ifelse variant = "base" or not high_incur_virulence
-    [ ;; Low virulence
-      (ifelse age < 10
-        [
-          report LnPrToLnOdds (-10.2189 + variantUI_IFR_young)
-        ]
-        [
-          report LnPrToLnOdds (0.1049 * age - 11.9861 + variantUI_IFR)
-        ]
-      )
-    ]
-    [ ;; High virulence
-      (ifelse age < 10
-        [
-          report LnPrToLnOdds (-11.6051 + variantUI_IFR_young)
-        ]
-        [
-          report LnPrToLnOdds (0.1049 * age - 10.5999 + variantUI_IFR)
+          report 12.31 + variantUI_length * 0.3061
         ]
       )
     ]

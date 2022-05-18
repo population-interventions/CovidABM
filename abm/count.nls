@@ -20,13 +20,14 @@ to updatePipes
   set hospUsagePipe  lput 0 (but-first hospUsagePipe)
 end
 
-to simul_AddDeathHospToPipes [hasHosp popPerSimul varHospLengthMult deathMean]
+to simul_AddDeathHospToPipes [hasHosp popPerSimul variant deathMean]
   set deathTodayPipe AddToList deathTodayPipe (cohortHospTime - timenow) deathMean
   
   if hasHosp [
     set hospTodayPipe AddToList hospTodayPipe (cohortHospTime - timenow) popPerSimul
+    let varHospLengthMult (table:get (table:get variantData variant) "hospLengthMult")
     let i 0
-    let hospLength floor (varHospLengthMult * cohortHospLengthBase + 0.5 * rngs:rnd-beta defaultStream 1 1)
+    let hospLength floor (varHospLengthMult * (GetHospStayLength agerange variant) + rngs:rnd-beta defaultStream 1 1)
     repeat hospLength [
       if cohortHospTime - timenow + i >= 0 [
         set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + 1) popPerSimul
