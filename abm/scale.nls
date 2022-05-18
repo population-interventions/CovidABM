@@ -12,7 +12,7 @@ to ShiftRecoveredTowardsTotalProportion
       ]
       ask n-of wantAsk yellowSet [
         set color cyan
-        set recoverVariant getInitRecoverVariant
+        set recoverVariant 0
       ]
     ]
   ]

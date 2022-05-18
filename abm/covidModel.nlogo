@@ -34,7 +34,7 @@ __includes[
 GRAPHICS-WINDOW
 388
 63
-898
+899
 575
 -1
 -1
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.08
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-0.0
+15.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-0.0
+15.0
 .5
 1
 NIL
@@ -561,7 +561,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+70.0
 1
 1
 NIL
@@ -589,7 +589,7 @@ SWITCH
 411
 tracking
 tracking
-1
+0
 1
 -1000
 
@@ -662,7 +662,7 @@ SWITCH
 318
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
@@ -1115,7 +1115,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-0.0
+15.0
 1
 1
 NIL
@@ -1412,7 +1412,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-1
+0
 1
 -1000
 
@@ -3137,10 +3137,10 @@ policy_mask_n95
 -1000
 
 INPUTBOX
-2617
-540
-2740
-600
+2644
+542
+2747
+602
 incur_name_part_1
 omlike
 1
@@ -3276,6 +3276,17 @@ policymetric7
 17
 1
 11
+
+INPUTBOX
+2555
+542
+2639
+602
+base_name
+base
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?

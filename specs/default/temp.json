@@ -6,13 +6,13 @@
         "10.0"
     ],
     "superspreaders": [
-        "0.1"
+        "0.08"
     ],
     "proportion_people_avoid": [
-        "5.0"
+        "15.0"
     ],
     "proportion_time_avoid": [
-        "5.0"
+        "15.0"
     ],
     "initial_cases": [
         "3000.0"
@@ -21,7 +21,7 @@
         "6649066.0"
     ],
     "essential_workers": [
-        "100.0"
+        "70.0"
     ],
     "ess_w_risk_reduction": [
         "0.0"
@@ -57,10 +57,10 @@
         "0.66"
     ],
     "gather_location_count": [
-        "120.0"
+        "70.0"
     ],
     "complacency_bound": [
-        "5.0"
+        "15.0"
     ],
     "profile_on": [
         "false"
@@ -393,7 +393,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "0.0"
+        "548.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_target_multi.csv\""
@@ -426,10 +426,10 @@
         "\"omlike\""
     ],
     "incur_name_part_2": [
-        "\"_escape\""
+        "\"NIL\""
     ],
     "incur_name_part_3": [
-        "\"_high\""
+        "\"NIL\""
     ],
     "incur_day": [
         "39.0"
@@ -451,5 +451,8 @@
     ],
     "in_vaccine_count": [
         "2.0"
+    ],
+    "base_name": [
+        "\"base\""
     ]
 }

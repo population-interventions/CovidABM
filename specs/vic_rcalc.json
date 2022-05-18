@@ -1,21 +1,24 @@
 {
 	"netlogoFile" : "covidModel",
-	"defaultParamFile" : "rcalc",
+	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_rcalc",
+	"threads" : 1,
 	"indexParams" : {
 		"trans_override" : [
-			0.25,
-			0.5,
-			0.75
+			0.27817017037789,
+			0.383231475232612
 		],
-		"sympt_iso_prop" : [
-			0,
-			1
+		"vaccine_enabled" : [
+			false,
+			true
 		],
-		"gather_location_count" : [
-			120,
-			160,
-			200
+		"param_policy" : [
+			"None",
+			"StageCal_1",
+			"StageCal_2",
+			"StageCal_3",
+			"StageCal_4",
+			"StageCal_5"
 		]
 	},
 	"paramOverrides" : {

@@ -369,7 +369,7 @@ to simul_infect
           ]
           
           ;; Replace infection with more virulent variant
-          if global_incursionReplaceChance > 0 and global_incursionVariant > patchVariant [
+          if global_incursionReplaceChance > 0 [
             if global_incursionReplaceChance > random-float 1 [
               set patchVariant global_incursionVariant
             ]

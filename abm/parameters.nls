@@ -192,7 +192,6 @@ to params_setDrawValues
   if first_case_calibrate [
     set _initial_cases 1
     set _param_incur_phase_limit 0
-    set _vaccine_enabled false
     set _policy_pipeline "None"
     set _init_timenow_limit 0
     set _init_metric_threshold -10

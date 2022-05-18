@@ -12,7 +12,7 @@ to setup_incursionData
       ;; Implement simple incursion parameters
       set incursionTable table:make
       let varName (word incur_name_part_1 incur_name_part_2 incur_name_part_3)
-      table:put incursionTable 0 (list incur_day 0 0 0 0 0 0 0 1 1)
+      table:put incursionTable 0 (list incur_day 0 0 0 0 0 base_name 0 1 1)
       table:put incursionTable 1 (list 0 0 0 0 0 0 varName incur_replace_chance 1 1)
     ]
     [
@@ -63,6 +63,32 @@ to incursion_update
   ]
   
   let peoplePerSimul scaledPopulation * extraScaleFactor / Population
+  if days > 0 and global_incursionVariant != 0 [
+    if peoplePerSimul <= 1 [
+      if rngs:rnd-beta incursionsSeedID 1 1 < 0.2 [
+        ask n-of 1 simuls with [color != red and color != black] [
+          simul_setNewInfection global_incursionVariant 0
+          set contact_events 0
+          set contributeToR true
+          simul_updateVariantParams
+          
+          set infectedContactList table:make
+          set traceAttempts 0
+          set selfTraceEffMult 1
+          
+          set hasKnownContact false
+          set myScale 0
+          print "incur"
+          
+          set isolating 0
+          set infectionsToday_acc infectionsToday_acc + peoplePerSimul
+          set new_case_real_counter new_case_real_counter + peoplePerSimul
+        ]
+      ]
+    ]
+  ]
+  
+  
   if global_incursionArrivals > 0 [
     ask n-of (floor (global_incursionArrivals * _param_incurMult + rngs:rnd-beta incursionsSeedID 1 1)) simuls with [color != red and color != black] [
       if draw_borderIncursionRisk * global_incursionRisk > peoplePerSimul * ( rngs:rnd-beta incursionsSeedID 1 1 ) [
