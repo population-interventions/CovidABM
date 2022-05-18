@@ -20,8 +20,10 @@ import subprocess
 fileCreated = {}
 HEAD_MODE = True
 
-def UniqueLevelValueList(df, level):
-	return list(set(df.index.get_level_values(level)))
+def UniqueLevelValueList(df, level, axis=0):
+	if axis == 0:
+		return list(set(df.index.get_level_values(level)))
+	return list(set(df.columns.get_level_values(level)))
 
 def SetLevelType(df, level, newType):
 	df.index = df.index.set_levels(df.index.levels[level].astype(newType), level=level)

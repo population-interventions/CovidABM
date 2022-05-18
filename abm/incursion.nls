@@ -78,7 +78,6 @@ to incursion_update
           
           set hasKnownContact false
           set myScale 0
-          print "incur"
           
           set isolating 0
           set infectionsToday_acc infectionsToday_acc + peoplePerSimul

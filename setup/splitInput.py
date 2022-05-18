@@ -30,6 +30,7 @@ def SplitFile(inFile, outFile, stackedCols=False, appendDf=False):
 		if appendDf is not False:
 			outDf = outDf.join(appendDf)
 		util.OutputToFile(outDf, '{}_{}'.format(outFile, draw), head=False)
+		return
 
 
 def DoVicSplit():
@@ -38,4 +39,4 @@ def DoVicSplit():
 		header=[0])
 	
 	SplitFile('abm/input/vic/preinfect_source', 'abm/input/vic/prevac/draw', stackedCols=True, appendDf=appendDf)
-	SplitFile('abm/input/vic/vaccine_underlying_source', 'abm/input/vic/vaccine/draw')
+	SplitFile('abm/input/vic/vaccine_underlying_source', 'abm/input/vic/vaccine/draw', stackedCols=True)

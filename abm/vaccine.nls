@@ -59,18 +59,20 @@ to setup_vaccineData
   
   file-close
   foreach baseParamsData [ rawData ->
-      let vacTable table:make      
-      table:put vacTable "name"         (item 0 rawData)
-      table:put vacTable "infectReduct" (item 1 rawData)
-      table:put vacTable "riskReduct"   (item 2 rawData)
-      table:put vacTable "reduceSympt"  (item 3 rawData)
-      table:put vacTable "reduceHosp"   (item 4 rawData)
-      table:put vacTable "reduceIcu"    (item 5 rawData)
-      table:put vacTable "reduceMort"   (item 6 rawData)
-      table:put vacTable "effectDays"   (item 7 rawData)
-      table:put vacTable "waneRate"     (item 8 rawData)
-      table:put vacTable "waneRateOut"  (item 9 rawData)
-    
+      let vacTable table:make
+
+      let index -1
+      set index index + 1    table:put vacTable "name"         (item index rawData)
+      set index index + 1    table:put vacTable "effectDays"   (item index rawData)
+      set index index + 1    table:put vacTable "infectReduct" (item index rawData)
+      set index index + 1    table:put vacTable "reduceHosp"   (item index rawData)
+      set index index + 1    table:put vacTable "reduceIcu"    (item index rawData)
+      set index index + 1    table:put vacTable "reduceMort"   (item index rawData)
+      set index index + 1    table:put vacTable "reduceSympt"  (item index rawData)
+      set index index + 1    table:put vacTable "riskReduct"   (item index rawData)
+      set index index + 1    table:put vacTable "waneRate"     (item index rawData)
+      set index index + 1    table:put vacTable "waneRateOut"  (item index rawData)
+
       table:put baseParamsTable (item 0 rawData) vacTable
   ]
   
@@ -90,20 +92,23 @@ to setup_vaccineData
     let paramsTable table:make
     let i 0
     foreach vaccineParamsFileData [ rawData -> 
-      let vacTable table:make      
+      let vacTable table:make
+
       let vacName (item 0 rawData)
       table:put vacTable "name"         vacName
-      table:put vacTable "infectReduct" (item 1 rawData)
-      table:put vacTable "riskReduct"   (item 2 rawData)
-      table:put vacTable "reduceSympt"  (item 3 rawData)
-      table:put vacTable "reduceHosp"   (item 4 rawData)
-      table:put vacTable "reduceIcu"    (item 5 rawData)
-      table:put vacTable "reduceMort"   (item 6 rawData)
-      table:put vacTable "effectDays"   (item 7 rawData)
-      table:put vacTable "waneRate"     (item 8 rawData)
-      table:put vacTable "waneRateOut"  (item 9 rawData)
-      let baseParamName                 (item 10 rawData)
-      
+
+      let index 0
+      set index index + 1    table:put vacTable "infectReduct" (item index rawData)
+      set index index + 1    table:put vacTable "riskReduct"   (item index rawData)
+      set index index + 1    table:put vacTable "reduceSympt"  (item index rawData)
+      set index index + 1    table:put vacTable "reduceHosp"   (item index rawData)
+      set index index + 1    table:put vacTable "reduceIcu"    (item index rawData)
+      set index index + 1    table:put vacTable "reduceMort"   (item index rawData)
+      set index index + 1    table:put vacTable "effectDays"   (item index rawData)
+      set index index + 1    table:put vacTable "waneRate"     (item index rawData)
+      set index index + 1    table:put vacTable "waneRateOut"  (item index rawData)
+      set index index + 1    let baseParamName                 (item index rawData)
+
       let uncertaintyValue table:get (table:get uncertParamsTable variant) vacName
       
       let myBaseParams table:get baseParamsTable baseParamName
