@@ -130,9 +130,11 @@ to go
   
   tick
   if stop_simulation [
+    print (word "s " ticks " d " days)
     Stop 
   ]
   if first_case_calibrate and initial_infection_R > -1 [
+    print (word "s " ticks " d " days)
     Stop
   ]
   
