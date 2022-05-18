@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.08
+0.1
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-15.0
+5.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-15.0
+5.0
 .5
 1
 NIL
@@ -561,7 +561,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-70.0
+100.0
 1
 1
 NIL
@@ -978,8 +978,8 @@ CHOOSER
 375
 param_policy
 param_policy
-"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "continuous"
-3
+"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
+22
 
 MONITOR
 1473
@@ -1115,7 +1115,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-15.0
+5.0
 1
 1
 NIL
@@ -2099,7 +2099,7 @@ SWITCH
 682
 first_case_calibrate
 first_case_calibrate
-1
+0
 1
 -1000
 
@@ -2718,7 +2718,7 @@ SLIDER
 init_stage
 init_stage
 0
-4
+5
 1.0
 0.1
 1

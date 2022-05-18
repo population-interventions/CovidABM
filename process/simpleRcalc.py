@@ -21,7 +21,8 @@ def ProcessResults(modelData):
 	gitTime = util.GetGitTimeIdentifier()
 	
 	index = list(modelData['indexParams'].keys())
-	notFloatCol = [] # TODO: Fill out non-float index
+	notFloatCol = [name for name, data in modelData['indexParams'].items()
+				if not (type(data[0]) == int or type(data[0]) == float)]
 	simIndex = modelData['runIndexer']
 	metric = modelData['postSeries']['rcalc']['metric']
 	

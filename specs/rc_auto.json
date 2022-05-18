@@ -20,7 +20,8 @@
 	"paramOverrides" : {
 		"first_case_calibrate" : true,
 		"vaccine_enabled" : false,
-		"param_policy" : "None"
+		"param_policy" : "None",
+		"init_stage" : 0
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {

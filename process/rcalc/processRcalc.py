@@ -138,7 +138,7 @@ def DoProcessRCalc(nameList, metric_name, simIndex, index, path, saveID):
 		metric_name,
 		simIndex,
 		index,
-		yTop=14,
+		yTop=18,
 		hlines=[1, 6, 7.5],
 		figWidth=30,
 		figHeight=20,

@@ -4,25 +4,26 @@
 	"copyExperimentMetrics" : "vic_rcalc",
 	"threads" : 1,
 	"indexParams" : {
-		"trans_override" : [
-			0.27817017037789,
-			0.383231475232612
+		"init_stage" : [
+			0,
+			1,
+			2,
+			3,
+			4,
+			5
 		],
 		"vaccine_enabled" : [
 			false,
 			true
 		],
-		"param_policy" : [
-			"None",
-			"StageCal_1",
-			"StageCal_2",
-			"StageCal_3",
-			"StageCal_4",
-			"StageCal_5"
+		"trans_override" : [
+			0.28,
+			0.38
 		]
 	},
 	"paramOverrides" : {
-		"first_case_calibrate" : true
+		"first_case_calibrate" : true,
+		"param_policy" : "StageFixed"
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {

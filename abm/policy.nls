@@ -9,7 +9,7 @@ end
 
 to policy_stage [ toStage ]
   if ticks = 0 [
-    set stage 0
+    set stage toStage
     set End_Day -1
     set track_R False
   ]
