@@ -34,8 +34,8 @@ __includes[
 GRAPHICS-WINDOW
 388
 63
-951
-627
+916
+592
 -1
 -1
 8.68
@@ -49,9 +49,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-63
+59
 0
-63
+59
 1
 1
 1
@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-8.0
+10.0
 1
 1
 NIL
@@ -186,7 +186,7 @@ superspreaders
 superspreaders
 0
 1
-0.06
+0.1
 0.01
 1
 NIL
@@ -204,7 +204,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-35.0
+5.0
 .5
 1
 NIL
@@ -219,7 +219,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-35.0
+5.0
 .5
 1
 NIL
@@ -271,7 +271,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-50.0
+100.0
 1
 1
 NIL
@@ -368,7 +368,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.2
+8.8
 1
 1
 NIL
@@ -435,7 +435,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "continuous"
-4
+3
 
 
 
@@ -482,7 +482,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-30.0
+5.0
 1
 1
 NIL
@@ -2074,7 +2074,7 @@ sympt_iso_prop
 sympt_iso_prop
 0
 1
-0.5
+1.0
 0.01
 1
 NIL
@@ -2086,7 +2086,7 @@ INPUTBOX
 2534
 714
 input_pre_vacinfect
-input/vic/prevacinfect.csv
+input/vic/prevac/draw_
 1
 0
 String
@@ -2123,7 +2123,7 @@ INPUTBOX
 2537
 777
 input_vaccine_base
-input/vic/vaccine_underlying_params
+input/vic/vaccine/draw_
 1
 0
 String
@@ -2140,10 +2140,10 @@ policy_mask_n95
 -1000
 
 INPUTBOX
-2560
-547
-2683
-607
+2617
+540
+2740
+600
 incur_name_part_1
 omlike
 1
@@ -2151,10 +2151,10 @@ omlike
 String
 
 INPUTBOX
-2560
-613
-2684
-673
+2617
+607
+2741
+667
 incur_name_part_2
 _escape
 1
@@ -2162,10 +2162,10 @@ _escape
 String
 
 INPUTBOX
-2560
-678
-2687
-738
+2617
+672
+2744
+732
 incur_name_part_3
 _high
 1
@@ -2220,13 +2220,55 @@ HORIZONTAL
 INPUTBOX
 2350
 778
-2633
+2539
 848
 input_matchup_uncertainty
 input/vic/vaccine_params_or_uncertainty.csv
 1
 0
 String
+
+SWITCH
+819
+749
+984
+782
+high_incur_virulence
+high_incur_virulence
+1
+1
+-1000
+
+SLIDER
+2569
+749
+2742
+782
+in_prevac_count
+in_prevac_count
+0
+1000
+1000.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+2570
+788
+2743
+821
+in_vaccine_count
+in_vaccine_count
+0
+1000
+2.0
+1
+1
+NIL
+HORIZONTAL
+
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -3093,7 +3135,7 @@ NetLogo 6.2.0
       <value value="0.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sympt_iso_prop">
-      <value value="0.5"/>
+      <value value="1.0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="input_pre_vacinfect">
       <value value="&quot;input/vic/prevacinfect.csv&quot;"/>
@@ -3137,6 +3179,10 @@ NetLogo 6.2.0
     </enumeratedValueSet>
     <enumeratedValueSet variable="input_matchup_uncertainty">
       <value value="&quot;input/vic/vaccine_params_or_uncertainty.csv&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="high_incur_virulence">
+      <value value="false"/>
+      <value value="true"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>

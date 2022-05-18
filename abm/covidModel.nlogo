@@ -34,8 +34,8 @@ __includes[
 GRAPHICS-WINDOW
 388
 63
-917
-593
+916
+592
 -1
 -1
 8.68
@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-5.0
+10.0
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.1
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-56.0
+5.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-56.0
+5.0
 .5
 1
 NIL
@@ -409,8 +409,8 @@ false
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [ agerange ] of simuls"
 "pen-2" 1.0 0 -2674135 true "" "histogram [ agerange ] of simuls with [ color = red ]"
-"pen-3" 1.0 0 -15040220 true "" "histogram [ agerange ] of simuls with [ color = yellow ]"
-"pen-4" 1.0 0 -1184463 true "" "histogram [ agerange ] of simuls with [ color = red and asymptomaticFlag]"
+"pen-3" 1.0 0 -15040220 true "" "histogram [ agerange ] of simuls with [ currentVaccine != 0 ]"
+"pen-4" 1.0 0 -13791810 true "" "histogram [ agerange ] of simuls with [ prevVaccine != 0 ]"
 
 PLOT
 1040
@@ -561,7 +561,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-35.0
+100.0
 1
 1
 NIL
@@ -600,7 +600,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -705,7 +705,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -979,7 +979,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "continuous"
-4
+3
 
 MONITOR
 1473
@@ -1115,7 +1115,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-50.0
+5.0
 1
 1
 NIL
@@ -3265,6 +3265,17 @@ in_vaccine_count
 1
 NIL
 HORIZONTAL
+
+MONITOR
+1623
+552
+1746
+597
+NIL
+policymetric7
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
