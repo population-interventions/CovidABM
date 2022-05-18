@@ -44,8 +44,6 @@ def MakeHeadlessWithCustomBehaviourSpace(modelData):
 					
 				if not ignore:
 					outputFile.write(line + '\n')
-					if line == 'in_prevac_count':
-						print(line)
 		elif inBehaviourSection:
 			if line == BEHAVIOUR_END:
 				inBehaviourSection = False
