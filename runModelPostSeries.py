@@ -4,7 +4,7 @@ import process.simpleRcalc as rcalc
 import process.targetOptimise as targetOptimise
 import process.mainPostProcessing as mainPost
 
-modelName = sys.argv[1] if len(sys.argv) > 1 else 'vic_main'
+modelName = sys.argv[1] if len(sys.argv) > 1 else 'rc_auto'
 runs = sys.argv[2] if len(sys.argv) > 2 else 10
 pernode = sys.argv[3] if len(sys.argv) > 3 else 5
 

@@ -69,6 +69,9 @@ def ProcessResults(modelData, runs, pernode):
 	## Output a new model spec file with the updated guesses
 	rawModel = md.LoadRawModelDataFile(modelData['name'])
 	
+	guesses = list(set(guesses))
+	print("guesses", guesses)
+	
 	repetitionLimit = repetitionLimit - 1
 	rawModel['postSeries']['targetOptimise']['repetionLimit'] = repetitionLimit
 	rawModel['indexParams'][index[0]] = guesses

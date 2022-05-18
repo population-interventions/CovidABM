@@ -16,6 +16,7 @@ def AggregateAndPickOutColumn(nameList, index, runIndex, notFloatCol, columName)
 		if colName not in notFloatCol:
 			df[colName] = df[colName].astype(float)
 
+	print(df)
 	df = df.set_index(index + [runIndex])
 	df = df.transpose().stack(runIndex)
 	df = df.describe(percentiles=[0 + 0.01*i for i in range(100)])
