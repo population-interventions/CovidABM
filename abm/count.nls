@@ -32,12 +32,12 @@ to simul_AddDeathHospToPipes [hospProp popPerSimul variant deathMean]
     let hospLength varHospLengthMult * (GetHospStayLength agerange variant)
     repeat floor hospLength [
       if cohortHospTime - timenow + i >= 0 [
-        set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i + 1) (popPerSimul * hospProp)
+        set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i) (popPerSimul * hospProp)
       ]
       set i i + 1 
     ]
     if cohortHospTime - timenow + i >= 0 [
-      set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i + 1) (popPerSimul * hospProp * (hospLength - floor hospLength))
+      set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i) (popPerSimul * hospProp * (hospLength - floor hospLength))
     ]
   ]
 end
@@ -243,7 +243,7 @@ to calculateHospInLastPeriod
   
   if policyUseHosp [
     ;print hospUsagePipe
-    set policymetric7 (item 0 hospUsagePipe) + (item 1 hospUsagePipe) + (item 2 hospUsagePipe) + (item 3 hospUsagePipe) + (item 4 hospUsagePipe) + (item 5 hospUsagePipe) + (item 6 hospUsagePipe)
+    set policymetric7 ((item 10 hospUsagePipe) + (item 11 hospUsagePipe) + (item 12 hospUsagePipe) + (item 13 hospUsagePipe) + (item 14 hospUsagePipe)) / 5
     set policymetric14 policymetric7 + (item 7 hospUsagePipe) + (item 8 hospUsagePipe) + (item 9 hospUsagePipe) + (item 10 hospUsagePipe) + (item 11 hospUsagePipe) + (item 12 hospUsagePipe) + (item 13 hospUsagePipe)
   ]
 end
