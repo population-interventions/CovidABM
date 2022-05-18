@@ -63,6 +63,7 @@ def MakeHeadlessWithCustomBehaviourSpace(modelData):
 				inGraphicsSection = True
 			outputFile.write(line + '\n')
 	
+	print('Headless written', modelData['netlogoFileName'], modelData['headlessFileName'])
 	outputFile.close()
 	modelFile.close()
 	
