@@ -602,6 +602,7 @@ to setGlobals
   set dieArray_listOut    []
   set icuArray_listOut    []
   set hospArray_listOut   []
+  set symptArray_listOut  []
 end
 
 ;;*******************************************************************************************************************************

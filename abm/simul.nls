@@ -208,6 +208,9 @@ to simul_do_scaleup
   set size 2
   set color cyan
   set infectVariant 0
+  set recoverVariant 0
+  set recoverVaccine 0
+  set recoverDay -1
 
   set timenow 0
   set noticeOwnInfection 0
@@ -265,6 +268,8 @@ to simul_setNewInfection [variant startDay]
   array:set (item cohortHospTime hospArray) cohortIndex ((array:item (item cohortHospTime  hospArray) cohortIndex) + hospRiskMean)
   array:set (item cohortIcuTime icuArray)   cohortIndex ((array:item (item cohortIcuTime   icuArray)  cohortIndex) + deathRiskMean)
   array:set (item cohortDeathTime dieArray) cohortIndex ((array:item (item cohortDeathTime dieArray)  cohortIndex) + deathRiskMean)
+  array:set symptArray cohortIndex (array:item symptArray cohortIndex) + symptProp * popPerSimul
+  
   ifelse currentVaccine = 0
   [
     array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
@@ -532,18 +537,29 @@ to simul_end_infection
     ]
     
     let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
-    if recoverVariant != 0 [
-      table:put recoverCountByVariant recoverVariant ((table:get recoverCountByVariant recoverVariant) - popPerSimul)
-      if table:get recoverCountByVariant recoverVariant < 0 [
-        set recoverCount recoverCount - table:get recoverCountByVariant recoverVariant
-        table:put recoverCountByVariant recoverVariant 0
-      ]
-    ]
     
-    if recoverVariant = 0 [
-      set recoverCount recoverCount + popPerSimul
+    ;; Don't increment recoveries or give immunity before the main model starts.
+    if days > 0 [
+      if recoverVariant != 0 [
+        table:put recoverCountByVariant recoverVariant ((table:get recoverCountByVariant recoverVariant) - popPerSimul)
+        if table:get recoverCountByVariant recoverVariant < 0 [
+          set recoverCount recoverCount - table:get recoverCountByVariant recoverVariant
+          table:put recoverCountByVariant recoverVariant 0
+        ]
+      ]
+      
+      if recoverVariant = 0 [
+        set recoverCount recoverCount + popPerSimul
+      ]
+      table:put recoverCountByVariant infectVariant ((table:get recoverCountByVariant infectVariant) + popPerSimul)
+      
+      ;; May as well set color to yellow since dead and infected people have a similar effect on the simulation.
+      ;; Very few people die in the low scales as a proportion of the total population.
+      simul_setNewRecover infectVariant
+      set isInitialInfection false
+      set recoverVariant infectVariant
+      set infectVariant 0
     ]
-    table:put recoverCountByVariant infectVariant ((table:get recoverCountByVariant infectVariant) + popPerSimul)
     
     if trace_calibration > 0 [
       set finished_infections finished_infections + popPerSimul
@@ -551,13 +567,6 @@ to simul_end_infection
         set finished_tracked finished_tracked + popPerSimul
       ]
     ]
-    
-    ;; May as well set color to yellow since dead and infected people have a similar effect on the simulation.
-    ;; Very few people die in the low scales as a proportion of the total population.
-    simul_setNewRecover infectVariant
-    set isInitialInfection false
-    set recoverVariant infectVariant
-    set infectVariant 0
   
     if print_contact_events [
       print contact_events

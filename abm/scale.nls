@@ -2,7 +2,7 @@
 to ShiftRecoveredTowardsTotalProportion
   if Recovered_Match_Rate > 0 [
     set recoverProportion recoverCount / (total_population - deathCount)
-    let repYellowCount ceiling (Population * recoverProportion)
+    let repYellowCount floor (Population * recoverProportion + random-float 1)
     let yellowSet simuls with [ color = yellow ]
     let yellowSetCount count yellowSet
     if repYellowCount < yellowSetCount [
@@ -13,6 +13,8 @@ to ShiftRecoveredTowardsTotalProportion
       ask n-of wantAsk yellowSet [
         set color cyan
         set recoverVariant 0
+        set recoverVaccine 0
+        set recoverDay -1
       ]
     ]
   ]

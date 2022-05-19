@@ -57,6 +57,8 @@ def DoSpartanAggregate(dataDir, rawDataDir, measureCols, arraySize=100, skip=Fal
 		'hosp_daily',
 		'hosp_weeklyAgg',
 		'hosp_yearlyAgg',
+		'icu_weeklyAgg',
+		'sympt_weeklyAgg',
 	]
 	
 	if doTenday:
@@ -109,6 +111,8 @@ def DoSpartanAggregate(dataDir, rawDataDir, measureCols, arraySize=100, skip=Fal
 			'mort_weeklyAgg',
 			'hosp_weeklyAgg',
 			'stage_weeklyAgg',
+			'icu_weeklyAgg',
+			'sympt_weeklyAgg',
 		],
 	)
 	

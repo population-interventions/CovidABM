@@ -8,19 +8,7 @@ to policy_none
 end
 
 to policy_stage [ toStage ]
-  if ticks = 0 [
-    set stage toStage
-    set End_Day -1
-    set track_R False
-  ]
-  
-  if End_Day = -1 and casesinperiod7 >= calibrate_stage_switch [
-    set stage toStage
-    set End_Day ticks + 70
-    set track_R True
-    set R_measure_time ticks + 30
-    set decisionDate ticks
-  ]
+  set stage toStage
 end
 
 to policy_infect [ toStage ]
@@ -58,9 +46,9 @@ end
 to updatePolicyPipeline
   if _init_metric_threshold < 0 [
     if policy_pipeline = "ME_TS_S1" [
-      ifelse ticks - start_day < 2 * policy_pipe_time 
+      ifelse days < 2 * policy_pipe_time 
       [
-        ifelse ticks - start_day < policy_pipe_time 
+        ifelse days < policy_pipe_time 
         [
           set param_policy "ModerateElim"
         ]
@@ -76,7 +64,7 @@ to updatePolicyPipeline
       set param_policy "ModerateElim"
     ]
     if policy_pipeline = "ME_ME_TS" [
-      ifelse ticks - start_day < 2 * policy_pipe_time 
+      ifelse days < 2 * policy_pipe_time 
       [
         set param_policy "ModerateElim"
       ]
@@ -85,7 +73,7 @@ to updatePolicyPipeline
       ]
     ]
     if policy_pipeline = "ME_ME_LS" [
-      ifelse ticks - start_day < 2 * policy_pipe_time 
+      ifelse days < 2 * policy_pipe_time 
       [
         set param_policy "ModerateElim"
       ]
@@ -94,9 +82,9 @@ to updatePolicyPipeline
       ]
     ]
     if policy_pipeline = "ME_TS_LS" [
-      ifelse ticks - start_day < 2 * policy_pipe_time 
+      ifelse days < 2 * policy_pipe_time 
       [
-        ifelse ticks - start_day < policy_pipe_time 
+        ifelse days < policy_pipe_time 
         [
           set param_policy "ModerateElim"
         ]
@@ -109,9 +97,9 @@ to updatePolicyPipeline
       ]
     ]
     if policy_pipeline = "ME_TS_BS" [
-      ifelse ticks - start_day < 2 * policy_pipe_time 
+      ifelse days < 2 * policy_pipe_time 
       [
-        ifelse ticks - start_day < policy_pipe_time 
+        ifelse days < policy_pipe_time 
         [
           set param_policy "ModerateElim"
         ]
@@ -124,9 +112,9 @@ to updatePolicyPipeline
       ]
     ]
     if policy_pipeline = "ME_TS_NONE" [
-      ifelse ticks - start_day < 2 * policy_pipe_time 
+      ifelse days < 2 * policy_pipe_time 
       [
-        ifelse ticks - start_day < policy_pipe_time 
+        ifelse days < policy_pipe_time 
         [
           set param_policy "ModerateElim"
         ]
@@ -138,7 +126,7 @@ to updatePolicyPipeline
         set param_policy "None"
       ]
     ]
-    if ticks - start_day >= 2 * policy_pipe_time [
+    if days >= 2 * policy_pipe_time [
       if pipe_end_override != "off" [
         set param_policy pipe_end_override
       ]
@@ -151,7 +139,7 @@ end
 
 to COVIDPolicyTriggers
   
-  ifelse days = 0
+  ifelse days < 0
   [
     set stage init_stage
   ]

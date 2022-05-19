@@ -358,10 +358,12 @@ globals [
   vacineEff_areaOut
   global_transmissibility_out
   
+  symptArray
   dieArray
   icuArray
   hospArray
   
+  symptArray_listOut
   dieArray_listOut
   icuArray_listOut
   hospArray_listOut

@@ -1,8 +1,10 @@
 
 to setup_DataOut [maxHospTime maxIcuTime maxDeathTime]
   set cohortLengthListOfZeros n-values length table:keys popDivisionTable [0]
+  
   set infectNoVacArray array:from-list cohortLengthListOfZeros
   set infectVacArray array:from-list cohortLengthListOfZeros
+  set symptArray array:from-list cohortLengthListOfZeros
   
   set hospArray []
   repeat maxHospTime + 1 [
@@ -42,9 +44,12 @@ to calculateDataOut
     ;print "doDataOut"
     set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
     set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
+    
     set dieArray_listOut lput (array:to-list item 0 dieArray) dieArray_listOut
     set icuArray_listOut lput (array:to-list item 0 icuArray) icuArray_listOut
     set hospArray_listOut lput (array:to-list item 0 hospArray) hospArray_listOut
+    set symptArray_listOut lput array:to-list symptArray symptArray_listOut
+    
     set case_listOut lput casesReportedToday case_listOut
     set case7_listOut lput casesinperiod7 case7_listOut
     set case14_listOut lput casesinperiod14 case14_listOut
@@ -53,6 +58,7 @@ to calculateDataOut
     
     set infectNoVacArray array:from-list cohortLengthListOfZeros
     set infectVacArray array:from-list cohortLengthListOfZeros
+    set symptArray array:from-list cohortLengthListOfZeros
     
     if stage = 1 [
       set stage1time stage1time + 1
@@ -75,7 +81,7 @@ to calculateDataOut
       set cumulativeInfected_switchTime cumulativeInfected
     ]
     
-    if ticks - start_day = mid_report_day - 1 [
+    if days = mid_report_day - 1 [
       set midReport_cumulativeInfected_minusInit cumulativeInfected_minusInit
       set midReport_totalCasesReported           totalCasesReported
       set midReport_slopeAverage                 slopeAverage

@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.1
+0.08
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-0.0
+26.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-0.0
+26.0
 .5
 1
 NIL
@@ -330,10 +330,10 @@ PENS
 "default" 1.0 1 -2674135 true "" "Histogram [ agerange ] of simuls with [ color = black ] "
 
 PLOT
-3735
-807
-4003
-956
+2148
+194
+2416
+343
 Infection Proportional Growth Rate
 Time
 Growth rate
@@ -364,7 +364,7 @@ INPUTBOX
 373
 263
 initial_cases
-3000.0
+8000.0
 1
 0
 Number
@@ -381,10 +381,10 @@ total_population
 Number
 
 MONITOR
-1039
-309
-1211
-354
+1477
+460
+1609
+505
 Close contacts per day
 AverageContacts
 2
@@ -392,10 +392,10 @@ AverageContacts
 11
 
 PLOT
-2125
-13
-2390
-180
+1837
+22
+2102
+189
 Age (black), Vaccinated (green)
 NIL
 NIL
@@ -408,7 +408,7 @@ false
 "" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [ agerange ] of simuls"
-"pen-2" 1.0 0 -2674135 true "" "histogram [ agerange ] of simuls with [ color = red ]"
+"pen-2" 1.0 0 -2674135 true "" "histogram [ agerange ] of simuls with [ recoverVaccine != 0 ]"
 "pen-3" 1.0 0 -15040220 true "" "histogram [ agerange ] of simuls with [ currentVaccine != 0 ]"
 "pen-4" 1.0 0 -13791810 true "" "histogram [ agerange ] of simuls with [ prevVaccine != 0 ]"
 
@@ -433,10 +433,10 @@ PENS
 "ICU Beds Required" 1.0 0 -16777216 true "" "plot ICUBedsRequired "
 
 MONITOR
-1480
-550
-1605
-599
+1478
+554
+1603
+603
 New Infections
 (globalPopPerSimul * (count simuls with [ color = red and timenow = 1 ]))
 0
@@ -517,10 +517,10 @@ PotentialContacts
 11
 
 PLOT
-3735
-640
-4024
-802
+2148
+27
+2437
+189
 Distribution of Illness pd
 NIL
 NIL
@@ -561,7 +561,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-100.0
+70.0
 1
 1
 NIL
@@ -589,7 +589,7 @@ SWITCH
 411
 tracking
 tracking
-1
+0
 1
 -1000
 
@@ -662,14 +662,14 @@ SWITCH
 318
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
 SLIDER
-808
+835
 1027
-1008
+1035
 1060
 Case_Reporting_Delay
 Case_Reporting_Delay
@@ -813,10 +813,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-465
-684
-657
-717
+433
+719
+591
+752
 Vaccine_Enabled
 Vaccine_Enabled
 0
@@ -900,10 +900,10 @@ quarantine
 11
 
 MONITOR
-1040
-260
-1212
+1044
 305
+1216
+350
 NIL
 Track_and_Trace_Efficiency
 17
@@ -972,14 +972,14 @@ Stage Policy Settings
 1
 
 CHOOSER
-8
-519
-203
-564
+13
+460
+208
+505
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-22
+4
 
 MONITOR
 1473
@@ -1025,9 +1025,9 @@ PENS
 "KnowContact" 1.0 0 -13840069 true "" "plot count simuls with [hasKnownContact and color = red] * globalPopPerSimul"
 
 SLIDER
-807
+834
 944
-1006
+1033
 977
 Asymptom_Trace_Mult
 Asymptom_Trace_Mult
@@ -1092,10 +1092,10 @@ PENS
 "KnownContact" 1.0 0 -13297659 true "" "plot count simuls with [hasKnownContact and color = red] * globalPopPerSimul "
 
 SLIDER
-467
-639
-669
-672
+419
+900
+621
+933
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1115,7 +1115,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-0.0
+15.0
 1
 1
 NIL
@@ -1263,7 +1263,7 @@ SWITCH
 796
 track_R
 track_R
-0
+1
 1
 -1000
 
@@ -1309,15 +1309,15 @@ recoverProportion * 100
 14
 
 SLIDER
-818
-869
-1020
-902
+624
+984
+826
+1017
 Recovered_Match_Rate
 Recovered_Match_Rate
 0
 1
-0.33
+0.9
 0.01
 1
 NIL
@@ -1335,10 +1335,10 @@ param_trigger_loosen
 -1000
 
 MONITOR
-1497
-499
-1602
-544
+1495
+504
+1600
+549
 NIL
 policyTriggerScale
 17
@@ -1412,7 +1412,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-1
+0
 1
 -1000
 
@@ -1484,10 +1484,10 @@ preSimDailyCases
 Number
 
 MONITOR
-302
-884
-411
-929
+297
+865
+406
+910
 % Yellow Second
 100 * (count simuls with [color = yellow and recoverVariant = \"beta\"]) / Population
 2
@@ -1495,10 +1495,10 @@ MONITOR
 11
 
 MONITOR
-188
-838
-290
-883
+183
+819
+285
+864
 % Red First
 100 * (count simuls with [color = red and infectVariant = \"base\"]) / Population
 2
@@ -1506,10 +1506,10 @@ MONITOR
 11
 
 MONITOR
-189
-887
-291
-932
+184
+868
+286
+913
 % Red Second
 100 * (count simuls with [color = red and infectVariant = (word incur_name_part_1 incur_name_part_2 incur_name_part_3)]) / Population
 2
@@ -1517,10 +1517,10 @@ MONITOR
 11
 
 SLIDER
-813
-908
-1011
-941
+619
+1023
+817
+1056
 Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
@@ -1554,10 +1554,10 @@ incursionPhaseEndDay
 11
 
 MONITOR
-300
-837
-402
-882
+294
+818
+396
+863
 % Yellow First
 100 * (count simuls with [color = yellow and recoverVariant = \"alpha\"]) / Population
 17
@@ -1621,10 +1621,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1043
-213
-1216
-258
+1048
+259
+1221
+304
 Case report %
 100 * (count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion]) / (max (list (count simuls with [ color = red ]) 1))
 2
@@ -1692,7 +1692,7 @@ initial_primary_prop
 initial_primary_prop
 0
 1
-0.26
+0.3
 0.01
 1
 NIL
@@ -1969,10 +1969,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-465
-988
-655
-1021
+419
+994
+609
+1027
 init_trace_prop
 init_trace_prop
 0
@@ -2005,10 +2005,10 @@ compound_input
 0
 
 SLIDER
-467
-724
-657
-757
+427
+770
+617
+803
 param_vac_uptake_mult
 param_vac_uptake_mult
 0
@@ -2093,13 +2093,13 @@ initial_infection_R
 11
 
 SWITCH
-819
-649
-993
-682
+433
+640
+607
+673
 first_case_calibrate
 first_case_calibrate
-0
+1
 1
 -1000
 
@@ -2129,9 +2129,9 @@ data_suffix
 12
 
 SLIDER
-808
+835
 987
-1007
+1034
 1020
 pre_present_iso
 pre_present_iso
@@ -2144,10 +2144,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-464
-949
-657
-982
+419
+955
+612
+988
 self_iso_at_peak
 self_iso_at_peak
 0
@@ -2185,7 +2185,7 @@ house_init_group
 house_init_group
 0
 1
-0.15
+0.8
 0.05
 1
 NIL
@@ -2338,10 +2338,10 @@ data_suffix_2
 0
 
 CHOOSER
-844
-743
-982
-788
+10
+517
+123
+562
 policy_switch
 policy_switch
 "tony" "nz" "pak" "continuous"
@@ -2696,39 +2696,39 @@ override_asympt_table
 -1000
 
 SLIDER
-1039
-95
-1219
-128
+1045
+169
+1225
+202
 init_metric_threshold
 init_metric_threshold
--10
-1200
-390.0
-10
+-100
+12000
+11000.0
+100
 1
 NIL
 HORIZONTAL
 
 SLIDER
-1040
-132
-1213
-165
+1044
+208
+1217
+241
 init_stage
 init_stage
 0
 5
-1.0
+2.0
 0.1
 1
 NIL
 HORIZONTAL
 
 MONITOR
-963
+848
 14
-1031
+916
 59
 NIL
 start_day
@@ -2762,17 +2762,6 @@ SIM_SEED
 NIL
 HORIZONTAL
 
-SWITCH
-1040
-169
-1213
-202
-realNotCaseThres
-realNotCaseThres
-0
-1
--1000
-
 MONITOR
 15
 772
@@ -2785,30 +2774,19 @@ totalCasesReported
 14
 
 SLIDER
-832
-817
-1016
-850
+640
+943
+824
+976
 mid_report_day
 mid_report_day
 0
 100
-42.0
+64.0
 1
 1
 NIL
 HORIZONTAL
-
-MONITOR
-850
-13
-957
-58
-NIL
-Days - start_day
-17
-1
-11
 
 SLIDER
 3570
@@ -2944,7 +2922,7 @@ draw_index
 draw_index
 0
 4000
-548.0
+314.0
 1
 1
 NIL
@@ -2962,10 +2940,10 @@ input/vic/rollout_current.csv
 String
 
 PLOT
-2125
-188
-2430
-338
+1837
+197
+2142
+347
 Vaccine Eff vs. Infection
 NIL
 NIL
@@ -2999,6 +2977,7 @@ false
 "" ""
 PENS
 "default" 5.0 1 -16777216 true "" "histogram [ days - vaccineDay ] of simuls with [currentVaccine != 0]"
+"pen-1" 1.0 0 -5298144 true "" "histogram [ days - recoverDay ] of simuls with [recoverVaccine != 0]"
 
 CHOOSER
 1598
@@ -3048,10 +3027,10 @@ PENS
 "default" 1.0 1 -16777216 true "" "histogram [ myScale ] of simuls with [ color = red ]"
 
 SLIDER
-819
-687
-992
-720
+433
+678
+606
+711
 trans_override
 trans_override
 0
@@ -3063,10 +3042,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-465
-1024
-659
-1057
+419
+1030
+613
+1063
 sympt_iso_prop
 sympt_iso_prop
 0
@@ -3132,7 +3111,7 @@ SWITCH
 413
 policy_mask_n95
 policy_mask_n95
-1
+0
 1
 -1000
 
@@ -3152,10 +3131,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-470
-849
-645
-882
+424
+855
+599
+888
 incur_replace_chance
 incur_replace_chance
 0
@@ -3167,10 +3146,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-467
-764
-655
-797
+427
+810
+615
+843
 param_vac_uptake_std
 param_vac_uptake_std
 0
@@ -3199,7 +3178,7 @@ SWITCH
 371
 high_incur_virulence
 high_incur_virulence
-1
+0
 1
 -1000
 
@@ -3263,7 +3242,7 @@ CHOOSER
 incur_name_part_1
 incur_name_part_1
 "omlike" "novel"
-0
+1
 
 CHOOSER
 35
@@ -3273,7 +3252,7 @@ CHOOSER
 incur_name_part_2
 incur_name_part_2
 "" "_escape"
-1
+0
 
 CHOOSER
 38
@@ -3284,6 +3263,78 @@ incur_name_part_3
 incur_name_part_3
 "" "_high"
 0
+
+MONITOR
+1045
+118
+1227
+163
+NIL
+infectionsToday
+0
+1
+11
+
+MONITOR
+1044
+69
+1182
+114
+Expected Hosp
+policymetric7
+0
+1
+11
+
+MONITOR
+183
+917
+288
+962
+% Recover
+100 * count simuls with [ recoverVaccine != 0 and color != red] / population
+2
+1
+11
+
+PLOT
+673
+610
+1008
+775
+New infections / expected hosp
+NIL
+NIL
+0.0
+10.0
+0.0
+0.1
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -2674135 true "" "plot policymetric7 / ( 0.01 + infectionsToday)"
+"pen-1" 1.0 0 -16777216 true "" "plot 0.044"
+
+PLOT
+673
+780
+1008
+930
+New infections
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -2674135 true "" "plot infectionsToday"
+"pen-1" 1.0 0 -16777216 true "" "plot init_metric_threshold"
+"pen-2" 1.0 0 -955883 true "" "plot infectionsinperiod7 / 7"
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -5204,6 +5255,7 @@ NetLogo 6.2.0
     <metric>dieArray_listOut</metric>
     <metric>icuArray_listOut</metric>
     <metric>hospArray_listOut</metric>
+    <metric>symptArray_listOut</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>
