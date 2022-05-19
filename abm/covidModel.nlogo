@@ -330,10 +330,10 @@ PENS
 "default" 1.0 1 -2674135 true "" "Histogram [ agerange ] of simuls with [ color = black ] "
 
 PLOT
-2149
-195
-2417
-344
+3735
+807
+4003
+956
 Infection Proportional Growth Rate
 Time
 Growth rate
@@ -392,10 +392,10 @@ AverageContacts
 11
 
 PLOT
-1833
-27
-2098
-194
+2125
+13
+2390
+180
 Age (black), Vaccinated (green)
 NIL
 NIL
@@ -517,10 +517,10 @@ PotentialContacts
 11
 
 PLOT
-2150
-28
-2439
-190
+3735
+640
+4024
+802
 Distribution of Illness pd
 NIL
 NIL
@@ -972,10 +972,10 @@ Stage Policy Settings
 1
 
 CHOOSER
-10
-330
-178
-375
+8
+519
+203
+564
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
@@ -1287,10 +1287,10 @@ PENS
 "pen-1" 1.0 0 -5298144 true "" "histogram [ cohortIndex ] of simuls with [ color = red ]"
 
 MONITOR
-12
-652
-162
-709
+13
+653
+163
+710
 Total Infected
 cumulativeInfected
 0
@@ -1699,10 +1699,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-9
-457
-202
-490
+2160
+408
+2353
+441
 param_policy_force_days
 param_policy_force_days
 0
@@ -1714,10 +1714,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-7
-493
-201
-526
+2158
+444
+2352
+477
 param_policy_force_stage
 param_policy_force_stage
 -1
@@ -1729,10 +1729,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-9
-419
-202
-452
+2160
+370
+2353
+403
 param_policy_force_preset
 param_policy_force_preset
 0
@@ -1849,20 +1849,20 @@ NIL
 HORIZONTAL
 
 CHOOSER
-8
-568
-201
-613
+9
+569
+202
+614
 policy_pipeline
 policy_pipeline
 "None" "ME_TS_S1" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS" "ME_TS_NONE"
 0
 
 SLIDER
-9
-617
-198
-650
+10
+618
+199
+651
 policy_pipe_time
 policy_pipe_time
 0
@@ -1954,10 +1954,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-8
-529
-202
-562
+2159
+480
+2353
+513
 param_stage1_time
 param_stage1_time
 -1
@@ -1984,10 +1984,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2132
-425
-2347
-485
+2572
+678
+2697
+738
 input_population_table
 input/vic/pop
 1
@@ -2338,10 +2338,10 @@ data_suffix_2
 0
 
 CHOOSER
-12
-175
-150
-220
+844
+743
+982
+788
 policy_switch
 policy_switch
 "tony" "nz" "pak" "continuous"
@@ -2573,10 +2573,10 @@ reducedStageFour
 -1000
 
 INPUTBOX
-2132
-359
-2347
-419
+2572
+613
+2699
+673
 input_incursion_table
 none
 1
@@ -2951,21 +2951,21 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2204
-493
-2381
-553
+17
+74
+205
+134
 input_vaccine_schedule
-input/vic/rollout_target_multi.csv
+input/vic/rollout_current.csv
 1
 0
 String
 
 PLOT
-1833
-202
-2138
-352
+2125
+188
+2430
+338
 Vaccine Eff vs. Infection
 NIL
 NIL
@@ -3126,59 +3126,26 @@ input/vic/vaccine/draw_
 String
 
 SWITCH
-472
-894
-642
-927
+12
+380
+182
+413
 policy_mask_n95
 policy_mask_n95
 1
 1
 -1000
 
-INPUTBOX
-2644
-542
-2747
-602
-incur_name_part_1
-omlike
-1
-0
-String
-
-INPUTBOX
-2617
-607
-2741
-667
-incur_name_part_2
-NIL
-1
-0
-String
-
-INPUTBOX
-2617
-672
-2744
-732
-incur_name_part_3
-NIL
-1
-0
-String
-
 SLIDER
-470
-809
-643
-842
+12
+420
+185
+453
 incur_day
 incur_day
 0
 300
-39.0
+80.0
 1
 1
 NIL
@@ -3226,10 +3193,10 @@ input/vic/vaccine_params_or_uncertainty.csv
 String
 
 SWITCH
-819
-749
-984
-782
+14
+338
+179
+371
 high_incur_virulence
 high_incur_virulence
 1
@@ -3278,15 +3245,45 @@ policymetric7
 11
 
 INPUTBOX
-2555
-542
-2639
-602
+2572
+549
+2656
+609
 base_name
 base
 1
 0
 String
+
+CHOOSER
+34
+154
+173
+199
+incur_name_part_1
+incur_name_part_1
+"omlike" "novel"
+0
+
+CHOOSER
+35
+204
+174
+249
+incur_name_part_2
+incur_name_part_2
+"" "_escape"
+1
+
+CHOOSER
+38
+254
+177
+299
+incur_name_part_3
+incur_name_part_3
+"" "_high"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
