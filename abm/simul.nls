@@ -539,7 +539,7 @@ to simul_end_infection
     let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
     
     ;; Don't increment recoveries or give immunity before the main model starts.
-    if days > 0 [
+    if days >= 0 [
       if recoverVariant != 0 [
         table:put recoverCountByVariant recoverVariant ((table:get recoverCountByVariant recoverVariant) - popPerSimul)
         if table:get recoverCountByVariant recoverVariant < 0 [

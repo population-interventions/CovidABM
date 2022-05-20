@@ -633,10 +633,13 @@ to setup
   resetAccumulators
   setupPipes
   setup_mask
-
+  
   ;;import-drawing "Background1.png" ;; imports MSD image
-  set days 0 ; used to count days
-
+  if first_case_calibrate [ 
+    set days 0 ; used to count days
+  ]
+  set stage init_stage
+  
   processPopulationData
   setup_variantData
   setup_vaccineData
