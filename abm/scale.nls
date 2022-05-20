@@ -1,6 +1,6 @@
 
 to ShiftRecoveredTowardsTotalProportion
-  if Recovered_Match_Rate > 0 [
+  if Recovered_Match_Rate > 0 and days >= 0 [
     set recoverProportion recoverCount / (total_population - deathCount)
     let repYellowCount floor (Population * recoverProportion + random-float 1)
     let yellowSet simuls with [ color = yellow ]
@@ -19,7 +19,7 @@ to ShiftRecoveredTowardsTotalProportion
     ]
   ]
   
-  if Recov_Var_Match_Rate > 0 and recoverCount > 0 [
+  if Recov_Var_Match_Rate > 0 and recoverCount > 0 and days >= 0 [
     let yellowSet simuls with [ color = yellow ]
     let variantKeys table:keys recoverCountByVariant
     let yellowSetCount count yellowSet

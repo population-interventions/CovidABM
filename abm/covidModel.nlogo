@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-51.0
+50.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-51.0
+50.0
 .5
 1
 NIL
@@ -364,7 +364,7 @@ INPUTBOX
 373
 263
 initial_cases
-8000.0
+10000.0
 1
 0
 Number
@@ -460,6 +460,7 @@ false
 "" ""
 PENS
 "LN New Cases" 1.0 1 -5298144 true "" "plot Log (1 + (globalPopPerSimul * (count simuls with [ color = red and timenow = 1]))) 2.618"
+"pen-1" 1.0 0 -16777216 true "" "plot Log (1 + init_metric_threshold) 2.618"
 
 MONITOR
 1759
@@ -979,7 +980,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-23
+3
 
 MONITOR
 1473
@@ -1692,7 +1693,7 @@ initial_primary_prop
 initial_primary_prop
 0
 1
-0.3
+0.25
 0.01
 1
 NIL
@@ -2099,7 +2100,7 @@ SWITCH
 637
 first_case_calibrate
 first_case_calibrate
-0
+1
 1
 -1000
 
@@ -2185,7 +2186,7 @@ house_init_group
 house_init_group
 0
 1
-0.8
+0.85
 0.05
 1
 NIL
@@ -2719,7 +2720,7 @@ init_stage
 init_stage
 0
 5
-4.0
+2.0
 0.1
 1
 NIL
@@ -2922,7 +2923,7 @@ draw_index
 draw_index
 0
 4000
-314.0
+1902.0
 1
 1
 NIL
@@ -2940,10 +2941,10 @@ input/vic/rollout_target_multi.csv
 String
 
 PLOT
-1837
+1840
 197
-2142
-347
+2122
+361
 Vaccine Eff vs. Infection
 NIL
 NIL
@@ -2955,10 +2956,10 @@ true
 true
 "" ""
 PENS
-"base" 0.02 1 -16777216 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
-"incur" 0.02 1 -14454117 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"base" 0.02 1 -1184463 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"incur" 0.02 1 -13840069 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
 "baseRec" 0.02 1 -2674135 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" recoverVaccine recoverDay 0 0) ] of simuls"
-"incurRec" 1.0 0 -13840069 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) recoverVaccine recoverDay 0 0) ] of simuls"
+"incurRec" 0.02 1 -13345367 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) recoverVaccine recoverDay 0 0) ] of simuls"
 
 PLOT
 1837
@@ -3242,7 +3243,7 @@ CHOOSER
 incur_name_part_1
 incur_name_part_1
 "omlike" "novel"
-1
+0
 
 CHOOSER
 35
@@ -3252,7 +3253,7 @@ CHOOSER
 incur_name_part_2
 incur_name_part_2
 "" "_escape"
-0
+1
 
 CHOOSER
 38

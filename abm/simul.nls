@@ -206,11 +206,17 @@ end
 
 to simul_do_scaleup
   set size 2
-  set color cyan
-  set infectVariant 0
-  set recoverVariant 0
-  set recoverVaccine 0
-  set recoverDay -1
+  ifelse recoverVaccine = 0
+  [
+    set color cyan
+    set infectVariant 0
+    set recoverVariant 0
+    set recoverVaccine 0
+    set recoverDay -1
+  ]
+  [
+    set color yellow
+  ]
 
   set timenow 0
   set noticeOwnInfection 0
