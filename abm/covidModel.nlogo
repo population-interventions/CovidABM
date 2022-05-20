@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-10.0
+5.0
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.08
+0.04
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-26.0
+57.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-26.0
+57.0
 .5
 1
 NIL
@@ -561,7 +561,7 @@ Essential_Workers
 Essential_Workers
 0
 100
-70.0
+35.0
 1
 1
 NIL
@@ -600,7 +600,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -705,7 +705,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+5.0
 1
 1
 NIL
@@ -813,10 +813,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-433
-719
-591
-752
+435
+684
+593
+717
 Vaccine_Enabled
 Vaccine_Enabled
 0
@@ -1115,7 +1115,7 @@ Complacency_Bound
 Complacency_Bound
 0
 100
-15.0
+50.0
 1
 1
 NIL
@@ -2093,10 +2093,10 @@ initial_infection_R
 11
 
 SWITCH
-433
-640
-607
-673
+435
+604
+609
+637
 first_case_calibrate
 first_case_calibrate
 1
@@ -3027,10 +3027,10 @@ PENS
 "default" 1.0 1 -16777216 true "" "histogram [ myScale ] of simuls with [ color = red ]"
 
 SLIDER
-433
-678
-606
-711
+435
+643
+608
+676
 trans_override
 trans_override
 0
@@ -3335,6 +3335,21 @@ PENS
 "default" 1.0 1 -2674135 true "" "plot infectionsToday"
 "pen-1" 1.0 0 -16777216 true "" "plot init_metric_threshold"
 "pen-2" 1.0 0 -955883 true "" "plot infectionsinperiod7 / 7"
+
+SLIDER
+434
+725
+607
+759
+init_vacrecover_day
+init_vacrecover_day
+0
+250
+0.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

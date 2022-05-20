@@ -321,29 +321,33 @@ to setupInitialVaccination_micromangedMethod
       set rowIndex rowIndex + 1
       
       set initPreSetup True
-      if (item 2 row) >= 0 [
+      let in_prevVaccineDay (item 1 row) - init_vacrecover_day
+      let in_recoverDay (item 2 row) - init_vacrecover_day
+      let in_vaccineDay (item 3 row) - init_vacrecover_day
+      
+      if in_recoverDay >= 0 [
         simul_setNewRecover (item 4 row)
-        set recoverDay -1 * (item 2 row)
+        set recoverDay -1 * in_recoverDay
       ]
-      ifelse (item 3 row) >= 0
+      ifelse in_vaccineDay >= 0
       [
         if _param_vac_uptake_mult * cohortVacUptake > random-float 1 [
           set vaccReceptive true ; Only the most vaccinated are receptive to recieving another vaccine
         ]
-        set vaccineDay -1 * (item 3 row)
+        set vaccineDay -1 * in_vaccineDay
         set currentVaccine (word (item 6 row) cohortVacSuffix)
-        if (item 1 row) >= 0 [
-          set prevVaccineDay -1 * (item 1 row)
+        if in_prevVaccineDay >= 0 [
+          set prevVaccineDay -1 * in_prevVaccineDay
           set prevVaccine (word (item 5 row) cohortVacSuffix)
         ] 
       ]
       [
-        if (item 1 row) >= 0 [
+        if in_prevVaccineDay >= 0 [
           if _param_vac_uptake_mult * cohortVacUptakeDose2 > random-float 1 [ 
             set vaccReceptive true ; A member of a cohort may continue on to further vaccination after only dose 2
             set vaccBranch vaccBranchFrom2
           ]
-          set vaccineDay -1 * (item 1 row)
+          set vaccineDay -1 * in_prevVaccineDay
           set currentVaccine (word (item 5 row) cohortVacSuffix)
         ] 
       ]
