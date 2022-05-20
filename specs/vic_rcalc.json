@@ -2,7 +2,7 @@
 	"netlogoFile" : "covidModel",
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_rcalc",
-	"threads" : 2,
+	"threads" : 1,
 	"indexParams" : {
 		"init_stage" : [
 			0,
@@ -27,6 +27,7 @@
 	},
 	"paramOverrides" : {
 		"first_case_calibrate" : true,
+		"track_R" : true,
 		"param_policy" : "StageFixed"
 	},
 	"runIndexer" : "draw_index",

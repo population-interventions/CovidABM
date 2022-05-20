@@ -17,6 +17,7 @@
 	"paramOverrides" : {
 		"first_case_calibrate" : true,
 		"vaccine_enabled" : false,
+		"track_R" : true,
 		"param_policy" : "StageFixed",
 		"init_stage" : 0
 	},
