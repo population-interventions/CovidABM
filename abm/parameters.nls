@@ -18,16 +18,23 @@ to params_readStaticDraws
   file-close
   
   let colNames (item 0 fileData)
-  let drawParamList (item (draw_index + 1) fileData)
-  set drawParams table:make
-  
-  foreach range length colNames [ x ->
-    table:put drawParams (item x colNames) (item x drawParamList)
+  ifelse length fileData > (draw_index + 1)
+  [
+    let drawParamList (item (draw_index + 1) fileData)
+    set drawParams table:make
+    
+    foreach range length colNames [ x ->
+      table:put drawParams (item x colNames) (item x drawParamList)
+    ]
+    ;print drawParams
+    
+    let rand_seed (item 1 drawParamList)
+    random-seed rand_seed
   ]
-  ;print drawParams
-  
-  let rand_seed (item 1 drawParamList)
-  random-seed rand_seed
+  [
+    let rand_seed (draw_index + 1)
+    random-seed rand_seed
+  ]
 end
 
 to params_updateTrace
