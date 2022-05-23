@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 100
-50.0
+60.0
 .5
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 100
-50.0
+60.0
 .5
 1
 NIL
@@ -392,10 +392,10 @@ AverageContacts
 11
 
 PLOT
-1837
-22
-2102
-189
+1838
+32
+2131
+180
 Age (black), Vaccinated (green)
 NIL
 NIL
@@ -411,6 +411,7 @@ PENS
 "pen-2" 1.0 0 -2674135 true "" "histogram [ agerange ] of simuls with [ recoverVaccine != 0 ]"
 "pen-3" 1.0 0 -15040220 true "" "histogram [ agerange ] of simuls with [ currentVaccine != 0 ]"
 "pen-4" 1.0 0 -13791810 true "" "histogram [ agerange ] of simuls with [ prevVaccine != 0 ]"
+"pen-5" 1.0 0 -5825686 true "" "histogram [ agerange ] of simuls with [ color = red ]"
 
 PLOT
 1040
@@ -847,10 +848,10 @@ Vaccinated
 11
 
 PLOT
-1839
-524
-2188
-684
+2968
+359
+3325
+497
 Vaccination Rates
 NIL
 NIL
@@ -980,7 +981,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-3
+4
 
 MONITOR
 1473
@@ -1005,10 +1006,10 @@ scaledPopulation * extraScaleFactor
 11
 
 PLOT
-1859
-697
-2331
-877
+1869
+727
+2341
+885
 Case Tracking (scaled)
 NIL
 NIL
@@ -1041,10 +1042,10 @@ NIL
 HORIZONTAL
 
 PLOT
-2970
-349
-3378
-499
+1839
+534
+2152
+684
 Average Interaction Infectivity
 NIL
 NIL
@@ -1299,10 +1300,10 @@ cumulativeInfected
 14
 
 MONITOR
-15
-895
-170
-952
+13
+897
+168
+954
 % Living Recovered
 recoverProportion * 100
 2
@@ -2490,7 +2491,7 @@ SLIDER
 min_stage
 min_stage
 0
-4
+5
 1.0
 1
 1
@@ -2699,13 +2700,13 @@ override_asympt_table
 SLIDER
 1045
 169
-1225
-202
+1232
+203
 init_metric_threshold
 init_metric_threshold
 -100
-12000
-11000.0
+30000
+30000.0
 100
 1
 NIL
@@ -2720,7 +2721,7 @@ init_stage
 init_stage
 0
 5
-2.0
+4.0
 0.1
 1
 NIL
@@ -2922,8 +2923,8 @@ SLIDER
 draw_index
 draw_index
 0
-4000
-1902.0
+2000
+245.0
 1
 1
 NIL
@@ -2941,10 +2942,10 @@ input/vic/rollout_target_multi.csv
 String
 
 PLOT
-1840
-197
-2122
-361
+1843
+185
+2136
+354
 Vaccine Eff vs. Infection
 NIL
 NIL
@@ -2956,16 +2957,16 @@ true
 true
 "" ""
 PENS
-"base" 0.02 1 -1184463 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
-"incur" 0.02 1 -13840069 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
-"baseRec" 0.02 1 -2674135 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" recoverVaccine recoverDay 0 0) ] of simuls"
-"incurRec" 0.02 1 -13345367 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) recoverVaccine recoverDay 0 0) ] of simuls"
+"base" 0.02 1 -1184463 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"incur" 0.02 1 -13840069 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"baseRec" 0.02 1 -2674135 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" \"base\" recoverVaccine recoverDay 0 0) ] of simuls"
+"incurRec" 0.02 1 -13345367 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) recoverVaccine recoverDay 0 0) ] of simuls"
 
 PLOT
-1837
-367
-2121
-517
+1840
+360
+2130
+519
 Days Since Vac
 NIL
 NIL
@@ -2978,7 +2979,7 @@ false
 "" ""
 PENS
 "default" 5.0 1 -16777216 true "" "histogram [ days - vaccineDay ] of simuls with [currentVaccine != 0]"
-"pen-1" 1.0 0 -5298144 true "" "histogram [ days - recoverDay ] of simuls with [recoverVaccine != 0]"
+"pen-1" 10.0 1 -5298144 true "" "histogram [ days - recoverDay ] of simuls with [recoverVaccine != 0]"
 
 CHOOSER
 1598
@@ -3277,10 +3278,10 @@ infectionsToday
 11
 
 MONITOR
-1044
-69
-1182
-114
+1045
+67
+1183
+112
 Expected Hosp
 policymetric7
 0
@@ -3299,10 +3300,10 @@ MONITOR
 11
 
 PLOT
-673
-610
-1008
-775
+670
+609
+1005
+778
 New infections / expected hosp
 NIL
 NIL
@@ -3315,13 +3316,13 @@ false
 "" ""
 PENS
 "default" 1.0 1 -2674135 true "" "plot policymetric7 / ( 0.01 + infectionsToday)"
-"pen-1" 1.0 0 -16777216 true "" "plot 0.044"
+"pen-1" 1.0 0 -16777216 true "" "plot 0.025"
 
 PLOT
-673
-780
-1008
-930
+672
+785
+1011
+939
 New infections
 NIL
 NIL

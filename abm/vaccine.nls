@@ -151,12 +151,14 @@ to-report vaccine_getWanedParameter [paramName variant vac day prevVac prevDay]
   ]
   
   let vacEff table:get vacParams paramName
+  let daysAgo (days - (effDays + day))
+  
   ifelse paramName = "reduceHosp" or paramName = "reduceIcu" or paramName = "reduceMort"
   [
-    set vacEff vacEff - (days - (effDays + day)) * (table:get vacParams "waneRateOut")
+    set vacEff vacEff - daysAgo * (table:get vacParams "waneRateOut")
   ]
   [
-    set vacEff vacEff - (days - (effDays + day)) * (table:get vacParams "waneRate")
+    set vacEff vacEff - daysAgo * (table:get vacParams "waneRate")
   ]
   ;; TODO waning based on day
   report 1 - LnOddsToPr (vacEff)

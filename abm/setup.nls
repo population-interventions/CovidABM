@@ -37,6 +37,7 @@ to loadPopDivisionTable
     set index index + 1    table:put cohortData "workerCount" item index x
     set index index + 1    table:put cohortData "studentCount" item index x
     set index index + 1    table:put cohortData "spanMult" item index x
+    set index index + 1    table:put cohortData "avoidOr" item index x
     set index index + 1    table:put cohortData "gatherFreqMult" item index x
     set index index + 1    table:put cohortData "region" item index x
     set index index + 1    table:put cohortData "succeptOr" item index x

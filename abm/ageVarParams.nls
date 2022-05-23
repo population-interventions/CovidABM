@@ -36,6 +36,9 @@ to-report GetVariantDeathLnOdds [age variant]
 end
 
 to-report GetVariantIcuLnOdds [age variant]
+  if age > 80 [
+    set age 80 
+  ]
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age > 30
@@ -69,6 +72,9 @@ to-report GetVariantIcuLnOdds [age variant]
 end
 
 to-report GetVariantHospLnOdds [age variant]
+  if age > 80 [
+    set age 80 
+  ]
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age > 30
@@ -102,6 +108,9 @@ to-report GetVariantHospLnOdds [age variant]
 end
 
 to-report GetVariantSymptomaticLnOdds [age variant]
+  if age > 80 [
+    set age 80 
+  ]
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age < 20
@@ -135,6 +144,9 @@ to-report GetVariantSymptomaticLnOdds [age variant]
 end
 
 to-report GetHospStayLength [age variant]
+  if age > 80 [
+    set age 80 
+  ]
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age < 40

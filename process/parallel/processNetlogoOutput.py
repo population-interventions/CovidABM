@@ -16,7 +16,7 @@ import os
 import process.shared.utilities as util
 
 metricList = ['mort', 'icu', 'hosp', 'sympt', 'infect']
-metricListRaw = ['mort', 'icu', 'hosp', 'sympt']
+metricListRaw = {'die' : 'mort', 'icu' : 'icu', 'hosp' : 'hosp', 'sympt' : 'sympt'}
 
 def SplitOutDailyData(chunk, cohorts, days, arrayIndex, name, filePath, fileAppend, fillTo=False):
 	columnName = name + '_listOut'
@@ -86,9 +86,9 @@ def ProcessAbmChunk(
 		filename, 'infectVac', fillTo=day_override)
 	DecorateOutDailyData(dfNoVac + dfVac, arrayIndex, filename, 'infect')
 	
-	for metric in metricListRaw:
+	for rawName, metric in metricListRaw.items():
 		SplitOutDailyData(
-			chunk, cohorts, days, arrayIndex, '{}Array'.format(metric),
+			chunk, cohorts, days, arrayIndex, '{}Array'.format(rawName),
 			filename, metric, fillTo=day_override)
 
 
@@ -120,11 +120,13 @@ def ProcessAbmOutput(
 def ToVisualisation(chunk, outputDir, arrayIndex, append, measureCols, divisor=False, dayStartOffset=0, outputDay=False):
 	chunk.columns = chunk.columns.set_levels(chunk.columns.levels[0].astype(int), level=0)
 	chunk.columns = chunk.columns.set_levels(chunk.columns.levels[1].astype(int), level=1)
+	print(chunk)
 	chunk = chunk.groupby(level=[0], axis=1).sum()
 	chunk = chunk.sort_values('day', axis=1)
 	if divisor:
 		chunk = chunk / divisor
 	
+	print(chunk)
 	if outputDay:
 		chunk_day = chunk.copy()
 		chunk_day.columns = chunk_day.columns.droplevel(level=0)
@@ -133,6 +135,7 @@ def ToVisualisation(chunk, outputDir, arrayIndex, append, measureCols, divisor=F
 	index = chunk.columns.to_frame()
 	index['week'] = np.floor((index['day'] - dayStartOffset)/7)
 	
+	print(chunk)
 	chunk.columns = pd.MultiIndex.from_frame(index)
 	chunk = chunk.groupby(level=[0], axis=1).sum()
 	util.OutputToFile(chunk, outputDir + '/processed_' + append + '_weeklyAgg_' + str(arrayIndex), head=False)
@@ -317,7 +320,7 @@ def ProcessInfectionCohorts(inputDir, outputDir, arrayIndex, measureCols):
 
 def DoAbmProcessing(inputDir, outputDir, arrayIndex, indexRename, measureCols, measureCols_raw, day_override=False, dayStartOffset=0):
 	print('Processing ABM Output', inputDir, arrayIndex)
-	ProcessAbmOutput(inputDir, outputDir + '/step_1', arrayIndex, indexRename, measureCols_raw, day_override=day_override)
+	#ProcessAbmOutput(inputDir, outputDir + '/step_1', arrayIndex, indexRename, measureCols_raw, day_override=day_override)
 	
 	#CasesVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
 	InfectionsAndStageVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)

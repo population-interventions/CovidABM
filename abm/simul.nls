@@ -363,8 +363,6 @@ to simul_infect
           ;print (word "first " (ApplyOrToPr (ApplyOrToPr succeptibility succeptOr) wornMaskOr) ", second " (ApplyOrToPr (ApplyOrToPr succeptibility wornMaskOr) succeptOr) ", mult " ApplyOrToPr succeptibility (wornMaskOr * succeptOr))
           set succeptibility ApplyOrToPr succeptibility (wornMaskOr * succeptOr)
           
-          set transmission_count transmission_count + extraScaleFactor * (Scale_Factor ^ localPatchScale)
-          set transmission_sum transmission_sum + succeptibility
           let infectDraw random-float 1
           
           if print_contact_events [
@@ -385,6 +383,8 @@ to simul_infect
               set patchVariant global_incursionVariant
             ]
           ]
+          set transmission_count transmission_count + extraScaleFactor * (Scale_Factor ^ localPatchScale)
+          set transmission_sum transmission_sum + succeptibility * (vaccine_getWanedParameter "riskReduct" patchVariant currentVaccine vaccineDay prevVaccine prevVaccineDay) * (vaccine_getWanedParameter "riskReduct" patchVariant recoverVaccine recoverDay 0 0)
           
           ;; Check against lower succeptiblity for reinfection.
           if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
