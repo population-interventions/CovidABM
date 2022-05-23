@@ -15,11 +15,20 @@ import os
 
 import process.shared.utilities as util
 
+metricList = ['mort', 'icu', 'hosp', 'sympt', 'infect']
+metricListRaw = ['mort', 'icu', 'hosp', 'sympt']
 
 def SplitOutDailyData(chunk, cohorts, days, arrayIndex, name, filePath, fileAppend, fillTo=False):
 	columnName = name + '_listOut'
 	df = util.SplitNetlogoNestedList(chunk, cohorts, days, columnName, name, fillTo=fillTo)
+	df = df[name]
 	util.OutputToFile(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), head=False)
+	return df
+
+
+def DecorateOutDailyData(df, arrayIndex, filePath, fileAppend):
+	util.OutputToFile(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), head=False)
+	return df
 
 
 def ProcessAbmChunk(
@@ -68,12 +77,19 @@ def ProcessAbmChunk(
 	SplitOutDailyData(chunk, 1, days, arrayIndex, 'case7', filename, 'case7', fillTo=day_override)
 	SplitOutDailyData(chunk, 1, days, arrayIndex, 'case14', filename, 'case14', fillTo=day_override)
 	SplitOutDailyData(chunk, 1, days, arrayIndex, 'stage', filename, 'stage', fillTo=day_override)
-	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectNoVacArray', filename, 'infectNoVac', fillTo=day_override)
-	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectVacArray', filename, 'infectVac', fillTo=day_override)
-	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'dieArray', filename, 'mort', fillTo=day_override)
-	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'icuArray', filename, 'icu', fillTo=day_override)
-	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'hospArray', filename, 'hosp', fillTo=day_override)
-	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'symptArray', filename, 'sympt', fillTo=day_override)
+	
+	dfNoVac = SplitOutDailyData(
+		chunk, cohorts, days, arrayIndex, 'infectNoVacArray',
+		filename, 'infectNoVac', fillTo=day_override)
+	dfVac = SplitOutDailyData(
+		chunk, cohorts, days, arrayIndex, 'infectVacArray',
+		filename, 'infectVac', fillTo=day_override)
+	DecorateOutDailyData(dfNoVac + dfVac, arrayIndex, filename, 'infect')
+	
+	for metric in metricListRaw:
+		SplitOutDailyData(
+			chunk, cohorts, days, arrayIndex, '{}Array'.format(metric),
+			filename, metric, fillTo=day_override)
 
 
 def ProcessAbmOutput(
@@ -102,9 +118,9 @@ def ProcessAbmOutput(
 
 
 def ToVisualisation(chunk, outputDir, arrayIndex, append, measureCols, divisor=False, dayStartOffset=0, outputDay=False):
+	chunk.columns = chunk.columns.set_levels(chunk.columns.levels[0].astype(int), level=0)
 	chunk.columns = chunk.columns.set_levels(chunk.columns.levels[1].astype(int), level=1)
-	chunk.columns = chunk.columns.set_levels(chunk.columns.levels[2].astype(int), level=2)
-	chunk = chunk.groupby(level=[0, 1], axis=1).sum()
+	chunk = chunk.groupby(level=[0], axis=1).sum()
 	chunk = chunk.sort_values('day', axis=1)
 	if divisor:
 		chunk = chunk / divisor
@@ -117,11 +133,8 @@ def ToVisualisation(chunk, outputDir, arrayIndex, append, measureCols, divisor=F
 	index = chunk.columns.to_frame()
 	index['week'] = np.floor((index['day'] - dayStartOffset)/7)
 	
-	chunk.columns = index
-	chunk.columns = pd.MultiIndex.from_tuples(chunk.columns, names=['metric', 'day', 'week'])
-	chunk.columns = chunk.columns.droplevel(level=0)
-	chunk = chunk.groupby(level=[1], axis=1).sum()
-	
+	chunk.columns = pd.MultiIndex.from_frame(index)
+	chunk = chunk.groupby(level=[0], axis=1).sum()
 	util.OutputToFile(chunk, outputDir + '/processed_' + append + '_weeklyAgg_' + str(arrayIndex), head=False)
 
 
@@ -131,24 +144,25 @@ def ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, append, measureC
 	for chunk in tqdm(pd.read_csv(
 				fileIn + '_' + append + '_' + str(arrayIndex) + '.csv', chunksize=chunksize,
 				index_col=list(range(2 + len(measureCols))),
-				header=list(range(3)),
+				header=list(range(2)),
 				dtype={'day' : int, 'cohort' : int}), 
 			total=4):
 		ToVisualisation(chunk, outputDir, arrayIndex, append, measureCols, divisor=divisor, dayStartOffset=dayStartOffset, outputDay=outputDay)
 
 
 def InfectionsAndStageVisualise(inputDir, outputDir, arrayIndex, measureCols, dayStartOffset=0):
-	print('Processing infectNoVac')
+	print('Processing trace infectNoVac')
 	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'infectNoVac', measureCols, dayStartOffset=dayStartOffset)
-	print('Processing infectVac')
+	print('Processing trace infectVac')
 	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'infectVac', measureCols, dayStartOffset=dayStartOffset)
 	
-	print('Processing hosp')
-	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'hosp', measureCols, dayStartOffset=dayStartOffset)
-	print('Processing mort')
-	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'mort', measureCols, dayStartOffset=dayStartOffset)
-
-	print('Processing stage')
+	for metric in metricList:
+		print('Processing trace {}'.format(metric))
+		ProcessFileToVisualisation(
+			inputDir, outputDir, arrayIndex, metric,
+			measureCols, dayStartOffset=dayStartOffset)
+	
+	print('Processing trace stage')
 	ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'stage', measureCols, dayStartOffset=dayStartOffset)
 
 
@@ -207,9 +221,9 @@ def OutputYear(df, outputPrefix, arrayIndex):
 	util.OutputToFile(df, outputPrefix + '_yearlyAgg' + '_' + str(arrayIndex), head=False)
 
 
-def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doTenday=False):
+def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doTenday=False):
+	df.columns = df.columns.set_levels(df.columns.levels[0].astype(int), level=0)
 	df.columns = df.columns.set_levels(df.columns.levels[1].astype(int), level=1)
-	df.columns = df.columns.set_levels(df.columns.levels[2].astype(int), level=2)
 	df = df.sort_values(['cohort', 'day'], axis=1)
 	
 	col_index = df.columns.to_frame()
@@ -221,12 +235,13 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doTenday=False):
 		sort=False)
 	df.columns = pd.MultiIndex.from_frame(col_index)
 	
-	df = df.groupby(level=[3, 1], axis=1).sum()
+	df = df.groupby(level=[0, 2], axis=1).sum()
 
 	# In the ABM age range 15 represents ages 10-17 while age range 25 is
 	# ages 18-30. First redestribute these cohorts so they align with 10 year
 	# increments.
-	df[15], df[25] = df[15] + df[25]/5, df[25]*4/5
+	# BUT NOT ANYMORE!
+	#df[15], df[25] = df[15] + df[25]/5, df[25]*4/5
 
 	# Then split the 10 year cohorts in half.
 	ageCols = [i*10 + 5 for i in range(10)]
@@ -244,12 +259,14 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doTenday=False):
 	# Add extra cohorts missing from ABM
 	df = df.sort_index(axis=0)
 	df = df.sort_index(axis=1)
-	for age in [100 + i*5 for i in range(2)]:
-		df1 = df.loc[:, slice(80, 80)].rename(columns={80 : age}, level=0)
-		df = df.join(df1)
+	# Not anymore! The PMSLT can deal with this (if it exist?)
+	#for age in [100 + i*5 for i in range(2)]:
+	#	df1 = df.loc[:, slice(80, 80)].rename(columns={80 : age}, level=0)
+	#	df = df.join(df1)
 	
 	df = df.stack(level=['age'])
-	util.OutputToFile(df, outputPrefix + '_' + str(arrayIndex), head=False)
+	if doDaily:
+		util.OutputToFile(df, outputPrefix + '_' + str(arrayIndex), head=False)
 	OutputWeek(df.copy(), outputPrefix, arrayIndex)
 	if doTenday:
 		OutputTenday(df.copy(), outputPrefix, arrayIndex)
@@ -264,7 +281,7 @@ def ProcessInfectCohorts(measureCols, filename, cohortFile, outputPrefix, arrayI
 	for chunk in tqdm(pd.read_csv(
 				filename + '.csv', 
 				index_col=list(range(2 + len(measureCols))),
-				header=list(range(3)),
+				header=list(range(2)),
 				dtype={'day' : int, 'cohort' : int},
 				chunksize=chunksize,
 				keep_default_na=False),
@@ -274,31 +291,26 @@ def ProcessInfectCohorts(measureCols, filename, cohortFile, outputPrefix, arrayI
 
 
 def ProcessInfectionCohorts(inputDir, outputDir, arrayIndex, measureCols):
-	print('Processing vaccination infection for MortHosp')
+	print('Processing vaccination infection')
 	ProcessInfectCohorts(
 		measureCols,
 		inputDir + '/processed_infectVac' + '_' + str(arrayIndex),
 		inputDir + '/processed_static' + '_' + str(arrayIndex),
 		outputDir + '/infect_vac', arrayIndex)
-	print('Processing non-vaccination infection for MortHosp')
+	print('Processing non-vaccination infection')
 	ProcessInfectCohorts(
 		measureCols,
 		inputDir + '/processed_infectNoVac' + '_' + str(arrayIndex),
 		inputDir + '/processed_static' + '_' + str(arrayIndex),
 		outputDir + '/infect_noVac', arrayIndex)
 	
-	print('Processing mort for MortHosp')
-	ProcessInfectCohorts(
-		measureCols,
-		inputDir + '/processed_mort' + '_' + str(arrayIndex),
-		inputDir + '/processed_static' + '_' + str(arrayIndex),
-		outputDir + '/mort', arrayIndex)
-	print('Processing hosp for MortHosp')
-	ProcessInfectCohorts(
-		measureCols,
-		inputDir + '/processed_hosp' + '_' + str(arrayIndex),
-		inputDir + '/processed_static' + '_' + str(arrayIndex),
-		outputDir + '/hosp', arrayIndex)
+	for metric in metricList:
+		print('Processing ages {}'.format(metric))
+		ProcessInfectCohorts(
+			measureCols,
+			inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
+			inputDir + '/processed_static' + '_' + str(arrayIndex),
+			outputDir + '/{}'.format(metric), arrayIndex)
 
 
 ############### Cohort outputs for mort/hosp ###############
@@ -308,8 +320,8 @@ def DoAbmProcessing(inputDir, outputDir, arrayIndex, indexRename, measureCols, m
 	ProcessAbmOutput(inputDir, outputDir + '/step_1', arrayIndex, indexRename, measureCols_raw, day_override=day_override)
 	
 	#CasesVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
-	#InfectionsAndStageVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
+	InfectionsAndStageVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
 	
-	#print('ProcessInfectionCohorts', inputDir, arrayIndex)
-	#ProcessInfectionCohorts(outputDir + '/step_1', outputDir + '/cohort', arrayIndex, measureCols)
+	print('ProcessInfectionCohorts', inputDir, arrayIndex)
+	ProcessInfectionCohorts(outputDir + '/step_1', outputDir + '/cohort', arrayIndex, measureCols)
 
