@@ -33,7 +33,7 @@ def ProcessAbmChunk(
 		'[run number]', 'draw_index',
 		'stage_listOut', 'scalephase', 'cumulativeInfected',
 		'infectNoVacArray_listOut', 'infectVacArray_listOut',
-		'dieArray_listOut', 'icuArray_listOut', 'hospArray_listOut',
+		'dieArray_listOut', 'icuArray_listOut', 'hospArray_listOut', 'symptArray_listOut',
 		'case_listOut', 'case7_listOut',
 		'case14_listOut', 'case28_listOut',
 		'age_listOut'
@@ -71,7 +71,9 @@ def ProcessAbmChunk(
 	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectNoVacArray', filename, 'infectNoVac', fillTo=day_override)
 	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'infectVacArray', filename, 'infectVac', fillTo=day_override)
 	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'dieArray', filename, 'mort', fillTo=day_override)
+	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'icuArray', filename, 'icu', fillTo=day_override)
 	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'hospArray', filename, 'hosp', fillTo=day_override)
+	SplitOutDailyData(chunk, cohorts, days, arrayIndex, 'symptArray', filename, 'sympt', fillTo=day_override)
 
 
 def ProcessAbmOutput(
@@ -305,9 +307,9 @@ def DoAbmProcessing(inputDir, outputDir, arrayIndex, indexRename, measureCols, m
 	print('Processing ABM Output', inputDir, arrayIndex)
 	ProcessAbmOutput(inputDir, outputDir + '/step_1', arrayIndex, indexRename, measureCols_raw, day_override=day_override)
 	
-	CasesVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
-	InfectionsAndStageVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
+	#CasesVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
+	#InfectionsAndStageVisualise(outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
 	
-	print('ProcessInfectionCohorts', inputDir, arrayIndex)
-	ProcessInfectionCohorts(outputDir + '/step_1', outputDir + '/cohort', arrayIndex, measureCols)
+	#print('ProcessInfectionCohorts', inputDir, arrayIndex)
+	#ProcessInfectionCohorts(outputDir + '/step_1', outputDir + '/cohort', arrayIndex, measureCols)
 

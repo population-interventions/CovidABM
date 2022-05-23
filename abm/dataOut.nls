@@ -40,7 +40,7 @@ to setup_DataOut [maxHospTime maxIcuTime maxDeathTime]
 end
 
 to calculateDataOut
-  if _init_metric_threshold < 0 [
+  if _init_metric_threshold < 0[
     ;print "doDataOut"
     set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
     set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
@@ -55,10 +55,6 @@ to calculateDataOut
     set case14_listOut lput casesinperiod14 case14_listOut
     set case28_listOut lput casesinperiod28 case28_listOut
     set stage_listOut lput stage stage_listOut
-    
-    set infectNoVacArray array:from-list cohortLengthListOfZeros
-    set infectVacArray array:from-list cohortLengthListOfZeros
-    set symptArray array:from-list cohortLengthListOfZeros
     
     if stage = 1 [
       set stage1time stage1time + 1
@@ -88,6 +84,10 @@ to calculateDataOut
       set midReport_casesinperiod7_max           casesinperiod7_max
     ]
   ]
+  
+  set infectNoVacArray array:from-list cohortLengthListOfZeros
+  set infectVacArray array:from-list cohortLengthListOfZeros
+  set symptArray array:from-list cohortLengthListOfZeros
   
   set hospArray lput array:from-list cohortLengthListOfZeros (but-first hospArray)
   set icuArray lput array:from-list cohortLengthListOfZeros (but-first icuArray)
