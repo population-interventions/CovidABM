@@ -163,7 +163,7 @@ end
 to simul_updateIsolationResponse
   set pace span * spanMult * global_distance_mult
   set isolateCompliant 0
-  if (accept_isolation_draw < accept_isolation_prop and not always_spread) or (color = red and hospFlag and timenow >= cohortHospTime) [
+  if (accept_isolation_draw < ApplyOrToPr accept_isolation_prop avoidOr and not always_spread) or (color = red and hospFlag and timenow >= cohortHospTime) [
     if (Case_Isolation and (isolating = 1 or tracked = 1)) or (color = red and isolate_on_inf_notice and noticeOwnInfection = 1)[
       ifelse isolating = 1 and color != red
       [
@@ -359,7 +359,7 @@ to simul_infect
         ;print "x"
         ;print x
         if color != red [
-          let succeptibility baseSuccept * x ;; TODO calculate succeptiblity based on patchVariant
+          let succeptibility baseSuccept * x * infectivityMult
           ;print (word "succeptibility " succeptibility ", after " (ApplyOrToPr succeptibility wornMaskOr))
           ;print (word "first " (ApplyOrToPr (ApplyOrToPr succeptibility succeptOr) wornMaskOr) ", second " (ApplyOrToPr (ApplyOrToPr succeptibility wornMaskOr) succeptOr) ", mult " ApplyOrToPr succeptibility (wornMaskOr * succeptOr))
           set succeptibility ApplyOrToPr succeptibility (wornMaskOr * succeptOr)
@@ -454,7 +454,7 @@ end
 to simul_visitDestination
   ;; sets up destinations where people might gather and set off superspreader events
   ;; reduces large gatherings by stage
-  if isolateCompliant = 0 and Visit_Frequency * gatherFreqMult * visit_chance_multiplier > random-float 1  [
+  if isolateCompliant = 0 and ApplyOrToPr (Visit_Frequency * gatherFreqMult * visit_chance_multiplier) (1 / avoidOr) > random-float 1  [
     let myRadius Visit_Radius * global_distance_mult
     if EssentialWorkerFlag and myRadius < ess_radius_anchor [
       set myRadius (myRadius + ess_radius_anchor) * 0.5
@@ -480,8 +480,8 @@ to simul_avoid
     ;; if you are an essential worker, you can only reduce your
     ;; contacts when you are not at work assuming 8 hours work, 8 hours rest, 8 hours recreation - rest doesn't count for anyone, hence it is
     ;; set at 50 on the input slider. People don't isolate from others in their household unit
-    let myPPA Proportion_People_Avoid + draw_ppa_modifier
-    let myPTA Proportion_Time_Avoid + draw_pta_modifier
+    let myPPA ApplyOrToPr (Proportion_People_Avoid + draw_ppa_modifier) avoidOr
+    let myPTA ApplyOrToPr (Proportion_Time_Avoid + draw_pta_modifier) avoidOr
     
     let myHouse householdUnit
     (ifelse any? other simuls-here with [ (householdUnit != myHouse and isolateCompliant = 1) ] and draw_isolationCompliance > random-float 1
@@ -514,7 +514,7 @@ to simul_avoid
 end
 
 to simul_superSpread
-  let mySpread superspreaders
+  let mySpread ApplyOrToPr superspreaders (1 / avoidOr)
   ;if random-float 1 < 0.001 [ print (word mySpread ", " selfVaccEff_raw_risk ", " nextDoseTimer ", " nextDoseTimer)]
   if EssentialWorkerFlag and mySpread < ess_spread_anchor [
     set mySpread (mySpread + ess_spread_anchor) * 0.5

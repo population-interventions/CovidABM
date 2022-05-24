@@ -51,6 +51,9 @@ to-report AddLogOdds [prob toAdd]
 end
 
 to-report ApplyOrToPr [prob oddsRatio]
+  if prob <= 0 or prob >= 1 or oddsRatio = 1 [
+   report prob
+  ]
   report OddsToPr (oddsRatio * PrToOdds prob)
 end
 

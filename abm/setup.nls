@@ -482,6 +482,7 @@ to setGlobals
   set h_prior23                  preSimDailyHosp
   
   set start_day                  0
+  set infectivityMult            1
   
   set real_prior0                0
   set real_prior1                0

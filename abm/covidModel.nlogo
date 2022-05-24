@@ -93,10 +93,10 @@ NIL
 1
 
 BUTTON
-2799
-870
-2901
-905
+2807
+874
+2909
+909
 Trace_Patterns
 ask n-of 1 simuls with [ color != black ] [ pen-down ] 
 NIL
@@ -110,10 +110,10 @@ NIL
 1
 
 BUTTON
-2913
-870
-3013
-904
+2920
+874
+3020
+908
 UnTrace
 ask turtles [ pen-up ]
 NIL
@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-3.0
+5.0
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.02
+0.04
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.78
+0.5499999999999999
 0.01
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.78
+0.5499999999999999
 0.01
 1
 NIL
@@ -364,7 +364,7 @@ INPUTBOX
 373
 263
 initial_cases
-10000.0
+600000.0
 1
 0
 Number
@@ -563,7 +563,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.2
+0.35
 0.01
 1
 NIL
@@ -707,7 +707,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+5.0
 1
 1
 NIL
@@ -902,10 +902,10 @@ quarantine
 11
 
 MONITOR
-1044
-305
-1216
-350
+1042
+310
+1214
+355
 NIL
 Track_and_Trace_Efficiency
 17
@@ -1117,7 +1117,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.78
+0.5
 0.01
 1
 NIL
@@ -1570,7 +1570,7 @@ SLIDER
 2830
 913
 3028
-947
+946
 complacency_loss
 complacency_loss
 0
@@ -1623,10 +1623,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1048
-259
-1221
-304
+1042
+263
+1215
+308
 Case report %
 100 * (count simuls with [ color = red and tracked = 1 and caseReportTime <= ticks and report_case_draw < report_proportion]) / (max (list (count simuls with [ color = red ]) 1))
 2
@@ -1791,10 +1791,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-220
-564
-329
+244
 597
+353
+630
 max_stage
 max_stage
 0
@@ -2157,10 +2157,10 @@ self_iso_at_peak
 -1000
 
 SWITCH
-219
-657
-338
-690
+237
+678
+356
+711
 print_phase
 print_phase
 1
@@ -2168,10 +2168,10 @@ print_phase
 -1000
 
 SWITCH
-219
-619
-337
-652
+237
+640
+355
+673
 print_vac
 print_vac
 1
@@ -2484,10 +2484,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-220
-529
-333
+244
 562
+357
+595
 min_stage
 min_stage
 0
@@ -2698,10 +2698,10 @@ override_asympt_table
 -1000
 
 SLIDER
-1045
-169
-1232
-202
+1040
+193
+1227
+226
 init_metric_threshold
 init_metric_threshold
 -100
@@ -2713,15 +2713,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-1044
-208
-1217
-241
+1042
+229
+1215
+262
 init_stage
 init_stage
 0
 5
-4.0
+2.0
 0.1
 1
 NIL
@@ -2924,7 +2924,7 @@ draw_index
 draw_index
 0
 2000
-245.0
+990.0
 1
 1
 NIL
@@ -3267,10 +3267,10 @@ incur_name_part_3
 0
 
 MONITOR
-1045
-118
-1227
-163
+1040
+145
+1222
+190
 NIL
 infectionsToday
 0
@@ -3278,10 +3278,10 @@ infectionsToday
 11
 
 MONITOR
-1045
-67
-1183
-112
+1040
+94
+1178
+139
 Expected Hosp
 policymetric7
 0
@@ -3352,6 +3352,32 @@ init_vacrecover_day
 1
 NIL
 HORIZONTAL
+
+SLIDER
+1042
+55
+1182
+89
+start_day_min
+start_day_min
+0
+100
+20.0
+1
+1
+NIL
+HORIZONTAL
+
+SWITCH
+133
+524
+252
+558
+stages_cont
+stages_cont
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?

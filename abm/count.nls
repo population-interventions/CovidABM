@@ -333,13 +333,17 @@ end
 
 to checkStartThreshold
   if _init_metric_threshold > -1 [
-    ifelse infectionsToday > _init_metric_threshold
+    ifelse infectionsToday > _init_metric_threshold and ticks >= start_day_min
     [
       set _init_metric_threshold -1
+      set infectivityMult 1
       ;print (word "start_day " start_day ", cases " (casesinperiod7 / 7))
     ]
     [
       set start_day ticks + 1
+      if infectionsToday > 0 [
+        set infectivityMult infectivityMult * 0.8 + 0.2 * 0.7 * _init_metric_threshold / infectionsToday
+      ]
     ]
   ]
 end

@@ -144,6 +144,7 @@ globals [
   initial_primary
   initial_secondary
   start_day
+  infectivityMult
   
   _initial_cases
   _param_incur_phase_limit
