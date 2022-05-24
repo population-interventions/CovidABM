@@ -246,6 +246,9 @@ to createSimulants
       set cohortDeathTime cohort_deathTime
       set cohortHospLengthBase cohort_hospLengthBase
       
+      set recoverVaccine 0
+      set recoverVaccinePopPerSimul 0
+      
       set vaccBranch cohort_vaccineBranch
       set vaccBranchFrom2 cohort_branchFrom2
       set vaccReceptive false
@@ -330,7 +333,9 @@ to setupInitialVaccination_micromangedMethod
       let in_vaccineDay (item 3 row) - init_vacrecover_day
       
       if in_recoverDay >= 0 [
-        simul_setNewRecover (item 4 row)
+        ;; Placeholder recoverVaccinePopPerSimul, set like this so that initial infections have
+        ;; full immunity. Proper recoverVaccinePopPerSimul is set later in setup.
+        simul_setNewRecover (item 4 row) 999999
         set recoverDay -1 * in_recoverDay
       ]
       ifelse in_vaccineDay >= 0
@@ -695,7 +700,7 @@ to setup
   
   ask n-of ( initial_primary / popPerSimul ) potentialInitCases [
     set myScale scalePhase
-    simul_setNewInfection getRandomInitVariant (random (floor min (list init_timenow_limit ownIllnessPeriod)))
+    simul_setNewInfection getRandomInitVariant (random (floor min (list init_timenow_limit ownIllnessPeriod))) 1
     set isInitialInfection true
     set contributeToR false
     set infectedContactList table:make
@@ -729,7 +734,7 @@ to setup
     let nearSimuls (other simuls in-radius 2 with [ color = red ])
     if init_secondry_infect > popPerSimul and any? nearSimuls [
       set myScale scalePhase
-      simul_setNewInfection getRandomInitVariant (random (floor min (list init_timenow_limit ownIllnessPeriod)))
+      simul_setNewInfection getRandomInitVariant (random (floor min (list init_timenow_limit ownIllnessPeriod))) 1
       set isInitialInfection true
       set contributeToR false
       set infectedContactList table:make
@@ -754,7 +759,12 @@ to setup
     ]
   ]
 
-  set recovercount (count simuls with [color = yellow]) * total_population / Population
+  let localYellowCount (count simuls with [color = yellow])
+  set recovercount localYellowCount * total_population / Population
+  ask simuls with [color = yellow] [
+    set recoverVaccinePopPerSimul recovercount / localYellowCount
+  ]
+  
   table:put recoverCountByVariant getInitRecoverVariant recovercount
   set dailyRecoverMult exp(ln(1 - yearly_recover_prop_loss) / 365)
   ;;set tracking false ;; ensures this is set to false each time the model starts

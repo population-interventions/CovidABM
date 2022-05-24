@@ -67,7 +67,7 @@ to incursion_update
     if peoplePerSimul <= 1 [
       if rngs:rnd-beta incursionsSeedID 1 1 < 0.2 [
         ask n-of 1 simuls with [color != red and color != black] [
-          simul_setNewInfection global_incursionVariant 0
+          simul_setNewInfection global_incursionVariant 0 1
           set contact_events 0
           set contributeToR true
           simul_updateVariantParams

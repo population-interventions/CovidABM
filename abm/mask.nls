@@ -30,14 +30,14 @@ end
 to-report simul_getWantWearMask
   (ifelse agerange = 5
     [
-      report wearsMask_draw < mask_wearing_a0
+      report wearsMask_draw < ApplyOrToPr mask_wearing_a0 avoidOr
     ]
     agerange = 15
     [
-      report wearsMask_draw < mask_wearing_a10
+      report wearsMask_draw < ApplyOrToPr mask_wearing_a10 avoidOr
     ]
     [
-      report wearsMask_draw < mask_wearing_a20
+      report wearsMask_draw < ApplyOrToPr mask_wearing_a20 avoidOr
     ]
   )
 end

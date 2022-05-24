@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-5.0
+8.0
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.06
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.5499999999999999
+0.3
 0.01
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.5499999999999999
+0.3
 0.01
 1
 NIL
@@ -563,7 +563,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.35
+0.5
 0.01
 1
 NIL
@@ -602,7 +602,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -707,7 +707,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+6.2
 1
 1
 NIL
@@ -1117,7 +1117,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.5
+0.3
 0.01
 1
 NIL
@@ -2924,7 +2924,7 @@ draw_index
 draw_index
 0
 2000
-990.0
+725.0
 1
 1
 NIL
@@ -2936,15 +2936,15 @@ INPUTBOX
 205
 134
 input_vaccine_schedule
-input/vic/rollout_target_multi.csv
+input/vic/rollout_target_early.csv
 1
 0
 String
 
 PLOT
-1843
-185
-2136
+1839
+200
+2131
 354
 Vaccine Eff vs. Infection
 NIL
@@ -2959,8 +2959,8 @@ true
 PENS
 "base" 0.02 1 -1184463 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
 "incur" 0.02 1 -13840069 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
-"baseRec" 0.02 1 -2674135 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" \"base\" recoverVaccine recoverDay 0 0) ] of simuls"
-"incurRec" 0.02 1 -13345367 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) recoverVaccine recoverDay 0 0) ] of simuls"
+"baseRec" 0.02 1 -2674135 true "" "histogram [ 1 - (simul_getRecoverVacHistogram \"base\" 2659) ] of simuls"
+"incurRec" 0.02 1 -13345367 true "" "histogram [ 1 - (simul_getRecoverVacHistogram (word incur_name_part_1 incur_name_part_2 incur_name_part_3) 2659) ] of simuls"
 
 PLOT
 1840
@@ -3357,7 +3357,7 @@ SLIDER
 1042
 55
 1182
-89
+88
 start_day_min
 start_day_min
 0
@@ -3372,12 +3372,23 @@ SWITCH
 133
 524
 252
-558
+557
 stages_cont
 stages_cont
 1
 1
 -1000
+
+MONITOR
+297
+918
+406
+963
+%recoverVariant
+100 * count simuls with [ recoverVariant != 0 and color != red] / population
+2
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?

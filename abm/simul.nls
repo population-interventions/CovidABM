@@ -72,6 +72,7 @@ simuls-own [
   initPreSetup ;; Whether pre simulation dose and vaccine has been set up
   
   recoverVaccine ;; Name of the 'vaccine' gained by recovering
+  recoverVaccinePopPerSimul ;; Number of people the agent 
   currentVaccine ;; Name of most recent vaccine
   prevVaccine ;; Name of previous vaccine, for when the new one is not yet in effect
   
@@ -213,6 +214,7 @@ to simul_do_scaleup
     set infectVariant 0
     set recoverVariant 0
     set recoverVaccine 0
+    set recoverVaccinePopPerSimul -1
     set recoverDay -1
   ]
   [
@@ -233,29 +235,40 @@ to simul_do_scaleup
   set returntoschool random 100
 end
 
-to simul_setNewRecover [variant]
+to simul_setNewRecover [variant popPerSimul]
   set color yellow
+  ifelse recoverVaccine = 0 or popPerSimul > recoverVaccinePopPerSimul
+  [
+    set recoverVaccinePopPerSimul popPerSimul
+    set recoverDay days
+  ]
+  [
+    ;; Reinfected simulants should not gain full recent immunity when the simulation scales up again.
+    let pullProp popPerSimul / recoverVaccinePopPerSimul
+    set recoverDay pullProp * days  + (1 - pullProp) * recoverDay
+  ]
+  
   set recoverVaccine getVariantRecoverVaccine variant
-  set recoverDay days
+  set recoverVariant variant
 end
 
-to simul_setNewInfection [variant startDay]
+to simul_setNewInfection [variant startDay recoverEffProp]
   set color red
   set timenow startDay
   set infectVariant variant
   
   let symptProp (LnOddsToPr (GetVariantSymptomaticLnOdds agerange variant)) * 
                 (vaccine_getWanedParameter "reduceSympt" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
-                (vaccine_getWanedParameter "reduceSympt" variant recoverVaccine recoverDay 0 0)
+                ((vaccine_getWanedParameter "reduceSympt" variant recoverVaccine recoverDay 0 0) * recoverEffProp + 1 - recoverEffProp)
   let hospProp  (LnOddsToPr (GetVariantHospLnOdds agerange variant)) * 
                 (vaccine_getWanedParameter "reduceHosp" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
-                (vaccine_getWanedParameter "reduceHosp" variant recoverVaccine recoverDay 0 0)
+                ((vaccine_getWanedParameter "reduceHosp" variant recoverVaccine recoverDay 0 0) * recoverEffProp + 1 - recoverEffProp)
   let icuProp   (LnOddsToPr (GetVariantIcuLnOdds agerange variant)) * 
                 (vaccine_getWanedParameter "reduceIcu" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
-                (vaccine_getWanedParameter "reduceIcu" variant recoverVaccine recoverDay 0 0)
+                ((vaccine_getWanedParameter "reduceIcu" variant recoverVaccine recoverDay 0 0) * recoverEffProp + 1 - recoverEffProp)
   let mortProp  (LnOddsToPr (GetVariantDeathLnOdds agerange variant)) * 
                 (vaccine_getWanedParameter "reduceMort" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
-                (vaccine_getWanedParameter "reduceMort" variant recoverVaccine recoverDay 0 0)
+                ((vaccine_getWanedParameter "reduceMort" variant recoverVaccine recoverDay 0 0) * recoverEffProp + 1 - recoverEffProp)
   
   let severityDraw random-float 1
   set asymptomaticFlag not (severityDraw < symptProp)
@@ -284,6 +297,15 @@ to simul_setNewInfection [variant startDay]
   [
     array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + popPerSimul
   ]
+end
+
+to-report simul_getRecoverVacHistogram [variant popPerSimul]
+  let recoverEffProp recoverVaccinePopPerSimul / popPerSimul
+  if recoverEffProp > 1 [
+    set recoverEffProp 1 
+  ]
+  
+  report ((vaccine_getWanedParameter "riskReduct" variant recoverVaccine recoverDay 0 0) * recoverEffProp + 1 - recoverEffProp)
 end
 
 ;;*******************************************************************************************************************************
@@ -391,13 +413,18 @@ to simul_infect
           if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
             set succeptibility succeptibility * (vaccine_getWanedParameter "riskReduct" patchVariant currentVaccine vaccineDay prevVaccine prevVaccineDay)
             if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
-              set succeptibility succeptibility * (vaccine_getWanedParameter "riskReduct" patchVariant recoverVaccine recoverDay 0 0)
+              let popPerSimul extraScaleFactor * (Scale_Factor ^ localPatchScale)
+              let recoverEffProp recoverVaccinePopPerSimul / popPerSimul
+              if recoverEffProp > 1 [
+                set recoverEffProp 1 
+              ]
+              
+              set succeptibility succeptibility * ((vaccine_getWanedParameter "riskReduct" patchVariant recoverVaccine recoverDay 0 0) * recoverEffProp + 1 - recoverEffProp)
               if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
                 set myScale localPatchScale
-                let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
                 
                 ;; Set infection status
-                simul_setNewInfection patchVariant 0
+                simul_setNewInfection patchVariant 0 recoverEffProp
                 set contact_events 0
                 set contributeToR true
                 simul_updateVariantParams
@@ -562,9 +589,8 @@ to simul_end_infection
       
       ;; May as well set color to yellow since dead and infected people have a similar effect on the simulation.
       ;; Very few people die in the low scales as a proportion of the total population.
-      simul_setNewRecover infectVariant
+      simul_setNewRecover infectVariant popPerSimul
       set isInitialInfection false
-      set recoverVariant infectVariant
       set infectVariant 0
     ]
     
