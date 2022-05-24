@@ -14,7 +14,7 @@ to setEssentialWorkerPriority
     ]
   ]
   [
-    set EssentialWorkerPriority 101 ;; People who don't work are never essential workers.
+    set EssentialWorkerPriority 2 ;; People who don't work are never essential workers.
   ]
 end
 
@@ -108,8 +108,8 @@ to processPopulationData
     table:put regionPopulation region ((table:get regionPopulation region) + pop)
   ]
   
-  set essentialWorkerRange 100 * totalEssentialWorkers / totalWorkers
-  set otherWorkerRange 100 * (totalWorkers - totalEssentialWorkers) / totalWorkers
+  set essentialWorkerRange totalEssentialWorkers / totalWorkers
+  set otherWorkerRange (totalWorkers - totalEssentialWorkers) / totalWorkers
   
   ;; Set the house index range used by each region
   set regionHouseMin table:make
@@ -143,6 +143,7 @@ to createSimulants
   let cohort_workerCount 0
   let cohort_studentCount 0
   let cohort_spanMult 0
+  let cohort_avoidOr 0
   let cohort_gatherFreqMult 0
   let cohort_region 0
   let cohort_succeptOr 0
@@ -176,6 +177,7 @@ to createSimulants
       set cohort_workerCount     table:get cohortData "workerCount"
       set cohort_studentCount    table:get cohortData "studentCount"
       set cohort_spanMult        table:get cohortData "spanMult"
+      set cohort_avoidOr         table:get cohortData "avoidOr"
       set cohort_gatherFreqMult  table:get cohortData "gatherFreqMult"
       set cohort_region          table:get cohortData "region"
       set cohort_succeptOr       table:get cohortData "succeptOr"
@@ -249,6 +251,7 @@ to createSimulants
       set vaccReceptive false
       
       set spanMult cohort_spanMult
+      set avoidOr cohort_avoidOr
       set gatherFreqMult cohort_gatherFreqMult
       set homeRegion cohort_region
       set succeptOr cohort_succeptOr

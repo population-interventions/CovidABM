@@ -13,13 +13,13 @@ to do_stages
     set Visit_Frequency 0.1428
     set superspreaders 0.1
 
-    set proportion_people_avoid 0
-    set proportion_time_avoid 0
-    set Complacency_Bound 0
+    set proportion_people_avoid 0.0
+    set proportion_time_avoid 0.0
+    set Complacency_Bound 0.0
     set case_isolation false
     set schoolsOpen true
     set quarantine false
-    set Essential_Workers 100
+    set Essential_Workers 1
     set maskPolicy false
     set spatial_distance false
     set traceMult 1
@@ -97,23 +97,23 @@ to do_stages_test
   if stage_test_index = 5 [
     set testName "PA20 C20"
     set spatial_distance true
-    set proportion_people_avoid 20
-    set proportion_time_avoid 20
-    set Complacency_Bound 20
+    set proportion_people_avoid 0.20
+    set proportion_time_avoid 0.20
+    set Complacency_Bound 0.20
   ]
   if stage_test_index = 7 [
     set testName "PA70 C70"
     set spatial_distance true
-    set proportion_people_avoid 70
-    set proportion_time_avoid 70
-    set Complacency_Bound 70
+    set proportion_people_avoid 0.70
+    set proportion_time_avoid 0.70
+    set Complacency_Bound 0.70
   ]
   if stage_test_index = 8 [
     set testName "PA70 C0"
     set spatial_distance true
-    set proportion_people_avoid 70
-    set proportion_time_avoid 70
-    set Complacency_Bound 0
+    set proportion_people_avoid 0.70
+    set proportion_time_avoid 0.70
+    set Complacency_Bound 0.0
   ]
   if stage_test_index = 9 [
     set testName "Iso T x1"
@@ -123,26 +123,26 @@ to do_stages_test
   if stage_test_index = 10 [
     set testName "P60 !Sch"
     set spatial_distance true
-    set proportion_people_avoid 60
-    set proportion_time_avoid 60
-    set Complacency_Bound 60
+    set proportion_people_avoid 0.60
+    set proportion_time_avoid 0.60
+    set Complacency_Bound 0.60
     set schoolsOpen false
   ]
   if stage_test_index = 11 [
     set testName "P60 Ewk60"
-    set Essential_Workers 60
+    set Essential_Workers 0.60
     set spatial_distance true
-    set proportion_people_avoid 60
-    set proportion_time_avoid 60
-    set Complacency_Bound 60
+    set proportion_people_avoid 0.60
+    set proportion_time_avoid 0.60
+    set Complacency_Bound 0.60
   ]
   if stage_test_index = 12 [
     set testName "P60 Ewk20"
-    set Essential_Workers 20
+    set Essential_Workers 0.20
     set spatial_distance true
-    set proportion_people_avoid 60
-    set proportion_time_avoid 60
-    set Complacency_Bound 60
+    set proportion_people_avoid 0.60
+    set proportion_time_avoid 0.60
+    set Complacency_Bound 0.60
   ]
   if stage_test_index = 13 [
     set testName "Mask 040"
@@ -190,9 +190,9 @@ to do_stages_test
   if stage_test_index = 23 [
     set testName "PA50 C50"
     set spatial_distance true
-    set proportion_people_avoid 50
-    set proportion_time_avoid 50
-    set Complacency_Bound 50
+    set proportion_people_avoid 0.50
+    set proportion_time_avoid 0.50
+    set Complacency_Bound 0.50
   ]
   if stage_test_index = 24 [
     set testName "Span 15"
@@ -213,41 +213,41 @@ to do_stages_test
   if stage_test_index = 28 [
     set testName "PA20 C0"
     set spatial_distance true
-    set proportion_people_avoid 20
-    set proportion_time_avoid 20
-    set Complacency_Bound 0
+    set proportion_people_avoid 0.20
+    set proportion_time_avoid 0.20
+    set Complacency_Bound 0.0
   ]
   if stage_test_index = 29 [
     set testName "P50 Vi20 Fq0.2"
     set Visit_Radius 20
     set Visit_Frequency 0.2
     set spatial_distance true
-    set proportion_people_avoid 50
-    set proportion_time_avoid 50
-    set Complacency_Bound 50
+    set proportion_people_avoid 0.50
+    set proportion_time_avoid 0.50
+    set Complacency_Bound 0.50
   ]
   if stage_test_index = 30 [
     set testName "P50 Iso T1"
     set traceMult 1
     set case_isolation true
     set spatial_distance true
-    set proportion_people_avoid 50
-    set proportion_time_avoid 50
-    set Complacency_Bound 50
+    set proportion_people_avoid 0.50
+    set proportion_time_avoid 0.50
+    set Complacency_Bound 0.50
   ]
   if stage_test_index = 31 [
     set testName "PA-30 C-30"
     set spatial_distance true
-    set proportion_people_avoid -30
-    set proportion_time_avoid -30
-    set Complacency_Bound -30
+    set proportion_people_avoid 0.30
+    set proportion_time_avoid 0.30
+    set Complacency_Bound 0.30
   ]
   if stage_test_index = 32 [
     set testName "P50 CntR20"
     set spatial_distance true
-    set proportion_people_avoid 50
-    set proportion_time_avoid 50
-    set Complacency_Bound 50
+    set proportion_people_avoid 0.50
+    set proportion_time_avoid 0.50
+    set Complacency_Bound 0.50
   ]
   if stage_test_index = 33 [
     set testName "SSprd 0.005"
@@ -266,16 +266,16 @@ to do_stages_test
   if stage_test_index = 36 [
     set testName "PA100C100"
     set spatial_distance true
-    set proportion_people_avoid 100
-    set proportion_time_avoid 100
-    set Complacency_Bound 100
+    set proportion_people_avoid 0.100
+    set proportion_time_avoid 0.100
+    set Complacency_Bound 0.100
   ]
   if stage_test_index = 37 [
     set testName "P50 RC"
     set spatial_distance true
-    set proportion_people_avoid 50
-    set proportion_time_avoid 50
-    set Complacency_Bound 50
+    set proportion_people_avoid 0.50
+    set proportion_time_avoid 0.50
+    set Complacency_Bound 0.50
   ]
   if stage_test_index = 38 [
     set testName "CntR 50"
@@ -431,16 +431,16 @@ to do_stages_test
     set stage 2
     do_stages_tony
     set stage -2
-    set proportion_people_avoid 85
-    set proportion_time_avoid 85
-    set Complacency_Bound 72
+    set proportion_people_avoid 0.85
+    set proportion_time_avoid 0.85
+    set Complacency_Bound 0.72
   ]
   if stage_test_index = 62 [
     set testName "Stage2 3 Workers"
     set stage 2
     do_stages_tony
     set stage -2
-    set Essential_Workers 25
+    set Essential_Workers 0.25
   ]
   if stage_test_index = 63 [
     set testName "Stage2 3 Schools"
@@ -490,9 +490,9 @@ to do_stages_test
     do_stages_tony
     set stage -2
     set span 7.5
-    set proportion_people_avoid 70
-    set proportion_time_avoid 70
-    set Complacency_Bound 56
+    set proportion_people_avoid 0.70
+    set proportion_time_avoid 0.70
+    set Complacency_Bound 0.56
   ]
   if stage_test_index = 70 [
     ;; Stage 2
@@ -500,9 +500,9 @@ to do_stages_test
     set stage 2
     do_stages_tony
     set stage -2
-    set proportion_people_avoid 77
-    set proportion_time_avoid 77
-    set Complacency_Bound 52
+    set proportion_people_avoid 0.77
+    set proportion_time_avoid 0.77
+    set Complacency_Bound 0.52
   ]
 
   if stage_test_index = 71 [
@@ -512,9 +512,9 @@ to do_stages_test
     do_stages_tony
     set stage -2
     set span 2.8
-    set proportion_people_avoid 86
-    set proportion_time_avoid 86
-    set Complacency_Bound 68
+    set proportion_people_avoid 0.86
+    set proportion_time_avoid 0.86
+    set Complacency_Bound 0.68
   ]
   if stage_test_index = 72 [
     ;; Stage 3
@@ -523,9 +523,9 @@ to do_stages_test
     do_stages_tony
     set stage -2
     set span 3.2
-    set proportion_people_avoid 84
-    set proportion_time_avoid 84
-    set Complacency_Bound 66
+    set proportion_people_avoid 0.84
+    set proportion_time_avoid 0.84
+    set Complacency_Bound 0.66
   ]
 
   if stage_test_index = 73 [
@@ -535,10 +535,10 @@ to do_stages_test
     do_stages_tony
     set stage -2
     set span 0.7
-    set proportion_people_avoid 98
-    set proportion_time_avoid 98
-    set Complacency_Bound 92
-    set Essential_Workers 9
+    set proportion_people_avoid 0.98
+    set proportion_time_avoid 0.98
+    set Complacency_Bound 0.92
+    set Essential_Workers 0.9
     set Visit_Frequency 0.0165
   ]
   if stage_test_index = 74 [
@@ -548,10 +548,10 @@ to do_stages_test
     do_stages_tony
     set stage -2
     set span 0.6
-    set proportion_people_avoid 100
-    set proportion_time_avoid 100
-    set Complacency_Bound 95
-    set Essential_Workers 8
+    set proportion_people_avoid 1
+    set proportion_time_avoid 1
+    set Complacency_Bound 0.95
+    set Essential_Workers 0.8
     set Visit_Frequency 0.015
   ]
   

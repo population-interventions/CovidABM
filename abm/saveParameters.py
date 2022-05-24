@@ -310,7 +310,7 @@ paramValues_rCalibrate = {**defaultParams, **{
 	'ess_radius_anchor' : 0,
 	'ess_spread_anchor' : 0,
 	'ess_w_risk_reduction' : 0.5,
-	'essential_workers' : 100,
+	'essential_workers' : 1,
 	'age_isolation' : 0,
 	'avoid_essential' : 'true',
 	'asymptomatic_trans' : 0.74095293324329,

@@ -11,6 +11,7 @@ simuls-own [
 
   ;; Cohort parameters
   spanMult
+  avoidOr
   gatherFreqMult
   homeRegion
   succeptOr
@@ -150,7 +151,7 @@ to simul_move_to_empty_patch
 end
 
 to simul_resetSomeRandomParams
-  set proportion_people_avoid_draw random 100
+  set proportion_people_avoid_draw random-float 1
 end
 
 to simul_applyIsolation
@@ -489,7 +490,7 @@ to simul_avoid
       ]
       ((not EssentialWorkerFlag) or Ess_W_Risk_Reduction > random-float 1) and Spatial_Distance = true
       and myPPA > proportion_people_avoid_draw
-      and myPTA > random 100
+      and myPTA > random-float 1
       [
         ifelse isStudent and schoolsOpen
         [

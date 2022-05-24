@@ -104,8 +104,8 @@ to param_updateRecoverImmune
 end
 
 to params_setDrawValues
-  set draw_ppa_modifier random-normal 0 3
-  set draw_pta_modifier random-normal 0 3
+  set draw_ppa_modifier random-normal 0 0.03
+  set draw_pta_modifier random-normal 0 0.03
   
   rngs:init ;; replacing previous log transform with beta distribution
   set defaultStream 1
