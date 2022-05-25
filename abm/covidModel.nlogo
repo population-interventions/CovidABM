@@ -59,10 +59,10 @@ ticks
 30.0
 
 BUTTON
-255
-68
-319
-102
+257
+69
+321
+103
 NIL
 setup
 NIL
@@ -815,10 +815,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-435
-684
-593
-717
+434
+700
+592
+733
 Vaccine_Enabled
 Vaccine_Enabled
 0
@@ -1095,9 +1095,9 @@ PENS
 
 SLIDER
 419
-900
+915
 621
-933
+948
 Gather_Location_Count
 Gather_Location_Count
 0
@@ -1791,10 +1791,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-244
-597
-353
-630
+270
+564
+382
+598
 max_stage
 max_stage
 0
@@ -2008,9 +2008,9 @@ compound_input
 
 SLIDER
 427
-770
+785
 617
-803
+818
 param_vac_uptake_mult
 param_vac_uptake_mult
 0
@@ -2095,10 +2095,10 @@ initial_infection_R
 11
 
 SWITCH
-435
-604
-609
-637
+434
+620
+608
+653
 first_case_calibrate
 first_case_calibrate
 1
@@ -2484,10 +2484,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-244
-562
-357
-595
+270
+527
+383
+560
 min_stage
 min_stage
 0
@@ -2924,7 +2924,7 @@ draw_index
 draw_index
 0
 2000
-1186.0
+873.0
 1
 1
 NIL
@@ -2991,29 +2991,11 @@ param_force_vaccine
 "Disabled" "AZ" "Pfizer"
 0
 
-PLOT
-1235
-218
-1463
-355
-plot 2
-NIL
-NIL
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 1 -16777216 true "" "histogram [ myScale ] of simuls with [ color = red ]"
-
 SLIDER
-435
-643
-608
-676
+434
+659
+607
+692
 trans_override
 trans_override
 0
@@ -3115,9 +3097,9 @@ HORIZONTAL
 
 SLIDER
 424
-855
+870
 599
-888
+903
 incur_replace_chance
 incur_replace_chance
 0
@@ -3130,9 +3112,9 @@ HORIZONTAL
 
 SLIDER
 427
-810
+825
 615
-843
+858
 param_vac_uptake_std
 param_vac_uptake_std
 0
@@ -3282,9 +3264,9 @@ MONITOR
 
 PLOT
 673
-610
+624
 1013
-780
+794
 New infections / expected hosp
 NIL
 NIL
@@ -3300,10 +3282,10 @@ PENS
 "pen-1" 1.0 0 -16777216 true "" "plot 0.02"
 
 PLOT
-672
-785
-1011
-939
+673
+800
+1013
+940
 New infections
 NIL
 NIL
@@ -3321,9 +3303,9 @@ PENS
 
 SLIDER
 434
-725
+740
 607
-758
+773
 init_vacrecover_day
 init_vacrecover_day
 0
@@ -3343,7 +3325,7 @@ start_day_min
 start_day_min
 0
 100
-15.0
+25.0
 1
 1
 NIL
@@ -3399,6 +3381,24 @@ input/vic/draw_static.csv
 1
 0
 String
+
+PLOT
+1235
+222
+1465
+352
+Deaths
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "if ticks > 0 [plot sum (array:to-list item 0 dieArray)]"
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -5278,6 +5278,7 @@ NetLogo 6.2.0
     <metric>average_R_all_regions</metric>
     <metric>trans_override</metric>
     <metric>days</metric>
+    <metric>aggIndex</metric>
     <metric>totalEndCount</metric>
     <metric>scalephase</metric>
     <metric>infectionsToday</metric>

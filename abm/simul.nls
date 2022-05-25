@@ -283,22 +283,22 @@ to simul_setNewInfection [variant startDay recoverEffProp]
   
   ;; Add hosp for dynamic policy
   ; Do not add hosp in setup
-  if ticks > 0 [
-    simul_AddDeathHospToPipes hospProp popPerSimul variant deathRiskMean
-  ]
-  
-  ;; Add to data output metrics
-  array:set (item cohortHospTime hospArray) cohortIndex ((array:item (item cohortHospTime  hospArray) cohortIndex) + hospRiskMean)
-  array:set (item cohortIcuTime icuArray)   cohortIndex ((array:item (item cohortIcuTime   icuArray)  cohortIndex) + deathRiskMean)
-  array:set (item cohortDeathTime dieArray) cohortIndex ((array:item (item cohortDeathTime dieArray)  cohortIndex) + deathRiskMean)
-  array:set symptArray cohortIndex (array:item symptArray cohortIndex) + symptProp * popPerSimul
-  
-  ifelse currentVaccine = 0
-  [
-    array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
-  ]
-  [
-    array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + popPerSimul
+  if ticks > 0 or first_case_calibrate [
+    simul_AddDeathHospToPipes variant hospRiskMean deathRiskMean
+    
+    ;; Add to data output metrics
+    array:set (item cohortHospTime hospArray) cohortIndex ((array:item (item cohortHospTime  hospArray) cohortIndex) + hospRiskMean)
+    array:set (item cohortIcuTime icuArray)   cohortIndex ((array:item (item cohortIcuTime   icuArray)  cohortIndex) + deathRiskMean)
+    array:set (item cohortDeathTime dieArray) cohortIndex ((array:item (item cohortDeathTime dieArray)  cohortIndex) + deathRiskMean)
+    array:set symptArray cohortIndex (array:item symptArray cohortIndex) + symptProp * popPerSimul
+    
+    ifelse currentVaccine = 0
+    [
+      array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
+    ]
+    [
+      array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + popPerSimul
+    ]
   ]
 end
 
@@ -512,6 +512,7 @@ to simul_avoid
     ;; set at 50 on the input slider. People don't isolate from others in their household unit
     let myPPA ApplyOrToPr (Proportion_People_Avoid + draw_ppa_modifier) avoidOr
     let myPTA ApplyOrToPr (Proportion_Time_Avoid + draw_pta_modifier) avoidOr
+    ;if random-float 1 < 0.001 [ print (word agerange ", " myPPA)]
     
     let myHouse householdUnit
     (ifelse any? other simuls-here with [ (householdUnit != myHouse and isolateCompliant = 1) ] and draw_isolationCompliance > random-float 1
@@ -545,7 +546,7 @@ end
 
 to simul_superSpread
   let mySpread ApplyOrToPr superspreaders (1 / avoidOr)
-  ;if random-float 1 < 0.001 [ print (word mySpread ", " selfVaccEff_raw_risk ", " nextDoseTimer ", " nextDoseTimer)]
+  ;if random-float 1 < 0.001 [ print (word agerange ", " mySpread)]
   if EssentialWorkerFlag and mySpread < ess_spread_anchor [
     set mySpread (mySpread + ess_spread_anchor) * 0.5
   ]

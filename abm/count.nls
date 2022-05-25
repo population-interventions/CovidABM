@@ -20,26 +20,24 @@ to updatePipes
   set hospUsagePipe  lput 0 (but-first hospUsagePipe)
 end
 
-to simul_AddDeathHospToPipes [hospProp popPerSimul variant deathMean]
+to simul_AddDeathHospToPipes [variant hospMean deathMean]
   set deathTodayPipe AddToList deathTodayPipe (cohortHospTime - timenow) deathMean
   
-  if hospProp > 0 [
-    set hospTodayPipe AddToList hospTodayPipe (cohortHospTime - timenow) popPerSimul
-    let varHospLengthMult (table:get (table:get variantData variant) "hospLengthMult")
-    ;print varHospLengthMult * (GetHospStayLength agerange variant)
-    
-    let i 0
-    let hospLength varHospLengthMult * (GetHospStayLength agerange variant)
-    repeat floor hospLength [
-      if cohortHospTime - timenow + i >= 0 [
-        set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i) (popPerSimul * hospProp)
-      ]
-      set i i + 1 
-    ]
+  let varHospLengthMult (table:get (table:get variantData variant) "hospLengthMult")
+  ;print varHospLengthMult * (GetHospStayLength agerange variant)
+  
+  let i 0
+  let hospLength varHospLengthMult * (GetHospStayLength agerange variant)
+  repeat floor hospLength [
     if cohortHospTime - timenow + i >= 0 [
-      set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i) (popPerSimul * hospProp * (hospLength - floor hospLength))
+      set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i) hospMean
     ]
+    set i i + 1 
   ]
+  if cohortHospTime - timenow + i >= 0 [
+    set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i) (hospMean * (hospLength - floor hospLength))
+  ]
+  ;print (word agerange "  " hospMean)
 end
 
 to printVaccineProgress
