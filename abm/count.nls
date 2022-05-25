@@ -342,7 +342,7 @@ to checkStartThreshold
     [
       set start_day ticks + 1
       if infectionsToday > 0 [
-        set infectivityMult infectivityMult * 0.8 + 0.2 * 0.7 * _init_metric_threshold / infectionsToday
+        set infectivityMult infectivityMult * 0.9 + 0.1 * 0.45 * _init_metric_threshold / infectionsToday
       ]
     ]
   ]

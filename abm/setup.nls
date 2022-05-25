@@ -314,7 +314,7 @@ to setupInitialVaccination_micromangedMethod
   let preVacInfectData 0
   ifelse in_prevac_count > 0
   [
-    set preVacInfectData remove-item 0 csv:from-file (word input_pre_vacinfect ((draw_index mod in_prevac_count) + 1) ".csv")
+    set preVacInfectData remove-item 0 csv:from-file (word input_pre_vacinfect ((aggIndex mod in_prevac_count) + 1) ".csv")
   ]
   [
     set preVacInfectData remove-item 0 csv:from-file (word input_pre_vacinfect )
@@ -683,11 +683,6 @@ to setup
   
   let popPerSimul extraScaleFactor * (Scale_Factor ^ scalephase)
   set globalPopPerSimul popPerSimul
-
-  ;; Optionallly change random seed for simulation to compare simulation uncertainty to draw uncertainty
-  if SIM_SEED > -1 [
-    random-seed SIM_SEED
-  ]
   
   ;; Create simulants etc
   createSimulants
@@ -715,7 +710,8 @@ to setup
     if random-float 1 < _init_trace_prop [
       simul_applyTrace 
     ]
-    set infectionsToday_acc infectionsToday_acc + 1
+    
+    ;set infectionsToday_acc infectionsToday_acc + 1
     ;; Do not add to infection output as it makes for poor traces.
     ;array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
   ]
@@ -753,7 +749,8 @@ to setup
       simul_updateVariantParams
       
       set init_secondry_infect init_secondry_infect - popPerSimul
-      set infectionsToday_acc infectionsToday_acc + popPerSimul
+      
+      ;set infectionsToday_acc infectionsToday_acc + popPerSimul
       ;; Do not add to infection output as it makes for poor traces.
       ;;array:set infectNoVacArray cohortIndex (array:item infectNoVacArray cohortIndex) + popPerSimul
     ]
@@ -774,6 +771,19 @@ to setup
   ;;set assignAppEss false ;; that the assigning the App to EssentialWorkers doesn't begin before the policy trigger starts
   
   setupstages ;; setting up for the MJA runs
+
+  ;; Optionallly change random seed for simulation to compare simulation uncertainty to draw uncertainty
+  if SIM_SEED > -1 [
+    random-seed SIM_SEED
+    rngs:set-seed defaultStream random-float 999
+    rngs:set-seed incursionsSeedID random-float 999
+    rngs:set-seed houseSeedID random-float 999
+    rngs:set-seed vaccineEffseedID random-float 999
+    rngs:set-seed vaccineInitSeedID random-float 999
+    rngs:set-seed moveInitSeedID random-float 999
+    rngs:set-seed presentInitSeedID random-float 999
+    rngs:set-seed variantSeedID random-float 999
+  ]
   
   ;; Output infection rates 
   if trace_print [

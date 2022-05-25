@@ -51,7 +51,7 @@ to setup_vaccineData
   let baseParamsData 0
   ifelse in_prevac_count > 0
   [
-    set baseParamsData remove-item 0 csv:from-file (word input_vaccine_base ((draw_index mod in_vaccine_count) + 1) ".csv")
+    set baseParamsData remove-item 0 csv:from-file (word input_vaccine_base ((aggIndex mod in_vaccine_count) + 1) ".csv")
   ]
   [
     set baseParamsData remove-item 0 csv:from-file (word input_vaccine_base ".csv")

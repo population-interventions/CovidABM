@@ -11,10 +11,22 @@ to ShiftRecoveredTowardsTotalProportion
         set wantAsk count yellowSet 
       ]
       ask n-of wantAsk yellowSet [
+        let transferRecoverDay recoverDay
+        let transferRecoverVaccinePopPerSimul recoverVaccinePopPerSimul
+        
         set color cyan
         set recoverVariant 0
         set recoverVaccine 0
         set recoverDay -1
+        
+        ;; Transfer pop-per-simul and averaged recover day to another recovered simul.
+        if count yellowSet > 1 [
+          ask min-one-of simuls with [ color = yellow ] [recoverVaccinePopPerSimul] [
+            let transferProp 1 - recoverVaccinePopPerSimul / transferRecoverVaccinePopPerSimul
+            set recoverVaccinePopPerSimul transferRecoverVaccinePopPerSimul
+            set recoverDay transferProp * transferRecoverDay + (1 - transferProp) * recoverDay
+          ]
+        ]
       ]
     ]
   ]

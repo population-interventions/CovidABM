@@ -14,7 +14,7 @@ to params_readDrawTable
 end
 
 to params_readStaticDraws
-  let fileData csv:from-file (word input_draws "/draw_static.csv")
+  let fileData csv:from-file (word input_draw_static)
   file-close
   
   let colNames (item 0 fileData)
@@ -30,10 +30,13 @@ to params_readStaticDraws
     
     let rand_seed (item 1 drawParamList)
     random-seed rand_seed
+    set aggIndex (item 2 drawParamList)
+    set sim_seed (item 3 drawParamList)
   ]
   [
     let rand_seed (draw_index + 1)
     random-seed rand_seed
+    set aggIndex draw_index
   ]
 end
 

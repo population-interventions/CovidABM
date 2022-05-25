@@ -8,6 +8,8 @@ to ageVariant_setup
   set variantUI_hosp random-normal 0 0.1
   
   set variantUI_length random-normal 0 1
+  
+  set variantUI_hosp 0
 end
 
 to-report GetVariantDeathLnOdds [age variant]
@@ -151,14 +153,14 @@ to-report GetHospStayLength [age variant]
     [ ;; Low virulence
       (ifelse age < 40
         [
-          report 2.05 + variantUI_length * 0.1276
+          report (2.05 + variantUI_length * 0.1276)
         ]
         age < 70
         [
-          report 2.92 + variantUI_length * 0.2985
+          report (2.92 + variantUI_length * 0.2985)
         ]
         [
-          report 6.02 + variantUI_length * 0.5358
+          report (6.02 + variantUI_length * 0.5358)
         ]
       )
     ]

@@ -3,37 +3,37 @@
         "2500.0"
     ],
     "span": [
-        "10.0"
+        "8.0"
     ],
     "superspreaders": [
-        "0.1"
+        "0.06"
     ],
     "proportion_people_avoid": [
-        "0.0"
+        "0.3"
     ],
     "proportion_time_avoid": [
-        "0.0"
+        "0.3"
     ],
     "initial_cases": [
-        "3000.0"
+        "600000.0"
     ],
     "total_population": [
         "6649066.0"
     ],
     "essential_workers": [
-        "100.0"
+        "0.5"
     ],
     "ess_w_risk_reduction": [
         "0.0"
     ],
     "tracking": [
-        "false"
+        "true"
     ],
     "schoolsopen": [
         "true"
     ],
     "maskpolicy": [
-        "false"
+        "true"
     ],
     "case_reporting_delay": [
         "1.0"
@@ -42,7 +42,7 @@
         "0.1428"
     ],
     "visit_radius": [
-        "8.8"
+        "6.2"
     ],
     "mask_efficacy_mult": [
         "1.0"
@@ -51,7 +51,7 @@
         "true"
     ],
     "param_policy": [
-        "\"StageCal_5\""
+        "\"BarelySupress\""
     ],
     "asymptom_trace_mult": [
         "0.66"
@@ -60,7 +60,7 @@
         "110.0"
     ],
     "complacency_bound": [
-        "0.0"
+        "0.3"
     ],
     "profile_on": [
         "false"
@@ -75,7 +75,7 @@
         "true"
     ],
     "recovered_match_rate": [
-        "0.33"
+        "0.9"
     ],
     "param_trigger_loosen": [
         "false"
@@ -87,7 +87,7 @@
         "0.0"
     ],
     "isolate_on_inf_notice": [
-        "false"
+        "true"
     ],
     "household_iso_factor": [
         "1.0"
@@ -111,7 +111,7 @@
         "false"
     ],
     "complacency_loss": [
-        "1.0"
+        "0.01"
     ],
     "param_incur_phase_limit": [
         "-1.0"
@@ -129,7 +129,7 @@
         "false"
     ],
     "initial_primary_prop": [
-        "0.26"
+        "0.25"
     ],
     "param_policy_force_days": [
         "0.0"
@@ -213,7 +213,7 @@
         "0.08"
     ],
     "first_case_calibrate": [
-        "true"
+        "false"
     ],
     "prepeak_vir_boost": [
         "0.1"
@@ -234,7 +234,7 @@
         "false"
     ],
     "house_init_group": [
-        "0.15"
+        "0.85"
     ],
     "sensitivity": [
         "\"None\""
@@ -348,19 +348,16 @@
         "false"
     ],
     "init_metric_threshold": [
-        "390.0"
+        "30000.0"
     ],
     "init_stage": [
-        "1.0"
+        "2.0"
     ],
     "sim_seed": [
         "-1.0"
     ],
-    "realnotcasethres": [
-        "true"
-    ],
     "mid_report_day": [
-        "42.0"
+        "64.0"
     ],
     "param_incurmult": [
         "0.0"
@@ -393,10 +390,10 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "548.0"
+        "725.0"
     ],
     "input_vaccine_schedule": [
-        "\"input/vic/rollout_target_multi.csv\""
+        "\"input/vic/rollout_target_early.csv\""
     ],
     "param_force_vaccine": [
         "\"Disabled\""
@@ -420,19 +417,10 @@
         "\"input/vic/vaccine/draw_\""
     ],
     "policy_mask_n95": [
-        "false"
-    ],
-    "incur_name_part_1": [
-        "\"omlike\""
-    ],
-    "incur_name_part_2": [
-        "\"NIL\""
-    ],
-    "incur_name_part_3": [
-        "\"NIL\""
+        "true"
     ],
     "incur_day": [
-        "39.0"
+        "80.0"
     ],
     "incur_replace_chance": [
         "0.02"
@@ -444,7 +432,7 @@
         "\"input/vic/vaccine_params_or_uncertainty.csv\""
     ],
     "high_incur_virulence": [
-        "false"
+        "true"
     ],
     "in_prevac_count": [
         "1000.0"
@@ -454,5 +442,23 @@
     ],
     "base_name": [
         "\"base\""
+    ],
+    "incur_name_part_1": [
+        "\"omlike\""
+    ],
+    "incur_name_part_2": [
+        "\"_escape\""
+    ],
+    "incur_name_part_3": [
+        "\"\""
+    ],
+    "init_vacrecover_day": [
+        "0.0"
+    ],
+    "start_day_min": [
+        "20.0"
+    ],
+    "stages_cont": [
+        "false"
     ]
 }

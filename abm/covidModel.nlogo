@@ -93,10 +93,10 @@ NIL
 1
 
 BUTTON
-2807
-874
-2909
-909
+2837
+903
+2939
+938
 Trace_Patterns
 ask n-of 1 simuls with [ color != black ] [ pen-down ] 
 NIL
@@ -110,10 +110,10 @@ NIL
 1
 
 BUTTON
-2920
-874
-3020
-908
+2949
+903
+3049
+937
 UnTrace
 ask turtles [ pen-up ]
 NIL
@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-8.0
+10.0
 1
 1
 NIL
@@ -205,10 +205,10 @@ Deathcount
 14
 
 MONITOR
-3077
-842
-3232
-899
+3079
+927
+3234
+984
 # simuls
 count simuls * (Total_Population / population)
 0
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.06
+0.05
 0.01
 1
 NIL
@@ -332,8 +332,8 @@ PENS
 PLOT
 2148
 194
-2416
-343
+2417
+336
 Infection Proportional Growth Rate
 Time
 Growth rate
@@ -359,10 +359,10 @@ infectionchange
 11
 
 INPUTBOX
-239
-200
-373
 263
+200
+376
+264
 initial_cases
 600000.0
 1
@@ -497,10 +497,10 @@ scalePhase
 12
 
 MONITOR
-3573
-682
-3653
-727
+3628
+668
+3708
+713
 NIL
 count simuls
 17
@@ -563,7 +563,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.5
+0.7
 0.01
 1
 NIL
@@ -707,7 +707,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.2
+8.8
 1
 1
 NIL
@@ -1567,10 +1567,10 @@ MONITOR
 11
 
 SLIDER
-2830
-913
-3028
-946
+2838
+943
+3036
+976
 complacency_loss
 complacency_loss
 0
@@ -1986,10 +1986,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2572
-678
-2697
-738
+2559
+653
+2684
+713
 input_population_table
 input/vic/pop
 1
@@ -2106,10 +2106,10 @@ first_case_calibrate
 -1000
 
 SLIDER
-2830
-955
-3030
-988
+2838
+984
+3038
+1017
 prepeak_vir_boost
 prepeak_vir_boost
 0
@@ -2121,10 +2121,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-2208
-555
-2353
-600
+2177
+557
+2322
+602
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_az_25_95.csv" "_az_25_90.csv" "_az_25_80.csv" "_az_25_70.csv" "_70" "_80" "_90" "_95" ".csv"
@@ -2330,10 +2330,10 @@ trace_print
 -1000
 
 CHOOSER
-2203
-604
-2341
-649
+2172
+607
+2310
+652
 data_suffix_2
 data_suffix_2
 "None" "_5.csv" "_12.csv"
@@ -2350,10 +2350,10 @@ policy_switch
 0
 
 SWITCH
-2210
-657
-2338
-690
+2178
+659
+2306
+692
 suffix_rollout
 suffix_rollout
 0
@@ -2372,10 +2372,10 @@ count_incursion
 -1000
 
 SLIDER
-3063
-953
-3232
-986
+3064
+990
+3233
+1023
 transmit_skew
 transmit_skew
 0.2
@@ -2387,10 +2387,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-3063
-993
-3232
-1026
+3064
+1030
+3233
+1063
 duration_skew
 duration_skew
 1
@@ -2575,10 +2575,10 @@ reducedStageFour
 -1000
 
 INPUTBOX
-2572
-613
-2699
-673
+2630
+589
+2733
+649
 input_incursion_table
 none
 1
@@ -2706,7 +2706,7 @@ init_metric_threshold
 init_metric_threshold
 -100
 30000
-30000.0
+20000.0
 100
 1
 NIL
@@ -2721,7 +2721,7 @@ init_stage
 init_stage
 0
 5
-2.0
+1.0
 0.1
 1
 NIL
@@ -2758,7 +2758,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
--1.0
+1822916.0
 1
 1
 NIL
@@ -2806,10 +2806,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2383
-344
-2558
-404
+2368
+342
+2543
+402
 input_region
 input/vic/region.csv
 1
@@ -2817,10 +2817,10 @@ input/vic/region.csv
 String
 
 INPUTBOX
-2384
-399
-2558
-459
+2368
+404
+2542
+464
 input_vac_params
 input/vic/vaccine_params
 1
@@ -2828,9 +2828,9 @@ input/vic/vaccine_params
 String
 
 INPUTBOX
-239
 265
-372
+265
+374
 325
 init_cases_region
 -1.0
@@ -2894,10 +2894,10 @@ recoverCount
 14
 
 INPUTBOX
-2390
-462
-2549
-522
+2368
+467
+2527
+527
 input_variant
 input/vic/variant.csv
 1
@@ -2905,10 +2905,10 @@ input/vic/variant.csv
 String
 
 INPUTBOX
-2393
-522
-2535
-582
+2368
+529
+2510
+589
 input_draws
 input/vic
 1
@@ -2924,17 +2924,17 @@ draw_index
 draw_index
 0
 2000
-725.0
+1186.0
 1
 1
 NIL
 HORIZONTAL
 
 INPUTBOX
-17
-74
-205
-134
+14
+265
+257
+325
 input_vaccine_schedule
 input/vic/rollout_target_early.csv
 1
@@ -2942,9 +2942,9 @@ input/vic/rollout_target_early.csv
 String
 
 PLOT
-1839
-200
-2131
+1843
+185
+2135
 354
 Vaccine Eff vs. Infection
 NIL
@@ -2957,16 +2957,16 @@ true
 true
 "" ""
 PENS
-"base" 0.02 1 -1184463 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
-"incur" 0.02 1 -13840069 true "" "histogram [ 1 - (vaccine_getWanedParameter \"reduceHosp\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"base" 0.02 1 -1184463 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
+"incur" 0.02 1 -13840069 true "" "histogram [ 1 - (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls"
 "baseRec" 0.02 1 -2674135 true "" "histogram [ 1 - (simul_getRecoverVacHistogram \"base\" 2659) ] of simuls"
 "incurRec" 0.02 1 -13345367 true "" "histogram [ 1 - (simul_getRecoverVacHistogram (word incur_name_part_1 incur_name_part_2 incur_name_part_3) 2659) ] of simuls"
 
 PLOT
 1840
-360
-2130
-519
+367
+2154
+527
 Days Since Vac
 NIL
 NIL
@@ -2992,29 +2992,10 @@ param_force_vaccine
 0
 
 PLOT
-1240
-63
-1460
-183
-plot 1
-NIL
-NIL
-0.0
-100.0
-0.0
-1.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "histogram [ agerange ] of simuls with [ color = red and asymptomaticFlag]"
-"pen-1" 1.0 0 -7500403 true "" "histogram [ agerange ] of simuls with [ color = red]"
-
-PLOT
-1240
-200
-1440
-350
+1235
+218
+1463
+355
 plot 2
 NIL
 NIL
@@ -3059,9 +3040,9 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2350
+2365
 654
-2534
+2549
 714
 input_pre_vacinfect
 input/vic/prevac/draw_
@@ -3085,10 +3066,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2363
-589
-2542
-649
+2368
+590
+2547
+650
 input_maskFile
 input/vic/mask_params.csv
 1
@@ -3096,9 +3077,9 @@ input/vic/mask_params.csv
 String
 
 INPUTBOX
-2350
+2364
 717
-2537
+2551
 777
 input_vaccine_base
 input/vic/vaccine/draw_
@@ -3163,10 +3144,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-2350
-778
-2539
-848
+2362
+780
+2682
+840
 input_matchup_uncertainty
 input/vic/vaccine_params_or_uncertainty.csv
 1
@@ -3185,10 +3166,10 @@ high_incur_virulence
 -1000
 
 SLIDER
-2569
-749
-2742
-782
+3062
+844
+3235
+877
 in_prevac_count
 in_prevac_count
 0
@@ -3200,10 +3181,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2570
-788
-2743
-821
+3062
+883
+3235
+916
 in_vaccine_count
 in_vaccine_count
 0
@@ -3226,10 +3207,10 @@ policymetric7
 11
 
 INPUTBOX
-2572
-549
-2656
-609
+2558
+589
+2627
+649
 base_name
 base
 1
@@ -3237,34 +3218,34 @@ base
 String
 
 CHOOSER
-34
-154
-173
-199
+14
+110
+153
+155
 incur_name_part_1
 incur_name_part_1
 "omlike" "novel"
-0
+1
 
 CHOOSER
-35
-204
-174
-249
+14
+160
+153
+205
 incur_name_part_2
 incur_name_part_2
 "" "_escape"
 1
 
 CHOOSER
-38
-254
-177
-299
+18
+210
+157
+255
 incur_name_part_3
 incur_name_part_3
 "" "_high"
-0
+1
 
 MONITOR
 1040
@@ -3300,14 +3281,14 @@ MONITOR
 11
 
 PLOT
-670
-609
-1005
-778
+673
+610
+1013
+780
 New infections / expected hosp
 NIL
 NIL
-0.0
+3.0
 10.0
 0.0
 0.1
@@ -3316,7 +3297,7 @@ false
 "" ""
 PENS
 "default" 1.0 1 -2674135 true "" "plot policymetric7 / ( 0.01 + infectionsToday)"
-"pen-1" 1.0 0 -16777216 true "" "plot 0.025"
+"pen-1" 1.0 0 -16777216 true "" "plot 0.02"
 
 PLOT
 672
@@ -3362,7 +3343,7 @@ start_day_min
 start_day_min
 0
 100
-20.0
+15.0
 1
 1
 NIL
@@ -3389,6 +3370,35 @@ MONITOR
 2
 1
 11
+
+PLOT
+1237
+68
+1462
+212
+expected hosp
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot policymetric7"
+
+INPUTBOX
+2559
+717
+2744
+777
+input_draw_static
+input/vic/draw_static.csv
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?

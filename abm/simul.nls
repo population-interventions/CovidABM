@@ -282,7 +282,10 @@ to simul_setNewInfection [variant startDay recoverEffProp]
   let deathRiskMean mortProp * popPerSimul
   
   ;; Add hosp for dynamic policy
-  simul_AddDeathHospToPipes hospProp popPerSimul variant deathRiskMean
+  ; Do not add hosp in setup
+  if ticks > 0 [
+    simul_AddDeathHospToPipes hospProp popPerSimul variant deathRiskMean
+  ]
   
   ;; Add to data output metrics
   array:set (item cohortHospTime hospArray) cohortIndex ((array:item (item cohortHospTime  hospArray) cohortIndex) + hospRiskMean)
@@ -634,7 +637,7 @@ to simul_checkMask
   ifelse maskPolicy and patch-here != homelocation and simul_getWantWearMask
   [
     set wearingMask true
-    set wornMaskOr simul_getMaskEfficacyOr
+    set wornMaskOr LnOddsToOdds simul_getMaskEfficacyLnOr
   ]
   [
     set wearingMask false

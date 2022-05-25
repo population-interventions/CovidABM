@@ -42,7 +42,7 @@ to-report simul_getWantWearMask
   )
 end
 
-to-report simul_getMaskEfficacyOr
+to-report simul_getMaskEfficacyLnOr
   let drawTest wearsMask_draw
   
   ;; Rescale drawTest to [0, 1) for people who wear masks.

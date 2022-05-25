@@ -364,6 +364,8 @@ globals [
   icuArray
   hospArray
   
+  aggIndex
+  
   symptArray_listOut
   dieArray_listOut
   icuArray_listOut
