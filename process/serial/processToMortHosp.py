@@ -25,6 +25,8 @@ nameMap = {
 	'deaths' : 'mort',
 }
 
+metricList = ['mort', 'icu', 'hosp', 'sympt', 'infect']
+
 ############### Preprocessing ###############
 
 def CheckForProblem(df):
@@ -470,16 +472,19 @@ def LoadHeatmapInputDf(
 		subfolder, measureCols, heatStruct, heatAge, timeName, metric,
 		start, end, describe=False, hasRunCol=False, divide=False, doSum=True):
 	
-	fileIn = '{}_{}_age_{}_{}'.format(metric, timeName, heatAge[0], heatAge[1])
+	fileIn = '{}_{}'.format(metric, timeName)
+	print(fileIn)
 	df = pd.read_csv(
-		subfolder + '/Mort_out/' + fileIn + '.csv', 
+		subfolder + '/cohort/' + fileIn + '.csv', 
 		index_col=list(range((2 if hasRunCol else 1) + len(measureCols))),
 		header=list(range(1)))
 	
+	print(df)
 	df = df[[str(x) for x in range(math.floor(start), math.ceil(end))]]
 	
 	if divide:
 		df = df / divide
+	print(df)
 	
 	# Take a fraction of the metric in fractional weeks.
 	if math.floor(start) < start:
@@ -499,7 +504,7 @@ def DoHeatmapsDrawRangeHeatAge(
 		start, end, describe=False, hasRunCol=False, divide=False, rateDivide=False):
 	
 	prefixName = '{}_{}_from_{}_to_{}_age_{}_{}'.format(
-		timeName,metric,
+		timeName, metric,
 		util.DecimalLimit(start, 4),util.DecimalLimit(end, 4),
 		heatAge[0], heatAge[1])
 	
@@ -657,73 +662,13 @@ def DoTraceHeatmaps(
 
 ############### API ###############
 
-def PreProcessMortHosp(subfolder, measureCols):
-	ProcessInfectionCohorts(subfolder, measureCols)
-
-
-def DrawMortHospDistributions(subfolder, inputDir, measureCols, **kwargs):
-	DoDraws(subfolder, inputDir, measureCols, **kwargs)
-
-
-def FinaliseMortHosp(subfolder, measureCols, heatAges, doTenday=False):
-	ApplyCohortEffectsUncertainty(subfolder, measureCols, heatAges, doTenday=doTenday)
-
-
-def FinaliseMortHosp_NoDraw(subfolder, measureCols, heatAges, doTenday=False):
-	CopyInfMortHosp(subfolder, measureCols, heatAges, doTenday=doTenday)
-
-
-def MakeIcuHeatmaps(
-		subfolder, measureCols, heatStruct, start, window,
-		icuStart=10/7, icuEnd=19/7, icuCapacity=600, describe=True):
-	DoIcuHeatmaps(
-		subfolder, measureCols, heatStruct, start, start + window,
-		icuStart, icuEnd, icuCapacity, describe)
-
-
-def MakeCaseHeatmaps(subfolder, measureCols, heatAges, heatStruct, timeName, start, window, describe=True):
-	end = start + window
-	DoHeatmapsDrawRange(subfolder + '/Trace/', measureCols, heatStruct, 'processed_case7_' + timeName, start, end, describe=describe, hasRunCol=True)
-
-
 def MakeMortHospHeatmapRange(
 		subfolder, measureCols, heatAges, heatStruct, timeName, start, window,
-		describe=True, doExtras=True, doIfr=True, doVacSplit=False,
-		deathLag=0, aggSize=7):
+		describe=True, doIfr=False,
+		deathLag=0):
 	end = start + window
-	totalDays = aggSize * window
 	
-	DoTraceHeatmaps(subfolder, measureCols, heatStruct, timeName, aggSize, start, end, describe=describe)
-	
-	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'infect_vac',
-		start, end, describe=describe)
-	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'infect_noVac',
-		start, end, describe=describe)
-	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'infect',
-		start, end, describe=describe)
-	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'hosp',
+	for metric in metricList:
+		DoHeatmapsDrawRange(
+			subfolder, measureCols, heatStruct, heatAges, timeName, metric,
 			start, end, describe=describe)
-	DoHeatmapsDrawRange(
-		subfolder, measureCols, heatStruct, heatAges, timeName, 'mort',
-		start, end, describe=describe)
-	
-	if doIfr:
-		DoHeatmapsDrawRange(
-			subfolder, measureCols, heatStruct, heatAges, timeName, 'mort',
-			max(0, start - deathLag), end - deathLag, describe=describe, rateDivide='infect')
-	
-	if doVacSplit:
-		DoHeatmapsDrawRange(
-			subfolder, measureCols, heatStruct, heatAges, timeName, 'infect_vac',
-			start, end, describe=describe, rateDivide='infect')
-		DoHeatmapsDrawRange(
-			subfolder, measureCols, heatStruct, heatAges, timeName, 'infect_noVac',
-			start, end, describe=describe, rateDivide='infect')
-		DoHeatmapsDrawRange(
-			subfolder, measureCols, heatStruct, heatAges, timeName, 'infect_vac',
-			start, end, describe=describe, rateDivide='infect_noVac')
-

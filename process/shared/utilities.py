@@ -197,6 +197,13 @@ def GetFiles(subfolder, firstOnly=False):
 	return filelist
 
 
+def OutputToDataMap(df, path, dataMap):
+	if path in dataMap:
+		dataMap[path] = dataMap[path].append(df)
+	else:
+		dataMap[path] = df
+
+
 def OutputToFile(df, path, index=True, head=True, appendToExisting=False):
 	# Write dataframe to a file.
 	# Appends dataframe when called with the same name.
@@ -299,21 +306,35 @@ def AddFiles(outputName, fileList, index=1, header=1, doTqdm=False):
 	OutputToFile(df, outputName)
 
 
-def AppendFiles(outputName, fileList, index=1, header=1, doTqdm=False):
+def AppendFiles(
+		outputName, fileList, runIndexer, indexSize=1, header=1, doTqdm=False,
+		head=False, indexGrouping=False):
 	first = True
 	for fileName in (tqdm.tqdm(fileList) if doTqdm else fileList):
 		if first:
 			first = False
 			df = pd.read_csv(
 				fileName + '.csv',
-				index_col=list(range(index)),
+				index_col=list(range(indexSize)),
 				header=list(range(header)))
 		else:
 			df = df.append(pd.read_csv(
 				fileName + '.csv',
-				index_col=list(range(index)),
+				index_col=list(range(indexSize)),
 				header=list(range(header))))
-	OutputToFile(df, outputName)
+	
+	# Average the runs by grouping chunks of index values.
+	if indexGrouping is not False:
+		index = df.index.to_frame()
+		index['_index_agg'] = np.floor(index[runIndexer] / indexGrouping)
+		df.index = pd.MultiIndex.from_frame(index)
+		df = df.groupby(level=ListRemove(list(range(indexSize + 1)), 1), axis=0).mean()
+		df.index = df.index.rename(runIndexer, level='_index_agg')
+			
+		df.index = df.index.set_levels(df.index.levels[indexSize - 1].astype(int), level=runIndexer)
+		df = df.reorder_levels([0, indexSize - 1] + list(range(1, indexSize - 1)))
+		
+	OutputToFile(df, outputName, head=head)
 	
 
 def ListRemove(myList, element):

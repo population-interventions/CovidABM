@@ -8,8 +8,7 @@ import pandas as pd
 import numpy as np
 
 from process.serial.aggregateSpartan import DoSpartanAggregate
-from process.serial.processToMortHosp import PreProcessMortHosp, FinaliseMortHosp_NoDraw, DrawMortHospDistributions
-from process.serial.processToMortHosp import MakeMortHospHeatmapRange, MakeIcuHeatmaps
+from process.serial.processToMortHosp import MakeMortHospHeatmapRange
 from process.serial.makeHeatmaps import MakeStagesHeatmap, MakeComparisionHeatmap
 from process.serial.makeGraphs import MakePrettyGraphs, MakeFavouriteGraph, MakeDailyGraphs
 from process.serial.processedOutputToPMSLT import DoProcessingForPMSLT
@@ -44,6 +43,7 @@ favouriteParams = [5, 'ME_TS_LS', 'No', 5, 0.7]
 
 def RunSeriesPost(modelData, runs, pernode):
 	conf = modelData['postSeries']['processMain']
+	runIndexer = modelData['runIndexer']
 	params = conf['params']
 	
 	dryRun = params['dryRun']
@@ -54,6 +54,8 @@ def RunSeriesPost(modelData, runs, pernode):
 	makeOutput = params['makeOutput']
 	outputStages = params['outputStages']
 	makeComparison = params['makeComparison']
+	processCohort = params['processCohort']
+	indexGrouping = params['indexGrouping']
 	
 	heatAges = conf['heatAges']
 	heatmapStructure = conf['heatmapStructure']
@@ -75,16 +77,15 @@ def RunSeriesPost(modelData, runs, pernode):
 	if aggregateSpartan:
 		arraySize = len(util.GetFiles(rawDataDir))
 		print('arraySize', arraySize)
-		DoSpartanAggregate(workingDir, postDataDir, measureCols, arraySize=arraySize)
-
-	#if doDraws:
-	#	DrawMortHospDistributions(workingDir, postInputDir, measureCols, drawCount=100, padMult=1)
-
-	if doFinaliseCohortAgg:
-		FinaliseMortHosp_NoDraw(workingDir, measureCols, heatAges)
+		DoSpartanAggregate(
+			workingDir, postDataDir, measureCols, runIndexer,
+			arraySize=arraySize, processCohort=processCohort,
+			indexGrouping=indexGrouping)
 
 	if makeOutput:
-		MakeMortHospHeatmapRange(workingDir, measureCols, heatAges, heatmapStructure, 'weeklyAgg', 0, 56, aggSize=7, describe=True)
+		MakeMortHospHeatmapRange(
+			workingDir, measureCols, heatAges, heatmapStructure, 'quartAgg',
+			0, 5, describe=True)
 
 	if outputStages:
 		#MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, 0, 210, describe=True)

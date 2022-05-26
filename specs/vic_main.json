@@ -58,7 +58,9 @@
 				"doFinaliseCohortAgg" : true,
 				"makeOutput" : true,
 				"outputStages" : true,
-				"makeComparison" : false
+				"makeComparison" : false,
+				"processCohort" : true,
+				"indexGrouping" : 2
 			},
 			"heatAges" : [
 				[0, 110]

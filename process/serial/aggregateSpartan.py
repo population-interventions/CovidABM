@@ -20,8 +20,11 @@ from process.shared.utilities import AddFiles, AppendFiles
 from process.shared.utilities import ToHeatmap
 import process.shared.utilities as util
 
+metricList = ['mort', 'icu', 'hosp', 'sympt', 'infect']
 
-def AppendParallels(dataDir, rawDataDir, outDir, measureCols, outputSubdir, prefix, indexList, fileNames, header=1):
+def AppendParallels(
+		dataDir, rawDataDir, outDir, measureCols, outputSubdir, prefix,
+		runIndexer, indexList, fileNames, header=1, indexGrouping=False):
 	for file in fileNames:
 		if prefix:
 			thisPrefix = prefix + '_'
@@ -31,96 +34,39 @@ def AppendParallels(dataDir, rawDataDir, outDir, measureCols, outputSubdir, pref
 		AppendFiles(
 			dataDir + outDir + thisPrefix + file,
 			[rawDataDir + outputSubdir + thisPrefix + file + '_' + str(x) for x in indexList],
+			runIndexer,
 			doTqdm=True,
-			index=len(measureCols) + 2,
+			indexSize=len(measureCols) + 2,
 			header=header,
+			head=False,
+			indexGrouping=indexGrouping
 		)
 
 
-def DoSpartanAggregate(dataDir, rawDataDir, measureCols, arraySize=100, skip=False, doTenday=False, doLong=False):
+def DoSpartanAggregate(
+		dataDir, rawDataDir, measureCols, runIndexer, arraySize=400,skip=False,
+		processCohort=True, indexGrouping=False):
 	indexList = range(1, arraySize + 1)
 	if skip:
 		indexList = util.ListRemove(indexList, skip)
 	
-	util.OutputToFile(util.GetCohortData(rawDataDir + '/step_1/processed_static_1').drop(columns='cohort'), dataDir + '/shared/cohortData')
+	util.OutputToFile(util.GetCohortData(
+		rawDataDir + '/step_1/processed_static_1').drop(columns='cohort'),
+		dataDir + '/shared/cohortData', head=False)
 	
-	mortAgg = [
-		'infect_noVac_daily',
-		'infect_noVac_weeklyAgg',
-		'infect_noVac_yearlyAgg',
-		'infect_vac_daily',
-		'infect_vac_weeklyAgg',
-		'infect_vac_yearlyAgg',
-		'mort_daily',
-		'mort_weeklyAgg',
-		'mort_yearlyAgg',
-		'hosp_daily',
-		'hosp_weeklyAgg',
-		'hosp_yearlyAgg',
-		'icu_weeklyAgg',
-		'sympt_weeklyAgg',
-	]
+	processAgg = []
+	tracesAgg = []
+	for metric in metricList:
+		processAgg.append('{}_quartAgg'.format(metric))
+		processAgg.append('{}_yearlyAgg'.format(metric))
+		
+		tracesAgg.append('{}_weeklyAgg'.format(metric))
 	
-	if doTenday:
-		mortAgg = mortAgg + [
-			'infect_noVac_tendayAgg',
-			'infect_vac_tendayAgg',
-			'mort_tendayAgg',
-			'hosp_tendayAgg',
-		]
-	
-	if doLong:
-		# May not exist as these files are large.
-		mortAgg = mortAgg + [
-			'infect_noVac',
-			'infect_vac',
-			'mort',
-			'hosp',
-		]
+	if processCohort:
+		AppendParallels(
+			dataDir, rawDataDir, '/cohort/', measureCols, '/cohort/', False,
+			runIndexer, indexList, processAgg, indexGrouping=indexGrouping)
 	
 	AppendParallels(
-		dataDir, rawDataDir, '/Mort_process/', measureCols,
-		'/cohort/', False, indexList, mortAgg)
-	
-	AppendParallels(
-		dataDir, rawDataDir, '/Traces/', measureCols,
-		'/step_1/', 'processed', indexList, [
-			'case',
-			'case7',
-			'case14',
-			'infectNoVac',
-			'infectVac',
-			'mort',
-			'hosp',
-			'stage',
-		],
-		header=3,
-	)
-	
-	AppendParallels(
-		dataDir, rawDataDir, '/Traces/', measureCols,
-		'/visualise/', 'processed', indexList, [
-			'case_daily',
-			'case_weeklyAgg',
-			'case7_daily',
-			'case7_weeklyAgg',
-			'case14_daily',
-			'case14_weeklyAgg',
-			'infectNoVac_weeklyAgg',
-			'infectVac_weeklyAgg',
-			'mort_weeklyAgg',
-			'hosp_weeklyAgg',
-			'stage_weeklyAgg',
-			'icu_weeklyAgg',
-			'sympt_weeklyAgg',
-		],
-	)
-	
-	AddFiles(dataDir + '/Traces/' + 'infect_unique_weeklyAgg',
-		[
-			dataDir + '/Traces/' + 'processed_infectNoVac_weeklyAgg',
-			dataDir + '/Traces/' + 'processed_infectVac_weeklyAgg',
-		],
-		index=(2 + len(measureCols))
-	)
-
+		dataDir, rawDataDir, '/traces/', measureCols, '/visualise/', 'processed',
+		runIndexer, indexList, tracesAgg, indexGrouping=indexGrouping)
