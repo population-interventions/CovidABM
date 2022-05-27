@@ -32,13 +32,13 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-388
-63
-916
-592
+434
+85
+883
+535
 -1
 -1
-8.68
+5.86
 1
 10
 1
@@ -946,10 +946,10 @@ transmission_count_metric
 11
 
 PLOT
-2970
-502
-3377
-676
+1874
+550
+2204
+715
 Potential transmission interactions per day (scaled)
 NIL
 NIL
@@ -1042,10 +1042,10 @@ NIL
 HORIZONTAL
 
 PLOT
-1839
-534
-2152
-684
+2987
+512
+3300
+662
 Average Interaction Infectivity
 NIL
 NIL
@@ -1213,15 +1213,15 @@ NIL
 HORIZONTAL
 
 SLIDER
-2748
-394
-2946
-427
+679
+545
+877
+578
 Isolation_Transmission
 Isolation_Transmission
 0
 1
-0.33
+0.1
 0.01
 1
 NIL
@@ -1794,7 +1794,7 @@ SLIDER
 270
 564
 382
-598
+597
 max_stage
 max_stage
 0
@@ -2121,10 +2121,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-2177
-557
-2322
-602
+2225
+555
+2370
+600
 data_suffix
 data_suffix
 "_bau.csv" "_int.csv" "_az_25.csv" "_az_50.csv" "_az_25_95.csv" "_az_25_90.csv" "_az_25_80.csv" "_az_25_70.csv" "_70" "_80" "_90" "_95" ".csv"
@@ -2330,10 +2330,10 @@ trace_print
 -1000
 
 CHOOSER
-2172
-607
-2310
-652
+2220
+605
+2358
+650
 data_suffix_2
 data_suffix_2
 "None" "_5.csv" "_12.csv"
@@ -2350,10 +2350,10 @@ policy_switch
 0
 
 SWITCH
-2178
-659
-2306
-692
+2227
+658
+2355
+691
 suffix_rollout
 suffix_rollout
 0
@@ -3278,7 +3278,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -2674135 true "" "plot policymetric7 / ( 0.01 + infectionsToday)"
+"default" 1.0 1 -2674135 true "" "plot  policymetric7 / ( 3 + infectionsToday)"
 "pen-1" 1.0 0 -16777216 true "" "plot 0.02"
 
 PLOT
@@ -3399,6 +3399,21 @@ false
 "" ""
 PENS
 "default" 1.0 0 -16777216 true "" "if ticks > 0 [plot sum (array:to-list item 0 dieArray)]"
+
+SLIDER
+675
+583
+882
+617
+avoidAttemptIntMult
+avoidAttemptIntMult
+0
+1
+0.1
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

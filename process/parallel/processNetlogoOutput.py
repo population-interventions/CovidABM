@@ -261,6 +261,7 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doW
 		sort=False)
 	df.columns = pd.MultiIndex.from_frame(col_index)
 	
+	# TODO - Figure out why this crashes with dataMap.
 	df = df.groupby(level=[0, 2], axis=1).sum()
 
 	# In the ABM age range 15 represents ages 10-17 while age range 25 is

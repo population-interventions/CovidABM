@@ -92,7 +92,7 @@ to updateCounts
   ;; calculates the number of people infected and recorded today
   if _init_metric_threshold < 0 [
     set cumulativeInfected cumulativeInfected + infectionsToday
-    set cumulativeInfected_minusInit cumulativeInfected - _initial_cases
+    set cumulativeInfected_minusInit cumulativeInfected
     set totalCasesReported totalCasesReported + casesReportedToday
     set totalHosp totalHosp + hospToday
   ]

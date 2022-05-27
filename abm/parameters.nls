@@ -256,7 +256,6 @@ to params_setDrawValues
   set param_override_ve -1
   set param_override_ve_area -1
   set global_distance_mult 1
-  set Isolation_Transmission 0.33
   set override_asympt_table false
 
   if sensitivity = "UniformContact_054" [
