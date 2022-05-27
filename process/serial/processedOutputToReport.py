@@ -417,28 +417,28 @@ def ProcessInfectionCohorts(subfolder, measureCols, months):
 	print('Processing vaccination infection for PMSLT')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/Traces/processed_infectVac',
+		subfolder + '/traces/processed_infectVac',
 		subfolder + '/shared/cohortData',
 		subfolder + '/Report_process/infect_vac',
 		months)
 	print('Processing non-vaccination infection for PMSLT')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/Traces/processed_infectNoVac',
+		subfolder + '/traces/processed_infectNoVac',
 		subfolder + '/shared/cohortData',
 		subfolder + '/Report_process/infect_noVac',
 		months)
 	print('Processing mort for PMSLT')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/Traces/processed_mort',
+		subfolder + '/traces/processed_mort',
 		subfolder + '/shared/cohortData',
 		subfolder + '/Report_process/mort',
 		months)
 	print('Processing hosp PMSLT')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/Traces/processed_hosp',
+		subfolder + '/traces/processed_hosp',
 		subfolder + '/shared/cohortData',
 		subfolder + '/Report_process/hosp',
 		months)
@@ -446,7 +446,7 @@ def ProcessInfectionCohorts(subfolder, measureCols, months):
 
 def ProcessStages(subfolder, measureCols):
 	ProcessStageCohorts(measureCols,
-						subfolder + '/Traces/processed_stage',
+						subfolder + '/traces/processed_stage',
 						subfolder + '/Report_process/stage')
 
 

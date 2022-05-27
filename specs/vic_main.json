@@ -51,19 +51,27 @@
 	"postSeries" : {
 		"processMain" : {
 			"params" : {
-				"dryRun" : false,
-				"preChecks" : false,
 				"aggregateSpartan" : true,
-				"doDraws" : true,
-				"doFinaliseCohortAgg" : true,
 				"makeOutput" : true,
 				"outputStages" : true,
-				"makeComparison" : false,
 				"processCohort" : true,
-				"indexGrouping" : 2
+				
+				"dryRun" : false,
+				"preChecks" : false,
+				"makeComparison" : false,
+				"indexGrouping" : 4
 			},
 			"heatAges" : [
+				[0, 30],
+				[30, 60],
+				[60, 100],
 				[0, 100]
+			],
+			"heatPeriods" : [
+				[0, 2],
+				[2, 4],
+				[4, 6],
+				[0, 6]
 			],
 			"heatmapStructure" : {
 				"index_rows" : ["Variant", "Infectiousness", "Immune escape", "Incursion day"],
@@ -80,18 +88,18 @@
 				"input_vaccine_schedule" : {
 					"name" : "Vaccine schedule",
 					"values" : {
-						"input/vic/rollout_none.csv"         : "Stop at three",
-						"input/vic/rollout_current.csv"      : "Ongoing current",
-						"input/vic/rollout_target_early.csv" : "Omicron 3rd quarter",
-						"input/vic/rollout_target_mid.csv"   : "Omicron 4th quarter",
-						"input/vic/rollout_multi_mid.csv"    : "Multivalent 4th quarter",
-						"input/vic/rollout_target_multi.csv" : "Omicron 3rd, multivalent 5th"
+						"input/vic/rollout_none.csv"         : "None",
+						"input/vic/rollout_current.csv"      : "Cur 4+5",
+						"input/vic/rollout_target_early.csv" : "Omni Q3",
+						"input/vic/rollout_target_mid.csv"   : "Omni Q4",
+						"input/vic/rollout_multi_mid.csv"    : "Multi Q4",
+						"input/vic/rollout_target_multi.csv" : "OmQ3, MuQ5"
 					}
 				},
 				"incur_name_part_1" : {
 					"name" : "Variant",
 					"values" : {
-						"omlike" : "Omicron-like",
+						"omlike" : "Omni-like",
 						"novel"  : "Novel"
 					}
 				},

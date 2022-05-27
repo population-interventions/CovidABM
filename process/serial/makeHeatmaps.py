@@ -11,33 +11,28 @@ import process.shared.utilities as util
 
 def DoMakeStagesHeatmap(
 		subfolder, measureCols, heatStruct,
-		stage_min=3, stage_max=4, start=0, window=100, describe=False):
+		stage_min=3, stage_max=5, start=0, end=100, describe=False):
 	df = pd.read_csv(
-		subfolder + '/Traces/processed_stage' + '.csv',
-		index_col=list(range(2 + len(measureCols))),
-		header=list(range(3)))
+		subfolder + '/traces/processed_stage_daily' + '.csv',
+		index_col=list(range(1 + len(measureCols))),
+		header=list(range(1)))
 	
 	prefixName = 'stageMin_{}_max_{}_from_{}_to_{}'.format(
-		stage_min, stage_max, start, start + window)
+		stage_min, stage_max, start, end)
 	
-	df = df.droplevel([0, 2], axis=1)
-	df = df[[str(x) for x in range(start, start + window)]]
+	df = df[[str(x) for x in range(start, end)]]
 	df = df.apply(lambda c: [1 if x >= stage_min and x <= stage_max else 0 for x in c])
 	
 	df = df.mean(axis=1)
-	df = df.droplevel('run', axis=0)
-	
 	util.MakeDescribedHeatmapSet(
-		subfolder + '/Heatmaps/', df,
+		subfolder + '/heatmaps/', df,
 		heatStruct, prefixName, describe=describe)
 	
 
 def MakeStagesHeatmap(
-		subfolder, measureCols, heatStruct, start, window,
-		stage_set=False, describe=False):
-	
-	stage_min = 3
-	stage_max = 4
+		subfolder, measureCols, heatStruct, start, end,
+		stage_set=False, stage_min=3, stage_max=5, describe=False):
+
 	if stage_set is not False:
 		stage_min = stage_set
 		stage_max = stage_set
@@ -45,7 +40,7 @@ def MakeStagesHeatmap(
 	DoMakeStagesHeatmap(
 		subfolder, measureCols, heatStruct,
 		stage_min=stage_min, stage_max=stage_max,
-		start=start, window=window, describe=describe)
+		start=start, end=end, describe=describe)
 
 
 def OutputHeatmapIndexComparision(
@@ -101,7 +96,7 @@ def MakeComparisionHeatmap(subfolder, heatStruct, fileName, divide=True):
 	index_cols = heatStruct.get('index_cols')
 	
 	df = pd.read_csv(
-		subfolder + '/Heatmaps/' + fileName + '.csv',
+		subfolder + '/heatmaps/' + fileName + '.csv',
 		index_col=list(range(len(index_rows))),
 		header=list(range(len(index_cols) + 1)))
 	df = df.drop_duplicates()
@@ -115,7 +110,7 @@ def MakeComparisionHeatmap(subfolder, heatStruct, fileName, divide=True):
 			else:
 				baseIndexName = list(sort.keys())[0]
 			OutputHeatmapIndexComparision(
-				subfolder + '/Heatmaps/', heatStruct, df, fileName,
+				subfolder + '/heatmaps/', heatStruct, df, fileName,
 				name, baseIndexName, divide=divide)
 	
 	

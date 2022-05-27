@@ -61,6 +61,7 @@ def DoSpartanAggregate(
 		processAgg.append('{}_yearlyAgg'.format(metric))
 		
 		tracesAgg.append('{}_weeklyAgg'.format(metric))
+	tracesAgg.append('stage_daily'.format(metric))
 	
 	if processCohort:
 		# Larger index because cohort data contains age

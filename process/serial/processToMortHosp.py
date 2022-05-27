@@ -124,14 +124,14 @@ def ProcessInfectionCohorts(subfolder, measureCols):
 	print('Processing vaccination infection for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/Traces/processed_infectVac',
-		subfolder + '/Traces/processed_static',
+		subfolder + '/traces/processed_infectVac',
+		subfolder + '/traces/processed_static',
 		subfolder + '/Mort_process/infect_vac')
 	print('Processing non-vaccination infection for MortHosp')
 	ProcessInfectCohorts(
 		measureCols,
-		subfolder + '/Traces/processed_infectNoVac',
-		subfolder + '/Traces/processed_static',
+		subfolder + '/traces/processed_infectNoVac',
+		subfolder + '/traces/processed_static',
 		subfolder + '/Mort_process/infect_noVac')
 
 
@@ -466,7 +466,7 @@ def DoDraws(subfolder, inputDir, measureCols, **kwargs):
 	OutputToFile(df_draw, subfolder + '/draw_cache/' + 'mortHosp_final')
 
 
-############### Age Heatmaps ###############
+############### Age heatmaps ###############
 
 def LoadHeatmapInputDf(
 		subfolder, measureCols, heatStruct, heatAge, timeName, metric,
@@ -491,8 +491,7 @@ def LoadHeatmapInputDf(
 		last = str(math.ceil(end - 1))
 		df[last] = df[last] * (1 - math.ceil(end) + end)
 	
-	print(df)
-	
+	df = util.FilterOnIndex(df, 'age', heatAge[0], heatAge[1] - 1)
 	if doSum:
 		df = df.sum(axis=1)
 	return df
@@ -504,7 +503,7 @@ def DoHeatmapsDrawRangeHeatAge(
 	
 	prefixName = '{}_{}_from_{}_to_{}_age_{}_{}'.format(
 		timeName, metric,
-		util.DecimalLimit(start, 4),util.DecimalLimit(end, 4),
+		util.DecimalLimit(start, 4), util.DecimalLimit(end + 1, 4),
 		heatAge[0], heatAge[1])
 	
 	if divide:
@@ -531,7 +530,7 @@ def DoHeatmapsDrawRangeHeatAge(
 		df = df[~df.index.duplicated()]
 	
 	util.MakeDescribedHeatmapSet(
-		subfolder + '/Heatmaps/', df,
+		subfolder + '/heatmaps/', df,
 		heatStruct, prefixName, describe=describe)
 
 def DoHeatmapsDrawRange(
@@ -591,7 +590,7 @@ def DoIcuHeatmaps(
 		df = df.add(dfAdd, fill_value=0)
 	
 	df = df[list(range(math.floor(start), math.ceil(end)))]
-	OutputToFile(df, subfolder + '/Traces/' + traceName)
+	OutputToFile(df, subfolder + '/traces/' + traceName)
 	
 	df = df.applymap(lambda x: 0 if x < icuCapacity else 1)
 	df = df.mean(axis=1)
@@ -601,11 +600,11 @@ def DoIcuHeatmaps(
 		df = df[~df.index.duplicated()]
 	
 	util.MakeDescribedHeatmapSet(
-		subfolder + '/Heatmaps/', df,
+		subfolder + '/heatmaps/', df,
 		heatStruct, prefixName, describe=describe)
 
 
-############### Load Heatmaps From Traces ###############
+############### Load heatmaps From traces ###############
 
 def LoadHeatmapTraceInputDf(
 		subfolder, measureCols, heatStruct, timeName, metric,
@@ -613,7 +612,7 @@ def LoadHeatmapTraceInputDf(
 	
 	fileIn = 'processed_{}_{}'.format(metric, timeName)
 	df = pd.read_csv(
-		subfolder + '/Traces/' + fileIn + '.csv', 
+		subfolder + '/traces/' + fileIn + '.csv', 
 		index_col=list(range((2 if hasRunCol else 1) + len(measureCols))),
 		header=list(range(1)))
 	
@@ -648,7 +647,7 @@ def DoHeatmapsRangeFromTrace(
 	df = LoadHeatmapTraceInputDf(subfolder, measureCols, heatStruct, timeName, metric, start, end, hasRunCol=True)
 	
 	util.MakeDescribedHeatmapSet(
-		subfolder + '/Heatmaps/', df,
+		subfolder + '/heatmaps/', df,
 		heatStruct, prefixName, describe=describe)
 
 
@@ -662,10 +661,9 @@ def DoTraceHeatmaps(
 ############### API ###############
 
 def MakeMortHospHeatmapRange(
-		subfolder, measureCols, heatAges, heatStruct, timeName, start, window,
+		subfolder, measureCols, heatAges, heatStruct, timeName, start, end,
 		describe=True, doIfr=False,
 		deathLag=0):
-	end = start + window
 	
 	for metric in metricList:
 		DoHeatmapsDrawRange(

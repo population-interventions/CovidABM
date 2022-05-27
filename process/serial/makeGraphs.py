@@ -11,7 +11,7 @@ from process.shared.utilities import OutputToFile
 from process.shared.utilities import ToHeatmap
 
 def MakeFavouriteGraph(dataDir, dataName, measureCols, favParams, median=True, mean=True, si=False):
-	processDir = dataDir + '/Traces/'
+	processDir = dataDir + '/traces/'
 	visualDir = dataDir + '/Graphs/'
 	inputFile = processDir + dataName + '_weeklyAgg'
 	
@@ -48,7 +48,7 @@ def MakeFavouriteGraph(dataDir, dataName, measureCols, favParams, median=True, m
 def MakeDailyGraphs(
 		dataDir, dataName, measureCols, splitParam,
 		median=True, mean=True, si=False, filterIndex=[], days=364):
-	processDir = dataDir + '/Traces/'
+	processDir = dataDir + '/traces/'
 	visualDir = dataDir + '/Graphs/'
 	
 	df = pd.read_csv(
@@ -110,7 +110,7 @@ def MakeDailyGraphs(
 def MakePrettyGraphs(
 		dataDir, dataName, measureCols, splitParam,
 		median=True, mean=True, si=False, filterIndex=[], timesteps=30):
-	processDir = dataDir + '/Traces/'
+	processDir = dataDir + '/traces/'
 	visualDir = dataDir + '/Graphs/'
 	inputFile = processDir + dataName
 	
@@ -174,7 +174,7 @@ def MakePrettyGraphs(
 def MakeMultiSplitGraphs(
 		dataDir, dataName, measureCols, splitParams,
 		median=True, mean=True, si=False):
-	processDir = dataDir + '/Traces/'
+	processDir = dataDir + '/traces/'
 	visualDir = dataDir + '/Graphs/'
 	inputFile = processDir + dataName + '_weeklyAgg'
 	
@@ -240,7 +240,7 @@ def MakeMultiSplitGraphs(
 
 def MakeStageGraphs(dataDir, measureCols, filterParams, splitParam,
 					median=True, mean=False, si=False):
-	processDir = dataDir + '/Traces/'
+	processDir = dataDir + '/traces/'
 	visualDir = dataDir + '/Graphs/'
 	inputFile = processDir + 'processed_stage'
 	

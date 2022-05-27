@@ -351,6 +351,14 @@ def ListUnique(myList):
 	return list(dict.fromkeys(myList))
 
 
+def FilterOnIndex(df, indexName, minVal, maxVal):
+	filterIndex = df.index.get_level_values(indexName)
+	minExisting = max(filterIndex.min(), minVal)
+	maxExisting = min(filterIndex.max(), maxVal - 1)
+	filterIndex = ((filterIndex >= minExisting) & (filterIndex <= maxExisting))
+	df = df[filterIndex]
+	return df
+
 def ToHeatmap(df, structure):
 	if df.index.name != None:
 		df = df.reset_index()
@@ -377,6 +385,7 @@ def MakeDescribedHeatmapSet(
 		describe=False,
 		describeList=[x*0.01 for x in range(1, 100)]):
 	
+	print('Output heatmap {}'.format(prefixName))
 	percentList = [0.05, 0.5, 0.95]
 	percMap = {
 		0.05: 'percentile_005',
@@ -389,7 +398,7 @@ def MakeDescribedHeatmapSet(
 	
 	if describe:
 		name = prefixName + '_describe'
-		print('Describe {} draws'.format(prefixName))
+		#print('Describe {} draws'.format(prefixName))
 		df_describe = df.copy()
 		df_describe = df_describe.unstack(relevantMeasureCols)
 		df_describe = df_describe.describe(percentiles=describeList)
@@ -410,7 +419,6 @@ def MakeDescribedHeatmapSet(
 	#print(dfHeat)
 	
 	name =  prefixName + '_mean'
-	print('Output heatmap {}'.format(name))
 	#dfHeat = dfHeat.drop_duplicates()
 	OutputToFile(dfHeat, subfolder + name, head=False)
 	
@@ -419,7 +427,7 @@ def MakeDescribedHeatmapSet(
 		dfHeat = df[pc].to_frame().rename(columns={0 : 'pc_{}'.format(pc)})
 		dfHeat = ToHeatmap(dfHeat.reset_index(), heatStruct)
 		name =  prefixName + '_' + percMap.get(pc)
-		print('Output heatmap {}'.format(name))
+		#print('Output heatmap {}'.format(name))
 		#dfHeat = dfHeat.drop_duplicates()
 		OutputToFile(dfHeat, subfolder + name, head=False)
 	
