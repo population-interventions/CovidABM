@@ -254,6 +254,28 @@ to simul_setNewRecover [variant popPerSimul]
   set recoverVariant variant
 end
 
+to simul_stealRecover
+  let myAge agerange
+  let myCurrentVaccine currentVaccine
+  let target one-of simuls with [agerange = myAge and color = yellow and currentVaccine = myCurrentVaccine]
+  
+  if is-simul? target [
+    set recoverVaccinePopPerSimul ([recoverVaccinePopPerSimul] of target)
+    set recoverDay ([recoverDay] of target)
+    set recoverVaccine ([recoverVaccine] of target)
+    set recoverVariant ([recoverVariant] of target)
+    set color yellow
+    
+    ask target [
+      set recoverVaccinePopPerSimul 0
+      set recoverDay 0
+      set recoverVaccine 0
+      set recoverVariant 0
+      set color cyan
+    ]
+  ]
+end
+
 to simul_setNewInfection [variant startDay recoverEffProp]
   set color red
   set timenow startDay
@@ -594,7 +616,8 @@ to simul_end_infection
     let popPerSimul extraScaleFactor * (Scale_Factor ^ myScale)
     
     ;; Don't increment recoveries or give immunity before the main model starts.
-    if days >= 0 [
+    ifelse days >= 0
+    [
       if recoverVariant != 0 [
         table:put recoverCountByVariant recoverVariant ((table:get recoverCountByVariant recoverVariant) - popPerSimul)
         if table:get recoverCountByVariant recoverVariant < 0 [
@@ -613,6 +636,11 @@ to simul_end_infection
       simul_setNewRecover infectVariant popPerSimul
       set isInitialInfection false
       set infectVariant 0
+    ]
+    [
+      if recoverVariant = 0 [
+        simul_stealRecover 
+      ]
     ]
     
     if trace_calibration > 0 [

@@ -6,5 +6,8 @@ modelName = sys.argv[1] if len(sys.argv) > 1 else 'rc_auto'
 runCount = int(sys.argv[2]) if len(sys.argv) > 2 else 2
 
 modelSetup.MakeHeadlessWithParameters(modelName, runCount=runCount)
-splitInput.DoVicSplit()
+
+# Run manually, not on HPC
+if len(sys.argv) < 2:
+	splitInput.DoVicSplit()
 

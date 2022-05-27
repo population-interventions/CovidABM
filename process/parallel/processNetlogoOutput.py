@@ -18,6 +18,9 @@ import process.shared.utilities as util
 metricList = ['mort', 'icu', 'hosp', 'sympt', 'infect']
 metricListRaw = {'die' : 'mort', 'icu' : 'icu', 'hosp' : 'hosp', 'sympt' : 'sympt'}
 
+WRITE_ALWAYS = False
+DELETE_AFTER = True
+
 def SplitOutDailyData(
 		chunk, dataMap, cohorts, days, arrayIndex, name, filePath, fileAppend,
 		fillTo=False, noWrite=False):
@@ -26,6 +29,8 @@ def SplitOutDailyData(
 	df = df[name]
 	if dataMap is not False:
 		util.OutputToDataMap(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), dataMap)
+		if WRITE_ALWAYS:
+			util.OutputToFile(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), head=False)
 	elif not noWrite:
 		util.OutputToFile(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), head=False)
 	return df
@@ -34,6 +39,8 @@ def SplitOutDailyData(
 def DecorateOutDailyData(df, dataMap, arrayIndex, filePath, fileAppend):
 	if dataMap is not False:
 		util.OutputToDataMap(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), dataMap)
+		if WRITE_ALWAYS:
+			util.OutputToFile(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), head=False)
 	else:
 		util.OutputToFile(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), head=False)
 	return df
@@ -178,8 +185,8 @@ def InfectionsAndStageVisualise(dataMap, inputDir, outputDir, arrayIndex, measur
 			dataMap, inputDir, outputDir, arrayIndex, metric,
 			measureCols, dayStartOffset=dayStartOffset)
 	
-	print('Processing trace stage')
-	ProcessFileToVisualisation(dataMap, inputDir, outputDir, arrayIndex, 'stage', measureCols, dayStartOffset=dayStartOffset)
+	#print('Processing trace stage')
+	#ProcessFileToVisualisation(dataMap, inputDir, outputDir, arrayIndex, 'stage', measureCols, dayStartOffset=dayStartOffset)
 
 
 def CasesVisualise(inputDir, outputDir, arrayIndex, measureCols, dayStartOffset=0):
@@ -279,6 +286,8 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doW
 			df[age - 5] = df[age]/2
 			df[age] = df[age]/2
 		else:
+			print("age not found", age)
+			print(df)
 			df[age - 5] = 0
 			df[age] = 0
 	df = df.unstack('day')
@@ -291,10 +300,10 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doW
 	#	df1 = df.loc[:, slice(80, 80)].rename(columns={80 : age}, level=0)
 	#	df = df.join(df1)
 	
+	df = df.stack(level=['age'])
 	OutputQuart(df.copy(), outputPrefix, arrayIndex)
 	OutputYear(df.copy(), outputPrefix, arrayIndex)
 	
-	df = df.stack(level=['age'])
 	if doDaily:
 		util.OutputToFile(df, outputPrefix + '_' + str(arrayIndex), head=False)
 	if doWeekly:
@@ -302,6 +311,22 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doW
 	if doTenday:
 		OutputTenday(df.copy(), outputPrefix, arrayIndex)
 	return df
+
+
+def ProcessStage(dataMap, inputDir, outputDir, arrayIndex, measureCols):
+	df = pd.read_csv(
+		inputDir + '/processed_stage' + '_' + str(arrayIndex) + '.csv',
+		index_col=list(range(2 + len(measureCols))),
+		header=list(range(2)),
+		dtype={'day' : int, 'cohort' : int},
+		keep_default_na=False)
+	
+	df.columns = df.columns.set_levels(df.columns.levels[0].astype(int), level=0)
+	df.columns = df.columns.set_levels(df.columns.levels[1].astype(int), level=1)
+	df = df.sort_values(['cohort', 'day'], axis=1)
+	df = df.groupby(level=[0], axis=1).sum()
+	
+	util.OutputToFile(df, outputDir + '/processed_stage' + '_daily_' + str(arrayIndex), head=False)
 
 
 def ProcessInfectCohorts(dataMap, measureCols, filename, cohortFile, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
@@ -350,6 +375,12 @@ def ProcessInfectionCohorts(dataMap, inputDir, outputDir, arrayIndex, measureCol
 			outputDir + '/{}'.format(metric), arrayIndex, doWeekly=doWeekly)
 
 
+
+def CleanupFiles(inputDir, arrayIndex):
+	for metric in metricList + ['secondary', 'stage']:
+		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv') 
+
+
 ############### Cohort outputs for mort/hosp ###############
 
 def DoAbmProcessing(inputDir, outputDir, arrayIndex, indexRename, measureCols, measureCols_raw, day_override=False, dayStartOffset=0):
@@ -362,4 +393,8 @@ def DoAbmProcessing(inputDir, outputDir, arrayIndex, indexRename, measureCols, m
 	
 	print('ProcessInfectionCohorts', inputDir, arrayIndex)
 	ProcessInfectionCohorts(dataMap, outputDir + '/step_1', outputDir + '/cohort', arrayIndex, measureCols, doWeekly=False)
-
+	
+	ProcessStage(dataMap, outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols)
+	
+	if DELETE_AFTER:
+		CleanupFiles(outputDir, arrayIndex)

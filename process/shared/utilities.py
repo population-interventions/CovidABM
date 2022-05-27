@@ -334,6 +334,10 @@ def AppendFiles(
 		df.index = df.index.set_levels(df.index.levels[indexSize - 1].astype(int), level=runIndexer)
 		df = df.reorder_levels([0, indexSize - 1] + list(range(1, indexSize - 1)))
 		
+	df = df.droplevel('run', axis=0)
+	df = df.sort_index(0)
+	df.columns = pd.to_numeric(df.columns).astype(int)
+		
 	OutputToFile(df, outputName, head=head)
 	
 

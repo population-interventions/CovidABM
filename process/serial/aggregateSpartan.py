@@ -23,7 +23,7 @@ import process.shared.utilities as util
 metricList = ['mort', 'icu', 'hosp', 'sympt', 'infect']
 
 def AppendParallels(
-		dataDir, rawDataDir, outDir, measureCols, outputSubdir, prefix,
+		dataDir, rawDataDir, outDir, indexSize, outputSubdir, prefix,
 		runIndexer, indexList, fileNames, header=1, indexGrouping=False):
 	for file in fileNames:
 		if prefix:
@@ -36,7 +36,7 @@ def AppendParallels(
 			[rawDataDir + outputSubdir + thisPrefix + file + '_' + str(x) for x in indexList],
 			runIndexer,
 			doTqdm=True,
-			indexSize=len(measureCols) + 2,
+			indexSize=indexSize,
 			header=header,
 			head=False,
 			indexGrouping=indexGrouping
@@ -63,10 +63,11 @@ def DoSpartanAggregate(
 		tracesAgg.append('{}_weeklyAgg'.format(metric))
 	
 	if processCohort:
+		# Larger index because cohort data contains age
 		AppendParallels(
-			dataDir, rawDataDir, '/cohort/', measureCols, '/cohort/', False,
+			dataDir, rawDataDir, '/cohort/', len(measureCols) + 3, '/cohort/', False,
 			runIndexer, indexList, processAgg, indexGrouping=indexGrouping)
 	
 	AppendParallels(
-		dataDir, rawDataDir, '/traces/', measureCols, '/visualise/', 'processed',
+		dataDir, rawDataDir, '/traces/', len(measureCols) + 2, '/visualise/', 'processed',
 		runIndexer, indexList, tracesAgg, indexGrouping=indexGrouping)

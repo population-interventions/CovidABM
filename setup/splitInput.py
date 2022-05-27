@@ -26,11 +26,11 @@ def SplitFile(inFile, outFile, stackedCols=False, appendDf=False):
 	df = df.sort_index()
 	
 	for draw in util.UniqueLevelValueList(df, 0):
+		print('draw', draw)
 		outDf = df.loc[draw, :]
 		if appendDf is not False:
 			outDf = outDf.join(appendDf)
 		util.OutputToFile(outDf, '{}_{}'.format(outFile, draw), head=False)
-		return
 
 
 def DoVicSplit():

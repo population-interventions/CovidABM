@@ -63,7 +63,7 @@
 				"indexGrouping" : 2
 			},
 			"heatAges" : [
-				[0, 110]
+				[0, 100]
 			],
 			"heatmapStructure" : {
 				"index_rows" : ["Variant", "Infectiousness", "Immune escape", "Incursion day"],

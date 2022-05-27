@@ -476,15 +476,12 @@ def LoadHeatmapInputDf(
 	print(fileIn)
 	df = pd.read_csv(
 		subfolder + '/cohort/' + fileIn + '.csv', 
-		index_col=list(range((2 if hasRunCol else 1) + len(measureCols))),
+		index_col=list(range(2 + len(measureCols))),
 		header=list(range(1)))
 	
-	print(df)
 	df = df[[str(x) for x in range(math.floor(start), math.ceil(end))]]
-	
 	if divide:
 		df = df / divide
-	print(df)
 	
 	# Take a fraction of the metric in fractional weeks.
 	if math.floor(start) < start:
@@ -493,6 +490,8 @@ def LoadHeatmapInputDf(
 	if math.ceil(end) > end:
 		last = str(math.ceil(end - 1))
 		df[last] = df[last] * (1 - math.ceil(end) + end)
+	
+	print(df)
 	
 	if doSum:
 		df = df.sum(axis=1)

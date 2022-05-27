@@ -34,11 +34,11 @@ __includes[
 GRAPHICS-WINDOW
 434
 85
-883
-535
+886
+538
 -1
 -1
-5.86
+5.883333333333334
 1
 10
 1
@@ -1221,7 +1221,7 @@ Isolation_Transmission
 Isolation_Transmission
 0
 1
-0.1
+0.33
 0.01
 1
 NIL
@@ -1561,7 +1561,7 @@ MONITOR
 396
 863
 % Yellow First
-100 * (count simuls with [color = yellow and recoverVariant = \"alpha\"]) / Population
+100 * (count simuls with [color = yellow and recoverVariant = \"base\"]) / Population
 17
 1
 11
@@ -2704,10 +2704,10 @@ SLIDER
 226
 init_metric_threshold
 init_metric_threshold
--100
+-1000
 30000
-20000.0
-100
+12000.0
+1000
 1
 NIL
 HORIZONTAL
@@ -2721,7 +2721,7 @@ init_stage
 init_stage
 0
 5
-1.0
+2.0
 0.1
 1
 NIL
@@ -2924,7 +2924,7 @@ draw_index
 draw_index
 0
 2000
-873.0
+667.0
 1
 1
 NIL
@@ -3279,7 +3279,7 @@ false
 "" ""
 PENS
 "default" 1.0 1 -2674135 true "" "plot  policymetric7 / ( 3 + infectionsToday)"
-"pen-1" 1.0 0 -16777216 true "" "plot 0.02"
+"pen-1" 1.0 0 -16777216 true "" "plot 0.0125"
 
 PLOT
 673
@@ -3325,7 +3325,7 @@ start_day_min
 start_day_min
 0
 100
-25.0
+20.0
 1
 1
 NIL
@@ -3404,13 +3404,28 @@ SLIDER
 675
 583
 882
-617
+616
 avoidAttemptIntMult
 avoidAttemptIntMult
 0
 1
-0.1
+0.33
 0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+434
+582
+607
+616
+init_infectivityMult
+init_infectivityMult
+0
+2
+0.4
+0.1
 1
 NIL
 HORIZONTAL
