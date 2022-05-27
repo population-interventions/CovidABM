@@ -26,6 +26,7 @@ simuls-own [
   cohortVacSuffix
   
   myScale
+  attemptedAvoid
   
   move_chance_multiplier
   superSpread_chance_multiplier
@@ -143,6 +144,7 @@ end
 
 to simul_move_to_empty_patch
   let movePatch one-of neighbors with [ lastUtilTime < ticks ]
+  set attemptedAvoid true
   if is-patch? movePatch [
     move-to movePatch
     ask movePatch [
@@ -168,7 +170,7 @@ to simul_updateIsolationResponse
     if (Case_Isolation and (isolating = 1 or tracked = 1)) or (color = red and isolate_on_inf_notice and noticeOwnInfection = 1)[
       ifelse isolating = 1 and color != red
       [
-        if draw_isolationCompliance * Household_Iso_Factor > random-float 1 [
+        if ApplyOrToPr (draw_isolationCompliance * Household_Iso_Factor) avoidOr > random-float 1 [
           simul_applyIsolation
         ]
       ]
@@ -176,12 +178,12 @@ to simul_updateIsolationResponse
         ;; Full strength isolation for known cases
         ifelse caseReportTime >= ticks
         [
-          if draw_isolationCompliance * Infect_Iso_Factor > random-float 1 [
+          if ApplyOrToPr (draw_isolationCompliance * Infect_Iso_Factor) avoidOr > random-float 1 [
             simul_applyIsolation
           ]
         ]
         [
-          if draw_isolationCompliance * Track_Iso_Factor > random-float 1 [
+          if ApplyOrToPr (draw_isolationCompliance * Track_Iso_Factor) avoidOr > random-float 1 [
             simul_applyIsolation
           ]
         ]
@@ -337,6 +339,7 @@ to simul_record_patch_infectiveness
     let localPatchScale myScale
     let localWearingMask wearingMask
     let localWornMaskOr wornMaskOr
+    let localAttemptAvoid attemptedAvoid
     ask myPatch [
       if lastInfectionUpdate < ticks [
         set infectionList []
@@ -346,6 +349,9 @@ to simul_record_patch_infectiveness
       ]
       if gather_loc_trans_red > 0 and destination = 1 [
         set localInfectiveness (localInfectiveness * (1 - gather_loc_trans_red))
+      ]
+      if localAttemptAvoid [
+        set localInfectiveness localInfectiveness * avoidAttemptIntMult 
       ]
       if localWearingMask [
         set localInfectiveness ApplyOrToPr localInfectiveness localWornMaskOr
@@ -385,6 +391,12 @@ to simul_infect
         ;print x
         if color != red [
           let succeptibility baseSuccept * x * infectivityMult
+          if attemptedAvoid [
+           set succeptibility (succeptibility * avoidAttemptIntMult)
+          ]
+          if isolateCompliant = 1 [
+            set succeptibility (succeptibility * Isolation_Transmission )
+          ]
           ;print (word "succeptibility " succeptibility ", after " (ApplyOrToPr succeptibility wornMaskOr))
           ;print (word "first " (ApplyOrToPr (ApplyOrToPr succeptibility succeptOr) wornMaskOr) ", second " (ApplyOrToPr (ApplyOrToPr succeptibility wornMaskOr) succeptOr) ", mult " ApplyOrToPr succeptibility (wornMaskOr * succeptOr))
           set succeptibility ApplyOrToPr succeptibility (wornMaskOr * succeptOr)
@@ -505,14 +517,15 @@ end
 
 to simul_avoid
   ;; so, if the social distancing policies are on and you are distancing at this time and you are not part of an age-isolated
-  ;; group and you are not an EssentialWorkerPriority, then if there is anyone near you, move away if you can.♦
+  ;; group and you are not an EssentialWorkerPriority, then if there is anyone near you, move away if you can.
+  set attemptedAvoid false
   if isolateCompliant != 1 [
     ;; if you are an essential worker, you can only reduce your
     ;; contacts when you are not at work assuming 8 hours work, 8 hours rest, 8 hours recreation - rest doesn't count for anyone, hence it is
     ;; set at 50 on the input slider. People don't isolate from others in their household unit
     let myPPA ApplyOrToPr (Proportion_People_Avoid + draw_ppa_modifier) avoidOr
     let myPTA ApplyOrToPr (Proportion_Time_Avoid + draw_pta_modifier) avoidOr
-    ;if random-float 1 < 0.001 [ print (word agerange ", " myPPA)]
+    ;if random-float 1 < 0.001 [ print (word agerange ", myPPA " myPPA)]
     
     let myHouse householdUnit
     (ifelse any? other simuls-here with [ (householdUnit != myHouse and isolateCompliant = 1) ] and draw_isolationCompliance > random-float 1
@@ -531,7 +544,7 @@ to simul_avoid
           ]
         ]
         [
-          if any? other simuls-here with [ (householdUnit != myHouse) and BeAvoided ] [
+          if true or any? other simuls-here with [ (householdUnit != myHouse) and BeAvoided ] [
             simul_move_to_empty_patch
           ]
         ]
@@ -539,6 +552,9 @@ to simul_avoid
       [
         ;; otherwise just avoid ICU (we already moved)
         simul_update_patch_utilisation
+        ;if agerange > 60 [
+        ;  print (word "fail " myPPA "  " myPTA "  " (((not EssentialWorkerFlag) or Ess_W_Risk_Reduction > random-float 1) and Spatial_Distance = true))
+        ;]
     ])
   ]
   ;;move-to patch-here ;; Snap to grid
@@ -551,6 +567,7 @@ to simul_superSpread
     set mySpread (mySpread + ess_spread_anchor) * 0.5
   ]
   if (isolateCompliant = 0 and mySpread * superSpread_chance_multiplier > random-float 1) or always_spread [
+    set attemptedAvoid false
     move-to one-of destination_patches
   ]
 end
