@@ -37,7 +37,8 @@ to simul_AddDeathHospToPipes [variant hospMean deathMean]
   if cohortHospTime - timenow + i >= 0 [
     set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i) (hospMean * (hospLength - floor hospLength))
   ]
-  ;print (word agerange "  " hospMean)
+  
+  ;print (word agerange "  " (floor (hospMean * 10) / 10) )
 end
 
 to printVaccineProgress
@@ -240,7 +241,14 @@ to calculateHospInLastPeriod
   set policymetric14 policymetric14 + h_prior20 + h_prior21 + h_prior22 + h_prior23
   
   if policyUseHosp [
-    ;print hospUsagePipe
+    ;let printList []
+    ;let i 0
+    ;repeat length hospUsagePipe [
+    ;  set printList lput (floor item i hospUsagePipe) printList
+    ;  set i (i + 1)
+    ;]
+    ;print printList
+    
     set policymetric7 ((item 10 hospUsagePipe) + (item 11 hospUsagePipe) + (item 12 hospUsagePipe) + (item 13 hospUsagePipe) + (item 14 hospUsagePipe)) / 5
     set policymetric14 policymetric7 + (item 7 hospUsagePipe) + (item 8 hospUsagePipe) + (item 9 hospUsagePipe) + (item 10 hospUsagePipe) + (item 11 hospUsagePipe) + (item 12 hospUsagePipe) + (item 13 hospUsagePipe)
   ]

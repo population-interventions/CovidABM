@@ -4,152 +4,155 @@
 ;; this section for Tony
 
 to do_stages_tony
-  if stage = -1 [
+  ifelse  stage = -1 or stage_test_index >= 0
+  [
     do_stages_test
   ]
-  if stage = 0 [
-    ;; Stage 0 - nothing, no change
-    set span 10
-    set Visit_Radius 8.8
-    set Visit_Frequency 0.1428
-    set superspreaders 0.1
-
-    set proportion_people_avoid 0.0
-    set proportion_time_avoid 0
-    set Complacency_Bound 0
-    set case_isolation false
-    set schoolsOpen true
-    set quarantine false
-    set Essential_Workers 1
-    set maskPolicy false
-    set spatial_distance false
-    set traceMult 1
-    set isolate_on_inf_notice false
-    set tracking false
-    
-    ;; Cascading probabilities. Check mask wearing, then n95, then surgical, otherwise default to cloth.
-    set mask_wearing_a0           0
-    set mask_wearing_a10          0
-    set mask_wearing_a20          0
-    set mask_wearing_n95_a0       0
-    set mask_wearing_n95_a10      0
-    set mask_wearing_n95_a20      0
-    set mask_wearing_surgical_a0  0
-    set mask_wearing_surgical_a10 0
-    set mask_wearing_surgical_a20 0
-  ]
-  
-  if stage >= 1 [
-    set maskPolicy true
-    set spatial_distance true
-    set case_isolation true
-    set quarantine true
-    set isolate_on_inf_notice true
-    set tracking true
-  ]
-  
-  ;; Mask proportions
-  ifelse stage >= 3 and policy_mask_n95
   [
-    set mask_wearing_n95_a0       0.2
-    set mask_wearing_n95_a10      mask_n95_prop_draw
-    set mask_wearing_n95_a20      mask_n95_prop_draw
-    set mask_wearing_surgical_a0  1
-    set mask_wearing_surgical_a10 1
-    set mask_wearing_surgical_a20 1
-  ]
-  [
-    set mask_wearing_n95_a0       0.2
-    set mask_wearing_n95_a10      0.2
-    set mask_wearing_n95_a20      0.2
-    set mask_wearing_surgical_a0  1
-    set mask_wearing_surgical_a10 1
-    set mask_wearing_surgical_a20 1
-  ]
-  
-  if stage = 1 [
-    ;; Stage 1
-    set span                    10
-    set proportion_people_avoid 0.3
-    set proportion_time_avoid   0.3
-    set Complacency_Bound       0.3
-    set Essential_Workers       0.7
-    set Visit_Radius            8.8
-    set Visit_Frequency         0.1428
-    set superspreaders          0.05
-    set schoolsOpen true
+    if stage = 0 [
+      ;; Stage 0 - nothing, no change
+      set span 10
+      set Visit_Radius 8.8
+      set Visit_Frequency 0.1428
+      set superspreaders 0.1
+      
+      set proportion_people_avoid 0.0
+      set proportion_time_avoid 0
+      set Complacency_Bound 0
+      set case_isolation false
+      set schoolsOpen true
+      set quarantine false
+      set Essential_Workers 1
+      set maskPolicy false
+      set spatial_distance false
+      set traceMult 1
+      set isolate_on_inf_notice false
+      set tracking false
+      
+      ;; Cascading probabilities. Check mask wearing, then n95, then surgical, otherwise default to cloth.
+      set mask_wearing_a0           0
+      set mask_wearing_a10          0
+      set mask_wearing_a20          0
+      set mask_wearing_n95_a0       0
+      set mask_wearing_n95_a10      0
+      set mask_wearing_n95_a20      0
+      set mask_wearing_surgical_a0  0
+      set mask_wearing_surgical_a10 0
+      set mask_wearing_surgical_a20 0
+    ]
     
-    set mask_wearing_a20        0.25
-    set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-    set mask_wearing_a0         mask_wearing_a10 * 2 / 3
-  ]
-
-  if stage = 2 [
-    ;; Stage 2
-    set span                    10
-    set proportion_people_avoid 0.45
-    set proportion_time_avoid   0.45
-    set Complacency_Bound       0.45
-    set Essential_Workers       0.60
-    set Visit_Radius            8.8
-    set Visit_Frequency         0.1428
-    set superspreaders          0.04
-    set schoolsOpen true
+    if stage >= 1 [
+      set maskPolicy true
+      set spatial_distance true
+      set case_isolation true
+      set quarantine true
+      set isolate_on_inf_notice true
+      set tracking true
+    ]
     
-    set mask_wearing_a20        0.45
-    set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-    set mask_wearing_a0         mask_wearing_a10 * 2 / 3
-  ]
-
-  if stage = 3 [
-    ;; Stage 3
-    set span                    8
-    set proportion_people_avoid 0.6
-    set proportion_time_avoid   0.6
-    set Complacency_Bound       0.6
-    set Essential_Workers       0.50
-    set Visit_Radius            6.2
-    set Visit_Frequency         0.1428
-    set superspreaders          0.03
-    set schoolsOpen true
+    ;; Mask proportions
+    ifelse stage >= 3 and policy_mask_n95
+    [
+      set mask_wearing_n95_a0       0.2
+      set mask_wearing_n95_a10      mask_n95_prop_draw
+      set mask_wearing_n95_a20      mask_n95_prop_draw
+      set mask_wearing_surgical_a0  1
+      set mask_wearing_surgical_a10 1
+      set mask_wearing_surgical_a20 1
+    ]
+    [
+      set mask_wearing_n95_a0       0.2
+      set mask_wearing_n95_a10      0.2
+      set mask_wearing_n95_a20      0.2
+      set mask_wearing_surgical_a0  1
+      set mask_wearing_surgical_a10 1
+      set mask_wearing_surgical_a20 1
+    ]
     
-    set mask_wearing_a20        0.65
-    set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-    set mask_wearing_a0         mask_wearing_a10 * 2 / 3
-  ]
-
-  if stage = 4 [
-    ;; Stage 4
-    set span                    5
-    set proportion_people_avoid 0.75
-    set proportion_time_avoid   0.75
-    set Complacency_Bound       0.75
-    set Essential_Workers       0.35
-    set Visit_Radius            5.0
-    set Visit_Frequency         0.1428
-    set superspreaders          0.02
-    set schoolsOpen false
+    if stage = 1 [
+      ;; Stage 1
+      set span                    10
+      set proportion_people_avoid 0.3
+      set proportion_time_avoid   0.3
+      set Complacency_Bound       0.3
+      set Essential_Workers       0.7
+      set Visit_Radius            8.8
+      set Visit_Frequency         0.1428
+      set superspreaders          0.05
+      set schoolsOpen true
+      
+      set mask_wearing_a20        0.25
+      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
+      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
+    ]
     
-    set mask_wearing_a20        0.80
-    set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-    set mask_wearing_a0         mask_wearing_a10 * 2 / 3
-  ]
-
-  if stage = 5 [
-    ;; Stage 5
-    set span                    3
-    set proportion_people_avoid 0.85
-    set proportion_time_avoid   0.85
-    set Complacency_Bound       0.85
-    set Essential_Workers       0.20
-    set Visit_Radius            3.6
-    set Visit_Frequency         0.1428
-    set superspreaders          0.015
-    set schoolsOpen false
+    if stage = 2 [
+      ;; Stage 2
+      set span                    10
+      set proportion_people_avoid 0.45
+      set proportion_time_avoid   0.45
+      set Complacency_Bound       0.45
+      set Essential_Workers       0.60
+      set Visit_Radius            8.8
+      set Visit_Frequency         0.1428
+      set superspreaders          0.04
+      set schoolsOpen true
+      
+      set mask_wearing_a20        0.45
+      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
+      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
+    ]
     
-    set mask_wearing_a20        0.90
-    set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-    set mask_wearing_a0         mask_wearing_a10 * 2 / 3
+    if stage = 3 [
+      ;; Stage 3
+      set span                    8
+      set proportion_people_avoid 0.6
+      set proportion_time_avoid   0.6
+      set Complacency_Bound       0.6
+      set Essential_Workers       0.50
+      set Visit_Radius            6.2
+      set Visit_Frequency         0.1428
+      set superspreaders          0.03
+      set schoolsOpen true
+      
+      set mask_wearing_a20        0.65
+      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
+      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
+    ]
+    
+    if stage = 4 [
+      ;; Stage 4
+      set span                    5
+      set proportion_people_avoid 0.75
+      set proportion_time_avoid   0.75
+      set Complacency_Bound       0.75
+      set Essential_Workers       0.35
+      set Visit_Radius            5.0
+      set Visit_Frequency         0.1428
+      set superspreaders          0.02
+      set schoolsOpen false
+      
+      set mask_wearing_a20        0.80
+      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
+      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
+    ]
+    
+    if stage = 5 [
+      ;; Stage 5
+      set span                    3
+      set proportion_people_avoid 0.85
+      set proportion_time_avoid   0.85
+      set Complacency_Bound       0.85
+      set Essential_Workers       0.20
+      set Visit_Radius            3.6
+      set Visit_Frequency         0.1428
+      set superspreaders          0.015
+      set schoolsOpen false
+      
+      set mask_wearing_a20        0.90
+      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
+      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
+    ]
   ]
 end
 

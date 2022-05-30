@@ -38,7 +38,7 @@ GRAPHICS-WINDOW
 538
 -1
 -1
-5.883333333333334
+7.4
 1
 10
 1
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.05
+0.03
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.3
+0.0
 0.01
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.3
+0.0
 0.01
 1
 NIL
@@ -563,7 +563,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.7
+1.0
 0.01
 1
 NIL
@@ -591,7 +591,7 @@ SWITCH
 411
 tracking
 tracking
-0
+1
 1
 -1000
 
@@ -664,7 +664,7 @@ SWITCH
 318
 MaskPolicy
 MaskPolicy
-0
+1
 1
 -1000
 
@@ -981,7 +981,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-4
+23
 
 MONITOR
 1473
@@ -1117,7 +1117,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.3
+0.0
 0.01
 1
 NIL
@@ -1378,30 +1378,15 @@ PENS
 "pen-1" 1.0 0 -7500403 true "" "plot slope * 100"
 
 SLIDER
-18
-967
-208
-1000
-calibrate_stage_switch
-calibrate_stage_switch
-0
-500
-300.0
-100
-1
-NIL
-HORIZONTAL
-
-SLIDER
-22
-1007
-322
-1040
+12
+968
+171
+1002
 stage_test_index
 stage_test_index
-0
-70
-0.0
+-1
+25
+4.0
 1
 1
 NIL
@@ -1414,7 +1399,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-0
+1
 1
 -1000
 
@@ -1490,8 +1475,8 @@ MONITOR
 865
 406
 910
-% Yellow Second
-100 * (count simuls with [color = yellow and recoverVariant = \"beta\"]) / Population
+% Rec Second
+100 * (count simuls with [recoverVariant = (word incur_name_part_1 incur_name_part_2 incur_name_part_3)]) / Population
 2
 1
 11
@@ -1527,7 +1512,7 @@ Recov_Var_Match_Rate
 Recov_Var_Match_Rate
 0
 1
-0.58
+0.9
 0.01
 1
 NIL
@@ -1560,8 +1545,8 @@ MONITOR
 818
 396
 863
-% Yellow First
-100 * (count simuls with [color = yellow and recoverVariant = \"base\"]) / Population
+% Rec First
+100 * (count simuls with [recoverVariant = \"base\"]) / Population
 17
 1
 11
@@ -1582,10 +1567,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1650
-379
-1793
-424
+1629
+383
+1772
+428
 NIL
 average_R_all_regions
 4
@@ -1664,10 +1649,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-217
-967
-321
-1000
+129
+1009
+229
+1043
 calibrate
 calibrate
 1
@@ -1799,7 +1784,7 @@ max_stage
 max_stage
 0
 5
-5.0
+2.0
 1
 1
 NIL
@@ -2084,10 +2069,10 @@ casesReportedToday
 11
 
 MONITOR
-1632
-432
-1741
-477
+1629
+433
+1738
+478
 NIL
 initial_infection_R
 17
@@ -2101,7 +2086,7 @@ SWITCH
 653
 first_case_calibrate
 first_case_calibrate
-1
+0
 1
 -1000
 
@@ -2157,10 +2142,10 @@ self_iso_at_peak
 -1000
 
 SWITCH
-237
-678
-356
-711
+243
+682
+362
+715
 print_phase
 print_phase
 1
@@ -2168,10 +2153,10 @@ print_phase
 -1000
 
 SWITCH
-237
-640
-355
-673
+243
+643
+361
+676
 print_vac
 print_vac
 1
@@ -2492,7 +2477,7 @@ min_stage
 min_stage
 0
 5
-1.0
+2.0
 1
 1
 NIL
@@ -2721,7 +2706,7 @@ init_stage
 init_stage
 0
 5
-2.0
+0.0
 0.1
 1
 NIL
@@ -2758,7 +2743,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-1822916.0
+42465.29361
 1
 1
 NIL
@@ -2924,7 +2909,7 @@ draw_index
 draw_index
 0
 2000
-667.0
+686.0
 1
 1
 NIL
@@ -3076,7 +3061,7 @@ SWITCH
 413
 policy_mask_n95
 policy_mask_n95
-0
+1
 1
 -1000
 
@@ -3088,9 +3073,9 @@ SLIDER
 incur_day
 incur_day
 0
-300
-80.0
-1
+320
+320.0
+20
 1
 NIL
 HORIZONTAL
@@ -3419,7 +3404,7 @@ SLIDER
 434
 582
 607
-616
+615
 init_infectivityMult
 init_infectivityMult
 0
@@ -3429,6 +3414,32 @@ init_infectivityMult
 1
 NIL
 HORIZONTAL
+
+SLIDER
+188
+969
+406
+1003
+recover_prop
+recover_prop
+0
+1
+0.56
+0.01
+1
+NIL
+HORIZONTAL
+
+SWITCH
+233
+1009
+405
+1043
+override_recover_prop
+override_recover_prop
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?

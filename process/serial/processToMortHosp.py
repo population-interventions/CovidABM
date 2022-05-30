@@ -492,6 +492,8 @@ def LoadHeatmapInputDf(
 		df[last] = df[last] * (1 - math.ceil(end) + end)
 	
 	df = util.FilterOnIndex(df, 'age', heatAge[0], heatAge[1] - 1)
+	df = df.groupby(['draw_index'] + measureCols).sum()
+	
 	if doSum:
 		df = df.sum(axis=1)
 	return df

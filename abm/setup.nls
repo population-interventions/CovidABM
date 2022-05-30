@@ -362,6 +362,39 @@ to setupInitialVaccination_micromangedMethod
       ]
     ]
   ]
+  
+  if override_recover_prop [
+    let yellowSimuls simuls with [ color = yellow ]
+    let diff recover_prop * Population - (count yellowSimuls)
+    (ifelse diff > 1
+      [
+        let toAsk min (list (count simuls with [color = cyan]) (diff))
+        ask n-of toAsk simuls with [ color = cyan ] [
+          let myAge agerange
+          let target one-of simuls with [agerange = myAge and color = yellow]
+          
+          if is-simul? target [
+            set recoverVaccinePopPerSimul ([recoverVaccinePopPerSimul] of target)
+            set recoverDay ([recoverDay] of target)
+            set recoverVaccine ([recoverVaccine] of target)
+            set recoverVariant ([recoverVariant] of target)
+            set color yellow
+          ]
+        ]
+      ]
+      diff < -1
+      [
+        set diff -1 * diff
+        ask n-of (diff) simuls with [ color = yellow ] [
+          set recoverVaccinePopPerSimul 0
+          set recoverDay 0
+          set recoverVaccine 0
+          set recoverVariant 0
+          set color cyan
+        ]
+      ]
+    )
+  ]
 end
 
 to setupInitialVaccination

@@ -54,6 +54,10 @@ to ShiftRecoveredTowardsTotalProportion
         let myYellow yellowSet with [recoverVariant = variant]
         let myProp (count myYellow) / yellowSetCount
         let desiredProp (table:get recoverCountByVariant variant) / totalRecoverByVariant
+        ;; Print out active variants
+        ;if count myYellow > 0 [
+        ; print (word (count myYellow) ", " (table:get recoverCountByVariant variant) ", " desiredProp)
+        ;]
         if desiredProp > myProp [
           if desiredProp - myProp > wantMostProp [
             set wantMostProp desiredProp - myProp
@@ -71,6 +75,7 @@ to ShiftRecoveredTowardsTotalProportion
       foreach table:keys variantPropDiff [ variant ->
         ask n-of ((table:get variantPropDiff variant) * Recov_Var_Match_Rate * yellowSetCount) table:get variantSet variant [
           set recoverVariant wantMostVariant
+          set recoverVaccine getVariantRecoverVaccine wantMostVariant
         ]
       ]
     ]
