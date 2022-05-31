@@ -130,6 +130,7 @@ to params_setDrawValues
   rngs:set-seed variantSeedID random-float 999
   
   param_updateRecoverImmune
+  set infectivityMult init_infectivityMult
   
   ;; Copy UI variables so as to no overwrite their modification
   ;; Ideally UI variables would be read-only to cut down on misspecifictation
@@ -149,6 +150,7 @@ to params_setDrawValues
     let betaParams MeanStdToBeta _param_vac_uptake_mult param_vac_uptake_std
     set _param_vac_uptake_mult rngs:rnd-beta defaultStream (item 0 betaParams) (item 1 betaParams)
   ]
+  
   
   ;; Ignore cases reported before this day, due to initial spike
   set IGNORE_CASE_UNTIL 3
@@ -208,6 +210,7 @@ to params_setDrawValues
     set _init_trace_prop 0
     set _param_vacIncurMult 0
     set _param_incurMult 0
+    set infectivityMult 1
   ]
   
   if param_policy_force_preset > 0 [
