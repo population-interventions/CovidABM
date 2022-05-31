@@ -28,6 +28,7 @@ def ProcessResults(modelData, runs, pernode):
 	notFloatCol = [] # TODO: Fill out non-float index
 	simIndex = modelData['runIndexer']
 	metric = modelData['postSeries']['targetOptimise']['metric']
+	positiveSlope = modelData['postSeries']['targetOptimise']['positiveSlope']
 	
 	gitTime = util.GetGitTimeIdentifier()
 	df = helpers.AggregateAndPickOutColumn(nameList, index, simIndex, notFloatCol, metric)
@@ -44,7 +45,7 @@ def ProcessResults(modelData, runs, pernode):
 	## Read the input-output file that has been built up.
 	df = pd.read_csv(outPath + '/targetValues' + '.csv', index_col=0)
 	df = df[~df.index.duplicated(keep='first')]
-	df = df.sort_index()
+	df = df.sort_index(ascending=positiveSlope)
 	
 	## Make guesses for the next model run.
 	print(df)
@@ -53,7 +54,11 @@ def ProcessResults(modelData, runs, pernode):
 	guesses = [
 		util.GuessAtFunctionInverse(inList, outList, x) 
 		for x in modelData['postSeries']['targetOptimise']['targets']]
+	print('========== guesses ==========')
 	print('guesses', guesses)
+	print('in', inList)
+	print('out', outList)
+	print('target', modelData['postSeries']['targetOptimise']['targets'])
 	
 	## Check whether the repetion limit has been reached, and output final guess.
 	repetitionLimit = modelData['postSeries']['targetOptimise']['repetionLimit']
@@ -70,7 +75,7 @@ def ProcessResults(modelData, runs, pernode):
 	rawModel = md.LoadRawModelDataFile(modelData['name'])
 	
 	guesses = list(set(guesses))
-	print("guesses", guesses)
+	print("guesses final", guesses)
 	
 	repetitionLimit = repetitionLimit - 1
 	rawModel['postSeries']['targetOptimise']['repetionLimit'] = repetitionLimit

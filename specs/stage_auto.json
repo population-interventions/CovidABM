@@ -24,6 +24,7 @@
 		},
 		"targetOptimise" : {
 			"metric" : "cumulativeInfected",
+			"positiveSlope" : false,
 			"targets" : [
 				900000,
 				1200000,

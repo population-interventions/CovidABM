@@ -29,6 +29,7 @@
 		},
 		"targetOptimise" : {
 			"metric" : "initial_infection_R",
+			"positiveSlope" : true,
 			"targets" : [
 				10,
 				11,
