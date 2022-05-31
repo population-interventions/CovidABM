@@ -35,3 +35,7 @@
 /setup/__pycache__/modelSetup.cpython-38.pyc
 /setup/__pycache__/readNetlogo.cpython-38.pyc
 /setup/__pycache__/*.pyc
+/abm/headless_rc_auto.nlogo
+/abm/headless_rcalc_stage.nlogo
+/abm/headless_stage_auto.nlogo
+/abm/headless_vic_main.nlogo

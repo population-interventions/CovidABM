@@ -1,0 +1,35 @@
+{
+	"netlogoFile" : "covidModel",
+	"defaultParamFile" : "vic_main",
+	"copyExperimentMetrics" : "vic_rcalc",
+	"handlerName" : "stage_auto_handler",
+	"threads" : 1,
+	"indexParams" : {
+		"init_stage" : [
+			2,
+			3,
+			4
+		]
+	},
+	"paramOverrides" : {
+		"vaccine_enabled" : true,
+		"end_day" : 60,
+		"stages_cont" : true,
+		"param_policy" : "StageFixed"
+	},
+	"runIndexer" : "draw_index",
+	"postSeries" : {
+		"rcalc" : {
+			"metric" : "cumulativeInfected"
+		},
+		"targetOptimise" : {
+			"metric" : "cumulativeInfected",
+			"targets" : [
+				900000,
+				1200000,
+				1800000
+			],
+			"repetionLimit" : 4
+		}
+	}
+}

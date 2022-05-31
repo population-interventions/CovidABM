@@ -7,98 +7,100 @@ to do_stages_continuous
     do_stages_test
   ]
   if stage = 0 [
-    ;; Stage 0 - nothing, no change
-    set span 10
-    set Visit_Radius 8.8
-    set Visit_Frequency 0.1428
-    set superspreaders 0.1
-    
-    set proportion_people_avoid 0
-    set proportion_time_avoid 0
-    set Complacency_Bound 0
-    set case_isolation false
-    set schoolsOpen true
-    set quarantine false
-    set Essential_Workers 1
-    set maskPolicy false
-    set spatial_distance false
-    set traceMult 1
-    set isolate_on_inf_notice false
-    set tracking false
-    
-    ;; Cascading probabilities. Check mask wearing, then n95, then surgical, otherwise default to cloth.
-    set mask_wearing_a0 0
-    set mask_wearing_a10 0
-    set mask_wearing_a20 0
-    set mask_wearing_n95_a0 0
-    set mask_wearing_n95_a10 0
-    set mask_wearing_n95_a20 0
-    set mask_wearing_surgical_a0 0
-    set mask_wearing_surgical_a10 0
-    set mask_wearing_surgical_a20 0
+    do_stages_tony
   ]
   
-  if stage >= 1 [
-    set maskPolicy true
-    set spatial_distance true
-    set case_isolation true
-    set quarantine true
-    set isolate_on_inf_notice true
-    set tracking true
+  if stage >= 0 [
+    let realStage stage
+    set stage (ceiling realStage)
+    do_stages_tony
     
-    (ifelse stage <= 2
-      [
-        let prop stage - 1
-        set span                    (1 - prop) * 10     + prop * 10
-        set proportion_people_avoid (1 - prop) * 0.10   + prop * 0.30
-        set proportion_time_avoid   (1 - prop) * 0.10   + prop * 0.30
-        set Complacency_Bound       (1 - prop) * 0.5    + prop * 0.15
-        set Essential_Workers       (1 - prop) * 1      + prop * 0.70
-        set Visit_Radius            (1 - prop) * 8.8    + prop * 8.8
-        set Visit_Frequency         (1 - prop) * 0.1428 + prop * 0.1428
-        set superspreaders          (1 - prop) * 0.1    + prop * 0.08
-        set schoolsOpen true
-      ]
-      stage <= 3
-      [
-        let prop stage - 2
-        set span                    (1 - prop) * 10     + prop * 8
-        set proportion_people_avoid (1 - prop) * 0.30   + prop * 0.45
-        set proportion_time_avoid   (1 - prop) * 0.30   + prop * 0.45
-        set Complacency_Bound       (1 - prop) * 0.15   + prop * 0.30
-        set Essential_Workers       (1 - prop) * 0.70   + prop * 0.50
-        set Visit_Radius            (1 - prop) * 8.8    + prop * 6.2
-        set Visit_Frequency         (1 - prop) * 0.1428 + prop * 0.1428
-        set superspreaders          (1 - prop) * 0.08   + prop * 0.06
-        set schoolsOpen true
-      ]
-      stage <= 4
-      [
-        let prop stage - 3
-        set span                    (1 - prop) * 8      + prop * 5
-        set proportion_people_avoid (1 - prop) * 0.45   + prop * 0.60
-        set proportion_time_avoid   (1 - prop) * 0.45   + prop * 0.60
-        set Complacency_Bound       (1 - prop) * 0.30   + prop * 0.50
-        set Essential_Workers       (1 - prop) * 0.50   + prop * 0.35
-        set Visit_Radius            (1 - prop) * 6.2    + prop * 5.0
-        set Visit_Frequency         (1 - prop) * 0.1428 + prop * 0.1428
-        set superspreaders          (1 - prop) * 0.06   + prop * 0.04
-        set schoolsOpen true
-      ]
-      stage <= 5
-      [
-        let prop stage - 4
-        set span                    (1 - prop) * 5      + prop * 3
-        set proportion_people_avoid (1 - prop) * 0.60   + prop * 0.85
-        set proportion_time_avoid   (1 - prop) * 0.60   + prop * 0.85
-        set Complacency_Bound       (1 - prop) * 0.50   + prop * 0.78
-        set Essential_Workers       (1 - prop) * 0.35   + prop * 0.20
-        set Visit_Radius            (1 - prop) * 5.0    + prop * 3.6
-        set Visit_Frequency         (1 - prop) * 0.1428 + prop * 0.1428
-        set superspreaders          (1 - prop) * 0.04   + prop * 0.02
-        set schoolsOpen false
-    ])
+    let upper_span                      span
+    let upper_Visit_Radius              Visit_Radius
+    let upper_Visit_Frequency           Visit_Frequency
+    let upper_superspreaders            superspreaders
+    let upper_proportion_people_avoid   proportion_people_avoid
+    let upper_proportion_time_avoid     proportion_time_avoid
+    let upper_Complacency_Bound         Complacency_Bound
+    let upper_Essential_Workers         Essential_Workers
+    let upper_traceMult                 traceMult
+    let upper_mask_wearing_a0           mask_wearing_a0
+    let upper_mask_wearing_a10          mask_wearing_a10
+    let upper_mask_wearing_a20          mask_wearing_a20
+    let upper_mask_wearing_n95_a0       mask_wearing_n95_a0
+    let upper_mask_wearing_n95_a10      mask_wearing_n95_a10
+    let upper_mask_wearing_n95_a20      mask_wearing_n95_a20
+    let upper_mask_wearing_surgical_a0  mask_wearing_surgical_a0
+    let upper_mask_wearing_surgical_a10 mask_wearing_surgical_a10
+    let upper_mask_wearing_surgical_a20 mask_wearing_surgical_a20
+    
+    let upper_case_isolation            case_isolation
+    let upper_schoolsOpen               schoolsOpen
+    let upper_quarantine                quarantine
+    let upper_maskPolicy                maskPolicy
+    let upper_spatial_distance          spatial_distance
+    let upper_isolate_on_inf_notice     isolate_on_inf_notice
+    let upper_tracking                  tracking
+    
+    set stage floor realStage
+    do_stages_tony
+    
+    let lower_span                      span
+    let lower_Visit_Radius              Visit_Radius
+    let lower_Visit_Frequency           Visit_Frequency
+    let lower_superspreaders            superspreaders
+    let lower_proportion_people_avoid   proportion_people_avoid
+    let lower_proportion_time_avoid     proportion_time_avoid
+    let lower_Complacency_Bound         Complacency_Bound
+    let lower_Essential_Workers         Essential_Workers
+    let lower_traceMult                 traceMult
+    let lower_mask_wearing_a0           mask_wearing_a0
+    let lower_mask_wearing_a10          mask_wearing_a10
+    let lower_mask_wearing_a20          mask_wearing_a20
+    let lower_mask_wearing_n95_a0       mask_wearing_n95_a0
+    let lower_mask_wearing_n95_a10      mask_wearing_n95_a10
+    let lower_mask_wearing_n95_a20      mask_wearing_n95_a20
+    let lower_mask_wearing_surgical_a0  mask_wearing_surgical_a0
+    let lower_mask_wearing_surgical_a10 mask_wearing_surgical_a10
+    let lower_mask_wearing_surgical_a20 mask_wearing_surgical_a20
+    
+    let lower_case_isolation            case_isolation
+    let lower_schoolsOpen               schoolsOpen
+    let lower_quarantine                quarantine
+    let lower_maskPolicy                maskPolicy
+    let lower_spatial_distance          spatial_distance
+    let lower_isolate_on_inf_notice     isolate_on_inf_notice
+    let lower_tracking                  tracking
+    
+    let prop realStage - stage
+    set stage realStage
+    
+    set case_isolation            lower_case_isolation
+    set schoolsOpen               lower_schoolsOpen
+    set quarantine                lower_quarantine
+    set maskPolicy                lower_maskPolicy
+    set spatial_distance          lower_spatial_distance
+    set isolate_on_inf_notice     lower_isolate_on_inf_notice
+    set tracking                  lower_tracking
+    
+    set span                      prop * upper_span                      + (1 - prop) * lower_span
+    set Visit_Radius              prop * upper_Visit_Radius              + (1 - prop) * lower_Visit_Radius
+    set Visit_Frequency           prop * upper_Visit_Frequency           + (1 - prop) * lower_Visit_Frequency
+    set superspreaders            prop * upper_superspreaders            + (1 - prop) * lower_superspreaders
+    set proportion_people_avoid   prop * upper_proportion_people_avoid   + (1 - prop) * lower_proportion_people_avoid
+    set proportion_time_avoid     prop * upper_proportion_time_avoid     + (1 - prop) * lower_proportion_time_avoid
+    set Complacency_Bound         prop * upper_Complacency_Bound         + (1 - prop) * lower_Complacency_Bound
+    set Essential_Workers         prop * upper_Essential_Workers         + (1 - prop) * lower_Essential_Workers
+    set traceMult                 prop * upper_traceMult                 + (1 - prop) * lower_traceMult
+    set mask_wearing_a0           prop * upper_mask_wearing_a0           + (1 - prop) * lower_mask_wearing_a0
+    set mask_wearing_a10          prop * upper_mask_wearing_a10          + (1 - prop) * lower_mask_wearing_a10
+    set mask_wearing_a20          prop * upper_mask_wearing_a20          + (1 - prop) * lower_mask_wearing_a20
+    set mask_wearing_n95_a0       prop * upper_mask_wearing_n95_a0       + (1 - prop) * lower_mask_wearing_n95_a0
+    set mask_wearing_n95_a10      prop * upper_mask_wearing_n95_a10      + (1 - prop) * lower_mask_wearing_n95_a10
+    set mask_wearing_n95_a20      prop * upper_mask_wearing_n95_a20      + (1 - prop) * lower_mask_wearing_n95_a20
+    set mask_wearing_surgical_a0  prop * upper_mask_wearing_surgical_a0  + (1 - prop) * lower_mask_wearing_surgical_a0
+    set mask_wearing_surgical_a10 prop * upper_mask_wearing_surgical_a10 + (1 - prop) * lower_mask_wearing_surgical_a10
+    set mask_wearing_surgical_a20 prop * upper_mask_wearing_surgical_a20 + (1 - prop) * lower_mask_wearing_surgical_a20
   ]
-  
 end
 

@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-10.0
+8.84
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.03
+0.0342
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.0
+0.537
 0.01
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.0
+0.537
 0.01
 1
 NIL
@@ -563,7 +563,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-1.0
+0.542
 0.01
 1
 NIL
@@ -591,7 +591,7 @@ SWITCH
 411
 tracking
 tracking
-1
+0
 1
 -1000
 
@@ -664,7 +664,7 @@ SWITCH
 318
 MaskPolicy
 MaskPolicy
-1
+0
 1
 -1000
 
@@ -707,7 +707,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+7.292
 1
 1
 NIL
@@ -1117,7 +1117,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.0
+0.537
 0.01
 1
 NIL
@@ -1381,12 +1381,12 @@ SLIDER
 12
 968
 171
-1002
+1001
 stage_test_index
 stage_test_index
 -1
 25
-4.0
+-1.0
 1
 1
 NIL
@@ -1399,7 +1399,7 @@ SWITCH
 371
 isolate_on_inf_notice
 isolate_on_inf_notice
-1
+0
 1
 -1000
 
@@ -1652,7 +1652,7 @@ SWITCH
 129
 1009
 229
-1043
+1042
 calibrate
 calibrate
 1
@@ -2086,7 +2086,7 @@ SWITCH
 653
 first_case_calibrate
 first_case_calibrate
-0
+1
 1
 -1000
 
@@ -2706,8 +2706,8 @@ init_stage
 init_stage
 0
 5
-0.0
-0.1
+2.58
+0.01
 1
 NIL
 HORIZONTAL
@@ -2909,7 +2909,7 @@ draw_index
 draw_index
 0
 2000
-686.0
+667.0
 1
 1
 NIL
@@ -3323,7 +3323,7 @@ SWITCH
 557
 stages_cont
 stages_cont
-1
+0
 1
 -1000
 
@@ -3419,7 +3419,7 @@ SLIDER
 188
 969
 406
-1003
+1002
 recover_prop
 recover_prop
 0
@@ -3434,7 +3434,7 @@ SWITCH
 233
 1009
 405
-1043
+1042
 override_recover_prop
 override_recover_prop
 1
@@ -3877,14 +3877,6 @@ NetLogo 6.2.0
     <metric>stage3time</metric>
     <metric>stage2time</metric>
     <metric>stage1time</metric>
-    <metric>stage_listOut</metric>
-    <metric>infectNoVacArray_listOut</metric>
-    <metric>infectVacArray_listOut</metric>
-    <metric>case_listOut</metric>
-    <metric>case7_listOut</metric>
-    <metric>case14_listOut</metric>
-    <metric>case28_listOut</metric>
-    <metric>age_listOut</metric>
     <metric>casesinperiod7_min</metric>
     <metric>pre_stop_day</metric>
     <metric>casesinperiod7_switchTime</metric>

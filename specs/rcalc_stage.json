@@ -28,7 +28,6 @@
 		"track_R" : true,
 		"param_policy" : "StageFixed",
 		"input_draw_static" : "input/vic/draw_static_none.csv",
-		"vaccine_enabled" : true,
 		"trans_override" : 0.2946,
 		"init_vacrecover_day" : 0
 	},
