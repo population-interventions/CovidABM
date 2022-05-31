@@ -150,7 +150,7 @@ Span
 Span
 0
 30
-8.84
+8.219999999999999
 1
 1
 NIL
@@ -235,7 +235,7 @@ superspreaders
 superspreaders
 0
 1
-0.0342
+0.031099999999999996
 0.01
 1
 NIL
@@ -290,7 +290,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.537
+0.5835
 0.01
 1
 NIL
@@ -305,7 +305,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.537
+0.5835
 0.01
 1
 NIL
@@ -563,7 +563,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.542
+0.511
 0.01
 1
 NIL
@@ -707,7 +707,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-7.292
+6.486
 1
 1
 NIL
@@ -1035,7 +1035,7 @@ Asymptom_Trace_Mult
 Asymptom_Trace_Mult
 0
 1
-0.66
+0.67
 0.01
 1
 NIL
@@ -1117,7 +1117,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.537
+0.5835
 0.01
 1
 NIL
@@ -2706,7 +2706,7 @@ init_stage
 init_stage
 0
 5
-2.58
+2.89
 0.01
 1
 NIL
@@ -2909,7 +2909,7 @@ draw_index
 draw_index
 0
 2000
-667.0
+422.0
 1
 1
 NIL
@@ -3267,10 +3267,10 @@ PENS
 "pen-1" 1.0 0 -16777216 true "" "plot 0.0125"
 
 PLOT
-673
-800
-1013
-940
+674
+802
+1014
+937
 New infections
 NIL
 NIL

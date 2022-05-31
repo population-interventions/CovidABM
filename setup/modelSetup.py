@@ -12,7 +12,7 @@ SEPARATOR = '<experiments>'
 BEHAVIOUR_END = '</experiments>'
 
 
-def MakeHeadlessWithCustomBehaviourSpace(modelData):
+def MakeHeadlessWithCustomBehaviourSpace(modelData, cullUi=True):
 	modelFile = open(modelData['netlogoFileName'], 'r')
 	outputFile = open(modelData['headlessFileName'], 'w')
 	ignore = False
@@ -42,7 +42,7 @@ def MakeHeadlessWithCustomBehaviourSpace(modelData):
 				elif line == '':
 					ignore = False
 					
-				if not ignore:
+				if not (ignore and cullUi):
 					outputFile.write(line + '\n')
 		elif inBehaviourSection:
 			if line == BEHAVIOUR_END:
@@ -68,11 +68,11 @@ def MakeHeadlessWithCustomBehaviourSpace(modelData):
 	modelFile.close()
 	
 
-def MakeHeadlessWithParameters(specFile, runCount):
+def MakeHeadlessWithParameters(specFile, runCount, cullUi=True):
 	modelData = md.LoadModelDatWithExperimentInput(specFile, runCount)
 	
 	# Useful for checking validity
 	nl.OutputCurrentNetlogoValues(modelData['netlogoFileName'], 'specs/default/temp.json')
 	
-	MakeHeadlessWithCustomBehaviourSpace(modelData)
+	MakeHeadlessWithCustomBehaviourSpace(modelData, cullUi=cullUi)
 	

@@ -3,16 +3,16 @@
         "2500.0"
     ],
     "span": [
-        "8.84"
+        "8.219999999999999"
     ],
     "superspreaders": [
-        "0.0342"
+        "0.031099999999999996"
     ],
     "proportion_people_avoid": [
-        "0.537"
+        "0.5835"
     ],
     "proportion_time_avoid": [
-        "0.537"
+        "0.5835"
     ],
     "initial_cases": [
         "600000.0"
@@ -21,7 +21,7 @@
         "6649066.0"
     ],
     "essential_workers": [
-        "0.542"
+        "0.511"
     ],
     "ess_w_risk_reduction": [
         "0.0"
@@ -42,7 +42,7 @@
         "0.1428"
     ],
     "visit_radius": [
-        "7.292"
+        "6.486"
     ],
     "mask_efficacy_mult": [
         "1.0"
@@ -54,13 +54,13 @@
         "\"StageFixed\""
     ],
     "asymptom_trace_mult": [
-        "0.66"
+        "0.67"
     ],
     "gather_location_count": [
         "110.0"
     ],
     "complacency_bound": [
-        "0.537"
+        "0.5835"
     ],
     "profile_on": [
         "false"
@@ -348,7 +348,7 @@
         "12000.0"
     ],
     "init_stage": [
-        "2.58"
+        "2.89"
     ],
     "sim_seed": [
         "42465.29361"
@@ -387,7 +387,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "667.0"
+        "422.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_target_early.csv\""
