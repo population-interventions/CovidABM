@@ -29,7 +29,7 @@
 		"first_case_calibrate" : true,
 		"track_R" : true,
 		"param_policy" : "StageFixed",
-		"input_draw_static" : "\"input/vic/draw_static_none.csv\""
+		"input_draw_static" : "input/vic/draw_static_none.csv"
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {
