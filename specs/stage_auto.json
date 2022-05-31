@@ -3,7 +3,7 @@
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_rcalc",
 	"handlerName" : "stage_auto_handler",
-	"threads" : 1,
+	"threads" : 2,
 	"indexParams" : {
 		"init_stage" : [
 			2,
