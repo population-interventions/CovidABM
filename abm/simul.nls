@@ -545,8 +545,8 @@ to simul_avoid
     ;; if you are an essential worker, you can only reduce your
     ;; contacts when you are not at work assuming 8 hours work, 8 hours rest, 8 hours recreation - rest doesn't count for anyone, hence it is
     ;; set at 50 on the input slider. People don't isolate from others in their household unit
-    let myPPA ApplyOrToPr (Proportion_People_Avoid + draw_ppa_modifier) avoidOr
-    let myPTA ApplyOrToPr (Proportion_Time_Avoid + draw_pta_modifier) avoidOr
+    let myPPA ApplyOrToPr (Proportion_People_Avoid + draw_ppa_modifier + fearPpaChange) avoidOr
+    let myPTA ApplyOrToPr (Proportion_Time_Avoid + draw_pta_modifier + fearPtaChange) avoidOr
     ;if random-float 1 < 0.001 [ print (word agerange ", myPPA " myPPA)]
     
     let myHouse householdUnit

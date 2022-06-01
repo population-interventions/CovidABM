@@ -39,6 +39,8 @@ globals [
   hospToday
   totalHosp
   hospUsage
+  fearPpaChange
+  fearPtaChange
   
   recovercount
   recoverCountByVariant

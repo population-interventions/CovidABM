@@ -29,6 +29,7 @@ __includes[
   "ageVarParams.nls"
   "util.nls"
   "mask.nls"
+  "avoidResponse.nls"
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -150,7 +151,7 @@ Span
 Span
 0
 30
-8.219999999999999
+3.0
 1
 1
 NIL
@@ -235,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.031099999999999996
+0.015
 0.01
 1
 NIL
@@ -290,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.5835
+0.85
 0.01
 1
 NIL
@@ -305,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.5835
+0.85
 0.01
 1
 NIL
@@ -563,7 +564,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.511
+0.2
 0.01
 1
 NIL
@@ -602,7 +603,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -707,7 +708,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.486
+3.6
 1
 1
 NIL
@@ -981,7 +982,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-23
+4
 
 MONITOR
 1473
@@ -1117,7 +1118,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.5835
+0.85
 0.01
 1
 NIL
@@ -1213,10 +1214,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-679
-545
-877
-578
+619
+548
+791
+582
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -1784,7 +1785,7 @@ max_stage
 max_stage
 0
 5
-2.0
+5.0
 1
 1
 NIL
@@ -2477,7 +2478,7 @@ min_stage
 min_stage
 0
 5
-2.0
+1.0
 1
 1
 NIL
@@ -2706,7 +2707,7 @@ init_stage
 init_stage
 0
 5
-2.89
+2.0
 0.01
 1
 NIL
@@ -2743,7 +2744,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-42465.29361
+76431.67353
 1
 1
 NIL
@@ -2909,7 +2910,7 @@ draw_index
 draw_index
 0
 2000
-422.0
+1392.0
 1
 1
 NIL
@@ -3267,10 +3268,10 @@ PENS
 "pen-1" 1.0 0 -16777216 true "" "plot 0.0125"
 
 PLOT
-674
-802
+675
+800
 1014
-937
+935
 New infections
 NIL
 NIL
@@ -3285,6 +3286,7 @@ PENS
 "default" 1.0 1 -2674135 true "" "plot infectionsToday"
 "pen-1" 1.0 0 -16777216 true "" "plot init_metric_threshold"
 "pen-2" 1.0 0 -955883 true "" "plot infectionsinperiod7 / 7"
+"pen-3" 1.0 0 -15040220 true "" "plot 20000"
 
 SLIDER
 434
@@ -3386,10 +3388,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "if ticks > 0 [plot sum (array:to-list item 0 dieArray)]"
 
 SLIDER
-675
-583
-882
-616
+618
+585
+791
+619
 avoidAttemptIntMult
 avoidAttemptIntMult
 0
@@ -3440,6 +3442,99 @@ override_recover_prop
 1
 1
 -1000
+
+SLIDER
+898
+370
+1037
+404
+fear_max
+fear_max
+0
+40000
+32000.0
+1000
+1
+NIL
+HORIZONTAL
+
+SLIDER
+898
+410
+1040
+444
+fear_min
+fear_min
+0
+10000
+5000.0
+1000
+1
+NIL
+HORIZONTAL
+
+SLIDER
+900
+452
+1035
+486
+fear_ppa_limit
+fear_ppa_limit
+0
+1
+0.15
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+897
+495
+1034
+529
+fear_pta_limit
+fear_pta_limit
+0
+1
+0.1
+0.01
+1
+NIL
+HORIZONTAL
+
+MONITOR
+897
+253
+1041
+298
+%fearPpaChange
+fearPpaChange * 100
+2
+1
+11
+
+MONITOR
+898
+304
+1037
+349
+%fearPtaChange
+fearPtaChange * 100
+2
+1
+11
+
+MONITOR
+893
+205
+1037
+250
+NIL
+infectionsinperiod7 / 7
+0
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?

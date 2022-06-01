@@ -53,6 +53,7 @@ to go
   
   ;; Simulants avoid people if social distancing is enabled, and they are not essential workers (or have some other reason to be in a crowd)
   ;; Note that simulants can effect each other in this stage.
+  updateAvoidResponse
   ask simuls [
     simul_avoid
   ]

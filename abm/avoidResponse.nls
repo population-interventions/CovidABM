@@ -1,0 +1,21 @@
+
+
+to updateAvoidResponse
+  set fearPpaChange 0 
+  set fearPtaChange 0 
+  if stage < 4 [
+    (ifelse (infectionsinperiod7 / 7) > fear_max
+      [
+        set fearPpaChange fear_ppa_limit 
+        set fearPtaChange fear_pta_limit 
+      ]
+      (infectionsinperiod7 / 7) > fear_min
+      [
+        let prop ((infectionsinperiod7 / 7) - fear_min) / (fear_max - fear_min)
+        set fearPpaChange fear_ppa_limit * prop
+        set fearPtaChange fear_pta_limit * prop
+      ]
+    )
+  ]
+  ;print (word "PPA: " fearPpaChange ", PTA: " fearPtaChange)
+end
