@@ -18,7 +18,7 @@
 		"draw_index" : 578,
 		"param_policy" : "StageFixed"
 	},
-	"runIndexer" : "seed_index",
+	"runIndexer" : "sim_seed",
 	"postSeries" : {
 		"rcalc" : {
 			"metric" : "cumulativeInfected"
@@ -29,7 +29,7 @@
 			"targets" : [
 				900000,
 				1200000,
-				1800000
+				1500000
 			],
 			"repetionLimit" : 4
 		}
