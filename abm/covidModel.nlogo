@@ -5439,6 +5439,8 @@ NetLogo 6.2.0
     <metric>first_trace_infections</metric>
     <metric>currentInfections</metric>
     <metric>cumulativeInfected</metric>
+    <metric>totalHospUsage</metric>
+    <metric>totalHosp</metric>
     <metric>tracked_simuls</metric>
     <metric>finished_infections</metric>
     <metric>finished_tracked</metric>
