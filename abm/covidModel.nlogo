@@ -151,7 +151,7 @@ Span
 Span
 0
 30
-3.0
+10.0
 1
 1
 NIL
@@ -236,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.015
+0.05
 0.01
 1
 NIL
@@ -291,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.85
+0.3
 0.01
 1
 NIL
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.85
+0.47
 0.01
 1
 NIL
@@ -564,7 +564,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.2
+0.7
 0.01
 1
 NIL
@@ -603,7 +603,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -708,7 +708,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+8.8
 1
 1
 NIL
@@ -1118,7 +1118,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.85
+0.3
 0.01
 1
 NIL
@@ -1217,7 +1217,7 @@ SLIDER
 619
 548
 791
-582
+581
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -3391,7 +3391,7 @@ SLIDER
 618
 585
 791
-619
+618
 avoidAttemptIntMult
 avoidAttemptIntMult
 0
@@ -3447,7 +3447,7 @@ SLIDER
 898
 370
 1037
-404
+403
 fear_max
 fear_max
 0
@@ -3462,7 +3462,7 @@ SLIDER
 898
 410
 1040
-444
+443
 fear_min
 fear_min
 0
@@ -3477,7 +3477,7 @@ SLIDER
 900
 452
 1035
-486
+485
 fear_ppa_limit
 fear_ppa_limit
 0
@@ -3492,7 +3492,7 @@ SLIDER
 897
 495
 1034
-529
+528
 fear_pta_limit
 fear_pta_limit
 0
@@ -3533,6 +3533,28 @@ MONITOR
 NIL
 infectionsinperiod7 / 7
 0
+1
+11
+
+MONITOR
+14
+1013
+122
+1058
+NIL
+totalHosp
+17
+1
+11
+
+MONITOR
+138
+1048
+240
+1093
+NIL
+totalHospUsage
+17
 1
 11
 
@@ -3955,6 +3977,8 @@ NetLogo 6.2.0
     <metric>first_trace_infections</metric>
     <metric>currentInfections</metric>
     <metric>cumulativeInfected</metric>
+    <metric>totalHospUsage</metric>
+    <metric>totalHosp</metric>
     <metric>tracked_simuls</metric>
     <metric>finished_infections</metric>
     <metric>finished_tracked</metric>

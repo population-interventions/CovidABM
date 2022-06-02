@@ -119,7 +119,7 @@ def MakePlot(
 	ax.grid(which='minor', alpha=0.4, linewidth=1.5, zorder=-1, axis="y")
 	ax.grid(which='major', alpha=0.7, linewidth=2, zorder=-1)
 	if saveID:
-		pyplot.savefig('{}/{}_plot.png'.format(path, saveID))
+		pyplot.savefig('{}/{}_{}_plot.png'.format(path, saveID, varName))
 	else:
 		pyplot.show()
 

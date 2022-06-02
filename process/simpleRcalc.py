@@ -24,15 +24,19 @@ def ProcessResults(modelData):
 	notFloatCol = [name for name, data in modelData['indexParams'].items()
 				if not (type(data[0]) == int or type(data[0]) == float)]
 	simIndex = modelData['runIndexer']
-	metric = modelData['postSeries']['rcalc']['metric']
+	metricList = [modelData['postSeries']['rcalc']['metric']]
 	
-	gitTime = util.GetGitTimeIdentifier()
-	df = helpers.AggregateAndPickOutColumn(nameList, index, simIndex, notFloatCol, metric)
-	print(df)
+	if 'extraMetrics' in modelData['postSeries']['rcalc']:
+		metricList = metricList + modelData['postSeries']['rcalc']['extraMetrics']
 	
-	outPath = modelData['scratchDir'] + '/process'
-	util.OutputToFile(df, '{}/{}_{}'.format(outPath, gitTime, 'desc'), head=False)
-	DoProcessRCalc(
-		nameList, metric,
-		simIndex, index,
-		outPath, gitTime)
+	for metric in metricList:
+		gitTime = util.GetGitTimeIdentifier()
+		df = helpers.AggregateAndPickOutColumn(nameList, index, simIndex, notFloatCol, metric)
+		print(df)
+		
+		outPath = modelData['scratchDir'] + '/process'
+		util.OutputToFile(df, '{}/{}_{}_{}'.format(outPath, gitTime, metric, 'desc'), head=False)
+		DoProcessRCalc(
+			nameList, metric,
+			simIndex, index,
+			outPath, gitTime)

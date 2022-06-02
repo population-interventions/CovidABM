@@ -6,9 +6,9 @@
 	"threads" : 2,
 	"indexParams" : {
 		"init_stage" : [
-			2,
-			3,
-			4
+			2.6,
+			2.85,
+			3
 		]
 	},
 	"paramOverrides" : {
@@ -20,7 +20,11 @@
 	"runIndexer" : "draw_index",
 	"postSeries" : {
 		"rcalc" : {
-			"metric" : "cumulativeInfected"
+			"metric" : "cumulativeInfected",
+			"extraMetrics" : [
+				"totalHosp",
+				"totalHospUsage"
+			]
 		},
 		"targetOptimise" : {
 			"metric" : "cumulativeInfected",
@@ -28,9 +32,9 @@
 			"targets" : [
 				900000,
 				1200000,
-				1800000
+				1500000
 			],
-			"repetionLimit" : 4
+			"repetionLimit" : 2
 		}
 	}
 }

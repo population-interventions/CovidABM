@@ -38,6 +38,7 @@ globals [
   DeathCount
   hospToday
   totalHosp
+  totalHospUsage
   hospUsage
   fearPpaChange
   fearPtaChange

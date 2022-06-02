@@ -26,6 +26,8 @@ to simul_AddDeathHospToPipes [variant hospMean deathMean]
   let varHospLengthMult (table:get (table:get variantData variant) "hospLengthMult")
   ;print varHospLengthMult * (GetHospStayLength agerange variant)
   
+  set hospTodayPipe AddToList hospTodayPipe (cohortHospTime - timenow) hospMean 
+  
   let i 0
   let hospLength varHospLengthMult * (GetHospStayLength agerange variant)
   repeat floor hospLength [
@@ -96,6 +98,7 @@ to updateCounts
     set cumulativeInfected_minusInit cumulativeInfected
     set totalCasesReported totalCasesReported + casesReportedToday
     set totalHosp totalHosp + hospToday
+    set totalHospUsage totalHospUsage + hospUsage
   ]
     
   ;; calculates death rate per infected person over the course of the pandemic
