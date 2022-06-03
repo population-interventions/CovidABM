@@ -2,6 +2,7 @@
 	"netlogoFile" : "covidModel",
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_main",
+	"postInputDir" : "vic",
 	"threads" : 2,
 	"indexParams" : {
 	},
