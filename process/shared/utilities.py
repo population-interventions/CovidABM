@@ -340,6 +340,8 @@ def AppendFiles(
 	
 	OutputToFile(df, outputName, head=head)
 	
+	print(df)
+	print(df.index)
 	if doAggregate or True:
 		df = df.groupby(level=ListRemove(list(range(indexSize)), 0), axis=0).mean()
 		OutputToFile(df, outputName + '_drawAgg', head=head)
