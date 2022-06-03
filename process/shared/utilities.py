@@ -308,7 +308,7 @@ def AddFiles(outputName, fileList, index=1, header=1, doTqdm=False):
 
 def AppendFiles(
 		outputName, fileList, runIndexer, indexSize=1, header=1, doTqdm=False,
-		head=False, indexGrouping=False):
+		head=False, indexGrouping=False, doAggregate=False):
 	first = True
 	for fileName in (tqdm.tqdm(fileList) if doTqdm else fileList):
 		if first:
@@ -337,9 +337,13 @@ def AppendFiles(
 	df = df.droplevel('run', axis=0)
 	df = df.sort_index(0)
 	df.columns = pd.to_numeric(df.columns).astype(int)
-		
+	
 	OutputToFile(df, outputName, head=head)
 	
+	if doAggregate:
+		df = df.groupby(level=ListRemove(list(range(indexSize)), 0), axis=0).mean()
+		OutputToFile(df, outputName + '_drawAgg', head=head)
+
 
 def ListRemove(myList, element):
 	myCopy = list(myList).copy()

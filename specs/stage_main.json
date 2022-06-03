@@ -29,6 +29,7 @@
 				"makeOutput" : false,
 				"outputStages" : false,
 				"processCohort" : true,
+				"doAggregate" : true,
 				
 				"dryRun" : false,
 				"preChecks" : false,

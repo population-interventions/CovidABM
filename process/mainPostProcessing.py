@@ -55,6 +55,8 @@ def RunSeriesPost(modelData, runs, pernode):
 	processCohort = params['processCohort']
 	indexGrouping = params['indexGrouping']
 	
+	doAggregate = 'doAggregate' in conf and conf['doAggregate']
+	
 	heatAges = conf['heatAges']
 	heatPeriods = conf['heatPeriods']
 	heatmapStructure = conf['heatmapStructure']
@@ -79,7 +81,7 @@ def RunSeriesPost(modelData, runs, pernode):
 		DoSpartanAggregate(
 			workingDir, postDataDir, measureCols, runIndexer,
 			arraySize=arraySize, processCohort=processCohort,
-			indexGrouping=indexGrouping)
+			indexGrouping=indexGrouping, doAggregate=doAggregate)
 
 	if makeOutput:
 		for period in heatPeriods:

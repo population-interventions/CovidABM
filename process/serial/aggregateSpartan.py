@@ -24,7 +24,7 @@ metricList = ['mort', 'icu', 'hosp', 'sympt', 'infect']
 
 def AppendParallels(
 		dataDir, rawDataDir, outDir, indexSize, outputSubdir, prefix,
-		runIndexer, indexList, fileNames, header=1, indexGrouping=False):
+		runIndexer, indexList, fileNames, header=1, indexGrouping=False, doAggregate=False):
 	for file in fileNames:
 		if prefix:
 			thisPrefix = prefix + '_'
@@ -39,13 +39,14 @@ def AppendParallels(
 			indexSize=indexSize,
 			header=header,
 			head=False,
-			indexGrouping=indexGrouping
+			indexGrouping=indexGrouping,
+			doAggregate=doAggregate
 		)
 
 
 def DoSpartanAggregate(
 		dataDir, rawDataDir, measureCols, runIndexer, arraySize=400,skip=False,
-		processCohort=True, indexGrouping=False):
+		processCohort=True, indexGrouping=False, doAggregate=False):
 	indexList = range(1, arraySize + 1)
 	if skip:
 		indexList = util.ListRemove(indexList, skip)
@@ -67,7 +68,7 @@ def DoSpartanAggregate(
 		# Larger index because cohort data contains age
 		AppendParallels(
 			dataDir, rawDataDir, '/cohort/', len(measureCols) + 3, '/cohort/', False,
-			runIndexer, indexList, processAgg, indexGrouping=indexGrouping)
+			runIndexer, indexList, processAgg, indexGrouping=indexGrouping, doAggregate=doAggregate)
 	
 	AppendParallels(
 		dataDir, rawDataDir, '/traces/', len(measureCols) + 2, '/visualise/', 'processed',
