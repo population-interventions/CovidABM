@@ -55,7 +55,7 @@ def RunSeriesPost(modelData, runs, pernode):
 	processCohort = params['processCohort']
 	indexGrouping = params['indexGrouping']
 	
-	doAggregate = 'doAggregate' in conf and conf['doAggregate']
+	doAggregate = 'doAggregate' in params and params['doAggregate']
 	
 	heatAges = conf['heatAges']
 	heatPeriods = conf['heatPeriods']
