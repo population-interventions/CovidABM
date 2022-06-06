@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.47
+0.3
 0.01
 1
 NIL

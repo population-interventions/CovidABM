@@ -92,6 +92,12 @@ to calculateDataOut
   set hospArray lput array:from-list cohortLengthListOfZeros (but-first hospArray)
   set icuArray lput array:from-list cohortLengthListOfZeros (but-first icuArray)
   set dieArray lput array:from-list cohortLengthListOfZeros (but-first dieArray)
+  
+  ;let i 0
+  ;foreach hospArray [ x ->
+  ;  print (sum array:to-list x) - item i hospTodayPipe
+  ;  set i i + 1
+  ;]
 end
 
 to checkCalibrationStop
