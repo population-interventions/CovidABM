@@ -7,7 +7,6 @@
 	"indexParams" : {
 	},
 	"paramOverrides" : {
-		"init_stage" : true,
 		"vaccine_enabled" : true,
 		"init_stage" : 2.85,
 		"end_day" : 60,
