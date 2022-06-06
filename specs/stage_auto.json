@@ -1,7 +1,7 @@
 {
 	"netlogoFile" : "covidModel",
 	"defaultParamFile" : "vic_main",
-	"copyExperimentMetrics" : "vic_rcalc",
+	"copyExperimentMetrics" : "vic_main",
 	"handlerName" : "stage_auto_handler",
 	"postInputDir" : "vic",
 	"threads" : 2,
