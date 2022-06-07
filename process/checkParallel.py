@@ -11,7 +11,9 @@ def DoParallelCheck(runIndex, modelName, runs, pernode):
 	if 'postSeries' in modelData:
 		if 'processMain' in modelData['postSeries']:
 			measureCols_raw = list(modelData['indexParams'].keys())
-			measureCols = [data['name'] for data in modelData['postSeries']['processMain']['indexRename'].values()]
+			measureCols = [
+				modelData['postSeries']['processMain']['indexRename'][metric]['name']
+				if metric in modelData['postSeries']['processMain']['indexRename'] else metric for metric in measureCols_raw]
 		
 			inputDir = '{}/raw'.format(modelData['scratchDir'])
 			outputDir = '{}/post_parallel'.format(modelData['scratchDir'])

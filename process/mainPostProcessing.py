@@ -62,7 +62,9 @@ def RunSeriesPost(modelData, runs, pernode):
 	heatmapStructure = conf['heatmapStructure']
 
 	measureCols_raw = list(modelData['indexParams'].keys())
-	measureCols = [data['name'] for data in modelData['postSeries']['processMain']['indexRename'].values()]
+	measureCols = [
+		modelData['postSeries']['processMain']['indexRename'][metric]['name']
+		if metric in modelData['postSeries']['processMain']['indexRename'] else metric for metric in measureCols_raw]
 	indexRename = modelData['postSeries']['processMain']['indexRename']
 	
 	rawDataDir = '{}/raw'.format(modelData['scratchDir'])
