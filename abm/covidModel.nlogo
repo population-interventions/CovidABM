@@ -236,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.05
+0.04
 0.01
 1
 NIL
@@ -291,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.3
+0.45
 0.01
 1
 NIL
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.3
+0.57
 0.01
 1
 NIL
@@ -564,7 +564,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.7
+0.6
 0.01
 1
 NIL
@@ -1118,7 +1118,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.3
+0.45
 0.01
 1
 NIL
@@ -3966,7 +3966,6 @@ NetLogo 6.2.0
   <experiment name="vic_rcalc" repetitions="1" runMetricsEveryStep="false">
     <setup>setup</setup>
     <go>go</go>
-    <metric>average_R_all_regions</metric>
     <metric>trans_override</metric>
     <metric>days</metric>
     <metric>totalEndCount</metric>
