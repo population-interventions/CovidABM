@@ -20,16 +20,11 @@ to updatePipes
   set hospUsagePipe  lput 0 (but-first hospUsagePipe)
 end
 
-to simul_AddDeathHospToPipes [variant hospMean deathMean]
+to simul_AddDeathHospToPipes [variant hospMean deathMean hospLength]
   set deathTodayPipe AddToList deathTodayPipe (cohortHospTime - timenow) deathMean
-  
-  let varHospLengthMult (table:get (table:get variantData variant) "hospLengthMult")
-  ;print varHospLengthMult * (GetHospStayLength agerange variant)
-  
   set hospTodayPipe AddToList hospTodayPipe (cohortHospTime - timenow) hospMean 
   
   let i 0
-  let hospLength varHospLengthMult * (GetHospStayLength agerange variant)
   repeat floor hospLength [
     if cohortHospTime - timenow + i >= 0 [
       set hospUsagePipe AddToList hospUsagePipe (cohortHospTime - timenow + i) hospMean

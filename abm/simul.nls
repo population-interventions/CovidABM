@@ -308,12 +308,16 @@ to simul_setNewInfection [variant startDay recoverEffProp]
   ;; Add hosp for dynamic policy
   ; Do not add hosp in setup
   if ticks > 0 or first_case_calibrate [
-    simul_AddDeathHospToPipes variant hospRiskMean deathRiskMean
+    let varHospLengthMult (table:get (table:get variantData variant) "hospLengthMult")
+    let hospLength varHospLengthMult * (GetHospStayLength agerange variant)
+     
+    simul_AddDeathHospToPipes variant hospRiskMean deathRiskMean hospLength
     
     ;; Add to data output metrics
-    array:set (item cohortHospTime hospArray) cohortIndex ((array:item (item cohortHospTime  hospArray) cohortIndex) + hospRiskMean)
-    array:set (item cohortIcuTime icuArray)   cohortIndex ((array:item (item cohortIcuTime   icuArray)  cohortIndex) + deathRiskMean)
-    array:set (item cohortDeathTime dieArray) cohortIndex ((array:item (item cohortDeathTime dieArray)  cohortIndex) + deathRiskMean)
+    array:set (item cohortHospTime hospArray)     cohortIndex ((array:item (item cohortHospTime  hospArray)     cohortIndex) + hospRiskMean)
+    array:set (item cohortHospTime hospTimeArray) cohortIndex ((array:item (item cohortHospTime  hospTimeArray) cohortIndex) + hospRiskMean * hospLength)
+    array:set (item cohortIcuTime icuArray)       cohortIndex ((array:item (item cohortIcuTime   icuArray)      cohortIndex) + deathRiskMean)
+    array:set (item cohortDeathTime dieArray)     cohortIndex ((array:item (item cohortDeathTime dieArray)      cohortIndex) + deathRiskMean)
     array:set symptArray cohortIndex (array:item symptArray cohortIndex) + symptProp * popPerSimul
     
     ifelse currentVaccine = 0

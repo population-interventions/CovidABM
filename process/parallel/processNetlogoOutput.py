@@ -15,8 +15,8 @@ import os
 
 import process.shared.utilities as util
 
-metricList = ['mort', 'icu', 'hosp', 'sympt', 'infect']
-metricListRaw = {'die' : 'mort', 'icu' : 'icu', 'hosp' : 'hosp', 'sympt' : 'sympt'}
+metricList = ['mort', 'icu', 'hosp', 'hospTime', 'sympt', 'infect']
+metricListRaw = {'die' : 'mort', 'icu' : 'icu', 'hosp' : 'hosp', 'hospTime' : 'hospTime', 'sympt' : 'sympt'}
 
 WRITE_ALWAYS = False
 DELETE_AFTER = True

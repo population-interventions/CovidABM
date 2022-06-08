@@ -5472,6 +5472,7 @@ NetLogo 6.2.0
     <metric>cumulativeInfected_minusInit</metric>
     <metric>dieArray_listOut</metric>
     <metric>icuArray_listOut</metric>
+    <metric>hospTimeArray_listOut</metric>
     <metric>hospArray_listOut</metric>
     <metric>symptArray_listOut</metric>
     <enumeratedValueSet variable="draw_index">

@@ -20,7 +20,7 @@ from process.shared.utilities import AddFiles, AppendFiles
 from process.shared.utilities import ToHeatmap
 import process.shared.utilities as util
 
-metricList = ['mort', 'icu', 'hosp', 'sympt', 'infect']
+metricList = ['mort', 'icu', 'hosp', 'hospTime', 'sympt', 'infect']
 
 def AppendParallels(
 		dataDir, rawDataDir, outDir, indexSize, outputSubdir, prefix,

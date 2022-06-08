@@ -646,10 +646,11 @@ to setGlobals
   set case28_listOut []
   set stage_listOut []
   
-  set dieArray_listOut    []
-  set icuArray_listOut    []
-  set hospArray_listOut   []
-  set symptArray_listOut  []
+  set dieArray_listOut        []
+  set icuArray_listOut        []
+  set hospArray_listOut       []
+  set hospTimeArray_listOut   []
+  set symptArray_listOut      []
 end
 
 ;;*******************************************************************************************************************************

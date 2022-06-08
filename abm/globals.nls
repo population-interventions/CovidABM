@@ -365,6 +365,7 @@ globals [
   symptArray
   dieArray
   icuArray
+  hospTimeArray
   hospArray
   
   aggIndex
@@ -372,6 +373,7 @@ globals [
   symptArray_listOut
   dieArray_listOut
   icuArray_listOut
+  hospTimeArray_listOut
   hospArray_listOut
   
   R_measure_time
