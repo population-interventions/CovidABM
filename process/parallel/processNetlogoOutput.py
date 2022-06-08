@@ -17,6 +17,7 @@ import process.shared.utilities as util
 
 metricList = ['mort', 'icu', 'hosp', 'hospTime', 'sympt', 'infect']
 metricListRaw = {'die' : 'mort', 'icu' : 'icu', 'hosp' : 'hosp', 'hospTime' : 'hospTime', 'sympt' : 'sympt'}
+stages = [1, 2, 3, 4, 5]
 
 WRITE_ALWAYS = False
 DELETE_AFTER = True
@@ -57,11 +58,11 @@ def ProcessAbmChunk(
 		'[run number]', 'draw_index',
 		'stage_listOut', 'scalephase', 'cumulativeInfected',
 		'infectNoVacArray_listOut', 'infectVacArray_listOut',
-		'dieArray_listOut', 'icuArray_listOut', 'hospArray_listOut', 'symptArray_listOut',
 		'case_listOut', 'case7_listOut',
 		'case14_listOut', 'case28_listOut',
-		'age_listOut'
-	] + measureCols_raw]
+		'age_listOut']
+		 + measureCols_raw
+		 + ['{}Array_listOut'.format(name) for name in metricListRaw.keys()]]
 	
 	cohorts = len(chunk.iloc[0].age_listOut.split(' '))
 	days = len(chunk.iloc[0].stage_listOut.split(' '))
@@ -313,7 +314,7 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doW
 	return df
 
 
-def ProcessStage(dataMap, inputDir, outputDir, arrayIndex, measureCols):
+def ProcessStage(dataMap, inputDir, visualOutDir, outputDir, arrayIndex, measureCols):
 	df = pd.read_csv(
 		inputDir + '/processed_stage' + '_' + str(arrayIndex) + '.csv',
 		index_col=list(range(2 + len(measureCols))),
@@ -326,7 +327,12 @@ def ProcessStage(dataMap, inputDir, outputDir, arrayIndex, measureCols):
 	df = df.sort_values(['cohort', 'day'], axis=1)
 	df = df.groupby(level=[0], axis=1).sum()
 	
-	util.OutputToFile(df, outputDir + '/processed_stage' + '_daily_' + str(arrayIndex), head=False)
+	util.OutputToFile(df, visualOutDir + '/processed_stage' + '_daily_' + str(arrayIndex), head=False)
+	
+	for stage in stages:
+		dfStage = df.applymap(lambda x: 1 if x == stage else 0)
+		OutputQuart(dfStage.copy(), outputDir + '/processed_stage{}'.format(stage), arrayIndex)
+		OutputYear(dfStage.copy(), outputDir + '/processed_stage{}'.format(stage), arrayIndex)
 
 
 def ProcessInfectCohorts(dataMap, measureCols, filename, cohortFile, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
@@ -375,7 +381,6 @@ def ProcessInfectionCohorts(dataMap, inputDir, outputDir, arrayIndex, measureCol
 			outputDir + '/{}'.format(metric), arrayIndex, doWeekly=doWeekly)
 
 
-
 def CleanupFiles(inputDir, arrayIndex):
 	for metric in metricList + ['secondary', 'stage']:
 		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv') 
@@ -394,7 +399,7 @@ def DoAbmProcessing(inputDir, outputDir, arrayIndex, indexRename, measureCols, m
 	print('ProcessInfectionCohorts', inputDir, arrayIndex)
 	ProcessInfectionCohorts(dataMap, outputDir + '/step_1', outputDir + '/cohort', arrayIndex, measureCols, doWeekly=False)
 	
-	ProcessStage(dataMap, outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols)
+	ProcessStage(dataMap, outputDir + '/step_1', outputDir + '/visualise', outputDir + '/stage', arrayIndex, measureCols)
 	
 	if DELETE_AFTER:
 		CleanupFiles(outputDir, arrayIndex)

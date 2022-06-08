@@ -40,8 +40,8 @@
 		"processMain" : {
 			"params" : {
 				"aggregateSpartan" : true,
-				"makeOutput" : false,
-				"outputStages" : false,
+				"outputHeatmaps" : false,
+				"processStages" : true,
 				"processCohort" : true,
 				"doAggregate" : true,
 				

@@ -21,6 +21,7 @@ from process.shared.utilities import ToHeatmap
 import process.shared.utilities as util
 
 metricList = ['mort', 'icu', 'hosp', 'hospTime', 'sympt', 'infect']
+stages = [1, 2, 3, 4, 5]
 
 def AppendParallels(
 		dataDir, rawDataDir, outDir, indexSize, outputSubdir, prefix,
@@ -45,8 +46,9 @@ def AppendParallels(
 
 
 def DoSpartanAggregate(
-		dataDir, rawDataDir, measureCols, runIndexer, arraySize=400,skip=False,
-		processCohort=True, indexGrouping=False, doAggregate=False):
+		dataDir, rawDataDir, measureCols, runIndexer, arraySize=400,
+		skip=False, processCohort=True, processStages=True,
+		indexGrouping=False, doAggregate=False):
 	indexList = range(1, arraySize + 1)
 	if skip:
 		indexList = util.ListRemove(indexList, skip)
@@ -62,13 +64,23 @@ def DoSpartanAggregate(
 		processAgg.append('{}_yearlyAgg'.format(metric))
 		
 		tracesAgg.append('{}_weeklyAgg'.format(metric))
-	tracesAgg.append('stage_daily'.format(metric))
+	tracesAgg.append('stage_daily')
+	
+	stageAgg = []
+	for stage in stages:
+		stageAgg.append('processed_stage{}_quartAgg'.format(stage))
+		stageAgg.append('processed_stage{}_yearlyAgg'.format(stage))
 	
 	if processCohort:
 		# Larger index because cohort data contains age
 		AppendParallels(
 			dataDir, rawDataDir, '/cohort/', len(measureCols) + 3, '/cohort/', False,
 			runIndexer, indexList, processAgg, indexGrouping=indexGrouping, doAggregate=doAggregate)
+	
+	if processStages:
+		AppendParallels(
+			dataDir, rawDataDir, '/stage/', len(measureCols) + 2, '/stage/', False,
+			runIndexer, indexList, stageAgg, indexGrouping=indexGrouping, doAggregate=doAggregate)
 	
 	AppendParallels(
 		dataDir, rawDataDir, '/traces/', len(measureCols) + 2, '/visualise/', 'processed',
