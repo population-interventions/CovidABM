@@ -42,7 +42,7 @@
         "0.1428"
     ],
     "visit_radius": [
-        "8.8"
+        "12.0"
     ],
     "mask_efficacy_mult": [
         "1.0"
@@ -57,7 +57,7 @@
         "0.67"
     ],
     "gather_location_count": [
-        "80.0"
+        "50.0"
     ],
     "complacency_bound": [
         "0.3"

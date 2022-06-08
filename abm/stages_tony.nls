@@ -12,7 +12,7 @@ to do_stages_tony
     if stage = 0 [
       ;; Stage 0 - nothing, no change
       set span 10
-      set Visit_Radius 8.8
+      set Visit_Radius 16
       set Visit_Frequency 0.1428
       set superspreaders 0.1
       
@@ -76,7 +76,7 @@ to do_stages_tony
       set proportion_time_avoid   0.5
       set Complacency_Bound       0.3
       set Essential_Workers       0.7
-      set Visit_Radius            8.8
+      set Visit_Radius            12
       set Visit_Frequency         0.1428
       set superspreaders          0.05
       set schoolsOpen true
@@ -93,7 +93,7 @@ to do_stages_tony
       set proportion_time_avoid   0.6
       set Complacency_Bound       0.45
       set Essential_Workers       0.60
-      set Visit_Radius            8.8
+      set Visit_Radius            9
       set Visit_Frequency         0.1428
       set superspreaders          0.04
       set schoolsOpen true
@@ -110,7 +110,7 @@ to do_stages_tony
       set proportion_time_avoid   0.7
       set Complacency_Bound       0.6
       set Essential_Workers       0.50
-      set Visit_Radius            6.2
+      set Visit_Radius            7
       set Visit_Frequency         0.1428
       set superspreaders          0.03
       set schoolsOpen true
@@ -127,7 +127,7 @@ to do_stages_tony
       set proportion_time_avoid   0.80
       set Complacency_Bound       0.75
       set Essential_Workers       0.35
-      set Visit_Radius            5.0
+      set Visit_Radius            5
       set Visit_Frequency         0.1428
       set superspreaders          0.02
       set schoolsOpen false
@@ -144,7 +144,7 @@ to do_stages_tony
       set proportion_time_avoid   0.90
       set Complacency_Bound       0.85
       set Essential_Workers       0.20
-      set Visit_Radius            3.6
+      set Visit_Radius            3.5
       set Visit_Frequency         0.1428
       set superspreaders          0.015
       set schoolsOpen false

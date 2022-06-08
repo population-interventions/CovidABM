@@ -35,8 +35,8 @@ __includes[
 GRAPHICS-WINDOW
 435
 93
-872
-531
+858
+517
 -1
 -1
 7.4
@@ -50,9 +50,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-57
+55
 0
-57
+55
 1
 1
 1
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.41999999999999993
+0.3
 0.01
 1
 NIL
@@ -708,7 +708,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+12.0
 1
 1
 NIL
@@ -1102,8 +1102,8 @@ SLIDER
 Gather_Location_Count
 Gather_Location_Count
 0
-1000
-80.0
+200
+50.0
 10
 1
 NIL
