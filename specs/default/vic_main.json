@@ -3,16 +3,16 @@
         "2500.0"
     ],
     "span": [
-        "3.0"
+        "10.0"
     ],
     "superspreaders": [
-        "0.015"
+        "0.05"
     ],
     "proportion_people_avoid": [
-        "0.85"
+        "0.3"
     ],
     "proportion_time_avoid": [
-        "0.85"
+        "0.3"
     ],
     "initial_cases": [
         "600000.0"
@@ -21,7 +21,7 @@
         "6649066.0"
     ],
     "essential_workers": [
-        "0.2"
+        "0.7"
     ],
     "ess_w_risk_reduction": [
         "0.0"
@@ -30,7 +30,7 @@
         "true"
     ],
     "schoolsopen": [
-        "false"
+        "true"
     ],
     "maskpolicy": [
         "true"
@@ -42,7 +42,7 @@
         "0.1428"
     ],
     "visit_radius": [
-        "3.6"
+        "8.8"
     ],
     "mask_efficacy_mult": [
         "1.0"
@@ -57,10 +57,10 @@
         "0.67"
     ],
     "gather_location_count": [
-        "110.0"
+        "150.0"
     ],
     "complacency_bound": [
-        "0.85"
+        "0.3"
     ],
     "profile_on": [
         "false"

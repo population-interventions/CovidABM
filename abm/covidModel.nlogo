@@ -33,10 +33,10 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-434
-85
-886
-538
+399
+63
+881
+546
 -1
 -1
 7.4
@@ -50,9 +50,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-59
+63
 0
-59
+63
 1
 1
 1
@@ -236,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.05
 0.01
 1
 NIL
@@ -291,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.45
+0.3
 0.01
 1
 NIL
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.57
+0.3
 0.01
 1
 NIL
@@ -564,7 +564,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.6
+0.7
 0.01
 1
 NIL
@@ -1103,7 +1103,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-110.0
+150.0
 10
 1
 NIL
@@ -1118,7 +1118,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.45
+0.3
 0.01
 1
 NIL
@@ -1214,10 +1214,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-619
-548
-791
-581
+632
+572
+804
+605
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -3249,10 +3249,10 @@ MONITOR
 11
 
 PLOT
-673
-624
-1013
-794
+674
+650
+1014
+795
 New infections / expected hosp
 NIL
 NIL
@@ -3388,10 +3388,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "if ticks > 0 [plot sum (array:to-list item 0 dieArray)]"
 
 SLIDER
-618
-585
-791
-618
+630
+608
+803
+641
 avoidAttemptIntMult
 avoidAttemptIntMult
 0
