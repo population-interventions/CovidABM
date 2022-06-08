@@ -33,10 +33,10 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-399
-63
-881
-546
+435
+93
+872
+531
 -1
 -1
 7.4
@@ -50,9 +50,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-63
+57
 0
-63
+57
 1
 1
 1
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.3
+0.41999999999999993
 0.01
 1
 NIL
@@ -1103,7 +1103,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 1000
-150.0
+80.0
 10
 1
 NIL
