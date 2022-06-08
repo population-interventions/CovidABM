@@ -35,8 +35,8 @@ __includes[
 GRAPHICS-WINDOW
 435
 93
-858
-517
+887
+546
 -1
 -1
 7.4
@@ -50,9 +50,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-55
+59
 0
-55
+59
 1
 1
 1
@@ -1103,7 +1103,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 200
-50.0
+110.0
 10
 1
 NIL
