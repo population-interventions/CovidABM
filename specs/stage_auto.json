@@ -8,8 +8,8 @@
 	"indexParams" : {
 		"init_stage" : [
 			2,
-			3,
-			4
+			2.5,
+			3
 		]
 	},
 	"paramOverrides" : {
@@ -48,7 +48,7 @@
 				"dryRun" : false,
 				"preChecks" : false,
 				"makeComparison" : false,
-				"indexGrouping" : 4
+				"indexGrouping" : 3
 			},
 			"heatAges" : [
 				[0, 10],
