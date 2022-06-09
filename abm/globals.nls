@@ -347,6 +347,7 @@ globals [
 
   ;; Data output
   cohortLengthListOfZeros
+  vaccineLengthListOfZeros
   infectNoVacArray
   infectVacArray
   infectNoVacArray_listOut
@@ -355,13 +356,18 @@ globals [
   case7_listOut
   case14_listOut
   case28_listOut
+  
   age_listOut
+  vaccine_listOut
+  vaccine_outMapping
+  
   stage_listOut
   vacineEff_nameOut
   vacineEff_transOut
   vacineEff_areaOut
   global_transmissibility_out
   
+  vaccineArray
   symptArray
   dieArray
   icuArray
@@ -370,6 +376,7 @@ globals [
   
   aggIndex
   
+  vaccineArray_listOut
   symptArray_listOut
   dieArray_listOut
   icuArray_listOut

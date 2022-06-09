@@ -72,8 +72,8 @@ to setup_vaccineData
       set index index + 1    table:put vacTable "riskReduct"   (item index rawData)
       set index index + 1    table:put vacTable "waneRate"     (item index rawData)
       set index index + 1    table:put vacTable "waneRateOut"  (item index rawData)
-
-      table:put baseParamsTable (item 0 rawData) vacTable
+    
+    table:put baseParamsTable (item 0 rawData) vacTable
   ]
   
   ;; Load OR uncertainty
@@ -196,6 +196,7 @@ to vaccineMode_micromanageDoses [branch]
   while [vaccinateToday >= 1 and not empty? vacQueue] [
     ask first vacQueue [
       simul_applyVaccine vaccinateType
+      dataOut_addVaccine vaccinateType
     ]
     set vacQueue but-first vacQueue
     set vaccinateToday vaccinateToday - 1

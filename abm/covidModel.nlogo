@@ -236,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.05
+0.045
 0.01
 1
 NIL
@@ -291,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.3
+0.35
 0.01
 1
 NIL
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.3
+0.5
 0.01
 1
 NIL
@@ -708,7 +708,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-12.0
+8.8
 1
 1
 NIL
@@ -1118,7 +1118,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.3
+1.0
 0.01
 1
 NIL
@@ -1748,9 +1748,9 @@ HORIZONTAL
 
 SLIDER
 2565
-502
+494
 2738
-535
+527
 param_trace_mult
 param_trace_mult
 0
@@ -2221,9 +2221,9 @@ HORIZONTAL
 
 SLIDER
 2565
-432
+424
 2738
-465
+457
 trace_at_5
 trace_at_5
 0
@@ -2236,9 +2236,9 @@ HORIZONTAL
 
 SLIDER
 2565
-467
+459
 2738
-500
+492
 trace_assymtote
 trace_assymtote
 0
@@ -2250,10 +2250,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-2567
-347
-2740
-392
+2568
+339
+2741
+384
 compound_trace
 compound_trace
 "None" "ass50_70at5" "ass100_90at5" "ass100_90at5_iso" "ass200_90at5"
@@ -2291,9 +2291,9 @@ HORIZONTAL
 
 SLIDER
 2565
-397
+389
 2738
-430
+422
 trace_at_1
 trace_at_1
 0
@@ -3557,6 +3557,17 @@ totalHospUsage
 17
 1
 11
+
+INPUTBOX
+2519
+532
+2734
+592
+input_vac_extra
+input/vic/vaccine_extra_params.csv
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -5465,6 +5476,7 @@ NetLogo 6.2.0
     <metric>case14_listOut</metric>
     <metric>case28_listOut</metric>
     <metric>age_listOut</metric>
+    <metric>vaccine_listOut</metric>
     <metric>casesinperiod7_min</metric>
     <metric>pre_stop_day</metric>
     <metric>casesinperiod7_switchTime</metric>
@@ -5475,6 +5487,7 @@ NetLogo 6.2.0
     <metric>hospTimeArray_listOut</metric>
     <metric>hospArray_listOut</metric>
     <metric>symptArray_listOut</metric>
+    <metric>vaccineArray_listOut</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>
