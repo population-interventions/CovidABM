@@ -158,10 +158,10 @@ NIL
 HORIZONTAL
 
 PLOT
-3242
-865
-3637
-1040
+3238
+860
+3633
+1035
 Susceptible, Infected and Recovered - 000's
 Days from March 10th
 Numbers of people
@@ -206,10 +206,10 @@ Deathcount
 14
 
 MONITOR
-3079
-927
-3234
-984
+3075
+923
+3230
+980
 # simuls
 count simuls * (Total_Population / population)
 0
@@ -2358,10 +2358,10 @@ count_incursion
 -1000
 
 SLIDER
-3064
-990
-3233
-1023
+3060
+985
+3229
+1018
 transmit_skew
 transmit_skew
 0.2
@@ -2373,10 +2373,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-3064
-1030
-3233
-1063
+3060
+1025
+3229
+1058
 duration_skew
 duration_skew
 1
@@ -3134,10 +3134,10 @@ high_incur_virulence
 -1000
 
 SLIDER
-3062
-844
-3235
-877
+3058
+840
+3231
+873
 in_prevac_count
 in_prevac_count
 0
@@ -3149,10 +3149,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-3062
-883
-3235
-916
+3058
+879
+3231
+912
 in_vaccine_count
 in_vaccine_count
 0
@@ -3548,10 +3548,10 @@ totalHosp
 11
 
 MONITOR
-138
-1048
-240
-1093
+1757
+1023
+1859
+1068
 NIL
 totalHospUsage
 17
