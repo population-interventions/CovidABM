@@ -1,0 +1,149 @@
+{
+	"netlogoFile" : "covidModel",
+	"defaultParamFile" : "vic_main",
+	"copyExperimentMetrics" : "vic_main",
+	"postInputDir" : "vic",
+	"threads" : 4,
+	"indexParams" : {
+		"input_vaccine_schedule" : [
+			"input/vic/rollout_none.csv",
+			"input/vic/rollout_current.csv",
+			"input/vic/rollout_target_early.csv",
+			"input/vic/rollout_target_mid.csv",
+			"input/vic/rollout_multi_mid.csv",
+			"input/vic/rollout_target_multi.csv"
+		],
+		"incur_name_part_1" : [
+			"omlike",
+			"novel"
+		],
+		"incur_name_part_2" : [
+			"",
+			"_escape"
+		],
+		"incur_name_part_3" : [
+			"",
+			"_high"
+		],
+		"high_incur_virulence" : [
+			false,
+			true
+		],
+		"incur_day" : [
+			80,
+			120
+		],
+		"policy_mask_n95" : [
+			false,
+			true
+		],
+		"param_policy" : [
+			"LooseSupress",
+			"BarelySupress"
+		]
+	},
+	"paramOverrides" : {
+		"first_case_calibrate" : false,
+		"end_day" : 30
+	},
+	"runIndexer" : "draw_index",
+	"postSeries" : {
+		"processMain" : {
+			"params" : {
+				"aggregateSpartan" : true,
+				"outputHeatmaps" : true,
+				"processStages" : true,
+				"processCohort" : true,
+				
+				"dryRun" : false,
+				"preChecks" : false,
+				"makeComparison" : false,
+				"indexGrouping" : 4
+			},
+			"heatAges" : [
+				[0, 30],
+				[30, 60],
+				[60, 100],
+				[0, 100]
+			],
+			"heatPeriods" : [
+				[0, 2]
+			],
+			"heatmapStructure" : {
+				"index_rows" : ["Variant", "Infectiousness", "Immune escape", "Incursion day"],
+				"index_cols" : ["Vaccine schedule", "Mask policy", "Stage policy"],
+				"base_value" : {
+				},
+				"sort_rows" : [
+				], 
+				"sort_cols" : [
+				]
+			},
+			"splitTableIndexName" : "Vaccine schedule",
+			"indexRename" : {
+				"input_vaccine_schedule" : {
+					"name" : "Vaccine schedule",
+					"values" : {
+						"input/vic/rollout_none.csv"         : "None",
+						"input/vic/rollout_current.csv"      : "Cur 4+5",
+						"input/vic/rollout_target_early.csv" : "Omni Q3",
+						"input/vic/rollout_target_mid.csv"   : "Omni Q4",
+						"input/vic/rollout_multi_mid.csv"    : "Multi Q4",
+						"input/vic/rollout_target_multi.csv" : "OmQ3, MuQ5"
+					}
+				},
+				"incur_name_part_1" : {
+					"name" : "Variant",
+					"values" : {
+						"omlike" : "Omni-like",
+						"novel"  : "Novel"
+					}
+				},
+				"incur_name_part_2" : {
+					"name" : "Immune escape",
+					"values" : {
+						"" : "Low",
+						"_escape"  : "High"
+					}
+				},
+				"incur_name_part_3" : {
+					"name" : "Infectiousness",
+					"values" : {
+						"" : "Current",
+						"_high"  : "Higher"
+					}
+				},
+				"high_incur_virulence" : {
+					"name" : "Virulence",
+					"values" : {
+						"False" : "Low",
+						"True"  : "High"
+					}
+				},
+				"incur_day" : {
+					"name" : "Incursion day",
+					"values" : {
+						"80"  : "80",
+						"160" : "160",
+						"240" : "240",
+						"320" : "320"
+					}
+				},
+				"policy_mask_n95" : {
+					"name" : "Mask policy",
+					"values" : {
+						"False" : "Current",
+						"True"  : "Stockpile N95"
+					}
+				},
+				"param_policy" : {
+					"name" : "Stage policy",
+					"values" : {
+						"LooseSupress" : "LooseSupress",
+						"BarelySupress" : "BarelySupress"
+					}
+				}
+			}
+		}
+	}
+}

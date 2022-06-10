@@ -88,6 +88,7 @@ def RunSeriesPost(modelData, runs, pernode):
 
 	if outputHeatmaps:
 		for period in heatPeriods:
+			print('Period', period[0], period[1] - 1)
 			MakeMortHospHeatmapRange(
 				workingDir, measureCols, heatAges, heatmapStructure, 'quartAgg',
 				period[0], period[1] - 1, describe=True)

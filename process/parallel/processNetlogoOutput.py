@@ -58,6 +58,7 @@ def ProcessAbmChunk(
 		'[run number]', 'draw_index',
 		'stage_listOut', 'scalephase', 'cumulativeInfected',
 		'infectNoVacArray_listOut', 'infectVacArray_listOut',
+		'vaccine_listOut', 'vaccineArray_listOut',
 		'case_listOut', 'case7_listOut',
 		'case14_listOut', 'case28_listOut',
 		'age_listOut']
@@ -65,19 +66,23 @@ def ProcessAbmChunk(
 		 + ['{}Array_listOut'.format(name) for name in metricListRaw.keys()]]
 	
 	cohorts = len(chunk.iloc[0].age_listOut.split(' '))
+	vaccines = len(chunk.iloc[0].vaccine_listOut.split(' '))
 	days = len(chunk.iloc[0].stage_listOut.split(' '))
 	if day_override:
 		days = day_override
 	
 	if outputStaticData:
-		staticData = pd.DataFrame(
-			chunk[['age_listOut']].transpose()[0])
+		staticData = pd.DataFrame(chunk[['age_listOut']].transpose()[0])
 		staticData = util.SplitNetlogoList(staticData, cohorts, 0, '').transpose()
-		staticData = staticData.rename(
-			columns={'age_listOut': 'age'})
+		staticData = staticData.rename(columns={'age_listOut': 'age'})
 		util.OutputToFile(staticData, filename + '_static' + '_' + str(arrayIndex), head=False) 
+		
+		staticData = pd.DataFrame(chunk[['vaccine_listOut']].transpose()[0])
+		staticData = util.SplitNetlogoList(staticData, vaccines, 0, '').transpose()
+		staticData = staticData.rename(columns={'vaccine_listOut': 'vaccine'})
+		util.OutputToFile(staticData, filename + '_static_vaccine' + '_' + str(arrayIndex), head=False) 
 	
-	chunk = chunk.drop(['age_listOut'], axis=1)
+	chunk = chunk.drop(['age_listOut', 'vaccine_listOut'], axis=1)
 	chunk = chunk.rename(mapper={'[run number]' : 'run'}, axis=1)
 	chunk = chunk.set_index(['run', 'draw_index',] + measureCols_raw)
 	
@@ -93,6 +98,10 @@ def ProcessAbmChunk(
 	#SplitOutDailyData(chunk, 1, days, arrayIndex, 'case7', filename, 'case7', fillTo=day_override)
 	#SplitOutDailyData(chunk, 1, days, arrayIndex, 'case14', filename, 'case14', fillTo=day_override)
 	SplitOutDailyData(chunk, dataMap, 1, days, arrayIndex, 'stage', filename, 'stage', fillTo=day_override)
+	
+	SplitOutDailyData(
+		chunk, dataMap, vaccines, days, arrayIndex, '{}Array'.format('vaccine'),
+		filename, 'vaccine', fillTo=day_override)
 	
 	dfNoVac = SplitOutDailyData(
 		chunk, dataMap, cohorts, days, arrayIndex, 'infectNoVacArray',
@@ -180,7 +189,7 @@ def InfectionsAndStageVisualise(dataMap, inputDir, outputDir, arrayIndex, measur
 	#print('Processing trace infectVac')
 	#ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'infectVac', measureCols, dayStartOffset=dayStartOffset)
 	
-	for metric in metricList:
+	for metric in metricList + ['vaccine']:
 		print('Processing trace {}'.format(metric))
 		ProcessFileToVisualisation(
 			dataMap, inputDir, outputDir, arrayIndex, metric,
@@ -314,6 +323,38 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doW
 	return df
 
 
+def ProcessVaccineChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doWeekly=False, doTenday=False):
+	df.columns = df.columns.set_levels(df.columns.levels[0].astype(int), level=0)
+	df.columns = df.columns.set_levels(df.columns.levels[1].astype(int), level=1)
+	df = df.sort_values(['cohort', 'day'], axis=1)
+	
+	col_index = df.columns.to_frame()
+	col_index = col_index.reset_index(drop=True)
+	col_index = pd.merge(
+		col_index, chortDf,
+		on='cohort',
+		how='left',
+		sort=False)
+	df.columns = pd.MultiIndex.from_frame(col_index)
+	
+	# TODO - Figure out why this crashes with dataMap.
+	df = df.groupby(level=[0, 2], axis=1).sum()
+	df = df.sort_index(axis=0)
+	df = df.sort_index(axis=1)
+	
+	df = df.stack(level=['vaccine'])
+	OutputQuart(df.copy(), outputPrefix, arrayIndex)
+	OutputYear(df.copy(), outputPrefix, arrayIndex)
+	
+	if doDaily:
+		util.OutputToFile(df, outputPrefix + '_' + str(arrayIndex), head=False)
+	if doWeekly:
+		OutputWeek(df.copy(), outputPrefix, arrayIndex)
+	if doTenday:
+		OutputTenday(df.copy(), outputPrefix, arrayIndex)
+	return df
+
+
 def ProcessStage(dataMap, inputDir, visualOutDir, outputDir, arrayIndex, measureCols):
 	df = pd.read_csv(
 		inputDir + '/processed_stage' + '_' + str(arrayIndex) + '.csv',
@@ -335,8 +376,8 @@ def ProcessStage(dataMap, inputDir, visualOutDir, outputDir, arrayIndex, measure
 		OutputYear(dfStage.copy(), outputDir + '/processed_stage{}'.format(stage), arrayIndex)
 
 
-def ProcessInfectCohorts(dataMap, measureCols, filename, cohortFile, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
-	cohortData = util.GetCohortData(cohortFile)
+def ProcessInfectCohorts(dataMap, measureCols, filename, cohortData, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
+
 	chunksize = 4 ** 7
 
 	if dataMap is not False:
@@ -358,6 +399,28 @@ def ProcessInfectCohorts(dataMap, measureCols, filename, cohortFile, outputPrefi
 				OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
 
 
+def ProcessVaccineCohorts(dataMap, measureCols, filename, cohortData, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
+	chunksize = 4 ** 7
+
+	if dataMap is not False:
+		chunk = dataMap[filename].copy()
+		df = ProcessInfectChunk(chunk, cohortData, outputPrefix, arrayIndex, doDaily=doDaily, doWeekly=doWeekly)
+		if doDaily:
+			OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
+	else:
+		for chunk in tqdm(pd.read_csv(
+					filename + '.csv', 
+					index_col=list(range(2 + len(measureCols))),
+					header=list(range(2)),
+					dtype={'day' : int},
+					chunksize=chunksize,
+					keep_default_na=False),
+				total=4):
+			df = ProcessVaccineChunk(chunk, cohortData, outputPrefix, arrayIndex, doDaily=doDaily, doWeekly=doWeekly)
+			if doDaily:
+				OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
+
+
 def ProcessInfectionCohorts(dataMap, inputDir, outputDir, arrayIndex, measureCols, doWeekly=False):
 	#print('Processing vaccination infection')
 	#ProcessInfectCohorts(
@@ -372,14 +435,24 @@ def ProcessInfectionCohorts(dataMap, inputDir, outputDir, arrayIndex, measureCol
 	#	inputDir + '/processed_static' + '_' + str(arrayIndex),
 	#	outputDir + '/infect_noVac', arrayIndex)
 	
+	cohortData = util.GetCohortData(inputDir + '/processed_static' + '_' + str(arrayIndex))
 	for metric in metricList:
 		print('Processing ages {}'.format(metric))
 		ProcessInfectCohorts(
 			dataMap, measureCols,
 			inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
-			inputDir + '/processed_static' + '_' + str(arrayIndex),
+			cohortData,
 			outputDir + '/{}'.format(metric), arrayIndex, doWeekly=doWeekly)
-
+		
+	metric = 'vaccine'
+	cohortData = util.GetCohortData(inputDir + '/processed_static_vaccine' + '_' + str(arrayIndex), dataCol='vaccine', dataInt=False)
+	print('Processing ages {}'.format(metric))
+	ProcessVaccineCohorts(
+		dataMap, measureCols,
+		inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
+		cohortData,
+		outputDir + '/{}'.format(metric), arrayIndex, doWeekly=doWeekly)
+	
 
 def CleanupFiles(inputDir, arrayIndex):
 	for metric in metricList + ['secondary', 'stage']:

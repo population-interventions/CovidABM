@@ -279,14 +279,15 @@ def SplitNetlogoNestedList(chunk, cohorts, days, colName, name, fillTo=365):
 	return df
 
 
-def GetCohortData(cohortFile):
+def GetCohortData(cohortFile, dataCol='age', dataInt=True):
 	df = pd.read_csv(cohortFile + '.csv', 
 				index_col=[0],
 				header=[0])
 	df.index.rename('cohort', True)
 	df = df.reset_index()
 	df['cohort'] = df['cohort'].astype(int)
-	df['age'] = df['age'].astype(int)
+	if dataInt:
+		df[dataCol] = df[dataCol].astype(int)
 	return df
 
 
