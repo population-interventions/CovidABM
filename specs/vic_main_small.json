@@ -54,7 +54,7 @@
 				"outputHeatmaps" : true,
 				"processStages" : true,
 				"processCohort" : true,
-				"doAggregate" : true,
+				"doAverage" : true,
 				
 				"dryRun" : false,
 				"preChecks" : false,

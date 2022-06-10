@@ -310,7 +310,7 @@ def AddFiles(outputName, fileList, index=1, header=1, doTqdm=False):
 
 def AppendFiles(
 		outputName, fileList, runIndexer, indexSize=1, header=1, doTqdm=False,
-		head=False, indexGrouping=False, doAggregate=False):
+		head=False, indexGrouping=False, doAverage=False):
 	first = True
 	for fileName in (tqdm.tqdm(fileList) if doTqdm else fileList):
 		if first:
@@ -342,9 +342,9 @@ def AppendFiles(
 	
 	OutputToFile(df, outputName, head=head)
 	
-	if doAggregate:
+	if doAverage:
 		df = df.groupby(level=ListRemove(list(range(indexSize - 1)), 0), axis=0).mean()
-		OutputToFile(df, outputName + '_drawAgg', head=head)
+		OutputToFile(df, outputName + '_drawAve', head=head)
 
 
 def ListRemove(myList, element):

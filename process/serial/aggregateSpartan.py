@@ -25,7 +25,7 @@ stages = [1, 2, 3, 4, 5]
 
 def AppendParallels(
 		dataDir, rawDataDir, outDir, indexSize, outputSubdir, prefix,
-		runIndexer, indexList, fileNames, header=1, indexGrouping=False, doAggregate=False):
+		runIndexer, indexList, fileNames, header=1, indexGrouping=False, doAverage=False):
 	for file in fileNames:
 		if prefix:
 			thisPrefix = prefix + '_'
@@ -41,14 +41,14 @@ def AppendParallels(
 			header=header,
 			head=False,
 			indexGrouping=indexGrouping,
-			doAggregate=doAggregate
+			doAverage=doAverage
 		)
 
 
 def DoSpartanAggregate(
 		dataDir, rawDataDir, measureCols, runIndexer, arraySize=400,
 		skip=False, processCohort=True, processStages=True,
-		indexGrouping=False, doAggregate=False):
+		indexGrouping=False, doAverage=False):
 	indexList = range(1, arraySize + 1)
 	if skip:
 		indexList = util.ListRemove(indexList, skip)
@@ -75,12 +75,12 @@ def DoSpartanAggregate(
 		# Larger index because cohort data contains age
 		AppendParallels(
 			dataDir, rawDataDir, '/cohort/', len(measureCols) + 3, '/cohort/', False,
-			runIndexer, indexList, processAgg, indexGrouping=indexGrouping, doAggregate=doAggregate)
+			runIndexer, indexList, processAgg, indexGrouping=indexGrouping, doAverage=doAverage)
 	
 	if processStages:
 		AppendParallels(
 			dataDir, rawDataDir, '/stage/', len(measureCols) + 2, '/stage/', False,
-			runIndexer, indexList, stageAgg, indexGrouping=indexGrouping, doAggregate=doAggregate)
+			runIndexer, indexList, stageAgg, indexGrouping=indexGrouping, doAverage=doAverage)
 	
 	AppendParallels(
 		dataDir, rawDataDir, '/traces/', len(measureCols) + 2, '/visualise/', 'processed',

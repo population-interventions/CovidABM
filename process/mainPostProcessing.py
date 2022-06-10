@@ -55,7 +55,7 @@ def RunSeriesPost(modelData, runs, pernode):
 	processCohort = params['processCohort']
 	indexGrouping = params['indexGrouping']
 	
-	doAggregate = 'doAggregate' in params and params['doAggregate']
+	doAverage = 'doAverage' in params and params['doAverage']
 	
 	heatAges = conf['heatAges']
 	heatPeriods = conf['heatPeriods']
@@ -84,7 +84,7 @@ def RunSeriesPost(modelData, runs, pernode):
 			workingDir, postDataDir, measureCols, runIndexer,
 			arraySize=arraySize, processCohort=processCohort,
 			processStages=processStages,
-			indexGrouping=indexGrouping, doAggregate=doAggregate)
+			indexGrouping=indexGrouping, doAverage=doAverage)
 
 	if outputHeatmaps:
 		for period in heatPeriods:
