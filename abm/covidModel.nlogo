@@ -2922,7 +2922,7 @@ INPUTBOX
 257
 325
 input_vaccine_schedule
-input/vic/rollout_target_early.csv
+input/vic/rollout_current.csv
 1
 0
 String

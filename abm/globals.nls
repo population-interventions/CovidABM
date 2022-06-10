@@ -360,6 +360,7 @@ globals [
   age_listOut
   vaccine_listOut
   vaccine_outMapping
+  vaccine_verboseMap
   
   stage_listOut
   vacineEff_nameOut

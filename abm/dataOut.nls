@@ -37,6 +37,7 @@ to setup_DataOut [maxHospTime maxIcuTime maxDeathTime]
   let extraVacData remove-item 0 csv:from-file (word input_vac_extra)
   set vaccine_listOut []
   set vaccine_outMapping table:make
+  set vaccine_verboseMap table:make
   
   foreach extraVacData [ rawData ->
     set index -1
@@ -46,6 +47,7 @@ to setup_DataOut [maxHospTime maxIcuTime maxDeathTime]
       table:put vaccine_outMapping outName length vaccine_listOut
       set vaccine_listOut lput outName vaccine_listOut
     ]
+    table:put vaccine_verboseMap name outName
   ]
   set vaccineLengthListOfZeros n-values length vaccine_listOut [0]
   set vaccineArray vaccineLengthListOfZeros
@@ -60,6 +62,7 @@ to setup_DataOut [maxHospTime maxIcuTime maxDeathTime]
 end
 
 to dataOut_addVaccine [vaccineType]
+  set vaccineType table:get vaccine_verboseMap vaccineType
   let vacIndex table:get vaccine_outMapping vaccineType
   set vaccineArray AddToList vaccineArray vacIndex (total_population / Population)
 end

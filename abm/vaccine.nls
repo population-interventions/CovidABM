@@ -179,6 +179,7 @@ to simul_applyVaccine [vaccinateType]
   
   set vaccineDay days
   set currentVaccine (word vaccinateType cohortVacSuffix)
+  dataOut_addVaccine currentVaccine
 end
 
 to add_vaccine [branch]
@@ -196,7 +197,6 @@ to vaccineMode_micromanageDoses [branch]
   while [vaccinateToday >= 1 and not empty? vacQueue] [
     ask first vacQueue [
       simul_applyVaccine vaccinateType
-      dataOut_addVaccine vaccinateType
     ]
     set vacQueue but-first vacQueue
     set vaccinateToday vaccinateToday - 1
