@@ -48,7 +48,7 @@
 				"dryRun" : false,
 				"preChecks" : false,
 				"makeComparison" : false,
-				"indexGrouping" : 3
+				"indexGrouping" : 1
 			},
 			"heatAges" : [
 				[0, 10],

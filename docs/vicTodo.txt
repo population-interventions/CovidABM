@@ -34,8 +34,4 @@ Todo:
 
 ==================
 
-Output agents vaccinated per vaccine type.
-
-Process stages in parallel into numbers that can be averaged (say, time in stage >= 3) because run aggregation involves averaging.
-
 Make Rcalc system that runs for, say, 25 days then picks the person to be tracked (or drops one in?).

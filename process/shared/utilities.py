@@ -332,7 +332,7 @@ def AppendFiles(
 		df.index = pd.MultiIndex.from_frame(index)
 		df = df.groupby(level=ListRemove(list(range(indexSize + 1)), 1), axis=0).mean()
 		df.index = df.index.rename(runIndexer, level='_index_agg')
-			
+		
 		df.index = df.index.set_levels(df.index.levels[indexSize - 1].astype(int), level=runIndexer)
 		df = df.reorder_levels([0, indexSize - 1] + list(range(1, indexSize - 1)))
 		

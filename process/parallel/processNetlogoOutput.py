@@ -455,7 +455,7 @@ def ProcessInfectionCohorts(dataMap, inputDir, outputDir, arrayIndex, measureCol
 	
 
 def CleanupFiles(inputDir, arrayIndex):
-	for metric in metricList + ['secondary', 'stage']:
+	for metric in metricList + ['secondary', 'stage', 'vaccine']:
 		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv') 
 
 
