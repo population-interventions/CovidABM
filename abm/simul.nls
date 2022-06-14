@@ -686,11 +686,14 @@ to simul_EssentialWorkerID
 end
 
 to simul_checkMask
-  ;; identifies people who waear a mask
+  ;; identifies people who wear a mask
   ifelse maskPolicy and patch-here != homelocation and simul_getWantWearMask
   [
     set wearingMask true
     set wornMaskOr LnOddsToOdds simul_getMaskEfficacyLnOr
+    ;if random-float 1 < 0.001 [
+    ; print OddsToPr wornMaskOr 
+    ;]
   ]
   [
     set wearingMask false

@@ -48,45 +48,45 @@ to-report simul_getMaskEfficacyLnOr
   ;; Rescale drawTest to [0, 1) for people who wear masks.
   (ifelse agerange = 5
     [
-      set drawTest drawTest / mask_wearing_a0
+      set drawTest drawTest / (ApplyOrToPr mask_wearing_a0 avoidOr)
     ]
     agerange = 15
     [
-      set drawTest drawTest / mask_wearing_a10
+      set drawTest drawTest / (ApplyOrToPr mask_wearing_a10 avoidOr)
     ]
     [
-      set drawTest drawTest / mask_wearing_a20
+      set drawTest drawTest / (ApplyOrToPr mask_wearing_a20 avoidOr)
     ]
   )
   
   ;; Check n95, rescale to [0, 1) if n95 not worn
   (ifelse agerange = 5
     [
-      ifelse wearsMask_draw < mask_wearing_n95_a0
+      ifelse drawTest < mask_wearing_n95_a0
       [
         report draw_maskWearEfficacy_n95
       ]      
       [
-        set drawTest (wearsMask_draw - mask_wearing_n95_a0) / (1 - mask_wearing_n95_a0)
+        set drawTest (drawTest - mask_wearing_n95_a0) / (1 - mask_wearing_n95_a0)
       ]
     ]
     agerange = 15
     [
-      ifelse wearsMask_draw < mask_wearing_n95_a10
+      ifelse drawTest < mask_wearing_n95_a10
       [
         report draw_maskWearEfficacy_n95
       ]      
       [
-        set drawTest (wearsMask_draw - mask_wearing_n95_a10) / (1 - mask_wearing_n95_a0)
+        set drawTest (drawTest - mask_wearing_n95_a10) / (1 - mask_wearing_n95_a10)
       ]
     ]
     [
-      ifelse wearsMask_draw < mask_wearing_n95_a20
+      ifelse drawTest < mask_wearing_n95_a20
       [
         report draw_maskWearEfficacy_n95
       ]      
       [
-        set drawTest (wearsMask_draw - mask_wearing_n95_a20) / (1 - mask_wearing_n95_a0)
+        set drawTest (drawTest - mask_wearing_n95_a20) / (1 - mask_wearing_n95_a20)
       ]
     ]
   )
@@ -94,18 +94,18 @@ to-report simul_getMaskEfficacyLnOr
   ;; Check surgical
   (ifelse agerange = 5
     [
-      if wearsMask_draw < mask_wearing_surgical_a0 [
+      if drawTest < mask_wearing_surgical_a0 [
         report draw_maskWearEfficacy_surgical
       ]
     ]
     agerange = 15
     [
-      if wearsMask_draw < mask_wearing_surgical_a10 [
+      if drawTest < mask_wearing_surgical_a10 [
         report draw_maskWearEfficacy_surgical
       ]  
     ]
     [
-      if wearsMask_draw < mask_wearing_surgical_a20 [
+      if drawTest < mask_wearing_surgical_a20 [
         report draw_maskWearEfficacy_surgical
       ] 
     ]

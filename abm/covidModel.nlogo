@@ -982,7 +982,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-4
+3
 
 MONITOR
 1473
@@ -2910,7 +2910,7 @@ draw_index
 draw_index
 0
 2000
-1392.0
+1265.0
 1
 1
 NIL
@@ -3062,7 +3062,7 @@ SWITCH
 413
 policy_mask_n95
 policy_mask_n95
-1
+0
 1
 -1000
 

@@ -1,0 +1,4 @@
+name,or_mean,or_std
+cloth,0.53,0.05
+surgical,-0.76,0.31
+n95,-4,0.65

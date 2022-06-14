@@ -51,7 +51,7 @@
         "true"
     ],
     "param_policy": [
-        "\"BarelySupress\""
+        "\"LooseSupress\""
     ],
     "asymptom_trace_mult": [
         "0.67"
@@ -387,7 +387,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "1392.0"
+        "1265.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_current.csv\""
@@ -414,7 +414,7 @@
         "\"input/vic/vaccine/draw_\""
     ],
     "policy_mask_n95": [
-        "false"
+        "true"
     ],
     "incur_day": [
         "320.0"
