@@ -7,9 +7,9 @@
 	"threads" : 2,
 	"indexParams" : {
 		"init_stage" : [
-			1.2,
+			1,
 			2,
-			2.8
+			3
 		]
 	},
 	"paramOverrides" : {
@@ -35,7 +35,7 @@
 				1200000,
 				1500000
 			],
-			"repetionLimit" : 4
+			"repetionLimit" : 3
 		},
 		"processMain" : {
 			"params" : {

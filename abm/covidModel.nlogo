@@ -151,7 +151,7 @@ Span
 Span
 0
 30
-3.0
+10.0
 1
 1
 NIL
@@ -236,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.015
+0.04
 0.01
 1
 NIL
@@ -291,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.85
+0.42
 0.01
 1
 NIL
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.9
+0.55
 0.01
 1
 NIL
@@ -564,7 +564,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.2
+0.65
 0.01
 1
 NIL
@@ -603,7 +603,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -708,7 +708,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+8.8
 1
 1
 NIL
@@ -2744,7 +2744,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-49520.67383
+21795.09758
 1
 1
 NIL
@@ -2910,7 +2910,7 @@ draw_index
 draw_index
 0
 2000
-784.0
+873.0
 1
 1
 NIL

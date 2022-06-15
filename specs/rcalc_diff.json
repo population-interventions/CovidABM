@@ -5,16 +5,20 @@
 	"threads" : 2,
 	"indexParams" : {
 		"init_stage" : [
+			2,
+			3
+		],
+		"vaccine_enabled" : [
+			false,
+			true
+		],
+		"stage_test_index" : [
 			0,
 			1,
 			2,
 			3,
 			4,
 			5
-		],
-		"vaccine_enabled" : [
-			false,
-			true
 		]
 	},
 	"paramOverrides" : {
