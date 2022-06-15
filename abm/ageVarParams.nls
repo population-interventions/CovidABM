@@ -45,28 +45,28 @@ to-report GetVariantIcuLnOdds [age variant]
     [ ;; Low virulence
       (ifelse age > 30
         [
-          report LnPrToLnOdds (0.129 * age - 13.386 + variantUI_ICU) 
+          report LnPrToLnOdds (0.129 * age - 13.386 + variantUI_ICU - 0.48) 
         ]
         age > 10
         [
-          report LnPrToLnOdds (-10.943 + variantUI_ICU)
+          report LnPrToLnOdds (-10.943 + variantUI_ICU - 0.48)
         ]
         [
-          report LnPrToLnOdds (-9.783 + variantUI_ICU)
+          report LnPrToLnOdds (-9.783 + variantUI_ICU - 0.48)
         ]
       )
     ]
     [ ;; High virulence
       (ifelse age > 30
         [
-          report LnPrToLnOdds (0.129 * age - 12.346 + variantUI_ICU) 
+          report LnPrToLnOdds (0.129 * age - 12.346 + variantUI_ICU - 0.48) 
         ]
         age > 10
         [
-          report LnPrToLnOdds (-9.904 + variantUI_ICU)
+          report LnPrToLnOdds (-9.904 + variantUI_ICU - 0.48)
         ]
         [
-          report LnPrToLnOdds (-8.743 + variantUI_ICU)
+          report LnPrToLnOdds (-8.743 + variantUI_ICU - 0.48)
         ]
       )
     ]
@@ -81,28 +81,28 @@ to-report GetVariantHospLnOdds [age variant]
     [ ;; Low virulence
       (ifelse age > 30
         [
-          report LnPrToLnOdds (0.0997 * age - 9.258 + variantUI_hosp)
+          report LnPrToLnOdds (0.0997 * age - 9.258 + variantUI_hosp - 0.601)
         ]
         age > 10
         [
-          report LnPrToLnOdds (-7.470 + variantUI_hosp)
+          report LnPrToLnOdds (-7.470 + variantUI_hosp - 0.601)
         ]
         [
-          report LnPrToLnOdds (-6.377 + variantUI_hosp)
+          report LnPrToLnOdds (-6.377 + variantUI_hosp - 0.601)
         ]
       )
     ]
     [ ;; High virulence
       (ifelse age > 30
         [
-          report LnPrToLnOdds (0.0997 * age - 8.5647 + variantUI_hosp)
+          report LnPrToLnOdds (0.0997 * age - 8.5647 + variantUI_hosp - 0.601)
         ]
         age > 10
         [
-          report LnPrToLnOdds (-6.777 + variantUI_hosp)
+          report LnPrToLnOdds (-6.777 + variantUI_hosp - 0.601)
         ]
         [
-          report LnPrToLnOdds (-5.684 + variantUI_hosp)
+          report LnPrToLnOdds (-5.684 + variantUI_hosp - 0.601)
         ]
       )
     ]

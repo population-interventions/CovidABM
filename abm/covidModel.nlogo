@@ -33,10 +33,10 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-435
-93
-887
-546
+387
+69
+868
+551
 -1
 -1
 7.4
@@ -50,9 +50,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-59
+63
 0
-59
+63
 1
 1
 1
@@ -151,7 +151,7 @@ Span
 Span
 0
 30
-10.0
+3.0
 1
 1
 NIL
@@ -236,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.045
+0.015
 0.01
 1
 NIL
@@ -291,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.35
+0.85
 0.01
 1
 NIL
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.5
+0.9
 0.01
 1
 NIL
@@ -564,7 +564,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.7
+0.2
 0.01
 1
 NIL
@@ -603,7 +603,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -708,7 +708,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+3.6
 1
 1
 NIL
