@@ -88,16 +88,16 @@ to do_stages_tony
     
     if stage = 2 [
       ;; Stage 2
-      set span                    9.1
-      set proportion_people_avoid 0.5
-      set proportion_time_avoid   0.63
-      set Essential_Workers       0.56
-      set Visit_Radius            7.6
+      set span                    9
+      set proportion_people_avoid 0.521
+      set proportion_time_avoid   0.649
+      set Essential_Workers       0.539
+      set Visit_Radius            7.4
       set Visit_Frequency         0.1428
-      set superspreaders          0.036
+      set superspreaders          0.0342
       set schoolsOpen true
       
-      set mask_wearing_a20        0.53
+      set mask_wearing_a20        0.552
       set mask_wearing_a10        mask_wearing_a20 * 2 / 3
       set mask_wearing_a0         mask_wearing_a10 * 2 / 3
     ]

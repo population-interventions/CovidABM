@@ -128,10 +128,10 @@ NIL
 1
 
 SLIDER
-3354
-187
-3467
-220
+3370
+203
+3483
+236
 Population
 Population
 0
@@ -151,7 +151,7 @@ Span
 Span
 0
 30
-10.0
+5.0
 1
 1
 NIL
@@ -217,10 +217,10 @@ count simuls * (Total_Population / population)
 14
 
 MONITOR
-2742
-183
-2911
-240
+3248
+118
+3417
+175
 Total # Infected
 cumulativeInfected
 0
@@ -236,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.045
+0.02
 0.01
 1
 NIL
@@ -291,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.35
+0.75
 0.01
 1
 NIL
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.5
+0.8
 0.01
 1
 NIL
@@ -446,10 +446,10 @@ New Infections
 12
 
 PLOT
-1039
-489
-1456
-609
+2839
+195
+3013
+328
 Ln(1 + New Infections Per Day)
 NIL
 NIL
@@ -564,7 +564,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.7
+0.35
 0.01
 1
 NIL
@@ -603,7 +603,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -619,10 +619,10 @@ houseTotal
 11
 
 PLOT
-2445
+2435
 185
-2725
-333
+2654
+334
 Infections by age range
 NIL
 NIL
@@ -708,7 +708,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+5.0
 1
 1
 NIL
@@ -1154,10 +1154,10 @@ new_case_real
 11
 
 BUTTON
-3357
-97
-3462
-131
+3359
+79
+3464
+113
 Profile Stop
 profiler:stop \nprint profiler:report
 NIL
@@ -1171,10 +1171,10 @@ NIL
 1
 
 SWITCH
-3408
-59
-3515
-92
+3410
+42
+3517
+75
 profile_on
 profile_on
 1
@@ -1182,10 +1182,10 @@ profile_on
 -1000
 
 BUTTON
-3243
-97
-3347
-132
+3245
+79
+3349
+114
 Profile Start
 profiler:start
 NIL
@@ -1271,10 +1271,10 @@ track_R
 -1000
 
 PLOT
-2738
-180
-3017
-340
+2662
+190
+2822
+333
 Cohorts and infections
 NIL
 NIL
@@ -1877,10 +1877,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-3230
-240
-3442
-273
+3245
+255
+3457
+288
 hetro_mult
 hetro_mult
 0
@@ -1892,10 +1892,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-3230
-278
-3439
-311
+3245
+294
+3454
+327
 Daily_Infect_Binom
 Daily_Infect_Binom
 1
@@ -2550,10 +2550,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-3182
-187
-3337
-220
+3185
+194
+3340
+227
 reducedStageFour
 reducedStageFour
 1
@@ -2673,10 +2673,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-3202
-52
-3382
-85
+3204
+34
+3384
+67
 override_asympt_table
 override_asympt_table
 1
@@ -3568,6 +3568,24 @@ input/vic/vaccine_extra_params.csv
 1
 0
 String
+
+PLOT
+1040
+490
+1462
+610
+Masks
+NIL
+NIL
+0.0
+1.05
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 0.05 1 -16777216 true "" "histogram [wornMaskOr] of simuls"
 
 @#$#@#$#@
 ## WHAT IS IT?
