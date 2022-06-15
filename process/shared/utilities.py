@@ -181,7 +181,7 @@ def MakePath(path):
 	out_folder = os.path.dirname(path)
 	if not os.path.exists(out_folder):
 		MakePath(out_folder)
-		os.mkdir(out_folder)
+		os.mkdir(out_folder, exist_ok=True)
 
 
 def GetFiles(subfolder, firstOnly=False):
@@ -343,8 +343,8 @@ def AppendFiles(
 	OutputToFile(df, outputName, head=head)
 	
 	if doAverage:
-		df = df.groupby(level=ListRemove(list(range(indexSize - 1)), 0), axis=0).mean()
-		OutputToFile(df, outputName + '_drawAve', head=head)
+		dfAve = df.groupby(level=ListRemove(list(range(indexSize - 1)), 0), axis=0).mean()
+		OutputToFile(dfAve, outputName + '_drawAve', head=head)
 
 
 def ListRemove(myList, element):
