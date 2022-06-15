@@ -3,19 +3,21 @@ to setup_mask
   let fileData remove-item 0 csv:from-file input_maskFile
   file-close
   
+  let maskUncertainDraw rngs:rnd-norm defaultStream 0 1
+  
   foreach fileData [ x -> 
     let name item 0 x
     (ifelse name = "cloth"
       [
-        set draw_maskWearEfficacy_cloth rngs:rnd-norm defaultStream (item 1 x) (item 2 x)
+        set draw_maskWearEfficacy_cloth ((item 1 x) + maskUncertainDraw * (item 2 x))
       ]
       name = "surgical"
       [
-        set draw_maskWearEfficacy_surgical rngs:rnd-norm defaultStream (item 1 x) (item 2 x)
+        set draw_maskWearEfficacy_surgical ((item 1 x) + maskUncertainDraw * (item 2 x))
       ]
       name = "n95"
       [
-        set draw_maskWearEfficacy_n95 rngs:rnd-norm defaultStream (item 1 x) (item 2 x)
+        set draw_maskWearEfficacy_n95 ((item 1 x) + maskUncertainDraw * (item 2 x))
       ]
     )
   ]

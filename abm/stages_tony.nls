@@ -81,7 +81,7 @@ to do_stages_tony
       set superspreaders          0.045
       set schoolsOpen true
       
-      set mask_wearing_a20        0.35
+      set mask_wearing_a20        0.25
       set mask_wearing_a10        mask_wearing_a20 * 2 / 3
       set mask_wearing_a0         mask_wearing_a10 * 2 / 3
     ]
@@ -97,7 +97,7 @@ to do_stages_tony
       set superspreaders          0.0342
       set schoolsOpen true
       
-      set mask_wearing_a20        0.552
+      set mask_wearing_a20        0.35
       set mask_wearing_a10        mask_wearing_a20 * 2 / 3
       set mask_wearing_a0         mask_wearing_a10 * 2 / 3
     ]

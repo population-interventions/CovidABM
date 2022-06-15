@@ -151,7 +151,7 @@ Span
 Span
 0
 30
-5.0
+9.0
 1
 1
 NIL
@@ -236,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.02
+0.0342
 0.01
 1
 NIL
@@ -291,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.75
+0.521
 0.01
 1
 NIL
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.8
+0.649
 0.01
 1
 NIL
@@ -564,7 +564,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.35
+0.539
 0.01
 1
 NIL
@@ -603,7 +603,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -708,7 +708,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+7.4
 1
 1
 NIL
@@ -2910,7 +2910,7 @@ draw_index
 draw_index
 0
 2000
-1265.0
+1912.0
 1
 1
 NIL
@@ -3489,10 +3489,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-897
-495
-1034
-528
+900
+493
+1037
+526
 fear_pta_limit
 fear_pta_limit
 0
@@ -3570,18 +3570,18 @@ input/vic/vaccine_extra_params.csv
 String
 
 PLOT
-1040
-490
-1462
-610
-Masks
+1042
+492
+1460
+614
+MaskOr
 NIL
 NIL
 0.0
 1.05
 0.0
-1.0
-true
+2500.0
+false
 false
 "" ""
 PENS
