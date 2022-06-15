@@ -181,7 +181,7 @@ def MakePath(path):
 	out_folder = os.path.dirname(path)
 	if not os.path.exists(out_folder):
 		MakePath(out_folder)
-		os.mkdir(out_folder, exist_ok=True)
+		os.makedirs(out_folder, exist_ok=True)
 
 
 def GetFiles(subfolder, firstOnly=False):
