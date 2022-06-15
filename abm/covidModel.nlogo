@@ -151,7 +151,7 @@ Span
 Span
 0
 30
-9.0
+10.0
 1
 1
 NIL
@@ -236,7 +236,7 @@ superspreaders
 superspreaders
 0
 1
-0.0342
+0.045
 0.01
 1
 NIL
@@ -291,7 +291,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.521
+0.35
 0.01
 1
 NIL
@@ -306,7 +306,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.649
+0.5
 0.01
 1
 NIL
@@ -564,7 +564,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.539
+0.7
 0.01
 1
 NIL
@@ -708,7 +708,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-7.4
+8.8
 1
 1
 NIL
@@ -2744,7 +2744,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-76431.67353
+49520.67383
 1
 1
 NIL
@@ -2910,7 +2910,7 @@ draw_index
 draw_index
 0
 2000
-1912.0
+1206.0
 1
 1
 NIL
@@ -3249,10 +3249,10 @@ MONITOR
 11
 
 PLOT
-674
-650
+675
+662
 1014
-795
+796
 New infections / expected hosp
 NIL
 NIL
