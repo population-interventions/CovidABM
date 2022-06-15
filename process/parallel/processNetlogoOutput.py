@@ -287,19 +287,18 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doW
 	# BUT NOT ANYMORE!
 	#df[15], df[25] = df[15] + df[25]/5, df[25]*4/5
 
-	# Then split the 10 year cohorts in half.
+	# Move cohort names
 	ageCols = [i*10 + 5 for i in range(10)]
 	df = df.stack('day')
 	for age in ageCols:
 		# TODO, vectorise?
 		if age in df:
-			df[age - 5] = df[age]/2
-			df[age] = df[age]/2
+			df[age - 5] = df[age]
+			df = df.drop(age, axis=1)
 		else:
 			print("age not found", age)
 			print(df)
 			df[age - 5] = 0
-			df[age] = 0
 	df = df.unstack('day')
 	
 	# Add extra cohorts missing from ABM
