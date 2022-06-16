@@ -45,28 +45,28 @@ to-report GetVariantIcuLnOdds [age variant]
     [ ;; Low virulence
       (ifelse age > 30
         [
-          report LnPrToLnOdds (0.129 * age - 13.386 + variantUI_ICU - 0.48) 
+          report LnPrToLnOdds (0.129 * age - 13.386 + variantUI_ICU - 0.481) 
         ]
         age > 10
         [
-          report LnPrToLnOdds (-10.943 + variantUI_ICU - 0.48)
+          report LnPrToLnOdds (-10.943 + variantUI_ICU - 0.481)
         ]
         [
-          report LnPrToLnOdds (-9.783 + variantUI_ICU - 0.48)
+          report LnPrToLnOdds (-9.783 + variantUI_ICU - 0.481)
         ]
       )
     ]
     [ ;; High virulence
       (ifelse age > 30
         [
-          report LnPrToLnOdds (0.129 * age - 12.346 + variantUI_ICU - 0.48) 
+          report LnPrToLnOdds (0.129 * age - 12.346 + variantUI_ICU - 0.481) 
         ]
         age > 10
         [
-          report LnPrToLnOdds (-9.904 + variantUI_ICU - 0.48)
+          report LnPrToLnOdds (-9.904 + variantUI_ICU - 0.481)
         ]
         [
-          report LnPrToLnOdds (-8.743 + variantUI_ICU - 0.48)
+          report LnPrToLnOdds (-8.743 + variantUI_ICU - 0.481)
         ]
       )
     ]
