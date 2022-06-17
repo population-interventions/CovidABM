@@ -73,12 +73,12 @@ to do_stages_tony
     if stage = 1 [
       ;; Stage 1
       set span                    10
-      set proportion_people_avoid 0.48
-      set proportion_time_avoid   0.57
-      set Essential_Workers       0.48
-      set Visit_Radius            8
+      set proportion_people_avoid 0.42
+      set proportion_time_avoid   0.55
+      set Essential_Workers       0.65
+      set Visit_Radius            8.8
       set Visit_Frequency         0.1428
-      set superspreaders          0.035
+      set superspreaders          0.04
       set schoolsOpen true
       
       set mask_wearing_a20        0.25
@@ -109,9 +109,9 @@ to do_stages_tony
       set proportion_time_avoid   0.73
       set Essential_Workers       0.38
       set Visit_Radius            6
-      set Visit_Frequency         0.1428
-      set superspreaders          0.025
-      set schoolsOpen false
+      set Visit_Frequency         0.13
+      set superspreaders          0.022
+      set schoolsOpen true
       
       set mask_wearing_a20        0.6
       set mask_wearing_a10        mask_wearing_a20 * 2 / 3
@@ -120,32 +120,32 @@ to do_stages_tony
     
     if stage = 4 [
       ;; Stage 4
-      set span                    6
-      set proportion_people_avoid 0.8
-      set proportion_time_avoid   0.85
-      set Essential_Workers       0.2
-      set Visit_Radius            4.5
-      set Visit_Frequency         0.1428
-      set superspreaders          0.015
+      set span                    5
+      set proportion_people_avoid 0.75
+      set proportion_time_avoid   0.80
+      set Essential_Workers       0.25
+      set Visit_Radius            5.0
+      set Visit_Frequency         0.075
+      set superspreaders          0.016
       set schoolsOpen false
       
-      set mask_wearing_a20        0.90
+      set mask_wearing_a20        0.80
       set mask_wearing_a10        mask_wearing_a20 * 2 / 3
       set mask_wearing_a0         mask_wearing_a10 * 2 / 3
     ]
     
     if stage = 5 [
       ;; Stage 5
-      set span                    4.5
-      set proportion_people_avoid 1
-      set proportion_time_avoid   1
-      set Essential_Workers       0
-      set Visit_Radius            0
-      set Visit_Frequency         0.1428
-      set superspreaders          0
+      set span                    5
+      set proportion_people_avoid 0.85
+      set proportion_time_avoid   0.90
+      set Essential_Workers       0.1
+      set Visit_Radius            3.6
+      set Visit_Frequency         0.05
+      set superspreaders          0.01
       set schoolsOpen false
       
-      set mask_wearing_a20        1
+      set mask_wearing_a20        0.90
       set mask_wearing_a10        mask_wearing_a20 * 2 / 3
       set mask_wearing_a0         mask_wearing_a10 * 2 / 3
     ]
