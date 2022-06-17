@@ -77,8 +77,8 @@
 				[0, 6]
 			],
 			"heatmapStructure" : {
-				"index_rows" : ["Variant", "Infectiousness", "Immune escape", "Incursion day"],
-				"index_cols" : ["Vaccine schedule", "Mask policy", "Stage policy"],
+				"index_rows" : ["Variant", "Immune escape", "Infectiousness", "Incursion day"],
+				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
 				"base_value" : {
 				},
 				"sort_rows" : [
