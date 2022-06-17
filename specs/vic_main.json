@@ -51,12 +51,13 @@
 	"postSeries" : {
 		"processMain" : {
 			"params" : {
-				"aggregateSpartan" : true,
 				"outputHeatmaps" : true,
 				"processStages" : true,
 				"processCohort" : true,
 				"doAverage" : true,
 				
+				"outputTraces" : false,
+				"describeHeatmaps" : false,
 				"dryRun" : false,
 				"preChecks" : false,
 				"makeComparison" : false,

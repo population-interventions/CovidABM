@@ -104,11 +104,27 @@ to do_stages_tony
     
     if stage = 3 [
       ;; Stage 3
-      set span                    3
+      set span                    7
       set proportion_people_avoid 0.85
       set proportion_time_avoid   0.90
-      set Essential_Workers       0.18
-      set Visit_Radius            3.6
+      set Essential_Workers       0.22
+      set Visit_Radius            5.5
+      set Visit_Frequency         0.1428
+      set superspreaders          0.02
+      set schoolsOpen false
+      
+      set mask_wearing_a20        0.55
+      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
+      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
+    ]
+    
+    if stage = 4 [
+      ;; Stage 4
+      set span                    5.5
+      set proportion_people_avoid 0.9
+      set proportion_time_avoid   0.9
+      set Essential_Workers       0.08
+      set Visit_Radius            3.2
       set Visit_Frequency         0.1428
       set superspreaders          0.015
       set schoolsOpen false
@@ -118,25 +134,9 @@ to do_stages_tony
       set mask_wearing_a0         mask_wearing_a10 * 2 / 3
     ]
     
-    if stage = 4 [
-      ;; Stage 4
-      set span                    5
-      set proportion_people_avoid 1
-      set proportion_time_avoid   1
-      set Essential_Workers       0
-      set Visit_Radius            0
-      set Visit_Frequency         0.1428
-      set superspreaders          0
-      set schoolsOpen false
-      
-      set mask_wearing_a20        1
-      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
-    ]
-    
     if stage = 5 [
       ;; Stage 5
-      set span                    2
+      set span                    4
       set proportion_people_avoid 1
       set proportion_time_avoid   1
       set Essential_Workers       0

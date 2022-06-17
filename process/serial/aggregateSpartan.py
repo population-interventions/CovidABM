@@ -48,7 +48,7 @@ def AppendParallels(
 def DoSpartanAggregate(
 		dataDir, rawDataDir, measureCols, runIndexer, arraySize=400,
 		skip=False, processCohort=True, processStages=True,
-		indexGrouping=False, doAverage=False):
+		indexGrouping=False, doAverage=False, outputTraces=False):
 	indexList = range(1, arraySize + 1)
 	if skip:
 		indexList = util.ListRemove(indexList, skip)
@@ -82,6 +82,7 @@ def DoSpartanAggregate(
 			dataDir, rawDataDir, '/stage/', len(measureCols) + 2, '/stage/', False,
 			runIndexer, indexList, stageAgg, indexGrouping=indexGrouping, doAverage=doAverage)
 	
-	AppendParallels(
-		dataDir, rawDataDir, '/traces/', len(measureCols) + 2, '/visualise/', 'processed',
-		runIndexer, indexList, tracesAgg, indexGrouping=indexGrouping)
+	if outputTraces:
+		AppendParallels(
+			dataDir, rawDataDir, '/traces/', len(measureCols) + 2, '/visualise/', 'processed',
+			runIndexer, indexList, tracesAgg, indexGrouping=indexGrouping)

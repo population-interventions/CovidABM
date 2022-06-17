@@ -11,13 +11,16 @@
 			3,
 			4,
 			5
+		],
+		"vaccine_enabled" : [
+			false,
+			true
 		]
 	},
 	"paramOverrides" : {
 		"first_case_calibrate" : true,
 		"track_R" : true,
 		"param_policy" : "StageFixed",
-		"vaccine_enabled" : true,
 		"input_draw_static" : "input/vic/draw_static_none.csv"
 	},
 	"runIndexer" : "draw_index",

@@ -48,7 +48,6 @@ def RunSeriesPost(modelData, runs, pernode):
 	
 	dryRun = params['dryRun']
 	preChecks = params['preChecks']
-	aggregateSpartan = params['aggregateSpartan']
 	outputHeatmaps = params['outputHeatmaps']
 	processStages = params['processStages']
 	makeComparison = params['makeComparison']
@@ -56,6 +55,8 @@ def RunSeriesPost(modelData, runs, pernode):
 	indexGrouping = params['indexGrouping']
 	
 	doAverage = 'doAverage' in params and params['doAverage']
+	describeHeatmaps = 'describeHeatmaps' in params and params['describeHeatmaps']
+	outputTraces = 'outputTraces' in params and params['outputTraces']
 	
 	heatAges = conf['heatAges']
 	heatPeriods = conf['heatPeriods']
@@ -77,29 +78,20 @@ def RunSeriesPost(modelData, runs, pernode):
 			workingDir, postDataDir, indexRename, measureCols, measureCols_raw,
 			defaultValues, firstOnly=dryRun)
 
-	if aggregateSpartan:
-		arraySize = len(util.GetFiles(rawDataDir))
-		print('arraySize', arraySize)
-		DoSpartanAggregate(
-			workingDir, postDataDir, measureCols, runIndexer,
-			arraySize=arraySize, processCohort=processCohort,
-			processStages=processStages,
-			indexGrouping=indexGrouping, doAverage=doAverage)
+	arraySize = len(util.GetFiles(rawDataDir))
+	print('arraySize', arraySize)
+	DoSpartanAggregate(
+		workingDir, postDataDir, measureCols, runIndexer,
+		arraySize=arraySize, processCohort=processCohort,
+		processStages=processStages, indexGrouping=indexGrouping,
+		doAverage=doAverage, outputTraces=outputTraces)
 
 	if outputHeatmaps:
 		for period in heatPeriods:
 			print('Period', period[0], period[1] - 1)
 			MakeMortHospHeatmapRange(
 				workingDir, measureCols, heatAges, heatmapStructure, 'quartAgg',
-				period[0], period[1] - 1, describe=True)
-
-	#if outputStages:
-	#	for period in heatPeriods:
-	#		MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, period[0] * 91, period[1] * 91, stage_min=1, describe=True)
-	#		MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, period[0] * 91, period[1] * 91, stage_min=2, describe=True)
-	#		MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, period[0] * 91, period[1] * 91, stage_min=3, describe=True)
-	#		MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, period[0] * 91, period[1] * 91, stage_min=4, describe=True)
-	#		MakeStagesHeatmap(workingDir, measureCols, heatmapStructure, period[0] * 91, period[1] * 91, stage_min=5, describe=True)
+				period[0], period[1] - 1, describe=describeHeatmaps)
 
 	if 'splitTableIndexName' in modelData:
 		DoProcessingForReport(workingDir, postInputDir, measureCols, table5Rows, modelData['splitTableIndexName'], months=24)
