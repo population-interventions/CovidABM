@@ -354,7 +354,7 @@ def ProcessVaccineChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, do
 	return df
 
 
-def ProcessStage(dataMap, inputDir, visualOutDir, outputDir, arrayIndex, measureCols):
+def ProcessStage(dataMap, inputDir, visualOutDir, outputDir, arrayIndex, measureCols, outputTraces=False):
 	df = pd.read_csv(
 		inputDir + '/processed_stage' + '_' + str(arrayIndex) + '.csv',
 		index_col=list(range(2 + len(measureCols))),
@@ -367,7 +367,8 @@ def ProcessStage(dataMap, inputDir, visualOutDir, outputDir, arrayIndex, measure
 	df = df.sort_values(['cohort', 'day'], axis=1)
 	df = df.groupby(level=[0], axis=1).sum()
 	
-	util.OutputToFile(df, visualOutDir + '/processed_stage' + '_daily_' + str(arrayIndex), head=False)
+	if outputTraces:
+		util.OutputToFile(df, visualOutDir + '/processed_stage' + '_daily_' + str(arrayIndex), head=False)
 	
 	for stage in stages:
 		dfStage = df.applymap(lambda x: 1 if x == stage else 0)
@@ -460,18 +461,29 @@ def CleanupFiles(inputDir, arrayIndex):
 
 ############### Cohort outputs for mort/hosp ###############
 
-def DoAbmProcessing(inputDir, outputDir, arrayIndex, indexRename, measureCols, measureCols_raw, day_override=False, dayStartOffset=0):
+def DoAbmProcessing(
+		inputDir, outputDir, arrayIndex, indexRename, measureCols,
+		measureCols_raw, day_override=False, dayStartOffset=0,
+		outputTraces=False):
+	
 	print('Processing ABM Output', inputDir, arrayIndex)
 	dataMap = ProcessAbmOutput(
 		inputDir, outputDir + '/step_1', arrayIndex, indexRename,
 		measureCols_raw, day_override=day_override, useDataMap=False)
 	
-	InfectionsAndStageVisualise(dataMap, outputDir + '/step_1', outputDir + '/visualise', arrayIndex, measureCols, dayStartOffset=dayStartOffset)
+	if outputTraces:
+		InfectionsAndStageVisualise(
+			dataMap, outputDir + '/step_1', outputDir + '/visualise',
+			arrayIndex, measureCols, dayStartOffset=dayStartOffset)
 	
 	print('ProcessInfectionCohorts', inputDir, arrayIndex)
-	ProcessInfectionCohorts(dataMap, outputDir + '/step_1', outputDir + '/cohort', arrayIndex, measureCols, doWeekly=False)
+	ProcessInfectionCohorts(
+		dataMap, outputDir + '/step_1', outputDir + '/cohort', arrayIndex,
+		measureCols, doWeekly=False)
 	
-	ProcessStage(dataMap, outputDir + '/step_1', outputDir + '/visualise', outputDir + '/stage', arrayIndex, measureCols)
+	ProcessStage(
+		dataMap, outputDir + '/step_1', outputDir + '/visualise', outputDir + '/stage',
+		arrayIndex, measureCols, outputTraces=outputTraces)
 	
 	if DELETE_AFTER:
 		CleanupFiles(outputDir, arrayIndex)

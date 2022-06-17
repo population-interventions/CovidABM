@@ -15,12 +15,15 @@ def DoParallelCheck(runIndex, modelName, runs, pernode):
 				modelData['postSeries']['processMain']['indexRename'][metric]['name']
 				if metric in modelData['postSeries']['processMain']['indexRename'] else metric for metric in measureCols_raw]
 		
+			mainData = modelData['postSeries']['processMain']
+		
 			inputDir = '{}/raw'.format(modelData['scratchDir'])
 			outputDir = '{}/post_parallel'.format(modelData['scratchDir'])
+			outputTraces = mainData['params']['outputTraces'] if 'outputTraces' in mainData['params'] else False
 			
 			DoAbmProcessing(
 				inputDir, outputDir, runIndex,
-				modelData['postSeries']['processMain']['indexRename'],
-				measureCols, measureCols_raw)
+				mainData['indexRename'],
+				measureCols, measureCols_raw, outputTraces=outputTraces)
 	
 
