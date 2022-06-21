@@ -18,10 +18,10 @@ from process.shared.utilities import SplitNetlogoNestedList
 from process.shared.utilities import OutputToFile
 from process.shared.utilities import AddFiles, AppendFiles
 from process.shared.utilities import ToHeatmap
-import process.shared.utilities as util
 
-metricList = ['mort', 'icu', 'hosp', 'hospTime', 'sympt', 'infect', 'vaccine']
-stages = [1, 2, 3, 4, 5]
+import process.shared.utilities as util
+import process.shared.globalVars as gl
+
 
 def AppendParallels(
 		dataDir, rawDataDir, outDir, indexSize, outputSubdir, prefix,
@@ -59,18 +59,24 @@ def DoSpartanAggregate(
 	
 	processAgg = []
 	tracesAgg = []
-	for metric in metricList:
+	for metric in gl.metricList:
 		processAgg.append('{}_quartAgg'.format(metric))
 		processAgg.append('{}_yearlyAgg'.format(metric))
-		
 		tracesAgg.append('{}_weeklyAgg'.format(metric))
 	tracesAgg.append('stage_daily')
 	
 	stageAgg = []
-	for stage in stages:
+	for stage in gl.stages:
 		stageAgg.append('processed_stage{}_quartAgg'.format(stage))
 		stageAgg.append('processed_stage{}_yearlyAgg'.format(stage))
 	
+	AppendParallels(
+		dataDir, rawDataDir, '/timeless/', len(measureCols) + 2, '/cohort/', False,
+		runIndexer, indexList, gl.cohortMetricList, indexGrouping=indexGrouping, doAverage=doAverage)
+	AppendParallels(
+		dataDir, rawDataDir, '/single/', len(measureCols) + 2, '/single/', False,
+		runIndexer, indexList, gl.singleMetricList, indexGrouping=indexGrouping, doAverage=doAverage)
+
 	if processCohort:
 		# Larger index because cohort data contains age
 		AppendParallels(

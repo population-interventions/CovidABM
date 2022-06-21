@@ -310,6 +310,7 @@ to simul_setNewInfection [variant startDay recoverEffProp]
   if ticks > 0 or first_case_calibrate [
     let varHospLengthMult (table:get (table:get variantData variant) "hospLengthMult")
     let hospLength varHospLengthMult * (GetHospStayLength agerange variant)
+    let icuLength  varHospLengthMult * (GetIcuStayLength agerange variant)
      
     simul_AddDeathHospToPipes variant hospRiskMean deathRiskMean hospLength
     
@@ -326,6 +327,9 @@ to simul_setNewInfection [variant startDay recoverEffProp]
     ]
     [
       array:set infectVacArray cohortIndex (array:item infectVacArray cohortIndex) + popPerSimul
+    ]
+    if _init_metric_threshold < 0 [
+      ApplyInfectionCost agerange variant popPerSimul (symptProp * popPerSimul) hospRiskMean icuRiskMean deathRiskMean hospLength icuLength (currentVaccine != 0)
     ]
   ]
 end

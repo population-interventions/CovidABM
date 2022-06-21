@@ -1,0 +1,29 @@
+
+to costs_setup
+  
+  ;; Cohort costs
+  set halyMain_listOut  cohortLengthListOfZeros
+  set halyDeath_listOut cohortLengthListOfZeros
+  set halyLong_listOut  cohortLengthListOfZeros
+
+  ;; Global costs
+  set maskCost_out 0
+end
+
+to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl hospTime icuTime hasVaccine]
+  set halyMain_listOut AddToList halyMain_listOut cohortIndex 5
+end
+
+to ApplyVaccinationCost [age vaccine]
+  
+end
+
+to CalculateEndCosts 
+  
+  if policy_mask_n95 [
+    let totalMaskTime stage3time + stage4time + stage5time
+    let restocks floor (totalMaskTime / 21)
+    set maskCost_out restocks * 12345
+  ]
+  
+end

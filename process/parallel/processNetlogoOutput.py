@@ -14,20 +14,20 @@ import time
 import os
 
 import process.shared.utilities as util
-
-metricList = ['mort', 'icu', 'hosp', 'hospTime', 'sympt', 'infect']
-metricListRaw = {'die' : 'mort', 'icu' : 'icu', 'hosp' : 'hosp', 'hospTime' : 'hospTime', 'sympt' : 'sympt'}
-stages = [1, 2, 3, 4, 5]
+import process.shared.globalVars as gl
 
 WRITE_ALWAYS = False
 DELETE_AFTER = True
 
-def SplitOutDailyData(
+def SplitOutTableData(
 		chunk, dataMap, cohorts, days, arrayIndex, name, filePath, fileAppend,
-		fillTo=False, noWrite=False):
+		fillTo=False, noWrite=False, daily=True):
 	columnName = name + '_listOut'
-	df = util.SplitNetlogoNestedList(chunk, cohorts, days, columnName, name, fillTo=fillTo)
-	df = df[name]
+	if daily:
+		df = util.SplitNetlogoNestedList(chunk, cohorts, days, columnName, name, fillTo=fillTo)
+		df = df[name]
+	else:
+		df = util.SplitNetlogoList(chunk[[columnName]], cohorts, columnName, '')
 	if dataMap is not False:
 		util.OutputToDataMap(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), dataMap)
 		if WRITE_ALWAYS:
@@ -48,7 +48,7 @@ def DecorateOutDailyData(df, dataMap, arrayIndex, filePath, fileAppend):
 
 
 def ProcessAbmChunk(
-		chunk: pd.DataFrame, dataMap, outputStaticData, outputDir, arrayIndex,
+		chunk: pd.DataFrame, dataMap, outputStaticData, outputDir, singleDir, arrayIndex,
 		measureCols_raw, indexRename, day_override=False):
 	# Drop colums that are probably never useful.
 	
@@ -63,7 +63,10 @@ def ProcessAbmChunk(
 		'case14_listOut', 'case28_listOut',
 		'age_listOut']
 		 + measureCols_raw
-		 + ['{}Array_listOut'.format(name) for name in metricListRaw.keys()]]
+		 + ['{}Array_listOut'.format(name) for name in gl.metricListRaw.keys()]
+		 + ['{}_listOut'.format(name) for name in gl.cohortMetricList]
+		 + ['{}_out'.format(name) for name in gl.singleMetricList]
+	]
 	
 	cohorts = len(chunk.iloc[0].age_listOut.split(' '))
 	vaccines = len(chunk.iloc[0].vaccine_listOut.split(' '))
@@ -94,32 +97,43 @@ def ProcessAbmChunk(
 	chunk = chunk.drop(secondaryData, axis=1)
 	chunk = util.DoIndexRename(chunk, indexRename)
 	
-	#SplitOutDailyData(chunk, 1, days, arrayIndex, 'case', filename, 'case', fillTo=day_override)
-	#SplitOutDailyData(chunk, 1, days, arrayIndex, 'case7', filename, 'case7', fillTo=day_override)
-	#SplitOutDailyData(chunk, 1, days, arrayIndex, 'case14', filename, 'case14', fillTo=day_override)
-	SplitOutDailyData(chunk, dataMap, 1, days, arrayIndex, 'stage', filename, 'stage', fillTo=day_override)
+	for metric in gl.singleMetricList:
+		df = pd.DataFrame({0 : chunk['{}_out'.format(metric)]})
+		df = df.rename({'{}_out'.format(metric) : metric}, axis=1)
+		util.OutputToFile(df, '{}/{}_{}'.format(singleDir, metric, arrayIndex), head=False) 
+		
+	#SplitOutTableData(chunk, 1, days, arrayIndex, 'case', filename, 'case', fillTo=day_override)
+	#SplitOutTableData(chunk, 1, days, arrayIndex, 'case7', filename, 'case7', fillTo=day_override)
+	#SplitOutTableData(chunk, 1, days, arrayIndex, 'case14', filename, 'case14', fillTo=day_override)
+	SplitOutTableData(chunk, dataMap, 1, days, arrayIndex, 'stage', filename, 'stage', fillTo=day_override)
 	
-	SplitOutDailyData(
+	SplitOutTableData(
 		chunk, dataMap, vaccines, days, arrayIndex, '{}Array'.format('vaccine'),
 		filename, 'vaccine', fillTo=day_override)
 	
-	dfNoVac = SplitOutDailyData(
+	dfNoVac = SplitOutTableData(
 		chunk, dataMap, cohorts, days, arrayIndex, 'infectNoVacArray',
 		filename, 'infectNoVac', fillTo=day_override, noWrite=True)
-	dfVac = SplitOutDailyData(
+	dfVac = SplitOutTableData(
 		chunk, dataMap, cohorts, days, arrayIndex, 'infectVacArray',
 		filename, 'infectVac', fillTo=day_override, noWrite=True)
 	DecorateOutDailyData(dfNoVac.apply(pd.to_numeric) + dfVac.apply(pd.to_numeric), dataMap, arrayIndex, filename, 'infect')
 	
-	for rawName, metric in metricListRaw.items():
-		SplitOutDailyData(
+	for rawName, metric in gl.metricListRaw.items():
+		SplitOutTableData(
 			chunk, dataMap, cohorts, days, arrayIndex, '{}Array'.format(rawName),
 			filename, metric, fillTo=day_override)
+		
+	for metric in gl.cohortMetricList:
+		SplitOutTableData(
+			chunk, dataMap, cohorts, days, arrayIndex, metric,
+			filename, metric, fillTo=day_override, daily=False)
+	
 	return dataMap
 
 
 def ProcessAbmOutput(
-		inputDir, outputDir, arrayIndex,
+		inputDir, outputDir, singleDir, arrayIndex,
 		indexRename, measureCols_raw,
 		day_override=False, useDataMap=True):
 	filelist = [(inputDir + '/{}_table_{}').format(str(arrayIndex), str(arrayIndex))]
@@ -138,7 +152,7 @@ def ProcessAbmOutput(
 					keep_default_na=False),
 				total=4):
 			ProcessAbmChunk(
-				chunk, dataMap, firstProcess, outputDir, arrayIndex,
+				chunk, dataMap, firstProcess, outputDir, singleDir, arrayIndex,
 				measureCols_raw, indexRename,
 				day_override=day_override)
 			firstProcess = False
@@ -189,7 +203,7 @@ def InfectionsAndStageVisualise(dataMap, inputDir, outputDir, arrayIndex, measur
 	#print('Processing trace infectVac')
 	#ProcessFileToVisualisation(inputDir, outputDir, arrayIndex, 'infectVac', measureCols, dayStartOffset=dayStartOffset)
 	
-	for metric in metricList + ['vaccine']:
+	for metric in gl.metricList + ['vaccine']:
 		print('Processing trace {}'.format(metric))
 		ProcessFileToVisualisation(
 			dataMap, inputDir, outputDir, arrayIndex, metric,
@@ -322,6 +336,17 @@ def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doW
 	return df
 
 
+def ProcessTimelessChunk(df, chortDf, outputPrefix, arrayIndex):
+	df.columns = df.columns.astype(int)
+
+	cohortAgeMap = {r['cohort'] : r['age'] for i, r in chortDf.iterrows()}
+	df = df.rename(cohortAgeMap, axis=1)
+
+	df = df.sort_index(axis=0)
+	df = df.sort_index(axis=1)
+	util.OutputToFile(df, outputPrefix + '_' + str(arrayIndex), head=False)
+
+
 def ProcessVaccineChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doWeekly=False, doTenday=False):
 	df.columns = df.columns.set_levels(df.columns.levels[0].astype(int), level=0)
 	df.columns = df.columns.set_levels(df.columns.levels[1].astype(int), level=1)
@@ -370,16 +395,14 @@ def ProcessStage(dataMap, inputDir, visualOutDir, outputDir, arrayIndex, measure
 	if outputTraces:
 		util.OutputToFile(df, visualOutDir + '/processed_stage' + '_daily_' + str(arrayIndex), head=False)
 	
-	for stage in stages:
+	for stage in gl.stages:
 		dfStage = df.applymap(lambda x: 1 if x == stage else 0)
 		OutputQuart(dfStage.copy(), outputDir + '/processed_stage{}'.format(stage), arrayIndex)
 		OutputYear(dfStage.copy(), outputDir + '/processed_stage{}'.format(stage), arrayIndex)
 
 
 def ProcessInfectCohorts(dataMap, measureCols, filename, cohortData, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
-
 	chunksize = 4 ** 7
-
 	if dataMap is not False:
 		chunk = dataMap[filename].copy()
 		df = ProcessInfectChunk(chunk, cohortData, outputPrefix, arrayIndex, doDaily=doDaily, doWeekly=doWeekly)
@@ -399,9 +422,20 @@ def ProcessInfectCohorts(dataMap, measureCols, filename, cohortData, outputPrefi
 				OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
 
 
+def ProcessTimelessCohorts(dataMap, measureCols, filename, cohortData, outputPrefix, arrayIndex):
+	chunksize = 4 ** 7
+	for chunk in tqdm(pd.read_csv(
+				filename + '.csv', 
+				index_col=list(range(2 + len(measureCols))),
+				header=list(range(1)),
+				chunksize=chunksize,
+				keep_default_na=False),
+			total=4):
+		ProcessTimelessChunk(chunk, cohortData, outputPrefix, arrayIndex)
+
+
 def ProcessVaccineCohorts(dataMap, measureCols, filename, cohortData, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
 	chunksize = 4 ** 7
-
 	if dataMap is not False:
 		chunk = dataMap[filename].copy()
 		df = ProcessInfectChunk(chunk, cohortData, outputPrefix, arrayIndex, doDaily=doDaily, doWeekly=doWeekly)
@@ -421,7 +455,8 @@ def ProcessVaccineCohorts(dataMap, measureCols, filename, cohortData, outputPref
 				OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
 
 
-def ProcessInfectionCohorts(dataMap, inputDir, outputDir, arrayIndex, measureCols, doWeekly=False):
+def ProcessInfectionCohorts(
+		dataMap, inputDir, outputDir, arrayIndex, measureCols, doWeekly=False):
 	#print('Processing vaccination infection')
 	#ProcessInfectCohorts(
 	#	measureCols,
@@ -436,13 +471,21 @@ def ProcessInfectionCohorts(dataMap, inputDir, outputDir, arrayIndex, measureCol
 	#	outputDir + '/infect_noVac', arrayIndex)
 	
 	cohortData = util.GetCohortData(inputDir + '/processed_static' + '_' + str(arrayIndex))
-	for metric in metricList:
+	for metric in gl.metricList:
 		print('Processing ages {}'.format(metric))
 		ProcessInfectCohorts(
 			dataMap, measureCols,
 			inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
 			cohortData,
 			outputDir + '/{}'.format(metric), arrayIndex, doWeekly=doWeekly)
+	
+	for metric in gl.cohortMetricList:
+		print('Processing ages {}'.format(metric))
+		ProcessTimelessCohorts(
+			dataMap, measureCols,
+			inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
+			cohortData,
+			outputDir + '/{}'.format(metric), arrayIndex)
 		
 	metric = 'vaccine'
 	cohortData = util.GetCohortData(inputDir + '/processed_static_vaccine' + '_' + str(arrayIndex), dataCol='vaccine', dataInt=False)
@@ -455,7 +498,7 @@ def ProcessInfectionCohorts(dataMap, inputDir, outputDir, arrayIndex, measureCol
 	
 
 def CleanupFiles(inputDir, arrayIndex):
-	for metric in metricList + ['secondary', 'stage', 'vaccine']:
+	for metric in gl.metricList + gl.cohortMetricList + ['secondary', 'stage', 'vaccine']:
 		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv') 
 
 
@@ -468,7 +511,7 @@ def DoAbmProcessing(
 	
 	print('Processing ABM Output', inputDir, arrayIndex)
 	dataMap = ProcessAbmOutput(
-		inputDir, outputDir + '/step_1', arrayIndex, indexRename,
+		inputDir, outputDir + '/step_1', outputDir + '/single', arrayIndex, indexRename,
 		measureCols_raw, day_override=day_override, useDataMap=False)
 	
 	if outputTraces:
@@ -478,8 +521,8 @@ def DoAbmProcessing(
 	
 	print('ProcessInfectionCohorts', inputDir, arrayIndex)
 	ProcessInfectionCohorts(
-		dataMap, outputDir + '/step_1', outputDir + '/cohort', arrayIndex,
-		measureCols, doWeekly=False)
+		dataMap, outputDir + '/step_1', outputDir + '/cohort',
+		arrayIndex, measureCols, doWeekly=False)
 	
 	ProcessStage(
 		dataMap, outputDir + '/step_1', outputDir + '/visualise', outputDir + '/stage',

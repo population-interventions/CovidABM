@@ -329,6 +329,7 @@ globals [
   variantUI_IFR
   variantUI_IFR_young
   variantUI_length
+  variantUI_icu_length
   
   agentsByVaccPhase
 
@@ -383,6 +384,14 @@ globals [
   icuArray_listOut
   hospTimeArray_listOut
   hospArray_listOut
+  
+  ;; Cohort HALY and expenditure costs
+  halyMain_listOut
+  halyDeath_listOut
+  halyLong_listOut
+  
+  ;; Global costs output in ad-hoc way
+  maskCost_out
   
   R_measure_time
   stop_simulation

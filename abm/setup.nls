@@ -305,7 +305,6 @@ to createSimulants
     table:put populationCohortCache index simuls with [ cohortIndex = index ]
   ]
   
-  
   setup_DataOut maxHospTime maxIcuTime maxDeathTime
 end
 
@@ -722,6 +721,7 @@ to setup
   ;; Create simulants etc
   createSimulants
   setupInitialVaccination
+  costs_setup
   
   let potentialInitCases simuls
   if init_cases_region != -1 [

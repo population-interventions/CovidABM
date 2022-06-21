@@ -8,6 +8,7 @@ to ageVariant_setup
   set variantUI_hosp random-normal 0 0.1
   
   set variantUI_length random-normal 0 1
+  set variantUI_icu_length random-normal 0 1
   
   set variantUI_hosp 0
 end
@@ -188,6 +189,42 @@ to-report GetHospStayLength [age variant]
         ]
         [
           report 12.31 + variantUI_length * 0.3061
+        ]
+      )
+    ]
+  )
+end
+
+to-report GetIcuStayLength [age variant]
+  if age > 80 [
+    set age 80 
+  ]
+  (ifelse variant = "base" or not high_incur_virulence
+    [ ;; Low virulence
+      (ifelse age < 40
+        [
+          report (2.05 + variantUI_icu_length * 0.1276)
+        ]
+        age < 70
+        [
+          report (2.92 + variantUI_icu_length * 0.2985)
+        ]
+        [
+          report (6.02 + variantUI_icu_length * 0.5358)
+        ]
+      )
+    ]
+    [ ;; High virulence
+      (ifelse age < 40
+        [
+          report 3.6 + variantUI_icu_length * 0.0842
+        ]
+        age < 70
+        [
+          report 5.78 + variantUI_icu_length * 0.1020
+        ]
+        [
+          report 12.31 + variantUI_icu_length * 0.3061
         ]
       )
     ]

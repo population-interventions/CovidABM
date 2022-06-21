@@ -6,16 +6,11 @@
 	"threads" : 4,
 	"indexParams" : {
 		"input_vaccine_schedule" : [
-			"input/vic/rollout_none.csv",
-			"input/vic/rollout_current.csv",
 			"input/vic/rollout_target_early.csv",
-			"input/vic/rollout_target_mid.csv",
-			"input/vic/rollout_multi_mid.csv",
-			"input/vic/rollout_target_multi.csv"
+			"input/vic/rollout_target_mid.csv"
 		],
 		"incur_name_part_1" : [
-			"omlike",
-			"novel"
+			"omlike"
 		],
 		"incur_name_part_2" : [
 			"",
@@ -26,20 +21,17 @@
 			"_high"
 		],
 		"high_incur_virulence" : [
-			false,
-			true
+			false
 		],
 		"incur_day" : [
-			80,
-			120
+			91
 		],
 		"policy_mask_n95" : [
 			false,
 			true
 		],
 		"param_policy" : [
-			"LooseSupress",
-			"BarelySupress"
+			"LooseSupress"
 		]
 	},
 	"paramOverrides" : {
@@ -50,12 +42,13 @@
 	"postSeries" : {
 		"processMain" : {
 			"params" : {
-				"aggregateSpartan" : true,
 				"outputHeatmaps" : true,
 				"processStages" : true,
 				"processCohort" : true,
 				"doAverage" : true,
 				
+				"outputTraces" : false,
+				"describeHeatmaps" : false,
 				"dryRun" : false,
 				"preChecks" : false,
 				"makeComparison" : false,
@@ -71,8 +64,8 @@
 				[0, 2]
 			],
 			"heatmapStructure" : {
-				"index_rows" : ["Variant", "Infectiousness", "Immune escape", "Incursion day"],
-				"index_cols" : ["Vaccine schedule", "Mask policy", "Stage policy"],
+				"index_rows" : ["Variant", "Immune escape", "Infectiousness", "Incursion day"],
+				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
 				"base_value" : {
 				},
 				"sort_rows" : [
@@ -124,10 +117,10 @@
 				"incur_day" : {
 					"name" : "Incursion day",
 					"values" : {
-						"80"  : "80",
-						"160" : "160",
-						"240" : "240",
-						"320" : "320"
+						"91"  : "91",
+						"182" : "182",
+						"273" : "273",
+						"364" : "364"
 					}
 				},
 				"policy_mask_n95" : {

@@ -27,6 +27,7 @@ __includes[
   "debug.nls"
   "dataOut.nls"
   "ageVarParams.nls"
+  "costs.nls"
   "util.nls"
   "mask.nls"
   "avoidResponse.nls"
@@ -151,7 +152,7 @@ Span
 Span
 0
 30
-10.0
+5.0
 1
 1
 NIL
@@ -236,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.016
 0.01
 1
 NIL
@@ -291,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.42
+0.75
 0.01
 1
 NIL
@@ -306,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.55
+0.8
 0.01
 1
 NIL
@@ -564,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.65
+0.25
 0.01
 1
 NIL
@@ -603,7 +604,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -693,7 +694,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.1428
+0.075
 0.01
 1
 NIL
@@ -708,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+5.0
 1
 1
 NIL
@@ -5486,6 +5487,9 @@ NetLogo 6.2.0
     <metric>stage3time</metric>
     <metric>stage2time</metric>
     <metric>stage1time</metric>
+    <metric>halyMain_listOut</metric>
+    <metric>halyDeath_listOut</metric>
+    <metric>halyLong_listOut</metric>
     <metric>stage_listOut</metric>
     <metric>infectNoVacArray_listOut</metric>
     <metric>infectVacArray_listOut</metric>
@@ -5506,6 +5510,7 @@ NetLogo 6.2.0
     <metric>hospArray_listOut</metric>
     <metric>symptArray_listOut</metric>
     <metric>vaccineArray_listOut</metric>
+    <metric>maskCost_out</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>

@@ -179,6 +179,7 @@ to simul_applyVaccine [vaccinateType]
   
   set vaccineDay days
   set currentVaccine (word vaccinateType cohortVacSuffix)
+  ApplyVaccinationCost agerange vaccinateType
   dataOut_addVaccine currentVaccine
 end
 
