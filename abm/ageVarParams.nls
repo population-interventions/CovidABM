@@ -39,48 +39,53 @@ to-report GetVariantDeathLnOdds [age variant]
 end
 
 to-report GetVariantIcuLnOdds [age variant]
+  let riskAge age
+  if riskAge > 80 [
+    set riskAge 80 
+  ]
+
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age > 90
         [
-          report LnPrToLnOdds (0.129 * age - 13.386 + variantUI_ICU - (0.481 + 1.386) - 0.288) 
+          report LnPrToLnOdds (0.129 * riskAge - 13.386 + variantUI_ICU - (0.481 + 1.386) - 0.288 - 0.266) 
         ]
         age > 80
         [
-          report LnPrToLnOdds (0.129 * age - 13.386 + variantUI_ICU - (0.481 + 0.288) - 0.288) 
+          report LnPrToLnOdds (0.129 * riskAge - 13.386 + variantUI_ICU - (0.481 + 0.288) - 0.288 - 0.266) 
         ]
         age > 30
         [
-          report LnPrToLnOdds (0.129 * age - 13.386 + variantUI_ICU - 0.481 - 0.288) 
+          report LnPrToLnOdds (0.129 * riskAge - 13.386 + variantUI_ICU - 0.481 - 0.288 - 0.266) 
         ]
         age > 10
         [
-          report LnPrToLnOdds (-10.943 + variantUI_ICU - 0.481 - 0.288)
+          report LnPrToLnOdds (-10.943 + variantUI_ICU - 0.481 - 0.288 - 0.266)
         ]
         [
-          report LnPrToLnOdds (-9.783 + variantUI_ICU - 0.481 - 0.288)
+          report LnPrToLnOdds (-9.783 + variantUI_ICU - 0.481 - 0.288 - 0.266)
         ]
       )
     ]
     [ ;; High virulence
       (ifelse age > 90
         [
-          report LnPrToLnOdds (0.129 * age - 12.346 + variantUI_ICU - (0.481 + 1.386) - 0.288) 
+          report LnPrToLnOdds (0.129 * riskAge - 12.346 + variantUI_ICU - (0.481 + 1.386) - 0.288 - 0.266) 
         ]
         age > 80
         [
-          report LnPrToLnOdds (0.129 * age - 12.346 + variantUI_ICU - (0.481 + 0.288) - 0.288) 
+          report LnPrToLnOdds (0.129 * riskAge - 12.346 + variantUI_ICU - (0.481 + 0.288) - 0.288 - 0.266) 
         ]
         age > 30
         [
-          report LnPrToLnOdds (0.129 * age - 12.346 + variantUI_ICU - 0.481 - 0.288) 
+          report LnPrToLnOdds (0.129 * riskAge - 12.346 + variantUI_ICU - 0.481 - 0.288 - 0.266) 
         ]
         age > 10
         [
-          report LnPrToLnOdds (-9.904 + variantUI_ICU - 0.481 - 0.288)
+          report LnPrToLnOdds (-9.904 + variantUI_ICU - 0.481 - 0.288 - 0.266)
         ]
         [
-          report LnPrToLnOdds (-8.743 + variantUI_ICU - 0.481 - 0.288)
+          report LnPrToLnOdds (-8.743 + variantUI_ICU - 0.481 - 0.288 - 0.266)
         ]
       )
     ]
@@ -199,6 +204,7 @@ to-report GetIcuStayLength [age variant]
   if age > 80 [
     set age 80 
   ]
+  ;; THIS IS ALL FAKE DATA.
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
       (ifelse age < 40
