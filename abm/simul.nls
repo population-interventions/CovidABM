@@ -445,12 +445,6 @@ to simul_infect
             set patchVariant infectVariant
           ]
           
-          ;; Replace infection with more virulent variant
-          if global_incursionReplaceChance > 0 [
-            if global_incursionReplaceChance > random-float 1 [
-              set patchVariant global_incursionVariant
-            ]
-          ]
           set transmission_count transmission_count + extraScaleFactor * (Scale_Factor ^ localPatchScale)
           set transmission_sum transmission_sum + succeptibility * (vaccine_getWanedParameter "riskReduct" patchVariant currentVaccine vaccineDay prevVaccine prevVaccineDay) * (vaccine_getWanedParameter "riskReduct" patchVariant recoverVaccine recoverDay 0 0)
           
@@ -468,6 +462,12 @@ to simul_infect
               if vaccine_binomCheck infectDraw succeptibility Daily_Infect_Binom [
                 set myScale localPatchScale
                 
+                ;; Replace infection with more virulent variant
+                if global_incursionReplaceChance > 0 [
+                  if global_incursionReplaceChance > random-float 1 [
+                    set patchVariant global_incursionVariant
+                  ]
+                ]
                 ;; Set infection status
                 simul_setNewInfection patchVariant 0 recoverEffProp
                 set contact_events 0
