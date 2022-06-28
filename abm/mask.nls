@@ -21,7 +21,7 @@ to setup_mask
       ]
     )
   ]
-  set mask_n95_prop_draw rngs:rnd-beta defaultStream 80 20
+  set mask_n95_prop_draw 0.8
   
   ;print draw_maskWearEfficacy_cloth
   ;print draw_maskWearEfficacy_surgical

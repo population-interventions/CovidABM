@@ -391,7 +391,16 @@ globals [
   halyLong_listOut
   
   ;; Global costs output in ad-hoc way
-  maskCost_out
+  costDeathAverted_out
+  costAcute_out
+  costTesting_out
+  costVaccine_out
+  costMask_out
+  costGdp_out
+  costLong_out
+  halyTotalMain_out
+  halyTotalDeath_out
+  halyTotalLong_out
   
   R_measure_time
   stop_simulation

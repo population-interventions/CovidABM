@@ -55,8 +55,8 @@ to setup_variantData
     set index index + 1    let trans_min         (item index x)
     set index index + 1    let trans_max         (item index x)
     set index index + 1    let trans_std         (item index x)
-    set index index + 1    let asympt_trans_a    (item index x)
-    set index index + 1    let asympt_trans_b    (item index x)
+    set index index + 1    let asympt_trans_mean (item index x)
+    set index index + 1    let asympt_trans_std  (item index x)
     set index index + 1    let non_infect_time   (item index x)
     set index index + 1    let incubation_mean   (item index x)
     set index index + 1    let incubation_spread (item index x)
@@ -82,7 +82,7 @@ to setup_variantData
     
     ;; Draw asymptomatic transmissibility factor.
     if not table:has-key? correlateAsympt correlateKey [
-      table:put correlateAsympt correlateKey rngs:rnd-beta stream_id asympt_trans_a asympt_trans_b
+      table:put correlateAsympt correlateKey exp (rngs:rnd-norm stream_id asympt_trans_mean asympt_trans_std)
     ]
     table:put data "asympt_trans" table:get correlateAsympt correlateKey
     

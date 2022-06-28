@@ -20,7 +20,7 @@ to-report ApplyOddsRatio [vacTable baseParams uncertainty paramName]
   let oddsRatio table:get vacTable paramName
   
   let lowerOr oddsRatio * (1 - uncertainty)
-  let upperOr oddsRatio * (1 + uncertainty * 1.14121)
+  let upperOr oddsRatio * (1 + uncertainty * 1.4137)
 
   let lowerLnOdd OddsToLnOdds lowerOr
   let upperLnOdd OddsToLnOdds upperOr
@@ -179,7 +179,7 @@ to simul_applyVaccine [vaccinateType]
   
   set vaccineDay days
   set currentVaccine (word vaccinateType cohortVacSuffix)
-  ApplyVaccinationCost agerange vaccinateType
+  ApplyVaccinationCost agerange (total_population / population) vaccinateType
   dataOut_addVaccine currentVaccine
 end
 

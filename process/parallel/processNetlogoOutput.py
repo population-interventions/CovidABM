@@ -97,10 +97,10 @@ def ProcessAbmChunk(
 	chunk = chunk.drop(secondaryData, axis=1)
 	chunk = util.DoIndexRename(chunk, indexRename)
 	
-	for metric in gl.singleMetricList:
-		df = pd.DataFrame({0 : chunk['{}_out'.format(metric)]})
-		df = df.rename({'{}_out'.format(metric) : metric}, axis=1)
-		util.OutputToFile(df, '{}/{}_{}'.format(singleDir, metric, arrayIndex), head=False) 
+	dfSingle = chunk[['{}_out'.format(metric) for metric in gl.singleMetricList]]
+	dfSingle = dfSingle.rename({'{}_out'.format(metric) : metric for metric in gl.singleMetricList}, axis=1)
+	util.OutputToFile(dfSingle, '{}/{}_{}'.format(singleDir, 'single', arrayIndex), head=False) 
+	
 		
 	#SplitOutTableData(chunk, 1, days, arrayIndex, 'case', filename, 'case', fillTo=day_override)
 	#SplitOutTableData(chunk, 1, days, arrayIndex, 'case7', filename, 'case7', fillTo=day_override)
