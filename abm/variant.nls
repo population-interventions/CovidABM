@@ -73,6 +73,7 @@ to setup_variantData
     ]
     
     let trans_mean trans_min + (trans_max - trans_min) * transMeanCorrelatedDraw
+    ; TODO Output transmissibility draw potentially
     ;print (word name ", " trans_mean)
     
     ; Parameters for simulants to draw their own transmissibility
@@ -84,7 +85,7 @@ to setup_variantData
     if not table:has-key? correlateAsympt correlateKey [
       table:put correlateAsympt correlateKey exp (rngs:rnd-norm stream_id asympt_trans_mean asympt_trans_std)
     ]
-    table:put data "asympt_trans" table:get correlateAsympt correlateKey
+    table:put data "asympt_trans" table:get correlateAsympt correlateKey ; TODO Output as sensitive f
     
     ;; illness period estimation using ln transform
     let BetaIllnessPd ln (1 + (duration_spread / duration_mean ^ 2))

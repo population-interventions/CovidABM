@@ -3,7 +3,7 @@ to setup_mask
   let fileData remove-item 0 csv:from-file input_maskFile
   file-close
   
-  let maskUncertainDraw rngs:rnd-norm defaultStream 0 1
+  let maskUncertainDraw rngs:rnd-norm defaultStream 0 1 ; TODO Output uncertainty d
   
   foreach fileData [ x -> 
     let name item 0 x

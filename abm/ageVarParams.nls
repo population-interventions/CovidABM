@@ -1,10 +1,10 @@
 
 to ageVariant_setup
-  let IFR_base random-normal 0 1
+  let IFR_base random-normal 0 1 ; TODO Output as sensitive i
   set variantUI_IFR IFR_base * 0.269
   set variantUI_IFR_young IFR_base * 0.205
   
-  set variantUI_ICU random-normal 0 0.1
+  set variantUI_ICU random-normal 0 0.1 ; TODO Output as sensitive h
   set variantUI_hosp random-normal 0 0.1
   
   set variantUI_length random-normal 0 1

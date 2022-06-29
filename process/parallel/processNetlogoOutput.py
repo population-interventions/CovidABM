@@ -13,6 +13,8 @@ import pathlib
 import time
 import os
 
+#pd.options.mode.chained_assignment = 'raise'
+
 import process.shared.utilities as util
 import process.shared.globalVars as gl
 
@@ -27,7 +29,7 @@ def SplitOutTableData(
 		df = util.SplitNetlogoNestedList(chunk, cohorts, days, columnName, name, fillTo=fillTo)
 		df = df[name]
 	else:
-		df = util.SplitNetlogoList(chunk[[columnName]], cohorts, columnName, '')
+		df = util.SplitNetlogoList(chunk[[columnName]].copy(), cohorts, columnName, '')
 	if dataMap is not False:
 		util.OutputToDataMap(df, filePath + '_' + fileAppend + '_' + str(arrayIndex), dataMap)
 		if WRITE_ALWAYS:

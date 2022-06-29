@@ -15,17 +15,21 @@ to setup_vaccineSchedule
   set vaccineBranchVaccType table:make
 end
 
-to-report ApplyOddsRatio [vacTable baseParams uncertainty paramName]
+to-report ApplyOddsRatio [vacTable baseParams uncertainty correlateDraws correlateKey paramName]
   let basePr table:get baseParams paramName
   let oddsRatio table:get vacTable paramName
   
   let lowerOr oddsRatio * (1 - uncertainty)
-  let upperOr oddsRatio * (1 + uncertainty * 1.4137)
+  let upperOr oddsRatio * (1 + uncertainty * 1.1886792452)
 
   let lowerLnOdd OddsToLnOdds lowerOr
   let upperLnOdd OddsToLnOdds upperOr
   
-  let drawLnOdds lowerLnOdd + (upperLnOdd - lowerLnOdd) * (random-float 1)
+  if not table:has-key? correlateDraws correlateKey [
+   table:put correlateDraws correlateKey (random-float 1)
+  ]
+  
+  let drawLnOdds lowerLnOdd + (upperLnOdd - lowerLnOdd) * (table:get correlateDraws correlateKey)
   let resultLnOdds (PrToLnOdds basePr) + drawLnOdds
   
   ;if paramName = "infectReduct" [
@@ -73,6 +77,8 @@ to setup_vaccineData
       set index index + 1    table:put vacTable "waneRate"     (item index rawData)
       set index index + 1    table:put vacTable "waneRateOut"  (item index rawData)
     
+      ; TODO Output parameter a for cur_3, b for recover, c for cur_3 waneRate (split into three)
+    
     table:put baseParamsTable (item 0 rawData) vacTable
   ]
   
@@ -86,6 +92,7 @@ to setup_vaccineData
   set vacineEff_areaOut []
   
   set vaccineParamsTable table:make
+  let correlateDraws table:make ; Store previous draws for correlation.
   foreach variantNames [ variant ->
     let vaccineParamsFileData remove-item 0 csv:from-file (word input_vac_params "_" variant ".csv")
     file-close
@@ -110,14 +117,15 @@ to setup_vaccineData
       set index index + 1    let baseParamName                 (item index rawData)
 
       let uncertaintyValue table:get (table:get uncertParamsTable variant) vacName
+      let correlateKey table:get (table:get uncertParamsTable "correlateKey") vacName
       
       let myBaseParams table:get baseParamsTable baseParamName
-      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "infectReduct"
-      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "riskReduct"
-      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "reduceSympt"
-      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "reduceHosp"
-      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "reduceIcu"
-      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue "reduceMort"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue correlateDraws correlateKey "infectReduct"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue correlateDraws correlateKey "riskReduct"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue correlateDraws correlateKey "reduceSympt"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue correlateDraws correlateKey "reduceHosp"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue correlateDraws correlateKey "reduceIcu"
+      set vacTable ApplyOddsRatio vacTable myBaseParams uncertaintyValue correlateDraws correlateKey "reduceMort"
       set vacTable ApplyMultiplier vacTable myBaseParams "effectDays"
       set vacTable ApplyMultiplier vacTable myBaseParams "waneRate"
       set vacTable ApplyMultiplier vacTable myBaseParams "waneRateOut"

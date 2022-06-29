@@ -1,39 +1,80 @@
 
 to costs_setup
   ;; Cohort costs
-  set halyMain_listOut  cohortLengthListOfZeros
+  set halyAcute_listOut  cohortLengthListOfZeros
   set halyDeath_listOut cohortLengthListOfZeros
   set halyLong_listOut  cohortLengthListOfZeros
+  
+  set halyUI_long random-normal 1 0.3
+  
+  set costUI_rat random-normal 1 0.1
+  set costUI_long random-normal 1 0.3
+  
+  set costUI_maskFixed random-normal 295000 (295000 * 0.2)
+  set costUI_maskPerRound ((random-normal 14.7 1.47) + (random-normal 2.73 0.273) + (random-normal 0.09 0.009))
+  set costUI_maskDailyAds (random-normal 460000 (460000 * 0.2)) / 30.33333
+  
+  set costUI_vacOverhead (random-normal 1 0.1) + (random-normal 1 0.1) + (random-normal 30 3)
+  set costUI_vacCur      (random-normal 35 3.5)
+  set costUI_vacTarget   (random-normal 44 4.4)
+  set costUI_vacMulti    (random-normal 52.5 5.21)
+  set costUI_vacFixed    (random-normal 615000 (615000 * 0.2))
+  
+  set costUI_gdp 0.1 + 0.5 * (rngs:rnd-beta defaultStream 1 1)
+  
+  set costUI_doctor      (random-normal 39.10 (39.10 * 0.1))
+  set costUI_paracetamol (random-normal 6.80 (6.80 * 0.1))
+  set costUI_visitEr     (random-normal 907.68 (907.68 * 0.1))
+  set costUI_hospBed     (random-normal 1644.06 (1644.06 * 0.1))
+  set costUI_icuBed      (random-normal 6710.86 (6710.86 * 0.1))
 
+
+  ; TODO Output sensitivity j by summing haly split for acute, long, deaths.
+  ; TODO Output sensitivity k, l, m for cost not including overheads
+  
+  ; TODO Ouput mask costs o, p
+  
+  ; TODO Ouput q by splitting across three things (acute + mask, long, death avert)
+  
   ;; Global costs
   set costDeathAverted_out 0
+  set costLong_out         0
   set costAcute_out        0
   set costTesting_out      0
   set costVaccine_out      0
+  set costVaccineFixed_out 0
   set costMask_out         0
+  set costMaskFixed_out    0
   set costGdp_out          0
-  set costLong_out         0
-  set halyTotalMain_out    0
+  set costTotalHealth_out  0
+  set nmbLow_out           0
+  set nmbMed_out           0
+  set nmbHigh_out          0
+  set nmbLowNoGdp_out      0
+  set nmbMedNoGdp_out      0
+  set nmbHighNoGdp_out     0
+  set halyTotalAcute_out   0
   set halyTotalDeath_out   0
   set halyTotalLong_out    0
+  set halyTotalTotal_out   0
 end
 
 to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl hospTime icuTime hasVaccine]
   ;; Main haly outcome.
-  let halyMain 0
+  let halyAcute 0
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
-      set halyMain halyMain + (symptPpl - hospPpl) * 0.000350087671
+      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000350087671
     ]
     [ ;; High virulence
-      set halyMain halyMain + (symptPpl - hospPpl) * 0.000694150685
+      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000694150685
     ]
   )
-  set halyMain halyMain + (hospPpl - icuPpl) * (0.000978082 + (hospTime / 365) * 0.133 + 0.001275342)
-  set halyMain halyMain + (icuPpl - deathPpl) * (0.000978082 + (hospTime / 365) * 0.133 + (icuTime / 365) * 0.408 + 0.007824658)
+  set halyAcute halyAcute + (hospPpl - icuPpl) * (0.000978082 + (hospTime / 365) * 0.133 + 0.001275342)
+  set halyAcute halyAcute + (icuPpl - deathPpl) * (0.000978082 + (hospTime / 365) * 0.133 + (icuTime / 365) * 0.408 + 0.007824658)
   
-  set halyMain_listOut AddToList halyMain_listOut cohortIndex halyMain
-  set halyTotalMain_out halyTotalMain_out + halyMain
+  set halyAcute_listOut AddToList halyAcute_listOut cohortIndex halyAcute
+  set halyTotalAcute_out halyTotalAcute_out + halyAcute
   
   ;; Long covid haly outcome.
   let halyLong 0
@@ -43,22 +84,38 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
         [ ;; No vaccine
           (ifelse age > 20
             [ ;; Adult
-              set halyLong halyLong + (symptPpl - hospPpl) * 0.0075 
-              set halyLong halyLong + hospPpl * 0.0442  
+              set halyLong halyLong + halyUI_long * (symptPpl - hospPpl) * 0.0075
+              set halyLong halyLong + halyUI_long * hospPpl * 0.0442  
+            ]
+            age > 10
+            [
+              ;; Adult
+              set halyLong halyLong + 0.2 * halyUI_long * ((symptPpl - hospPpl) * 0.0075)
+              set halyLong halyLong + 0.2 * halyUI_long * (hospPpl * 0.0442)
+              ;; Child
+              set halyLong halyLong + 0.8 * halyUI_long * (symptPpl * 0.0010)
             ]
             [ ;; Child
-              set halyLong halyLong + symptPpl * 0.0010
+              set halyLong halyLong + halyUI_long * symptPpl * 0.0010
             ]
           )
         ]
         [ ;; Vaccine
           (ifelse age > 20
             [ ;; Adult
-              set halyLong halyLong + (symptPpl - hospPpl) * 0.0038 
-              set halyLong halyLong + hospPpl * 0.0186  
+              set halyLong halyLong + halyUI_long * (symptPpl - hospPpl) * 0.0038
+              set halyLong halyLong + halyUI_long * hospPpl * 0.0186
+            ]
+            age > 10
+            [
+              ;; Adult
+              set halyLong halyLong + 0.2 * halyUI_long * ((symptPpl - hospPpl) * 0.0038)
+              set halyLong halyLong + 0.2 * halyUI_long * (hospPpl * 0.0186)
+              ;; Child
+              set halyLong halyLong + 0.8 * halyUI_long * (symptPpl * 0.0006)
             ]
             [ ;; Child
-              set halyLong halyLong + symptPpl * 0.0006
+              set halyLong halyLong + halyUI_long * symptPpl * 0.0006
             ]
           )
         ]
@@ -69,22 +126,38 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
         [ ;; No vaccine
           (ifelse age > 20
             [ ;; Adult
-              set halyLong halyLong + (symptPpl - hospPpl) * 0.0017 
-              set halyLong halyLong + hospPpl * 0.0442  
+              set halyLong halyLong + halyUI_long * (symptPpl - hospPpl) * 0.0017 
+              set halyLong halyLong + halyUI_long * hospPpl * 0.0442
+            ]
+            age > 10
+            [
+              ;; Adult
+              set halyLong halyLong + 0.2 * halyUI_long * ((symptPpl - hospPpl) * 0.0017)
+              set halyLong halyLong + 0.2 * halyUI_long * (hospPpl * 0.0442)
+              ;; Child
+              set halyLong halyLong + 0.8 * halyUI_long * (symptPpl * 0.0003)
             ]
             [ ;; Child
-              set halyLong halyLong + symptPpl * 0.0003
+              set halyLong halyLong + halyUI_long * symptPpl * 0.0003
             ]
           )
         ]
         [ ;; Vaccine
           (ifelse age > 20
             [ ;; Adult
-              set halyLong halyLong + (symptPpl - hospPpl) * 0.0009
-              set halyLong halyLong + hospPpl * 0.0186  
+              set halyLong halyLong + halyUI_long * (symptPpl - hospPpl) * 0.0009
+              set halyLong halyLong + halyUI_long * hospPpl * 0.0186  
+            ]
+            age > 10
+            [
+              ;; Adult
+              set halyLong halyLong + 0.2 * halyUI_long * ((symptPpl - hospPpl) * 0.0009)
+              set halyLong halyLong + 0.2 * halyUI_long * (hospPpl * 0.0186)
+              ;; Child
+              set halyLong halyLong + 0.8 * halyUI_long * (symptPpl * 0.0001)
             ]
             [ ;; Child
-              set halyLong halyLong + symptPpl * 0.0001
+              set halyLong halyLong + halyUI_long * symptPpl * 0.0001
             ]
           )
         ]
@@ -113,14 +186,14 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   
   ;; Testing cost
   let costTesting 0 
-  set costTesting costTesting + 0.83 * 42.5 + 3.33 * 7.60
+  set costTesting costTesting + 0.83 * 42.5 + 3.33 * (7.60 * costUI_rat)
   set costTesting_out costTesting_out + costTesting
   
   ;; Acute health expenditure
   let costAcute 0
-  set costAcute costAcute + symptPpl * (0.5 * 39.10 + 1 * 6.80)
-  set costAcute costAcute + hospPpl  * (1.5 * 39.10 + 1.2 * 907.68 + hospTime * 1644.06 * 1.1 * 1.2)
-  set costAcute costAcute + icuPpl   * (2.0 * 39.10 + icuTime * 6710.86 * 1.2)
+  set costAcute costAcute + symptPpl * (0.5 * costUI_doctor + 1 * costUI_paracetamol)
+  set costAcute costAcute + hospPpl  * (1.5 * costUI_doctor + 1.2 * costUI_visitEr + hospTime * costUI_hospBed * 1.1 * 1.2)
+  set costAcute costAcute + icuPpl   * (2.0 * costUI_doctor + icuTime * costUI_icuBed * 1.2)
   
   set costAcute_out costAcute_out + costAcute
   
@@ -131,24 +204,42 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
       [ ;; High virulence
         (ifelse not hasVaccine
           [ ;; No vaccine
-            set costLong costLong + (symptPpl - hospPpl) * 95.29
-            set costLong costLong + hospPpl * 269.76
+            set costLong costLong + costUI_long * (symptPpl - hospPpl) * 95.29
+            set costLong costLong + costUI_long * hospPpl * 269.76
+          ]
+          age > 10
+          [
+            ;; Adult
+            set costLong costLong + 0.2 * costUI_long * (symptPpl - hospPpl) * 95.29
+            set costLong costLong + 0.2 * costUI_long * hospPpl * 269.76
+            ;; Child
+            set costLong costLong + 0.8 * costUI_long * (symptPpl - hospPpl) * 52.98
+            set costLong costLong + 0.8 * costUI_long * hospPpl * 148.37
           ]
           [ ;; Vaccine
-            set costLong costLong + (symptPpl - hospPpl) * 52.98
-            set costLong costLong + hospPpl * 148.37
+            set costLong costLong + costUI_long * (symptPpl - hospPpl) * 52.98
+            set costLong costLong + costUI_long * hospPpl * 148.37
           ]
         )
       ]
       [ ;; Low virulence
         (ifelse not hasVaccine
           [ ;; No vaccine
-            set costLong costLong + (symptPpl - hospPpl) * 24.08
-            set costLong costLong + hospPpl * 269.76
+            set costLong costLong + costUI_long * (symptPpl - hospPpl) * 24.08
+            set costLong costLong + costUI_long * hospPpl * 269.76
+          ]
+          age > 10
+          [
+            ;; Adult
+            set costLong costLong + 0.2 * costUI_long * (symptPpl - hospPpl) * 24.08
+            set costLong costLong + 0.2 * costUI_long * hospPpl * 269.76
+            ;; Child
+            set costLong costLong + 0.8 * costUI_long * (symptPpl - hospPpl) * 13.25
+            set costLong costLong + 0.8 * costUI_long * hospPpl * 148.37
           ]
           [ ;; Vaccine
-            set costLong costLong + (symptPpl - hospPpl) * 13.25
-            set costLong costLong + hospPpl * 148.37
+            set costLong costLong + costUI_long * (symptPpl - hospPpl) * 13.25
+            set costLong costLong + costUI_long * hospPpl * 148.37
           ]
         )
       ]
@@ -177,30 +268,66 @@ to ApplyVaccinationCost [age people vaccine]
   let vaccineCost 0
   
   ;; Overheads
-  set vaccineCost vaccineCost + people * 32
+  set vaccineCost vaccineCost + people * costUI_vacOverhead
   
   ;; Type cost
-  if vaccine = "cur_3"  [set vaccineCost vaccineCost + people * 35]
-  if vaccine = "target" [set vaccineCost vaccineCost + people * 44]
-  if vaccine = "multi"  [set vaccineCost vaccineCost + people * 52.5]
+  if vaccine = "cur_3"  [set vaccineCost vaccineCost + people * costUI_vacCur]
+  if vaccine = "target" [set vaccineCost vaccineCost + people * costUI_vacTarget]
+  if vaccine = "multi"  [set vaccineCost vaccineCost + people * costUI_vacMulti]
   
   set costVaccine_out costVaccine_out + vaccineCost
 end
 
 to ApplyStageCost
   if _init_metric_threshold < 0 [
-    if stage = 1 [set costGdp_out costGdp_out + 0.018 * 10 ^ 9]
-    if stage = 2 [set costGdp_out costGdp_out + 0.036 * 10 ^ 9]
-    if stage = 3 [set costGdp_out costGdp_out + 0.073 * 10 ^ 9]
-    if stage = 4 [set costGdp_out costGdp_out + 0.146 * 10 ^ 9]
-    if stage = 5 [set costGdp_out costGdp_out + 0.291 * 10 ^ 9]
+    ;if stage = 1 [set costGdp_out costGdp_out + costUI_gdp * 0.1 * 10 ^ 9]
+    ;if stage = 2 [set costGdp_out costGdp_out + costUI_gdp * 0.1 * 10 ^ 9]
+    if stage = 3 [set costGdp_out costGdp_out + costUI_gdp * 0.725 * 10 ^ 9]
+    if stage = 4 [set costGdp_out costGdp_out + costUI_gdp * 1.275 * 10 ^ 9]
+    if stage = 5 [set costGdp_out costGdp_out + costUI_gdp * 2.61 * 10 ^ 9]
   ]
 end
 
 to CalculateEndCosts
-  if policy_mask_n95 [
-    let totalMaskTime stage3time + stage4time + stage5time
-    let restocks floor (totalMaskTime / 21)
-    set costMask_out restocks * 12345
-  ]
+  ;; Calculate mask costs
+  (ifelse policy_mask_n95 
+    [
+      let totalMaskTime stage3time + stage4time + stage5time
+      let restocks floor (totalMaskTime / 28)
+      set costMask_out restocks * costUI_maskPerRound * (count simuls with [agerange > 10]) * total_population / population
+      set costMaskFixed_out costUI_maskFixed + totalMaskTime * costUI_maskDailyAds
+    ]
+    [
+      set costMask_out 0
+      set costMaskFixed_out 0
+    ]
+  )
+  
+  ;; Fixed vaccination cost
+  (ifelse input_vaccine_schedule = "input/vic/rollout_target_early.csv" or input_vaccine_schedule = "input/vic/rollout_multi_early.csv" or input_vaccine_schedule = "input/vic/rollout_current.csv"
+    [
+      set costVaccineFixed_out costUI_vacFixed * 9
+    ]
+    input_vaccine_schedule = "input/vic/rollout_target_late.csv" or input_vaccine_schedule = "input/vic/rollout_multi_late.csv"
+    [
+      set costVaccineFixed_out costUI_vacFixed * 6
+    ]
+    [
+      set costVaccineFixed_out 0
+    ]
+  )
+  
+  ;; Output aggregate costs costs
+  set halyTotalTotal_out   halyTotalAcute_out + halyTotalDeath_out + halyTotalLong_out
+  set costTotalHealth_out  costDeathAverted_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
+  
+  set nmbLowNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 123
+  set nmbMedNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 1234 ; TODO
+  set nmbHighNoGdp_out     -1 * costTotalHealth_out - halyTotalTotal_out * 12345
+  
+  set nmbLow_out           nmbLowNoGdp_out  - costGdp_out
+  set nmbMed_out           nmbMedNoGdp_out  - costGdp_out
+  set nmbHigh_out          nmbHighNoGdp_out - costGdp_out
+  
+  ;; NMB 3 costs per haly, one with GDP included, one with just health system cost
 end

@@ -6,15 +6,13 @@
 	"threads" : 4,
 	"indexParams" : {
 		"input_vaccine_schedule" : [
-			"input/vic/rollout_target_early.csv",
-			"input/vic/rollout_target_late.csv"
+			"input/vic/rollout_target_early.csv"
 		],
 		"incur_name_part_1" : [
 			"omlike"
 		],
 		"incur_name_part_2" : [
-			"",
-			"_escape"
+			""
 		],
 		"incur_name_part_3" : [
 			"",
@@ -27,7 +25,6 @@
 			91
 		],
 		"policy_mask_n95" : [
-			false,
 			true
 		],
 		"param_policy" : [
@@ -36,7 +33,7 @@
 	},
 	"paramOverrides" : {
 		"first_case_calibrate" : false,
-		"end_day" : 30
+		"end_day" : 546
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {
@@ -64,7 +61,7 @@
 				[0, 2]
 			],
 			"heatmapStructure" : {
-				"index_rows" : ["Variant", "Immune escape", "Infectiousness", "Incursion day"],
+				"index_rows" : ["Variant", "Immune escape", "Infectiousness", "Virulence", "Incursion day"],
 				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
 				"base_value" : {
 				},

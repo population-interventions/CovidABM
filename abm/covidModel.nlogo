@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-10.0
+8.5
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.04
+0.031
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.42
+0.58
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.55
+0.67
 0.01
 1
 NIL
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.65
+0.44
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+6.7
 1
 1
 NIL
@@ -5487,7 +5487,7 @@ NetLogo 6.2.0
     <metric>stage3time</metric>
     <metric>stage2time</metric>
     <metric>stage1time</metric>
-    <metric>halyMain_listOut</metric>
+    <metric>halyAcute_listOut</metric>
     <metric>halyDeath_listOut</metric>
     <metric>halyLong_listOut</metric>
     <metric>stage_listOut</metric>
@@ -5512,14 +5512,24 @@ NetLogo 6.2.0
     <metric>vaccineArray_listOut</metric>
     <metric>costDeathAverted_out</metric>
     <metric>costAcute_out</metric>
+    <metric>costLong_out</metric>
     <metric>costTesting_out</metric>
     <metric>costVaccine_out</metric>
+    <metric>costVaccineFixed_out</metric>
     <metric>costMask_out</metric>
+    <metric>costMaskFixed_out</metric>
     <metric>costGdp_out</metric>
-    <metric>costLong_out</metric>
-    <metric>halyTotalMain_out</metric>
+    <metric>costTotalHealth_out</metric>
+    <metric>nmbLow_out</metric>
+    <metric>nmbMed_out</metric>
+    <metric>nmbHigh_out</metric>
+    <metric>nmbLowNoGdp_out</metric>
+    <metric>nmbMedNoGdp_out</metric>
+    <metric>nmbHighNoGdp_out</metric>
+    <metric>halyTotalAcute_out</metric>
     <metric>halyTotalDeath_out</metric>
     <metric>halyTotalLong_out</metric>
+    <metric>halyTotalTotal_out</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>
