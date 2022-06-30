@@ -1,15 +1,15 @@
 name,reduceInfect,reduceRisk,reduceSympt,reduceHosp,reduceIcu,reduceMort,vacEffectDays,waneLnOdds,waneOut,baseName
 cur_2,1,1,1,1,1,1,1,1,1,cur_2
 cur_3,1,1,1,1,1,1,1,1,1,cur_3
-target,1,1,1,1,1,1,1,1,1,cur_2
+target,1.414,1.414,1.414,1.414,1.414,1.414,1,1,1,cur_2
 multi,2,2,2,2,2,2,1,1,1,cur_2
 cur_2_60,1,1,1,1,1,1,1,1,1,cur_2_60
 cur_3_60,1,1,1,1,1,1,1,1,1,cur_3_60
-target_60,1,1,1,1,1,1,1,1,1,cur_3_60
+target_60,1.414,1.414,1.414,1.414,1.414,1.414,1,1,1,cur_3_60
 multi_60,2,2,2,2,2,2,1,1,1,cur_3_60
 cur_2_70,1,1,1,1,1,1,1,1,1,cur_2_70
 cur_3_70,1,1,1,1,1,1,1,1,1,cur_3_70
-target_70,1,1,1,1,1,1,1,1,1,cur_3_70
+target_70,1.414,1.414,1.414,1.414,1.414,1.414,1,1,1,cur_3_70
 multi_70,2,2,2,2,2,2,1,1,1,cur_3_70
 base_post,1,1,1,1,1,1,1,1,1,recover
 omlike_post,1,1,1,1,1,1,1,1,1,recover
@@ -38,4 +38,3 @@ omlike_escape_post_70,1,1,1,1,1,1,1,1,1,recover_70
 novel_escape_post_70,1,1,1,1,1,1,1,1,1,recover_70
 omlike_escape_high_post_70,1,1,1,1,1,1,1,1,1,recover_70
 novel_escape_high_post_70,1,1,1,1,1,1,1,1,1,recover_70
-
