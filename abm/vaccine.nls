@@ -76,8 +76,16 @@ to setup_vaccineData
       set index index + 1    table:put vacTable "riskReduct"   (item index rawData)
       set index index + 1    table:put vacTable "waneRate"     (item index rawData)
       set index index + 1    table:put vacTable "waneRateOut"  (item index rawData)
-    
-      ; TODO Output parameter a for cur_3, b for recover, c for cur_3 waneRate (split into three)
+      
+      if table:get vacTable "name" = "base" [
+        set sen_vacInfectReduct_out table:get vacTable "infectReduct"
+        set sen_vacWaneInfect_out table:get vacTable "waneRate"
+        set sen_vacWaneHosp_out table:get vacTable "waneRateOut"
+      ]
+      if table:get vacTable "name" = "recover" [
+        set sen_recoverInfectReduct_out table:get vacTable "infectReduct"
+        set sen_recoverWane_out table:get vacTable "waneRate"
+      ]
     
     table:put baseParamsTable (item 0 rawData) vacTable
   ]

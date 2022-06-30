@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-8.5
+5.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.031
+0.01
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.58
+0.85
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.67
+0.9
 0.01
 1
 NIL
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.44
+0.1
 0.01
 1
 NIL
@@ -604,7 +604,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -694,7 +694,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.1428
+0.05
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.7
+3.6
 1
 1
 NIL
@@ -727,10 +727,10 @@ currentinfections
 11
 
 PLOT
-1039
-355
-1459
-487
+1840
+484
+2214
+604
 Ln(1 + New cases in last 7, 14, 28 days)
 NIL
 NIL
@@ -750,9 +750,9 @@ PENS
 
 PLOT
 1040
-614
-1459
-739
+620
+1464
+745
 Stage (red) and Scale (blue)
 NIL
 NIL
@@ -817,10 +817,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-434
-700
-592
-733
+405
+699
+563
+732
 Vaccine_Enabled
 Vaccine_Enabled
 0
@@ -948,10 +948,10 @@ transmission_count_metric
 11
 
 PLOT
-1874
-550
-2204
-715
+3178
+517
+3361
+671
 Potential transmission interactions per day (scaled)
 NIL
 NIL
@@ -1044,10 +1044,10 @@ NIL
 HORIZONTAL
 
 PLOT
-2987
-512
-3300
-662
+2973
+514
+3166
+667
 Average Interaction Infectivity
 NIL
 NIL
@@ -1215,10 +1215,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-632
-572
-804
-605
+590
+588
+750
+622
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -1363,7 +1363,7 @@ slopeAverage * 100
 PLOT
 1599
 693
-1857
+1831
 813
 slope %
 NIL
@@ -1688,10 +1688,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2160
-408
-2353
-441
+3737
+779
+3930
+812
 param_policy_force_days
 param_policy_force_days
 0
@@ -1703,10 +1703,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2158
-444
-2352
-477
+3735
+815
+3929
+848
 param_policy_force_stage
 param_policy_force_stage
 -1
@@ -1718,10 +1718,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2160
-370
-2353
-403
+3737
+740
+3930
+773
 param_policy_force_preset
 param_policy_force_preset
 0
@@ -1943,10 +1943,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-2159
-480
-2353
-513
+3737
+850
+3931
+883
 param_stage1_time
 param_stage1_time
 -1
@@ -1994,10 +1994,10 @@ compound_input
 0
 
 SLIDER
-427
-785
-617
-818
+419
+787
+609
+820
 param_vac_uptake_mult
 param_vac_uptake_mult
 0
@@ -2082,10 +2082,10 @@ initial_infection_R
 11
 
 SWITCH
-434
-620
-608
-653
+405
+619
+579
+652
 first_case_calibrate
 first_case_calibrate
 1
@@ -2911,7 +2911,7 @@ draw_index
 draw_index
 0
 2000
-863.0
+1176.0
 1
 1
 NIL
@@ -2923,7 +2923,7 @@ INPUTBOX
 257
 325
 input_vaccine_schedule
-input/vic/rollout_current.csv
+input/vic/rollout_multi_early.csv
 1
 0
 String
@@ -2951,9 +2951,9 @@ PENS
 
 PLOT
 1840
-367
-2154
-527
+363
+2204
+483
 Days Since Vac
 NIL
 NIL
@@ -2979,9 +2979,9 @@ param_force_vaccine
 0
 
 SLIDER
-434
+405
 659
-607
+578
 692
 trans_override
 trans_override
@@ -3075,9 +3075,9 @@ SLIDER
 incur_day
 incur_day
 0
-320
-320.0
-20
+364
+182.0
+91
 1
 NIL
 HORIZONTAL
@@ -3250,10 +3250,10 @@ MONITOR
 11
 
 PLOT
-675
-662
-1014
-796
+1043
+360
+1465
+480
 New infections / expected hosp
 NIL
 NIL
@@ -3269,10 +3269,10 @@ PENS
 "pen-1" 1.0 0 -16777216 true "" "plot 0.0125"
 
 PLOT
-675
-800
-1014
-935
+1043
+483
+1465
+621
 New infections
 NIL
 NIL
@@ -3290,10 +3290,10 @@ PENS
 "pen-3" 1.0 0 -15040220 true "" "plot 20000"
 
 SLIDER
-434
-740
-607
-773
+405
+739
+578
+772
 init_vacrecover_day
 init_vacrecover_day
 0
@@ -3389,10 +3389,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "if ticks > 0 [plot sum (array:to-list item 0 dieArray)]"
 
 SLIDER
-630
-608
-803
-641
+588
+624
+752
+658
 avoidAttemptIntMult
 avoidAttemptIntMult
 0
@@ -3404,9 +3404,9 @@ NIL
 HORIZONTAL
 
 SLIDER
-434
+405
 582
-607
+578
 615
 init_infectivityMult
 init_infectivityMult
@@ -3445,10 +3445,10 @@ override_recover_prop
 -1000
 
 SLIDER
-898
-370
-1037
-403
+780
+579
+903
+613
 fear_max
 fear_max
 0
@@ -3460,10 +3460,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-898
-410
-1040
-443
+780
+619
+903
+653
 fear_min
 fear_min
 0
@@ -3475,10 +3475,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-900
-452
+908
+578
 1035
-485
+612
 fear_ppa_limit
 fear_ppa_limit
 0
@@ -3490,10 +3490,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-900
-493
-1037
-526
+908
+619
+1032
+653
 fear_pta_limit
 fear_pta_limit
 0
@@ -3505,10 +3505,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-897
-253
-1041
-298
+658
+894
+778
+939
 %fearPpaChange
 fearPpaChange * 100
 2
@@ -3516,10 +3516,10 @@ fearPpaChange * 100
 11
 
 MONITOR
-898
-304
-1037
-349
+914
+894
+1027
+939
 %fearPtaChange
 fearPtaChange * 100
 2
@@ -3527,10 +3527,10 @@ fearPtaChange * 100
 11
 
 MONITOR
-893
-205
-1037
-250
+784
+895
+912
+940
 NIL
 infectionsinperiod7 / 7
 0
@@ -3571,10 +3571,10 @@ input/vic/vaccine_extra_params.csv
 String
 
 PLOT
-1042
-492
-1460
-614
+1839
+610
+2213
+730
 MaskOr
 NIL
 NIL
@@ -3587,6 +3587,29 @@ false
 "" ""
 PENS
 "default" 0.05 1 -16777216 true "" "histogram [wornMaskOr] of simuls"
+
+PLOT
+634
+669
+1026
+882
+Average immunity
+NIL
+NIL
+0.0
+10.0
+0.0
+0.5
+true
+true
+"" ""
+PENS
+"incur Rec" 1.0 0 -2674135 true "" "plot sum [ 1 - (simul_getRecoverVacHistogram (word incur_name_part_1 incur_name_part_2 incur_name_part_3) 2659) ] of simuls / population"
+"base Rec" 1.0 0 -955883 true "" "plot sum [ 1 - (simul_getRecoverVacHistogram \"base\" 2659) ] of simuls / population"
+"incur Vac" 1.0 0 -13840069 true "" "plot sum [ 1 - (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls / population"
+"base Vac" 1.0 0 -13345367 true "" "plot sum [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls / population"
+"incur Tot" 1.0 0 -16777216 true "" "plot sum [ 1 - (simul_getRecoverVacHistogram (word incur_name_part_1 incur_name_part_2 incur_name_part_3) 2659) * (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls / population"
+"base Tot" 1.0 0 -7500403 true "" "plot sum [ 1 - (simul_getRecoverVacHistogram \"base\" 2659) * (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls / population"
 
 @#$#@#$#@
 ## WHAT IS IT?

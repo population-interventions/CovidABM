@@ -419,6 +419,7 @@ globals [
   costMaskFixed_out
   costGdp_out
   costTotalHealth_out
+  costTotalTotal_out
   nmbLow_out
   nmbMed_out
   nmbHigh_out
@@ -429,6 +430,12 @@ globals [
   halyTotalDeath_out
   halyTotalLong_out
   halyTotalTotal_out
+  
+  sen_vacInfectReduct_out
+  sen_vacWaneInfect_out
+  sen_vacWaneHosp_out
+  sen_recoverInfectReduct_out
+  sen_recoverWane_out
   
   R_measure_time
   stop_simulation

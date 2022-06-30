@@ -3,16 +3,16 @@
         "2500.0"
     ],
     "span": [
-        "8.5"
+        "5.0"
     ],
     "superspreaders": [
-        "0.031"
+        "0.01"
     ],
     "proportion_people_avoid": [
-        "0.58"
+        "0.85"
     ],
     "proportion_time_avoid": [
-        "0.67"
+        "0.9"
     ],
     "initial_cases": [
         "600000.0"
@@ -21,7 +21,7 @@
         "6649066.0"
     ],
     "essential_workers": [
-        "0.44"
+        "0.1"
     ],
     "ess_w_risk_reduction": [
         "0.0"
@@ -30,7 +30,7 @@
         "true"
     ],
     "schoolsopen": [
-        "true"
+        "false"
     ],
     "maskpolicy": [
         "true"
@@ -39,10 +39,10 @@
         "1.0"
     ],
     "visit_frequency": [
-        "0.1428"
+        "0.05"
     ],
     "visit_radius": [
-        "6.7"
+        "3.6"
     ],
     "mask_efficacy_mult": [
         "1.0"
@@ -387,10 +387,10 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "863.0"
+        "1176.0"
     ],
     "input_vaccine_schedule": [
-        "\"input/vic/rollout_current.csv\""
+        "\"input/vic/rollout_multi_early.csv\""
     ],
     "param_force_vaccine": [
         "\"Disabled\""
@@ -417,7 +417,7 @@
         "true"
     ],
     "incur_day": [
-        "320.0"
+        "182.0"
     ],
     "incur_replace_chance": [
         "0.02"
