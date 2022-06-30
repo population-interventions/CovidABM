@@ -310,7 +310,7 @@ def AddFiles(outputName, fileList, index=1, header=1, doTqdm=False):
 
 def AppendFiles(
 		outputName, fileList, runIndexer, indexSize=1, header=1, doTqdm=False,
-		head=False, indexGrouping=False, doAverage=False):
+		head=False, indexGrouping=False, doAverage=False, numberKeys=True):
 	first = True
 	for fileName in (tqdm.tqdm(fileList) if doTqdm else fileList):
 		if first:
@@ -338,7 +338,8 @@ def AppendFiles(
 		
 	df = df.droplevel('run', axis=0)
 	df = df.sort_index(0)
-	df.columns = pd.to_numeric(df.columns).astype(int)
+	if numberKeys:
+		df.columns = pd.to_numeric(df.columns).astype(int)
 	
 	OutputToFile(df, outputName, head=head)
 	
