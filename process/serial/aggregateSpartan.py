@@ -75,7 +75,7 @@ def DoSpartanAggregate(
 		runIndexer, indexList, gl.cohortMetricList, indexGrouping=indexGrouping, doAverage=doAverage)
 	AppendParallels(
 		dataDir, rawDataDir, '/single/', len(measureCols) + 2, '/single/', False,
-		runIndexer, indexList, gl.singleMetricList, indexGrouping=indexGrouping, doAverage=doAverage)
+		runIndexer, indexList, ['single'], indexGrouping=indexGrouping, doAverage=doAverage)
 
 	if processCohort:
 		# Larger index because cohort data contains age
