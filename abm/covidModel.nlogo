@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-5.0
+8.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.01
+0.022
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.85
+0.62
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.9
+0.73
 0.01
 1
 NIL
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.1
+0.38
 0.01
 1
 NIL
@@ -604,7 +604,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -694,7 +694,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.05
+0.13
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-3.6
+6.0
 1
 1
 NIL
@@ -1218,7 +1218,7 @@ SLIDER
 590
 588
 750
-622
+621
 Isolation_Transmission
 Isolation_Transmission
 0
@@ -2745,7 +2745,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-21795.09758
+29310.98026
 1
 1
 NIL
@@ -2911,7 +2911,7 @@ draw_index
 draw_index
 0
 2000
-1176.0
+219.0
 1
 1
 NIL
@@ -3076,7 +3076,7 @@ incur_day
 incur_day
 0
 364
-182.0
+273.0
 91
 1
 NIL
@@ -3269,10 +3269,10 @@ PENS
 "pen-1" 1.0 0 -16777216 true "" "plot 0.0125"
 
 PLOT
-1043
+1042
 483
-1465
-621
+1466
+620
 New infections
 NIL
 NIL
@@ -3392,7 +3392,7 @@ SLIDER
 588
 624
 752
-658
+657
 avoidAttemptIntMult
 avoidAttemptIntMult
 0
@@ -3448,7 +3448,7 @@ SLIDER
 780
 579
 903
-613
+612
 fear_max
 fear_max
 0
@@ -3463,7 +3463,7 @@ SLIDER
 780
 619
 903
-653
+652
 fear_min
 fear_min
 0
@@ -3478,7 +3478,7 @@ SLIDER
 908
 578
 1035
-612
+611
 fear_ppa_limit
 fear_ppa_limit
 0
@@ -3493,7 +3493,7 @@ SLIDER
 908
 619
 1032
-653
+652
 fear_pta_limit
 fear_pta_limit
 0
@@ -3589,10 +3589,10 @@ PENS
 "default" 0.05 1 -16777216 true "" "histogram [wornMaskOr] of simuls"
 
 PLOT
-634
-669
-1026
-882
+630
+662
+1035
+892
 Average immunity
 NIL
 NIL
@@ -3610,6 +3610,21 @@ PENS
 "base Vac" 1.0 0 -13345367 true "" "plot sum [ 1 - (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls / population"
 "incur Tot" 1.0 0 -16777216 true "" "plot sum [ 1 - (simul_getRecoverVacHistogram (word incur_name_part_1 incur_name_part_2 incur_name_part_3) 2659) * (vaccine_getWanedParameter \"riskReduct\" (word incur_name_part_1 incur_name_part_2 incur_name_part_3) currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls / population"
 "base Tot" 1.0 0 -7500403 true "" "plot sum [ 1 - (simul_getRecoverVacHistogram \"base\" 2659) * (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls / population"
+
+SLIDER
+2225
+344
+2365
+378
+Mid_Day
+Mid_Day
+0
+580
+364.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -5553,6 +5568,17 @@ NetLogo 6.2.0
     <metric>halyTotalDeath_out</metric>
     <metric>halyTotalLong_out</metric>
     <metric>halyTotalTotal_out</metric>
+    <metric>totStage2_out</metric>
+    <metric>totStage3_out</metric>
+    <metric>totStage4_out</metric>
+    <metric>totStage5_out</metric>
+    <metric>totInfect_out</metric>
+    <metric>totSympt_out</metric>
+    <metric>totHosp_out</metric>
+    <metric>totIcu_out</metric>
+    <metric>totDeath_out</metric>
+    <metric>totHospTime_out</metric>
+    <metric>totIcuTime_out</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>

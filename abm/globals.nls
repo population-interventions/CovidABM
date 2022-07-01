@@ -431,6 +431,52 @@ globals [
   halyTotalLong_out
   halyTotalTotal_out
   
+  totStage2_out
+  totStage3_out
+  totStage4_out
+  totStage5_out
+  totInfect_out
+  totSympt_out
+  totHosp_out
+  totIcu_out
+  totDeath_out
+  totHospTime_out
+  totIcuTime_out
+  
+  mid_costDeathAverted_out
+  mid_costAcute_out
+  mid_costLong_out
+  mid_costTesting_out
+  mid_costVaccine_out
+  mid_costVaccineFixed_out
+  mid_costMask_out
+  mid_costMaskFixed_out
+  mid_costGdp_out
+  mid_costTotalHealth_out
+  mid_costTotalTotal_out
+  mid_nmbLow_out
+  mid_nmbMed_out
+  mid_nmbHigh_out
+  mid_nmbLowNoGdp_out
+  mid_nmbMedNoGdp_out
+  mid_nmbHighNoGdp_out
+  mid_halyTotalAcute_out
+  mid_halyTotalDeath_out
+  mid_halyTotalLong_out
+  mid_halyTotalTotal_out
+  
+  mid_totStage2_out
+  mid_totStage3_out
+  mid_totStage4_out
+  mid_totStage5_out
+  mid_totInfect_out
+  mid_totSympt_out
+  mid_totHosp_out
+  mid_totIcu_out
+  mid_totDeath_out
+  mid_totHospTime_out
+  mid_totIcuTime_out
+  
   sen_vacInfectReduct_out
   sen_vacWaneInfect_out
   sen_vacWaneHosp_out

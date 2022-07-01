@@ -57,9 +57,30 @@ to costs_setup
   set halyTotalDeath_out   0
   set halyTotalLong_out    0
   set halyTotalTotal_out   0
+  
+  set totStage2_out   0
+  set totStage3_out   0
+  set totStage4_out   0
+  set totStage5_out   0
+  set totInfect_out   0
+  set totSympt_out    0
+  set totHosp_out     0
+  set totIcu_out      0
+  set totDeath_out    0
+  set totHospTime_out 0
+  set totIcuTime_out  0
 end
 
 to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl hospTime icuTime hasVaccine]
+  ;; Add up totals
+  set totInfect_out   totInfect_out   + infectPpl
+  set totSympt_out    totSympt_out    + symptPpl
+  set totHosp_out     totHosp_out     + hospPpl
+  set totIcu_out      totIcu_out      + icuPpl
+  set totDeath_out    totDeath_out    + deathPpl
+  set totHospTime_out totHospTime_out + hospPpl * hospTime
+  set totIcuTime_out  totIcuTime_out  + icuPpl * icuTime
+  
   ;; Acute haly outcome.
   let halyAcute 0
   (ifelse variant = "base" or not high_incur_virulence
@@ -267,6 +288,11 @@ to ApplyStageCost
     if stage = 3 [set costGdp_out costGdp_out + costUI_gdp * 0.725 * 10 ^ 9 / 7]
     if stage = 4 [set costGdp_out costGdp_out + costUI_gdp * 1.275 * 10 ^ 9 / 7]
     if stage = 5 [set costGdp_out costGdp_out + costUI_gdp * 2.61 * 10 ^ 9 / 7]
+    
+    if stage >= 2 [set totStage2_out totStage2_out + 1]
+    if stage >= 3 [set totStage3_out totStage3_out + 1]
+    if stage >= 4 [set totStage4_out totStage4_out + 1]
+    if stage >= 5 [set totStage5_out totStage5_out + 1]
   ]
 end
 
@@ -312,4 +338,41 @@ to CalculateEndCosts
   set nmbHigh_out          nmbHighNoGdp_out - costGdp_out
   
   set costTotalTotal_out   costTotalHealth_out + costGdp_out
+end
+
+to CalculateMidCosts
+  CalculateEndCosts
+  
+  set mid_costDeathAverted_out costDeathAverted_out
+  set mid_costAcute_out        costAcute_out
+  set mid_costLong_out         costLong_out
+  set mid_costTesting_out      costTesting_out
+  set mid_costVaccine_out      costVaccine_out
+  set mid_costVaccineFixed_out costVaccineFixed_out
+  set mid_costMask_out         costMask_out
+  set mid_costMaskFixed_out    costMaskFixed_out
+  set mid_costGdp_out          costGdp_out
+  set mid_costTotalHealth_out  costTotalHealth_out
+  set mid_costTotalTotal_out   costTotalTotal_out
+  set mid_nmbLow_out           nmbLow_out
+  set mid_nmbMed_out           nmbMed_out
+  set mid_nmbHigh_out          nmbHigh_out
+  set mid_nmbLowNoGdp_out      nmbLowNoGdp_out
+  set mid_nmbMedNoGdp_out      nmbMedNoGdp_out
+  set mid_nmbHighNoGdp_out     nmbHighNoGdp_out
+  set mid_halyTotalAcute_out   halyTotalAcute_out
+  set mid_halyTotalDeath_out   halyTotalDeath_out
+  set mid_halyTotalLong_out    halyTotalLong_out
+  set mid_halyTotalTotal_out   halyTotalTotal_out
+  set mid_totStage2_out        totStage2_out
+  set mid_totStage3_out        totStage3_out
+  set mid_totStage4_out        totStage4_out
+  set mid_totStage5_out        totStage5_out
+  set mid_totInfect_out        totInfect_out
+  set mid_totSympt_out         totSympt_out
+  set mid_totHosp_out          totHosp_out
+  set mid_totIcu_out           totIcu_out
+  set mid_totDeath_out         totDeath_out
+  set mid_totHospTime_out      totHospTime_out
+  set mid_totIcuTime_out       totIcuTime_out
 end
