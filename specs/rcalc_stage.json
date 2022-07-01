@@ -1,7 +1,7 @@
 {
 	"netlogoFile" : "covidModel",
 	"defaultParamFile" : "vic_main",
-	"copyExperimentMetrics" : "vic_rcalc",
+	"copyExperimentMetrics" : "vic_main",
 	"threads" : 2,
 	"indexParams" : {
 		"init_stage" : [
