@@ -61,6 +61,7 @@ to loadPopDivisionTable
     set index index + 1    table:put cohortData "doseDays_3" item index x
     set index index + 1    table:put cohortData "doseName_3" item index x
     
+    table:put cohortData "succeptOr" ((table:get cohortData "succeptOr") * random-normal 1 0.15)
     table:put popDivisionTable i cohortData
     set i i + 1
   ]
