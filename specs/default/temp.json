@@ -3,16 +3,16 @@
         "2500.0"
     ],
     "span": [
-        "5.0"
+        "8.0"
     ],
     "superspreaders": [
-        "0.01"
+        "0.022"
     ],
     "proportion_people_avoid": [
-        "0.85"
+        "0.62"
     ],
     "proportion_time_avoid": [
-        "0.9"
+        "0.73"
     ],
     "initial_cases": [
         "600000.0"
@@ -21,7 +21,7 @@
         "6649066.0"
     ],
     "essential_workers": [
-        "0.1"
+        "0.38"
     ],
     "ess_w_risk_reduction": [
         "0.0"
@@ -30,7 +30,7 @@
         "true"
     ],
     "schoolsopen": [
-        "false"
+        "true"
     ],
     "maskpolicy": [
         "true"
@@ -39,10 +39,10 @@
         "1.0"
     ],
     "visit_frequency": [
-        "0.05"
+        "0.13"
     ],
     "visit_radius": [
-        "3.6"
+        "6.0"
     ],
     "mask_efficacy_mult": [
         "1.0"
@@ -351,7 +351,7 @@
         "2.0"
     ],
     "sim_seed": [
-        "21795.09758"
+        "29310.98026"
     ],
     "mid_report_day": [
         "64.0"
@@ -387,7 +387,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "1176.0"
+        "219.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_multi_early.csv\""
@@ -417,7 +417,7 @@
         "true"
     ],
     "incur_day": [
-        "182.0"
+        "273.0"
     ],
     "incur_replace_chance": [
         "0.02"
@@ -487,5 +487,8 @@
     ],
     "input_vac_extra": [
         "\"input/vic/vaccine_extra_params.csv\""
+    ],
+    "mid_day": [
+        "364.0"
     ]
 }
