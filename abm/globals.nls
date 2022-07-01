@@ -324,6 +324,7 @@ globals [
   
   variantNames
   variantData
+  variantUI_sympt
   variantUI_hosp
   variantUI_ICU
   variantUI_IFR

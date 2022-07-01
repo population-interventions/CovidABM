@@ -6,11 +6,10 @@ to ageVariant_setup
   
   set variantUI_ICU random-normal 0 0.1 ; TODO Output as sensitive h
   set variantUI_hosp random-normal 0 0.1
+  set variantUI_sympt random-normal 1 0.1
   
   set variantUI_length random-normal 0 1
   set variantUI_icu_length random-normal 0 1
-  
-  set variantUI_hosp 0
 end
 
 to-report GetVariantDeathLnOdds [age variant]
@@ -131,28 +130,28 @@ to-report GetVariantSymptomaticLnOdds [age variant]
     [ ;; Low virulence
       (ifelse age > 60
         [
-          report PrToLnOdds 0.774
+          report PrToLnOdds (0.774 * variantUI_sympt)
         ]
         age > 20
         [
-          report PrToLnOdds 0.64
+          report PrToLnOdds (0.64 * variantUI_sympt)
         ]
         [
-          report PrToLnOdds 0.49 
+          report PrToLnOdds (0.49 * variantUI_sympt)
         ]
       )
     ]
     [ ;; High virulence
       (ifelse age > 60
         [
-          report PrToLnOdds 0.829
+          report PrToLnOdds (0.829 * variantUI_sympt)
         ]
         age > 20
         [
-          report PrToLnOdds 0.716
+          report PrToLnOdds (0.716 * variantUI_sympt)
         ]
         [
-          report PrToLnOdds 0.576 
+          report PrToLnOdds (0.576 * variantUI_sympt)
         ]
       )
     ]

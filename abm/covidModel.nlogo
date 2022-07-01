@@ -3615,7 +3615,7 @@ SLIDER
 2225
 344
 2365
-378
+377
 Mid_Day
 Mid_Day
 0
@@ -5579,6 +5579,38 @@ NetLogo 6.2.0
     <metric>totDeath_out</metric>
     <metric>totHospTime_out</metric>
     <metric>totIcuTime_out</metric>
+    <metric>mid_costDeathAverted_out</metric>
+    <metric>mid_costAcute_out</metric>
+    <metric>mid_costLong_out</metric>
+    <metric>mid_costTesting_out</metric>
+    <metric>mid_costVaccine_out</metric>
+    <metric>mid_costVaccineFixed_out</metric>
+    <metric>mid_costMask_out</metric>
+    <metric>mid_costMaskFixed_out</metric>
+    <metric>mid_costGdp_out</metric>
+    <metric>mid_costTotalHealth_out</metric>
+    <metric>mid_costTotalTotal_out</metric>
+    <metric>mid_nmbLow_out</metric>
+    <metric>mid_nmbMed_out</metric>
+    <metric>mid_nmbHigh_out</metric>
+    <metric>mid_nmbLowNoGdp_out</metric>
+    <metric>mid_nmbMedNoGdp_out</metric>
+    <metric>mid_nmbHighNoGdp_out</metric>
+    <metric>mid_halyTotalAcute_out</metric>
+    <metric>mid_halyTotalDeath_out</metric>
+    <metric>mid_halyTotalLong_out</metric>
+    <metric>mid_halyTotalTotal_out</metric>
+    <metric>mid_totStage2_out</metric>
+    <metric>mid_totStage3_out</metric>
+    <metric>mid_totStage4_out</metric>
+    <metric>mid_totStage5_out</metric>
+    <metric>mid_totInfect_out</metric>
+    <metric>mid_totSympt_out</metric>
+    <metric>mid_totHosp_out</metric>
+    <metric>mid_totIcu_out</metric>
+    <metric>mid_totDeath_out</metric>
+    <metric>mid_totHospTime_out</metric>
+    <metric>mid_totIcuTime_out</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>
