@@ -75,7 +75,7 @@ to do_stages_tony
       set span                    12
       set proportion_people_avoid 0.35
       set proportion_time_avoid   0.45
-      set Essential_Workers       0.75
+      set Essential_Workers       0.7
       set Visit_Frequency         0.1428
       set superspreaders          0.05
       set mask_wearing_a20        0.2
@@ -87,12 +87,12 @@ to do_stages_tony
     
     if stage = 2 [
       ;; Stage 2
-      set span                    9.5
-      set proportion_people_avoid 0.47
-      set proportion_time_avoid   0.59
-      set Essential_Workers       0.58
-      set Visit_Frequency         0.14
-      set superspreaders          0.037
+      set span                    9
+      set proportion_people_avoid 0.53
+      set proportion_time_avoid   0.63
+      set Essential_Workers       0.51
+      set Visit_Frequency         0.1428
+      set superspreaders          0.034
       set mask_wearing_a20        0.35
       set mask_wearing_a10        mask_wearing_a20 * 2 / 3
       set mask_wearing_a0         mask_wearing_a10 * 2 / 3
@@ -102,10 +102,10 @@ to do_stages_tony
     
     if stage = 3 [
       ;; Stage 3
-      set span                    8
-      set proportion_people_avoid 0.62
+      set span                    7.5
+      set proportion_people_avoid 0.63
       set proportion_time_avoid   0.73
-      set Essential_Workers       0.38
+      set Essential_Workers       0.35
       set Visit_Frequency         0.13
       set superspreaders          0.022
       set mask_wearing_a20        0.6
@@ -119,8 +119,8 @@ to do_stages_tony
       ;; Stage 4
       set span                    6
       set proportion_people_avoid 0.75
-      set proportion_time_avoid   0.82
-      set Essential_Workers       0.22
+      set proportion_time_avoid   0.83
+      set Essential_Workers       0.2
       set Visit_Frequency         0.075
       set superspreaders          0.016
       set mask_wearing_a20        0.78
