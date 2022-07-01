@@ -233,7 +233,7 @@ to params_setDrawValues
   ;set param_vac_wane 1 - exp(ln(1 - (rngs:rnd-beta stream_id 3 27)) / 365)
   
   set _sympt_iso_prop (rngs:rnd-beta defaultStream 6 6) * sympt_iso_prop
-  ; TODO Output as sensitive g
+  set sen_isoProp_out _sympt_iso_prop
   
   set draw_isolationCompliance rngs:rnd-beta defaultStream 450.3 23.7 ; TODO Output isolation compliance possibly
   if isoComply_override >= 0 [

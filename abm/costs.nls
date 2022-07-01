@@ -6,9 +6,18 @@ to costs_setup
   set halyLong_listOut  cohortLengthListOfZeros
   
   set halyUI_long random-normal 1 0.3
+  set halyUI_death random-normal 0 0.01
+  
+  set halyUI_acuteNoHosp random-normal 1 0.2
+  set halyUI_acuteHosp random-normal 0.000978082 (0.000978082 * 0.2)
+  set halyUI_acuteHospEnd random-normal 0.001275342 (0.001275342 * 0.2)
+  set halyUI_acuteHospPerDay random-normal 0.133 (0.133 * 0.2)
+  set halyUI_acuteIcuEnd random-normal 0.007824658 (0.007824658 * 0.2)
+  set halyUI_acuteIcuPerDay random-normal 0.133 (0.133 * 0.2)
   
   set costUI_rat random-normal 1 0.1
   set costUI_long random-normal 1 0.3
+  set costUI_death random-normal 0 0.01
   
   set costUI_maskFixed random-normal 295000 (295000 * 0.2)
   set costUI_maskPerRound ((random-normal 14.7 1.47) + (random-normal 2.73 0.273) + (random-normal 0.09 0.009))
@@ -28,7 +37,6 @@ to costs_setup
   set costUI_visitEr     (random-normal 907.68 (907.68 * 0.1))
   set costUI_hospBed     (random-normal 1644.06 (1644.06 * 0.1))
   set costUI_icuBed      (random-normal 6710.86 (6710.86 * 0.1))
-
 
   ; TODO Output sensitivity j by summing haly split for acute, long, deaths.
   ; TODO Output sensitivity k, l, m for cost not including overheads
@@ -86,14 +94,14 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   let halyAcute 0
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
-      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000350087671
+      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000350087671 * halyUI_acuteNoHosp
     ]
     [ ;; High virulence
-      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000694150685
+      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000694150685 * halyUI_acuteNoHosp
     ]
   )
-  set halyAcute halyAcute + (hospPpl - icuPpl) * (0.000978082 + (hospTime / 365) * 0.133 + 0.001275342)
-  set halyAcute halyAcute + icuPpl * (0.000978082 + (hospTime / 365) * 0.133 + (icuTime / 365) * 0.408 + 0.007824658)
+  set halyAcute halyAcute + (hospPpl - icuPpl) * (halyUI_acuteHosp + (hospTime / 365) * halyUI_acuteHospPerDay + halyUI_acuteHospEnd)
+  set halyAcute halyAcute + icuPpl * (halyUI_acuteHosp + (hospTime / 365) * halyUI_acuteHospPerDay + (icuTime / 365) * halyUI_acuteIcuPerDay + halyUI_acuteIcuEnd)
   
   set halyAcute_listOut AddToList halyAcute_listOut cohortIndex halyAcute
   set halyTotalAcute_out halyTotalAcute_out + halyAcute
@@ -192,16 +200,16 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   
   ;; Death haly outcome.
   let halyDeath 0
-  if age = 5  [set halyDeath halyDeath + deathPpl * 23.94]
-  if age = 15 [set halyDeath halyDeath + deathPpl * 21.89]
-  if age = 25 [set halyDeath halyDeath + deathPpl * 19.86]
-  if age = 35 [set halyDeath halyDeath + deathPpl * 17.70]
-  if age = 45 [set halyDeath halyDeath + deathPpl * 15.04]
-  if age = 55 [set halyDeath halyDeath + deathPpl * 11.82]
-  if age = 65 [set halyDeath halyDeath + deathPpl * 8.17]
-  if age = 75 [set halyDeath halyDeath + deathPpl * 4.54]
-  if age = 85 [set halyDeath halyDeath + deathPpl * 1.78]
-  if age = 95 [set halyDeath halyDeath + deathPpl * 0.48]
+  if age = 5  [set halyDeath halyDeath + deathPpl * (24.11 *(1 + 2.20  * halyUI_death]
+  if age = 15 [set halyDeath halyDeath + deathPpl * (22.06 *(1 + 2.75  * halyUI_death]
+  if age = 25 [set halyDeath halyDeath + deathPpl * (19.96 *(1 + 3.30  * halyUI_death]
+  if age = 35 [set halyDeath halyDeath + deathPpl * (17.66 *(1 + 3.75  * halyUI_death]
+  if age = 45 [set halyDeath halyDeath + deathPpl * (14.82 *(1 + 4.35  * halyUI_death]
+  if age = 55 [set halyDeath halyDeath + deathPpl * (11.41 *(1 + 5.35  * halyUI_death]
+  if age = 65 [set halyDeath halyDeath + deathPpl * (7.685 *(1 + 6.85  * halyUI_death]
+  if age = 75 [set halyDeath halyDeath + deathPpl * (4.18  *(1 + 9.25  * halyUI_death]
+  if age = 85 [set halyDeath halyDeath + deathPpl * (1.65  *(1 + 13.05 * halyUI_death]
+  if age = 95 [set halyDeath halyDeath + deathPpl * (0.49  *(1 + 19.55 * halyUI_death]
   
   set halyDeath_listOut AddToList halyDeath_listOut cohortIndex halyDeath
   set halyTotalDeath_out halyTotalDeath_out + halyDeath
@@ -256,16 +264,16 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   
   ;; Death health expenditure aversion
   let costDeathAvoid 0
-  if age = 5  [set costDeathAvoid costDeathAvoid - deathPpl * 79825]
-  if age = 15 [set costDeathAvoid costDeathAvoid - deathPpl * 90913]
-  if age = 25 [set costDeathAvoid costDeathAvoid - deathPpl * 158112]
-  if age = 35 [set costDeathAvoid costDeathAvoid - deathPpl * 215990]
-  if age = 45 [set costDeathAvoid costDeathAvoid - deathPpl * 175489]
-  if age = 55 [set costDeathAvoid costDeathAvoid - deathPpl * 180501]
-  if age = 65 [set costDeathAvoid costDeathAvoid - deathPpl * 193058]
-  if age = 75 [set costDeathAvoid costDeathAvoid - deathPpl * 188429]
-  if age = 85 [set costDeathAvoid costDeathAvoid - deathPpl * 123066]
-  if age = 95 [set costDeathAvoid costDeathAvoid - deathPpl * 56881]
+  if age = 5  [set costDeathAvoid costDeathAvoid - deathPpl * (88508  *(1 + 15 * costUI_death]
+  if age = 15 [set costDeathAvoid costDeathAvoid - deathPpl * (84255  *(1 + 15 * costUI_death]
+  if age = 25 [set costDeathAvoid costDeathAvoid - deathPpl * (118652 *(1 + 15 * costUI_death]
+  if age = 35 [set costDeathAvoid costDeathAvoid - deathPpl * (157980 *(1 + 15 * costUI_death]
+  if age = 45 [set costDeathAvoid costDeathAvoid - deathPpl * (151913 *(1 + 15 * costUI_death]
+  if age = 55 [set costDeathAvoid costDeathAvoid - deathPpl * (170633 *(1 + 15 * costUI_death]
+  if age = 65 [set costDeathAvoid costDeathAvoid - deathPpl * (192283 *(1 + 15 * costUI_death]
+  if age = 75 [set costDeathAvoid costDeathAvoid - deathPpl * (188596 *(1 + 15 * costUI_death]
+  if age = 85 [set costDeathAvoid costDeathAvoid - deathPpl * (126542 *(1 + 15 * costUI_death]
+  if age = 95 [set costDeathAvoid costDeathAvoid - deathPpl * (62227  *(1 + 15 * costUI_death]
   
   set costDeathAverted_out costDeathAverted_out + costDeathAvoid
 end

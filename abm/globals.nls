@@ -333,8 +333,18 @@ globals [
   variantUI_icu_length
   
   halyUI_long
+  halyUI_acuteNoHosp
+  halyUI_acuteHosp
+  halyUI_acuteHospEnd
+  halyUI_acuteHospPerDay
+  halyUI_acuteIcuEnd
+  halyUI_acuteIcuPerDay
+  halyUI_death
+  
   costUI_rat
   costUI_long
+  costUI_death
+  
   costUI_maskPerRound
   costUI_maskDailyAds
   costUI_maskFixed
@@ -483,6 +493,11 @@ globals [
   sen_vacWaneHosp_out
   sen_recoverInfectReduct_out
   sen_recoverWane_out
+  sen_maskEff_out
+  sen_asymptTransmit_out
+  sen_isoProp_out
+  sen_ifr_out
+  sen_icu_out
   
   R_measure_time
   stop_simulation

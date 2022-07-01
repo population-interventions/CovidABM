@@ -83,7 +83,9 @@ to setup_variantData
     
     ;; Draw asymptomatic transmissibility factor.
     if not table:has-key? correlateAsympt correlateKey [
-      table:put correlateAsympt correlateKey exp (rngs:rnd-norm stream_id asympt_trans_mean asympt_trans_std)
+      let asymptValue exp (rngs:rnd-norm stream_id asympt_trans_mean asympt_trans_std)
+      set sen_asymptTransmit_out asymptValue
+      table:put correlateAsympt correlateKey asymptValue
     ]
     table:put data "asympt_trans" table:get correlateAsympt correlateKey ; TODO Output as sensitive f
     
