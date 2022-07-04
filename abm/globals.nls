@@ -332,6 +332,7 @@ globals [
   variantUI_length
   variantUI_icu_length
   
+  halyUI_acute
   halyUI_long
   halyUI_death
   
@@ -494,6 +495,10 @@ globals [
   sen_isoProp_out
   sen_ifr_out
   sen_icu_out
+  sen_hosp_out
+  sen_sympt_out
+  sen_hospTime_out
+  sen_icuTime_out
   sen_vacCur_out
   sen_vacTargetRel_out
   sen_vacMultiRel_out
@@ -503,6 +508,18 @@ globals [
   sen_vacUptake_out
   sen_transmissDraw_out
   sen_isoComply_out
+  sen_halyAcute_out
+  sen_halyLong_out
+  sen_halyDeath_out
+  sen_costGdp_out
+  sen_costRat_out
+  sen_costLong_out
+  sen_costDeath_out
+  sen_costDoctor_out
+  sen_costParacetamol_out
+  sen_costVisitEr_out
+  sen_costHospBed_out
+  sen_costIcuBed_out
   
   R_measure_time
   stop_simulation

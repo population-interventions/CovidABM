@@ -13,6 +13,10 @@ to ageVariant_setup
   
   set sen_ifr_out IFR_base
   set sen_icu_out variantUI_ICU
+  set sen_hosp_out variantUI_hosp
+  set sen_sympt_out variantUI_sympt
+  set sen_hospTime_out variantUI_length
+  set sen_icuTime_out variantUI_icu_length
 end
 
 to-report GetVariantDeathLnOdds [age variant]
@@ -133,28 +137,28 @@ to-report GetVariantSymptomaticLnOdds [age variant]
     [ ;; Low virulence
       (ifelse age > 60
         [
-          report PrToLnOdds (0.774 * variantUI_sympt)
+          report (PrToLnOdds 0.774 * variantUI_sympt)
         ]
         age > 20
         [
-          report PrToLnOdds (0.64 * variantUI_sympt)
+          report (PrToLnOdds 0.64 * variantUI_sympt)
         ]
         [
-          report PrToLnOdds (0.49 * variantUI_sympt)
+          report (PrToLnOdds 0.49 * variantUI_sympt)
         ]
       )
     ]
     [ ;; High virulence
       (ifelse age > 60
         [
-          report PrToLnOdds (0.829 * variantUI_sympt)
+          report (PrToLnOdds 0.829 * variantUI_sympt)
         ]
         age > 20
         [
-          report PrToLnOdds (0.716 * variantUI_sympt)
+          report (PrToLnOdds 0.716 * variantUI_sympt)
         ]
         [
-          report PrToLnOdds (0.576 * variantUI_sympt)
+          report (PrToLnOdds 0.576 * variantUI_sympt)
         ]
       )
     ]

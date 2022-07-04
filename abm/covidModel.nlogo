@@ -5613,6 +5613,41 @@ NetLogo 6.2.0
     <metric>mid_totDeath_out</metric>
     <metric>mid_totHospTime_out</metric>
     <metric>mid_totIcuTime_out</metric>
+    <metric>sen_vacInfectReduct_out</metric>
+    <metric>sen_vacWaneInfect_out</metric>
+    <metric>sen_vacWaneHosp_out</metric>
+    <metric>sen_recoverInfectReduct_out</metric>
+    <metric>sen_recoverWane_out</metric>
+    <metric>sen_maskEff_out</metric>
+    <metric>sen_asymptTransmit_out</metric>
+    <metric>sen_isoProp_out</metric>
+    <metric>sen_ifr_out</metric>
+    <metric>sen_icu_out</metric>
+    <metric>sen_hosp_out</metric>
+    <metric>sen_sympt_out</metric>
+    <metric>sen_hospTime_out</metric>
+    <metric>sen_icuTime_out</metric>
+    <metric>sen_vacCur_out</metric>
+    <metric>sen_vacTargetRel_out</metric>
+    <metric>sen_vacMultiRel_out</metric>
+    <metric>sen_vacFixAdOver_out</metric>
+    <metric>sen_maskPerson_out</metric>
+    <metric>sen_maskStorage_out</metric>
+    <metric>sen_vacUptake_out</metric>
+    <metric>sen_transmissDraw_out</metric>
+    <metric>sen_isoComply_out</metric>
+    <metric>sen_halyAcute_out</metric>
+    <metric>sen_halyLong_out</metric>
+    <metric>sen_halyDeath_out</metric>
+    <metric>sen_costGdp_out</metric>
+    <metric>sen_costRat_out</metric>
+    <metric>sen_costLong_out</metric>
+    <metric>sen_costDeath_out</metric>
+    <metric>sen_costDoctor_out</metric>
+    <metric>sen_costParacetamol_out</metric>
+    <metric>sen_costVisitEr_out</metric>
+    <metric>sen_costHospBed_out</metric>
+    <metric>sen_costIcuBed_out</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>

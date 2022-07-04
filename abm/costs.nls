@@ -5,12 +5,9 @@ to costs_setup
   set halyDeath_listOut cohortLengthListOfZeros
   set halyLong_listOut  cohortLengthListOfZeros
   
+  set halyUI_acute random-normal 1 0.2
   set halyUI_long random-normal 1 0.3
   set halyUI_death random-normal 0 0.01
-  
-  set costUI_rat random-normal 1 0.1
-  set costUI_long random-normal 1 0.3
-  set costUI_death random-normal 0 0.01
   
   set costUI_maskFixed random-normal 295000 (295000 * 0.2)
   set costUI_maskPerRound ((random-normal 14.7 1.47) + (random-normal 2.73 0.273) + (random-normal 0.09 0.009))
@@ -18,12 +15,17 @@ to costs_setup
   
   set costUI_vacOverhead (random-normal 1 0.1) + (random-normal 1 0.1) + (random-normal 30 3)
   set costUI_vacCur      (random-normal 35 3.5)
+  
   let newVacCostUI random-normal 1 0.1
   set costUI_vacTarget   newVacCostUI * 44
   set costUI_vacMulti    newVacCostUI * 52.5
   set costUI_vacFixed    (random-normal 615000 (615000 * 0.2))
   
   set costUI_gdp 0.1 + 0.4 * (rngs:rnd-beta defaultStream 1 1)
+  
+  set costUI_rat random-normal 1 0.1
+  set costUI_long random-normal 1 0.3
+  set costUI_death random-normal 0 0.01
   
   set costUI_doctor      (random-normal 39.10 (39.10 * 0.1))
   set costUI_paracetamol (random-normal 6.80 (6.80 * 0.1))
@@ -32,13 +34,26 @@ to costs_setup
   set costUI_icuBed      (random-normal 6710.86 (6710.86 * 0.1))
 
   ;; Sensitivity analysis
+  set sen_halyAcute_out halyUI_acute
+  set sen_halyLong_out  halyUI_long
+  set sen_halyDeath_out halyUI_death
+  
   set sen_vacCur_out       costUI_vacCur
   set sen_vacTargetRel_out costUI_vacTarget - costUI_vacCur
   set sen_vacMultiRel_out  costUI_vacMulti  - costUI_vacCur
   set sen_maskPerson_out   costUI_maskPerRound
   set sen_maskStorage_out  costUI_maskFixed
 
-  ; TODO Output sensitivity j by summing haly split for acute, long, deaths.
+  set sen_costGdp_out         costUI_gdp
+  set sen_costRat_out         costUI_rat
+  set sen_costLong_out        costUI_long
+  set sen_costDeath_out       costUI_death
+  set sen_costDoctor_out      costUI_doctor
+  set sen_costParacetamol_out costUI_paracetamol
+  set sen_costVisitEr_out     costUI_visitEr
+  set sen_costHospBed_out     costUI_hospBed
+  set sen_costIcuBed_out      costUI_icuBed
+  
   ; TODO Ouput q by splitting across three things (acute + mask, long, death avert)
   
   ;; Global costs
@@ -99,7 +114,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   )
   set halyAcute halyAcute + (hospPpl - icuPpl) * (0.000978082 + (hospTime / 365) * 0.133 + 0.001275342)
   set halyAcute halyAcute + icuPpl * (0.000978082 + (hospTime / 365) * 0.133 + (icuTime / 365) * 0.408 + 0.007824658)
-  
+  set halyAcute halyAcute * halyUI_acute
   
   set halyAcute_listOut AddToList halyAcute_listOut cohortIndex halyAcute
   set halyTotalAcute_out halyTotalAcute_out + halyAcute
