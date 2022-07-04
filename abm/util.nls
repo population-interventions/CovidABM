@@ -5,6 +5,12 @@ to-report LnOddsToPr [lnOdd]
 end
 
 to-report PrToLnOdds [pr]
+  if pr <= 0 [
+   report -10000000000000
+  ]
+  if pr >= 1 [
+   report 10000000000
+  ]
   report ln (pr / (1 - pr))
 end
 
@@ -21,6 +27,12 @@ to-report OddsToPr [odds]
 end
 
 to-report PrToOdds [pr]
+  if pr <= 0 [
+   report 0.00000000001
+  ]
+  if pr >= 1 [
+   report 10000000000
+  ]
   report pr / (1 - pr)
 end
 
@@ -29,7 +41,7 @@ to-report PrToLnPr [pr]
    report -10000000000000
   ]
   if pr >= 1 [
-   report -0.0000000000001 
+   report 10000000000
   ]
   report ln pr
 end
