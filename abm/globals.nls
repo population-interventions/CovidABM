@@ -500,11 +500,13 @@ globals [
   sen_hospTime_out
   sen_icuTime_out
   sen_vacCur_out
-  sen_vacTargetRel_out
-  sen_vacMultiRel_out
-  sen_vacFixAdOver_out
+  sen_vacTarget_out
+  sen_vacMulti_out
+  sen_vacPromote_out
+  sen_vacOverhead_out
   sen_maskPerson_out
   sen_maskStorage_out
+  sen_maskPromote_out
   sen_vacUptake_out
   sen_transmissDraw_out
   sen_isoComply_out
@@ -512,7 +514,7 @@ globals [
   sen_halyLong_out
   sen_halyDeath_out
   sen_costGdp_out
-  sen_costRat_out
+  sen_costTest_out
   sen_costLong_out
   sen_costDeath_out
   sen_costDoctor_out

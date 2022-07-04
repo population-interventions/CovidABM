@@ -5552,13 +5552,14 @@ NetLogo 6.2.0
     <metric>costAcute_out</metric>
     <metric>costLong_out</metric>
     <metric>costTesting_out</metric>
-    <metric>costVacDeliver_out</metric>
     <metric>costVaccine_out</metric>
+    <metric>costVacDeliver_out</metric>
     <metric>costVaccineFixed_out</metric>
     <metric>costMask_out</metric>
     <metric>costMaskFixed_out</metric>
     <metric>costGdp_out</metric>
     <metric>costTotalHealth_out</metric>
+    <metric>costTotalTotal_out</metric>
     <metric>nmbLow_out</metric>
     <metric>nmbMed_out</metric>
     <metric>nmbHigh_out</metric>
@@ -5628,11 +5629,13 @@ NetLogo 6.2.0
     <metric>sen_hospTime_out</metric>
     <metric>sen_icuTime_out</metric>
     <metric>sen_vacCur_out</metric>
-    <metric>sen_vacTargetRel_out</metric>
-    <metric>sen_vacMultiRel_out</metric>
-    <metric>sen_vacFixAdOver_out</metric>
+    <metric>sen_vacTarget_out</metric>
+    <metric>sen_vacMulti_out</metric>
+    <metric>sen_vacPromote_out</metric>
+    <metric>sen_vacOverhead_out</metric>
     <metric>sen_maskPerson_out</metric>
     <metric>sen_maskStorage_out</metric>
+    <metric>sen_maskPromote_out</metric>
     <metric>sen_vacUptake_out</metric>
     <metric>sen_transmissDraw_out</metric>
     <metric>sen_isoComply_out</metric>
@@ -5640,7 +5643,7 @@ NetLogo 6.2.0
     <metric>sen_halyLong_out</metric>
     <metric>sen_halyDeath_out</metric>
     <metric>sen_costGdp_out</metric>
-    <metric>sen_costRat_out</metric>
+    <metric>sen_costTest_out</metric>
     <metric>sen_costLong_out</metric>
     <metric>sen_costDeath_out</metric>
     <metric>sen_costDoctor_out</metric>

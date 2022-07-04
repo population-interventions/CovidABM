@@ -13,10 +13,9 @@ to costs_setup
   set costUI_maskPerRound ((random-normal 14.7 1.47) + (random-normal 2.73 0.273) + (random-normal 0.09 0.009))
   set costUI_maskDailyAds (random-normal 460000 (460000 * 0.2)) / 30.33333
   
+  let newVacCostUI random-normal 1 0.1
   set costUI_vacOverhead (random-normal 1 0.1) + (random-normal 1 0.1) + (random-normal 30 3)
   set costUI_vacCur      (random-normal 35 3.5)
-  
-  let newVacCostUI random-normal 1 0.1
   set costUI_vacTarget   newVacCostUI * 44
   set costUI_vacMulti    newVacCostUI * 52.5
   set costUI_vacFixed    (random-normal 615000 (615000 * 0.2))
@@ -39,13 +38,14 @@ to costs_setup
   set sen_halyDeath_out halyUI_death
   
   set sen_vacCur_out       costUI_vacCur
-  set sen_vacTargetRel_out costUI_vacTarget - costUI_vacCur
-  set sen_vacMultiRel_out  costUI_vacMulti  - costUI_vacCur
+  set sen_vacTarget_out    costUI_vacTarget
+  set sen_vacMulti_out     costUI_vacMulti
   set sen_maskPerson_out   costUI_maskPerRound
   set sen_maskStorage_out  costUI_maskFixed
+  set sen_maskPromote_out  costUI_maskDailyAds
 
   set sen_costGdp_out         costUI_gdp
-  set sen_costRat_out         costUI_rat
+  set sen_costTest_out        costUI_rat
   set sen_costLong_out        costUI_long
   set sen_costDeath_out       costUI_death
   set sen_costDoctor_out      costUI_doctor
@@ -53,6 +53,9 @@ to costs_setup
   set sen_costVisitEr_out     costUI_visitEr
   set sen_costHospBed_out     costUI_hospBed
   set sen_costIcuBed_out      costUI_icuBed
+  
+  set sen_vacPromote_out      costUI_vacFixed
+  set sen_vacOverhead_out     costUI_vacOverhead
   
   ; TODO Ouput q by splitting across three things (acute + mask, long, death avert)
   
@@ -326,8 +329,8 @@ to CalculateEndCosts
     [
       let totalMaskTime stage3time + stage4time + stage5time
       let restocks ceiling (totalMaskTime / 28)
-      set costMask_out restocks * costUI_maskPerRound * (count simuls with [agerange > 10]) * total_population / population
-      set costMaskFixed_out costUI_maskFixed + totalMaskTime * costUI_maskDailyAds
+      set costMask_out (restocks * costUI_maskPerRound * (count simuls with [agerange > 10]) * total_population / population) + totalMaskTime * costUI_maskDailyAds
+      set costMaskFixed_out costUI_maskFixed
     ]
     [
       set costMask_out 0
@@ -362,8 +365,6 @@ to CalculateEndCosts
   set nmbHigh_out          nmbHighNoGdp_out - costGdp_out
   
   set costTotalTotal_out   costTotalHealth_out + costGdp_out
-  
-  set sen_vacFixAdOver_out costVacDeliver_out + costVaccineFixed_out
 end
 
 to CalculateMidCosts
