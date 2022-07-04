@@ -333,12 +333,6 @@ globals [
   variantUI_icu_length
   
   halyUI_long
-  halyUI_acuteNoHosp
-  halyUI_acuteHosp
-  halyUI_acuteHospEnd
-  halyUI_acuteHospPerDay
-  halyUI_acuteIcuEnd
-  halyUI_acuteIcuPerDay
   halyUI_death
   
   costUI_rat

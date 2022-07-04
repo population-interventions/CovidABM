@@ -8,13 +8,6 @@ to costs_setup
   set halyUI_long random-normal 1 0.3
   set halyUI_death random-normal 0 0.01
   
-  set halyUI_acuteNoHosp random-normal 1 0.2
-  set halyUI_acuteHosp random-normal 0.000978082 (0.000978082 * 0.2)
-  set halyUI_acuteHospEnd random-normal 0.001275342 (0.001275342 * 0.2)
-  set halyUI_acuteHospPerDay random-normal 0.133 (0.133 * 0.2)
-  set halyUI_acuteIcuEnd random-normal 0.007824658 (0.007824658 * 0.2)
-  set halyUI_acuteIcuPerDay random-normal 0.133 (0.133 * 0.2)
-  
   set costUI_rat random-normal 1 0.1
   set costUI_long random-normal 1 0.3
   set costUI_death random-normal 0 0.01
@@ -98,14 +91,15 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   let halyAcute 0
   (ifelse variant = "base" or not high_incur_virulence
     [ ;; Low virulence
-      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000350087671 * halyUI_acuteNoHosp
+      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000350087671
     ]
     [ ;; High virulence
-      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000694150685 * halyUI_acuteNoHosp
+      set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000694150685
     ]
   )
-  set halyAcute halyAcute + (hospPpl - icuPpl) * (halyUI_acuteHosp + (hospTime / 365) * halyUI_acuteHospPerDay + halyUI_acuteHospEnd)
-  set halyAcute halyAcute + icuPpl * (halyUI_acuteHosp + (hospTime / 365) * halyUI_acuteHospPerDay + (icuTime / 365) * halyUI_acuteIcuPerDay + halyUI_acuteIcuEnd)
+  set halyAcute halyAcute + (hospPpl - icuPpl) * (0.000978082 + (hospTime / 365) * 0.133 + 0.001275342)
+  set halyAcute halyAcute + icuPpl * (0.000978082 + (hospTime / 365) * 0.133 + (icuTime / 365) * 0.408 + 0.007824658)
+  
   
   set halyAcute_listOut AddToList halyAcute_listOut cohortIndex halyAcute
   set halyTotalAcute_out halyTotalAcute_out + halyAcute
