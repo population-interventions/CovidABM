@@ -38,11 +38,14 @@ to costs_setup
   set costUI_hospBed     (random-normal 1644.06 (1644.06 * 0.1))
   set costUI_icuBed      (random-normal 6710.86 (6710.86 * 0.1))
 
+  ;; Sensitivity analysis
+  set sen_vacCur_out       costUI_vacCur
+  set sen_vacTargetRel_out costUI_vacTarget - costUI_vacCur
+  set sen_vacMultiRel_out  costUI_vacMulti  - costUI_vacCur
+  set sen_maskPerson_out   costUI_maskPerRound
+  set sen_maskStorage_out  costUI_maskFixed
+
   ; TODO Output sensitivity j by summing haly split for acute, long, deaths.
-  ; TODO Output sensitivity k, l, m for cost not including overheads
-  
-  ; TODO Ouput mask costs o, p
-  
   ; TODO Ouput q by splitting across three things (acute + mask, long, death avert)
   
   ;; Global costs
@@ -51,6 +54,7 @@ to costs_setup
   set costAcute_out        0
   set costTesting_out      0
   set costVaccine_out      0
+  set costVacDeliver_out   0
   set costVaccineFixed_out 0
   set costMask_out         0
   set costMaskFixed_out    0
@@ -280,9 +284,10 @@ end
 
 to ApplyVaccinationCost [age people vaccine]
   let vaccineCost 0
+  let vacDeliverCost 0
   
   ;; Overheads
-  set vaccineCost vaccineCost + people * costUI_vacOverhead
+  set vacDeliverCost vacDeliverCost + people * costUI_vacOverhead
   
   ;; Type cost
   if vaccine = "cur_3"  [set vaccineCost vaccineCost + people * costUI_vacCur]
@@ -290,6 +295,7 @@ to ApplyVaccinationCost [age people vaccine]
   if vaccine = "multi"  [set vaccineCost vaccineCost + people * costUI_vacMulti]
   
   set costVaccine_out costVaccine_out + vaccineCost
+  set costVacDeliver_out costVacDeliver_out + vacDeliverCost
 end
 
 to ApplyStageCost
@@ -336,7 +342,7 @@ to CalculateEndCosts
   
   ;; Output aggregate costs costs
   set halyTotalTotal_out   halyTotalAcute_out + halyTotalDeath_out + halyTotalLong_out
-  set costTotalHealth_out  costDeathAverted_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
+  set costTotalHealth_out  costDeathAverted_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
   
   set nmbLowNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 35000
   set nmbMedNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 70000
@@ -347,6 +353,8 @@ to CalculateEndCosts
   set nmbHigh_out          nmbHighNoGdp_out - costGdp_out
   
   set costTotalTotal_out   costTotalHealth_out + costGdp_out
+  
+  set sen_vacFixAdOver_out costVacDeliver_out + costVaccineFixed_out
 end
 
 to CalculateMidCosts
@@ -357,6 +365,7 @@ to CalculateMidCosts
   set mid_costLong_out         costLong_out
   set mid_costTesting_out      costTesting_out
   set mid_costVaccine_out      costVaccine_out
+  set mid_costVacDeliver_out   costVacDeliver_out
   set mid_costVaccineFixed_out costVaccineFixed_out
   set mid_costMask_out         costMask_out
   set mid_costMaskFixed_out    costMaskFixed_out

@@ -425,6 +425,7 @@ globals [
   costLong_out
   costTesting_out
   costVaccine_out
+  costVacDeliver_out
   costVaccineFixed_out
   costMask_out
   costMaskFixed_out
@@ -459,6 +460,7 @@ globals [
   mid_costLong_out
   mid_costTesting_out
   mid_costVaccine_out
+  mid_costVacDeliver_out
   mid_costVaccineFixed_out
   mid_costMask_out
   mid_costMaskFixed_out
@@ -498,6 +500,15 @@ globals [
   sen_isoProp_out
   sen_ifr_out
   sen_icu_out
+  sen_vacCur_out
+  sen_vacTargetRel_out
+  sen_vacMultiRel_out
+  sen_vacFixAdOver_out
+  sen_maskPerson_out
+  sen_maskStorage_out
+  sen_vacUptake_out
+  sen_transmissDraw_out
+  sen_isoComply_out
   
   R_measure_time
   stop_simulation

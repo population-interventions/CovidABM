@@ -5552,6 +5552,7 @@ NetLogo 6.2.0
     <metric>costAcute_out</metric>
     <metric>costLong_out</metric>
     <metric>costTesting_out</metric>
+    <metric>costVacDeliver_out</metric>
     <metric>costVaccine_out</metric>
     <metric>costVaccineFixed_out</metric>
     <metric>costMask_out</metric>
@@ -5584,6 +5585,7 @@ NetLogo 6.2.0
     <metric>mid_costLong_out</metric>
     <metric>mid_costTesting_out</metric>
     <metric>mid_costVaccine_out</metric>
+    <metric>mid_costVacDeliver_out</metric>
     <metric>mid_costVaccineFixed_out</metric>
     <metric>mid_costMask_out</metric>
     <metric>mid_costMaskFixed_out</metric>

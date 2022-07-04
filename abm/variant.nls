@@ -73,7 +73,7 @@ to setup_variantData
     ]
     
     let trans_mean trans_min + (trans_max - trans_min) * transMeanCorrelatedDraw
-    ; TODO Output transmissibility draw potentially
+    set sen_transmissDraw_out transMeanCorrelatedDraw
     ;print (word name ", " trans_mean)
     
     ; Parameters for simulants to draw their own transmissibility
