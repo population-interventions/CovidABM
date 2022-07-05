@@ -78,7 +78,7 @@
 				[0, 6]
 			],
 			"heatmapStructure" : {
-				"index_rows" : ["Variant", "Immune escape", "Infectiousness", "Virulence", "Incursion day"],
+				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
 				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
 				"base_value" : {
 				},
@@ -92,12 +92,12 @@
 				"input_vaccine_schedule" : {
 					"name" : "Vaccine schedule",
 					"values" : {
-						"input/vic/rollout_none.csv"         : "None",
-						"input/vic/rollout_current.csv"      : "Cur 4+5",
 						"input/vic/rollout_target_early.csv" : "Omni Q3",
 						"input/vic/rollout_target_late.csv"  : "Omni Q4",
 						"input/vic/rollout_multi_early.csv"  : "Multi Q3",
-						"input/vic/rollout_multi_late.csv"   : "Multi Q4"
+						"input/vic/rollout_multi_late.csv"   : "Multi Q4",
+						"input/vic/rollout_current.csv"      : "Cur",
+						"input/vic/rollout_none.csv"         : "None"
 					}
 				},
 				"incur_name_part_1" : {
@@ -124,8 +124,8 @@
 				"high_incur_virulence" : {
 					"name" : "Virulence",
 					"values" : {
-						"False" : "Low",
-						"True"  : "High"
+						"True"  : "High",
+						"False" : "Low"
 					}
 				},
 				"incur_day" : {
@@ -147,8 +147,8 @@
 				"param_policy" : {
 					"name" : "Stage policy",
 					"values" : {
-						"LooseSupress" : "LooseSupress",
-						"BarelySupress" : "BarelySupress"
+						"BarelySupress" : "BarelySupress",
+						"LooseSupress" : "LooseSupress"
 					}
 				}
 			}
