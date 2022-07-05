@@ -2745,7 +2745,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-12181.7834
+81250.91969
 1
 1
 NIL
@@ -2911,7 +2911,7 @@ draw_index
 draw_index
 0
 2000
-11.0
+1132.0
 1
 1
 NIL
@@ -3158,7 +3158,7 @@ in_vaccine_count
 in_vaccine_count
 0
 1000
-2.0
+100.0
 1
 1
 NIL

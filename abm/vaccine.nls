@@ -77,7 +77,7 @@ to setup_vaccineData
     set index index + 1    table:put vacTable "waneRate"     (item index rawData)
     set index index + 1    table:put vacTable "waneRateOut"  (item index rawData)
     
-    if table:get vacTable "name" = "cur_3" [ ;; TODO Fix
+    if table:get vacTable "name" = "cur_3" [
       set sen_vacInfectReduct_out table:get vacTable "infectReduct"
       set sen_vacWaneInfect_out table:get vacTable "waneRate"
       set sen_vacWaneHosp_out table:get vacTable "waneRateOut"
