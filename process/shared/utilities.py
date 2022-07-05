@@ -358,6 +358,20 @@ def ListUnique(myList):
 	return list(dict.fromkeys(myList))
 
 
+def GetFigMult(x, sigFigs):
+	return 10**math.floor(math.log10(abs(x)) - sigFigs + 1)
+
+
+def RoundNumber(x, sigFigs=2):
+	if abs(x) < 0.001:
+		return '{:,.6f}'.format(x)
+	if abs(x) < 1:
+		return '{:,.3f}'.format(x)
+	if abs(x) < 10:
+		return '{:,.2f}'.format(x)
+	return '{:,.0f}'.format(GetFigMult(x, sigFigs)*round(x/GetFigMult(x, sigFigs)))
+
+
 def FilterOnIndex(df, indexName, minVal, maxVal):
 	filterIndex = df.index.get_level_values(indexName)
 	minExisting = max(filterIndex.min(), minVal)

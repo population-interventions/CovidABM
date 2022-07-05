@@ -351,7 +351,7 @@
         "2.0"
     ],
     "sim_seed": [
-        "12181.7834"
+        "81250.91969"
     ],
     "mid_report_day": [
         "64.0"
@@ -387,7 +387,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "11.0"
+        "1132.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_multi_early.csv\""
@@ -435,7 +435,7 @@
         "1000.0"
     ],
     "in_vaccine_count": [
-        "2.0"
+        "100.0"
     ],
     "base_name": [
         "\"base\""

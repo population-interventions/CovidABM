@@ -24,7 +24,7 @@ def LoadModelData(specFile):
 	modelData['name'] = specFile
 	if 'baseName' not in modelData:
 		modelData['baseName'] = modelData['name']
-	modelData['scratchDir'] = '../scratch/{}'.format(specFile)
+	modelData['scratchDir'] = '../scratch/{}'.format(modelData['scratchDir'] if 'scratchDir' in modelData else specFile)
 	if 'handlerName' in modelData:
 		modelData['handlerDir'] = '../scratch/{}'.format(modelData['handlerName'])
 	if 'postInputDir' in modelData:
