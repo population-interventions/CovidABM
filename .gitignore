@@ -40,3 +40,12 @@
 /abm/headless_stage_auto.nlogo
 /abm/headless_vic_main.nlogo
 /abm/headless_stage_auto_fixedseed.nlogo
+/abm/headless_rcalc_small.nlogo
+/abm/headless_stage_hosp.nlogo
+/abm/headless_vic_main_mask.nlogo
+/abm/headless_vic_main_small.nlogo
+/docs/RE Initial file of agents by age by vaccine and infection status as of 1 April 2022.msg
+/docs/RE Questions for follow-up.msg
+/docs/inputParams.xlsx
+/docs/stages.xlsx
+/temp-plot.html
