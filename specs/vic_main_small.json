@@ -48,27 +48,26 @@
 		},
 		"processMain" : {
 			"params" : {
-				"outputHeatmaps" : true,
+				"aggregateProcessing" : true,
 				"processStages" : true,
 				"processCohort" : true,
 				"doAverage" : true,
 				
 				"outputTraces" : false,
 				"describeHeatmaps" : false,
-				"dryRun" : false,
-				"preChecks" : false,
-				"makeComparison" : false,
 				"indexGrouping" : 4
 			},
-			"heatAges" : [
-				[0, 30],
-				[30, 60],
-				[60, 100],
-				[0, 100]
-			],
-			"heatPeriods" : [
-				[0, 2]
-			],
+			"cohortHeatmaps" : {
+				"heatAges" : [
+					[0, 30],
+					[30, 60],
+					[60, 100],
+					[0, 100]
+				],
+				"heatPeriods" : [
+					[0, 2]
+				]
+			},
 			"heatmapStructure" : {
 				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
 				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],

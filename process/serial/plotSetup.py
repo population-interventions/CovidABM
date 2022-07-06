@@ -1,16 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Mar 31 12:16:11 2021
 
-@author: wilsonte
-"""
 import pandas as pd
 import numpy as np
 
 import process.serial.tornadoPlot as tornadoPlot
-
 import process.shared.utilities as util
-import process.shared.globalVars as gl
 
 def GetTornadoRange(df, sensitivity, metricList, percentile):
 	lower = df[sensitivity].quantile(percentile)
@@ -55,16 +48,3 @@ def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=
 			metric, tornadoData[metric], median,
 			saveDir=subfolder + '/tornado', showBrowser=not onHpc)
 
-
-def RunPostSmall(modelData, runs, pernode, onHpc):
-	conf = modelData['postSeries']['processMainPost']
-	runIndexer = modelData['runIndexer']
-	params = conf['params']
-	measureCols_raw = list(modelData['indexParams'].keys())
-	
-	workingDir = '{}/process'.format(modelData['scratchDir'])
-	
-	#tornadoPlot.MakeExamplePlot()
-	if 'tornado' in conf:
-		MakeTornadoPlots(conf['tornado'], workingDir, measureCols_raw, onHpc)
-	
