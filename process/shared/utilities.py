@@ -205,7 +205,7 @@ def OutputToDataMap(df, path, dataMap):
 		dataMap[path] = df
 
 
-def OutputToFile(df, path, index=True, head=True, appendToExisting=False):
+def OutputToFile(df, path, index=True, head=False, appendToExisting=False):
 	# Write dataframe to a file.
 	# Appends dataframe when called with the same name.
 	fullFilePath = path + '.csv'
@@ -348,9 +348,14 @@ def AppendFiles(
 		OutputToFile(dfAve, outputName + '_drawAve', head=head)
 
 
-def ListRemove(myList, element):
+def ListRemove(myList, element, lenient=False):
+	if type(element) == list:
+		for e in element:
+			myList = ListRemove(myList, e, lenient=lenient)
+		return myList
 	myCopy = list(myList).copy()
-	myCopy.remove(element)
+	if (not lenient) or element in myCopy:
+		myCopy.remove(element)
 	return myCopy
 
 
@@ -397,15 +402,18 @@ def ToHeatmap(df, structure):
 	df = df.sort_index(axis=1, level=0)
 	
 	df.columns = df.columns.droplevel(level='_sort_col')
-	df.index = df.index.droplevel(level='_sort_row')
+	if len(df.index.names) > 1:
+		df.index = df.index.droplevel(level='_sort_row')
+	else:
+		df = df.reset_index(drop=True)
+		df = df.rename(index={0 : 'value'})
 	return df
 
 
 def MakeDescribedHeatmapSet(
 		subfolder, df, heatStruct, prefixName,
-		describe=False,
+		describe=False, identifyIndex=False,
 		describeList=[x*0.01 for x in range(1, 100)]):
-	
 	print('Output heatmap {}'.format(prefixName))
 	percentList = [0.05, 0.5, 0.95]
 	percMap = {
@@ -415,8 +423,13 @@ def MakeDescribedHeatmapSet(
 	}
 	df = df.sort_index()
 	
-	relevantMeasureCols = heatStruct.get('index_rows') + heatStruct.get('index_cols')
+	if identifyIndex is not False:
+		df = df.groupby(ListRemove(list(df.index.names), identifyIndex)).mean()
+		heatStruct = heatStruct.copy()
+		heatStruct['index_rows'] = ListRemove(heatStruct['index_rows'], identifyIndex, lenient=True)
+		heatStruct['index_cols'] = ListRemove(heatStruct['index_cols'], identifyIndex, lenient=True)
 	
+	relevantMeasureCols = heatStruct.get('index_rows') + heatStruct.get('index_cols')
 	if describe:
 		name = prefixName + '_describe'
 		#print('Describe {} draws'.format(prefixName))
@@ -435,7 +448,6 @@ def MakeDescribedHeatmapSet(
 	
 	dfMean = dfMean.reset_index()
 	dfMean = dfMean.rename({dfMean.columns[0] : 'mean'})
-	#print(dfMean)
 	dfHeat = ToHeatmap(dfMean, heatStruct)
 	#print(dfHeat)
 	

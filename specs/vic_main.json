@@ -65,6 +65,35 @@
 				"metrics" : ["totStage3", "nmbMed", "nmbMedNoGdp", "totInfect", "totHosp", "totDeath"],
 				"senList" : ["totHosp", "totInfect", "totDeath", "totStage3", "sen_vacInfectReduct", "sen_vacWaneInfect", "sen_vacWaneHosp", "sen_recoverInfectReduct", "sen_recoverWane", "sen_maskEff", "sen_asymptTransmit", "sen_isoProp", "sen_ifr", "sen_icu", "sen_hosp", "sen_sympt", "sen_hospTime", "sen_icuTime", "sen_vacCur", "sen_vacTarget", "sen_vacMulti", "sen_vacPromote", "sen_vacOverhead", "sen_maskPerson", "sen_maskStorage", "sen_maskPromote", "sen_vacUptake", "sen_transmissDraw", "sen_isoComply", "sen_halyAcute", "sen_halyLong", "sen_halyDeath", "sen_costGdp", "sen_costTest", "sen_costLong", "sen_costDeath", "sen_costDoctor", "sen_costParacetamol", "sen_costVisitEr", "sen_costHospBed", "sen_costIcuBed"]
 			},
+			"singleHeatmaps" : {
+				"metrics" : ["totStage3", "nmbMed", "nmbMedNoGdp", "totInfect", "totHosp", "totDeath"],
+				"identifyIndex" : {
+					"scenAgg" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+				}
+			},
+			"singleProcessing" : {
+				"aggregates" : {
+					"policySituation" : {
+						"method" : "tony_known_unknown_system",
+						"index" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+						"percentiles" : [0.95, 0.5, 0.05]
+					}
+				},
+				"optimality" : {
+					"healthSystem" : {
+						"values" : [10000, 260000, 10000],
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp" : {
+						"values" : [10000, 260000, 10000],
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					}
+				}
+			},
 			"cohortHeatmaps" : {
 				"heatAges" : [
 					[0, 30],

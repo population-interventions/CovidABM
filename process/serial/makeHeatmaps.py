@@ -113,4 +113,23 @@ def MakeComparisionHeatmap(subfolder, heatStruct, fileName, divide=True):
 				subfolder + '/heatmaps/', heatStruct, df, fileName,
 				name, baseIndexName, divide=divide)
 	
-	
+
+def MakeSingleHeatmaps(conf, subfolder, heatStruct, measureCols_raw, describe=False):
+	df = pd.read_csv(
+		subfolder + '/single/single.csv',
+		index_col=list(range(len(measureCols_raw) + 1)))
+	 
+	for metric in conf['metrics']:
+		util.MakeDescribedHeatmapSet(
+			subfolder + '/heatmapSingle/', df[metric],
+			heatStruct, 'heatmap_{}'.format(metric),
+			identifyIndex=False, describe=describe)
+		
+	if 'identifyIndex' in conf:
+		for idName, idList in conf['identifyIndex'].items():
+			for metric in conf['metrics']:
+				util.MakeDescribedHeatmapSet(
+					subfolder + '/heatmapSingle/', df[metric],
+					heatStruct, '{}_{}'.format(idName, metric),
+					identifyIndex=idList, describe=describe)
+		

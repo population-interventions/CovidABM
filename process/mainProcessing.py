@@ -9,7 +9,6 @@ import numpy as np
 
 from process.serial.aggregateSpartan import DoSpartanAggregate
 from process.serial.processToMortHosp import MakeMortHospHeatmapRange
-from process.serial.makeHeatmaps import MakeStagesHeatmap, MakeComparisionHeatmap
 from process.serial.makeGraphs import MakePrettyGraphs, MakeFavouriteGraph, MakeDailyGraphs
 from process.serial.processedOutputToPMSLT import DoProcessingForPMSLT
 from process.serial.processedOutputToPMSLT import GetAggregates
@@ -17,7 +16,8 @@ from process.serial.processedOutputToReport import DoProcessingForReport
 from process.serial.processPMSLTOutput import ProcessPMSLTResults
 from process.serial.processTraceStyleGraphs import DoPreProcessChecks
 
-import process.serial.plotSetup as plotSetup
+import process.serial.makeHeatmaps as makeHeatmaps
+import process.serial.singleProcess as singleProcess
 
 import process.shared.utilities as util
 import process.shared.globalVars as gl
@@ -25,7 +25,6 @@ import process.shared.globalVars as gl
 table5Rows = [
 	[False, False],
 ]
-
 
 def RunSeriesPost(modelData, runs, pernode, onHpc):
 	conf = modelData['postSeries']['processMain']
@@ -63,9 +62,19 @@ def RunSeriesPost(modelData, runs, pernode, onHpc):
 			processStages=processStages, indexGrouping=indexGrouping,
 			doAverage=doAverage, outputTraces=outputTraces)
 
+
+	if 'singleProcessing' in conf:
+		singleProcess.DoSingleProcess(conf['singleProcessing'], workingDir, measureCols_raw, onHpc)
+		
+	if True:
+		return
+
 	if 'tornado' in conf:
-		plotSetup.MakeTornadoPlots(conf['tornado'], workingDir, measureCols_raw, onHpc)
+		singleProcess.MakeTornadoPlots(conf['tornado'], workingDir, measureCols_raw, onHpc)
 	
+	if 'singleHeatmaps' in conf:
+		makeHeatmaps.MakeSingleHeatmaps(conf['singleHeatmaps'], workingDir, heatmapStructure, measureCols_raw)
+		
 	if 'cohortHeatmaps' in conf:
 		for period in conf['cohortHeatmaps']['heatPeriods']:
 			print('Period', period[0], period[1] - 1)
