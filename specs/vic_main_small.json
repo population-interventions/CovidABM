@@ -70,6 +70,18 @@
 					}
 				},
 				"optimality" : {
+					"healthSystem_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
 					"healthSystem" : {
 						"values" : [10000, 260000, 10000],
 						"halyCol" : "halyTotalTotal",
