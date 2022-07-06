@@ -62,12 +62,8 @@ def RunSeriesPost(modelData, runs, pernode, onHpc):
 			processStages=processStages, indexGrouping=indexGrouping,
 			doAverage=doAverage, outputTraces=outputTraces)
 
-
 	if 'singleProcessing' in conf:
 		singleProcess.DoSingleProcess(conf['singleProcessing'], workingDir, measureCols_raw, onHpc)
-		
-	if True:
-		return
 
 	if 'tornado' in conf:
 		singleProcess.MakeTornadoPlots(conf['tornado'], workingDir, measureCols_raw, onHpc)

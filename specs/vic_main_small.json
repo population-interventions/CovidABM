@@ -42,7 +42,7 @@
 	"postSeries" : {
 		"processMain" : {
 			"params" : {
-				"aggregateProcessing" : false,
+				"aggregateProcessing" : true,
 				"processStages" : true,
 				"processCohort" : true,
 				"doAverage" : true,

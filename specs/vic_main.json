@@ -52,7 +52,7 @@
 	"postSeries" : {
 		"processMain" : {
 			"params" : {
-				"aggregateProcessing" : false,
+				"aggregateProcessing" : true,
 				"processStages" : true,
 				"processCohort" : true,
 				"doAverage" : true,
@@ -91,6 +91,11 @@
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth"
 					}
 				}
 			},
