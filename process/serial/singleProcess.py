@@ -74,8 +74,7 @@ def DoOptimality(df, name, conf, heatStruct, subfolder):
 			identifyIndex=conf['identifyIndex'] if 'identifyIndex' in conf else False,
 			stackIndex=conf['stackIndex'] if 'stackIndex' in conf else False
 		)
-		
-		util.OutputToFile(df, '{}/optimal/{}_TEST'.format(subfolder, name))
+		util.OutputToFile(df, '{}/optimal/{}_pre'.format(subfolder, name))
 		df = util.ToHeatmap(df.to_frame().reset_index(), heatStruct)
 		util.OutputToFile(df, '{}/optimal/{}'.format(subfolder, name))
 	
