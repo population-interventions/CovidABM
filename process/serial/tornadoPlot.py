@@ -1,4 +1,5 @@
 
+import pandas as pd
 import plotly.graph_objects as go
 from plotly.offline import plot
 from matplotlib import pyplot
@@ -67,7 +68,9 @@ def MakeExamplePlot():
 	plot(fig)
 
 
-def MakePlot(metric, plotData, median, saveDir=False, showBrowser=False):
+def MakePlot(
+		metric, plotData, middle, saveDir=False,
+		showBrowser=False, outputData=False):
 	plotData = dict(sorted(
 		plotData.items(),
 		key=lambda item: abs(item[1]['value'][1] - item[1]['value'][0])))
@@ -77,6 +80,20 @@ def MakePlot(metric, plotData, median, saveDir=False, showBrowser=False):
 		if v['value'][1] < v['value'][0]:
 			plotData[k]['value'] = [v['value'][1], v['value'][0]]
 			plotData[k]['range'] = [v['range'][1], v['range'][0]]
+	
+	if outputData:
+		flatData = {}
+		for k, v in plotData.items():
+			flatData[k] = {
+				'metricLower' : v['value'][0],
+				'metricUpper' : v['value'][1],
+				'rangeLower' : v['range'][0],
+				'rangeUpper' : v['range'][1],
+				'middle' : middle
+				
+			}
+		df = pd.DataFrame(flatData).transpose()
+		util.OutputToFile(df, '{}/{}_data'.format(saveDir, metric))
 	
 	titles = [
 		'{} ({} to {})'.format(
@@ -96,8 +113,8 @@ def MakePlot(metric, plotData, median, saveDir=False, showBrowser=False):
 	fig = go.Figure()
 	fig.add_trace(
 		go.Bar(
-			y=titles, x=sr1 - median,
-			base=median,
+			y=titles, x=sr1 - middle,
+			base=middle,
 			marker_color='crimson',
 			name='Lower quintile',
 			marker_line_color='red',
@@ -110,8 +127,8 @@ def MakePlot(metric, plotData, median, saveDir=False, showBrowser=False):
 	)
 	fig.add_trace(
 		go.Bar(
-			y=titles, x=sr2 - median,
-			base=median,
+			y=titles, x=sr2 - middle,
+			base=middle,
 			marker_color='rgb(158,202,225)',
 			name='Upper quintile',
 			marker_line_color='rgb(158,202,225)',

@@ -111,7 +111,8 @@ def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=
 			for k, v in tornadoData[metric].items()}
 	
 	for metric in tornadoConf['metrics']:
-		median = df[metric].quantile(0.5)
+		#median = df[metric].quantile(0.5)
+		mean = np.float64(df[metric].mean())
 		lower = df[metric].quantile(percentile)
 		upper = df[metric].quantile(1 - percentile)
 		tornadoData[metric][metric] = {
@@ -119,5 +120,6 @@ def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=
 			'range' : [lower, upper]
 		}
 		tornadoPlot.MakePlot(
-			metric, tornadoData[metric], median,
-			saveDir=subfolder + '/tornado', showBrowser=not onHpc)
+			metric, tornadoData[metric], mean,
+			saveDir=subfolder + '/tornado',
+			 showBrowser=not onHpc, outputData=True)
