@@ -409,6 +409,9 @@ def ToHeatmap(df, structure):
 		df = df.rename(index={0 : 'value'})
 	return df
 
+def PreAddList(pre, myList):
+	return [pre + x for x in myList]
+
 
 def MakeDescribedHeatmapSet(
 		subfolder, df, heatStruct, prefixName,

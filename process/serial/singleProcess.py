@@ -5,6 +5,13 @@ import numpy as np
 import process.serial.tornadoPlot as tornadoPlot
 import process.shared.utilities as util
 
+
+def GetPrefixList(conf):
+	if 'prefixList' not in conf:
+		return ['']
+	return conf['prefixList'] + ['']
+	
+
 def GetTornadoRange(df, sensitivity, metricList, percentile):
 	lower = df[sensitivity].quantile(percentile)
 	upper = df[sensitivity].quantile(1 - percentile)
@@ -54,9 +61,9 @@ def DoAggregate(df, name, conf, subfolder):
 		util.OutputToFile(df, '{}/single/{}_describe'.format(subfolder, name))
 
 
-def DoOptimality(df, name, conf, heatStruct, subfolder):
-	df = df[[conf['halyCol'], conf['costCol']]]
-	df = df.rename(columns={conf['halyCol'] : 'haly', conf['costCol'] : 'cost'})
+def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
+	df = df[[prefix + conf['halyCol'], prefix + conf['costCol']]]
+	df = df.rename(columns={prefix + conf['halyCol'] : 'haly', prefix + conf['costCol'] : 'cost'})
 	
 	if 'values' in conf:
 		dfOut = pd.DataFrame()
@@ -66,7 +73,7 @@ def DoOptimality(df, name, conf, heatStruct, subfolder):
 				identifyIndex=conf['identifyIndex'] if 'identifyIndex' in conf else False,
 				stackIndex=conf['stackIndex'] if 'stackIndex' in conf else False
 			)
-		util.OutputToFile(dfOut, '{}/optimal/{}'.format(subfolder, name))
+		util.OutputToFile(dfOut, '{}/{}optimal/{}'.format(subfolder, prefix, name))
 		
 	if 'heatmapValue' in conf:
 		df = CalculateOptimalityColumn(
@@ -74,9 +81,9 @@ def DoOptimality(df, name, conf, heatStruct, subfolder):
 			identifyIndex=conf['identifyIndex'] if 'identifyIndex' in conf else False,
 			stackIndex=conf['stackIndex'] if 'stackIndex' in conf else False
 		)
-		util.OutputToFile(df, '{}/optimal/{}_pre'.format(subfolder, name))
+		util.OutputToFile(df, '{}/{}optimal/{}_pre'.format(subfolder, prefix, name))
 		df = util.ToHeatmap(df.to_frame().reset_index(), heatStruct)
-		util.OutputToFile(df, '{}/optimal/{}'.format(subfolder, name))
+		util.OutputToFile(df, '{}/{}optimal/{}'.format(subfolder, prefix, name))
 	
 
 def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
@@ -84,12 +91,15 @@ def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 		subfolder + '/single/single.csv',
 		index_col=list(range(len(measureCols_raw) + 1)))
 	
-	if 'aggregates' in conf:
-		for name, aggData in conf['aggregates'].items():
-			DoAggregate(df, name, aggData, subfolder)
-	if 'optimality' in conf:
-		for name, aggData in conf['optimality'].items():
-			DoOptimality(df, name, aggData, heatStruct, subfolder)
+	for prefix in GetPrefixList(conf):
+		print('DoSingleProcess', 'aggregates')
+		if 'aggregates' in conf:
+			for name, aggData in conf['aggregates'].items():
+				DoAggregate(df, name, aggData, subfolder)
+		print('DoSingleProcess', 'optimality')
+		if 'optimality' in conf:
+			for name, aggData in conf['optimality'].items():
+				DoOptimality(df, name, prefix, aggData, heatStruct, subfolder)
 
 
 def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=0.2):
@@ -123,3 +133,24 @@ def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=
 			metric, tornadoData[metric], mean,
 			saveDir=subfolder + '/tornado',
 			 showBrowser=not onHpc, outputData=True)
+
+
+def MakeSingleHeatmaps(conf, subfolder, heatStruct, measureCols_raw, describe=False):
+	df = pd.read_csv(
+		subfolder + '/single/single.csv',
+		index_col=list(range(len(measureCols_raw) + 1)))
+	 
+	for prefix in GetPrefixList(conf):
+		for metric in util.PreAddList(prefix, conf['metrics']):
+			util.MakeDescribedHeatmapSet(
+				'{}/{}heatmapSingle/'.format(subfolder, prefix), df[metric],
+				heatStruct, 'heatmap_{}'.format(metric),
+				identifyIndex=False, describe=describe)
+			
+		if 'identifyIndex' in conf:
+			for idName, idList in conf['identifyIndex'].items():
+				for metric in util.PreAddList(prefix, conf['metrics']):
+					util.MakeDescribedHeatmapSet(
+						'{}/{}heatmapSingle/'.format(subfolder, prefix), df[metric],
+						heatStruct, '{}_{}'.format(idName, metric),
+						identifyIndex=idList, describe=describe)

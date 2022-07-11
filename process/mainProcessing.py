@@ -62,15 +62,15 @@ def RunSeriesPost(modelData, runs, pernode, onHpc):
 			processStages=processStages, indexGrouping=indexGrouping,
 			doAverage=doAverage, outputTraces=outputTraces)
 
-	if 'tornado' in conf:
-		singleProcess.MakeTornadoPlots(conf['tornado'], workingDir, measureCols_raw, onHpc)
-	
 	if 'singleProcessing' in conf:
 		singleProcess.DoSingleProcess(conf['singleProcessing'], workingDir, heatmapStructure, measureCols_raw, onHpc)
 
 	if 'singleHeatmaps' in conf:
-		makeHeatmaps.MakeSingleHeatmaps(conf['singleHeatmaps'], workingDir, heatmapStructure, measureCols_raw)
+		singleProcess.MakeSingleHeatmaps(conf['singleHeatmaps'], workingDir, heatmapStructure, measureCols_raw)
 		
+	if 'tornado' in conf:
+		singleProcess.MakeTornadoPlots(conf['tornado'], workingDir, measureCols_raw, onHpc)
+	
 	if 'cohortHeatmaps' in conf:
 		for period in conf['cohortHeatmaps']['heatPeriods']:
 			print('Period', period[0], period[1] - 1)
