@@ -180,10 +180,6 @@ to-report vaccine_getWanedParameter [paramName variant vac day prevVac prevDay]
   report 1 - LnOddsToPr (vacEff)
 end
 
-to simul_updateVaccineParams
-  
-end
-
 to simul_applyVaccine [vaccinateType]
   if 1 - _param_vac_uptake_mult * cohortVacUptake > random-float 1 [
     ;; Each vaccine sees some receptive people decide this is their last shot

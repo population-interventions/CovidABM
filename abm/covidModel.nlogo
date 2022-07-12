@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-9.0
+7.5
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.034
+0.022
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.53
+0.63
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.63
+0.73
 0.01
 1
 NIL
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.51
+0.35
 0.01
 1
 NIL
@@ -694,7 +694,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.1428
+0.13
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.12
+6.0
 1
 1
 NIL
@@ -1975,10 +1975,10 @@ HORIZONTAL
 INPUTBOX
 2559
 653
-2684
+2728
 713
 input_population_table
-input/vic/pop
+input/vic/pop_vac60
 1
 0
 String

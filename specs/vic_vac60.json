@@ -45,7 +45,7 @@
 		]
 	},
 	"paramOverrides" : {
-		"input_population_table" : "input/vic/pop",
+		"input_population_table" : "input/vic/pop_vac60",
 		"first_case_calibrate" : false,
 		"end_day" : 546
 	},
@@ -139,12 +139,12 @@
 				"input_vaccine_schedule" : {
 					"name" : "Vaccine schedule",
 					"values" : {
-						"input/vic/rollout_target_early.csv" : "Omni Q3",
-						"input/vic/rollout_target_late.csv"  : "Omni Q4",
-						"input/vic/rollout_multi_early.csv"  : "Multi Q3",
-						"input/vic/rollout_multi_late.csv"   : "Multi Q4",
-						"input/vic/rollout_current.csv"      : "Cur",
-						"input/vic/rollout_none.csv"         : "None"
+						"input/vic/rollout_target_early.csv" : "Omni_60 Q3",
+						"input/vic/rollout_target_late.csv"  : "Omni_60 Q4",
+						"input/vic/rollout_multi_early.csv"  : "Multi_60 Q3",
+						"input/vic/rollout_multi_late.csv"   : "Multi_60 Q4",
+						"input/vic/rollout_current.csv"      : "Cur_60",
+						"input/vic/rollout_none.csv"         : "None_60"
 					}
 				},
 				"incur_name_part_1" : {
