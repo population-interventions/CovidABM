@@ -3,7 +3,7 @@
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_main",
 	"postInputDir" : "vic",
-	"threads" : 4,
+	"threads" : 6,
 	"indexParams" : {
 		"input_vaccine_schedule" : [
 			"input/vic/rollout_none.csv",
