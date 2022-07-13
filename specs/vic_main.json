@@ -11,7 +11,12 @@
 			"input/vic/rollout_target_early.csv",
 			"input/vic/rollout_target_late.csv",
 			"input/vic/rollout_multi_early.csv",
-			"input/vic/rollout_multi_late.csv"
+			"input/vic/rollout_multi_late.csv",
+			"input/vic/rollout_current_60.csv",
+			"input/vic/rollout_target_early_60.csv",
+			"input/vic/rollout_target_late_60.csv",
+			"input/vic/rollout_multi_early_60.csv",
+			"input/vic/rollout_multi_late_60.csv"
 		],
 		"incur_name_part_1" : [
 			"omlike",
@@ -139,12 +144,17 @@
 				"input_vaccine_schedule" : {
 					"name" : "Vaccine schedule",
 					"values" : {
-						"input/vic/rollout_target_early.csv" : "Omni Q3",
-						"input/vic/rollout_target_late.csv"  : "Omni Q4",
-						"input/vic/rollout_multi_early.csv"  : "Multi Q3",
-						"input/vic/rollout_multi_late.csv"   : "Multi Q4",
-						"input/vic/rollout_current.csv"      : "Cur",
-						"input/vic/rollout_none.csv"         : "None"
+						"input/vic/rollout_target_early.csv"    : "CG then OT",
+						"input/vic/rollout_target_late.csv"     : "OT",
+						"input/vic/rollout_multi_early.csv"     : "CG then MV",
+						"input/vic/rollout_multi_late.csv"      : "MV",
+						"input/vic/rollout_current.csv"         : "CG",
+						"input/vic/rollout_target_early_60.csv" : "CG then OT 60+",
+						"input/vic/rollout_target_late_60.csv"  : "OT 60+",
+						"input/vic/rollout_multi_early_60.csv"  : "CG then MV 60+",
+						"input/vic/rollout_multi_late_60.csv"   : "MV 60+",
+						"input/vic/rollout_current_60.csv"      : "CG 60+",
+						"input/vic/rollout_none.csv"            : "None"
 					}
 				},
 				"incur_name_part_1" : {
@@ -157,22 +167,22 @@
 				"incur_name_part_2" : {
 					"name" : "Immune escape",
 					"values" : {
-						"" : "Low",
-						"_escape"  : "High"
+						"" : "Low escape",
+						"_escape"  : "High escape"
 					}
 				},
 				"incur_name_part_3" : {
 					"name" : "Infectiousness",
 					"values" : {
-						"" : "Current",
-						"_high"  : "Higher"
+						"" : "Current infect",
+						"_high"  : "Higher infect"
 					}
 				},
 				"high_incur_virulence" : {
 					"name" : "Virulence",
 					"values" : {
-						"True"  : "High",
-						"False" : "Low"
+						"True"  : "High vir",
+						"False" : "Low vir"
 					}
 				},
 				"incur_day" : {
@@ -187,7 +197,7 @@
 				"policy_mask_n95" : {
 					"name" : "Mask policy",
 					"values" : {
-						"False" : "Current",
+						"False" : "No Stockpile",
 						"True"  : "Stockpile N95"
 					}
 				},

@@ -19,10 +19,7 @@ to setEssentialWorkerPriority
 end
 
 to loadPopDivisionTable
-  let fileName (word input_population_table data_suffix)
-  if data_suffix_2 != "None" [
-    set fileName (word fileName data_suffix_2)
-  ]
+  let fileName params_getPopTable
   let populationFileData remove-item 0 csv:from-file fileName
   file-close
   set popDivisionTable table:make

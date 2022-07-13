@@ -416,6 +416,7 @@ globals [
   
   ;; Global costs output in ad-hoc way
   costDeathAverted_out
+  costDeathAverted_uk_out
   costAcute_out
   costLong_out
   costTesting_out
@@ -426,17 +427,27 @@ globals [
   costMaskFixed_out
   costGdp_out
   costTotalHealth_out
+  costTotalHealth_uk_out
   costTotalTotal_out
+  costTotalTotal_uk_out
   nmbLow_out
   nmbMed_out
   nmbHigh_out
+  nmbLow_uk_out
+  nmbMed_uk_out
+  nmbHigh_uk_out
   nmbLowNoGdp_out
   nmbMedNoGdp_out
   nmbHighNoGdp_out
+  nmbLowNoGdp_uk_out
+  nmbMedNoGdp_uk_out
+  nmbHighNoGdp_uk_out
   halyTotalAcute_out
   halyTotalDeath_out
+  halyTotalDeath_uk_out
   halyTotalLong_out
   halyTotalTotal_out
+  halyTotalTotal_uk_out
   
   totStage2_out
   totStage3_out
@@ -451,6 +462,7 @@ globals [
   totIcuTime_out
   
   mid_costDeathAverted_out
+  mid_costDeathAverted_uk_out
   mid_costAcute_out
   mid_costLong_out
   mid_costTesting_out
@@ -461,17 +473,27 @@ globals [
   mid_costMaskFixed_out
   mid_costGdp_out
   mid_costTotalHealth_out
+  mid_costTotalHealth_uk_out
   mid_costTotalTotal_out
+  mid_costTotalTotal_uk_out
   mid_nmbLow_out
   mid_nmbMed_out
   mid_nmbHigh_out
+  mid_nmbLow_uk_out
+  mid_nmbMed_uk_out
+  mid_nmbHigh_uk_out
   mid_nmbLowNoGdp_out
   mid_nmbMedNoGdp_out
   mid_nmbHighNoGdp_out
+  mid_nmbLowNoGdp_uk_out
+  mid_nmbMedNoGdp_uk_out
+  mid_nmbHighNoGdp_uk_out
   mid_halyTotalAcute_out
   mid_halyTotalDeath_out
+  mid_halyTotalDeath_uk_out
   mid_halyTotalLong_out
   mid_halyTotalTotal_out
+  mid_halyTotalTotal_uk_out
   
   mid_totStage2_out
   mid_totStage3_out

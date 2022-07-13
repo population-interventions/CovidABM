@@ -60,27 +60,37 @@ to costs_setup
   ; TODO Ouput q by splitting across three things (acute + mask, long, death avert)
   
   ;; Global costs
-  set costDeathAverted_out 0
-  set costLong_out         0
-  set costAcute_out        0
-  set costTesting_out      0
-  set costVaccine_out      0
-  set costVacDeliver_out   0
-  set costVaccineFixed_out 0
-  set costMask_out         0
-  set costMaskFixed_out    0
-  set costGdp_out          0
-  set costTotalHealth_out  0
-  set nmbLow_out           0
-  set nmbMed_out           0
-  set nmbHigh_out          0
-  set nmbLowNoGdp_out      0
-  set nmbMedNoGdp_out      0
-  set nmbHighNoGdp_out     0
-  set halyTotalAcute_out   0
-  set halyTotalDeath_out   0
-  set halyTotalLong_out    0
-  set halyTotalTotal_out   0
+  set costDeathAverted_out    0
+  set costDeathAverted_uk_out 0
+  set costLong_out            0
+  set costAcute_out           0
+  set costTesting_out         0
+  set costVaccine_out         0
+  set costVacDeliver_out      0
+  set costVaccineFixed_out    0
+  set costMask_out            0
+  set costMaskFixed_out       0
+  set costGdp_out             0
+  set costTotalHealth_out     0
+  set costTotalHealth_uk_out  0
+  set nmbLow_out              0
+  set nmbMed_out              0
+  set nmbHigh_out             0
+  set nmbLow_uk_out           0
+  set nmbMed_uk_out           0
+  set nmbHigh_uk_out          0
+  set nmbLowNoGdp_out         0
+  set nmbMedNoGdp_out         0
+  set nmbHighNoGdp_out        0
+  set nmbLowNoGdp_uk_out      0
+  set nmbMedNoGdp_uk_out      0
+  set nmbHighNoGdp_uk_out     0
+  set halyTotalAcute_out      0
+  set halyTotalDeath_out      0
+  set halyTotalDeath_uk_out   0
+  set halyTotalLong_out       0
+  set halyTotalTotal_out      0
+  set halyTotalTotal_uk_out   0
   
   set totStage2_out   0
   set totStage3_out   0
@@ -230,6 +240,21 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   set halyDeath_listOut AddToList halyDeath_listOut cohortIndex halyDeath
   set halyTotalDeath_out halyTotalDeath_out + halyDeath
   
+  ;; Death haly outcome.
+  let halyDeath_uk 0
+  if age = 5  [set halyDeath_uk halyDeath_uk + deathPpl * (24.11 * (1 + 2.20  * halyUI_death))]
+  if age = 15 [set halyDeath_uk halyDeath_uk + deathPpl * (22.06 * (1 + 2.75  * halyUI_death))]
+  if age = 25 [set halyDeath_uk halyDeath_uk + deathPpl * (19.96 * (1 + 3.30  * halyUI_death))]
+  if age = 35 [set halyDeath_uk halyDeath_uk + deathPpl * (17.66 * (1 + 3.75  * halyUI_death))]
+  if age = 45 [set halyDeath_uk halyDeath_uk + deathPpl * (14.82 * (1 + 4.35  * halyUI_death))]
+  if age = 55 [set halyDeath_uk halyDeath_uk + deathPpl * (11.41 * (1 + 5.35  * halyUI_death))]
+  if age = 65 [set halyDeath_uk halyDeath_uk + deathPpl * (7.685 * (1 + 6.85  * halyUI_death))]
+  if age = 75 [set halyDeath_uk halyDeath_uk + deathPpl * (4.18  * (1 + 9.25  * halyUI_death))]
+  if age = 85 [set halyDeath_uk halyDeath_uk + deathPpl * (1.65  * (1 + 13.05 * halyUI_death))]
+  if age = 95 [set halyDeath_uk halyDeath_uk + deathPpl * (0.49  * (1 + 19.55 * halyUI_death))]
+  
+  set halyTotalDeath_uk_out halyTotalDeath_uk_out + halyDeath_uk
+  
   ;; Testing cost
   let costTesting 0 
   set costTesting costTesting + infectPpl * (0.83 * (42.5 * costUI_rat) + 3.33 * (7.60 * costUI_rat))
@@ -292,6 +317,21 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   if age = 95 [set costDeathAvoid costDeathAvoid - deathPpl * (62227  * (1 + 15 * costUI_death))]
   
   set costDeathAverted_out costDeathAverted_out + costDeathAvoid
+  
+  ;; Death health expenditure aversion
+  let costDeathAvoid_uk 0
+  if age = 5  [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (88508  * (1 + 15 * costUI_death))]
+  if age = 15 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (84255  * (1 + 15 * costUI_death))]
+  if age = 25 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (118652 * (1 + 15 * costUI_death))]
+  if age = 35 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (157980 * (1 + 15 * costUI_death))]
+  if age = 45 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (151913 * (1 + 15 * costUI_death))]
+  if age = 55 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (170633 * (1 + 15 * costUI_death))]
+  if age = 65 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (192283 * (1 + 15 * costUI_death))]
+  if age = 75 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (188596 * (1 + 15 * costUI_death))]
+  if age = 85 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (126542 * (1 + 15 * costUI_death))]
+  if age = 95 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (62227  * (1 + 15 * costUI_death))]
+  
+  set costDeathAverted_uk_out costDeathAverted_uk_out + costDeathAvoid_uk
 end
 
 to ApplyVaccinationCost [age people vaccine]
@@ -353,54 +393,74 @@ to CalculateEndCosts
   )
   
   ;; Output aggregate costs costs
-  set halyTotalTotal_out   halyTotalAcute_out + halyTotalDeath_out + halyTotalLong_out
-  set costTotalHealth_out  costDeathAverted_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
+  set halyTotalTotal_out     halyTotalAcute_out + halyTotalDeath_out + halyTotalLong_out
+  set halyTotalTotal_uk_out  halyTotalAcute_out + halyTotalDeath_uk_out + halyTotalLong_out
+  set costTotalHealth_out    costDeathAverted_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
+  set costTotalHealth_uk_out costDeathAverted_uk_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
   
   set nmbLowNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 35000
   set nmbMedNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 70000
   set nmbHighNoGdp_out     -1 * costTotalHealth_out - halyTotalTotal_out * 140000
+  set nmbLowNoGdp_uk_out   -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 35000
+  set nmbMedNoGdp_uk_out   -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 70000
+  set nmbHighNoGdp_uk_out  -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 140000
   
   set nmbLow_out           nmbLowNoGdp_out  - costGdp_out
   set nmbMed_out           nmbMedNoGdp_out  - costGdp_out
   set nmbHigh_out          nmbHighNoGdp_out - costGdp_out
+  set nmbLow_uk_out        nmbLowNoGdp_uk_out  - costGdp_out
+  set nmbMed_uk_out        nmbMedNoGdp_uk_out  - costGdp_out
+  set nmbHigh_uk_out       nmbHighNoGdp_uk_out - costGdp_out
   
-  set costTotalTotal_out   costTotalHealth_out + costGdp_out
+  set costTotalTotal_out    costTotalHealth_out + costGdp_out
+  set costTotalTotal_uk_out costTotalHealth_uk_out + costGdp_out
 end
 
 to CalculateMidCosts
   CalculateEndCosts
   
-  set mid_costDeathAverted_out costDeathAverted_out
-  set mid_costAcute_out        costAcute_out
-  set mid_costLong_out         costLong_out
-  set mid_costTesting_out      costTesting_out
-  set mid_costVaccine_out      costVaccine_out
-  set mid_costVacDeliver_out   costVacDeliver_out
-  set mid_costVaccineFixed_out costVaccineFixed_out
-  set mid_costMask_out         costMask_out
-  set mid_costMaskFixed_out    costMaskFixed_out
-  set mid_costGdp_out          costGdp_out
-  set mid_costTotalHealth_out  costTotalHealth_out
-  set mid_costTotalTotal_out   costTotalTotal_out
-  set mid_nmbLow_out           nmbLow_out
-  set mid_nmbMed_out           nmbMed_out
-  set mid_nmbHigh_out          nmbHigh_out
-  set mid_nmbLowNoGdp_out      nmbLowNoGdp_out
-  set mid_nmbMedNoGdp_out      nmbMedNoGdp_out
-  set mid_nmbHighNoGdp_out     nmbHighNoGdp_out
-  set mid_halyTotalAcute_out   halyTotalAcute_out
-  set mid_halyTotalDeath_out   halyTotalDeath_out
-  set mid_halyTotalLong_out    halyTotalLong_out
-  set mid_halyTotalTotal_out   halyTotalTotal_out
-  set mid_totStage2_out        totStage2_out
-  set mid_totStage3_out        totStage3_out
-  set mid_totStage4_out        totStage4_out
-  set mid_totStage5_out        totStage5_out
-  set mid_totInfect_out        totInfect_out
-  set mid_totSympt_out         totSympt_out
-  set mid_totHosp_out          totHosp_out
-  set mid_totIcu_out           totIcu_out
-  set mid_totDeath_out         totDeath_out
-  set mid_totHospTime_out      totHospTime_out
-  set mid_totIcuTime_out       totIcuTime_out
+  set mid_costDeathAverted_out    costDeathAverted_out
+  set mid_costDeathAverted_uk_out costDeathAverted_uk_out
+  set mid_costAcute_out           costAcute_out
+  set mid_costLong_out            costLong_out
+  set mid_costTesting_out         costTesting_out
+  set mid_costVaccine_out         costVaccine_out
+  set mid_costVacDeliver_out      costVacDeliver_out
+  set mid_costVaccineFixed_out    costVaccineFixed_out
+  set mid_costMask_out            costMask_out
+  set mid_costMaskFixed_out       costMaskFixed_out
+  set mid_costGdp_out             costGdp_out
+  set mid_costTotalHealth_out     costTotalHealth_out
+  set mid_costTotalHealth_uk_out  costTotalHealth_uk_out
+  set mid_costTotalTotal_out      costTotalTotal_out
+  set mid_costTotalTotal_uk_out   costTotalTotal_uk_out
+  set mid_nmbLow_out              nmbLow_out
+  set mid_nmbMed_out              nmbMed_out
+  set mid_nmbHigh_out             nmbHigh_out
+  set mid_nmbLow_uk_out           nmbLow_uk_out
+  set mid_nmbMed_uk_out           nmbMed_uk_out
+  set mid_nmbHigh_uk_out          nmbHigh_uk_out
+  set mid_nmbLowNoGdp_out         nmbLowNoGdp_out
+  set mid_nmbMedNoGdp_out         nmbMedNoGdp_out
+  set mid_nmbHighNoGdp_out        nmbHighNoGdp_out
+  set mid_nmbLowNoGdp_uk_out      nmbLowNoGdp_uk_out
+  set mid_nmbMedNoGdp_uk_out      nmbMedNoGdp_uk_out
+  set mid_nmbHighNoGdp_uk_out     nmbHighNoGdp_uk_out
+  set mid_halyTotalAcute_out      halyTotalAcute_out
+  set mid_halyTotalDeath_out      halyTotalDeath_out
+  set mid_halyTotalDeath_uk_out   halyTotalDeath_uk_out
+  set mid_halyTotalLong_out       halyTotalLong_out
+  set mid_halyTotalTotal_out      halyTotalTotal_out
+  set mid_halyTotalTotal_uk_out   halyTotalTotal_uk_out
+  set mid_totStage2_out           totStage2_out
+  set mid_totStage3_out           totStage3_out
+  set mid_totStage4_out           totStage4_out
+  set mid_totStage5_out           totStage5_out
+  set mid_totInfect_out           totInfect_out
+  set mid_totSympt_out            totSympt_out
+  set mid_totHosp_out             totHosp_out
+  set mid_totIcu_out              totIcu_out
+  set mid_totDeath_out            totDeath_out
+  set mid_totHospTime_out         totHospTime_out
+  set mid_totIcuTime_out          totIcuTime_out
 end

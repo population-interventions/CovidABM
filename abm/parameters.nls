@@ -40,6 +40,19 @@ to params_readStaticDraws
   ]
 end
 
+to-report params_getPopTable
+  let paramValue input_population_table
+  if is-number? (position "_60" input_vaccine_schedule) [
+    set paramValue "input/vic/pop_vac60"
+  ]
+  
+  let fileName (word paramValue data_suffix)
+  if data_suffix_2 != "None" [
+    set fileName (word fileName data_suffix_2)
+  ]
+  report fileName
+end
+
 to params_updateTrace
   if compound_trace = "ass50_70at5" [
     set trace_at_5 0.7

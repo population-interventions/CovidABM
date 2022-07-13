@@ -1,0 +1,207 @@
+{
+	"netlogoFile" : "covidModel",
+	"defaultParamFile" : "vic_main",
+	"copyExperimentMetrics" : "vic_main",
+	"postInputDir" : "vic",
+	"threads" : 4,
+	"indexParams" : {
+		"input_vaccine_schedule" : [
+			"input/vic/rollout_none.csv",
+			"input/vic/rollout_current.csv",
+			"input/vic/rollout_target_early.csv",
+			"input/vic/rollout_target_late.csv",
+			"input/vic/rollout_multi_early.csv",
+			"input/vic/rollout_multi_late.csv",
+			"input/vic/rollout_current_60.csv",
+			"input/vic/rollout_target_early_60.csv",
+			"input/vic/rollout_target_late_60.csv",
+			"input/vic/rollout_multi_early_60.csv",
+			"input/vic/rollout_multi_late_60.csv"
+		],
+		"incur_name_part_1" : [
+			"omlike"
+		],
+		"incur_name_part_2" : [
+			"_escape"
+		],
+		"incur_name_part_3" : [
+			""
+		],
+		"high_incur_virulence" : [
+			false
+		],
+		"incur_day" : [
+			91
+		],
+		"policy_mask_n95" : [
+			false,
+			true
+		],
+		"param_policy" : [
+			"LooseSupress",
+			"BarelySupress"
+		]
+	},
+	"paramOverrides" : {
+		"input_population_table" : "input/vic/pop",
+		"first_case_calibrate" : false,
+		"end_day" : 546
+	},
+	"runIndexer" : "draw_index",
+	"postSeries" : {
+		"processMain" : {
+			"params" : {
+				"aggregateProcessing" : true,
+				"processStages" : true,
+				"processCohort" : true,
+				"doAverage" : true,
+				
+				"outputTraces" : false,
+				"describeHeatmaps" : false,
+				"indexGrouping" : 4
+			},
+			"tornado" : {
+				"metrics" : ["totStage3", "nmbMed", "nmbMedNoGdp", "totInfect", "totHosp", "totDeath"],
+				"senList" : ["totHosp", "totInfect", "totDeath", "totStage3", "sen_vacInfectReduct", "sen_vacWaneInfect", "sen_vacWaneHosp", "sen_recoverInfectReduct", "sen_recoverWane", "sen_maskEff", "sen_asymptTransmit", "sen_isoProp", "sen_ifr", "sen_icu", "sen_hosp", "sen_sympt", "sen_hospTime", "sen_icuTime", "sen_vacCur", "sen_vacTarget", "sen_vacMulti", "sen_vacPromote", "sen_vacOverhead", "sen_maskPerson", "sen_maskStorage", "sen_maskPromote", "sen_vacUptake", "sen_transmissDraw", "sen_isoComply", "sen_halyAcute", "sen_halyLong", "sen_halyDeath", "sen_costGdp", "sen_costTest", "sen_costLong", "sen_costDeath", "sen_costDoctor", "sen_costParacetamol", "sen_costVisitEr", "sen_costHospBed", "sen_costIcuBed"]
+			},
+			"singleHeatmaps" : {
+				"prefixList" : ["mid_"],
+				"metrics" : ["totStage3", "nmbMed", "nmbMedNoGdp", "totInfect", "totHosp", "totDeath"],
+				"identifyIndex" : {
+					"scenAgg" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+				}
+			},
+			"singleProcessing" : {
+				"prefixList" : ["mid_"],
+				"aggregates" : {
+					"policySituation" : {
+						"method" : "tony_known_unknown_system",
+						"index" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+						"percentiles" : [0.95, 0.5, 0.05]
+					}
+				},
+				"optimality" : {
+					"healthSystem_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem" : {
+						"values" : [10000, 260000, 10000],
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp" : {
+						"values" : [10000, 260000, 10000],
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					}
+				}
+			},
+			"cohortHeatmaps" : {
+				"heatAges" : [
+					[0, 30],
+					[30, 60],
+					[60, 100],
+					[0, 100]
+				],
+				"heatPeriods" : [
+					[0, 2],
+					[0, 4],
+					[2, 4],
+					[4, 6],
+					[0, 6]
+				]
+			},
+			"heatmapStructure" : {
+				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
+				"base_value" : {
+				},
+				"sort_rows" : [
+				], 
+				"sort_cols" : [
+				]
+			},
+			"splitTableIndexName" : "Vaccine schedule",
+			"indexRename" : {
+				"input_vaccine_schedule" : {
+					"name" : "Vaccine schedule",
+					"values" : {
+						"input/vic/rollout_target_early.csv"    : "CG then OT",
+						"input/vic/rollout_target_late.csv"     : "OT",
+						"input/vic/rollout_multi_early.csv"     : "CG then MV",
+						"input/vic/rollout_multi_late.csv"      : "MV",
+						"input/vic/rollout_current.csv"         : "CG",
+						"input/vic/rollout_target_early_60.csv" : "CG then OT 60+",
+						"input/vic/rollout_target_late_60.csv"  : "OT 60+",
+						"input/vic/rollout_multi_early_60.csv"  : "CG then MV 60+",
+						"input/vic/rollout_multi_late_60.csv"   : "MV 60+",
+						"input/vic/rollout_current_60.csv"      : "CG 60+",
+						"input/vic/rollout_none.csv"            : "None"
+					}
+				},
+				"incur_name_part_1" : {
+					"name" : "Variant",
+					"values" : {
+						"omlike" : "Omni-like",
+						"novel"  : "Novel"
+					}
+				},
+				"incur_name_part_2" : {
+					"name" : "Immune escape",
+					"values" : {
+						"" : "Low escape",
+						"_escape"  : "High escape"
+					}
+				},
+				"incur_name_part_3" : {
+					"name" : "Infectiousness",
+					"values" : {
+						"" : "Current infect",
+						"_high"  : "Higher infect"
+					}
+				},
+				"high_incur_virulence" : {
+					"name" : "Virulence",
+					"values" : {
+						"True"  : "High vir",
+						"False" : "Low vir"
+					}
+				},
+				"incur_day" : {
+					"name" : "Incursion day",
+					"values" : {
+						"91"  : "91",
+						"182" : "182",
+						"273" : "273",
+						"364" : "364"
+					}
+				},
+				"policy_mask_n95" : {
+					"name" : "Mask policy",
+					"values" : {
+						"False" : "No Stockpile",
+						"True"  : "Stockpile N95"
+					}
+				},
+				"param_policy" : {
+					"name" : "Stage policy",
+					"values" : {
+						"BarelySupress" : "BarelySupress",
+						"LooseSupress" : "LooseSupress"
+					}
+				}
+			}
+		}
+	}
+}

@@ -11,4 +11,3 @@ modelSetup.MakeHeadlessWithParameters(modelName, runCount=runCount, cullUi=cullU
 # Run manually, not on HPC
 #if len(sys.argv) < 2:
 #	splitInput.DoVicSplit()
-

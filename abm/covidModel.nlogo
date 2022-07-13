@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-7.5
+9.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.022
+0.034
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.63
+0.53
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.73
+0.63
 0.01
 1
 NIL
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.35
+0.51
 0.01
 1
 NIL
@@ -694,7 +694,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.13
+0.1428
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.0
+8.12
 1
 1
 NIL
@@ -2923,7 +2923,7 @@ INPUTBOX
 257
 325
 input_vaccine_schedule
-input/vic/rollout_multi_early.csv
+input/vic/rollout_multi_early_60.csv
 1
 0
 String
@@ -5549,6 +5549,7 @@ NetLogo 6.2.0
     <metric>symptArray_listOut</metric>
     <metric>vaccineArray_listOut</metric>
     <metric>costDeathAverted_out</metric>
+    <metric>costDeathAverted_uk_out</metric>
     <metric>costAcute_out</metric>
     <metric>costLong_out</metric>
     <metric>costTesting_out</metric>
@@ -5559,17 +5560,27 @@ NetLogo 6.2.0
     <metric>costMaskFixed_out</metric>
     <metric>costGdp_out</metric>
     <metric>costTotalHealth_out</metric>
+    <metric>costTotalHealth_uk_out</metric>
     <metric>costTotalTotal_out</metric>
+    <metric>costTotalTotal_uk_out</metric>
     <metric>nmbLow_out</metric>
     <metric>nmbMed_out</metric>
     <metric>nmbHigh_out</metric>
+    <metric>nmbLow_uk_out</metric>
+    <metric>nmbMed_uk_out</metric>
+    <metric>nmbHigh_uk_out</metric>
     <metric>nmbLowNoGdp_out</metric>
     <metric>nmbMedNoGdp_out</metric>
     <metric>nmbHighNoGdp_out</metric>
+    <metric>nmbLowNoGdp_uk_out</metric>
+    <metric>nmbMedNoGdp_uk_out</metric>
+    <metric>nmbHighNoGdp_uk_out</metric>
     <metric>halyTotalAcute_out</metric>
     <metric>halyTotalDeath_out</metric>
+    <metric>halyTotalDeath_uk_out</metric>
     <metric>halyTotalLong_out</metric>
     <metric>halyTotalTotal_out</metric>
+    <metric>halyTotalTotal_uk_out</metric>
     <metric>totStage2_out</metric>
     <metric>totStage3_out</metric>
     <metric>totStage4_out</metric>
@@ -5582,6 +5593,7 @@ NetLogo 6.2.0
     <metric>totHospTime_out</metric>
     <metric>totIcuTime_out</metric>
     <metric>mid_costDeathAverted_out</metric>
+    <metric>mid_costDeathAverted_uk_out</metric>
     <metric>mid_costAcute_out</metric>
     <metric>mid_costLong_out</metric>
     <metric>mid_costTesting_out</metric>
@@ -5592,17 +5604,27 @@ NetLogo 6.2.0
     <metric>mid_costMaskFixed_out</metric>
     <metric>mid_costGdp_out</metric>
     <metric>mid_costTotalHealth_out</metric>
+    <metric>mid_costTotalHealth_uk_out</metric>
     <metric>mid_costTotalTotal_out</metric>
+    <metric>mid_costTotalTotal_uk_out</metric>
     <metric>mid_nmbLow_out</metric>
     <metric>mid_nmbMed_out</metric>
     <metric>mid_nmbHigh_out</metric>
+    <metric>mid_nmbLow_uk_out</metric>
+    <metric>mid_nmbMed_uk_out</metric>
+    <metric>mid_nmbHigh_uk_out</metric>
     <metric>mid_nmbLowNoGdp_out</metric>
     <metric>mid_nmbMedNoGdp_out</metric>
     <metric>mid_nmbHighNoGdp_out</metric>
+    <metric>mid_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_nmbHighNoGdp_uk_out</metric>
     <metric>mid_halyTotalAcute_out</metric>
     <metric>mid_halyTotalDeath_out</metric>
+    <metric>mid_halyTotalDeath_uk_out</metric>
     <metric>mid_halyTotalLong_out</metric>
     <metric>mid_halyTotalTotal_out</metric>
+    <metric>mid_halyTotalTotal_uk_out</metric>
     <metric>mid_totStage2_out</metric>
     <metric>mid_totStage3_out</metric>
     <metric>mid_totStage4_out</metric>
