@@ -1,6 +1,8 @@
 
 import pandas as pd
 import numpy as np
+import random
+import math
 
 import process.serial.tornadoPlot as tornadoPlot
 import process.shared.utilities as util
@@ -10,7 +12,7 @@ def GetPrefixList(conf):
 	if 'prefixList' not in conf:
 		return ['']
 	return conf['prefixList'] + ['']
-	
+
 
 def GetTornadoRange(df, sensitivity, metricList, percentile):
 	lower = df[sensitivity].quantile(percentile)
@@ -23,6 +25,24 @@ def GetTornadoRange(df, sensitivity, metricList, percentile):
 			df[df[sensitivity] >= upper][metric].mean()
 		]
 	return output, [lower, upper]
+
+
+def GetRandomRange(df, drawMetric, metricList, percentile):
+	# Randomise by draw value since parameter draws are by draw value.
+	drawVals = list(set(list(df.index.get_level_values(drawMetric))))
+	drawCount = math.floor(len(drawVals) * percentile)
+	random.shuffle(drawVals)
+	
+	lowerDraws = drawVals[: drawCount]
+	upperDraws = drawVals[-drawCount:]
+
+	output = {}
+	for metric in metricList:
+		output[metric] = [
+			df.loc[lowerDraws, :][metric].mean(),
+			df.loc[upperDraws, :][metric].mean()
+		]
+	return output, [0, 0]
 
 
 def CalculateOptimalityColumn(df, costPerHaly, identifyIndex=False, stackIndex=False):
@@ -109,11 +129,18 @@ def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=
 	
 	tornadoData = {}
 	senValues = {}
+	for randName in ['rand_{}'.format(i) for i in range(10)]:
+		tornadoData[randName], senValues[randName] = GetRandomRange(
+			df, 'draw_index', tornadoConf['metrics'], percentile
+		)
+		
 	for senMetric in tornadoConf['senList']:
 		tornadoData[senMetric], senValues[senMetric] = GetTornadoRange(
 			df, senMetric, 
 			tornadoConf['metrics'], percentile
 		)
+	
+	
 	tornadoData = pd.DataFrame(tornadoData).transpose().to_dict()
 	for metric in tornadoConf['metrics']:
 		tornadoData[metric] = {
