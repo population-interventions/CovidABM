@@ -11,7 +11,7 @@ import process.shared.utilities as util
 def GetPrefixList(conf):
 	if 'prefixList' not in conf:
 		return ['']
-	return conf['prefixList'] + ['']
+	return [''] + conf['prefixList']
 
 
 def GetTornadoRange(df, sensitivity, metricList, percentile):
@@ -47,7 +47,7 @@ def GetRandomRange(df, drawMetric, metricList, percentile):
 
 def CalculateOptimalityColumn(df, costPerHaly, identifyIndex=False, stackIndex=False):
 	if identifyIndex is not False:
-		df = df.groupby(util.ListRemove(list(df.index.names), identifyIndex)).mean()
+		df = util.IdentifyIndex(df, identifyIndex)
 	df['nmb'] = -1*(df['cost'] + costPerHaly * df['haly'])
 	df = df['nmb'].unstack('draw_index')
 	drawCount = len(list(df.columns.values))
@@ -72,6 +72,38 @@ def CalculateOptimalityColumn(df, costPerHaly, identifyIndex=False, stackIndex=F
 	return dfOpt
 	
 
+def CalculateOptimalityRanking(df, costPerHaly, rankCount, identifyIndex=False, stackIndex=False):
+	dfVal = util.IdentifyIndex(df, (identifyIndex if identifyIndex is not False else []) + ['draw_index'])
+	dfVal = -1*(dfVal['cost'] + costPerHaly * dfVal['haly'])
+	
+	dfMedCalc = util.IdentifyIndex(df, (identifyIndex if identifyIndex is not False else []))
+	dfMedCalc = -1*(dfMedCalc['cost'] + costPerHaly * dfMedCalc['haly'])
+	
+	dfMed_05 = util.IdentifyIndex(dfMedCalc, ['draw_index'], quantile=0.05)
+	dfMed_50 = util.IdentifyIndex(dfMedCalc, ['draw_index'], quantile=0.5)
+	dfMed_95 = util.IdentifyIndex(dfMedCalc, ['draw_index'], quantile=0.95)
+	
+	outputList = []
+	for i in range(len(dfVal.index.values)):
+		dfOpt = CalculateOptimalityColumn(df, costPerHaly, identifyIndex=identifyIndex, stackIndex=stackIndex)
+		
+		maxIndex = dfOpt.idxmax()
+		maxOptimality = dfOpt[maxIndex]
+		toFilter = {list(dfOpt.index.names)[i] : maxIndex[i] for i in range(len(maxIndex))}
+		df = util.FilterOutIndexVal(df, toFilter)
+		
+		toFilter['rank'] = i + 1
+		toFilter['optimality'] = maxOptimality
+		toFilter['meanValue'] = dfVal[maxIndex]
+		toFilter['p_05'] = dfMed_05[maxIndex]
+		toFilter['p_50'] = dfMed_50[maxIndex]
+		toFilter['p_95'] = dfMed_95[maxIndex]
+		outputList.append(toFilter)
+	
+	dfOut = pd.DataFrame(outputList).set_index('rank')
+	return dfOut
+
+
 def DoAggregate(df, name, conf, subfolder):
 	if conf['method'] == 'tony_known_unknown_system':
 		df = df.groupby(util.ListRemove(list(df.index.names), 'draw_index')).mean()
@@ -94,7 +126,15 @@ def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
 				stackIndex=conf['stackIndex'] if 'stackIndex' in conf else False
 			)
 		util.OutputToFile(dfOut, '{}/{}optimal/{}'.format(subfolder, prefix, name))
-		
+			
+	if 'rankingValue' in conf:
+		df = CalculateOptimalityRanking(
+			df, conf['rankingValue'], conf['ranks'],
+			identifyIndex=conf['identifyIndex'] if 'identifyIndex' in conf else False,
+			stackIndex=conf['stackIndex'] if 'stackIndex' in conf else False
+		)
+		util.OutputToFile(df, '{}/{}optimal/{}'.format(subfolder, prefix, name))
+	
 	if 'heatmapValue' in conf:
 		df = CalculateOptimalityColumn(
 			df, conf['heatmapValue'],

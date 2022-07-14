@@ -385,6 +385,22 @@ def FilterOnIndex(df, indexName, minVal, maxVal):
 	df = df[filterIndex]
 	return df
 
+
+def FilterOutIndexVal(df, indexDict):
+	filterIndex = True
+	for name, val in indexDict.items():
+		thisFilter = df.index.get_level_values(name)
+		filterIndex = ((thisFilter == val) & filterIndex)
+	df = df[(~filterIndex)]
+	return df
+		
+
+def IdentifyIndex(df, identifyIndex, quantile=False):
+	if quantile is not False:
+		return df.groupby(ListRemove(list(df.index.names), identifyIndex)).quantile(quantile)
+	return df.groupby(ListRemove(list(df.index.names), identifyIndex)).mean()
+
+
 def ToHeatmap(df, structure):
 	if df.index.name != None:
 		df = df.reset_index()

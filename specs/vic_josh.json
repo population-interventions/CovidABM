@@ -66,7 +66,7 @@
 			},
 			"singleHeatmaps" : {
 				"prefixList" : ["mid_"],
-				"metrics" : ["totStage3", "nmbMed", "nmbMedNoGdp", "totInfect", "totHosp", "totDeath"],
+				"metrics" : ["totStage3", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
 				"identifyIndex" : {
 					"scenAgg" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 				}
@@ -81,6 +81,34 @@
 					}
 				},
 				"optimality" : {
+					"healthSystem_70k_ranking" : {
+						"rankingValue" : 70000,
+						"ranks" : 10,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_70k_ranking" : {
+						"rankingValue" : 70000,
+						"ranks" : 10,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk_70k_ranking" : {
+						"rankingValue" : 70000,
+						"ranks" : 10,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_70k_ranking" : {
+						"rankingValue" : 70000,
+						"ranks" : 10,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
 					"healthSystem_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal",
@@ -93,6 +121,18 @@
 						"costCol" : "costTotalTotal",
 						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
+					"healthSystem_uk_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
 					"healthSystem" : {
 						"values" : [10000, 260000, 10000],
 						"halyCol" : "halyTotalTotal",
@@ -103,6 +143,18 @@
 						"values" : [10000, 260000, 10000],
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk" : {
+						"values" : [10000, 260000, 10000],
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk" : {
+						"values" : [10000, 260000, 10000],
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					}
 				}
