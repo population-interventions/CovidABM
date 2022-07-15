@@ -3,7 +3,7 @@
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_main",
 	"postInputDir" : "vic",
-	"threads" : 6,
+	"threads" : 4,
 	"indexParams" : {
 		"input_vaccine_schedule" : [
 			"input/vic/rollout_none.csv",
@@ -19,26 +19,19 @@
 			"input/vic/rollout_multi_late_60.csv"
 		],
 		"incur_name_part_1" : [
-			"omlike",
-			"novel"
+			"omlike"
 		],
 		"incur_name_part_2" : [
-			"",
 			"_escape"
 		],
 		"incur_name_part_3" : [
-			"",
-			"_high"
+			""
 		],
 		"high_incur_virulence" : [
-			false,
-			true
+			false
 		],
 		"incur_day" : [
-			91,
-			182,
-			273,
-			364
+			91
 		],
 		"policy_mask_n95" : [
 			false,
@@ -52,6 +45,7 @@
 	"paramOverrides" : {
 		"input_population_table" : "input/vic/pop",
 		"first_case_calibrate" : false,
+		"max_stage" : 3,
 		"end_day" : 546
 	},
 	"runIndexer" : "draw_index",
@@ -59,8 +53,8 @@
 		"processMain" : {
 			"params" : {
 				"aggregateProcessing" : true,
-				"processStages" : true,
-				"processCohort" : true,
+				"processStages" : false,
+				"processCohort" : false,
 				"doAverage" : true,
 				
 				"outputTraces" : false,
@@ -141,25 +135,25 @@
 						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystem" : {
-						"values" : [10000, 250000, 10000],
+						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystemAndGdp" : {
-						"values" : [10000, 250000, 10000],
+						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystem_uk" : {
-						"values" : [10000, 250000, 10000],
+						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystemAndGdp_uk" : {
-						"values" : [10000, 250000, 10000],
+						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]

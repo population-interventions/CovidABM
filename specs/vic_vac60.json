@@ -96,13 +96,13 @@
 						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystem" : {
-						"values" : [10000, 260000, 10000],
+						"values" : [10000, 250000, 10000],
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystemAndGdp" : {
-						"values" : [10000, 260000, 10000],
+						"values" : [10000, 250000, 10000],
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]

@@ -71,7 +71,7 @@ def RunSeriesPost(modelData, runs, pernode, onHpc):
 	if 'singleHeatmaps' in conf:
 		singleProcess.MakeSingleHeatmaps(conf['singleHeatmaps'], workingDir, heatmapStructure, measureCols_raw)
 		
-	if 'cohortHeatmaps' in conf:
+	if processCohort and 'cohortHeatmaps' in conf:
 		for period in conf['cohortHeatmaps']['heatPeriods']:
 			print('Period', period[0], period[1] - 1)
 			MakeMortHospHeatmapRange(

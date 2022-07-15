@@ -86,14 +86,18 @@ def CalculateOptimalityRanking(df, costPerHaly, rankCount, identifyIndex=False, 
 	outputList = []
 	for i in range(len(dfVal.index.values)):
 		dfOpt = CalculateOptimalityColumn(df, costPerHaly, identifyIndex=identifyIndex, stackIndex=stackIndex)
+		if i == 0:
+			dfOptFirst = dfOpt
 		
 		maxIndex = dfOpt.idxmax()
 		maxOptimality = dfOpt[maxIndex]
+		globalOpt = dfOptFirst[maxIndex]
 		toFilter = {list(dfOpt.index.names)[i] : maxIndex[i] for i in range(len(maxIndex))}
 		df = util.FilterOutIndexVal(df, toFilter)
 		
 		toFilter['rank'] = i + 1
 		toFilter['optimality'] = maxOptimality
+		toFilter['globalOpt'] = globalOpt
 		toFilter['meanValue'] = dfVal[maxIndex]
 		toFilter['p_05'] = dfMed_05[maxIndex]
 		toFilter['p_50'] = dfMed_50[maxIndex]
@@ -119,7 +123,7 @@ def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
 	
 	if 'values' in conf:
 		dfOut = pd.DataFrame()
-		for costPerHaly in range(conf['values'][0], conf['values'][1], conf['values'][2]):
+		for costPerHaly in range(conf['values'][0], conf['values'][1] + conf['values'][2], conf['values'][2]):
 			dfOut[costPerHaly] = CalculateOptimalityColumn(
 				df, costPerHaly,
 				identifyIndex=conf['identifyIndex'] if 'identifyIndex' in conf else False,
@@ -151,12 +155,13 @@ def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 		subfolder + '/single/single.csv',
 		index_col=list(range(len(measureCols_raw) + 1)))
 	
+	print('DoSingleProcess', 'aggregates')
+	if 'aggregates' in conf:
+		for name, aggData in conf['aggregates'].items():
+			DoAggregate(df, name, aggData, subfolder)
+	
 	for prefix in GetPrefixList(conf):
-		print('DoSingleProcess', 'aggregates')
-		if 'aggregates' in conf:
-			for name, aggData in conf['aggregates'].items():
-				DoAggregate(df, name, aggData, subfolder)
-		print('DoSingleProcess', 'optimality')
+		print('DoSingleProcess', 'optimality', prefix)
 		if 'optimality' in conf:
 			for name, aggData in conf['optimality'].items():
 				DoOptimality(df, name, prefix, aggData, heatStruct, subfolder)

@@ -52,6 +52,7 @@
 	"paramOverrides" : {
 		"input_population_table" : "input/vic/pop",
 		"first_case_calibrate" : false,
+		"max_stage" : 3,
 		"end_day" : 546
 	},
 	"runIndexer" : "draw_index",
