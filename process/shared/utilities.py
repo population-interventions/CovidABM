@@ -308,6 +308,14 @@ def AddFiles(outputName, fileList, index=1, header=1, doTqdm=False):
 	OutputToFile(df, outputName)
 
 
+def AggregateDuplicateIndex(df):
+	index = df.index.to_frame()
+	index['row'] =  np.arange(len(index))
+	df.index = pd.MultiIndex.from_frame(index)
+	df = df.groupby(level=ListRemove(list(df.index.names), 'row')).mean()
+	return df
+
+
 def AppendFiles(
 		outputName, fileList, runIndexer, indexSize=1, header=1, doTqdm=False,
 		head=False, indexGrouping=False, doAverage=False, numberKeys=True):

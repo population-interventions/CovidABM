@@ -154,6 +154,8 @@ def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 	df = pd.read_csv(
 		subfolder + '/single/single.csv',
 		index_col=list(range(len(measureCols_raw) + 1)))
+	#df = util.AggregateDuplicateIndex(df)
+	#util.OutputToFile(df, subfolder + '/single/single_fixed')
 	
 	print('DoSingleProcess', 'aggregates')
 	if 'aggregates' in conf:
@@ -171,6 +173,7 @@ def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=
 	df = pd.read_csv(
 		subfolder + '/single/single.csv',
 		index_col=list(range(len(measureCols_raw) + 1)))
+	#df = util.AggregateDuplicateIndex(df)
 	
 	tornadoData = {}
 	senValues = {}
@@ -211,7 +214,8 @@ def MakeSingleHeatmaps(conf, subfolder, heatStruct, measureCols_raw, describe=Fa
 	df = pd.read_csv(
 		subfolder + '/single/single.csv',
 		index_col=list(range(len(measureCols_raw) + 1)))
-	 
+	#df = util.AggregateDuplicateIndex(df)
+	
 	for prefix in GetPrefixList(conf):
 		for metric in util.PreAddList(prefix, conf['metrics']):
 			util.MakeDescribedHeatmapSet(
