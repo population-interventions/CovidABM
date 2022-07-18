@@ -8,15 +8,15 @@
 		"input_vaccine_schedule" : [
 			"input/vic/rollout_none.csv",
 			"input/vic/rollout_current.csv",
-			"input/vic/rollout_target_early.csv",
-			"input/vic/rollout_target_late.csv",
-			"input/vic/rollout_multi_early.csv",
-			"input/vic/rollout_multi_late.csv",
+			"input/vic/rollout_cur_then_target.csv",
+			"input/vic/rollout_target_only.csv",
+			"input/vic/rollout_cur_then_multi.csv",
+			"input/vic/rollout_multi_only.csv",
 			"input/vic/rollout_current_60.csv",
-			"input/vic/rollout_target_early_60.csv",
-			"input/vic/rollout_target_late_60.csv",
-			"input/vic/rollout_multi_early_60.csv",
-			"input/vic/rollout_multi_late_60.csv"
+			"input/vic/rollout_cur_then_target_60.csv",
+			"input/vic/rollout_target_only_60.csv",
+			"input/vic/rollout_cur_then_multi_60.csv",
+			"input/vic/rollout_multi_only_60.csv"
 		],
 		"incur_name_part_1" : [
 			"omlike",
@@ -197,15 +197,15 @@
 				"input_vaccine_schedule" : {
 					"name" : "Vaccine schedule",
 					"values" : {
-						"input/vic/rollout_target_early.csv"    : "CG then OT",
-						"input/vic/rollout_target_late.csv"     : "OT",
-						"input/vic/rollout_multi_early.csv"     : "CG then MV",
-						"input/vic/rollout_multi_late.csv"      : "MV",
+						"input/vic/rollout_cur_then_target.csv"    : "CG then OT",
+						"input/vic/rollout_target_only.csv"     : "OT",
+						"input/vic/rollout_cur_then_multi.csv"     : "CG then MV",
+						"input/vic/rollout_multi_only.csv"      : "MV",
 						"input/vic/rollout_current.csv"         : "CG",
-						"input/vic/rollout_target_early_60.csv" : "CG then OT 60+",
-						"input/vic/rollout_target_late_60.csv"  : "OT 60+",
-						"input/vic/rollout_multi_early_60.csv"  : "CG then MV 60+",
-						"input/vic/rollout_multi_late_60.csv"   : "MV 60+",
+						"input/vic/rollout_cur_then_target_60.csv" : "CG then OT 60+",
+						"input/vic/rollout_target_only_60.csv"  : "OT 60+",
+						"input/vic/rollout_cur_then_multi_60.csv"  : "CG then MV 60+",
+						"input/vic/rollout_multi_only_60.csv"   : "MV 60+",
 						"input/vic/rollout_current_60.csv"      : "CG 60+",
 						"input/vic/rollout_none.csv"            : "None"
 					}

@@ -9,10 +9,10 @@
 		"input_vaccine_schedule" : [
 			"input/vic/rollout_none.csv",
 			"input/vic/rollout_current.csv",
-			"input/vic/rollout_target_early.csv",
-			"input/vic/rollout_target_late.csv",
-			"input/vic/rollout_multi_early.csv",
-			"input/vic/rollout_multi_late.csv"
+			"input/vic/rollout_cur_then_target.csv",
+			"input/vic/rollout_target_only.csv",
+			"input/vic/rollout_cur_then_multi.csv",
+			"input/vic/rollout_multi_only.csv"
 		],
 		"incur_name_part_1" : [
 			"omlike",

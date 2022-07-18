@@ -390,7 +390,7 @@
         "1132.0"
     ],
     "input_vaccine_schedule": [
-        "\"input/vic/rollout_multi_early_60.csv\""
+        "\"input/vic/rollout_cur_then_multi_60.csv\""
     ],
     "param_force_vaccine": [
         "\"Disabled\""

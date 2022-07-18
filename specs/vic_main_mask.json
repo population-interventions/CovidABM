@@ -7,7 +7,7 @@
 	"indexParams" : {
 		"input_vaccine_schedule" : [
 			"input/vic/rollout_none.csv",
-			"input/vic/rollout_target_late.csv"
+			"input/vic/rollout_target_only.csv"
 		],
 		"incur_name_part_1" : [
 			"omlike",
@@ -89,10 +89,10 @@
 					"values" : {
 						"input/vic/rollout_none.csv"         : "None",
 						"input/vic/rollout_current.csv"      : "Cur 4+5",
-						"input/vic/rollout_target_early.csv" : "Omni Q3",
-						"input/vic/rollout_target_late.csv"  : "Omni Q4",
-						"input/vic/rollout_multi_early.csv"  : "Multi Q3",
-						"input/vic/rollout_multi_late.csv"   : "Multi Q4"
+						"input/vic/rollout_cur_then_target.csv" : "Omni Q3",
+						"input/vic/rollout_target_only.csv"  : "Omni Q4",
+						"input/vic/rollout_cur_then_multi.csv"  : "Multi Q3",
+						"input/vic/rollout_multi_only.csv"   : "Multi Q4"
 					}
 				},
 				"incur_name_part_1" : {
