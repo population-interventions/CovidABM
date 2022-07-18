@@ -338,14 +338,15 @@ def AppendFiles(
 		index = df.index.to_frame()
 		index['_index_agg'] = np.floor(index[runIndexer] / indexGrouping)
 		df.index = pd.MultiIndex.from_frame(index)
-		df = df.groupby(level=ListRemove(list(range(indexSize + 1)), 1), axis=0).mean()
+		df = df.groupby(level=ListRemove(list(range(indexSize + 1)), [0, 1]), axis=0).mean()
 		df.index = df.index.rename(runIndexer, level='_index_agg')
 		
-		df.index = df.index.set_levels(df.index.levels[indexSize - 1].astype(int), level=runIndexer)
-		df = df.reorder_levels([0, indexSize - 1] + list(range(1, indexSize - 1)))
-		
-	df = df.droplevel('run', axis=0)
-	df = df.sort_index(0)
+		df.index = df.index.set_levels(df.index.levels[indexSize - 2].astype(int), level=runIndexer)
+		df = df.reorder_levels([indexSize - 2] + list(range(0, indexSize - 2)))
+	else:
+		df = df.droplevel('run', axis=0)
+	
+	df = df.sort_index()
 	if numberKeys:
 		df.columns = pd.to_numeric(df.columns).astype(int)
 	
