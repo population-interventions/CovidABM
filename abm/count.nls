@@ -94,8 +94,30 @@ to updateCounts
     set totalCasesReported totalCasesReported + casesReportedToday
     set totalHosp totalHosp + hospToday
     set totalHospUsage totalHospUsage + hospUsage
-  ]
     
+    if hospUsage >= 500 [
+      set hospDaysAbove500_out hospDaysAbove500_out + 1
+    ]
+    if hospUsage >= 750 [
+      set hospDaysAbove750_out hospDaysAbove750_out + 1
+    ]
+    if hospUsage >= 1000 [
+      set hospDaysAbove1000_out hospDaysAbove1000_out + 1
+    ]
+    if hospUsage >= 1250 [
+      set hospDaysAbove1250_out hospDaysAbove1250_out + 1
+    ]
+    if hospUsage >= 1500 [
+      set hospDaysAbove1500_out hospDaysAbove1500_out + 1
+    ]
+    if hospUsage >= 1750 [
+      set hospDaysAbove1750_out hospDaysAbove1750_out + 1
+    ]
+    if hospUsage >= 2000 [
+      set hospDaysAbove2000_out hospDaysAbove2000_out + 1
+    ]
+  ]
+  
   ;; calculates death rate per infected person over the course of the pandemic
   if Deathcount > 0 and cumulativeInfected > 0 [
     set casefatalityrate ( Deathcount / cumulativeInfected )

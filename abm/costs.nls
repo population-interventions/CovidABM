@@ -463,4 +463,11 @@ to CalculateMidCosts
   set mid_totDeath_out            totDeath_out
   set mid_totHospTime_out         totHospTime_out
   set mid_totIcuTime_out          totIcuTime_out
+  set mid_hospDaysAbove500_out    hospDaysAbove500_out
+  set mid_hospDaysAbove750_out    hospDaysAbove750_out
+  set mid_hospDaysAbove1000_out   hospDaysAbove1000_out
+  set mid_hospDaysAbove1250_out   hospDaysAbove1250_out
+  set mid_hospDaysAbove1500_out   hospDaysAbove1500_out
+  set mid_hospDaysAbove1750_out   hospDaysAbove1750_out
+  set mid_hospDaysAbove2000_out   hospDaysAbove2000_out
 end

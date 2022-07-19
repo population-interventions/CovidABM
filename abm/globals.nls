@@ -461,6 +461,14 @@ globals [
   totHospTime_out
   totIcuTime_out
   
+  hospDaysAbove500_out
+  hospDaysAbove750_out
+  hospDaysAbove1000_out
+  hospDaysAbove1250_out
+  hospDaysAbove1500_out
+  hospDaysAbove1750_out
+  hospDaysAbove2000_out
+  
   mid_costDeathAverted_out
   mid_costDeathAverted_uk_out
   mid_costAcute_out
@@ -506,6 +514,14 @@ globals [
   mid_totDeath_out
   mid_totHospTime_out
   mid_totIcuTime_out
+  
+  mid_hospDaysAbove500_out
+  mid_hospDaysAbove750_out
+  mid_hospDaysAbove1000_out
+  mid_hospDaysAbove1250_out
+  mid_hospDaysAbove1500_out
+  mid_hospDaysAbove1750_out
+  mid_hospDaysAbove2000_out
   
   sen_vacInfectReduct_out
   sen_vacWaneInfect_out

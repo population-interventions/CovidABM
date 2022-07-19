@@ -5592,6 +5592,13 @@ NetLogo 6.2.0
     <metric>totDeath_out</metric>
     <metric>totHospTime_out</metric>
     <metric>totIcuTime_out</metric>
+    <metric>hospDaysAbove500_out</metric>
+    <metric>hospDaysAbove750_out</metric>
+    <metric>hospDaysAbove1000_out</metric>
+    <metric>hospDaysAbove1250_out</metric>
+    <metric>hospDaysAbove1500_out</metric>
+    <metric>hospDaysAbove1750_out</metric>
+    <metric>hospDaysAbove2000_out</metric>
     <metric>mid_costDeathAverted_out</metric>
     <metric>mid_costDeathAverted_uk_out</metric>
     <metric>mid_costAcute_out</metric>
@@ -5636,6 +5643,13 @@ NetLogo 6.2.0
     <metric>mid_totDeath_out</metric>
     <metric>mid_totHospTime_out</metric>
     <metric>mid_totIcuTime_out</metric>
+    <metric>mid_hospDaysAbove500_out</metric>
+    <metric>mid_hospDaysAbove750_out</metric>
+    <metric>mid_hospDaysAbove1000_out</metric>
+    <metric>mid_hospDaysAbove1250_out</metric>
+    <metric>mid_hospDaysAbove1500_out</metric>
+    <metric>mid_hospDaysAbove1750_out</metric>
+    <metric>mid_hospDaysAbove2000_out</metric>
     <metric>sen_vacInfectReduct_out</metric>
     <metric>sen_vacWaneInfect_out</metric>
     <metric>sen_vacWaneHosp_out</metric>

@@ -68,12 +68,12 @@
 				"indexGrouping" : 4
 			},
 			"tornado" : {
-				"metrics" : ["totStage3", "nmbMed", "nmbMedNoGdp", "totInfect", "totHosp", "totDeath"],
-				"senList" : ["totHosp", "totInfect", "totDeath", "totStage3", "sen_vacInfectReduct", "sen_vacWaneInfect", "sen_vacWaneHosp", "sen_recoverInfectReduct", "sen_recoverWane", "sen_maskEff", "sen_asymptTransmit", "sen_isoProp", "sen_ifr", "sen_icu", "sen_hosp", "sen_sympt", "sen_hospTime", "sen_icuTime", "sen_vacCur", "sen_vacTarget", "sen_vacMulti", "sen_vacPromote", "sen_vacOverhead", "sen_maskPerson", "sen_maskStorage", "sen_maskPromote", "sen_vacUptake", "sen_transmissDraw", "sen_isoComply", "sen_halyAcute", "sen_halyLong", "sen_halyDeath", "sen_costGdp", "sen_costTest", "sen_costLong", "sen_costDeath", "sen_costDoctor", "sen_costParacetamol", "sen_costVisitEr", "sen_costHospBed", "sen_costIcuBed"]
+				"metrics" : ["totStage3", "hospDaysAbove750", "hospDaysAbove1500", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
+				"senList" : ["totHosp", "totInfect", "totDeath", "totStage3", "totStage4", "sen_vacInfectReduct", "sen_vacWaneInfect", "sen_vacWaneHosp", "sen_recoverInfectReduct", "sen_recoverWane", "sen_maskEff", "sen_asymptTransmit", "sen_isoProp", "sen_ifr", "sen_icu", "sen_hosp", "sen_sympt", "sen_hospTime", "sen_icuTime", "sen_vacCur", "sen_vacTarget", "sen_vacMulti", "sen_vacPromote", "sen_vacOverhead", "sen_maskPerson", "sen_maskStorage", "sen_maskPromote", "sen_vacUptake", "sen_transmissDraw", "sen_isoComply", "sen_halyAcute", "sen_halyLong", "sen_halyDeath", "sen_costGdp", "sen_costTest", "sen_costLong", "sen_costDeath", "sen_costDoctor", "sen_costParacetamol", "sen_costVisitEr", "sen_costHospBed", "sen_costIcuBed"]
 			},
 			"singleHeatmaps" : {
 				"prefixList" : ["mid_"],
-				"metrics" : ["totStage3", "nmbMed", "nmbMedNoGdp", "totInfect", "totHosp", "totDeath"],
+				"metrics" : ["totStage2", "totStage3", "totStage4", "totStage5", "hospDaysAbove750", "hospDaysAbove1500", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
 				"identifyIndex" : {
 					"scenAgg" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 				}
@@ -88,6 +88,78 @@
 					}
 				},
 				"optimality" : {
+					"healthSystem_35k_ranking" : {
+						"rankingValue" : 35000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_35k_ranking" : {
+						"rankingValue" : 35000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk_35k_ranking" : {
+						"rankingValue" : 35000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_35k_ranking" : {
+						"rankingValue" : 35000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_140k_ranking" : {
+						"rankingValue" : 140000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_140k_ranking" : {
+						"rankingValue" : 140000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk_140k_ranking" : {
+						"rankingValue" : 140000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_140k_ranking" : {
+						"rankingValue" : 140000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
 					"healthSystem_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal",
@@ -98,6 +170,18 @@
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
 						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystem" : {
@@ -111,18 +195,6 @@
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
-					},
-					"healthSystem_uk_70k_heatmap" : {
-						"heatmapValue" : 70000,
-						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalHealth_uk",
-						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
-					},
-					"healthSystemAndGdp_uk_70k_heatmap" : {
-						"heatmapValue" : 70000,
-						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalTotal_uk",
-						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystem_uk" : {
 						"values" : [10000, 250000, 2500],
@@ -167,16 +239,16 @@
 					"name" : "Vaccine schedule",
 					"values" : {
 						"input/vic/rollout_cur_then_target.csv"    : "CG then OT",
-						"input/vic/rollout_target_only.csv"     : "OT",
+						"input/vic/rollout_target_only.csv"        : "OT",
 						"input/vic/rollout_cur_then_multi.csv"     : "CG then MV",
-						"input/vic/rollout_multi_only.csv"      : "MV",
-						"input/vic/rollout_current.csv"         : "CG",
+						"input/vic/rollout_multi_only.csv"         : "MV",
+						"input/vic/rollout_current.csv"            : "CG",
 						"input/vic/rollout_cur_then_target_60.csv" : "CG then OT 60+",
-						"input/vic/rollout_target_only_60.csv"  : "OT 60+",
+						"input/vic/rollout_target_only_60.csv"     : "OT 60+",
 						"input/vic/rollout_cur_then_multi_60.csv"  : "CG then MV 60+",
-						"input/vic/rollout_multi_only_60.csv"   : "MV 60+",
-						"input/vic/rollout_current_60.csv"      : "CG 60+",
-						"input/vic/rollout_none.csv"            : "None"
+						"input/vic/rollout_multi_only_60.csv"      : "MV 60+",
+						"input/vic/rollout_current_60.csv"         : "CG 60+",
+						"input/vic/rollout_none.csv"               : "None"
 					}
 				},
 				"incur_name_part_1" : {

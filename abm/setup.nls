@@ -649,6 +649,14 @@ to setGlobals
   set hospTimeArray_listOut   []
   set symptArray_listOut      []
   set vaccineArray_listOut    []
+  
+  set hospDaysAbove500_out  0
+  set hospDaysAbove750_out  0
+  set hospDaysAbove1000_out 0
+  set hospDaysAbove1250_out 0
+  set hospDaysAbove1500_out 0
+  set hospDaysAbove1750_out 0
+  set hospDaysAbove2000_out 0
 end
 
 ;;*******************************************************************************************************************************
