@@ -59,8 +59,8 @@
 		"processMain" : {
 			"params" : {
 				"aggregateProcessing" : true,
-				"processStages" : true,
-				"processCohort" : true,
+				"processStages" : false,
+				"processCohort" : false,
 				"doAverage" : true,
 				
 				"outputTraces" : false,
