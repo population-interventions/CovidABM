@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-9.0
+12.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.034
+0.05
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.53
+0.35
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.63
+0.45
 0.01
 1
 NIL
@@ -477,10 +477,10 @@ count simuls with [ color = red ]
 11
 
 MONITOR
-773
-14
-838
-59
+768
+15
+846
+60
 NIL
 Days
 17
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.51
+0.7
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.12
+8.8
 1
 1
 NIL
@@ -1484,9 +1484,9 @@ MONITOR
 11
 
 MONITOR
-183
+182
 819
-285
+284
 864
 % Red First
 100 * (count simuls with [color = red and infectVariant = \"base\"]) / Population
@@ -1495,9 +1495,9 @@ MONITOR
 11
 
 MONITOR
-184
+183
 868
-286
+285
 913
 % Red Second
 100 * (count simuls with [color = red and infectVariant = (word incur_name_part_1 incur_name_part_2 incur_name_part_3)]) / Population
@@ -1908,10 +1908,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-203
-767
-351
-812
+205
+768
+353
+813
 compound_param
 compound_param
 "None" "Hetro_Test"
@@ -2745,7 +2745,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-81250.91969
+62242.23955
 1
 1
 NIL
@@ -2911,7 +2911,7 @@ draw_index
 draw_index
 0
 2000
-1132.0
+755.0
 1
 1
 NIL
@@ -2923,7 +2923,7 @@ INPUTBOX
 257
 325
 input_vaccine_schedule
-input/vic/rollout_multi_early_60.csv
+input/vic/rollout_target_only.csv
 1
 0
 String
@@ -3076,7 +3076,7 @@ incur_day
 incur_day
 0
 364
-273.0
+91.0
 91
 1
 NIL
@@ -3130,7 +3130,7 @@ SWITCH
 371
 high_incur_virulence
 high_incur_virulence
-0
+1
 1
 -1000
 
@@ -3194,7 +3194,7 @@ CHOOSER
 incur_name_part_1
 incur_name_part_1
 "omlike" "novel"
-1
+0
 
 CHOOSER
 14
@@ -3214,7 +3214,7 @@ CHOOSER
 incur_name_part_3
 incur_name_part_3
 "" "_high"
-1
+0
 
 MONITOR
 1040
@@ -3589,10 +3589,10 @@ PENS
 "default" 0.05 1 -16777216 true "" "histogram [wornMaskOr] of simuls"
 
 PLOT
-630
-662
-1035
-892
+622
+665
+1032
+887
 Average immunity
 NIL
 NIL

@@ -90,28 +90,24 @@
 				"optimality" : {
 					"healthSystem_70k_ranking" : {
 						"rankingValue" : 70000,
-						"ranks" : 10,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystemAndGdp_70k_ranking" : {
 						"rankingValue" : 70000,
-						"ranks" : 10,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystem_uk_70k_ranking" : {
 						"rankingValue" : 70000,
-						"ranks" : 10,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 					},
 					"healthSystemAndGdp_uk_70k_ranking" : {
 						"rankingValue" : 70000,
-						"ranks" : 10,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
 						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]

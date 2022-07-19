@@ -7,6 +7,7 @@ import math
 import process.serial.tornadoPlot as tornadoPlot
 import process.shared.utilities as util
 
+FUDGE_APPEND = ''
 
 def GetPrefixList(conf):
 	if 'prefixList' not in conf:
@@ -72,7 +73,7 @@ def CalculateOptimalityColumn(df, costPerHaly, identifyIndex=False, stackIndex=F
 	return dfOpt
 	
 
-def CalculateOptimalityRanking(df, costPerHaly, rankCount, identifyIndex=False, stackIndex=False):
+def CalculateOptimalityRanking(df, costPerHaly, identifyIndex=False, stackIndex=False):
 	dfVal = util.IdentifyIndex(df, (identifyIndex if identifyIndex is not False else []) + ['draw_index'])
 	dfVal = -1*(dfVal['cost'] + costPerHaly * dfVal['haly'])
 	
@@ -133,7 +134,7 @@ def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
 			
 	if 'rankingValue' in conf:
 		df = CalculateOptimalityRanking(
-			df, conf['rankingValue'], conf['ranks'],
+			df, conf['rankingValue'],
 			identifyIndex=conf['identifyIndex'] if 'identifyIndex' in conf else False,
 			stackIndex=conf['stackIndex'] if 'stackIndex' in conf else False
 		)
@@ -152,7 +153,7 @@ def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
 
 def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 	df = pd.read_csv(
-		subfolder + '/single/single.csv',
+		subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
 		index_col=list(range(len(measureCols_raw) + 1)))
 	#df = util.AggregateDuplicateIndex(df)
 	#util.OutputToFile(df, subfolder + '/single/single_fixed')
@@ -171,7 +172,7 @@ def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 
 def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=0.2):
 	df = pd.read_csv(
-		subfolder + '/single/single.csv',
+		subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
 		index_col=list(range(len(measureCols_raw) + 1)))
 	#df = util.AggregateDuplicateIndex(df)
 	
@@ -212,7 +213,7 @@ def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=
 
 def MakeSingleHeatmaps(conf, subfolder, heatStruct, measureCols_raw, describe=False):
 	df = pd.read_csv(
-		subfolder + '/single/single.csv',
+		subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
 		index_col=list(range(len(measureCols_raw) + 1)))
 	#df = util.AggregateDuplicateIndex(df)
 	
