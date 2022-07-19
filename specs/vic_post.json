@@ -73,7 +73,7 @@
 			},
 			"singleHeatmaps" : {
 				"prefixList" : ["mid_"],
-				"metrics" : ["totStage3", "totStage4", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
+				"metrics" : ["totStage2", "totStage3", "totStage4", "totStage5", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
 				"identifyIndex" : {
 					"scenAgg" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
 				}
