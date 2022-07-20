@@ -149,7 +149,7 @@ def ProcessAbmOutput(
 	# file for further processing.
 	for filename in filelist:
 		for chunk in tqdm(pd.read_csv(
-					filename + '.csv', sep=',',
+					filename + '.csv',
 					chunksize=chunksize, header=6,
 					keep_default_na=False),
 				total=4):
