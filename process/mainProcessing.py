@@ -26,7 +26,7 @@ table5Rows = [
 	[False, False],
 ]
 
-def RunSeriesPost(modelData, runs, pernode, onHpc):
+def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 	conf = modelData['postSeries']['processMain']
 	runIndexer = modelData['runIndexer']
 	params = conf['params']
@@ -55,7 +55,7 @@ def RunSeriesPost(modelData, runs, pernode, onHpc):
 
 	arraySize = len(util.GetFiles(rawDataDir))
 	print('arraySize', arraySize)
-	if aggregateProcessing:
+	if aggregateProcessing and not singleOnly:
 		DoSpartanAggregate(
 			workingDir, postDataDir, measureCols, runIndexer,
 			arraySize=arraySize, processCohort=processCohort,
@@ -71,7 +71,7 @@ def RunSeriesPost(modelData, runs, pernode, onHpc):
 	if 'singleHeatmaps' in conf:
 		singleProcess.MakeSingleHeatmaps(conf['singleHeatmaps'], workingDir, heatmapStructure, measureCols_raw)
 		
-	if processCohort and 'cohortHeatmaps' in conf:
+	if processCohort and 'cohortHeatmaps' in conf and not singleOnly:
 		for period in conf['cohortHeatmaps']['heatPeriods']:
 			print('Period', period[0], period[1] - 1)
 			MakeMortHospHeatmapRange(

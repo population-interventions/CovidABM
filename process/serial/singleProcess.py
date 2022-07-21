@@ -110,13 +110,16 @@ def CalculateOptimalityRanking(df, costPerHaly, identifyIndex=False, stackIndex=
 
 
 def DoAggregate(df, name, conf, subfolder):
-	if conf['method'] == 'tony_known_unknown_system':
-		df = df.groupby(util.ListRemove(list(df.index.names), 'draw_index')).mean()
-		df = df.unstack(util.ListRemove(list(df.index.names), conf['index']))
-		util.OutputToFile(df, '{}/single/{}'.format(subfolder, name))
-		df = df.describe(percentiles=conf['percentiles'])
-		util.OutputToFile(df, '{}/single/{}_describe'.format(subfolder, name))
-
+	df = df.groupby(util.ListRemove(list(df.index.names), conf['firstMeanOn'])).mean()
+	df = df.unstack(util.ListRemove(list(df.index.names), conf['thenDescribeOn']))
+	util.OutputToFile(df, '{}/single/{}_sourceRows'.format(subfolder, name))
+	remainingIndex = util.ListRemove(list(df.columns.names), None)
+	df = df.describe(percentiles=conf['percentiles']).stack(remainingIndex)
+	pctNames = ['{}%'.format(math.floor(x*100)) for x in conf['percentiles']]
+	for aggName in ['count', 'mean', 'std', 'min', 'max'] + pctNames:
+		print(aggName)	
+		util.OutputToFile(df.loc[aggName, :], '{}/single/{}_{}'.format(subfolder, name, aggName))
+	print('{} done'.format(name))
 
 def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
 	df = df[[prefix + conf['halyCol'], prefix + conf['costCol']]]
