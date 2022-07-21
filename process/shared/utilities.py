@@ -399,7 +399,13 @@ def FilterOutIndexVal(df, indexDict):
 	filterIndex = True
 	for name, val in indexDict.items():
 		thisFilter = df.index.get_level_values(name)
-		filterIndex = ((thisFilter == val) & filterIndex)
+		if type(val) == list:
+			valFilter = False
+			for v in val:
+				valFilter = ((thisFilter == v) | valFilter)
+			filterIndex = (valFilter & filterIndex)
+		else:
+			filterIndex = ((thisFilter == val) & filterIndex)
 	df = df[(~filterIndex)]
 	return df
 		

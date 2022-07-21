@@ -105,11 +105,13 @@ def CalculateOptimalityRanking(df, costPerHaly, identifyIndex=False, stackIndex=
 		toFilter['p_95'] = dfMed_95[maxIndex]
 		outputList.append(toFilter)
 	
-	dfOut = pd.DataFrame(outputList).set_index('rank')
+	dfOut = pd.DataFrame(outputList).set_index(list(dfMed_50.index.names)).sort_index()
 	return dfOut
 
 
 def DoAggregate(df, name, conf, subfolder):
+	if 'filterOutIndex' in conf:
+		df = util.FilterOutIndexVal(df, conf['filterOutIndex'])
 	df = df.groupby(util.ListRemove(list(df.index.names), conf['firstMeanOn'])).mean()
 	df = df.unstack(util.ListRemove(list(df.index.names), conf['thenDescribeOn']))
 	util.OutputToFile(df, '{}/single/{}_sourceRows'.format(subfolder, name))
@@ -117,9 +119,9 @@ def DoAggregate(df, name, conf, subfolder):
 	df = df.describe(percentiles=conf['percentiles']).stack(remainingIndex)
 	pctNames = ['{}%'.format(math.floor(x*100)) for x in conf['percentiles']]
 	for aggName in ['count', 'mean', 'std', 'min', 'max'] + pctNames:
-		print(aggName)	
 		util.OutputToFile(df.loc[aggName, :], '{}/single/{}_{}'.format(subfolder, name, aggName))
 	print('{} done'.format(name))
+
 
 def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
 	df = df[[prefix + conf['halyCol'], prefix + conf['costCol']]]
@@ -152,14 +154,16 @@ def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
 		util.OutputToFile(df, '{}/{}optimal/{}_pre'.format(subfolder, prefix, name))
 		df = util.ToHeatmap(df.to_frame().reset_index(), heatStruct)
 		util.OutputToFile(df, '{}/{}optimal/{}'.format(subfolder, prefix, name))
-	
+
+
+def MakeRankmap(name, subfolder, conf):
+	print('MakeRankmap')
+
 
 def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 	df = pd.read_csv(
 		subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
 		index_col=list(range(len(measureCols_raw) + 1)))
-	#df = util.AggregateDuplicateIndex(df)
-	#util.OutputToFile(df, subfolder + '/single/single_fixed')
 	
 	print('DoSingleProcess', 'aggregates')
 	if 'aggregates' in conf:
@@ -171,6 +175,10 @@ def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 		if 'optimality' in conf:
 			for name, aggData in conf['optimality'].items():
 				DoOptimality(df, name, prefix, aggData, heatStruct, subfolder)
+				
+	if 'rankmaps' in conf:
+		for name, data in conf['rankmaps'].items():
+			MakeRankmap(name, subfolder, data)
 
 
 def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=0.2):
@@ -234,3 +242,26 @@ def MakeSingleHeatmaps(conf, subfolder, heatStruct, measureCols_raw, describe=Fa
 						'{}/{}heatmapSingle/'.format(subfolder, prefix), df[metric],
 						heatStruct, '{}_{}'.format(idName, metric),
 						identifyIndex=idList, describe=describe)
+
+
+def FixSingle(subfolder, measureCols_raw):
+	df = pd.read_csv(
+		subfolder + '/single/single_broken{}.csv'.format(FUDGE_APPEND),
+		index_col=list(range(len(measureCols_raw) + 1)))
+	
+	#print(df)
+	#print(df['costVaccineFixed'])
+	indexOrder = list(df.index.names)
+	df = df.unstack('Vaccine schedule')
+	for schedule in ['CG then OT', 'CG then OT 60+', 'CG then MV', 'CG then MV 60+']:
+		df.loc[:, ('costVaccineFixed', schedule)] = df['costVaccineFixed']['CG']
+		df.loc[:, ('mid_costVaccineFixed', schedule)] = df['mid_costVaccineFixed']['CG']
+	for schedule in ['OT', 'OT 60+', 'MV', 'MV 60+']:
+		df.loc[:, ('costVaccineFixed', schedule)] = df['costVaccineFixed']['CG'] * 2/3
+		df.loc[:, ('mid_costVaccineFixed', schedule)] = df['mid_costVaccineFixed']['CG'] / 3
+		
+	df = df.stack('Vaccine schedule')
+	df = df.reorder_levels(indexOrder).sort_index()
+	#print(df)
+	#print(df['costVaccineFixed'])
+	util.OutputToFile(df, subfolder + '/single/single{}'.format(FUDGE_APPEND))
