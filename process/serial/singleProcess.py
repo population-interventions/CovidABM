@@ -125,9 +125,7 @@ def DoAggregate(df, name, conf, subfolder):
 
 def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
 	if 'filterOutIndex' in conf:
-		print(df)
 		df = util.FilterOutIndexVal(df, conf['filterOutIndex'])
-		print(df)
 	df = df[[prefix + conf['halyCol'], prefix + conf['costCol']]]
 	df = df.rename(columns={prefix + conf['halyCol'] : 'haly', prefix + conf['costCol'] : 'cost'})
 	
