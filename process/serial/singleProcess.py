@@ -118,12 +118,16 @@ def DoAggregate(df, name, conf, subfolder):
 	remainingIndex = util.ListRemove(list(df.columns.names), None)
 	df = df.describe(percentiles=conf['percentiles']).stack(remainingIndex)
 	pctNames = ['{}%'.format(math.floor(x*100)) for x in conf['percentiles']]
-	for aggName in ['count', 'mean', 'std', 'min', 'max'] + pctNames:
-		util.OutputToFile(df.loc[aggName, :], '{}/single/{}_{}'.format(subfolder, name, aggName))
+	for aggName in ['count', 'mean', 'min', 'max'] + pctNames:
+		util.OutputToFile(df.loc[aggName, :], '{}/single/{}_{}'.format(subfolder, name, aggName.replace('%', '')))
 	print('{} done'.format(name))
 
 
 def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
+	if 'filterOutIndex' in conf:
+		print(df)
+		df = util.FilterOutIndexVal(df, conf['filterOutIndex'])
+		print(df)
 	df = df[[prefix + conf['halyCol'], prefix + conf['costCol']]]
 	df = df.rename(columns={prefix + conf['halyCol'] : 'haly', prefix + conf['costCol'] : 'cost'})
 	
@@ -156,8 +160,27 @@ def DoOptimality(df, name, prefix, conf, heatStruct, subfolder):
 		util.OutputToFile(df, '{}/{}optimal/{}'.format(subfolder, prefix, name))
 
 
-def MakeRankmap(name, subfolder, conf):
+def MakeRankmap(outputName, subfolder, conf):
 	print('MakeRankmap')
+	df = pd.DataFrame()
+	for name, target in conf['metricCols'].items():
+		df[name] = pd.read_csv(
+		'{}/{}.csv'.format(subfolder, target[0]),
+		index_col=list(range(len(conf['index']))))[target[1]]
+	
+	for name, deriveConf in conf['deriveRanks'].items():
+		if 'value' in deriveConf:
+			df[name] = df[deriveConf['value']].rank(
+				ascending=deriveConf['ascending'], method='min')
+		elif 'average' in deriveConf:
+			df[name] = df[deriveConf['average']].mean(axis=1).rank(
+				ascending=deriveConf['ascending'], method='min')
+	
+	if 'sortBy' in conf:
+		df = df.sort_values(conf['sortBy'])
+	if 'orderCols' in conf:
+		df = df[conf['orderCols']]
+	util.OutputToFile(df, '{}/rankmaps/{}'.format(subfolder, outputName))	
 
 
 def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
