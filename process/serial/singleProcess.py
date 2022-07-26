@@ -162,17 +162,21 @@ def MakeRankmap(outputName, subfolder, conf):
 	print('MakeRankmap')
 	df = pd.DataFrame()
 	for name, target in conf['metricCols'].items():
+		path = '{}/{}.csv'.format(subfolder, target[0])
+		if len(target) > 2 and target[2] == True:
+			path = '{}.csv'.format(target[0])
 		df[name] = pd.read_csv(
-		'{}/{}.csv'.format(subfolder, target[0]),
-		index_col=list(range(len(conf['index']))))[target[1]]
+			path,
+			index_col=list(range(len(conf['index']))))[target[1]]
 	
-	for name, deriveConf in conf['deriveRanks'].items():
-		if 'value' in deriveConf:
-			df[name] = df[deriveConf['value']].rank(
-				ascending=deriveConf['ascending'], method='min')
-		elif 'average' in deriveConf:
-			df[name] = df[deriveConf['average']].mean(axis=1).rank(
-				ascending=deriveConf['ascending'], method='min')
+	if 'deriveRanks' in conf:
+		for name, deriveConf in conf['deriveRanks'].items():
+			if 'value' in deriveConf:
+				df[name] = df[deriveConf['value']].rank(
+					ascending=deriveConf['ascending'], method='min')
+			elif 'average' in deriveConf:
+				df[name] = df[deriveConf['average']].mean(axis=1).rank(
+					ascending=deriveConf['ascending'], method='min')
 	
 	if 'sortBy' in conf:
 		df = df.sort_values(conf['sortBy'])
@@ -182,18 +186,22 @@ def MakeRankmap(outputName, subfolder, conf):
 
 
 def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
-	df = pd.read_csv(
-		subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
-		index_col=list(range(len(measureCols_raw) + 1)))
-	
+	df = False
 	print('DoSingleProcess', 'aggregates')
 	if 'aggregates' in conf:
+		df = pd.read_csv(
+			subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
+			index_col=list(range(len(measureCols_raw) + 1)))
 		for name, aggData in conf['aggregates'].items():
 			DoAggregate(df, name, aggData, subfolder)
 	
-	for prefix in GetPrefixList(conf):
-		print('DoSingleProcess', 'optimality', prefix)
-		if 'optimality' in conf:
+	if 'optimality' in conf:
+		if df is False:
+			df = pd.read_csv(
+				subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
+				index_col=list(range(len(measureCols_raw) + 1)))
+		for prefix in GetPrefixList(conf):	
+			print('DoSingleProcess', 'optimality', prefix)
 			for name, aggData in conf['optimality'].items():
 				DoOptimality(df, name, prefix, aggData, heatStruct, subfolder)
 				

@@ -62,8 +62,8 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 			processStages=processStages, indexGrouping=indexGrouping,
 			doAverage=doAverage, outputTraces=outputTraces)
 	
-	if not onHpc:
-		singleProcess.FixSingle(workingDir, measureCols_raw)
+	#if not onHpc:
+	#	singleProcess.FixSingle(workingDir, measureCols_raw)
 
 	if 'singleProcessing' in conf:
 		singleProcess.DoSingleProcess(conf['singleProcessing'], workingDir, heatmapStructure, measureCols_raw, onHpc)

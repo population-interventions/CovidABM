@@ -1,0 +1,219 @@
+{
+	"netlogoFile" : "covidModel",
+	"defaultParamFile" : "vic_main",
+	"copyExperimentMetrics" : "vic_main",
+	"postInputDir" : "vic",
+	"threads" : 5,
+	"indexParams" : {
+		"input_vaccine_schedule" : [
+			"input/vic/rollout_none.csv",
+			"input/vic/rollout_current.csv",
+			"input/vic/rollout_cur_then_target.csv",
+			"input/vic/rollout_target_only.csv",
+			"input/vic/rollout_cur_then_multi.csv",
+			"input/vic/rollout_multi_only.csv",
+			"input/vic/rollout_current_60.csv",
+			"input/vic/rollout_cur_then_target_60.csv",
+			"input/vic/rollout_target_only_60.csv",
+			"input/vic/rollout_cur_then_multi_60.csv",
+			"input/vic/rollout_multi_only_60.csv"
+		],
+		"incur_name_part_1" : [
+			"omlike",
+			"novel"
+		],
+		"incur_name_part_2" : [
+			"",
+			"_escape"
+		],
+		"incur_name_part_3" : [
+			"",
+			"_high"
+		],
+		"high_incur_virulence" : [
+			false,
+			true
+		],
+		"incur_day" : [
+			91,
+			182,
+			273,
+			364
+		],
+		"policy_mask_n95" : [
+			false,
+			true
+		],
+		"param_policy" : [
+			"LooseSupress",
+			"BarelySupress"
+		]
+	},
+	"paramOverrides" : {
+		"input_population_table" : "input/vic/pop",
+		"first_case_calibrate" : false,
+		"end_day" : 546
+	},
+	"runIndexer" : "draw_index",
+	"postSeries" : {
+		"processMain" : {
+			"params" : {
+				"aggregateProcessing" : false,
+				"processStages" : false,
+				"processCohort" : false,
+				"doAverage" : true,
+				
+				"outputTraces" : false,
+				"describeHeatmaps" : false,
+				"indexGrouping" : 4
+			},
+			"singleProcessing" : {
+				"prefixList" : ["mid_"],
+				"rankmaps" : {
+					"combined" : {
+						"index" : ["Stage policy", "Mask policy", "Vaccine schedule"],
+						"metricCols" : {
+						"m18_nmb"           : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "nmb", true],
+							"m18_nmbGdp"        : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "nmbGdp", true],
+							"m18_hospAbove750"  : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "hospAbove750", true],
+							"m18_hospAbove1500" : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "hospAbove1500", true],
+							"m18_deaths"        : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "deaths", true],
+							
+							"m18_aggRanks"      : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "aggRanks", true],
+							"m12_aggRanks"      : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "aggRanks", true],
+							"j18_aggRanks"      : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "aggRanks", true],
+							"j12_aggRanks"      : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "aggRanks", true],
+
+							"m12_nmb"           : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "nmb", true],
+							"m12_nmbGdp"        : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "nmbGdp", true],
+							"m12_hospAbove750"  : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "hospAbove750", true],
+							"m12_hospAbove1500" : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "hospAbove1500", true],
+							"m12_deaths"        : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "deaths", true],
+							
+							"j18_nmb"           : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "nmb", true],
+							"j18_nmbGdp"        : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "nmbGdp", true],
+							"j18_hospAbove750"  : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "hospAbove750", true],
+							"j18_hospAbove1500" : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "hospAbove1500", true],
+							"j18_deaths"        : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "deaths", true],
+							
+							"j12_nmb"           : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "nmb", true],
+							"j12_nmbGdp"        : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "nmbGdp", true],
+							"j12_hospAbove750"  : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "hospAbove750", true],
+							"j12_hospAbove1500" : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "hospAbove1500", true],
+							"j12_deaths"        : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "deaths", true],
+							
+							"m18_nmb_median"    : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "nmb_median", true],
+							"m18_nmbGdp_median" : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "nmbGdp_median", true],
+							"m18_deathRank    " : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "deathRank", true],
+							"m18_hospRank_750"  : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "hospRank_750", true],
+							"m18_hospRank_1500" : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "hospRank_1500", true],
+							"m18_hospRank"      : ["../scratch/vic_main/process/rankmaps/fullTimeAndIncur", "hospRank", true],
+							
+							"m12_nmb_median"    : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "nmb_median", true],
+							"m12_nmbGdp_median" : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "nmbGdp_median", true],
+							"m12_deathRank    " : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "deathRank", true],
+							"m12_hospRank_750"  : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "hospRank_750", true],
+							"m12_hospRank_1500" : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "hospRank_1500", true],
+							"m12_hospRank"      : ["../scratch/vic_main/process/rankmaps/oneYearAllIncur", "hospRank", true],
+
+							"j18_nmb_median"    : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "nmb_median", true],
+							"j18_nmbGdp_median" : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "nmbGdp_median", true],
+							"j18_deathRank    " : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "deathRank", true],
+							"j18_hospRank_750"  : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "hospRank_750", true],
+							"j18_hospRank_1500" : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "hospRank_1500", true],
+							"j18_hospRank"      : ["../scratch/vic_josh/process/rankmaps/fullTimeAndIncur", "hospRank", true],
+
+							"j12_nmb_median"    : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "nmb_median", true],
+							"j12_nmbGdp_median" : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "nmbGdp_median", true],
+							"j12_deathRank    " : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "deathRank", true],
+							"j12_hospRank_750"  : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "hospRank_750", true],
+							"j12_hospRank_1500" : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "hospRank_1500", true],
+							"j12_hospRank"      : ["../scratch/vic_josh/process/rankmaps/oneYearAllIncur", "hospRank", true]
+						},
+						"sortBy" : "m18_aggRanks"
+					}
+				}
+			},
+			"heatmapStructure" : {
+				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
+				"base_value" : {
+				},
+				"sort_rows" : [
+				], 
+				"sort_cols" : [
+				]
+			},
+			"splitTableIndexName" : "Vaccine schedule",
+			"indexRename" : {
+				"input_vaccine_schedule" : {
+					"name" : "Vaccine schedule",
+					"values" : {
+						"input/vic/rollout_cur_then_target.csv"    : "CG then OT",
+						"input/vic/rollout_target_only.csv"        : "OT",
+						"input/vic/rollout_cur_then_multi.csv"     : "CG then MV",
+						"input/vic/rollout_multi_only.csv"         : "MV",
+						"input/vic/rollout_current.csv"            : "CG",
+						"input/vic/rollout_cur_then_target_60.csv" : "CG then OT 60+",
+						"input/vic/rollout_target_only_60.csv"     : "OT 60+",
+						"input/vic/rollout_cur_then_multi_60.csv"  : "CG then MV 60+",
+						"input/vic/rollout_multi_only_60.csv"      : "MV 60+",
+						"input/vic/rollout_current_60.csv"         : "CG 60+",
+						"input/vic/rollout_none.csv"               : "None"
+					}
+				},
+				"incur_name_part_1" : {
+					"name" : "Variant",
+					"values" : {
+						"omlike" : "Omni-like",
+						"novel"  : "Novel"
+					}
+				},
+				"incur_name_part_2" : {
+					"name" : "Immune escape",
+					"values" : {
+						"" : "Low escape",
+						"_escape"  : "High escape"
+					}
+				},
+				"incur_name_part_3" : {
+					"name" : "Infectiousness",
+					"values" : {
+						"" : "Current infect",
+						"_high"  : "Higher infect"
+					}
+				},
+				"high_incur_virulence" : {
+					"name" : "Virulence",
+					"values" : {
+						"True"  : "High vir",
+						"False" : "Low vir"
+					}
+				},
+				"incur_day" : {
+					"name" : "Incursion day",
+					"values" : {
+						"91"  : "91",
+						"182" : "182",
+						"273" : "273",
+						"364" : "364"
+					}
+				},
+				"policy_mask_n95" : {
+					"name" : "Mask policy",
+					"values" : {
+						"False" : "No Stockpile",
+						"True"  : "Stockpile N95"
+					}
+				},
+				"param_policy" : {
+					"name" : "Stage policy",
+					"values" : {
+						"BarelySupress" : "BarelySupress",
+						"LooseSupress" : "LooseSupress"
+					}
+				}
+			}
+		}
+	}
+}
