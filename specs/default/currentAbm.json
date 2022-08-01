@@ -487,5 +487,11 @@
     ],
     "input_vac_extra": [
         "\"input/vic/vaccine_extra_params.csv\""
+    ],
+    "mid_day": [
+        "364.0"
+    ],
+    "maskWearMod": [
+        "0.0"
     ]
 }

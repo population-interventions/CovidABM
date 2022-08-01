@@ -3626,6 +3626,21 @@ Mid_Day
 NIL
 HORIZONTAL
 
+SLIDER
+24
+70
+196
+103
+maskWearMod
+maskWearMod
+-100
+100
+0.0
+10
+1
+NIL
+HORIZONTAL
+
 @#$#@#$#@
 ## WHAT IS IT?
 

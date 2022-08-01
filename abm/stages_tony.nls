@@ -79,8 +79,6 @@ to do_stages_tony
       set Visit_Frequency         0.1428
       set superspreaders          0.05
       set mask_wearing_a20        0.2
-      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
       set Visit_Radius            8.8
       set schoolsOpen true
     ]
@@ -94,8 +92,6 @@ to do_stages_tony
       set Visit_Frequency         0.1428
       set superspreaders          0.034
       set mask_wearing_a20        0.35
-      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
       set Visit_Radius            8.12
       set schoolsOpen true
     ]
@@ -109,8 +105,6 @@ to do_stages_tony
       set Visit_Frequency         0.13
       set superspreaders          0.022
       set mask_wearing_a20        0.6
-      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
       set Visit_Radius            6
       set schoolsOpen true
     ]
@@ -124,8 +118,6 @@ to do_stages_tony
       set Visit_Frequency         0.075
       set superspreaders          0.016
       set mask_wearing_a20        0.78
-      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
       set Visit_Radius            5.0
       set schoolsOpen false
     ]
@@ -139,11 +131,22 @@ to do_stages_tony
       set Visit_Frequency         0.05
       set superspreaders          0.01
       set mask_wearing_a20        0.90
-      set mask_wearing_a10        mask_wearing_a20 * 2 / 3
-      set mask_wearing_a0         mask_wearing_a10 * 2 / 3
       set Visit_Radius            3.6
       set schoolsOpen false
     ]
+    
+    ;; Mask wearing modifier
+    set mask_wearing_a20 mask_wearing_a20 + maskWearMod * 0.01
+    if mask_wearing_a20 < 0 [
+     set mask_wearing_a20 0 
+    ]
+    if mask_wearing_a20 > 1 [
+     set mask_wearing_a20 1 
+    ]
+    
+    ;; Set lower mask wearing for younger age groups
+    set mask_wearing_a10        mask_wearing_a20 * 2 / 3
+    set mask_wearing_a0         mask_wearing_a10 * 2 / 3
   ]
 end
 

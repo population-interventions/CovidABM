@@ -1,0 +1,474 @@
+{
+	"netlogoFile" : "covidModel",
+	"defaultParamFile" : "vic_main",
+	"copyExperimentMetrics" : "vic_main",
+	"postInputDir" : "vic",
+	"threads" : 4,
+	"indexParams" : {
+		"input_vaccine_schedule" : [
+			"input/vic/rollout_none.csv",
+			"input/vic/rollout_current.csv",
+			"input/vic/rollout_cur_then_target.csv",
+			"input/vic/rollout_target_only.csv",
+			"input/vic/rollout_current_60.csv",
+			"input/vic/rollout_cur_then_target_60.csv",
+			"input/vic/rollout_target_only_60.csv"
+		],
+		"incur_name_part_1" : [
+			"omlike"
+		],
+		"incur_name_part_2" : [
+			"_escape"
+		],
+		"incur_name_part_3" : [
+			""
+		],
+		"high_incur_virulence" : [
+			false
+		],
+		"incur_day" : [
+			91
+		],
+		"policy_mask_n95" : [
+			false,
+			true
+		],
+		"param_policy" : [
+			"LooseSupress",
+			"BarelySupress"
+		],
+		"maskWearMod" : [
+			-100,
+			-25,
+			-10,
+			0,
+			10
+		]
+	},
+	"paramOverrides" : {
+		"input_population_table" : "input/vic/pop",
+		"first_case_calibrate" : false,
+		"end_day" : 546
+	},
+	"runIndexer" : "draw_index",
+	"postSeries" : {
+		"processMain" : {
+			"params" : {
+				"aggregateProcessing" : true,
+				"processStages" : true,
+				"processCohort" : true,
+				"doAverage" : true,
+				
+				"outputTraces" : false,
+				"describeHeatmaps" : false,
+				"indexGrouping" : 4
+			},
+			"tornado" : {
+				"metrics" : ["totStage3", "totStage4", "hospDaysAbove750", "hospDaysAbove1500", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
+				"senList" : ["totHosp", "totInfect", "totDeath", "totStage3", "totStage4", "sen_vacInfectReduct", "sen_vacWaneInfect", "sen_vacWaneHosp", "sen_recoverInfectReduct", "sen_recoverWane", "sen_maskEff", "sen_asymptTransmit", "sen_isoProp", "sen_ifr", "sen_icu", "sen_hosp", "sen_sympt", "sen_hospTime", "sen_icuTime", "sen_vacCur", "sen_vacTarget", "sen_vacMulti", "sen_vacPromote", "sen_vacOverhead", "sen_maskPerson", "sen_maskStorage", "sen_maskPromote", "sen_vacUptake", "sen_transmissDraw", "sen_isoComply", "sen_halyAcute", "sen_halyLong", "sen_halyDeath", "sen_costGdp", "sen_costTest", "sen_costLong", "sen_costDeath", "sen_costDoctor", "sen_costParacetamol", "sen_costVisitEr", "sen_costHospBed", "sen_costIcuBed"]
+			},
+			"singleHeatmaps" : {
+				"prefixList" : ["mid_"],
+				"metrics" : ["totStage2", "totStage3", "totStage4", "totStage5", "hospDaysAbove750", "hospDaysAbove1500", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
+				"identifyIndex" : {
+					"scenAgg" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+				}
+			},
+			"singleProcessing" : {
+				"prefixList" : ["mid_"],
+				"aggregates" : {
+					"meanOnDraw_thenDescribeOnScenario" : {
+						"firstMeanOn" : ["draw_index"],
+						"thenDescribeOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+						"percentiles" : [0.95, 0.5, 0.05]
+					},
+					"meanOnScenario_thenDescribeOnDraw" : {
+						"firstMeanOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+						"thenDescribeOn" : ["draw_index"],
+						"percentiles" : [0.95, 0.5, 0.05]
+					},
+					"earlyIncur_meanOnDraw_thenDescribeOnScenario" : {
+						"filterOutIndex" : {
+							"Incursion day" : [273, 364]
+						},
+						"firstMeanOn" : ["draw_index"],
+						"thenDescribeOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+						"percentiles" : [0.95, 0.5, 0.05]
+					},
+					"earlyIncur_meanOnScenario_thenDescribeOnDraw" : {
+						"filterOutIndex" : {
+							"Incursion day" : [273, 364]
+						},
+						"firstMeanOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+						"thenDescribeOn" : ["draw_index"],
+						"percentiles" : [0.95, 0.5, 0.05]
+					}
+				},
+				"optimality" : {
+					"healthSystem_35k_ranking" : {
+						"rankingValue" : 35000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_35k_ranking" : {
+						"rankingValue" : 35000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk_35k_ranking" : {
+						"rankingValue" : 35000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_35k_ranking" : {
+						"rankingValue" : 35000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"earlyIncur_healthSystem_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"filterOutIndex" : {
+							"Incursion day" : [273, 364]
+						},
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"earlyIncur_healthSystemAndGdp_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"filterOutIndex" : {
+							"Incursion day" : [273, 364]
+						},
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_70k_ranking" : {
+						"rankingValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_140k_ranking" : {
+						"rankingValue" : 140000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_140k_ranking" : {
+						"rankingValue" : 140000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk_140k_ranking" : {
+						"rankingValue" : 140000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_140k_ranking" : {
+						"rankingValue" : 140000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk_70k_heatmap" : {
+						"heatmapValue" : 70000,
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem" : {
+						"values" : [10000, 250000, 2500],
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalHealth",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp" : {
+						"values" : [10000, 250000, 2500],
+						"halyCol" : "halyTotalTotal",
+						"costCol" : "costTotalTotal",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystem_uk" : {
+						"values" : [10000, 250000, 2500],
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalHealth_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					},
+					"healthSystemAndGdp_uk" : {
+						"values" : [10000, 250000, 2500],
+						"halyCol" : "halyTotalTotal_uk",
+						"costCol" : "costTotalTotal_uk",
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"]
+					}
+				},
+				"rankmaps" : {
+					"fullTimeAndIncur" : {
+						"index" : ["Stage policy", "Mask policy", "Vaccine schedule"],
+						"metricCols" : {
+							"nmb" : ["optimal/healthSystem_70k_ranking", "rank"],
+							"nmbGdp" : ["optimal/healthSystemAndGdp_70k_ranking", "rank"],
+							"nmb_median" : ["optimal/healthSystem_70k_ranking", "p_50"],
+							"nmbGdp_median" : ["optimal/healthSystemAndGdp_70k_ranking", "p_50"],
+							"hospAbove750" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove750"],
+							"hospAbove1500" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove1500"],
+							"deaths" : ["single/meanOnDraw_thenDescribeOnScenario_50", "totDeath"]
+						},
+						"deriveRanks" : {
+							"deathRank" : {
+								"value" : "deaths",
+								"ascending" : true
+							},
+							"hospRank_750" : {
+								"value" : "hospAbove750",
+								"ascending" : true
+							},
+							"hospRank_1500" : {
+								"value" : "hospAbove1500",
+								"ascending" : true
+							},
+							"hospRank" : {
+								"average" : ["hospRank_750", "hospRank_1500"],
+								"ascending" : true
+							},
+							"aggRanks" : {
+								"average" : ["nmb", "nmbGdp", "deathRank", "hospRank"],
+								"ascending" : true
+							}
+						},
+						"sortBy" : "aggRanks",
+						"orderCols" : [
+							"nmb", "nmbGdp", "hospAbove750", "hospAbove1500", "deaths", "aggRanks",
+							"nmb_median", "nmbGdp_median", "deathRank", "hospRank_750", "hospRank_1500", "hospRank"
+						]
+					},
+					"oneYearEarlyIncur" : {
+						"index" : ["Stage policy", "Mask policy", "Vaccine schedule"],
+						"metricCols" : {
+							"nmb" : ["mid_optimal/earlyIncur_healthSystem_70k_ranking", "rank"],
+							"nmbGdp" : ["mid_optimal/earlyIncur_healthSystemAndGdp_70k_ranking", "rank"],
+							"nmb_median" : ["mid_optimal/earlyIncur_healthSystem_70k_ranking", "p_50"],
+							"nmbGdp_median" : ["mid_optimal/earlyIncur_healthSystemAndGdp_70k_ranking", "p_50"],
+							"hospAbove750" : ["single/earlyIncur_meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove750"],
+							"hospAbove1500" : ["single/earlyIncur_meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove1500"],
+							"deaths" : ["single/earlyIncur_meanOnDraw_thenDescribeOnScenario_50", "totDeath"]
+						},
+						"deriveRanks" : {
+							"deathRank" : {
+								"value" : "deaths",
+								"ascending" : true
+							},
+							"hospRank_750" : {
+								"value" : "hospAbove750",
+								"ascending" : true
+							},
+							"hospRank_1500" : {
+								"value" : "hospAbove1500",
+								"ascending" : true
+							},
+							"hospRank" : {
+								"average" : ["hospRank_750", "hospRank_1500"],
+								"ascending" : true
+							},
+							"aggRanks" : {
+								"average" : ["nmb", "nmbGdp", "deathRank", "hospRank"],
+								"ascending" : true
+							}
+						},
+						"sortBy" : "aggRanks",
+						"orderCols" : [
+							"nmb", "nmbGdp", "hospAbove750", "hospAbove1500", "deaths", "aggRanks",
+							"nmb_median", "nmbGdp_median", "deathRank", "hospRank_750", "hospRank_1500", "hospRank"
+						]
+					},
+					"oneYearAllIncur" : {
+						"index" : ["Stage policy", "Mask policy", "Vaccine schedule"],
+						"metricCols" : {
+							"nmb" : ["mid_optimal/healthSystem_70k_ranking", "rank"],
+							"nmbGdp" : ["mid_optimal/healthSystemAndGdp_70k_ranking", "rank"],
+							"nmb_median" : ["mid_optimal/healthSystem_70k_ranking", "p_50"],
+							"nmbGdp_median" : ["mid_optimal/healthSystemAndGdp_70k_ranking", "p_50"],
+							"hospAbove750" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove750"],
+							"hospAbove1500" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove1500"],
+							"deaths" : ["single/meanOnDraw_thenDescribeOnScenario_50", "totDeath"]
+						},
+						"deriveRanks" : {
+							"deathRank" : {
+								"value" : "deaths",
+								"ascending" : true
+							},
+							"hospRank_750" : {
+								"value" : "hospAbove750",
+								"ascending" : true
+							},
+							"hospRank_1500" : {
+								"value" : "hospAbove1500",
+								"ascending" : true
+							},
+							"hospRank" : {
+								"average" : ["hospRank_750", "hospRank_1500"],
+								"ascending" : true
+							},
+							"aggRanks" : {
+								"average" : ["nmb", "nmbGdp", "deathRank", "hospRank"],
+								"ascending" : true
+							}
+						},
+						"sortBy" : "aggRanks",
+						"orderCols" : [
+							"nmb", "nmbGdp", "hospAbove750", "hospAbove1500", "deaths", "aggRanks",
+							"nmb_median", "nmbGdp_median", "deathRank", "hospRank_750", "hospRank_1500", "hospRank"
+						]
+					}
+				}
+			},
+			"cohortHeatmaps" : {
+				"heatAges" : [
+					[0, 30],
+					[30, 60],
+					[60, 100],
+					[0, 100]
+				],
+				"heatPeriods" : [
+					[0, 2],
+					[0, 4],
+					[2, 4],
+					[4, 6],
+					[0, 6]
+				]
+			},
+			"heatmapStructure" : {
+				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
+				"base_value" : {
+				},
+				"sort_rows" : [
+				], 
+				"sort_cols" : [
+				]
+			},
+			"splitTableIndexName" : "Vaccine schedule",
+			"indexRename" : {
+				"input_vaccine_schedule" : {
+					"name" : "Vaccine schedule",
+					"values" : {
+						"input/vic/rollout_cur_then_target.csv"    : "CG then OT",
+						"input/vic/rollout_target_only.csv"        : "OT",
+						"input/vic/rollout_cur_then_multi.csv"     : "CG then MV",
+						"input/vic/rollout_multi_only.csv"         : "MV",
+						"input/vic/rollout_current.csv"            : "CG",
+						"input/vic/rollout_cur_then_target_60.csv" : "CG then OT 60+",
+						"input/vic/rollout_target_only_60.csv"     : "OT 60+",
+						"input/vic/rollout_cur_then_multi_60.csv"  : "CG then MV 60+",
+						"input/vic/rollout_multi_only_60.csv"      : "MV 60+",
+						"input/vic/rollout_current_60.csv"         : "CG 60+",
+						"input/vic/rollout_none.csv"               : "None"
+					}
+				},
+				"incur_name_part_1" : {
+					"name" : "Variant",
+					"values" : {
+						"omlike" : "Omni-like",
+						"novel"  : "Novel"
+					}
+				},
+				"incur_name_part_2" : {
+					"name" : "Immune escape",
+					"values" : {
+						"" : "Low escape",
+						"_escape"  : "High escape"
+					}
+				},
+				"incur_name_part_3" : {
+					"name" : "Infectiousness",
+					"values" : {
+						"" : "Current infect",
+						"_high"  : "Higher infect"
+					}
+				},
+				"high_incur_virulence" : {
+					"name" : "Virulence",
+					"values" : {
+						"True"  : "High vir",
+						"False" : "Low vir"
+					}
+				},
+				"incur_day" : {
+					"name" : "Incursion day",
+					"values" : {
+						"91"  : "91",
+						"182" : "182",
+						"273" : "273",
+						"364" : "364"
+					}
+				},
+				"policy_mask_n95" : {
+					"name" : "Mask policy",
+					"values" : {
+						"False" : "No Stockpile",
+						"True"  : "Stockpile N95"
+					}
+				},
+				"param_policy" : {
+					"name" : "Stage policy",
+					"values" : {
+						"BarelySupress" : "BarelySupress",
+						"LooseSupress" : "LooseSupress"
+					}
+				},
+				"maskWearMod" : {
+					"name" : "Mask modifier",
+					"values" : {
+						"-100"  : "Remove All",
+						"-25"   : "Decrease 25%",
+						"-10"   : "Decrease 10%",
+						"0"     : "Baseline",
+						"10"    : "Increase 10%"
+					}
+				}
+			}
+		}
+	}
+}
