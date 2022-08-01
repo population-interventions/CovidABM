@@ -380,7 +380,7 @@
 				]
 			},
 			"heatmapStructure" : {
-				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
+				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask modifier"],
 				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
 				"base_value" : {
 				},
