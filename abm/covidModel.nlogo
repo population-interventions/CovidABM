@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-12.0
+7.5
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.05
+0.022
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.35
+0.63
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.45
+0.73
 0.01
 1
 NIL
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.7
+0.35
 0.01
 1
 NIL
@@ -694,7 +694,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.1428
+0.13
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+6.0
 1
 1
 NIL
@@ -2002,7 +2002,7 @@ param_vac_uptake_mult
 param_vac_uptake_mult
 0
 1
-0.8
+0.65
 0.05
 1
 NIL
@@ -5614,6 +5614,15 @@ NetLogo 6.2.0
     <metric>hospDaysAbove1500_out</metric>
     <metric>hospDaysAbove1750_out</metric>
     <metric>hospDaysAbove2000_out</metric>
+    <metric>prevInfect0_out</metric>
+    <metric>prevInfect1_out</metric>
+    <metric>prevInfect2_out</metric>
+    <metric>prevInfect3_out</metric>
+    <metric>prevInfect4_out</metric>
+    <metric>prevInfect5_out</metric>
+    <metric>prevInfect6_out</metric>
+    <metric>prevInfect7_out</metric>
+    <metric>prevInfect8_out</metric>
     <metric>mid_costDeathAverted_out</metric>
     <metric>mid_costDeathAverted_uk_out</metric>
     <metric>mid_costAcute_out</metric>
@@ -5665,6 +5674,15 @@ NetLogo 6.2.0
     <metric>mid_hospDaysAbove1500_out</metric>
     <metric>mid_hospDaysAbove1750_out</metric>
     <metric>mid_hospDaysAbove2000_out</metric>
+    <metric>mid_prevInfect0_out</metric>
+    <metric>mid_prevInfect1_out</metric>
+    <metric>mid_prevInfect2_out</metric>
+    <metric>mid_prevInfect3_out</metric>
+    <metric>mid_prevInfect4_out</metric>
+    <metric>mid_prevInfect5_out</metric>
+    <metric>mid_prevInfect6_out</metric>
+    <metric>mid_prevInfect7_out</metric>
+    <metric>mid_prevInfect8_out</metric>
     <metric>sen_vacInfectReduct_out</metric>
     <metric>sen_vacWaneInfect_out</metric>
     <metric>sen_vacWaneHosp_out</metric>

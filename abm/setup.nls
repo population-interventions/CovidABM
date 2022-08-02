@@ -208,6 +208,7 @@ to createSimulants
       set size 2
       set shape "dot"
       set color cyan
+      set previousInfections 0
       set householdUnit random 1000
       set tracked 0
       set knownContactTime -1
@@ -376,6 +377,7 @@ to setupInitialVaccination_micromangedMethod
             set recoverVaccine ([recoverVaccine] of target)
             set recoverVariant ([recoverVariant] of target)
             set color yellow
+            set previousInfections 1
           ]
         ]
       ]
@@ -388,6 +390,7 @@ to setupInitialVaccination_micromangedMethod
           set recoverVaccine 0
           set recoverVariant 0
           set color cyan
+          set previousInfections 0
         ]
       ]
     )

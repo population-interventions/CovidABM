@@ -418,6 +418,7 @@ end
 
 to CalculateMidCosts
   CalculateEndCosts
+  CalculateEndCounts
   
   set mid_costDeathAverted_out    costDeathAverted_out
   set mid_costDeathAverted_uk_out costDeathAverted_uk_out
@@ -470,4 +471,13 @@ to CalculateMidCosts
   set mid_hospDaysAbove1500_out   hospDaysAbove1500_out
   set mid_hospDaysAbove1750_out   hospDaysAbove1750_out
   set mid_hospDaysAbove2000_out   hospDaysAbove2000_out
+  set mid_prevInfect0_out         prevInfect0_out
+  set mid_prevInfect1_out         prevInfect1_out
+  set mid_prevInfect2_out         prevInfect2_out
+  set mid_prevInfect3_out         prevInfect3_out
+  set mid_prevInfect4_out         prevInfect4_out
+  set mid_prevInfect5_out         prevInfect5_out
+  set mid_prevInfect6_out         prevInfect6_out
+  set mid_prevInfect7_out         prevInfect7_out
+  set mid_prevInfect8_out         prevInfect8_out
 end

@@ -8,6 +8,8 @@ to setupPipes
   set deathTodayPipe pipeZeros
   set hospTodayPipe  pipeZeros
   set hospUsagePipe  pipeZeros
+  
+  set prevInfectList n-values 9 [0]
 end
 
 to updatePipes
@@ -36,6 +38,13 @@ to simul_AddDeathHospToPipes [variant hospMean deathMean hospLength]
   ]
   
   ;print (word agerange "  " (floor (hospMean * 10) / 10) )
+end
+
+to simul_AddPreviousInfectionTracking [popPerSimul]
+  if previousInfections >= length prevInfectList [
+    set previousInfections (length prevInfectList) - 1
+  ]
+  set prevInfectList replace-item previousInfections prevInfectList ((item previousInfections prevInfectList) + popPerSimul)
 end
 
 to printVaccineProgress
@@ -372,4 +381,26 @@ to checkStartThreshold
       ]
     ]
   ]
+end
+
+to CalculateEndCounts
+  set prevInfect8_out item 8 prevInfectList
+  set prevInfect7_out prevInfect8_out + item 7 prevInfectList
+  set prevInfect6_out prevInfect7_out + item 6 prevInfectList
+  set prevInfect5_out prevInfect6_out + item 5 prevInfectList
+  set prevInfect4_out prevInfect5_out + item 4 prevInfectList
+  set prevInfect3_out prevInfect4_out + item 3 prevInfectList
+  set prevInfect2_out prevInfect3_out + item 2 prevInfectList
+  set prevInfect1_out prevInfect2_out + item 1 prevInfectList
+  set prevInfect0_out prevInfect1_out + item 0 prevInfectList
+  
+  set prevInfect8_out prevInfect8_out / totInfect_out
+  set prevInfect7_out prevInfect7_out / totInfect_out
+  set prevInfect6_out prevInfect6_out / totInfect_out
+  set prevInfect5_out prevInfect5_out / totInfect_out
+  set prevInfect4_out prevInfect4_out / totInfect_out
+  set prevInfect3_out prevInfect3_out / totInfect_out
+  set prevInfect2_out prevInfect2_out / totInfect_out
+  set prevInfect1_out prevInfect1_out / totInfect_out
+  set prevInfect0_out prevInfect0_out / totInfect_out
 end

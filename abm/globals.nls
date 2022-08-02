@@ -469,6 +469,17 @@ globals [
   hospDaysAbove1750_out
   hospDaysAbove2000_out
   
+  prevInfectList
+  prevInfect0_out
+  prevInfect1_out
+  prevInfect2_out
+  prevInfect3_out
+  prevInfect4_out
+  prevInfect5_out
+  prevInfect6_out
+  prevInfect7_out
+  prevInfect8_out
+  
   mid_costDeathAverted_out
   mid_costDeathAverted_uk_out
   mid_costAcute_out
@@ -522,6 +533,16 @@ globals [
   mid_hospDaysAbove1500_out
   mid_hospDaysAbove1750_out
   mid_hospDaysAbove2000_out
+  
+  mid_prevInfect0_out
+  mid_prevInfect1_out
+  mid_prevInfect2_out
+  mid_prevInfect3_out
+  mid_prevInfect4_out
+  mid_prevInfect5_out
+  mid_prevInfect6_out
+  mid_prevInfect7_out
+  mid_prevInfect8_out
   
   sen_vacInfectReduct_out
   sen_vacWaneInfect_out

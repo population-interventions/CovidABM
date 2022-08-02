@@ -15,6 +15,7 @@ to ShiftRecoveredTowardsTotalProportion
         let transferRecoverVaccinePopPerSimul recoverVaccinePopPerSimul
         
         set color cyan
+        set previousInfections 0
         set recoverVariant 0
         set recoverVaccine 0
         set recoverDay -1
@@ -223,6 +224,7 @@ to do_scaledown
     let my_recoverTime              0
     let my_asymptomaticFlag         0
     let my_hospFlag                 0
+    let my_previousInfections       0
     
     let thisSimul 0
     let otherSimul 0
@@ -240,6 +242,7 @@ to do_scaledown
         set my_selfTraceEffMult         selfTraceEffMult
         set my_asymptomaticFlag         asymptomaticFlag
         set my_hospFlag                 hospFlag
+        set my_previousInfections       previousInfections
         
         let toAsk Scale_Factor ^ (myScale - scalePhase) - 1 + random-float 1
         set toScale toScale - 1 
@@ -262,6 +265,7 @@ to do_scaledown
             set selfTraceEffMult         my_selfTraceEffMult
             set asymptomaticFlag         my_asymptomaticFlag
             set hospFlag                 my_hospFlag
+            set previousInfections       my_previousInfections
             
             table:put infectedContactList table:length infectedContactList thisSimul
             set otherSimul self
@@ -290,6 +294,7 @@ to do_scaledown
           set my_selfTraceEffMult         selfTraceEffMult
           set my_asymptomaticFlag         asymptomaticFlag
           set my_hospFlag                 hospFlag
+          set my_previousInfections       previousInfections
           
           let toAsk Scale_Factor ^ (myScale - scalePhase) - 1
           set toScale toScale - 1 
@@ -312,6 +317,7 @@ to do_scaledown
               set selfTraceEffMult         my_selfTraceEffMult
               set asymptomaticFlag         my_asymptomaticFlag
               set hospFlag                 my_hospFlag
+              set previousInfections       my_previousInfections
               
               table:put infectedContactList table:length infectedContactList thisSimul
               set otherSimul self
