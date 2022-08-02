@@ -214,6 +214,7 @@ to simul_do_scaleup
   ifelse recoverVaccine = 0
   [
     set color cyan
+    set previousInfections 0
     set infectVariant 0
     set recoverVariant 0
     set recoverVaccine 0
@@ -222,8 +223,11 @@ to simul_do_scaleup
   ]
   [
     set color yellow
+    if previousInfections < 1 [
+      set previousInfections 1
+    ]
   ]
-
+  
   set timenow 0
   set noticeOwnInfection 0
   set imported 0
