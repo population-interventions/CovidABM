@@ -640,6 +640,7 @@ to setGlobals
   
   set infectNoVacArray_listOut []
   set infectVacArray_listOut []
+  set prevInfections_listOut []
   set case_listOut []
   set case7_listOut []
   set case14_listOut []

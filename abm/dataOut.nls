@@ -1,9 +1,11 @@
 
 to setup_DataOut [maxHospTime maxIcuTime maxDeathTime]
   set cohortLengthListOfZeros n-values length table:keys popDivisionTable [0]
+  set prevInfectListOfZeros n-values prevInfectTrackMax [0]
   
   set infectNoVacArray array:from-list cohortLengthListOfZeros
   set infectVacArray array:from-list cohortLengthListOfZeros
+  set prevInfectionsArray array:from-list prevInfectListOfZeros
   set symptArray array:from-list cohortLengthListOfZeros
   
   set hospArray []
@@ -72,6 +74,7 @@ to calculateDataOut
     ;print "doDataOut"
     set infectNoVacArray_listOut lput array:to-list infectNoVacArray infectNoVacArray_listOut
     set infectVacArray_listOut lput array:to-list infectVacArray infectVacArray_listOut
+    set prevInfections_listOut lput array:to-list prevInfectionsArray prevInfections_listOut
     
     set dieArray_listOut      lput (array:to-list item 0 dieArray) dieArray_listOut
     set icuArray_listOut      lput (array:to-list item 0 icuArray) icuArray_listOut
@@ -117,6 +120,7 @@ to calculateDataOut
   
   set infectNoVacArray array:from-list cohortLengthListOfZeros
   set infectVacArray array:from-list cohortLengthListOfZeros
+  set prevInfectionsArray array:from-list prevInfectListOfZeros
   set symptArray array:from-list cohortLengthListOfZeros
   set vaccineArray vaccineLengthListOfZeros
   

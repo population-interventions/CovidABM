@@ -9,7 +9,7 @@ to setupPipes
   set hospTodayPipe  pipeZeros
   set hospUsagePipe  pipeZeros
   
-  set prevInfectList n-values 9 [0]
+  set prevInfectList n-values prevInfectTrackMax [0]
 end
 
 to updatePipes
@@ -44,6 +44,7 @@ to simul_AddPreviousInfectionTracking [popPerSimul]
   if previousInfections >= length prevInfectList [
     set previousInfections (length prevInfectList) - 1
   ]
+  array:set prevInfectionsArray previousInfections (array:item prevInfectionsArray previousInfections) + popPerSimul
   set prevInfectList replace-item previousInfections prevInfectList ((item previousInfections prevInfectList) + popPerSimul)
 end
 

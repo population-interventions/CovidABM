@@ -1838,20 +1838,20 @@ NIL
 HORIZONTAL
 
 CHOOSER
-9
-569
-202
-614
+2222
+468
+2365
+513
 policy_pipeline
 policy_pipeline
 "None" "ME_TS_S1" "ME_ME_ME" "ME_ME_TS" "ME_ME_LS" "ME_TS_LS" "ME_TS_BS" "ME_TS_NONE"
 0
 
 SLIDER
-10
-618
-199
-651
+2220
+515
+2365
+549
 policy_pipe_time
 policy_pipe_time
 0
@@ -3640,6 +3640,31 @@ maskWearMod
 1
 NIL
 HORIZONTAL
+
+SLIDER
+2218
+384
+2366
+418
+prevInfectTrackMax
+prevInfectTrackMax
+0
+8
+6.0
+1
+1
+NIL
+HORIZONTAL
+
+CHOOSER
+12
+569
+151
+614
+compoundScenario
+compoundScenario
+"none" "josh" "worst"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -5546,6 +5571,7 @@ NetLogo 6.2.0
     <metric>stage_listOut</metric>
     <metric>infectNoVacArray_listOut</metric>
     <metric>infectVacArray_listOut</metric>
+    <metric>prevInfections_listOut</metric>
     <metric>case_listOut</metric>
     <metric>case7_listOut</metric>
     <metric>case14_listOut</metric>

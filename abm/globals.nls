@@ -372,11 +372,14 @@ globals [
 
   ;; Data output
   cohortLengthListOfZeros
+  prevInfectListOfZeros
   vaccineLengthListOfZeros
   infectNoVacArray
   infectVacArray
+  prevInfectionsArray
   infectNoVacArray_listOut
   infectVacArray_listOut
+  prevInfections_listOut
   case_listOut
   case7_listOut
   case14_listOut

@@ -66,6 +66,7 @@ def ProcessAbmChunk(
 		'age_listOut']
 		 + measureCols_raw
 		 + ['{}Array_listOut'.format(name) for name in gl.metricListRaw.keys()]
+		 + ['{}_listOut'.format(name) for name in gl.countedMetricList]
 		 + ['{}_listOut'.format(name) for name in gl.cohortMetricList]
 		 + ['{}_out'.format(name) for name in gl.singleMetricList]
 	]
@@ -129,6 +130,11 @@ def ProcessAbmChunk(
 	for metric in gl.cohortMetricList:
 		SplitOutTableData(
 			chunk, dataMap, cohorts, days, arrayIndex, metric,
+			filename, metric, fillTo=day_override, daily=False)
+	
+	for metric in gl.countedMetricList:
+		SplitOutTableData(
+			chunk, dataMap, gl.countedMetricLength, days, arrayIndex, metric,
 			filename, metric, fillTo=day_override, daily=False)
 	
 	return dataMap
@@ -500,7 +506,7 @@ def ProcessInfectionCohorts(
 	
 
 def CleanupFiles(inputDir, arrayIndex):
-	for metric in gl.metricList + gl.cohortMetricList + ['secondary', 'stage', 'vaccine']:
+	for metric in gl.metricList + gl.cohortMetricList + gl.countedMetricList + ['secondary', 'stage', 'vaccine']:
 		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv') 
 
 

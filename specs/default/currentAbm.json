@@ -414,10 +414,10 @@
         "\"input/vic/vaccine/draw_\""
     ],
     "policy_mask_n95": [
-        "false"
+        "true"
     ],
     "incur_day": [
-        "320.0"
+        "91.0"
     ],
     "incur_replace_chance": [
         "0.02"
@@ -429,25 +429,25 @@
         "\"input/vic/vaccine_params_or_uncertainty.csv\""
     ],
     "high_incur_virulence": [
-        "true"
+        "false"
     ],
     "in_prevac_count": [
         "1000.0"
     ],
     "in_vaccine_count": [
-        "2.0"
+        "100.0"
     ],
     "base_name": [
         "\"base\""
     ],
     "incur_name_part_1": [
-        "\"novel\""
+        "\"omlike\""
     ],
     "incur_name_part_2": [
         "\"_escape\""
     ],
     "incur_name_part_3": [
-        "\"_high\""
+        "\"\""
     ],
     "init_vacrecover_day": [
         "0.0"
@@ -491,7 +491,13 @@
     "mid_day": [
         "364.0"
     ],
-    "maskWearMod": [
+    "maskwearmod": [
         "0.0"
+    ],
+    "previnfecttrackmax": [
+        "6.0"
+    ],
+    "compoundscenario": [
+        "\"none\""
     ]
 }
