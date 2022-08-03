@@ -4,7 +4,7 @@ metricListRaw = {'die' : 'mort', 'icu' : 'icu', 'hosp' : 'hosp', 'hospTime' : 'h
 
 cohortMetricList = ['halyAcute', 'halyDeath', 'halyLong']
 countedMetricList = ['prevInfections']
-countedMetricLength = 6
+countedMetricLength = 9
 singleMetricList = [
 	'costDeathAverted',
 	'costAcute',

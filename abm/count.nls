@@ -9,7 +9,7 @@ to setupPipes
   set hospTodayPipe  pipeZeros
   set hospUsagePipe  pipeZeros
   
-  set prevInfectList n-values prevInfectTrackMax [0]
+  set prevInfectList n-values 9 [0]
 end
 
 to updatePipes
@@ -40,12 +40,18 @@ to simul_AddDeathHospToPipes [variant hospMean deathMean hospLength]
   ;print (word agerange "  " (floor (hospMean * 10) / 10) )
 end
 
-to simul_AddPreviousInfectionTracking [popPerSimul]
-  if previousInfections >= length prevInfectList [
-    set previousInfections (length prevInfectList) - 1
+to simul_AddPreviousInfectionTracking [popPerSimul _prevInfects]
+  if _prevInfects >= 9 [
+    set _prevInfects 8
   ]
-  array:set prevInfectionsArray previousInfections (array:item prevInfectionsArray previousInfections) + popPerSimul
-  set prevInfectList replace-item previousInfections prevInfectList ((item previousInfections prevInfectList) + popPerSimul)
+  set prevInfectList replace-item _prevInfects prevInfectList ((item _prevInfects prevInfectList) + popPerSimul)
+  if _prevInfects >= prevInfectTrackMax [
+    set _prevInfects prevInfectTrackMax - 1
+  ]
+  while [_prevInfects >= 0] [
+    array:set prevInfectionsArray _prevInfects (array:item prevInfectionsArray _prevInfects) + popPerSimul
+    set _prevInfects _prevInfects - 1 
+  ]
 end
 
 to printVaccineProgress

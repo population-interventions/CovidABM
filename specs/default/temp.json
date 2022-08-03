@@ -3,16 +3,16 @@
         "2500.0"
     ],
     "span": [
-        "9.0"
+        "12.0"
     ],
     "superspreaders": [
-        "0.034"
+        "0.05"
     ],
     "proportion_people_avoid": [
-        "0.53"
+        "0.35"
     ],
     "proportion_time_avoid": [
-        "0.63"
+        "0.45"
     ],
     "initial_cases": [
         "600000.0"
@@ -21,7 +21,7 @@
         "6649066.0"
     ],
     "essential_workers": [
-        "0.51"
+        "0.7"
     ],
     "ess_w_risk_reduction": [
         "0.0"
@@ -42,7 +42,7 @@
         "0.1428"
     ],
     "visit_radius": [
-        "8.12"
+        "8.8"
     ],
     "mask_efficacy_mult": [
         "1.0"
@@ -195,7 +195,7 @@
         "\"None\""
     ],
     "param_vac_uptake_mult": [
-        "0.8"
+        "0.65"
     ],
     "compound_essential": [
         "\"Extreme\""
@@ -351,7 +351,7 @@
         "2.0"
     ],
     "sim_seed": [
-        "81250.91969"
+        "62242.23955"
     ],
     "mid_report_day": [
         "64.0"
@@ -387,10 +387,10 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "1132.0"
+        "755.0"
     ],
     "input_vaccine_schedule": [
-        "\"input/vic/rollout_cur_then_multi_60.csv\""
+        "\"input/vic/rollout_target_only.csv\""
     ],
     "param_force_vaccine": [
         "\"Disabled\""
@@ -417,7 +417,7 @@
         "true"
     ],
     "incur_day": [
-        "273.0"
+        "91.0"
     ],
     "incur_replace_chance": [
         "0.02"
@@ -429,7 +429,7 @@
         "\"input/vic/vaccine_params_or_uncertainty.csv\""
     ],
     "high_incur_virulence": [
-        "true"
+        "false"
     ],
     "in_prevac_count": [
         "1000.0"
@@ -441,13 +441,13 @@
         "\"base\""
     ],
     "incur_name_part_1": [
-        "\"novel\""
+        "\"omlike\""
     ],
     "incur_name_part_2": [
         "\"_escape\""
     ],
     "incur_name_part_3": [
-        "\"_high\""
+        "\"\""
     ],
     "init_vacrecover_day": [
         "0.0"
@@ -491,7 +491,13 @@
     "mid_day": [
         "364.0"
     ],
-    "maskWearMod": [
+    "maskwearmod": [
         "0.0"
+    ],
+    "previnfecttrackmax": [
+        "9.0"
+    ],
+    "compoundscenario": [
+        "\"none\""
     ]
 }

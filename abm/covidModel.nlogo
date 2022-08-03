@@ -976,10 +976,10 @@ Stage Policy Settings
 1
 
 CHOOSER
-13
-460
-208
-505
+8
+457
+203
+502
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
@@ -1851,7 +1851,7 @@ SLIDER
 2220
 515
 2365
-549
+548
 policy_pipe_time
 policy_pipe_time
 0
@@ -2919,9 +2919,9 @@ HORIZONTAL
 
 INPUTBOX
 14
-265
+260
 257
-325
+320
 input_vaccine_schedule
 input/vic/rollout_target_only.csv
 1
@@ -3058,9 +3058,9 @@ String
 
 SWITCH
 12
-380
+375
 182
-413
+408
 policy_mask_n95
 policy_mask_n95
 0
@@ -3069,9 +3069,9 @@ policy_mask_n95
 
 SLIDER
 12
-420
+415
 185
-453
+448
 incur_day
 incur_day
 0
@@ -3125,9 +3125,9 @@ String
 
 SWITCH
 14
-338
+334
 179
-371
+367
 high_incur_virulence
 high_incur_virulence
 1
@@ -3194,7 +3194,7 @@ CHOOSER
 incur_name_part_1
 incur_name_part_1
 "omlike" "novel"
-0
+1
 
 CHOOSER
 14
@@ -3207,10 +3207,10 @@ incur_name_part_2
 1
 
 CHOOSER
-18
-210
-157
-255
+13
+207
+152
+252
 incur_name_part_3
 incur_name_part_3
 "" "_high"
@@ -3627,10 +3627,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-24
-70
-196
-103
+15
+72
+187
+105
 maskWearMod
 maskWearMod
 -100
@@ -3645,12 +3645,12 @@ SLIDER
 2218
 384
 2366
-418
+417
 prevInfectTrackMax
 prevInfectTrackMax
 0
-8
-6.0
+9
+9.0
 1
 1
 NIL
@@ -3663,8 +3663,8 @@ CHOOSER
 614
 compoundScenario
 compoundScenario
-"none" "josh" "worst"
-0
+"none" "josh" "novel" "worst"
+2
 
 @#$#@#$#@
 ## WHAT IS IT?

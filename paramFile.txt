@@ -110,7 +110,7 @@
 ["prepeak_vir_boost" 0.1]
 ["presimdailycases" 0.0]
 ["presimdailyhosp" 0.0]
-["previnfecttrackmax" 6.0]
+["previnfecttrackmax" 9.0]
 ["print_contact_events" false]
 ["print_phase" false]
 ["print_vac" false]
