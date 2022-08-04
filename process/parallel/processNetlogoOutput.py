@@ -424,37 +424,21 @@ def ProcessPrevInfectionsChunk(df, outputPrefix, arrayIndex, doDaily=False, doWe
 	return df
 
 
-def ProcessStage(dataMap, inputDir, visualOutDir, outputDir, arrayIndex, measureCols, outputTraces=False, doWeekly=False):
-	cohortData = util.GetCohortData(inputDir + '/processed_static' + '_' + str(arrayIndex))
-	for metric in gl.metricList:
-		print('Processing ages {}'.format(metric))
-		ProcessInfectCohorts(
-			dataMap, measureCols,
-			inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
-			cohortData,
-			outputDir + '/{}'.format(metric), arrayIndex, doWeekly=doWeekly)
+def ProcessStage(dataMap, inputDir, visualOutDir, outputDir, arrayIndex, measureCols, outputTraces=False):
+	df = pd.read_csv(
+		inputDir + '/processed_stage' + '_' + str(arrayIndex) + '.csv',
+		index_col=list(range(2 + len(measureCols))),
+		header=list(range(2)),
+		dtype={'day' : int, 'cohort' : int},
+		keep_default_na=False)
 	
-	for metric in gl.cohortMetricList:
-		print('Processing ages {}'.format(metric))
-		ProcessTimelessCohorts(
-			dataMap, measureCols,
-			inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
-			cohortData,
-			outputDir + '/{}'.format(metric), arrayIndex)
-		
-	metric = 'vaccine'
-	cohortData = util.GetCohortData(inputDir + '/processed_static_vaccine' + '_' + str(arrayIndex), dataCol='vaccine', dataInt=False)
-	print('Processing ages {}'.format(metric))
-	ProcessVaccineCohorts(
-		dataMap, measureCols,
-		inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
-		cohortData,
-		outputDir + '/{}'.format(metric), arrayIndex, doWeekly=doWeekly)
+	df.columns = df.columns.set_levels(df.columns.levels[0].astype(int), level=0)
+	df.columns = df.columns.set_levels(df.columns.levels[1].astype(int), level=1)
+	df = df.sort_values(['cohort', 'day'], axis=1)
+	df = df.groupby(level=[0], axis=1).sum()
 	
-
-def CleanupFiles(inputDir, arrayIndex):
-	for metric in gl.metricList + gl.cohortMetricList + gl.countedMetricList + ['secondary', 'stage', 'vaccine']:
-		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv') 
+	if outputTraces:
+		util.OutputToFile(df, visualOutDir + '/processed_stage' + '_daily_' + str(arrayIndex), head=False)
 	
 	for stage in gl.stages:
 		dfStage = df.applymap(lambda x: 1 if x == stage else 0)
