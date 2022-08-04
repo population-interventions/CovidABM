@@ -20,7 +20,7 @@
 		],
 		"compoundScenario" : [
 			"josh",
-			"novel",
+			"middle",
 			"worst"
 		],
 		"policy_mask_n95" : [
@@ -442,7 +442,7 @@
 					"name" : "Scenario",
 					"values" : {
 						"josh" : "Josh",
-						"novel" : "Novel",
+						"middle" : "Middle",
 						"worst"  : "Worst"
 					}
 				},

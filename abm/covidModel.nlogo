@@ -3663,7 +3663,7 @@ CHOOSER
 614
 compoundScenario
 compoundScenario
-"none" "josh" "novel" "worst"
+"none" "josh" "middle" "worst"
 2
 
 @#$#@#$#@
