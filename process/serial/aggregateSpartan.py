@@ -85,7 +85,7 @@ def DoSpartanAggregate(
 		runIndexer, indexList, ['single'], indexGrouping=indexGrouping, doAverage=doAverage, numberKeys=False)
 
 	AppendParallels(
-		dataDir, rawDataDir, '/cohort/', len(measureCols) + 3, '/timefull/', False,
+		dataDir, rawDataDir, '/timefull/', len(measureCols) + 3, '/cohort/', False,
 		runIndexer, indexList, processCount, indexGrouping=indexGrouping, doAverage=doAverage)
 	if processCohort:
 		# Larger index because cohort data contains age
