@@ -387,7 +387,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "755.0"
+        "752.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_target_only.csv\""
@@ -441,13 +441,13 @@
         "\"base\""
     ],
     "incur_name_part_1": [
-        "\"omlike\""
+        "\"novel\""
     ],
     "incur_name_part_2": [
         "\"_escape\""
     ],
     "incur_name_part_3": [
-        "\"\""
+        "\"_high\""
     ],
     "init_vacrecover_day": [
         "0.0"
@@ -499,5 +499,8 @@
     ],
     "compoundscenario": [
         "\"none\""
+    ],
+    "param_wane_mult": [
+        "1.0"
     ]
 }
