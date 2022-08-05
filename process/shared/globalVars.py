@@ -3,7 +3,7 @@ metricList = ['mort', 'icu', 'hosp', 'hospTime', 'sympt', 'infect']
 metricListRaw = {'die' : 'mort', 'icu' : 'icu', 'hosp' : 'hosp', 'hospTime' : 'hospTime', 'sympt' : 'sympt'}
 
 cohortMetricList = ['halyAcute', 'halyDeath', 'halyLong']
-countedMetricList = ['prevInfections']
+countedMetricList = ['prevInfections', 'aveImmuneVac', 'aveImmuneNat', 'aveImmuneAll']
 countedMetricLength = 9
 singleMetricList = [
 	'costDeathAverted',

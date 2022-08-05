@@ -352,6 +352,15 @@ to-report simul_getRecoverVacHistogram [variant popPerSimul]
   report ((vaccine_getWanedParameter "riskReduct" variant recoverVaccine recoverDay 0 0) * recoverEffProp + 1 - recoverEffProp)
 end
 
+to-report simul_getRecoverVacHistogramGeneric [metric variant popPerSimul]
+  let recoverEffProp recoverVaccinePopPerSimul / popPerSimul
+  if recoverEffProp > 1 [
+    set recoverEffProp 1 
+  ]
+  
+  report ((vaccine_getWanedParameter metric variant recoverVaccine recoverDay 0 0) * recoverEffProp + 1 - recoverEffProp)
+end
+
 ;;*******************************************************************************************************************************
 ;;** Simul Once-A-Tick Functions **
 ;;*******************************************************************************************************************************

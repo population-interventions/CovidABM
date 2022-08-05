@@ -562,12 +562,13 @@ def ProcessInfectionCohorts(
 		cohortData,
 		outputDir + '/{}'.format(metric), arrayIndex, doWeekly=doWeekly)
 	
-	metric = 'prevInfections'
-	ProcessPrevInfections(
-		dataMap, measureCols,
-		inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
-		outputDir + '/{}'.format(metric), arrayIndex, doWeekly=True)
-	
+	for metric in gl.countedMetricList:
+		print('Processing metrics {}'.format(metric))
+		ProcessPrevInfections(
+			dataMap, measureCols,
+			inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
+			outputDir + '/{}'.format(metric), arrayIndex, doWeekly=True)
+
 
 def CleanupFiles(inputDir, arrayIndex):
 	for metric in gl.metricList + gl.cohortMetricList + gl.countedMetricList + ['secondary', 'stage', 'vaccine']:

@@ -151,6 +151,30 @@ to params_setDrawValues
       set high_incur_virulence false
       set incur_day 91
     ]
+    compoundScenario = "high_r0"
+    [
+      set incur_name_part_1 "omlike"
+      set incur_name_part_2 "_escape"
+      set incur_name_part_3 "_high"
+      set high_incur_virulence false
+      set incur_day 91
+    ]
+    compoundScenario = "josh"
+    [
+      set incur_name_part_1 "novel"
+      set incur_name_part_2 "_escape"
+      set incur_name_part_3 "_high"
+      set high_incur_virulence false
+      set incur_day 91
+    ]
+    compoundScenario = "middle"
+    [
+      set incur_name_part_1 "novel"
+      set incur_name_part_2 "_escape"
+      set incur_name_part_3 "_high"
+      set high_incur_virulence false
+      set incur_day 91
+    ]
     compoundScenario = "middle"
     [
       set incur_name_part_1 "novel"

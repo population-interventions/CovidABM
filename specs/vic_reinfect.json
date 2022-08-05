@@ -8,28 +8,36 @@
 		"input_vaccine_schedule" : [
 			"input/vic/rollout_none.csv",
 			"input/vic/rollout_current.csv",
-			"input/vic/rollout_cur_then_target.csv",
-			"input/vic/rollout_target_only.csv",
-			"input/vic/rollout_cur_then_multi.csv",
-			"input/vic/rollout_multi_only.csv",
-			"input/vic/rollout_current_60.csv",
-			"input/vic/rollout_cur_then_target_60.csv",
-			"input/vic/rollout_target_only_60.csv",
-			"input/vic/rollout_cur_then_multi_60.csv",
-			"input/vic/rollout_multi_only_60.csv"
+			"input/vic/rollout_target_only.csv"
 		],
-		"compoundScenario" : [
-			"josh",
-			"middle",
-			"worst"
+		"incur_name_part_1" : [
+			"omlike"
 		],
-		"policy_mask_n95" : [
+		"incur_name_part_2" : [
+			"",
+			"_escape"
+		],
+		"incur_name_part_3" : [
+			"",
+			"_high"
+		],
+		"high_incur_virulence" : [
 			false,
 			true
 		],
+		"incur_day" : [
+			91
+		],
+		"policy_mask_n95" : [
+			false
+		],
 		"param_policy" : [
-			"LooseSupress",
-			"BarelySupress"
+			"LooseSupress"
+		],
+		"param_wane_mult" : [
+			0.25,
+			0.5,
+			1
 		]
 	},
 	"paramOverrides" : {
@@ -58,7 +66,7 @@
 				"prefixList" : ["mid_"],
 				"metrics" : ["totStage2", "totStage3", "totStage4", "totStage5", "hospDaysAbove750", "hospDaysAbove1500", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
 				"identifyIndex" : {
-					"scenAgg" : ["Scenario"]
+					"scenAgg" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 				}
 			},
 			"singleProcessing" : {
@@ -66,11 +74,11 @@
 				"aggregates" : {
 					"meanOnDraw_thenDescribeOnScenario" : {
 						"firstMeanOn" : ["draw_index"],
-						"thenDescribeOn" : ["Scenario"],
+						"thenDescribeOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"],
 						"percentiles" : [0.95, 0.5, 0.05]
 					},
 					"meanOnScenario_thenDescribeOnDraw" : {
-						"firstMeanOn" : ["Scenario"],
+						"firstMeanOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"],
 						"thenDescribeOn" : ["draw_index"],
 						"percentiles" : [0.95, 0.5, 0.05]
 					}
@@ -80,121 +88,121 @@
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystem_uk_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp_uk_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystem_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystem_uk_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp_uk_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystem_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystem_uk_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp_uk_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystem_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"stackIndex" : ["Scenario"]
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"stackIndex" : ["Scenario"]
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystem_uk_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"stackIndex" : ["Scenario"]
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp_uk_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"stackIndex" : ["Scenario"]
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystem" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystem_uk" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					},
 					"healthSystemAndGdp_uk" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Scenario"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"]
 					}
 				},
 				"rankmaps" : {
@@ -411,7 +419,7 @@
 				]
 			},
 			"heatmapStructure" : {
-				"index_rows" : ["Scenario"],
+				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Vaccine waning"],
 				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
 				"base_value" : {
 				},
@@ -438,12 +446,41 @@
 						"input/vic/rollout_none.csv"               : "None"
 					}
 				},
-				"compoundScenario" : {
-					"name" : "Scenario",
+				"incur_name_part_1" : {
+					"name" : "Variant",
 					"values" : {
-						"josh" : "Josh",
-						"middle" : "Middle",
-						"worst"  : "Worst"
+						"omlike" : "Omni-like",
+						"novel"  : "Novel"
+					}
+				},
+				"incur_name_part_2" : {
+					"name" : "Immune escape",
+					"values" : {
+						"" : "Low escape",
+						"_escape"  : "High escape"
+					}
+				},
+				"incur_name_part_3" : {
+					"name" : "Infectiousness",
+					"values" : {
+						"" : "Current infect",
+						"_high"  : "Higher infect"
+					}
+				},
+				"high_incur_virulence" : {
+					"name" : "Virulence",
+					"values" : {
+						"True"  : "High vir",
+						"False" : "Low vir"
+					}
+				},
+				"incur_day" : {
+					"name" : "Incursion day",
+					"values" : {
+						"91"  : "91",
+						"182" : "182",
+						"273" : "273",
+						"364" : "364"
 					}
 				},
 				"policy_mask_n95" : {
@@ -459,7 +496,15 @@
 						"BarelySupress" : "BarelySupress",
 						"LooseSupress" : "LooseSupress"
 					}
-				}
+				},
+				"param_wane_mult" : {
+					"name" : "Vaccine waning",
+					"values" : {
+						"0.25"  : "25%",
+						"0.5" : "50%",
+						"1" : "100%"
+					}
+				},
 			}
 		}
 	}

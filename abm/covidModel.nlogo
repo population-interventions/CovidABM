@@ -2327,10 +2327,10 @@ data_suffix_2
 0
 
 CHOOSER
-10
-517
-123
-562
+12
+508
+125
+553
 policy_switch
 policy_switch
 "tony" "nz" "pak" "continuous"
@@ -2911,7 +2911,7 @@ draw_index
 draw_index
 0
 2000
-755.0
+752.0
 1
 1
 NIL
@@ -3214,7 +3214,7 @@ CHOOSER
 incur_name_part_3
 incur_name_part_3
 "" "_high"
-0
+1
 
 MONITOR
 1040
@@ -3320,10 +3320,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-133
-524
-252
-557
+135
+519
+254
+552
 stages_cont
 stages_cont
 0
@@ -3658,13 +3658,28 @@ HORIZONTAL
 
 CHOOSER
 12
-569
+555
 151
-614
+600
 compoundScenario
 compoundScenario
 "none" "josh" "middle" "worst"
-2
+0
+
+SLIDER
+9
+603
+182
+636
+param_wane_mult
+param_wane_mult
+0
+1
+1.0
+0.05
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -5572,6 +5587,9 @@ NetLogo 6.2.0
     <metric>infectNoVacArray_listOut</metric>
     <metric>infectVacArray_listOut</metric>
     <metric>prevInfections_listOut</metric>
+    <metric>aveImmuneVac_listOut</metric>
+    <metric>aveImmuneNat_listOut</metric>
+    <metric>aveImmuneAll_listOut</metric>
     <metric>case_listOut</metric>
     <metric>case7_listOut</metric>
     <metric>case14_listOut</metric>
