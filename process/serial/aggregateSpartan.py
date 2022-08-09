@@ -66,10 +66,15 @@ def DoSpartanAggregate(
 		processAgg.append('{}_quartAgg'.format(metric))
 		processAgg.append('{}_yearlyAgg'.format(metric))
 		tracesAgg.append('{}_weeklyAgg'.format(metric))
-	for metric in gl.timefullMetrics.keys():
-		processCount.append('{}_quartAgg'.format(metric))
-		processCount.append('{}_yearlyAgg'.format(metric))
-		processCount.append('{}_weeklyAgg'.format(metric))
+	for metric, conf in gl.timefullMetrics.items():
+		if 'aggMean' in conf and conf['aggMean'] is True:
+			processCount.append('{}_quartMean'.format(metric))
+			processCount.append('{}_yearlyMean'.format(metric))
+			processCount.append('{}_weeklyMean'.format(metric))
+		else:
+			processCount.append('{}_quartAgg'.format(metric))
+			processCount.append('{}_yearlyAgg'.format(metric))
+			processCount.append('{}_weeklyAgg'.format(metric))
 	tracesAgg.append('stage_daily')
 	
 	stageAgg = []

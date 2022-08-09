@@ -257,13 +257,15 @@ def OutputWeek(df, outputPrefix, arrayIndex, aggregate=True, conf=False):
 			df = df.groupby(level=['week'], axis=1).mean()
 		else:
 			df = df.groupby(level=[1, 2], axis=1).mean()
+		CheckForProblem(df)
+		util.OutputToFile(df, outputPrefix + '_weeklyMean' + '_' + str(arrayIndex), head=False)
 	else:
 		if aggregate:
 			df = df.groupby(level=['week'], axis=1).sum()
 		else:
 			df = df.groupby(level=[1, 2], axis=1).sum()
-	CheckForProblem(df)
-	util.OutputToFile(df, outputPrefix + '_weeklyAgg' + '_' + str(arrayIndex), head=False)
+		CheckForProblem(df)
+		util.OutputToFile(df, outputPrefix + '_weeklyAgg' + '_' + str(arrayIndex), head=False)
 
 def OutputTenday(df, outputPrefix, arrayIndex, aggregate=True):
 	index = df.columns.to_frame()
@@ -288,14 +290,15 @@ def OutputQuart(df, outputPrefix, arrayIndex, aggregate=True, conf=False):
 			df = df.groupby(level=['quart'], axis=1).mean()
 		else:
 			df = df.groupby(level=[1, 2], axis=1).mean()
+		CheckForProblem(df)
+		util.OutputToFile(df, outputPrefix + '_quartMean' + '_' + str(arrayIndex), head=False)
 	else:
 		if aggregate:
 			df = df.groupby(level=['quart'], axis=1).sum()
 		else:
 			df = df.groupby(level=[1, 2], axis=1).sum()
-
-	CheckForProblem(df)
-	util.OutputToFile(df, outputPrefix + '_quartAgg' + '_' + str(arrayIndex), head=False)
+		CheckForProblem(df)
+		util.OutputToFile(df, outputPrefix + '_quartAgg' + '_' + str(arrayIndex), head=False)
 
 
 def OutputYear(df, outputPrefix, arrayIndex, aggregate=True, conf=False):
@@ -308,14 +311,15 @@ def OutputYear(df, outputPrefix, arrayIndex, aggregate=True, conf=False):
 			df = df.groupby(level=['year'], axis=1).mean()
 		else:
 			df = df.groupby(level=[1, 2], axis=1).mean()
+		CheckForProblem(df)
+		util.OutputToFile(df, outputPrefix + '_yearlyMean' + '_' + str(arrayIndex), head=False)
 	else:
 		if aggregate:
 			df = df.groupby(level=['year'], axis=1).sum()
 		else:
 			df = df.groupby(level=[1, 2], axis=1).sum()
-	
-	CheckForProblem(df)
-	util.OutputToFile(df, outputPrefix + '_yearlyAgg' + '_' + str(arrayIndex), head=False)
+		CheckForProblem(df)
+		util.OutputToFile(df, outputPrefix + '_yearlyAgg' + '_' + str(arrayIndex), head=False)
 
 
 def ProcessInfectChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, doWeekly=False, doTenday=False):
