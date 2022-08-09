@@ -426,13 +426,14 @@ def ProcessPrevInfectionsChunk(df, outputPrefix, arrayIndex, conf, doDaily=False
 	
 	col_index = df.columns.to_frame()
 	if 'rename' in conf:
+		col_index = col_index.reset_index(drop=True)
 		col_index = pd.merge(
 			col_index, pd.DataFrame(
 				{
 					'cohort' : list(range(conf['length'])),
 					conf['colName'] : conf['rename']
 				}
-			)),
+			),
 			on='cohort',
 			how='left',
 			sort=False)
@@ -597,7 +598,7 @@ def ProcessInfectionCohorts(
 
 
 def CleanupFiles(inputDir, arrayIndex):
-	for metric in gl.metricList + gl.timefullMetrics.keys() + gl.countedMetricList + ['secondary', 'stage', 'vaccine']:
+	for metric in gl.metricList + gl.cohortMetricList + list(gl.timefullMetrics.keys()) + ['secondary', 'stage', 'vaccine']:
 		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv') 
 
 

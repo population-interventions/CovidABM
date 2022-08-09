@@ -66,7 +66,7 @@ def DoSpartanAggregate(
 		processAgg.append('{}_quartAgg'.format(metric))
 		processAgg.append('{}_yearlyAgg'.format(metric))
 		tracesAgg.append('{}_weeklyAgg'.format(metric))
-	for metric in gl.countedMetricList.keys():
+	for metric in gl.timefullMetrics.keys():
 		processCount.append('{}_quartAgg'.format(metric))
 		processCount.append('{}_yearlyAgg'.format(metric))
 		processCount.append('{}_weeklyAgg'.format(metric))
