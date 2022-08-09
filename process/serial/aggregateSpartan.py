@@ -66,7 +66,7 @@ def DoSpartanAggregate(
 		processAgg.append('{}_quartAgg'.format(metric))
 		processAgg.append('{}_yearlyAgg'.format(metric))
 		tracesAgg.append('{}_weeklyAgg'.format(metric))
-	for metric in gl.countedMetricList:
+	for metric in gl.countedMetricList.keys():
 		processCount.append('{}_quartAgg'.format(metric))
 		processCount.append('{}_yearlyAgg'.format(metric))
 		processCount.append('{}_weeklyAgg'.format(metric))
@@ -87,6 +87,7 @@ def DoSpartanAggregate(
 	AppendParallels(
 		dataDir, rawDataDir, '/timefull/', len(measureCols) + 3, '/cohort/', False,
 		runIndexer, indexList, processCount, indexGrouping=indexGrouping, doAverage=doAverage)
+
 	if processCohort:
 		# Larger index because cohort data contains age
 		AppendParallels(

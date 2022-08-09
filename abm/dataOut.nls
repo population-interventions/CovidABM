@@ -117,6 +117,14 @@ to calculateDataOut
       set midReport_casesinperiod7_max           casesinperiod7_max
     ]
     
+    set aggOutcome_listOut lput (list
+      ((sum array:to-list infectNoVacArray) + (sum array:to-list infectVacArray))
+      (sum array:to-list symptArray)
+      (sum (array:to-list item 0 hospArray))
+      (sum (array:to-list item 0 icuArray))
+      (sum (array:to-list item 0 dieArray))
+     ) aggOutcome_listOut
+    
     ;; Average population immunity
     let incurName (word incur_name_part_1 incur_name_part_2 incur_name_part_3)
     set aveImmuneVac_listOut lput (list
@@ -126,7 +134,6 @@ to calculateDataOut
       ((sum [ 1 - (vaccine_getWanedParameter "reduceHosp"   incurName currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls) / population)
       ((sum [ 1 - (vaccine_getWanedParameter "reduceIcu"    incurName currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls) / population)
       ((sum [ 1 - (vaccine_getWanedParameter "reduceMort"   incurName currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls) / population)
-      0 0 0
      ) aveImmuneVac_listOut
     
     set aveImmuneNat_listOut lput (list
@@ -136,7 +143,6 @@ to calculateDataOut
       ((sum [ 1 - (simul_getRecoverVacHistogramGeneric "reduceHosp"   incurName (total_population / population)) ] of simuls) / population)
       ((sum [ 1 - (simul_getRecoverVacHistogramGeneric "reduceIcu"    incurName (total_population / population)) ] of simuls) / population)
       ((sum [ 1 - (simul_getRecoverVacHistogramGeneric "reduceMort"   incurName (total_population / population)) ] of simuls) / population)
-      0 0 0
     ) aveImmuneNat_listOut
     
     set aveImmuneAll_listOut lput (list
@@ -146,7 +152,6 @@ to calculateDataOut
       ((sum [ 1 - (simul_getRecoverVacHistogramGeneric "reduceHosp"   incurName (total_population / population)) * (vaccine_getWanedParameter "reduceHosp"   incurName currentVaccine vaccineDay prevVaccine prevVaccineDay)] of simuls) / population)
       ((sum [ 1 - (simul_getRecoverVacHistogramGeneric "reduceIcu"    incurName (total_population / population)) * (vaccine_getWanedParameter "reduceIcu"    incurName currentVaccine vaccineDay prevVaccine prevVaccineDay)] of simuls) / population)
       ((sum [ 1 - (simul_getRecoverVacHistogramGeneric "reduceMort"   incurName (total_population / population)) * (vaccine_getWanedParameter "reduceMort"   incurName currentVaccine vaccineDay prevVaccine prevVaccineDay)] of simuls) / population)
-      0 0 0
     ) aveImmuneAll_listOut
   ]
   

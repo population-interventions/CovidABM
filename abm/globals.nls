@@ -380,6 +380,7 @@ globals [
   infectNoVacArray_listOut
   infectVacArray_listOut
   prevInfections_listOut
+  aggOutcome_listOut
   aveImmuneVac_listOut
   aveImmuneNat_listOut
   aveImmuneAll_listOut

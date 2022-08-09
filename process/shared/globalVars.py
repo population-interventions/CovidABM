@@ -3,8 +3,64 @@ metricList = ['mort', 'icu', 'hosp', 'hospTime', 'sympt', 'infect']
 metricListRaw = {'die' : 'mort', 'icu' : 'icu', 'hosp' : 'hosp', 'hospTime' : 'hospTime', 'sympt' : 'sympt'}
 
 cohortMetricList = ['halyAcute', 'halyDeath', 'halyLong']
-countedMetricList = ['prevInfections', 'aveImmuneVac', 'aveImmuneNat', 'aveImmuneAll']
-countedMetricLength = 9
+timefullMetrics = {
+	'prevInfections' : {
+		'length' : 9,
+		'colName' : 'prevInfects',
+	},
+	'aggOutcome' : {
+		'length' : 5,
+		'colName' : 'outcome',
+		'rename' : [
+			'infections',
+			'sympts',
+			'hosps',
+			'icus',
+			'deaths',
+		],
+	},
+	'aveImmuneVac' : {
+		'length' : 6,
+		'colName' : 'outcome',
+		'aggMean' : True,
+		'rename' : [
+			'infectivity',
+			'risk',
+			'sympt',
+			'hosp',
+			'icu',
+			'mortality',
+		],
+	},
+	'aveImmuneNat' : {
+		'length' : 6,
+		'colName' : 'outcome',
+		'aggMean' : True,
+		'rename' : [
+			'infectivity',
+			'risk',
+			'sympt',
+			'hosp',
+			'icu',
+			'mortality',
+		],
+	
+	},
+	'aveImmuneAll' : {
+		'length' : 6,
+		'colName' : 'outcome',
+		'aggMean' : True,
+		'rename' : [
+			'infectivity',
+			'risk',
+			'sympt',
+			'hosp',
+			'icu',
+			'mortality',
+		],
+	}
+}
+
 singleMetricList = [
 	'costDeathAverted',
 	'costAcute',

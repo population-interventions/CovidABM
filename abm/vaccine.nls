@@ -77,12 +77,6 @@ to setup_vaccineData
     set index index + 1    table:put vacTable "waneRate"     (item index rawData)
     set index index + 1    table:put vacTable "waneRateOut"  (item index rawData)
     
-    let name table:get vacTable "name"
-    if (name = "cur_2" or name = "cur_3" or name = "cur_2_60" or name = "cur_3_60" or name = "cur_2_70" or name = "cur_3_70") [
-      table:put vacTable "waneRate" (param_wane_mult * table:get vacTable "waneRate")
-      table:put vacTable "waneRateOut" (param_wane_mult * table:get vacTable "waneRateOut")
-    ]
-    
     if table:get vacTable "name" = "cur_3" [
       set sen_vacInfectReduct_out table:get vacTable "infectReduct"
       set sen_vacWaneInfect_out table:get vacTable "waneRate"
@@ -129,7 +123,14 @@ to setup_vaccineData
       set index index + 1    table:put vacTable "waneRate"     (item index rawData)
       set index index + 1    table:put vacTable "waneRateOut"  (item index rawData)
       set index index + 1    let baseParamName                 (item index rawData)
-
+      
+      
+      let name table:get vacTable "name"
+      if (name = "target" or name = "multi" or name = "target_60" or name = "nulti_60" or name = "target_70" or name = "multi_70") [
+        table:put vacTable "waneRate" (param_wane_mult * table:get vacTable "waneRate")
+        table:put vacTable "waneRateOut" (param_wane_mult * table:get vacTable "waneRateOut")
+      ]
+      
       let uncertaintyValue table:get (table:get uncertParamsTable variant) vacName
       let correlateKey table:get (table:get uncertParamsTable "correlateKey") vacName
       

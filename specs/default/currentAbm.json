@@ -502,5 +502,8 @@
     ],
     "param_wane_mult": [
         "1.0"
+    ],
+    "compoundvaccine": [
+        "\"none\""
     ]
 }

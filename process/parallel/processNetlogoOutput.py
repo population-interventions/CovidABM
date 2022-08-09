@@ -66,7 +66,7 @@ def ProcessAbmChunk(
 		'age_listOut']
 		 + measureCols_raw
 		 + ['{}Array_listOut'.format(name) for name in gl.metricListRaw.keys()]
-		 + ['{}_listOut'.format(name) for name in gl.countedMetricList]
+		 + ['{}_listOut'.format(name) for name in gl.timefullMetrics.keys()]
 		 + ['{}_listOut'.format(name) for name in gl.cohortMetricList]
 		 + ['{}_out'.format(name) for name in gl.singleMetricList]
 	]
@@ -132,9 +132,9 @@ def ProcessAbmChunk(
 			chunk, dataMap, cohorts, days, arrayIndex, metric,
 			filename, metric, fillTo=day_override, daily=False)
 	
-	for metric in gl.countedMetricList:
+	for metric, conf in gl.timefullMetrics.items():
 		SplitOutTableData(
-			chunk, dataMap, gl.countedMetricLength, days, arrayIndex, metric,
+			chunk, dataMap, conf['length'], days, arrayIndex, metric,
 			filename, metric, fillTo=day_override)
 	
 	return dataMap
@@ -247,15 +247,21 @@ def OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex):
 	util.OutputToFile(df, outputPrefix + '_daily' + '_' + str(arrayIndex), head=False)
 	
 
-def OutputWeek(df, outputPrefix, arrayIndex, aggregate=True):
+def OutputWeek(df, outputPrefix, arrayIndex, aggregate=True, conf=False):
 	index = df.columns.to_frame()
 	index['week'] = np.floor(index['day']/7)
 	df.columns = pd.MultiIndex.from_frame(index)
 	
-	if aggregate:
-		df = df.groupby(level=['week'], axis=1).sum()
+	if conf is not False and 'aggMean' in conf and conf['aggMean'] is True:
+		if aggregate:
+			df = df.groupby(level=['week'], axis=1).mean()
+		else:
+			df = df.groupby(level=[1, 2], axis=1).mean()
 	else:
-		df = df.groupby(level=[1, 2], axis=1).sum()
+		if aggregate:
+			df = df.groupby(level=['week'], axis=1).sum()
+		else:
+			df = df.groupby(level=[1, 2], axis=1).sum()
 	CheckForProblem(df)
 	util.OutputToFile(df, outputPrefix + '_weeklyAgg' + '_' + str(arrayIndex), head=False)
 
@@ -272,28 +278,42 @@ def OutputTenday(df, outputPrefix, arrayIndex, aggregate=True):
 	util.OutputToFile(df, outputPrefix + '_tendayAgg' + '_' + str(arrayIndex), head=False)
 
 
-def OutputQuart(df, outputPrefix, arrayIndex, aggregate=True):
+def OutputQuart(df, outputPrefix, arrayIndex, aggregate=True, conf=False):
 	index = df.columns.to_frame()
 	index['quart'] = np.floor((index['day'])/91)
 	df.columns = pd.MultiIndex.from_frame(index)
 	
-	if aggregate:
-		df = df.groupby(level=['quart'], axis=1).sum()
+	if conf is not False and 'aggMean' in conf and conf['aggMean'] is True:
+		if aggregate:
+			df = df.groupby(level=['quart'], axis=1).mean()
+		else:
+			df = df.groupby(level=[1, 2], axis=1).mean()
 	else:
-		df = df.groupby(level=[1, 2], axis=1).sum()
+		if aggregate:
+			df = df.groupby(level=['quart'], axis=1).sum()
+		else:
+			df = df.groupby(level=[1, 2], axis=1).sum()
+
 	CheckForProblem(df)
 	util.OutputToFile(df, outputPrefix + '_quartAgg' + '_' + str(arrayIndex), head=False)
 
 
-def OutputYear(df, outputPrefix, arrayIndex, aggregate=True):
+def OutputYear(df, outputPrefix, arrayIndex, aggregate=True, conf=False):
 	index = df.columns.to_frame()
 	index['year'] = np.floor((index['day'])/364)
 	df.columns = pd.MultiIndex.from_frame(index)
 	
-	if aggregate:
-		df = df.groupby(level=['year'], axis=1).sum()
+	if conf is not False and 'aggMean' in conf and conf['aggMean'] is True:
+		if aggregate:
+			df = df.groupby(level=['year'], axis=1).mean()
+		else:
+			df = df.groupby(level=[1, 2], axis=1).mean()
 	else:
-		df = df.groupby(level=[1, 2], axis=1).sum()
+		if aggregate:
+			df = df.groupby(level=['year'], axis=1).sum()
+		else:
+			df = df.groupby(level=[1, 2], axis=1).sum()
+	
 	CheckForProblem(df)
 	util.OutputToFile(df, outputPrefix + '_yearlyAgg' + '_' + str(arrayIndex), head=False)
 
@@ -399,26 +419,38 @@ def ProcessVaccineChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, do
 	return df
 
 
-def ProcessPrevInfectionsChunk(df, outputPrefix, arrayIndex, doDaily=False, doWeekly=False, doTenday=False):
+def ProcessPrevInfectionsChunk(df, outputPrefix, arrayIndex, conf, doDaily=False, doWeekly=False, doTenday=False):
 	df.columns = df.columns.set_levels(df.columns.levels[0].astype(int), level=0)
 	df.columns = df.columns.set_levels(df.columns.levels[1].astype(int), level=1)
 	df = df.sort_values(['cohort', 'day'], axis=1)
 	
 	col_index = df.columns.to_frame()
-	col_index = col_index.rename(columns={'cohort' : 'prevInfects'})
+	if 'rename' in conf:
+		col_index = pd.merge(
+			col_index, pd.DataFrame(
+				{
+					'cohort' : list(range(conf['length'])),
+					conf['colName'] : conf['rename']
+				}
+			)),
+			on='cohort',
+			how='left',
+			sort=False)
+	else:
+		col_index = col_index.rename(columns={'cohort' : conf['colName']})
 	df.columns = pd.MultiIndex.from_frame(col_index)
 	
 	df = df.sort_index(axis=0)
 	df = df.sort_index(axis=1)
 	
-	df = df.stack(level=['prevInfects'])
-	OutputQuart(df.copy(), outputPrefix, arrayIndex)
-	OutputYear(df.copy(), outputPrefix, arrayIndex)
+	df = df.stack(level=[conf['colName']])
+	OutputQuart(df.copy(), outputPrefix, arrayIndex, conf=conf)
+	OutputYear(df.copy(), outputPrefix, arrayIndex, conf=conf)
 	
 	if doDaily:
 		util.OutputToFile(df, outputPrefix + '_' + str(arrayIndex), head=False)
 	if doWeekly:
-		OutputWeek(df.copy(), outputPrefix, arrayIndex)
+		OutputWeek(df.copy(), outputPrefix, arrayIndex, conf=conf)
 	if doTenday:
 		OutputTenday(df.copy(), outputPrefix, arrayIndex)
 	return df
@@ -500,25 +532,19 @@ def ProcessVaccineCohorts(dataMap, measureCols, filename, cohortData, outputPref
 				OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
 
 
-def ProcessPrevInfections(dataMap, measureCols, filename, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
+def ProcessPrevInfections(dataMap, measureCols, conf, filename, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
 	chunksize = 4 ** 7
-	if dataMap is not False:
-		chunk = dataMap[filename].copy()
-		df = ProcessInfectChunk(chunk, cohortData, outputPrefix, arrayIndex, doDaily=doDaily, doWeekly=doWeekly)
+	for chunk in tqdm(pd.read_csv(
+				filename + '.csv', 
+				index_col=list(range(2 + len(measureCols))),
+				header=list(range(2)),
+				dtype={'day' : int, 'cohort' : int},
+				chunksize=chunksize,
+				keep_default_na=False),
+			total=4):
+		df = ProcessPrevInfectionsChunk(chunk, outputPrefix, arrayIndex, conf, doDaily=doDaily, doWeekly=doWeekly)
 		if doDaily:
 			OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
-	else:
-		for chunk in tqdm(pd.read_csv(
-					filename + '.csv', 
-					index_col=list(range(2 + len(measureCols))),
-					header=list(range(2)),
-					dtype={'day' : int, 'cohort' : int},
-					chunksize=chunksize,
-					keep_default_na=False),
-				total=4):
-			df = ProcessPrevInfectionsChunk(chunk, outputPrefix, arrayIndex, doDaily=doDaily, doWeekly=doWeekly)
-			if doDaily:
-				OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
 
 
 def ProcessInfectionCohorts(
@@ -562,16 +588,16 @@ def ProcessInfectionCohorts(
 		cohortData,
 		outputDir + '/{}'.format(metric), arrayIndex, doWeekly=doWeekly)
 	
-	for metric in gl.countedMetricList:
+	for metric, conf in gl.timefullMetrics.items():
 		print('Processing metrics {}'.format(metric))
 		ProcessPrevInfections(
-			dataMap, measureCols,
+			dataMap, measureCols, conf,
 			inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
 			outputDir + '/{}'.format(metric), arrayIndex, doWeekly=True)
 
 
 def CleanupFiles(inputDir, arrayIndex):
-	for metric in gl.metricList + gl.cohortMetricList + gl.countedMetricList + ['secondary', 'stage', 'vaccine']:
+	for metric in gl.metricList + gl.timefullMetrics.keys() + gl.countedMetricList + ['secondary', 'stage', 'vaccine']:
 		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv') 
 
 

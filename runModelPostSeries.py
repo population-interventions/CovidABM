@@ -11,7 +11,7 @@ pernode = sys.argv[3] if len(sys.argv) > 3 else 5
 
 modelData = md.LoadModelData(modelName)
 
-singleOnly = not onHpc
+singleOnly = False #not onHpc
 
 if 'postSeries' in modelData:
 	if 'processMain' in modelData['postSeries']:

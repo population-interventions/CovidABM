@@ -193,6 +193,34 @@ to params_setDrawValues
     ]
   )
   
+  ;; Vaccine combinations
+  (ifelse compoundVaccine = "noVac"
+    [
+      set input_vaccine_schedule "input/vic/rollout_none.csv"
+      set param_wane_mult 1
+    ]
+    compoundVaccine = "CG"
+    [
+      set input_vaccine_schedule "input/vic/rollout_current.csv"
+      set param_wane_mult 1
+    ]
+    compoundVaccine = "OT"
+    [
+      set input_vaccine_schedule "input/vic/rollout_target_only.csv"
+      set param_wane_mult 1
+    ]
+    compoundVaccine = "OT_50"
+    [
+      set input_vaccine_schedule "input/vic/rollout_target_only.csv"
+      set param_wane_mult 0.5
+    ]
+    compoundVaccine = "OT_25"
+    [
+      set input_vaccine_schedule "input/vic/rollout_target_only.csv"
+      set param_wane_mult 0.25
+    ]
+  )
+  
   param_updateRecoverImmune
   set infectivityMult init_infectivityMult
   
