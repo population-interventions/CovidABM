@@ -159,7 +159,7 @@ to params_setDrawValues
       set high_incur_virulence false
       set incur_day 91
     ]
-    compoundScenario = "josh"
+    compoundScenario = "josh_novel"
     [
       set incur_name_part_1 "novel"
       set incur_name_part_2 "_escape"

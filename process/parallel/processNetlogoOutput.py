@@ -267,6 +267,7 @@ def OutputWeek(df, outputPrefix, arrayIndex, aggregate=True, conf=False):
 		CheckForProblem(df)
 		util.OutputToFile(df, outputPrefix + '_weeklyAgg' + '_' + str(arrayIndex), head=False)
 
+
 def OutputTenday(df, outputPrefix, arrayIndex, aggregate=True):
 	index = df.columns.to_frame()
 	index['tenday'] = np.floor(index['day']/10)
@@ -415,7 +416,7 @@ def ProcessVaccineChunk(df, chortDf, outputPrefix, arrayIndex, doDaily=False, do
 	OutputYear(df.copy(), outputPrefix, arrayIndex)
 	
 	if doDaily:
-		util.OutputToFile(df, outputPrefix + '_' + str(arrayIndex), head=False)
+		util.OutputToFile(df, outputPrefix + '_daily_' + str(arrayIndex), head=False)
 	if doWeekly:
 		OutputWeek(df.copy(), outputPrefix, arrayIndex)
 	if doTenday:
@@ -453,7 +454,7 @@ def ProcessPrevInfectionsChunk(df, outputPrefix, arrayIndex, conf, doDaily=False
 	OutputYear(df.copy(), outputPrefix, arrayIndex, conf=conf)
 	
 	if doDaily:
-		util.OutputToFile(df, outputPrefix + '_' + str(arrayIndex), head=False)
+		util.OutputToFile(df, outputPrefix + '_daily_' + str(arrayIndex), head=False)
 	if doWeekly:
 		OutputWeek(df.copy(), outputPrefix, arrayIndex, conf=conf)
 	if doTenday:
@@ -537,7 +538,7 @@ def ProcessVaccineCohorts(dataMap, measureCols, filename, cohortData, outputPref
 				OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
 
 
-def ProcessPrevInfections(dataMap, measureCols, conf, filename, outputPrefix, arrayIndex, doDaily=False, doWeekly=False):
+def ProcessPrevInfections(dataMap, measureCols, conf, filename, outputPrefix, arrayIndex, doWeekly=False):
 	chunksize = 4 ** 7
 	for chunk in tqdm(pd.read_csv(
 				filename + '.csv', 
@@ -547,9 +548,8 @@ def ProcessPrevInfections(dataMap, measureCols, conf, filename, outputPrefix, ar
 				chunksize=chunksize,
 				keep_default_na=False),
 			total=4):
+		doDaily = ('doDaily' in conf and conf['doDaily'] is True)
 		df = ProcessPrevInfectionsChunk(chunk, outputPrefix, arrayIndex, conf, doDaily=doDaily, doWeekly=doWeekly)
-		if doDaily:
-			OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
 
 
 def ProcessInfectionCohorts(
@@ -631,7 +631,6 @@ def DoAbmProcessing(
 	ProcessStage(
 		dataMap, outputDir + '/step_1', outputDir + '/visualise', outputDir + '/stage',
 		arrayIndex, measureCols, outputTraces=outputTraces)
-	
 	
 	if DELETE_AFTER:
 		CleanupFiles(outputDir, arrayIndex)

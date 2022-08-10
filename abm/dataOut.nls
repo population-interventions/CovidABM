@@ -125,6 +125,10 @@ to calculateDataOut
       (sum (array:to-list item 0 dieArray))
      ) aggOutcome_listOut
     
+    set hospUsage_listOut lput (list
+      hospUsage
+     ) hospUsage_listOut
+    
     ;; Average population immunity
     let incurName (word incur_name_part_1 incur_name_part_2 incur_name_part_3)
     set aveImmuneVac_listOut lput (list

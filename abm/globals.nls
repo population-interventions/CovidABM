@@ -381,6 +381,7 @@ globals [
   infectVacArray_listOut
   prevInfections_listOut
   aggOutcome_listOut
+  hospUsage_listOut
   aveImmuneVac_listOut
   aveImmuneNat_listOut
   aveImmuneAll_listOut

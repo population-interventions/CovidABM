@@ -5598,6 +5598,7 @@ NetLogo 6.2.0
     <metric>infectVacArray_listOut</metric>
     <metric>prevInfections_listOut</metric>
     <metric>aggOutcome_listOut</metric>
+    <metric>hospUsage_listOut</metric>
     <metric>aveImmuneVac_listOut</metric>
     <metric>aveImmuneNat_listOut</metric>
     <metric>aveImmuneAll_listOut</metric>

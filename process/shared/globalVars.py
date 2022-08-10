@@ -11,6 +11,7 @@ timefullMetrics = {
 	'aggOutcome' : {
 		'length' : 5,
 		'colName' : 'outcome',
+		#'doDaily' : True,
 		'rename' : [
 			'1_infections',
 			'2_sympts',
@@ -18,6 +19,11 @@ timefullMetrics = {
 			'4_icus',
 			'5_deaths',
 		],
+	},
+	'hospUsage' : {
+		'length' : 1,
+		'colName' : 'hospUsage',
+		#'doDaily' : True,
 	},
 	'aveImmuneVac' : {
 		'length' : 6,

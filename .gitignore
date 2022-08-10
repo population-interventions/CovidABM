@@ -50,3 +50,5 @@
 /docs/stages.xlsx
 /temp-plot.html
 /abm/headless_vic_reinfect.nlogo
+/abm/headless_vic_hosp_test.nlogo
+/abm/headless_vic_mask.nlogo

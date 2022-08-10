@@ -75,6 +75,8 @@ def DoSpartanAggregate(
 			processCount.append('{}_quartAgg'.format(metric))
 			processCount.append('{}_yearlyAgg'.format(metric))
 			processCount.append('{}_weeklyAgg'.format(metric))
+		if 'doDaily' in conf and conf['doDaily'] is True:
+			processCount.append('{}_daily'.format(metric))
 	tracesAgg.append('stage_daily')
 	
 	stageAgg = []
