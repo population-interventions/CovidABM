@@ -43,6 +43,7 @@
 				"processStages" : true,
 				"processCohort" : true,
 				"doAverage" : true,
+				"allowDaily" : true,
 				
 				"outputTraces" : false,
 				"describeHeatmaps" : false,

@@ -39,6 +39,7 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 	doAverage = 'doAverage' in params and params['doAverage']
 	describeHeatmaps = 'describeHeatmaps' in params and params['describeHeatmaps']
 	outputTraces = 'outputTraces' in params and params['outputTraces']
+	allowDaily = 'allowDaily' in params and params['allowDaily']
 	
 	heatmapStructure = conf['heatmapStructure']
 
@@ -62,7 +63,7 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 			workingDir, postDataDir, measureCols, runIndexer,
 			arraySize=arraySize, processCohort=processCohort,
 			processStages=processStages, indexGrouping=indexGrouping,
-			doAverage=doAverage, outputTraces=outputTraces)
+			doAverage=doAverage, outputTraces=outputTraces, allowDaily=allowDaily)
 	
 	#if not onHpc:
 	#	singleProcess.FixSingle(workingDir, measureCols_raw)

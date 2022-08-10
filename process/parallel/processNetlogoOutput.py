@@ -454,7 +454,7 @@ def ProcessPrevInfectionsChunk(df, outputPrefix, arrayIndex, conf, doDaily=False
 	OutputYear(df.copy(), outputPrefix, arrayIndex, conf=conf)
 	
 	if doDaily:
-		util.OutputToFile(df, outputPrefix + '_daily_' + str(arrayIndex), head=False)
+		util.OutputToFile(df.groupby(level=[0], axis=1).sum(), outputPrefix + '_daily_' + str(arrayIndex), head=False)
 	if doWeekly:
 		OutputWeek(df.copy(), outputPrefix, arrayIndex, conf=conf)
 	if doTenday:
@@ -538,7 +538,7 @@ def ProcessVaccineCohorts(dataMap, measureCols, filename, cohortData, outputPref
 				OutputDayAgeAgg(df, outputPrefix, measureCols, arrayIndex)
 
 
-def ProcessPrevInfections(dataMap, measureCols, conf, filename, outputPrefix, arrayIndex, doWeekly=False):
+def ProcessPrevInfections(dataMap, measureCols, conf, filename, outputPrefix, arrayIndex, doWeekly=False, allowDaily=False):
 	chunksize = 4 ** 7
 	for chunk in tqdm(pd.read_csv(
 				filename + '.csv', 
@@ -548,12 +548,12 @@ def ProcessPrevInfections(dataMap, measureCols, conf, filename, outputPrefix, ar
 				chunksize=chunksize,
 				keep_default_na=False),
 			total=4):
-		doDaily = ('doDaily' in conf and conf['doDaily'] is True)
+		doDaily = ('doDaily' in conf and conf['doDaily'] is True) and allowDaily
 		df = ProcessPrevInfectionsChunk(chunk, outputPrefix, arrayIndex, conf, doDaily=doDaily, doWeekly=doWeekly)
 
 
 def ProcessInfectionCohorts(
-		dataMap, inputDir, outputDir, arrayIndex, measureCols, doWeekly=False):
+		dataMap, inputDir, outputDir, arrayIndex, measureCols, doWeekly=False, allowDaily=False):
 	#print('Processing vaccination infection')
 	#ProcessInfectCohorts(
 	#	measureCols,
@@ -598,7 +598,7 @@ def ProcessInfectionCohorts(
 		ProcessPrevInfections(
 			dataMap, measureCols, conf,
 			inputDir + '/processed_{}'.format(metric) + '_' + str(arrayIndex),
-			outputDir + '/{}'.format(metric), arrayIndex, doWeekly=True)
+			outputDir + '/{}'.format(metric), arrayIndex, doWeekly=True, allowDaily=allowDaily)
 
 
 def CleanupFiles(inputDir, arrayIndex):
@@ -611,7 +611,7 @@ def CleanupFiles(inputDir, arrayIndex):
 def DoAbmProcessing(
 		inputDir, outputDir, arrayIndex, indexRename, measureCols,
 		measureCols_raw, day_override=False, dayStartOffset=0,
-		outputTraces=False):
+		outputTraces=False, allowDaily=False):
 	
 	print('Processing ABM Output', inputDir, arrayIndex)
 	dataMap = ProcessAbmOutput(
@@ -626,7 +626,7 @@ def DoAbmProcessing(
 	print('ProcessInfectionCohorts', inputDir, arrayIndex)
 	ProcessInfectionCohorts(
 		dataMap, outputDir + '/step_1', outputDir + '/cohort',
-		arrayIndex, measureCols, doWeekly=False)
+		arrayIndex, measureCols, doWeekly=False, allowDaily=allowDaily)
 	
 	ProcessStage(
 		dataMap, outputDir + '/step_1', outputDir + '/visualise', outputDir + '/stage',

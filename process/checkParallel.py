@@ -20,10 +20,12 @@ def DoParallelCheck(runIndex, modelName, runs, pernode):
 			inputDir = '{}/raw'.format(modelData['scratchDir'])
 			outputDir = '{}/post_parallel'.format(modelData['scratchDir'])
 			outputTraces = mainData['params']['outputTraces'] if 'outputTraces' in mainData['params'] else False
+			allowDaily = mainData['params']['allowDaily'] if 'allowDaily' in mainData['params'] else False
 			
 			DoAbmProcessing(
 				inputDir, outputDir, runIndex,
 				mainData['indexRename'],
-				measureCols, measureCols_raw, outputTraces=outputTraces)
+				measureCols, measureCols_raw,
+				outputTraces=outputTraces, allowDaily=allowDaily)
 	
 

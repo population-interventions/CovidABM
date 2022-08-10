@@ -11,7 +11,7 @@ timefullMetrics = {
 	'aggOutcome' : {
 		'length' : 5,
 		'colName' : 'outcome',
-		#'doDaily' : True,
+		'doDaily' : True, # only if model spec allows daily
 		'rename' : [
 			'1_infections',
 			'2_sympts',
@@ -23,7 +23,7 @@ timefullMetrics = {
 	'hospUsage' : {
 		'length' : 1,
 		'colName' : 'hospUsage',
-		#'doDaily' : True,
+		'doDaily' : True, # only if model spec allows daily
 	},
 	'aveImmuneVac' : {
 		'length' : 6,

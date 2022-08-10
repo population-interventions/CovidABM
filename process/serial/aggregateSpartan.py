@@ -50,7 +50,8 @@ def AppendParallels(
 def DoSpartanAggregate(
 		dataDir, rawDataDir, measureCols, runIndexer, arraySize=400,
 		skip=False, processCohort=True, processStages=True,
-		indexGrouping=False, doAverage=False, outputTraces=False):
+		indexGrouping=False, doAverage=False, outputTraces=False,
+		allowDaily=False):
 	indexList = range(1, arraySize + 1)
 	if skip:
 		indexList = util.ListRemove(indexList, skip)
@@ -75,7 +76,7 @@ def DoSpartanAggregate(
 			processCount.append('{}_quartAgg'.format(metric))
 			processCount.append('{}_yearlyAgg'.format(metric))
 			processCount.append('{}_weeklyAgg'.format(metric))
-		if 'doDaily' in conf and conf['doDaily'] is True:
+		if allowDaily and 'doDaily' in conf and conf['doDaily'] is True:
 			processCount.append('{}_daily'.format(metric))
 	tracesAgg.append('stage_daily')
 	
