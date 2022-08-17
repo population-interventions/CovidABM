@@ -499,7 +499,7 @@
 					"name" : "Mask modifier",
 					"values" : {
 						"-11.5" : "30% reduct",
-						"-7"    : "20% reduct",
+						"-7.0"  : "20% reduct",
 						"-3.5"  : "10% reduct",
 						"0"     : "Baseline",
 						"3.5"   : "10% inc",
