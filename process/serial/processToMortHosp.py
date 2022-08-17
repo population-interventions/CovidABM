@@ -479,7 +479,7 @@ def LoadHeatmapInputDf(
 		index_col=list(range(2 + len(measureCols))),
 		header=list(range(1)))
 	
-	df = df[[str(x) for x in range(math.floor(start), math.ceil(end))]]
+	df = df[[str(x) for x in range(math.floor(start), math.ceil(end + 1))]]
 	if divide:
 		df = df / divide
 	
@@ -496,6 +496,7 @@ def LoadHeatmapInputDf(
 	
 	if doSum:
 		df = df.sum(axis=1)
+		
 	return df
 
 
