@@ -64,7 +64,8 @@ end
 ;;*************************************************************************************************************************************************************************************************************************
 
 to setupstages
-  if prev_stage != stage [
+  ;; Reset stage on day 0 so that dags > -1 analysis takes effect.
+  if prev_stage != stage or days = 0 [
     do_stages
     set_policy_overrides
     set stageHasChanged 1
