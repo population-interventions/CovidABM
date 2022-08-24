@@ -1473,10 +1473,10 @@ preSimDailyCases
 Number
 
 MONITOR
-297
-865
-406
-910
+298
+884
+407
+929
 % Rec Second
 100 * (count simuls with [recoverVariant = (word incur_name_part_1 incur_name_part_2 incur_name_part_3)]) / Population
 2
@@ -1484,10 +1484,10 @@ MONITOR
 11
 
 MONITOR
-182
-819
-284
-864
+183
+839
+285
+884
 % Red First
 100 * (count simuls with [color = red and infectVariant = \"base\"]) / Population
 2
@@ -1495,10 +1495,10 @@ MONITOR
 11
 
 MONITOR
-183
-868
-285
-913
+184
+888
+286
+933
 % Red Second
 100 * (count simuls with [color = red and infectVariant = (word incur_name_part_1 incur_name_part_2 incur_name_part_3)]) / Population
 2
@@ -1543,10 +1543,10 @@ incursionPhaseEndDay
 11
 
 MONITOR
-294
-818
-396
-863
+295
+838
+397
+883
 % Rec First
 100 * (count simuls with [recoverVariant = \"base\"]) / Population
 17
@@ -1651,10 +1651,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-129
-1009
-229
-1042
+130
+1029
+230
+1062
 calibrate
 calibrate
 1
@@ -1909,9 +1909,9 @@ HORIZONTAL
 
 CHOOSER
 205
-768
+788
 353
-813
+833
 compound_param
 compound_param
 "None" "Hetro_Test"
@@ -1984,10 +1984,10 @@ input/vic/pop_vac60
 String
 
 CHOOSER
-203
-717
-350
-762
+204
+737
+351
+782
 compound_input
 compound_input
 "None" "baseline"
@@ -2144,10 +2144,10 @@ self_iso_at_peak
 -1000
 
 SWITCH
-243
-682
-362
-715
+244
+702
+363
+735
 print_phase
 print_phase
 1
@@ -2155,10 +2155,10 @@ print_phase
 -1000
 
 SWITCH
-243
-643
-361
-676
+244
+663
+362
+696
 print_vac
 print_vac
 1
@@ -3239,10 +3239,10 @@ policymetric7
 11
 
 MONITOR
-183
-917
-288
-962
+184
+937
+289
+982
 % Recover
 100 * count simuls with [ recoverVaccine != 0 and color != red] / population
 2
@@ -3331,10 +3331,10 @@ stages_cont
 -1000
 
 MONITOR
-297
-918
-406
-963
+298
+938
+407
+983
 %recoverVariant
 100 * count simuls with [ recoverVariant != 0 and color != red] / population
 2
@@ -3419,10 +3419,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-188
-969
-406
-1002
+189
+989
+407
+1022
 recover_prop
 recover_prop
 0
@@ -3434,10 +3434,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-233
-1009
-405
-1042
+234
+1029
+406
+1062
 override_recover_prop
 override_recover_prop
 1
@@ -3683,13 +3683,23 @@ HORIZONTAL
 
 CHOOSER
 133
-557
+556
 256
-602
+601
 compoundVaccine
 compoundVaccine
 "none" "noVac" "CG" "OT" "OT_25" "OT_50"
 0
+
+CHOOSER
+209
+610
+348
+655
+compoundMask
+compoundMask
+"none" "NoMask" "25Mask" "50Mask" "75Mask" "AllMask" "AllMaskEvenKids" "AllMask_50N95" "AllN95" "AllN95EvenKids"
+9
 
 @#$#@#$#@
 ## WHAT IS IT?

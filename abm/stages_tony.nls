@@ -144,9 +144,86 @@ to do_stages_tony
      set mask_wearing_a20 1 
     ]
     
+    ;; Compound mask parameters
+    if days >= 0 [
+      (ifelse compoundMask = "NoMask"
+        [
+          set mask_wearing_a20 0
+          set mask_wearing_n95_a0 0
+          set mask_wearing_n95_a10 0
+          set mask_wearing_n95_a20 0
+        ]
+        compoundMask = "25Mask"
+        [
+          set mask_wearing_a20 0.25
+          set mask_wearing_n95_a0 0
+          set mask_wearing_n95_a10 0
+          set mask_wearing_n95_a20 0
+        ]
+        compoundMask = "50Mask"
+        [
+          set mask_wearing_a20 0.5
+          set mask_wearing_n95_a0 0
+          set mask_wearing_n95_a10 0
+          set mask_wearing_n95_a20 0
+        ]
+        compoundMask = "75Mask"
+        [
+          set mask_wearing_a20 0.75
+          set mask_wearing_n95_a0 0
+          set mask_wearing_n95_a10 0
+          set mask_wearing_n95_a20 0
+        ]
+        compoundMask = "AllMask"
+        [
+          set mask_wearing_a20 1
+          set mask_wearing_n95_a0 0
+          set mask_wearing_n95_a10 0
+          set mask_wearing_n95_a20 0
+        ]
+        compoundMask = "AllMask_50N95"
+        [
+          set mask_wearing_a20 1
+          set mask_wearing_n95_a0 0.5
+          set mask_wearing_n95_a10 0.5
+          set mask_wearing_n95_a20 0.5
+        ]
+        compoundMask = "AllN95"
+        [
+          set mask_wearing_a20 1
+          set mask_wearing_n95_a0 1
+          set mask_wearing_n95_a10 1
+          set mask_wearing_n95_a20 1
+        ]
+      )
+    ]
+    
     ;; Set lower mask wearing for younger age groups
     set mask_wearing_a10        mask_wearing_a20 * 2 / 3
     set mask_wearing_a0         mask_wearing_a10 * 2 / 3
+    
+    ;; Compound parameters that boost kids.
+    if days >= 0 [
+      (ifelse compoundMask = "AllMaskEvenKids"
+        [
+          set mask_wearing_a0 1
+          set mask_wearing_a10 1
+          set mask_wearing_a20 1
+          set mask_wearing_n95_a0 0
+          set mask_wearing_n95_a10 0
+          set mask_wearing_n95_a20 0
+        ]
+        compoundMask = "AllN95EvenKids"
+        [
+          set mask_wearing_a0 1
+          set mask_wearing_a10 1
+          set mask_wearing_a20 1
+          set mask_wearing_n95_a0 1
+          set mask_wearing_n95_a10 1
+          set mask_wearing_n95_a20 1
+        ]
+      )
+    ]
   ]
 end
 
