@@ -77,12 +77,12 @@
 					"meanOnDraw_thenDescribeOnScenario" : {
 						"firstMeanOn" : ["draw_index"],
 						"thenDescribeOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
-						"percentiles" : [0.95, 0.5, 0.05]
+						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					},
 					"meanOnScenario_thenDescribeOnDraw" : {
 						"firstMeanOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
 						"thenDescribeOn" : ["draw_index"],
-						"percentiles" : [0.95, 0.5, 0.05]
+						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					},
 					"earlyIncur_meanOnDraw_thenDescribeOnScenario" : {
 						"filterOutIndex" : {
@@ -90,7 +90,7 @@
 						},
 						"firstMeanOn" : ["draw_index"],
 						"thenDescribeOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
-						"percentiles" : [0.95, 0.5, 0.05]
+						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					},
 					"earlyIncur_meanOnScenario_thenDescribeOnDraw" : {
 						"filterOutIndex" : {
@@ -98,7 +98,7 @@
 						},
 						"firstMeanOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant"],
 						"thenDescribeOn" : ["draw_index"],
-						"percentiles" : [0.95, 0.5, 0.05]
+						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					}
 				},
 				"optimality" : {

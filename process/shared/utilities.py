@@ -449,10 +449,12 @@ def MakeDescribedHeatmapSet(
 		describe=False, identifyIndex=False,
 		describeList=[x*0.01 for x in range(1, 100)]):
 	print('Output heatmap {}'.format(prefixName))
-	percentList = [0.05, 0.5, 0.95]
+	percentList = [0.05, 0.25, 0.5, 0.75, 0.95]
 	percMap = {
 		0.05: 'percentile_005',
 		0.95 : 'percentile_095',
+		0.25 : 'percentile_025',
+		0.75 : 'percentile_075',
 		0.5 : 'percentile_050',
 	}
 	df = df.sort_index()

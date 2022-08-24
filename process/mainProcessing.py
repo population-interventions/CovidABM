@@ -57,6 +57,8 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 	arraySize = len(util.GetFiles(rawDataDir))
 	if arraySize == 0:
 		arraySize = len(util.GetFiles('{}/post_parallel/single'.format(modelData['scratchDir'])))
+		singleOnly = True
+	
 	print('arraySize', arraySize)
 	if aggregateProcessing and not singleOnly:
 		DoSpartanAggregate(

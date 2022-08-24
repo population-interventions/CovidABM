@@ -79,12 +79,12 @@
 					"meanOnDraw_thenDescribeOnScenario" : {
 						"firstMeanOn" : ["draw_index"],
 						"thenDescribeOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask modifier"],
-						"percentiles" : [0.95, 0.5, 0.05]
+						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					},
 					"meanOnScenario_thenDescribeOnDraw" : {
 						"firstMeanOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask modifier"],
 						"thenDescribeOn" : ["draw_index"],
-						"percentiles" : [0.95, 0.5, 0.05]
+						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					}
 				},
 				"optimality" : {
@@ -501,11 +501,11 @@
 						"-11.5" : "30% reduct",
 						"-7.0"  : "20% reduct",
 						"-3.5"  : "10% reduct",
-						"0.0"     : "Baseline",
+						"0.0"   : "Baseline",
 						"3.5"   : "10% inc",
-						"7.0"     : "20% inc",
+						"7.0"   : "20% inc",
 						"11.5"  : "30% inc",
-						"14.0"    : "40% inc"
+						"14.0"  : "40% inc"
 					}
 				}
 			}
