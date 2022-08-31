@@ -3,16 +3,16 @@
         "2500.0"
     ],
     "span": [
-        "10.0"
+        "12.0"
     ],
     "superspreaders": [
-        "0.045"
+        "0.05"
     ],
     "proportion_people_avoid": [
         "0.35"
     ],
     "proportion_time_avoid": [
-        "0.5"
+        "0.45"
     ],
     "initial_cases": [
         "600000.0"
@@ -51,7 +51,7 @@
         "true"
     ],
     "param_policy": [
-        "\"BarelySupress\""
+        "\"LooseSupress\""
     ],
     "asymptom_trace_mult": [
         "0.67"
@@ -189,13 +189,13 @@
         "0.5"
     ],
     "input_population_table": [
-        "\"input/vic/pop\""
+        "\"input/vic/pop_vac60\""
     ],
     "compound_input": [
         "\"None\""
     ],
     "param_vac_uptake_mult": [
-        "0.8"
+        "0.65"
     ],
     "compound_essential": [
         "\"Extreme\""
@@ -351,7 +351,7 @@
         "2.0"
     ],
     "sim_seed": [
-        "76431.67353"
+        "82339.52762"
     ],
     "mid_report_day": [
         "64.0"
@@ -387,10 +387,10 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "1392.0"
+        "245.0"
     ],
     "input_vaccine_schedule": [
-        "\"input/vic/rollout_cur_then_target.csv\""
+        "\"input/vic/rollout_target_only.csv\""
     ],
     "param_force_vaccine": [
         "\"Disabled\""
@@ -507,6 +507,6 @@
         "\"none\""
     ],
     "compoundmask": [
-        "\"none\""
+        "\"AllN95EvenKids\""
     ]
 }

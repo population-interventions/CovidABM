@@ -493,5 +493,20 @@
     ],
     "maskWearMod": [
         "0.0"
+    ],
+    "previnfecttrackmax": [
+        "9.0"
+    ],
+    "compoundscenario": [
+        "\"none\""
+    ],
+    "param_wane_mult": [
+        "1.0"
+    ],
+    "compoundvaccine": [
+        "\"none\""
+    ],
+    "compoundmask": [
+        "\"none\""
     ]
 }

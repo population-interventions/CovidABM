@@ -188,6 +188,14 @@ def MakeRankmap(outputName, subfolder, conf):
 def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 	df = False
 	print('DoSingleProcess', 'aggregates')
+
+	if 'rerun_drawAve' in conf:
+		df = pd.read_csv(
+			subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
+			index_col=list(range(len(measureCols_raw) + 1)))
+		dfAve = df.groupby(level=util.ListRemove(list(range(len(measureCols_raw) + 1)), 0), axis=0).mean()
+		util.OutputToFile(dfAve, subfolder + '/single/single_drawAve')
+	
 	if 'aggregates' in conf:
 		df = pd.read_csv(
 			subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
@@ -204,7 +212,9 @@ def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 			print('DoSingleProcess', 'optimality', prefix)
 			for name, aggData in conf['optimality'].items():
 				DoOptimality(df, name, prefix, aggData, heatStruct, subfolder)
-				
+		
+	
+	
 	if 'rankmaps' in conf:
 		for name, data in conf['rankmaps'].items():
 			MakeRankmap(name, subfolder, data)
