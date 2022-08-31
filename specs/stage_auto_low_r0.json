@@ -1,0 +1,59 @@
+{
+	"netlogoFile" : "covidModel",
+	"defaultParamFile" : "vic_main",
+	"copyExperimentMetrics" : "vic_main",
+	"handlerName" : "stage_auto_low_r0_handler",
+	"postInputDir" : "vic",
+	"threads" : 2,
+	"indexParams" : {
+		"init_stage" : [
+			0.01,
+			1.25,
+			2.5
+		]
+	},
+	"paramOverrides" : {
+		"vaccine_enabled" : true,
+		"end_day" : 60,
+		"stages_cont" : true,
+		"param_policy" : "StageFixed",
+		"input_variant" : "input/vic/variant_r0_5_7.csv"
+	},
+	"runIndexer" : "draw_index",
+	"postSeries" : {
+		"rcalc" : {
+			"metric" : "cumulativeInfected",
+			"extraMetrics" : [
+				"totalHosp",
+				"totalHospUsage"
+			]
+		},
+		"targetOptimise" : {
+			"metric" : "cumulativeInfected",
+			"positiveSlope" : false,
+			"targets" : [
+				900000,
+				1200000,
+				1500000
+			],
+			"repetionLimit" : 3
+		},
+		"processMain" : {
+			"params" : {
+				"aggregateProcessing" : true,
+				"processStages" : false,
+				"processCohort" : true,
+				"doAverage" : true,
+				
+				"outputTraces" : false,
+				"describeHeatmaps" : false,
+				"indexGrouping" : 4
+			},
+			"heatmapStructure" : {
+			},
+			"splitTableIndexName" : "Vaccine schedule",
+			"indexRename" : {
+			}
+		}
+	}
+}

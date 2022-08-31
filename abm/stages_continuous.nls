@@ -83,6 +83,17 @@ to do_stages_continuous
     set isolate_on_inf_notice     lower_isolate_on_inf_notice
     set tracking                  lower_tracking
     
+    print stage
+    if stage >= 0 [
+      set maskPolicy true
+      set spatial_distance true
+      set case_isolation true
+      set quarantine true
+      set isolate_on_inf_notice true
+      set tracking true
+      set Complacency_Bound 1
+    ]
+    
     set span                      prop * upper_span                      + (1 - prop) * lower_span
     set Visit_Radius              prop * upper_Visit_Radius              + (1 - prop) * lower_Visit_Radius
     set Visit_Frequency           prop * upper_Visit_Frequency           + (1 - prop) * lower_Visit_Frequency
