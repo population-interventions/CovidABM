@@ -21,9 +21,14 @@ timefullMetrics = {
 		],
 	},
 	'hospUsage' : {
-		'length' : 1,
+		'length' : 3,
 		'colName' : 'hospUsage',
-		'doDaily' : True, # only if model spec allows daily
+		'doDaily' : True, # only if model spec allows daily[
+		'rename' : [
+			'1_hospUsage',
+			'2_hospAbove750',
+			'2_hospAbove1500',
+		],
 	},
 	'aveImmuneVac' : {
 		'length' : 6,

@@ -125,8 +125,18 @@ to calculateDataOut
       (sum (array:to-list item 0 dieArray))
      ) aggOutcome_listOut
     
+    let hosp_750 0
+    let hosp_1500 0
+    if hospUsage >= 750 [
+      set hosp_750 1
+    ]
+    if hospUsage >= 1500 [
+      set hosp_1500 1
+    ]
     set hospUsage_listOut lput (list
       hospUsage
+      hosp_750
+      hosp_1500
      ) hospUsage_listOut
     
     ;; Average population immunity
