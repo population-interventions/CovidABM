@@ -83,7 +83,6 @@ to do_stages_continuous
     set isolate_on_inf_notice     lower_isolate_on_inf_notice
     set tracking                  lower_tracking
     
-    print stage
     if stage >= 0 [
       set maskPolicy true
       set spatial_distance true
