@@ -137,7 +137,7 @@ to calculateDataOut
       hospUsage
       hosp_750
       hosp_1500
-     ) hospUsage_listOut
+    ) hospUsage_listOut
     
     ;; Average population immunity
     let incurName (word incur_name_part_1 incur_name_part_2 incur_name_part_3)
