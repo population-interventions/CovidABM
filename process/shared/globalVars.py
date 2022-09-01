@@ -27,7 +27,7 @@ timefullMetrics = {
 		'rename' : [
 			'1_hospUsage',
 			'2_hospAbove750',
-			'2_hospAbove1500',
+			'3_hospAbove1500',
 		],
 	},
 	'aveImmuneVac' : {
