@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-9.0
+12.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.034
+0.05
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.53
+0.35
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.63
+0.45
 0.01
 1
 NIL
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.51
+0.7
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.12
+8.8
 1
 1
 NIL
@@ -1208,7 +1208,7 @@ End_Day
 End_Day
 -1
 730
-546.0
+58.0
 1
 1
 NIL
