@@ -164,6 +164,10 @@ def ProcessAbmOutput(
 				measureCols_raw, indexRename,
 				day_override=day_override)
 			firstProcess = False
+	
+	if DELETE_AFTER:
+		for filename in filelist:
+			os.remove(filename + '.csv') 
 	return dataMap
 
 
@@ -603,7 +607,7 @@ def ProcessInfectionCohorts(
 
 def CleanupFiles(inputDir, arrayIndex):
 	for metric in gl.metricList + gl.cohortMetricList + list(gl.timefullMetrics.keys()) + ['secondary', 'stage', 'vaccine']:
-		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv') 
+		os.remove(inputDir + '/step_1/processed_{}'.format(metric) + '_' + str(arrayIndex) + '.csv')
 
 
 ############### Cohort outputs for mort/hosp ###############
