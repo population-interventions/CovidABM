@@ -27,12 +27,15 @@ to do_stages_continuous
     let upper_mask_wearing_a0           mask_wearing_a0
     let upper_mask_wearing_a10          mask_wearing_a10
     let upper_mask_wearing_a20          mask_wearing_a20
+    let upper_mask_wearing_a60          mask_wearing_a60
     let upper_mask_wearing_n95_a0       mask_wearing_n95_a0
     let upper_mask_wearing_n95_a10      mask_wearing_n95_a10
     let upper_mask_wearing_n95_a20      mask_wearing_n95_a20
+    let upper_mask_wearing_n95_a60      mask_wearing_n95_a60
     let upper_mask_wearing_surgical_a0  mask_wearing_surgical_a0
     let upper_mask_wearing_surgical_a10 mask_wearing_surgical_a10
     let upper_mask_wearing_surgical_a20 mask_wearing_surgical_a20
+    let upper_mask_wearing_surgical_a60 mask_wearing_surgical_a60
     
     let upper_case_isolation            case_isolation
     let upper_schoolsOpen               schoolsOpen
@@ -57,12 +60,15 @@ to do_stages_continuous
     let lower_mask_wearing_a0           mask_wearing_a0
     let lower_mask_wearing_a10          mask_wearing_a10
     let lower_mask_wearing_a20          mask_wearing_a20
+    let lower_mask_wearing_a60          mask_wearing_a60
     let lower_mask_wearing_n95_a0       mask_wearing_n95_a0
     let lower_mask_wearing_n95_a10      mask_wearing_n95_a10
     let lower_mask_wearing_n95_a20      mask_wearing_n95_a20
+    let lower_mask_wearing_n95_a60      mask_wearing_n95_a60
     let lower_mask_wearing_surgical_a0  mask_wearing_surgical_a0
     let lower_mask_wearing_surgical_a10 mask_wearing_surgical_a10
     let lower_mask_wearing_surgical_a20 mask_wearing_surgical_a20
+    let lower_mask_wearing_surgical_a60 mask_wearing_surgical_a60
     
     let lower_case_isolation            case_isolation
     let lower_schoolsOpen               schoolsOpen
@@ -105,12 +111,15 @@ to do_stages_continuous
     set mask_wearing_a0           prop * upper_mask_wearing_a0           + (1 - prop) * lower_mask_wearing_a0
     set mask_wearing_a10          prop * upper_mask_wearing_a10          + (1 - prop) * lower_mask_wearing_a10
     set mask_wearing_a20          prop * upper_mask_wearing_a20          + (1 - prop) * lower_mask_wearing_a20
+    set mask_wearing_a60          prop * upper_mask_wearing_a60          + (1 - prop) * lower_mask_wearing_a60
     set mask_wearing_n95_a0       prop * upper_mask_wearing_n95_a0       + (1 - prop) * lower_mask_wearing_n95_a0
     set mask_wearing_n95_a10      prop * upper_mask_wearing_n95_a10      + (1 - prop) * lower_mask_wearing_n95_a10
     set mask_wearing_n95_a20      prop * upper_mask_wearing_n95_a20      + (1 - prop) * lower_mask_wearing_n95_a20
+    set mask_wearing_n95_a60      prop * upper_mask_wearing_n95_a60      + (1 - prop) * lower_mask_wearing_n95_a60
     set mask_wearing_surgical_a0  prop * upper_mask_wearing_surgical_a0  + (1 - prop) * lower_mask_wearing_surgical_a0
     set mask_wearing_surgical_a10 prop * upper_mask_wearing_surgical_a10 + (1 - prop) * lower_mask_wearing_surgical_a10
     set mask_wearing_surgical_a20 prop * upper_mask_wearing_surgical_a20 + (1 - prop) * lower_mask_wearing_surgical_a20
+    set mask_wearing_surgical_a60 prop * upper_mask_wearing_surgical_a60 + (1 - prop) * lower_mask_wearing_surgical_a60
   ]
 end
 

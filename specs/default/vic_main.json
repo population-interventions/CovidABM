@@ -508,5 +508,8 @@
     ],
     "compoundmask": [
         "\"none\""
+    ],
+    "compoundmaskold": [
+        "\"none\""
     ]
 }

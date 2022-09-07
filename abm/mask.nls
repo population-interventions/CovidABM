@@ -39,8 +39,12 @@ to-report simul_getWantWearMask
     [
       report wearsMask_draw < ApplyOrToPr mask_wearing_a10 avoidOr
     ]
+    agerange < 60
     [
       report wearsMask_draw < ApplyOrToPr mask_wearing_a20 avoidOr
+    ]
+    [
+      report wearsMask_draw < ApplyOrToPr mask_wearing_a60 avoidOr
     ]
   )
 end
@@ -57,8 +61,12 @@ to-report simul_getMaskEfficacyLnOr
     [
       set drawTest drawTest / (ApplyOrToPr mask_wearing_a10 avoidOr)
     ]
+    agerange < 60
     [
       set drawTest drawTest / (ApplyOrToPr mask_wearing_a20 avoidOr)
+    ]
+    [
+      set drawTest drawTest / (ApplyOrToPr mask_wearing_a60 avoidOr)
     ]
   )
   
@@ -83,6 +91,7 @@ to-report simul_getMaskEfficacyLnOr
         set drawTest (drawTest - mask_wearing_n95_a10) / (1 - mask_wearing_n95_a10)
       ]
     ]
+    agerange < 60
     [
       ifelse drawTest < mask_wearing_n95_a20
       [
@@ -90,6 +99,15 @@ to-report simul_getMaskEfficacyLnOr
       ]      
       [
         set drawTest (drawTest - mask_wearing_n95_a20) / (1 - mask_wearing_n95_a20)
+      ]
+    ]
+    [
+      ifelse drawTest < mask_wearing_n95_a60
+      [
+        report draw_maskWearEfficacy_n95
+      ]      
+      [
+        set drawTest (drawTest - mask_wearing_n95_a60) / (1 - mask_wearing_n95_a60)
       ]
     ]
   )
@@ -107,8 +125,14 @@ to-report simul_getMaskEfficacyLnOr
         report draw_maskWearEfficacy_surgical
       ]  
     ]
+    agerange < 60
     [
       if drawTest < mask_wearing_surgical_a20 [
+        report draw_maskWearEfficacy_surgical
+      ] 
+    ]
+    [
+      if drawTest < mask_wearing_surgical_a60 [
         report draw_maskWearEfficacy_surgical
       ] 
     ]

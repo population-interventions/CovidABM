@@ -28,12 +28,15 @@ to do_stages
     set mask_wearing_a0 0
     set mask_wearing_a10 0
     set mask_wearing_a20 0
+    set mask_wearing_a60 0
     set mask_wearing_n95_a0 0
     set mask_wearing_n95_a10 0
     set mask_wearing_n95_a20 0
+    set mask_wearing_n95_a60 0
     set mask_wearing_surgical_a0 0
     set mask_wearing_surgical_a10 0
     set mask_wearing_surgical_a20 0
+    set mask_wearing_surgical_a60 0
   ]
   
   if policy_switch = "continuous" [
@@ -100,6 +103,7 @@ to do_stages_test
       set superspreaders          0.03
   ]
   if stage_test_index = 5 [
+    set mask_wearing_a60        0.65
     set mask_wearing_a20        0.65
     set mask_wearing_a10        mask_wearing_a20 * 2 / 3
     set mask_wearing_a0         mask_wearing_a10 * 2 / 3

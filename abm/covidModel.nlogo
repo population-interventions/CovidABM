@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-12.0
+7.5
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.05
+0.022
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.35
+0.63
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.45
+0.73
 0.01
 1
 NIL
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.7
+0.35
 0.01
 1
 NIL
@@ -694,7 +694,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.1428
+0.13
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+6.0
 1
 1
 NIL
@@ -2144,10 +2144,10 @@ self_iso_at_peak
 -1000
 
 SWITCH
-244
-702
-363
-735
+1755
+544
+1874
+577
 print_phase
 print_phase
 1
@@ -2155,10 +2155,10 @@ print_phase
 -1000
 
 SWITCH
-244
-663
-362
-696
+1755
+505
+1873
+538
 print_vac
 print_vac
 1
@@ -3698,8 +3698,18 @@ CHOOSER
 655
 compoundMask
 compoundMask
-"none" "NoMask" "25Mask" "50Mask" "75Mask" "AllMask" "AllMaskEvenKids" "AllMask_50N95" "AllN95" "AllN95EvenKids"
-9
+"none" "NoMask" "20Mask" "25Mask" "35Mask" "50Mask" "75Mask" "AllN95"
+0
+
+CHOOSER
+209
+664
+348
+709
+compoundMaskOld
+compoundMaskOld
+"none" "NoMask" "20Mask" "25Mask" "35Mask" "50Mask" "75Mask" "AllN95"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?

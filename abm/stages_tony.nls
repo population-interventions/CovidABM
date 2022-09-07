@@ -33,12 +33,15 @@ to do_stages_tony
       set mask_wearing_a0           0
       set mask_wearing_a10          0
       set mask_wearing_a20          0
+      set mask_wearing_a60          0
       set mask_wearing_n95_a0       0
       set mask_wearing_n95_a10      0
       set mask_wearing_n95_a20      0
+      set mask_wearing_n95_a60      0
       set mask_wearing_surgical_a0  0
       set mask_wearing_surgical_a10 0
       set mask_wearing_surgical_a20 0
+      set mask_wearing_surgical_a60 0
     ]
     
     if stage >= 1 [
@@ -57,17 +60,21 @@ to do_stages_tony
       set mask_wearing_n95_a0       0.2
       set mask_wearing_n95_a10      mask_n95_prop_draw
       set mask_wearing_n95_a20      mask_n95_prop_draw
+      set mask_wearing_n95_a60      mask_n95_prop_draw
       set mask_wearing_surgical_a0  1
       set mask_wearing_surgical_a10 1
       set mask_wearing_surgical_a20 1
+      set mask_wearing_surgical_a60 1
     ]
     [
       set mask_wearing_n95_a0       0.2
       set mask_wearing_n95_a10      0.2
       set mask_wearing_n95_a20      0.2
+      set mask_wearing_n95_a60      0.2
       set mask_wearing_surgical_a0  1
       set mask_wearing_surgical_a10 1
       set mask_wearing_surgical_a20 1
+      set mask_wearing_surgical_a60 1
     ]
     
     if stage = 1 [
@@ -143,57 +150,126 @@ to do_stages_tony
     if mask_wearing_a20 > 1 [
      set mask_wearing_a20 1 
     ]
+    set mask_wearing_a60 mask_wearing_a20
     
     ;; Compound mask parameters
     if days >= 0 [
       (ifelse compoundMask = "NoMask"
         [
           set mask_wearing_a20 0
+          set mask_wearing_a60 0
           set mask_wearing_n95_a0 0
           set mask_wearing_n95_a10 0
           set mask_wearing_n95_a20 0
+          set mask_wearing_n95_a60 0
+        ]
+        compoundMask = "20Mask"
+        [
+          set mask_wearing_a20 0.20
+          set mask_wearing_a60 0.20
+          set mask_wearing_n95_a0 0
+          set mask_wearing_n95_a10 0
+          set mask_wearing_n95_a20 0
+          set mask_wearing_n95_a60 0
         ]
         compoundMask = "25Mask"
         [
           set mask_wearing_a20 0.25
+          set mask_wearing_a60 0.25
           set mask_wearing_n95_a0 0
           set mask_wearing_n95_a10 0
           set mask_wearing_n95_a20 0
+          set mask_wearing_n95_a60 0
+        ]
+        compoundMask = "35Mask"
+        [
+          set mask_wearing_a20 0.35
+          set mask_wearing_a60 0.35
+          set mask_wearing_n95_a0 0
+          set mask_wearing_n95_a10 0
+          set mask_wearing_n95_a20 0
+          set mask_wearing_n95_a60 0
         ]
         compoundMask = "50Mask"
         [
           set mask_wearing_a20 0.5
+          set mask_wearing_a60 0.5
           set mask_wearing_n95_a0 0
           set mask_wearing_n95_a10 0
           set mask_wearing_n95_a20 0
+          set mask_wearing_n95_a60 0
         ]
         compoundMask = "75Mask"
         [
           set mask_wearing_a20 0.75
+          set mask_wearing_a60 0.75
           set mask_wearing_n95_a0 0
           set mask_wearing_n95_a10 0
           set mask_wearing_n95_a20 0
+          set mask_wearing_n95_a60 0
+        ]
+        compoundMask = "75N95"
+        [
+          set mask_wearing_a20 0.75
+          set mask_wearing_a60 0.75
+          set mask_wearing_n95_a0 1
+          set mask_wearing_n95_a10 1
+          set mask_wearing_n95_a20 1
+          set mask_wearing_n95_a60 1
         ]
         compoundMask = "AllMask"
         [
           set mask_wearing_a20 1
+          set mask_wearing_a60 1
           set mask_wearing_n95_a0 0
           set mask_wearing_n95_a10 0
           set mask_wearing_n95_a20 0
-        ]
-        compoundMask = "AllMask_50N95"
-        [
-          set mask_wearing_a20 1
-          set mask_wearing_n95_a0 0.5
-          set mask_wearing_n95_a10 0.5
-          set mask_wearing_n95_a20 0.5
+          set mask_wearing_n95_a60 0
         ]
         compoundMask = "AllN95"
         [
           set mask_wearing_a20 1
+          set mask_wearing_a60 1
           set mask_wearing_n95_a0 1
           set mask_wearing_n95_a10 1
           set mask_wearing_n95_a20 1
+          set mask_wearing_n95_a60 1
+        ]
+      )
+      (ifelse compoundMaskOld = "NoMask"
+        [
+          set mask_wearing_a60 0
+          set mask_wearing_n95_a60 0
+        ]
+        compoundMaskOld = "20Mask"
+        [
+          set mask_wearing_a60 0.20
+          set mask_wearing_n95_a60 0
+        ]
+        compoundMaskOld = "35Mask"
+        [
+          set mask_wearing_a60 0.35
+          set mask_wearing_n95_a60 0
+        ]
+        compoundMaskOld = "50Mask"
+        [
+          set mask_wearing_a60 0.5
+          set mask_wearing_n95_a60 0
+        ]
+        compoundMaskOld = "75Mask"
+        [
+          set mask_wearing_a60 0.75
+          set mask_wearing_n95_a60 0
+        ]
+        compoundMaskOld = "75N95"
+        [
+          set mask_wearing_a60 0.75
+          set mask_wearing_n95_a60 1
+        ]
+        compoundMaskOld = "AllN95"
+        [
+          set mask_wearing_a60 1
+          set mask_wearing_n95_a60 1
         ]
       )
     ]
@@ -209,18 +285,22 @@ to do_stages_tony
           set mask_wearing_a0 1
           set mask_wearing_a10 1
           set mask_wearing_a20 1
+          set mask_wearing_a60 1
           set mask_wearing_n95_a0 0
           set mask_wearing_n95_a10 0
           set mask_wearing_n95_a20 0
+          set mask_wearing_n95_a60 0
         ]
         compoundMask = "AllN95EvenKids"
         [
           set mask_wearing_a0 1
           set mask_wearing_a10 1
           set mask_wearing_a20 1
+          set mask_wearing_a60 1
           set mask_wearing_n95_a0 1
           set mask_wearing_n95_a10 1
           set mask_wearing_n95_a20 1
+          set mask_wearing_n95_a60 1
         ]
       )
     ]

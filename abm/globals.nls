@@ -295,12 +295,15 @@ globals [
   mask_wearing_a0
   mask_wearing_a10
   mask_wearing_a20
+  mask_wearing_a60
   mask_wearing_surgical_a0
   mask_wearing_surgical_a10
   mask_wearing_surgical_a20
+  mask_wearing_surgical_a60
   mask_wearing_n95_a0
   mask_wearing_n95_a10
   mask_wearing_n95_a20
+  mask_wearing_n95_a60
   
   
   incursionTable
