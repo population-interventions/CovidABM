@@ -3698,7 +3698,7 @@ CHOOSER
 655
 compoundMask
 compoundMask
-"none" "NoMask" "20Mask" "25Mask" "35Mask" "50Mask" "75Mask" "AllN95"
+"none" "NoMask" "20Mask" "25Mask" "35Mask" "50Mask" "75Mask" "75N95" "AllN95"
 0
 
 CHOOSER
@@ -3708,7 +3708,7 @@ CHOOSER
 709
 compoundMaskOld
 compoundMaskOld
-"none" "NoMask" "20Mask" "25Mask" "35Mask" "50Mask" "75Mask" "AllN95"
+"none" "NoMask" "20Mask" "25Mask" "35Mask" "50Mask" "75Mask" "75N95" "AllN95"
 0
 
 @#$#@#$#@

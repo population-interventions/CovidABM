@@ -49,12 +49,11 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 		if metric in modelData['postSeries']['processMain']['indexRename'] else metric for metric in measureCols_raw]
 	indexRename = modelData['postSeries']['processMain']['indexRename']
 	
-	rawDataDir = '{}/raw'.format(modelData['scratchDir'])
 	postDataDir = '{}/post_parallel'.format(modelData['scratchDir'])
 	workingDir = '{}/process'.format(modelData['scratchDir'])
 	postInputDir = modelData['postInputDir']
 
-	arraySize = len(util.GetFiles(rawDataDir))
+	arraySize = len(util.GetFiles('{}/single'.format(postDataDir)))
 	if arraySize == 0:
 		arraySize = len(util.GetFiles('{}/post_parallel/single'.format(modelData['scratchDir'])))
 		singleOnly = True
