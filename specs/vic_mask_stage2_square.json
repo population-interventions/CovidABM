@@ -79,7 +79,7 @@
 				"prefixList" : ["mid_"],
 				"metrics" : ["totStage2", "totStage3", "totStage4", "totStage5", "hospDaysAbove750", "hospDaysAbove1500", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
 				"identifyIndex" : {
-					"scenAgg" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+					"scenAgg" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 				}
 			},
 			"singleProcessing" : {
@@ -87,11 +87,11 @@
 				"aggregates" : {
 					"meanOnDraw_thenDescribeOnScenario" : {
 						"firstMeanOn" : ["draw_index"],
-						"thenDescribeOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"],
+						"thenDescribeOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"],
 						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					},
 					"meanOnScenario_thenDescribeOnDraw" : {
-						"firstMeanOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"],
+						"firstMeanOn" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"],
 						"thenDescribeOn" : ["draw_index"],
 						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					}
@@ -101,121 +101,121 @@
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystem_uk_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp_uk_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystem_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystem_uk_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp_uk_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystem_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystem_uk_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp_uk_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystem_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystem_uk_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp_uk_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"stackIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystem" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystem_uk" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					},
 					"healthSystemAndGdp_uk" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_uk",
 						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"]
+						"identifyIndex" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"]
 					}
 				},
 				"rankmaps" : {
@@ -432,7 +432,7 @@
 				]
 			},
 			"heatmapStructure" : {
-				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing"],
+				"index_rows" : ["Virulence", "Infectiousness", "Immune escape", "Incursion day", "Variant", "Mask wearing <60", "Mask wearing 60+"],
 				"index_cols" : ["Stage policy", "Mask policy", "Vaccine schedule"],
 				"base_value" : {
 				},
