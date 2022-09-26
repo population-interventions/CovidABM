@@ -1,6 +1,6 @@
 {
     "population": [
-        "2500.0"
+        "5000.0"
     ],
     "span": [
         "10.0"
@@ -57,7 +57,7 @@
         "0.67"
     ],
     "gather_location_count": [
-        "100.0"
+        "200.0"
     ],
     "complacency_bound": [
         "1.0"
@@ -327,10 +327,10 @@
         "-1.0"
     ],
     "scale_up_threshold": [
-        "150.0"
+        "300.0"
     ],
     "scale_down_threshold": [
-        "130.0"
+        "260.0"
     ],
     "scale_cont_buffer": [
         "10.0"
@@ -351,7 +351,7 @@
         "2.0"
     ],
     "sim_seed": [
-        "76431.67353"
+        "57235.97273"
     ],
     "mid_report_day": [
         "64.0"
@@ -491,7 +491,7 @@
     "mid_day": [
         "364.0"
     ],
-    "maskWearMod": [
+    "maskwearmod": [
         "0.0"
     ],
     "previnfecttrackmax": [
@@ -511,5 +511,8 @@
     ],
     "compoundmaskold": [
         "\"none\""
+    ],
+    "filepop": [
+        "2500.0"
     ]
 }

@@ -292,7 +292,8 @@ to createSimulants
       setEssentialWorkerPriority
     ]
     
-    if agentsOfThisIndex >= cohort_pop [
+    if agentsOfThisIndex >= cohort_pop * Population / filePop [
+      ;print (word "pop_index " pop_index ", agentsOfThisIndex " agentsOfThisIndex) 
       set pop_index pop_index + 1
       set agentsOfThisIndex 0
     ]
@@ -322,7 +323,8 @@ to setupInitialVaccination_micromangedMethod
   let rowIndex 0
   foreach sort-on [agerange] simuls [ sim -> 
     ask sim [
-      let row item rowIndex preVacInfectData
+      ;print (floor (rowIndex * filePop / Population))
+      let row item (floor (rowIndex * filePop / Population)) preVacInfectData
       set rowIndex rowIndex + 1
       
       set initPreSetup True

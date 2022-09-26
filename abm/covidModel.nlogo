@@ -34,13 +34,13 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-387
-69
-868
-551
+412
+67
+920
+576
 -1
 -1
-7.4
+3.941
 1
 10
 1
@@ -51,9 +51,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-63
+100
 0
-63
+100
 1
 1
 1
@@ -129,15 +129,15 @@ NIL
 1
 
 SLIDER
-3370
-203
-3483
-236
+3447
+155
+3560
+188
 Population
 Population
 0
-2500
-2500.0
+10000
+5000.0
 2500
 1
 NIL
@@ -1103,8 +1103,8 @@ SLIDER
 Gather_Location_Count
 Gather_Location_Count
 0
-200
-110.0
+350
+200.0
 5
 1
 NIL
@@ -1208,7 +1208,7 @@ End_Day
 End_Day
 -1
 730
-58.0
+105.0
 1
 1
 NIL
@@ -1241,10 +1241,10 @@ floor (policymetric7 / 7)
 11
 
 PLOT
-3489
-187
-3762
-307
+3492
+193
+3765
+313
 OverseasIncursions
 NIL
 NIL
@@ -2595,8 +2595,8 @@ SLIDER
 Scale_Up_Threshold
 Scale_Up_Threshold
 0
-200
-150.0
+300
+300.0
 1
 1
 NIL
@@ -2610,8 +2610,8 @@ SLIDER
 Scale_Down_Threshold
 Scale_Down_Threshold
 0
-200
-130.0
+300
+260.0
 1
 1
 NIL
@@ -2745,7 +2745,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-82339.52762
+57235.97273
 1
 1
 NIL
@@ -2911,7 +2911,7 @@ draw_index
 draw_index
 0
 2000
-245.0
+980.0
 1
 1
 NIL
@@ -3710,6 +3710,21 @@ compoundMaskOld
 compoundMaskOld
 "none" "NoMask" "20Mask" "25Mask" "35Mask" "50Mask" "75Mask" "75N95" "AllN95"
 0
+
+SLIDER
+3445
+118
+3564
+152
+filePop
+filePop
+0
+2500
+2500.0
+100
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
