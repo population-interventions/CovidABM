@@ -24,6 +24,7 @@
 		"track_R" : true,
 		"param_policy" : "StageFixed",
 		"init_stage" : 0,
+		"gather_location_count" : 140,
 		"input_population_table" : "input/vic/pop_r0",
 		"input_draw_static" : "input/vic/draw_static_none.csv"
 	},
