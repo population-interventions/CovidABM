@@ -21,11 +21,13 @@ def DoParallelCheck(runIndex, modelName, runs, pernode):
 			outputDir = '{}/post_parallel'.format(modelData['scratchDir'])
 			outputTraces = mainData['params']['outputTraces'] if 'outputTraces' in mainData['params'] else False
 			allowDaily = mainData['params']['allowDaily'] if 'allowDaily' in mainData['params'] else False
+			retainRaw = mainData['params']['retainRaw'] if 'retainRaw' in mainData['params'] else False
+			# Usually retainRaw for auto calibration, as it reads raw directly.
 			
 			DoAbmProcessing(
 				inputDir, outputDir, runIndex,
 				mainData['indexRename'],
 				measureCols, measureCols_raw,
-				outputTraces=outputTraces, allowDaily=allowDaily)
+				outputTraces=outputTraces, allowDaily=allowDaily, retainRaw=retainRaw)
 	
 

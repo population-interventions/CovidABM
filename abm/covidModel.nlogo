@@ -36,11 +36,11 @@ __includes[
 GRAPHICS-WINDOW
 412
 67
-920
-576
+910
+566
 -1
 -1
-3.941
+3.8614
 1
 10
 1
@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-7.5
+6.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.022
+0.016
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.63
+0.75
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.73
+0.83
 0.01
 1
 NIL
@@ -565,7 +565,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.35
+0.2
 0.01
 1
 NIL
@@ -604,7 +604,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-0
+1
 1
 -1000
 
@@ -694,7 +694,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.13
+0.075
 0.01
 1
 NIL
@@ -709,7 +709,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-6.0
+5.0
 1
 1
 NIL
@@ -1104,7 +1104,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 350
-200.0
+140.0
 5
 1
 NIL
@@ -2911,7 +2911,7 @@ draw_index
 draw_index
 0
 2000
-980.0
+784.0
 1
 1
 NIL
@@ -3715,7 +3715,7 @@ SLIDER
 3445
 118
 3564
-152
+151
 filePop
 filePop
 0

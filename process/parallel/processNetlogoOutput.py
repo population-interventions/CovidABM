@@ -615,7 +615,7 @@ def CleanupFiles(inputDir, arrayIndex):
 def DoAbmProcessing(
 		inputDir, outputDir, arrayIndex, indexRename, measureCols,
 		measureCols_raw, day_override=False, dayStartOffset=0,
-		outputTraces=False, allowDaily=False):
+		outputTraces=False, allowDaily=False, retainRaw=False):
 	
 	print('Processing ABM Output', inputDir, arrayIndex)
 	dataMap = ProcessAbmOutput(
@@ -636,5 +636,5 @@ def DoAbmProcessing(
 		dataMap, outputDir + '/step_1', outputDir + '/visualise', outputDir + '/stage',
 		arrayIndex, measureCols, outputTraces=outputTraces)
 	
-	if DELETE_AFTER:
+	if (not retainRaw) and DELETE_AFTER:
 		CleanupFiles(outputDir, arrayIndex)
