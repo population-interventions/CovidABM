@@ -43,6 +43,7 @@
 				"processStages" : false,
 				"processCohort" : true,
 				"doAverage" : true,
+				"retainRaw" : true,
 				
 				"outputTraces" : false,
 				"describeHeatmaps" : false,
