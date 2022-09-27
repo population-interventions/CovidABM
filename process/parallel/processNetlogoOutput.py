@@ -637,4 +637,5 @@ def DoAbmProcessing(
 		arrayIndex, measureCols, outputTraces=outputTraces)
 	
 	if (not retainRaw) and DELETE_AFTER:
-		CleanupFiles(outputDir, arrayIndex)
+		print('Deleting raw')
+		#CleanupFiles(outputDir, arrayIndex)
