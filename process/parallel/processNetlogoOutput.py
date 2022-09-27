@@ -143,7 +143,7 @@ def ProcessAbmChunk(
 def ProcessAbmOutput(
 		inputDir, outputDir, singleDir, arrayIndex,
 		indexRename, measureCols_raw,
-		day_override=False, useDataMap=True):
+		day_override=False, useDataMap=True, retainRaw=False):
 	filelist = [(inputDir + '/{}_table_{}').format(str(arrayIndex), str(arrayIndex))]
 		
 	print("Processing Files", filelist)
@@ -165,7 +165,8 @@ def ProcessAbmOutput(
 				day_override=day_override)
 			firstProcess = False
 	
-	if DELETE_AFTER:
+	if (not retainRaw) and DELETE_AFTER:
+		print('ProcessAbmOutput delete raw')
 		for filename in filelist:
 			os.remove(filename + '.csv') 
 	return dataMap
@@ -620,7 +621,7 @@ def DoAbmProcessing(
 	print('Processing ABM Output', inputDir, arrayIndex)
 	dataMap = ProcessAbmOutput(
 		inputDir, outputDir + '/step_1', outputDir + '/single', arrayIndex, indexRename,
-		measureCols_raw, day_override=day_override, useDataMap=False)
+		measureCols_raw, day_override=day_override, useDataMap=False, retainRaw=retainRaw)
 	
 	if outputTraces:
 		InfectionsAndStageVisualise(
@@ -638,4 +639,4 @@ def DoAbmProcessing(
 	
 	if (not retainRaw) and DELETE_AFTER:
 		print('Deleting raw')
-		#CleanupFiles(outputDir, arrayIndex)
+		CleanupFiles(outputDir, arrayIndex)
