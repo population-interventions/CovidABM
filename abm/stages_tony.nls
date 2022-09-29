@@ -85,7 +85,7 @@ to do_stages_tony
       set Essential_Workers       0.7
       set Visit_Frequency         0.1428
       set superspreaders          0.05
-      set mask_wearing_a20        0.2
+      set mask_wearing_a20        0.1
       set Visit_Radius            8.8
       set schoolsOpen true
     ]
@@ -98,7 +98,7 @@ to do_stages_tony
       set Essential_Workers       0.51
       set Visit_Frequency         0.1428
       set superspreaders          0.034
-      set mask_wearing_a20        0.35
+      set mask_wearing_a20        0.25
       set Visit_Radius            8.12
       set schoolsOpen true
     ]
@@ -111,7 +111,7 @@ to do_stages_tony
       set Essential_Workers       0.35
       set Visit_Frequency         0.13
       set superspreaders          0.022
-      set mask_wearing_a20        0.6
+      set mask_wearing_a20        0.4
       set Visit_Radius            6
       set schoolsOpen true
     ]

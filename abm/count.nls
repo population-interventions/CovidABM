@@ -104,6 +104,7 @@ to updateCounts
   set globalPopPerSimul scaledPopulation / Population
 
   ;; calculates the number of people infected and recorded today
+  set cumulativeInfected_raw cumulativeInfected_raw + infectionsToday
   if _init_metric_threshold < 0 [
     set cumulativeInfected cumulativeInfected + infectionsToday
     set cumulativeInfected_minusInit cumulativeInfected
@@ -384,7 +385,7 @@ to checkStartThreshold
     [
       set start_day ticks + 1
       if infectionsToday > 0 [
-        set infectivityMult infectivityMult * 0.85 + 0.15 * min (list 2 (_init_metric_threshold / infectionsToday))
+        set infectivityMult infectivityMult * 0.85 + 0.15 * min (list 2 ((_init_metric_threshold) / infectionsToday))
       ]
     ]
   ]

@@ -59,6 +59,7 @@ globals [
   yellowcount
   redcount
   cumulativeInfected
+  cumulativeInfected_raw
   scaledPopulation
   MeanR
   EWInfections

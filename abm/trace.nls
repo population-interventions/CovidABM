@@ -1,63 +1,69 @@
 
 to simul_setContactsKnown
-  ;; Allow contacts to be tracked now that this case is tracked.
-  set hasKnownContact true
-  ask turtle-set (table:values infectedContactList) [
-    if traceAttempts > trace_attempt_limit / 2 [
-      set traceAttempts 0
-      set selfTraceEffMult selfTraceEffMult * 2 / 3
-    ]
-    if not hasKnownContact [
-      set hasKnownContact true
-      set knownContactTime ticks
-      set traceAttempts 0
-      set selfTraceEffMult 1
+  if traceContacts [
+    ;; Allow contacts to be tracked now that this case is tracked.
+    set hasKnownContact true
+    ask turtle-set (table:values infectedContactList) [
+      if traceAttempts > trace_attempt_limit / 2 [
+        set traceAttempts 0
+        set selfTraceEffMult selfTraceEffMult * 2 / 3
+      ]
+      if not hasKnownContact [
+        set hasKnownContact true
+        set knownContactTime ticks
+        set traceAttempts 0
+        set selfTraceEffMult 1
+      ]
     ]
   ]
 end
 
 to simul_fixInfectedContactList
-  ;; Remove duplicate and non-infected simulants from contact list
-  let idTable table:make
-  let fixedTable table:make
-  let anyKnownContact false
-  ask turtle-set (table:values infectedContactList) [
-    if not table:has-key? idTable who [
-      table:put idTable who 1
-      if color = red [
-        table:put fixedTable (table:length fixedTable) self
-        if hasKnownContact [
-          set anyKnownContact true
+  if traceContacts [
+    ;; Remove duplicate and non-infected simulants from contact list
+    let idTable table:make
+    let fixedTable table:make
+    let anyKnownContact false
+    ask turtle-set (table:values infectedContactList) [
+      if not table:has-key? idTable who [
+        table:put idTable who 1
+        if color = red [
+          table:put fixedTable (table:length fixedTable) self
+          if hasKnownContact [
+            set anyKnownContact true
+          ]
         ]
       ]
     ]
-  ]
-  set infectedContactList fixedTable
-  
-  set hasKnownContact (anyKnownContact or hasKnownContact)
-  if tracked = 1 [
-    simul_setContactsKnown
+    set infectedContactList fixedTable
+    
+    set hasKnownContact (anyKnownContact or hasKnownContact)
+    if tracked = 1 [
+      simul_setContactsKnown
+    ]
   ]
 end
 
 to simul_applyTrace
-  set caseReportTime ticks + Case_Reporting_Delay
-  set caseReportTime ticks + Case_Reporting_Delay
-  set tracked 1
-  set IDTime timenow
-  
-  if trace_calibration > 0 [
-    if first_trace_occurred = -1 [
-      set first_trace_occurred ticks
+  if traceContacts [
+    set caseReportTime ticks + Case_Reporting_Delay
+    set caseReportTime ticks + Case_Reporting_Delay
+    set tracked 1
+    set IDTime timenow
+    
+    if trace_calibration > 0 [
+      if first_trace_occurred = -1 [
+        set first_trace_occurred ticks
+      ]
+      set cumulative_tracked_all cumulative_tracked_all + extraScaleFactor * (Scale_Factor ^ myScale)
+      if (noticeOwnInfection = 1 and timenow >= symtomatic_present_day) [
+        set cumulative_tracked_notice cumulative_tracked_notice + extraScaleFactor * (Scale_Factor ^ myScale)
+      ]
     ]
-    set cumulative_tracked_all cumulative_tracked_all + extraScaleFactor * (Scale_Factor ^ myScale)
-    if (noticeOwnInfection = 1 and timenow >= symtomatic_present_day) [
-      set cumulative_tracked_notice cumulative_tracked_notice + extraScaleFactor * (Scale_Factor ^ myScale)
-    ]
+    
+    simul_setContactsKnown
+    set global_trace_again true
   ]
-  
-  simul_setContactsKnown
-  set global_trace_again true
 end
 
 to simul_traceme
@@ -126,32 +132,36 @@ to trace_doTrace
   ask simuls [
     simul_traceme
   ]
-  while [global_trace_again] [
-    set global_trace_again false
-    ask simuls with [knownContactTime = ticks] [
-      simul_traceme_recursive_contact
+  if traceContacts [
+    while [global_trace_again] [
+      set global_trace_again false
+      ask simuls with [knownContactTime = ticks] [
+        simul_traceme_recursive_contact
+      ]
     ]
   ]
 end
 
 to traceadjust
-  ;print (word "trace_a " trace_a ", trace_b " trace_b ", trace_c " trace_c ", trace_n " trace_n)
-  ifelse param_trace_mult > 0 
-  [
-    let dailyInfections (infectionsinperiod7 / 7)
-    ifelse infectionsinperiod7 > 0
+  if traceContacts [
+    ;print (word "trace_a " trace_a ", trace_b " trace_b ", trace_c " trace_c ", trace_n " trace_n)
+    ifelse param_trace_mult > 0 
     [
-      set track_and_trace_efficiency (1 / (trace_a * dailyInfections ^ trace_n + trace_b) + trace_c) / dailyInfections
+      let dailyInfections (infectionsinperiod7 / 7)
+      ifelse infectionsinperiod7 > 0
+      [
+        set track_and_trace_efficiency (1 / (trace_a * dailyInfections ^ trace_n + trace_b) + trace_c) / dailyInfections
+      ]
+      [
+        set track_and_trace_efficiency t_atOnePerDay
+      ]
     ]
     [
-      set track_and_trace_efficiency t_atOnePerDay
+      set track_and_trace_efficiency 0
     ]
-  ]
-  [
-    set track_and_trace_efficiency 0
-  ]
-  if trace_eff_override >= 0 [
-    set track_and_trace_efficiency trace_eff_override
+    if trace_eff_override >= 0 [
+      set track_and_trace_efficiency trace_eff_override
+    ]
   ]
 end
 

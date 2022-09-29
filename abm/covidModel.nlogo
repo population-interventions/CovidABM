@@ -34,13 +34,13 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-412
-67
-910
-566
+408
+63
+920
+576
 -1
 -1
-3.8614
+3.9703
 1
 10
 1
@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-6.0
+11.74
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.016
+0.05650000000000001
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.75
+0.3045
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.83
+0.3915
 0.01
 1
 NIL
@@ -366,7 +366,7 @@ INPUTBOX
 376
 264
 initial_cases
-600000.0
+200000.0
 1
 0
 Number
@@ -434,6 +434,7 @@ PENS
 "Current Cases" 1.0 1 -7858858 true "" "plot currentInfections_minusInit"
 "Total Infected" 1.0 0 -13345367 true "" "plot cumulativeInfected_minusInit"
 "ICU Beds Required" 1.0 0 -16777216 true "" "plot ICUBedsRequired "
+"Raw cum" 1.0 0 -7500403 true "" "plot cumulativeInfected_raw"
 
 MONITOR
 1478
@@ -499,10 +500,10 @@ scalePhase
 12
 
 MONITOR
-3628
-668
-3708
-713
+3604
+695
+3684
+740
 NIL
 count simuls
 17
@@ -510,10 +511,10 @@ count simuls
 11
 
 MONITOR
-3623
-562
-3737
-607
+3599
+589
+3713
+634
 Potential contacts
 PotentialContacts
 0
@@ -565,7 +566,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.2
+0.739
 0.01
 1
 NIL
@@ -604,7 +605,7 @@ SWITCH
 278
 schoolsOpen
 schoolsOpen
-1
+0
 1
 -1000
 
@@ -694,7 +695,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.075
+0.1428
 0.01
 1
 NIL
@@ -709,7 +710,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-5.0
+8.8
 1
 1
 NIL
@@ -791,10 +792,10 @@ count simuls with [ timenow = 2 ]
 11
 
 MONITOR
-3623
-612
-3688
-657
+3599
+639
+3664
+684
 Students
 count simuls with [ isStudent ]
 0
@@ -802,10 +803,10 @@ count simuls with [ isStudent ]
 11
 
 SLIDER
-3415
-634
-3599
-667
+3387
+642
+3571
+675
 Mask_Efficacy_Mult
 Mask_Efficacy_Mult
 0
@@ -983,7 +984,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-3
+23
 
 MONITOR
 1473
@@ -1119,7 +1120,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-1.0
+0.87
 0.01
 1
 NIL
@@ -1296,8 +1297,8 @@ MONITOR
 163
 710
 Total Infected
-cumulativeInfected
-0
+cumulativeInfected / 1000000
+6
 1
 14
 
@@ -1350,10 +1351,10 @@ policyTriggerScale
 11
 
 MONITOR
-1624
-488
-1727
-533
+1622
+515
+1725
+560
 slopeAverage %
 slopeAverage * 100
 3
@@ -1569,10 +1570,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1629
-383
-1772
-428
+1622
+418
+1765
+463
 NIL
 average_R_all_regions
 4
@@ -2071,10 +2072,10 @@ casesReportedToday
 11
 
 MONITOR
-1629
-433
-1738
-478
+1622
+468
+1731
+513
 NIL
 initial_infection_R
 17
@@ -2144,10 +2145,10 @@ self_iso_at_peak
 -1000
 
 SWITCH
-1755
-544
-1874
-577
+1748
+557
+1867
+590
 print_phase
 print_phase
 1
@@ -2155,10 +2156,10 @@ print_phase
 -1000
 
 SWITCH
-1755
-505
-1873
-538
+1748
+517
+1866
+550
 print_vac
 print_vac
 1
@@ -2644,10 +2645,10 @@ extraScaleFactor * 100 * scaledPopulation / total_population
 11
 
 SLIDER
-1615
-605
-1788
-638
+1608
+617
+1781
+650
 slope_track_start
 slope_track_start
 0
@@ -2659,10 +2660,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1615
-642
-1788
-675
+1608
+654
+1781
+687
 slope_track_end
 slope_track_end
 0
@@ -2693,7 +2694,7 @@ init_metric_threshold
 init_metric_threshold
 -1000
 30000
-12000.0
+17000.0
 1000
 1
 NIL
@@ -2708,7 +2709,7 @@ init_stage
 init_stage
 0
 5
-2.0
+0.89
 0.01
 1
 NIL
@@ -2745,7 +2746,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-57235.97273
+53497.90694
 1
 1
 NIL
@@ -2886,7 +2887,7 @@ INPUTBOX
 2527
 527
 input_variant
-input/vic/variant.csv
+input/vic/variant_r0_6_8_large.csv
 1
 0
 String
@@ -2911,7 +2912,7 @@ draw_index
 draw_index
 0
 2000
-784.0
+542.0
 1
 1
 NIL
@@ -3165,10 +3166,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1623
-552
-1746
-597
+1617
+564
+1740
+609
 NIL
 policymetric7
 17
@@ -3217,23 +3218,12 @@ incur_name_part_3
 1
 
 MONITOR
-1040
-145
-1222
-190
+1043
+95
+1225
+140
 NIL
 infectionsToday
-0
-1
-11
-
-MONITOR
-1040
-94
-1178
-139
-Expected Hosp
-policymetric7
 0
 1
 11
@@ -3313,7 +3303,7 @@ start_day_min
 start_day_min
 0
 100
-20.0
+18.0
 1
 1
 NIL
@@ -3326,7 +3316,7 @@ SWITCH
 548
 stages_cont
 stages_cont
-1
+0
 1
 -1000
 
@@ -3412,7 +3402,7 @@ init_infectivityMult
 init_infectivityMult
 0
 2
-0.4
+1.0
 0.1
 1
 NIL
@@ -3725,6 +3715,58 @@ filePop
 1
 NIL
 HORIZONTAL
+
+SWITCH
+1628
+379
+1760
+413
+traceContacts
+traceContacts
+1
+1
+-1000
+
+SLIDER
+932
+477
+1039
+511
+test_moveMult
+test_moveMult
+0
+2
+0.8
+0.1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+925
+520
+1037
+554
+test_spreadMult
+test_spreadMult
+0
+2
+0.2
+0.1
+1
+NIL
+HORIZONTAL
+
+MONITOR
+1045
+145
+1205
+190
+NIL
+infectivityMult
+3
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?

@@ -445,6 +445,7 @@ to setGlobals
   set yellowcount                0
   set redcount                   0
   set cumulativeInfected         0
+  set cumulativeInfected_raw     0
   set scaledPopulation           0
   set MeanR                      0
   set EWInfections               0

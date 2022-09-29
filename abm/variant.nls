@@ -135,6 +135,7 @@ to simul_updatepersonalvirulence
         set currentVirulence 0
       ]
     )
+    ;print (word self ", timenow " timenow ", cur " currentVirulence ", per " personalVirulence)
   ]
     ;if vaccinated = 1 [
     ;  show (word "cine " vaccinated ",time " timenow ",VIR " (currentVirulence / personalVirulence) ",unscale " currentVirulence)

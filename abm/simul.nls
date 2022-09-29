@@ -533,7 +533,7 @@ to simul_move
     ifelse 0.5 * move_chance_multiplier > random-float 1
     [
       set heading random 360
-      jump random-float pace
+      jump random-float (pace * test_moveMult)
     ]
     [
       move-to homeLocation
@@ -612,7 +612,7 @@ to simul_avoid
 end
 
 to simul_superSpread
-  let mySpread ApplyOrToPr superspreaders (1 / avoidOr)
+  let mySpread (ApplyOrToPr (superspreaders * test_spreadMult) (1 / avoidOr)) 
   ;if random-float 1 < 0.001 [ print (word agerange ", " mySpread)]
   if EssentialWorkerFlag and mySpread < ess_spread_anchor [
     set mySpread (mySpread + ess_spread_anchor) * 0.5
@@ -667,8 +667,14 @@ to simul_end_infection
       set infectVariant 0
     ]
     [
-      if recoverVariant = 0 [
+      ifelse recoverVariant = 0
+      [
         simul_stealRecover 
+      ]
+      [
+        set color yellow
+        set isInitialInfection false
+        set infectVariant 0 
       ]
     ]
     
