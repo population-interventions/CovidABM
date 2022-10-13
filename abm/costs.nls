@@ -4,28 +4,28 @@ to costs_setup
   set halyAcute_listOut  cohortLengthListOfZeros
   set halyDeath_listOut cohortLengthListOfZeros
   set halyLong_listOut  cohortLengthListOfZeros
-  
+
   set halyUI_acute random-normal 1 0.2
   set halyUI_long random-normal 1 0.3
   set halyUI_death random-normal 0 0.01
-  
+
   set costUI_maskFixed random-normal 295000 (295000 * 0.2)
   set costUI_maskPerRound ((random-normal 14.7 1.47) + (random-normal 2.73 0.273) + (random-normal 0.09 0.009))
   set costUI_maskDailyAds (random-normal 460000 (460000 * 0.2)) / 30.33333
-  
+
   let newVacCostUI random-normal 1 0.1
   set costUI_vacOverhead (random-normal 1 0.1) + (random-normal 1 0.1) + (random-normal 30 3)
   set costUI_vacCur      (random-normal 35 3.5)
   set costUI_vacTarget   newVacCostUI * 44
   set costUI_vacMulti    newVacCostUI * 52.5
   set costUI_vacFixed    (random-normal 615000 (615000 * 0.2))
-  
+
   set costUI_gdp 0.1 + 0.4 * (rngs:rnd-beta defaultStream 1 1)
-  
+
   set costUI_rat random-normal 1 0.1
   set costUI_long random-normal 1 0.3
   set costUI_death random-normal 0 0.01
-  
+
   set costUI_doctor      (random-normal 39.10 (39.10 * 0.1))
   set costUI_paracetamol (random-normal 6.80 (6.80 * 0.1))
   set costUI_visitEr     (random-normal 907.68 (907.68 * 0.1))
@@ -36,7 +36,7 @@ to costs_setup
   set sen_halyAcute_out halyUI_acute
   set sen_halyLong_out  halyUI_long
   set sen_halyDeath_out halyUI_death
-  
+
   set sen_vacCur_out       costUI_vacCur
   set sen_vacTarget_out    costUI_vacTarget
   set sen_vacMulti_out     costUI_vacMulti
@@ -53,12 +53,12 @@ to costs_setup
   set sen_costVisitEr_out     costUI_visitEr
   set sen_costHospBed_out     costUI_hospBed
   set sen_costIcuBed_out      costUI_icuBed
-  
+
   set sen_vacPromote_out      costUI_vacFixed
   set sen_vacOverhead_out     costUI_vacOverhead
-  
+
   ; TODO Ouput q by splitting across three things (acute + mask, long, death avert)
-  
+
   ;; Global costs
   set costDeathAverted_out    0
   set costDeathAverted_uk_out 0
@@ -91,7 +91,7 @@ to costs_setup
   set halyTotalLong_out       0
   set halyTotalTotal_out      0
   set halyTotalTotal_uk_out   0
-  
+
   set totStage2_out   0
   set totStage3_out   0
   set totStage4_out   0
@@ -114,7 +114,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   set totDeath_out    totDeath_out    + deathPpl
   set totHospTime_out totHospTime_out + hospPpl * hospTime
   set totIcuTime_out  totIcuTime_out  + icuPpl * icuTime
-  
+
   ;; Acute haly outcome.
   let halyAcute 0
   (ifelse variant = "base" or not high_incur_virulence
@@ -128,10 +128,10 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   set halyAcute halyAcute + (hospPpl - icuPpl) * (0.000978082 + (hospTime / 365) * 0.133 + 0.001275342)
   set halyAcute halyAcute + icuPpl * (0.000978082 + (hospTime / 365) * 0.133 + (icuTime / 365) * 0.408 + 0.007824658)
   set halyAcute halyAcute * halyUI_acute
-  
+
   set halyAcute_listOut AddToList halyAcute_listOut cohortIndex halyAcute
   set halyTotalAcute_out halyTotalAcute_out + halyAcute
-  
+
   ;; Long covid haly outcome.
   let halyLong 0
   (ifelse variant = "base" or not high_incur_virulence
@@ -141,7 +141,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
           (ifelse age > 20
             [ ;; Adult
               set halyLong halyLong + halyUI_long * (symptPpl - hospPpl) * 0.0075
-              set halyLong halyLong + halyUI_long * (hospPpl - deathPpl) * 0.0442  
+              set halyLong halyLong + halyUI_long * (hospPpl - deathPpl) * 0.0442
             ]
             age > 10
             [
@@ -182,7 +182,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
         [ ;; No vaccine
           (ifelse age > 20
             [ ;; Adult
-              set halyLong halyLong + halyUI_long * (symptPpl - hospPpl) * 0.0017 
+              set halyLong halyLong + halyUI_long * (symptPpl - hospPpl) * 0.0017
               set halyLong halyLong + halyUI_long * (hospPpl - deathPpl) * 0.0442
             ]
             age > 10
@@ -202,7 +202,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
           (ifelse age > 20
             [ ;; Adult
               set halyLong halyLong + halyUI_long * (symptPpl - hospPpl) * 0.0009
-              set halyLong halyLong + halyUI_long * (hospPpl - deathPpl) * 0.0186  
+              set halyLong halyLong + halyUI_long * (hospPpl - deathPpl) * 0.0186
             ]
             age > 10
             [
@@ -220,10 +220,10 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
       )
     ]
   )
-  
+
   set halyLong_listOut AddToList halyLong_listOut cohortIndex halyLong
   set halyTotalLong_out halyTotalLong_out + halyLong
-  
+
   ;; Death haly outcome.
   let halyDeath 0
   if age = 5  [set halyDeath halyDeath + deathPpl * (24.11 * (1 + 2.20  * halyUI_death))]
@@ -236,10 +236,10 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   if age = 75 [set halyDeath halyDeath + deathPpl * (4.18  * (1 + 9.25  * halyUI_death))]
   if age = 85 [set halyDeath halyDeath + deathPpl * (1.65  * (1 + 13.05 * halyUI_death))]
   if age = 95 [set halyDeath halyDeath + deathPpl * (0.49  * (1 + 19.55 * halyUI_death))]
-  
+
   set halyDeath_listOut AddToList halyDeath_listOut cohortIndex halyDeath
   set halyTotalDeath_out halyTotalDeath_out + halyDeath
-  
+
   ;; Death haly outcome.
   let halyDeath_uk 0
   if age = 5  [set halyDeath_uk halyDeath_uk + deathPpl * (36.53 * (1 + 2.20  * halyUI_death))]
@@ -252,22 +252,22 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   if age = 75 [set halyDeath_uk halyDeath_uk + deathPpl * (4.60  * (1 + 9.25  * halyUI_death))]
   if age = 85 [set halyDeath_uk halyDeath_uk + deathPpl * (1.74  * (1 + 13.05 * halyUI_death))]
   if age = 95 [set halyDeath_uk halyDeath_uk + deathPpl * (0.50  * (1 + 19.55 * halyUI_death))]
-  
+
   set halyTotalDeath_uk_out halyTotalDeath_uk_out + halyDeath_uk
-  
+
   ;; Testing cost
-  let costTesting 0 
+  let costTesting 0
   set costTesting costTesting + infectPpl * (0.83 * (42.5 * costUI_rat) + 3.33 * (7.60 * costUI_rat))
   set costTesting_out costTesting_out + costTesting
-  
+
   ;; Acute health expenditure
   let costAcute 0
   set costAcute costAcute + symptPpl * (0.5 * costUI_doctor + 1 * costUI_paracetamol)
   set costAcute costAcute + hospPpl  * (1.5 * costUI_doctor + 1.2 * costUI_visitEr + hospTime * costUI_hospBed * 1.1 * 1.2)
   set costAcute costAcute + icuPpl   * (2.0 * costUI_doctor + icuTime * costUI_icuBed * 1.2)
-  
+
   set costAcute_out costAcute_out + costAcute
-  
+
   ;; Long covid health expenditure
   let costLong 0
   if age > 10 [
@@ -300,9 +300,9 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
       ]
     )
   ]
-  
+
   set costLong_out costLong_out + costLong
-  
+
   ;; Death health expenditure aversion
   let costDeathAvoid 0
   if age = 5  [set costDeathAvoid costDeathAvoid - deathPpl * (88508  * (1 + 15 * costUI_death))]
@@ -315,9 +315,9 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   if age = 75 [set costDeathAvoid costDeathAvoid - deathPpl * (188596 * (1 + 15 * costUI_death))]
   if age = 85 [set costDeathAvoid costDeathAvoid - deathPpl * (126542 * (1 + 15 * costUI_death))]
   if age = 95 [set costDeathAvoid costDeathAvoid - deathPpl * (62227  * (1 + 15 * costUI_death))]
-  
+
   set costDeathAverted_out costDeathAverted_out + costDeathAvoid
-  
+
   ;; Death health expenditure aversion
   let costDeathAvoid_uk 0
   if age = 5  [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (73055  * (1 + 15 * costUI_death))]
@@ -330,22 +330,22 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
   if age = 75 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (172502 * (1 + 15 * costUI_death))]
   if age = 85 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (117551 * (1 + 15 * costUI_death))]
   if age = 95 [set costDeathAvoid_uk costDeathAvoid_uk - deathPpl * (58352  * (1 + 15 * costUI_death))]
-   
+
   set costDeathAverted_uk_out costDeathAverted_uk_out + costDeathAvoid_uk
 end
 
 to ApplyVaccinationCost [age people vaccine]
   let vaccineCost 0
   let vacDeliverCost 0
-  
+
   ;; Overheads
   set vacDeliverCost vacDeliverCost + people * costUI_vacOverhead
-  
+
   ;; Type cost
   if vaccine = "cur_3"  [set vaccineCost vaccineCost + people * costUI_vacCur]
   if vaccine = "target" [set vaccineCost vaccineCost + people * costUI_vacTarget]
   if vaccine = "multi"  [set vaccineCost vaccineCost + people * costUI_vacMulti]
-  
+
   set costVaccine_out costVaccine_out + vaccineCost
   set costVacDeliver_out costVacDeliver_out + vacDeliverCost
 end
@@ -355,7 +355,7 @@ to ApplyStageCost
     if stage = 3 [set costGdp_out costGdp_out + costUI_gdp * 0.725 * 10 ^ 9 / 7]
     if stage = 4 [set costGdp_out costGdp_out + costUI_gdp * 1.275 * 10 ^ 9 / 7]
     if stage = 5 [set costGdp_out costGdp_out + costUI_gdp * 2.61 * 10 ^ 9 / 7]
-    
+
     if stage >= 2 [set totStage2_out totStage2_out + 1]
     if stage >= 3 [set totStage3_out totStage3_out + 1]
     if stage >= 4 [set totStage4_out totStage4_out + 1]
@@ -365,7 +365,7 @@ end
 
 to CalculateEndCosts
   ;; Calculate mask costs
-  (ifelse policy_mask_n95 
+  (ifelse policy_mask_n95
     [
       let totalMaskTime stage3time + stage4time + stage5time
       let restocks ceiling (totalMaskTime / 28)
@@ -377,7 +377,7 @@ to CalculateEndCosts
       set costMaskFixed_out 0
     ]
   )
-  
+
   ;; Fixed vaccination cost
   (ifelse input_vaccine_schedule = "input/vic/rollout_current.csv" or input_vaccine_schedule = "input/vic/rollout_current_60.csv" or input_vaccine_schedule = "input/vic/rollout_multi_only.csv" or input_vaccine_schedule = "input/vic/rollout_multi_only_60.csv" or input_vaccine_schedule = "input/vic/rollout_target_only.csv" or input_vaccine_schedule = "input/vic/rollout_target_only_60.csv"
     [
@@ -391,93 +391,594 @@ to CalculateEndCosts
       set costVaccineFixed_out 0
     ]
   )
-  
+
   ;; Output aggregate costs costs
   set halyTotalTotal_out     halyTotalAcute_out + halyTotalDeath_out + halyTotalLong_out
   set halyTotalTotal_uk_out  halyTotalAcute_out + halyTotalDeath_uk_out + halyTotalLong_out
   set costTotalHealth_out    costDeathAverted_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
   set costTotalHealth_uk_out costDeathAverted_uk_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
-  
+
   set nmbLowNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 35000
   set nmbMedNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 70000
   set nmbHighNoGdp_out     -1 * costTotalHealth_out - halyTotalTotal_out * 140000
   set nmbLowNoGdp_uk_out   -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 35000
   set nmbMedNoGdp_uk_out   -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 70000
   set nmbHighNoGdp_uk_out  -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 140000
-  
+
   set nmbLow_out           nmbLowNoGdp_out  - costGdp_out
   set nmbMed_out           nmbMedNoGdp_out  - costGdp_out
   set nmbHigh_out          nmbHighNoGdp_out - costGdp_out
   set nmbLow_uk_out        nmbLowNoGdp_uk_out  - costGdp_out
   set nmbMed_uk_out        nmbMedNoGdp_uk_out  - costGdp_out
   set nmbHigh_uk_out       nmbHighNoGdp_uk_out - costGdp_out
-  
+
   set costTotalTotal_out    costTotalHealth_out + costGdp_out
   set costTotalTotal_uk_out costTotalHealth_uk_out + costGdp_out
 end
 
 to CalculateMidCosts
-  CalculateEndCosts
-  CalculateEndCounts
+  ;; This function is generated by makeSingleOutputStupidly.py
+  if days = 182 and days = 364 and days = 546 and days = 60 and days = 91 [
+    CalculateEndCosts
+    CalculateEndCounts
+  ]
   
-  set mid_costDeathAverted_out    costDeathAverted_out
-  set mid_costDeathAverted_uk_out costDeathAverted_uk_out
-  set mid_costAcute_out           costAcute_out
-  set mid_costLong_out            costLong_out
-  set mid_costTesting_out         costTesting_out
-  set mid_costVaccine_out         costVaccine_out
-  set mid_costVacDeliver_out      costVacDeliver_out
-  set mid_costVaccineFixed_out    costVaccineFixed_out
-  set mid_costMask_out            costMask_out
-  set mid_costMaskFixed_out       costMaskFixed_out
-  set mid_costGdp_out             costGdp_out
-  set mid_costTotalHealth_out     costTotalHealth_out
-  set mid_costTotalHealth_uk_out  costTotalHealth_uk_out
-  set mid_costTotalTotal_out      costTotalTotal_out
-  set mid_costTotalTotal_uk_out   costTotalTotal_uk_out
-  set mid_nmbLow_out              nmbLow_out
-  set mid_nmbMed_out              nmbMed_out
-  set mid_nmbHigh_out             nmbHigh_out
-  set mid_nmbLow_uk_out           nmbLow_uk_out
-  set mid_nmbMed_uk_out           nmbMed_uk_out
-  set mid_nmbHigh_uk_out          nmbHigh_uk_out
-  set mid_nmbLowNoGdp_out         nmbLowNoGdp_out
-  set mid_nmbMedNoGdp_out         nmbMedNoGdp_out
-  set mid_nmbHighNoGdp_out        nmbHighNoGdp_out
-  set mid_nmbLowNoGdp_uk_out      nmbLowNoGdp_uk_out
-  set mid_nmbMedNoGdp_uk_out      nmbMedNoGdp_uk_out
-  set mid_nmbHighNoGdp_uk_out     nmbHighNoGdp_uk_out
-  set mid_halyTotalAcute_out      halyTotalAcute_out
-  set mid_halyTotalDeath_out      halyTotalDeath_out
-  set mid_halyTotalDeath_uk_out   halyTotalDeath_uk_out
-  set mid_halyTotalLong_out       halyTotalLong_out
-  set mid_halyTotalTotal_out      halyTotalTotal_out
-  set mid_halyTotalTotal_uk_out   halyTotalTotal_uk_out
-  set mid_totStage2_out           totStage2_out
-  set mid_totStage3_out           totStage3_out
-  set mid_totStage4_out           totStage4_out
-  set mid_totStage5_out           totStage5_out
-  set mid_totInfect_out           totInfect_out
-  set mid_totSympt_out            totSympt_out
-  set mid_totHosp_out             totHosp_out
-  set mid_totIcu_out              totIcu_out
-  set mid_totDeath_out            totDeath_out
-  set mid_totHospTime_out         totHospTime_out
-  set mid_totIcuTime_out          totIcuTime_out
-  set mid_hospDaysAbove500_out    hospDaysAbove500_out
-  set mid_hospDaysAbove750_out    hospDaysAbove750_out
-  set mid_hospDaysAbove1000_out   hospDaysAbove1000_out
-  set mid_hospDaysAbove1250_out   hospDaysAbove1250_out
-  set mid_hospDaysAbove1500_out   hospDaysAbove1500_out
-  set mid_hospDaysAbove1750_out   hospDaysAbove1750_out
-  set mid_hospDaysAbove2000_out   hospDaysAbove2000_out
-  set mid_prevInfect0_out         prevInfect0_out
-  set mid_prevInfect1_out         prevInfect1_out
-  set mid_prevInfect2_out         prevInfect2_out
-  set mid_prevInfect3_out         prevInfect3_out
-  set mid_prevInfect4_out         prevInfect4_out
-  set mid_prevInfect5_out         prevInfect5_out
-  set mid_prevInfect6_out         prevInfect6_out
-  set mid_prevInfect7_out         prevInfect7_out
-  set mid_prevInfect8_out         prevInfect8_out
+  if days = 182 [
+    set mid_0_182_costDeathAverted_out costDeathAverted_out
+    set mid_0_182_costDeathAverted_uk_out costDeathAverted_uk_out
+    set mid_0_182_costAcute_out costAcute_out
+    set mid_0_182_costLong_out costLong_out
+    set mid_0_182_costTesting_out costTesting_out
+    set mid_0_182_costVaccine_out costVaccine_out
+    set mid_0_182_costVacDeliver_out costVacDeliver_out
+    set mid_0_182_costVaccineFixed_out costVaccineFixed_out
+    set mid_0_182_costMask_out costMask_out
+    set mid_0_182_costMaskFixed_out costMaskFixed_out
+    set mid_0_182_costGdp_out costGdp_out
+    set mid_0_182_costTotalHealth_out costTotalHealth_out
+    set mid_0_182_costTotalHealth_uk_out costTotalHealth_uk_out
+    set mid_0_182_costTotalTotal_out costTotalTotal_out
+    set mid_0_182_costTotalTotal_uk_out costTotalTotal_uk_out
+    set mid_0_182_nmbLow_out nmbLow_out
+    set mid_0_182_nmbMed_out nmbMed_out
+    set mid_0_182_nmbHigh_out nmbHigh_out
+    set mid_0_182_nmbLow_uk_out nmbLow_uk_out
+    set mid_0_182_nmbMed_uk_out nmbMed_uk_out
+    set mid_0_182_nmbHigh_uk_out nmbHigh_uk_out
+    set mid_0_182_nmbLowNoGdp_out nmbLowNoGdp_out
+    set mid_0_182_nmbMedNoGdp_out nmbMedNoGdp_out
+    set mid_0_182_nmbHighNoGdp_out nmbHighNoGdp_out
+    set mid_0_182_nmbLowNoGdp_uk_out nmbLowNoGdp_uk_out
+    set mid_0_182_nmbMedNoGdp_uk_out nmbMedNoGdp_uk_out
+    set mid_0_182_nmbHighNoGdp_uk_out nmbHighNoGdp_uk_out
+    set mid_0_182_halyTotalAcute_out halyTotalAcute_out
+    set mid_0_182_halyTotalDeath_out halyTotalDeath_out
+    set mid_0_182_halyTotalDeath_uk_out halyTotalDeath_uk_out
+    set mid_0_182_halyTotalLong_out halyTotalLong_out
+    set mid_0_182_halyTotalTotal_out halyTotalTotal_out
+    set mid_0_182_halyTotalTotal_uk_out halyTotalTotal_uk_out
+    set mid_0_182_totStage2_out totStage2_out
+    set mid_0_182_totStage3_out totStage3_out
+    set mid_0_182_totStage4_out totStage4_out
+    set mid_0_182_totStage5_out totStage5_out
+    set mid_0_182_totInfect_out totInfect_out
+    set mid_0_182_totSympt_out totSympt_out
+    set mid_0_182_totHosp_out totHosp_out
+    set mid_0_182_totIcu_out totIcu_out
+    set mid_0_182_totDeath_out totDeath_out
+    set mid_0_182_totHospTime_out totHospTime_out
+    set mid_0_182_totIcuTime_out totIcuTime_out
+    set mid_0_182_hospDaysAbove500_out hospDaysAbove500_out
+    set mid_0_182_hospDaysAbove750_out hospDaysAbove750_out
+    set mid_0_182_hospDaysAbove1000_out hospDaysAbove1000_out
+    set mid_0_182_hospDaysAbove1250_out hospDaysAbove1250_out
+    set mid_0_182_hospDaysAbove1500_out hospDaysAbove1500_out
+    set mid_0_182_hospDaysAbove1750_out hospDaysAbove1750_out
+    set mid_0_182_hospDaysAbove2000_out hospDaysAbove2000_out
+    set mid_0_182_prevInfect0_out prevInfect0_out
+    set mid_0_182_prevInfect1_out prevInfect1_out
+    set mid_0_182_prevInfect2_out prevInfect2_out
+    set mid_0_182_prevInfect3_out prevInfect3_out
+    set mid_0_182_prevInfect4_out prevInfect4_out
+    set mid_0_182_prevInfect5_out prevInfect5_out
+    set mid_0_182_prevInfect6_out prevInfect6_out
+    set mid_0_182_prevInfect7_out prevInfect7_out
+    set mid_0_182_prevInfect8_out prevInfect8_out
+  ]
+  if days = 364 [
+    set mid_0_364_costDeathAverted_out costDeathAverted_out
+    set mid_0_364_costDeathAverted_uk_out costDeathAverted_uk_out
+    set mid_0_364_costAcute_out costAcute_out
+    set mid_0_364_costLong_out costLong_out
+    set mid_0_364_costTesting_out costTesting_out
+    set mid_0_364_costVaccine_out costVaccine_out
+    set mid_0_364_costVacDeliver_out costVacDeliver_out
+    set mid_0_364_costVaccineFixed_out costVaccineFixed_out
+    set mid_0_364_costMask_out costMask_out
+    set mid_0_364_costMaskFixed_out costMaskFixed_out
+    set mid_0_364_costGdp_out costGdp_out
+    set mid_0_364_costTotalHealth_out costTotalHealth_out
+    set mid_0_364_costTotalHealth_uk_out costTotalHealth_uk_out
+    set mid_0_364_costTotalTotal_out costTotalTotal_out
+    set mid_0_364_costTotalTotal_uk_out costTotalTotal_uk_out
+    set mid_0_364_nmbLow_out nmbLow_out
+    set mid_0_364_nmbMed_out nmbMed_out
+    set mid_0_364_nmbHigh_out nmbHigh_out
+    set mid_0_364_nmbLow_uk_out nmbLow_uk_out
+    set mid_0_364_nmbMed_uk_out nmbMed_uk_out
+    set mid_0_364_nmbHigh_uk_out nmbHigh_uk_out
+    set mid_0_364_nmbLowNoGdp_out nmbLowNoGdp_out
+    set mid_0_364_nmbMedNoGdp_out nmbMedNoGdp_out
+    set mid_0_364_nmbHighNoGdp_out nmbHighNoGdp_out
+    set mid_0_364_nmbLowNoGdp_uk_out nmbLowNoGdp_uk_out
+    set mid_0_364_nmbMedNoGdp_uk_out nmbMedNoGdp_uk_out
+    set mid_0_364_nmbHighNoGdp_uk_out nmbHighNoGdp_uk_out
+    set mid_0_364_halyTotalAcute_out halyTotalAcute_out
+    set mid_0_364_halyTotalDeath_out halyTotalDeath_out
+    set mid_0_364_halyTotalDeath_uk_out halyTotalDeath_uk_out
+    set mid_0_364_halyTotalLong_out halyTotalLong_out
+    set mid_0_364_halyTotalTotal_out halyTotalTotal_out
+    set mid_0_364_halyTotalTotal_uk_out halyTotalTotal_uk_out
+    set mid_0_364_totStage2_out totStage2_out
+    set mid_0_364_totStage3_out totStage3_out
+    set mid_0_364_totStage4_out totStage4_out
+    set mid_0_364_totStage5_out totStage5_out
+    set mid_0_364_totInfect_out totInfect_out
+    set mid_0_364_totSympt_out totSympt_out
+    set mid_0_364_totHosp_out totHosp_out
+    set mid_0_364_totIcu_out totIcu_out
+    set mid_0_364_totDeath_out totDeath_out
+    set mid_0_364_totHospTime_out totHospTime_out
+    set mid_0_364_totIcuTime_out totIcuTime_out
+    set mid_0_364_hospDaysAbove500_out hospDaysAbove500_out
+    set mid_0_364_hospDaysAbove750_out hospDaysAbove750_out
+    set mid_0_364_hospDaysAbove1000_out hospDaysAbove1000_out
+    set mid_0_364_hospDaysAbove1250_out hospDaysAbove1250_out
+    set mid_0_364_hospDaysAbove1500_out hospDaysAbove1500_out
+    set mid_0_364_hospDaysAbove1750_out hospDaysAbove1750_out
+    set mid_0_364_hospDaysAbove2000_out hospDaysAbove2000_out
+    set mid_0_364_prevInfect0_out prevInfect0_out
+    set mid_0_364_prevInfect1_out prevInfect1_out
+    set mid_0_364_prevInfect2_out prevInfect2_out
+    set mid_0_364_prevInfect3_out prevInfect3_out
+    set mid_0_364_prevInfect4_out prevInfect4_out
+    set mid_0_364_prevInfect5_out prevInfect5_out
+    set mid_0_364_prevInfect6_out prevInfect6_out
+    set mid_0_364_prevInfect7_out prevInfect7_out
+    set mid_0_364_prevInfect8_out prevInfect8_out
+  ]
+  if days = 364 [
+    set mid_182_364_costDeathAverted_out costDeathAverted_out - mid_0_182_costDeathAverted_out
+    set mid_182_364_costDeathAverted_uk_out costDeathAverted_uk_out - mid_0_182_costDeathAverted_uk_out
+    set mid_182_364_costAcute_out costAcute_out - mid_0_182_costAcute_out
+    set mid_182_364_costLong_out costLong_out - mid_0_182_costLong_out
+    set mid_182_364_costTesting_out costTesting_out - mid_0_182_costTesting_out
+    set mid_182_364_costVaccine_out costVaccine_out - mid_0_182_costVaccine_out
+    set mid_182_364_costVacDeliver_out costVacDeliver_out - mid_0_182_costVacDeliver_out
+    set mid_182_364_costVaccineFixed_out costVaccineFixed_out - mid_0_182_costVaccineFixed_out
+    set mid_182_364_costMask_out costMask_out - mid_0_182_costMask_out
+    set mid_182_364_costMaskFixed_out costMaskFixed_out - mid_0_182_costMaskFixed_out
+    set mid_182_364_costGdp_out costGdp_out - mid_0_182_costGdp_out
+    set mid_182_364_costTotalHealth_out costTotalHealth_out - mid_0_182_costTotalHealth_out
+    set mid_182_364_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_182_costTotalHealth_uk_out
+    set mid_182_364_costTotalTotal_out costTotalTotal_out - mid_0_182_costTotalTotal_out
+    set mid_182_364_costTotalTotal_uk_out costTotalTotal_uk_out - mid_0_182_costTotalTotal_uk_out
+    set mid_182_364_nmbLow_out nmbLow_out - mid_0_182_nmbLow_out
+    set mid_182_364_nmbMed_out nmbMed_out - mid_0_182_nmbMed_out
+    set mid_182_364_nmbHigh_out nmbHigh_out - mid_0_182_nmbHigh_out
+    set mid_182_364_nmbLow_uk_out nmbLow_uk_out - mid_0_182_nmbLow_uk_out
+    set mid_182_364_nmbMed_uk_out nmbMed_uk_out - mid_0_182_nmbMed_uk_out
+    set mid_182_364_nmbHigh_uk_out nmbHigh_uk_out - mid_0_182_nmbHigh_uk_out
+    set mid_182_364_nmbLowNoGdp_out nmbLowNoGdp_out - mid_0_182_nmbLowNoGdp_out
+    set mid_182_364_nmbMedNoGdp_out nmbMedNoGdp_out - mid_0_182_nmbMedNoGdp_out
+    set mid_182_364_nmbHighNoGdp_out nmbHighNoGdp_out - mid_0_182_nmbHighNoGdp_out
+    set mid_182_364_nmbLowNoGdp_uk_out nmbLowNoGdp_uk_out - mid_0_182_nmbLowNoGdp_uk_out
+    set mid_182_364_nmbMedNoGdp_uk_out nmbMedNoGdp_uk_out - mid_0_182_nmbMedNoGdp_uk_out
+    set mid_182_364_nmbHighNoGdp_uk_out nmbHighNoGdp_uk_out - mid_0_182_nmbHighNoGdp_uk_out
+    set mid_182_364_halyTotalAcute_out halyTotalAcute_out - mid_0_182_halyTotalAcute_out
+    set mid_182_364_halyTotalDeath_out halyTotalDeath_out - mid_0_182_halyTotalDeath_out
+    set mid_182_364_halyTotalDeath_uk_out halyTotalDeath_uk_out - mid_0_182_halyTotalDeath_uk_out
+    set mid_182_364_halyTotalLong_out halyTotalLong_out - mid_0_182_halyTotalLong_out
+    set mid_182_364_halyTotalTotal_out halyTotalTotal_out - mid_0_182_halyTotalTotal_out
+    set mid_182_364_halyTotalTotal_uk_out halyTotalTotal_uk_out - mid_0_182_halyTotalTotal_uk_out
+    set mid_182_364_totStage2_out totStage2_out - mid_0_182_totStage2_out
+    set mid_182_364_totStage3_out totStage3_out - mid_0_182_totStage3_out
+    set mid_182_364_totStage4_out totStage4_out - mid_0_182_totStage4_out
+    set mid_182_364_totStage5_out totStage5_out - mid_0_182_totStage5_out
+    set mid_182_364_totInfect_out totInfect_out - mid_0_182_totInfect_out
+    set mid_182_364_totSympt_out totSympt_out - mid_0_182_totSympt_out
+    set mid_182_364_totHosp_out totHosp_out - mid_0_182_totHosp_out
+    set mid_182_364_totIcu_out totIcu_out - mid_0_182_totIcu_out
+    set mid_182_364_totDeath_out totDeath_out - mid_0_182_totDeath_out
+    set mid_182_364_totHospTime_out totHospTime_out - mid_0_182_totHospTime_out
+    set mid_182_364_totIcuTime_out totIcuTime_out - mid_0_182_totIcuTime_out
+    set mid_182_364_hospDaysAbove500_out hospDaysAbove500_out - mid_0_182_hospDaysAbove500_out
+    set mid_182_364_hospDaysAbove750_out hospDaysAbove750_out - mid_0_182_hospDaysAbove750_out
+    set mid_182_364_hospDaysAbove1000_out hospDaysAbove1000_out - mid_0_182_hospDaysAbove1000_out
+    set mid_182_364_hospDaysAbove1250_out hospDaysAbove1250_out - mid_0_182_hospDaysAbove1250_out
+    set mid_182_364_hospDaysAbove1500_out hospDaysAbove1500_out - mid_0_182_hospDaysAbove1500_out
+    set mid_182_364_hospDaysAbove1750_out hospDaysAbove1750_out - mid_0_182_hospDaysAbove1750_out
+    set mid_182_364_hospDaysAbove2000_out hospDaysAbove2000_out - mid_0_182_hospDaysAbove2000_out
+    set mid_182_364_prevInfect0_out prevInfect0_out - mid_0_182_prevInfect0_out
+    set mid_182_364_prevInfect1_out prevInfect1_out - mid_0_182_prevInfect1_out
+    set mid_182_364_prevInfect2_out prevInfect2_out - mid_0_182_prevInfect2_out
+    set mid_182_364_prevInfect3_out prevInfect3_out - mid_0_182_prevInfect3_out
+    set mid_182_364_prevInfect4_out prevInfect4_out - mid_0_182_prevInfect4_out
+    set mid_182_364_prevInfect5_out prevInfect5_out - mid_0_182_prevInfect5_out
+    set mid_182_364_prevInfect6_out prevInfect6_out - mid_0_182_prevInfect6_out
+    set mid_182_364_prevInfect7_out prevInfect7_out - mid_0_182_prevInfect7_out
+    set mid_182_364_prevInfect8_out prevInfect8_out - mid_0_182_prevInfect8_out
+  ]
+  if days = 546 [
+    set mid_182_546_costDeathAverted_out costDeathAverted_out - mid_0_182_costDeathAverted_out
+    set mid_182_546_costDeathAverted_uk_out costDeathAverted_uk_out - mid_0_182_costDeathAverted_uk_out
+    set mid_182_546_costAcute_out costAcute_out - mid_0_182_costAcute_out
+    set mid_182_546_costLong_out costLong_out - mid_0_182_costLong_out
+    set mid_182_546_costTesting_out costTesting_out - mid_0_182_costTesting_out
+    set mid_182_546_costVaccine_out costVaccine_out - mid_0_182_costVaccine_out
+    set mid_182_546_costVacDeliver_out costVacDeliver_out - mid_0_182_costVacDeliver_out
+    set mid_182_546_costVaccineFixed_out costVaccineFixed_out - mid_0_182_costVaccineFixed_out
+    set mid_182_546_costMask_out costMask_out - mid_0_182_costMask_out
+    set mid_182_546_costMaskFixed_out costMaskFixed_out - mid_0_182_costMaskFixed_out
+    set mid_182_546_costGdp_out costGdp_out - mid_0_182_costGdp_out
+    set mid_182_546_costTotalHealth_out costTotalHealth_out - mid_0_182_costTotalHealth_out
+    set mid_182_546_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_182_costTotalHealth_uk_out
+    set mid_182_546_costTotalTotal_out costTotalTotal_out - mid_0_182_costTotalTotal_out
+    set mid_182_546_costTotalTotal_uk_out costTotalTotal_uk_out - mid_0_182_costTotalTotal_uk_out
+    set mid_182_546_nmbLow_out nmbLow_out - mid_0_182_nmbLow_out
+    set mid_182_546_nmbMed_out nmbMed_out - mid_0_182_nmbMed_out
+    set mid_182_546_nmbHigh_out nmbHigh_out - mid_0_182_nmbHigh_out
+    set mid_182_546_nmbLow_uk_out nmbLow_uk_out - mid_0_182_nmbLow_uk_out
+    set mid_182_546_nmbMed_uk_out nmbMed_uk_out - mid_0_182_nmbMed_uk_out
+    set mid_182_546_nmbHigh_uk_out nmbHigh_uk_out - mid_0_182_nmbHigh_uk_out
+    set mid_182_546_nmbLowNoGdp_out nmbLowNoGdp_out - mid_0_182_nmbLowNoGdp_out
+    set mid_182_546_nmbMedNoGdp_out nmbMedNoGdp_out - mid_0_182_nmbMedNoGdp_out
+    set mid_182_546_nmbHighNoGdp_out nmbHighNoGdp_out - mid_0_182_nmbHighNoGdp_out
+    set mid_182_546_nmbLowNoGdp_uk_out nmbLowNoGdp_uk_out - mid_0_182_nmbLowNoGdp_uk_out
+    set mid_182_546_nmbMedNoGdp_uk_out nmbMedNoGdp_uk_out - mid_0_182_nmbMedNoGdp_uk_out
+    set mid_182_546_nmbHighNoGdp_uk_out nmbHighNoGdp_uk_out - mid_0_182_nmbHighNoGdp_uk_out
+    set mid_182_546_halyTotalAcute_out halyTotalAcute_out - mid_0_182_halyTotalAcute_out
+    set mid_182_546_halyTotalDeath_out halyTotalDeath_out - mid_0_182_halyTotalDeath_out
+    set mid_182_546_halyTotalDeath_uk_out halyTotalDeath_uk_out - mid_0_182_halyTotalDeath_uk_out
+    set mid_182_546_halyTotalLong_out halyTotalLong_out - mid_0_182_halyTotalLong_out
+    set mid_182_546_halyTotalTotal_out halyTotalTotal_out - mid_0_182_halyTotalTotal_out
+    set mid_182_546_halyTotalTotal_uk_out halyTotalTotal_uk_out - mid_0_182_halyTotalTotal_uk_out
+    set mid_182_546_totStage2_out totStage2_out - mid_0_182_totStage2_out
+    set mid_182_546_totStage3_out totStage3_out - mid_0_182_totStage3_out
+    set mid_182_546_totStage4_out totStage4_out - mid_0_182_totStage4_out
+    set mid_182_546_totStage5_out totStage5_out - mid_0_182_totStage5_out
+    set mid_182_546_totInfect_out totInfect_out - mid_0_182_totInfect_out
+    set mid_182_546_totSympt_out totSympt_out - mid_0_182_totSympt_out
+    set mid_182_546_totHosp_out totHosp_out - mid_0_182_totHosp_out
+    set mid_182_546_totIcu_out totIcu_out - mid_0_182_totIcu_out
+    set mid_182_546_totDeath_out totDeath_out - mid_0_182_totDeath_out
+    set mid_182_546_totHospTime_out totHospTime_out - mid_0_182_totHospTime_out
+    set mid_182_546_totIcuTime_out totIcuTime_out - mid_0_182_totIcuTime_out
+    set mid_182_546_hospDaysAbove500_out hospDaysAbove500_out - mid_0_182_hospDaysAbove500_out
+    set mid_182_546_hospDaysAbove750_out hospDaysAbove750_out - mid_0_182_hospDaysAbove750_out
+    set mid_182_546_hospDaysAbove1000_out hospDaysAbove1000_out - mid_0_182_hospDaysAbove1000_out
+    set mid_182_546_hospDaysAbove1250_out hospDaysAbove1250_out - mid_0_182_hospDaysAbove1250_out
+    set mid_182_546_hospDaysAbove1500_out hospDaysAbove1500_out - mid_0_182_hospDaysAbove1500_out
+    set mid_182_546_hospDaysAbove1750_out hospDaysAbove1750_out - mid_0_182_hospDaysAbove1750_out
+    set mid_182_546_hospDaysAbove2000_out hospDaysAbove2000_out - mid_0_182_hospDaysAbove2000_out
+    set mid_182_546_prevInfect0_out prevInfect0_out - mid_0_182_prevInfect0_out
+    set mid_182_546_prevInfect1_out prevInfect1_out - mid_0_182_prevInfect1_out
+    set mid_182_546_prevInfect2_out prevInfect2_out - mid_0_182_prevInfect2_out
+    set mid_182_546_prevInfect3_out prevInfect3_out - mid_0_182_prevInfect3_out
+    set mid_182_546_prevInfect4_out prevInfect4_out - mid_0_182_prevInfect4_out
+    set mid_182_546_prevInfect5_out prevInfect5_out - mid_0_182_prevInfect5_out
+    set mid_182_546_prevInfect6_out prevInfect6_out - mid_0_182_prevInfect6_out
+    set mid_182_546_prevInfect7_out prevInfect7_out - mid_0_182_prevInfect7_out
+    set mid_182_546_prevInfect8_out prevInfect8_out - mid_0_182_prevInfect8_out
+  ]
+  if days = 546 [
+    set mid_364_546_costDeathAverted_out costDeathAverted_out - mid_0_364_costDeathAverted_out
+    set mid_364_546_costDeathAverted_uk_out costDeathAverted_uk_out - mid_0_364_costDeathAverted_uk_out
+    set mid_364_546_costAcute_out costAcute_out - mid_0_364_costAcute_out
+    set mid_364_546_costLong_out costLong_out - mid_0_364_costLong_out
+    set mid_364_546_costTesting_out costTesting_out - mid_0_364_costTesting_out
+    set mid_364_546_costVaccine_out costVaccine_out - mid_0_364_costVaccine_out
+    set mid_364_546_costVacDeliver_out costVacDeliver_out - mid_0_364_costVacDeliver_out
+    set mid_364_546_costVaccineFixed_out costVaccineFixed_out - mid_0_364_costVaccineFixed_out
+    set mid_364_546_costMask_out costMask_out - mid_0_364_costMask_out
+    set mid_364_546_costMaskFixed_out costMaskFixed_out - mid_0_364_costMaskFixed_out
+    set mid_364_546_costGdp_out costGdp_out - mid_0_364_costGdp_out
+    set mid_364_546_costTotalHealth_out costTotalHealth_out - mid_0_364_costTotalHealth_out
+    set mid_364_546_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_364_costTotalHealth_uk_out
+    set mid_364_546_costTotalTotal_out costTotalTotal_out - mid_0_364_costTotalTotal_out
+    set mid_364_546_costTotalTotal_uk_out costTotalTotal_uk_out - mid_0_364_costTotalTotal_uk_out
+    set mid_364_546_nmbLow_out nmbLow_out - mid_0_364_nmbLow_out
+    set mid_364_546_nmbMed_out nmbMed_out - mid_0_364_nmbMed_out
+    set mid_364_546_nmbHigh_out nmbHigh_out - mid_0_364_nmbHigh_out
+    set mid_364_546_nmbLow_uk_out nmbLow_uk_out - mid_0_364_nmbLow_uk_out
+    set mid_364_546_nmbMed_uk_out nmbMed_uk_out - mid_0_364_nmbMed_uk_out
+    set mid_364_546_nmbHigh_uk_out nmbHigh_uk_out - mid_0_364_nmbHigh_uk_out
+    set mid_364_546_nmbLowNoGdp_out nmbLowNoGdp_out - mid_0_364_nmbLowNoGdp_out
+    set mid_364_546_nmbMedNoGdp_out nmbMedNoGdp_out - mid_0_364_nmbMedNoGdp_out
+    set mid_364_546_nmbHighNoGdp_out nmbHighNoGdp_out - mid_0_364_nmbHighNoGdp_out
+    set mid_364_546_nmbLowNoGdp_uk_out nmbLowNoGdp_uk_out - mid_0_364_nmbLowNoGdp_uk_out
+    set mid_364_546_nmbMedNoGdp_uk_out nmbMedNoGdp_uk_out - mid_0_364_nmbMedNoGdp_uk_out
+    set mid_364_546_nmbHighNoGdp_uk_out nmbHighNoGdp_uk_out - mid_0_364_nmbHighNoGdp_uk_out
+    set mid_364_546_halyTotalAcute_out halyTotalAcute_out - mid_0_364_halyTotalAcute_out
+    set mid_364_546_halyTotalDeath_out halyTotalDeath_out - mid_0_364_halyTotalDeath_out
+    set mid_364_546_halyTotalDeath_uk_out halyTotalDeath_uk_out - mid_0_364_halyTotalDeath_uk_out
+    set mid_364_546_halyTotalLong_out halyTotalLong_out - mid_0_364_halyTotalLong_out
+    set mid_364_546_halyTotalTotal_out halyTotalTotal_out - mid_0_364_halyTotalTotal_out
+    set mid_364_546_halyTotalTotal_uk_out halyTotalTotal_uk_out - mid_0_364_halyTotalTotal_uk_out
+    set mid_364_546_totStage2_out totStage2_out - mid_0_364_totStage2_out
+    set mid_364_546_totStage3_out totStage3_out - mid_0_364_totStage3_out
+    set mid_364_546_totStage4_out totStage4_out - mid_0_364_totStage4_out
+    set mid_364_546_totStage5_out totStage5_out - mid_0_364_totStage5_out
+    set mid_364_546_totInfect_out totInfect_out - mid_0_364_totInfect_out
+    set mid_364_546_totSympt_out totSympt_out - mid_0_364_totSympt_out
+    set mid_364_546_totHosp_out totHosp_out - mid_0_364_totHosp_out
+    set mid_364_546_totIcu_out totIcu_out - mid_0_364_totIcu_out
+    set mid_364_546_totDeath_out totDeath_out - mid_0_364_totDeath_out
+    set mid_364_546_totHospTime_out totHospTime_out - mid_0_364_totHospTime_out
+    set mid_364_546_totIcuTime_out totIcuTime_out - mid_0_364_totIcuTime_out
+    set mid_364_546_hospDaysAbove500_out hospDaysAbove500_out - mid_0_364_hospDaysAbove500_out
+    set mid_364_546_hospDaysAbove750_out hospDaysAbove750_out - mid_0_364_hospDaysAbove750_out
+    set mid_364_546_hospDaysAbove1000_out hospDaysAbove1000_out - mid_0_364_hospDaysAbove1000_out
+    set mid_364_546_hospDaysAbove1250_out hospDaysAbove1250_out - mid_0_364_hospDaysAbove1250_out
+    set mid_364_546_hospDaysAbove1500_out hospDaysAbove1500_out - mid_0_364_hospDaysAbove1500_out
+    set mid_364_546_hospDaysAbove1750_out hospDaysAbove1750_out - mid_0_364_hospDaysAbove1750_out
+    set mid_364_546_hospDaysAbove2000_out hospDaysAbove2000_out - mid_0_364_hospDaysAbove2000_out
+    set mid_364_546_prevInfect0_out prevInfect0_out - mid_0_364_prevInfect0_out
+    set mid_364_546_prevInfect1_out prevInfect1_out - mid_0_364_prevInfect1_out
+    set mid_364_546_prevInfect2_out prevInfect2_out - mid_0_364_prevInfect2_out
+    set mid_364_546_prevInfect3_out prevInfect3_out - mid_0_364_prevInfect3_out
+    set mid_364_546_prevInfect4_out prevInfect4_out - mid_0_364_prevInfect4_out
+    set mid_364_546_prevInfect5_out prevInfect5_out - mid_0_364_prevInfect5_out
+    set mid_364_546_prevInfect6_out prevInfect6_out - mid_0_364_prevInfect6_out
+    set mid_364_546_prevInfect7_out prevInfect7_out - mid_0_364_prevInfect7_out
+    set mid_364_546_prevInfect8_out prevInfect8_out - mid_0_364_prevInfect8_out
+  ]
+  if days = 60 [
+    set mid_0_60_costDeathAverted_out costDeathAverted_out
+    set mid_0_60_costDeathAverted_uk_out costDeathAverted_uk_out
+    set mid_0_60_costAcute_out costAcute_out
+    set mid_0_60_costLong_out costLong_out
+    set mid_0_60_costTesting_out costTesting_out
+    set mid_0_60_costVaccine_out costVaccine_out
+    set mid_0_60_costVacDeliver_out costVacDeliver_out
+    set mid_0_60_costVaccineFixed_out costVaccineFixed_out
+    set mid_0_60_costMask_out costMask_out
+    set mid_0_60_costMaskFixed_out costMaskFixed_out
+    set mid_0_60_costGdp_out costGdp_out
+    set mid_0_60_costTotalHealth_out costTotalHealth_out
+    set mid_0_60_costTotalHealth_uk_out costTotalHealth_uk_out
+    set mid_0_60_costTotalTotal_out costTotalTotal_out
+    set mid_0_60_costTotalTotal_uk_out costTotalTotal_uk_out
+    set mid_0_60_nmbLow_out nmbLow_out
+    set mid_0_60_nmbMed_out nmbMed_out
+    set mid_0_60_nmbHigh_out nmbHigh_out
+    set mid_0_60_nmbLow_uk_out nmbLow_uk_out
+    set mid_0_60_nmbMed_uk_out nmbMed_uk_out
+    set mid_0_60_nmbHigh_uk_out nmbHigh_uk_out
+    set mid_0_60_nmbLowNoGdp_out nmbLowNoGdp_out
+    set mid_0_60_nmbMedNoGdp_out nmbMedNoGdp_out
+    set mid_0_60_nmbHighNoGdp_out nmbHighNoGdp_out
+    set mid_0_60_nmbLowNoGdp_uk_out nmbLowNoGdp_uk_out
+    set mid_0_60_nmbMedNoGdp_uk_out nmbMedNoGdp_uk_out
+    set mid_0_60_nmbHighNoGdp_uk_out nmbHighNoGdp_uk_out
+    set mid_0_60_halyTotalAcute_out halyTotalAcute_out
+    set mid_0_60_halyTotalDeath_out halyTotalDeath_out
+    set mid_0_60_halyTotalDeath_uk_out halyTotalDeath_uk_out
+    set mid_0_60_halyTotalLong_out halyTotalLong_out
+    set mid_0_60_halyTotalTotal_out halyTotalTotal_out
+    set mid_0_60_halyTotalTotal_uk_out halyTotalTotal_uk_out
+    set mid_0_60_totStage2_out totStage2_out
+    set mid_0_60_totStage3_out totStage3_out
+    set mid_0_60_totStage4_out totStage4_out
+    set mid_0_60_totStage5_out totStage5_out
+    set mid_0_60_totInfect_out totInfect_out
+    set mid_0_60_totSympt_out totSympt_out
+    set mid_0_60_totHosp_out totHosp_out
+    set mid_0_60_totIcu_out totIcu_out
+    set mid_0_60_totDeath_out totDeath_out
+    set mid_0_60_totHospTime_out totHospTime_out
+    set mid_0_60_totIcuTime_out totIcuTime_out
+    set mid_0_60_hospDaysAbove500_out hospDaysAbove500_out
+    set mid_0_60_hospDaysAbove750_out hospDaysAbove750_out
+    set mid_0_60_hospDaysAbove1000_out hospDaysAbove1000_out
+    set mid_0_60_hospDaysAbove1250_out hospDaysAbove1250_out
+    set mid_0_60_hospDaysAbove1500_out hospDaysAbove1500_out
+    set mid_0_60_hospDaysAbove1750_out hospDaysAbove1750_out
+    set mid_0_60_hospDaysAbove2000_out hospDaysAbove2000_out
+    set mid_0_60_prevInfect0_out prevInfect0_out
+    set mid_0_60_prevInfect1_out prevInfect1_out
+    set mid_0_60_prevInfect2_out prevInfect2_out
+    set mid_0_60_prevInfect3_out prevInfect3_out
+    set mid_0_60_prevInfect4_out prevInfect4_out
+    set mid_0_60_prevInfect5_out prevInfect5_out
+    set mid_0_60_prevInfect6_out prevInfect6_out
+    set mid_0_60_prevInfect7_out prevInfect7_out
+    set mid_0_60_prevInfect8_out prevInfect8_out
+  ]
+  if days = 182 [
+    set mid_60_182_costDeathAverted_out costDeathAverted_out - mid_0_60_costDeathAverted_out
+    set mid_60_182_costDeathAverted_uk_out costDeathAverted_uk_out - mid_0_60_costDeathAverted_uk_out
+    set mid_60_182_costAcute_out costAcute_out - mid_0_60_costAcute_out
+    set mid_60_182_costLong_out costLong_out - mid_0_60_costLong_out
+    set mid_60_182_costTesting_out costTesting_out - mid_0_60_costTesting_out
+    set mid_60_182_costVaccine_out costVaccine_out - mid_0_60_costVaccine_out
+    set mid_60_182_costVacDeliver_out costVacDeliver_out - mid_0_60_costVacDeliver_out
+    set mid_60_182_costVaccineFixed_out costVaccineFixed_out - mid_0_60_costVaccineFixed_out
+    set mid_60_182_costMask_out costMask_out - mid_0_60_costMask_out
+    set mid_60_182_costMaskFixed_out costMaskFixed_out - mid_0_60_costMaskFixed_out
+    set mid_60_182_costGdp_out costGdp_out - mid_0_60_costGdp_out
+    set mid_60_182_costTotalHealth_out costTotalHealth_out - mid_0_60_costTotalHealth_out
+    set mid_60_182_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_60_costTotalHealth_uk_out
+    set mid_60_182_costTotalTotal_out costTotalTotal_out - mid_0_60_costTotalTotal_out
+    set mid_60_182_costTotalTotal_uk_out costTotalTotal_uk_out - mid_0_60_costTotalTotal_uk_out
+    set mid_60_182_nmbLow_out nmbLow_out - mid_0_60_nmbLow_out
+    set mid_60_182_nmbMed_out nmbMed_out - mid_0_60_nmbMed_out
+    set mid_60_182_nmbHigh_out nmbHigh_out - mid_0_60_nmbHigh_out
+    set mid_60_182_nmbLow_uk_out nmbLow_uk_out - mid_0_60_nmbLow_uk_out
+    set mid_60_182_nmbMed_uk_out nmbMed_uk_out - mid_0_60_nmbMed_uk_out
+    set mid_60_182_nmbHigh_uk_out nmbHigh_uk_out - mid_0_60_nmbHigh_uk_out
+    set mid_60_182_nmbLowNoGdp_out nmbLowNoGdp_out - mid_0_60_nmbLowNoGdp_out
+    set mid_60_182_nmbMedNoGdp_out nmbMedNoGdp_out - mid_0_60_nmbMedNoGdp_out
+    set mid_60_182_nmbHighNoGdp_out nmbHighNoGdp_out - mid_0_60_nmbHighNoGdp_out
+    set mid_60_182_nmbLowNoGdp_uk_out nmbLowNoGdp_uk_out - mid_0_60_nmbLowNoGdp_uk_out
+    set mid_60_182_nmbMedNoGdp_uk_out nmbMedNoGdp_uk_out - mid_0_60_nmbMedNoGdp_uk_out
+    set mid_60_182_nmbHighNoGdp_uk_out nmbHighNoGdp_uk_out - mid_0_60_nmbHighNoGdp_uk_out
+    set mid_60_182_halyTotalAcute_out halyTotalAcute_out - mid_0_60_halyTotalAcute_out
+    set mid_60_182_halyTotalDeath_out halyTotalDeath_out - mid_0_60_halyTotalDeath_out
+    set mid_60_182_halyTotalDeath_uk_out halyTotalDeath_uk_out - mid_0_60_halyTotalDeath_uk_out
+    set mid_60_182_halyTotalLong_out halyTotalLong_out - mid_0_60_halyTotalLong_out
+    set mid_60_182_halyTotalTotal_out halyTotalTotal_out - mid_0_60_halyTotalTotal_out
+    set mid_60_182_halyTotalTotal_uk_out halyTotalTotal_uk_out - mid_0_60_halyTotalTotal_uk_out
+    set mid_60_182_totStage2_out totStage2_out - mid_0_60_totStage2_out
+    set mid_60_182_totStage3_out totStage3_out - mid_0_60_totStage3_out
+    set mid_60_182_totStage4_out totStage4_out - mid_0_60_totStage4_out
+    set mid_60_182_totStage5_out totStage5_out - mid_0_60_totStage5_out
+    set mid_60_182_totInfect_out totInfect_out - mid_0_60_totInfect_out
+    set mid_60_182_totSympt_out totSympt_out - mid_0_60_totSympt_out
+    set mid_60_182_totHosp_out totHosp_out - mid_0_60_totHosp_out
+    set mid_60_182_totIcu_out totIcu_out - mid_0_60_totIcu_out
+    set mid_60_182_totDeath_out totDeath_out - mid_0_60_totDeath_out
+    set mid_60_182_totHospTime_out totHospTime_out - mid_0_60_totHospTime_out
+    set mid_60_182_totIcuTime_out totIcuTime_out - mid_0_60_totIcuTime_out
+    set mid_60_182_hospDaysAbove500_out hospDaysAbove500_out - mid_0_60_hospDaysAbove500_out
+    set mid_60_182_hospDaysAbove750_out hospDaysAbove750_out - mid_0_60_hospDaysAbove750_out
+    set mid_60_182_hospDaysAbove1000_out hospDaysAbove1000_out - mid_0_60_hospDaysAbove1000_out
+    set mid_60_182_hospDaysAbove1250_out hospDaysAbove1250_out - mid_0_60_hospDaysAbove1250_out
+    set mid_60_182_hospDaysAbove1500_out hospDaysAbove1500_out - mid_0_60_hospDaysAbove1500_out
+    set mid_60_182_hospDaysAbove1750_out hospDaysAbove1750_out - mid_0_60_hospDaysAbove1750_out
+    set mid_60_182_hospDaysAbove2000_out hospDaysAbove2000_out - mid_0_60_hospDaysAbove2000_out
+    set mid_60_182_prevInfect0_out prevInfect0_out - mid_0_60_prevInfect0_out
+    set mid_60_182_prevInfect1_out prevInfect1_out - mid_0_60_prevInfect1_out
+    set mid_60_182_prevInfect2_out prevInfect2_out - mid_0_60_prevInfect2_out
+    set mid_60_182_prevInfect3_out prevInfect3_out - mid_0_60_prevInfect3_out
+    set mid_60_182_prevInfect4_out prevInfect4_out - mid_0_60_prevInfect4_out
+    set mid_60_182_prevInfect5_out prevInfect5_out - mid_0_60_prevInfect5_out
+    set mid_60_182_prevInfect6_out prevInfect6_out - mid_0_60_prevInfect6_out
+    set mid_60_182_prevInfect7_out prevInfect7_out - mid_0_60_prevInfect7_out
+    set mid_60_182_prevInfect8_out prevInfect8_out - mid_0_60_prevInfect8_out
+  ]
+  if days = 91 [
+    set mid_0_91_costDeathAverted_out costDeathAverted_out
+    set mid_0_91_costDeathAverted_uk_out costDeathAverted_uk_out
+    set mid_0_91_costAcute_out costAcute_out
+    set mid_0_91_costLong_out costLong_out
+    set mid_0_91_costTesting_out costTesting_out
+    set mid_0_91_costVaccine_out costVaccine_out
+    set mid_0_91_costVacDeliver_out costVacDeliver_out
+    set mid_0_91_costVaccineFixed_out costVaccineFixed_out
+    set mid_0_91_costMask_out costMask_out
+    set mid_0_91_costMaskFixed_out costMaskFixed_out
+    set mid_0_91_costGdp_out costGdp_out
+    set mid_0_91_costTotalHealth_out costTotalHealth_out
+    set mid_0_91_costTotalHealth_uk_out costTotalHealth_uk_out
+    set mid_0_91_costTotalTotal_out costTotalTotal_out
+    set mid_0_91_costTotalTotal_uk_out costTotalTotal_uk_out
+    set mid_0_91_nmbLow_out nmbLow_out
+    set mid_0_91_nmbMed_out nmbMed_out
+    set mid_0_91_nmbHigh_out nmbHigh_out
+    set mid_0_91_nmbLow_uk_out nmbLow_uk_out
+    set mid_0_91_nmbMed_uk_out nmbMed_uk_out
+    set mid_0_91_nmbHigh_uk_out nmbHigh_uk_out
+    set mid_0_91_nmbLowNoGdp_out nmbLowNoGdp_out
+    set mid_0_91_nmbMedNoGdp_out nmbMedNoGdp_out
+    set mid_0_91_nmbHighNoGdp_out nmbHighNoGdp_out
+    set mid_0_91_nmbLowNoGdp_uk_out nmbLowNoGdp_uk_out
+    set mid_0_91_nmbMedNoGdp_uk_out nmbMedNoGdp_uk_out
+    set mid_0_91_nmbHighNoGdp_uk_out nmbHighNoGdp_uk_out
+    set mid_0_91_halyTotalAcute_out halyTotalAcute_out
+    set mid_0_91_halyTotalDeath_out halyTotalDeath_out
+    set mid_0_91_halyTotalDeath_uk_out halyTotalDeath_uk_out
+    set mid_0_91_halyTotalLong_out halyTotalLong_out
+    set mid_0_91_halyTotalTotal_out halyTotalTotal_out
+    set mid_0_91_halyTotalTotal_uk_out halyTotalTotal_uk_out
+    set mid_0_91_totStage2_out totStage2_out
+    set mid_0_91_totStage3_out totStage3_out
+    set mid_0_91_totStage4_out totStage4_out
+    set mid_0_91_totStage5_out totStage5_out
+    set mid_0_91_totInfect_out totInfect_out
+    set mid_0_91_totSympt_out totSympt_out
+    set mid_0_91_totHosp_out totHosp_out
+    set mid_0_91_totIcu_out totIcu_out
+    set mid_0_91_totDeath_out totDeath_out
+    set mid_0_91_totHospTime_out totHospTime_out
+    set mid_0_91_totIcuTime_out totIcuTime_out
+    set mid_0_91_hospDaysAbove500_out hospDaysAbove500_out
+    set mid_0_91_hospDaysAbove750_out hospDaysAbove750_out
+    set mid_0_91_hospDaysAbove1000_out hospDaysAbove1000_out
+    set mid_0_91_hospDaysAbove1250_out hospDaysAbove1250_out
+    set mid_0_91_hospDaysAbove1500_out hospDaysAbove1500_out
+    set mid_0_91_hospDaysAbove1750_out hospDaysAbove1750_out
+    set mid_0_91_hospDaysAbove2000_out hospDaysAbove2000_out
+    set mid_0_91_prevInfect0_out prevInfect0_out
+    set mid_0_91_prevInfect1_out prevInfect1_out
+    set mid_0_91_prevInfect2_out prevInfect2_out
+    set mid_0_91_prevInfect3_out prevInfect3_out
+    set mid_0_91_prevInfect4_out prevInfect4_out
+    set mid_0_91_prevInfect5_out prevInfect5_out
+    set mid_0_91_prevInfect6_out prevInfect6_out
+    set mid_0_91_prevInfect7_out prevInfect7_out
+    set mid_0_91_prevInfect8_out prevInfect8_out
+  ]
+  if days = 182 [
+    set mid_91_182_costDeathAverted_out costDeathAverted_out - mid_0_91_costDeathAverted_out
+    set mid_91_182_costDeathAverted_uk_out costDeathAverted_uk_out - mid_0_91_costDeathAverted_uk_out
+    set mid_91_182_costAcute_out costAcute_out - mid_0_91_costAcute_out
+    set mid_91_182_costLong_out costLong_out - mid_0_91_costLong_out
+    set mid_91_182_costTesting_out costTesting_out - mid_0_91_costTesting_out
+    set mid_91_182_costVaccine_out costVaccine_out - mid_0_91_costVaccine_out
+    set mid_91_182_costVacDeliver_out costVacDeliver_out - mid_0_91_costVacDeliver_out
+    set mid_91_182_costVaccineFixed_out costVaccineFixed_out - mid_0_91_costVaccineFixed_out
+    set mid_91_182_costMask_out costMask_out - mid_0_91_costMask_out
+    set mid_91_182_costMaskFixed_out costMaskFixed_out - mid_0_91_costMaskFixed_out
+    set mid_91_182_costGdp_out costGdp_out - mid_0_91_costGdp_out
+    set mid_91_182_costTotalHealth_out costTotalHealth_out - mid_0_91_costTotalHealth_out
+    set mid_91_182_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_91_costTotalHealth_uk_out
+    set mid_91_182_costTotalTotal_out costTotalTotal_out - mid_0_91_costTotalTotal_out
+    set mid_91_182_costTotalTotal_uk_out costTotalTotal_uk_out - mid_0_91_costTotalTotal_uk_out
+    set mid_91_182_nmbLow_out nmbLow_out - mid_0_91_nmbLow_out
+    set mid_91_182_nmbMed_out nmbMed_out - mid_0_91_nmbMed_out
+    set mid_91_182_nmbHigh_out nmbHigh_out - mid_0_91_nmbHigh_out
+    set mid_91_182_nmbLow_uk_out nmbLow_uk_out - mid_0_91_nmbLow_uk_out
+    set mid_91_182_nmbMed_uk_out nmbMed_uk_out - mid_0_91_nmbMed_uk_out
+    set mid_91_182_nmbHigh_uk_out nmbHigh_uk_out - mid_0_91_nmbHigh_uk_out
+    set mid_91_182_nmbLowNoGdp_out nmbLowNoGdp_out - mid_0_91_nmbLowNoGdp_out
+    set mid_91_182_nmbMedNoGdp_out nmbMedNoGdp_out - mid_0_91_nmbMedNoGdp_out
+    set mid_91_182_nmbHighNoGdp_out nmbHighNoGdp_out - mid_0_91_nmbHighNoGdp_out
+    set mid_91_182_nmbLowNoGdp_uk_out nmbLowNoGdp_uk_out - mid_0_91_nmbLowNoGdp_uk_out
+    set mid_91_182_nmbMedNoGdp_uk_out nmbMedNoGdp_uk_out - mid_0_91_nmbMedNoGdp_uk_out
+    set mid_91_182_nmbHighNoGdp_uk_out nmbHighNoGdp_uk_out - mid_0_91_nmbHighNoGdp_uk_out
+    set mid_91_182_halyTotalAcute_out halyTotalAcute_out - mid_0_91_halyTotalAcute_out
+    set mid_91_182_halyTotalDeath_out halyTotalDeath_out - mid_0_91_halyTotalDeath_out
+    set mid_91_182_halyTotalDeath_uk_out halyTotalDeath_uk_out - mid_0_91_halyTotalDeath_uk_out
+    set mid_91_182_halyTotalLong_out halyTotalLong_out - mid_0_91_halyTotalLong_out
+    set mid_91_182_halyTotalTotal_out halyTotalTotal_out - mid_0_91_halyTotalTotal_out
+    set mid_91_182_halyTotalTotal_uk_out halyTotalTotal_uk_out - mid_0_91_halyTotalTotal_uk_out
+    set mid_91_182_totStage2_out totStage2_out - mid_0_91_totStage2_out
+    set mid_91_182_totStage3_out totStage3_out - mid_0_91_totStage3_out
+    set mid_91_182_totStage4_out totStage4_out - mid_0_91_totStage4_out
+    set mid_91_182_totStage5_out totStage5_out - mid_0_91_totStage5_out
+    set mid_91_182_totInfect_out totInfect_out - mid_0_91_totInfect_out
+    set mid_91_182_totSympt_out totSympt_out - mid_0_91_totSympt_out
+    set mid_91_182_totHosp_out totHosp_out - mid_0_91_totHosp_out
+    set mid_91_182_totIcu_out totIcu_out - mid_0_91_totIcu_out
+    set mid_91_182_totDeath_out totDeath_out - mid_0_91_totDeath_out
+    set mid_91_182_totHospTime_out totHospTime_out - mid_0_91_totHospTime_out
+    set mid_91_182_totIcuTime_out totIcuTime_out - mid_0_91_totIcuTime_out
+    set mid_91_182_hospDaysAbove500_out hospDaysAbove500_out - mid_0_91_hospDaysAbove500_out
+    set mid_91_182_hospDaysAbove750_out hospDaysAbove750_out - mid_0_91_hospDaysAbove750_out
+    set mid_91_182_hospDaysAbove1000_out hospDaysAbove1000_out - mid_0_91_hospDaysAbove1000_out
+    set mid_91_182_hospDaysAbove1250_out hospDaysAbove1250_out - mid_0_91_hospDaysAbove1250_out
+    set mid_91_182_hospDaysAbove1500_out hospDaysAbove1500_out - mid_0_91_hospDaysAbove1500_out
+    set mid_91_182_hospDaysAbove1750_out hospDaysAbove1750_out - mid_0_91_hospDaysAbove1750_out
+    set mid_91_182_hospDaysAbove2000_out hospDaysAbove2000_out - mid_0_91_hospDaysAbove2000_out
+    set mid_91_182_prevInfect0_out prevInfect0_out - mid_0_91_prevInfect0_out
+    set mid_91_182_prevInfect1_out prevInfect1_out - mid_0_91_prevInfect1_out
+    set mid_91_182_prevInfect2_out prevInfect2_out - mid_0_91_prevInfect2_out
+    set mid_91_182_prevInfect3_out prevInfect3_out - mid_0_91_prevInfect3_out
+    set mid_91_182_prevInfect4_out prevInfect4_out - mid_0_91_prevInfect4_out
+    set mid_91_182_prevInfect5_out prevInfect5_out - mid_0_91_prevInfect5_out
+    set mid_91_182_prevInfect6_out prevInfect6_out - mid_0_91_prevInfect6_out
+    set mid_91_182_prevInfect7_out prevInfect7_out - mid_0_91_prevInfect7_out
+    set mid_91_182_prevInfect8_out prevInfect8_out - mid_0_91_prevInfect8_out
+  ]
 end

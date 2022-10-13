@@ -72,6 +72,18 @@ timefullMetrics = {
 	}
 }
 
+singleList = [
+	[0, 182],
+	[0, 364],
+	[182, 364],
+	[182, 546],
+	[364, 546],
+	[0, 60],
+	[60, 182],
+	[0, 91],
+	[91, 182],
+]
+
 singleMetricList = [
 	'costDeathAverted',
 	'costAcute',
@@ -133,66 +145,9 @@ singleMetricList = [
 	'prevInfect6',
 	'prevInfect7',
 	'prevInfect8',
-	'mid_costDeathAverted',
-	'mid_costAcute',
-	'mid_costLong',
-	'mid_costTesting',
-	'mid_costVaccine',
-	'mid_costVacDeliver',
-	'mid_costVaccineFixed',
-	'mid_costMask',
-	'mid_costMaskFixed',
-	'mid_costGdp',
-	'mid_costTotalHealth',
-	'mid_costTotalTotal',
-	'mid_nmbLow',
-	'mid_nmbMed',
-	'mid_nmbHigh',
-	'mid_nmbLowNoGdp',
-	'mid_nmbMedNoGdp',
-	'mid_nmbHighNoGdp',
-	'mid_halyTotalAcute',
-	'mid_halyTotalDeath',
-	'mid_halyTotalLong',
-	'mid_halyTotalTotal',
-	'mid_totStage2',
-	'mid_totStage3',
-	'mid_totStage4',
-	'mid_totStage5',
-	'mid_totInfect',
-	'mid_totSympt',
-	'mid_totHosp',
-	'mid_totIcu',
-	'mid_totDeath',
-	'mid_totHospTime',
-	'mid_totIcuTime',
-	'mid_hospDaysAbove500',
-	'mid_hospDaysAbove750',
-	'mid_hospDaysAbove1000',
-	'mid_hospDaysAbove1250',
-	'mid_hospDaysAbove1500',
-	'mid_hospDaysAbove1750',
-	'mid_hospDaysAbove2000',
-	'mid_costDeathAverted_uk',
-	'mid_halyTotalDeath_uk',
-	'mid_costTotalHealth_uk',
-	'mid_costTotalTotal_uk',
-	'mid_nmbLow_uk',
-	'mid_nmbMed_uk',
-	'mid_nmbHigh_uk',
-	'mid_nmbLowNoGdp_uk',
-	'mid_nmbMedNoGdp_uk',
-	'mid_nmbHighNoGdp_uk',
-	'mid_halyTotalTotal_uk',
-	'mid_prevInfect0',
-	'mid_prevInfect1',
-	'mid_prevInfect2',
-	'mid_prevInfect3',
-	'mid_prevInfect4',
-	'mid_prevInfect5',
-	'mid_prevInfect6',
-	'mid_prevInfect7',
-	'mid_prevInfect8',
+]
+
+senMetricList = [
 	'sen_vacInfectReduct',
 	'sen_vacWaneInfect',
 	'sen_vacWaneHosp',
@@ -232,3 +187,10 @@ singleMetricList = [
 	'sen_costIcuBed',
 ]
 stages = [1, 2, 3, 4, 5]
+
+def FullSingleMetricList():
+	retList = singleMetricList + senMetricList
+	for singleRange in singleList:
+		for var in singleMetricList:
+			retList.append('mid_{}_{}_{}</metric>\n'.format(singleRange[0], singleRange[1], var))
+	return retList

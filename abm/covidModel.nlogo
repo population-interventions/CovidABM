@@ -36,8 +36,8 @@ __includes[
 GRAPHICS-WINDOW
 408
 63
-897
-553
+799
+455
 -1
 -1
 3.8
@@ -100,7 +100,7 @@ BUTTON
 2939
 938
 Trace_Patterns
-ask n-of 1 simuls with [ color != black ] [ pen-down ] 
+ask n-of 1 simuls with [ color != black ] [ pen-down ]
 NIL
 1
 T
@@ -785,7 +785,7 @@ MONITOR
 353
 3457
 398
-Time = 1 
+Time = 1
 count simuls with [ timenow = 2 ]
 0
 1
@@ -1208,8 +1208,8 @@ SLIDER
 End_Day
 End_Day
 -1
-730
-105.0
+546
+546.0
 1
 1
 NIL
@@ -3602,21 +3602,6 @@ PENS
 "base Tot" 1.0 0 -7500403 true "" "plot sum [ 1 - (simul_getRecoverVacHistogram \"base\" 2659) * (vaccine_getWanedParameter \"riskReduct\" \"base\" currentVaccine vaccineDay prevVaccine prevVaccineDay) ] of simuls / population"
 
 SLIDER
-2225
-344
-2365
-377
-Mid_Day
-Mid_Day
-0
-580
-364.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
 15
 72
 187
@@ -5756,66 +5741,6 @@ NetLogo 6.2.0
     <metric>prevInfect6_out</metric>
     <metric>prevInfect7_out</metric>
     <metric>prevInfect8_out</metric>
-    <metric>mid_costDeathAverted_out</metric>
-    <metric>mid_costDeathAverted_uk_out</metric>
-    <metric>mid_costAcute_out</metric>
-    <metric>mid_costLong_out</metric>
-    <metric>mid_costTesting_out</metric>
-    <metric>mid_costVaccine_out</metric>
-    <metric>mid_costVacDeliver_out</metric>
-    <metric>mid_costVaccineFixed_out</metric>
-    <metric>mid_costMask_out</metric>
-    <metric>mid_costMaskFixed_out</metric>
-    <metric>mid_costGdp_out</metric>
-    <metric>mid_costTotalHealth_out</metric>
-    <metric>mid_costTotalHealth_uk_out</metric>
-    <metric>mid_costTotalTotal_out</metric>
-    <metric>mid_costTotalTotal_uk_out</metric>
-    <metric>mid_nmbLow_out</metric>
-    <metric>mid_nmbMed_out</metric>
-    <metric>mid_nmbHigh_out</metric>
-    <metric>mid_nmbLow_uk_out</metric>
-    <metric>mid_nmbMed_uk_out</metric>
-    <metric>mid_nmbHigh_uk_out</metric>
-    <metric>mid_nmbLowNoGdp_out</metric>
-    <metric>mid_nmbMedNoGdp_out</metric>
-    <metric>mid_nmbHighNoGdp_out</metric>
-    <metric>mid_nmbLowNoGdp_uk_out</metric>
-    <metric>mid_nmbMedNoGdp_uk_out</metric>
-    <metric>mid_nmbHighNoGdp_uk_out</metric>
-    <metric>mid_halyTotalAcute_out</metric>
-    <metric>mid_halyTotalDeath_out</metric>
-    <metric>mid_halyTotalDeath_uk_out</metric>
-    <metric>mid_halyTotalLong_out</metric>
-    <metric>mid_halyTotalTotal_out</metric>
-    <metric>mid_halyTotalTotal_uk_out</metric>
-    <metric>mid_totStage2_out</metric>
-    <metric>mid_totStage3_out</metric>
-    <metric>mid_totStage4_out</metric>
-    <metric>mid_totStage5_out</metric>
-    <metric>mid_totInfect_out</metric>
-    <metric>mid_totSympt_out</metric>
-    <metric>mid_totHosp_out</metric>
-    <metric>mid_totIcu_out</metric>
-    <metric>mid_totDeath_out</metric>
-    <metric>mid_totHospTime_out</metric>
-    <metric>mid_totIcuTime_out</metric>
-    <metric>mid_hospDaysAbove500_out</metric>
-    <metric>mid_hospDaysAbove750_out</metric>
-    <metric>mid_hospDaysAbove1000_out</metric>
-    <metric>mid_hospDaysAbove1250_out</metric>
-    <metric>mid_hospDaysAbove1500_out</metric>
-    <metric>mid_hospDaysAbove1750_out</metric>
-    <metric>mid_hospDaysAbove2000_out</metric>
-    <metric>mid_prevInfect0_out</metric>
-    <metric>mid_prevInfect1_out</metric>
-    <metric>mid_prevInfect2_out</metric>
-    <metric>mid_prevInfect3_out</metric>
-    <metric>mid_prevInfect4_out</metric>
-    <metric>mid_prevInfect5_out</metric>
-    <metric>mid_prevInfect6_out</metric>
-    <metric>mid_prevInfect7_out</metric>
-    <metric>mid_prevInfect8_out</metric>
     <metric>sen_vacInfectReduct_out</metric>
     <metric>sen_vacWaneInfect_out</metric>
     <metric>sen_vacWaneHosp_out</metric>
@@ -5853,6 +5778,546 @@ NetLogo 6.2.0
     <metric>sen_costVisitEr_out</metric>
     <metric>sen_costHospBed_out</metric>
     <metric>sen_costIcuBed_out</metric>
+    <metric>mid_0_182_costDeathAverted_out</metric>
+    <metric>mid_0_182_costDeathAverted_uk_out</metric>
+    <metric>mid_0_182_costAcute_out</metric>
+    <metric>mid_0_182_costLong_out</metric>
+    <metric>mid_0_182_costTesting_out</metric>
+    <metric>mid_0_182_costVaccine_out</metric>
+    <metric>mid_0_182_costVacDeliver_out</metric>
+    <metric>mid_0_182_costVaccineFixed_out</metric>
+    <metric>mid_0_182_costMask_out</metric>
+    <metric>mid_0_182_costMaskFixed_out</metric>
+    <metric>mid_0_182_costGdp_out</metric>
+    <metric>mid_0_182_costTotalHealth_out</metric>
+    <metric>mid_0_182_costTotalHealth_uk_out</metric>
+    <metric>mid_0_182_costTotalTotal_out</metric>
+    <metric>mid_0_182_costTotalTotal_uk_out</metric>
+    <metric>mid_0_182_nmbLow_out</metric>
+    <metric>mid_0_182_nmbMed_out</metric>
+    <metric>mid_0_182_nmbHigh_out</metric>
+    <metric>mid_0_182_nmbLow_uk_out</metric>
+    <metric>mid_0_182_nmbMed_uk_out</metric>
+    <metric>mid_0_182_nmbHigh_uk_out</metric>
+    <metric>mid_0_182_nmbLowNoGdp_out</metric>
+    <metric>mid_0_182_nmbMedNoGdp_out</metric>
+    <metric>mid_0_182_nmbHighNoGdp_out</metric>
+    <metric>mid_0_182_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_0_182_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_0_182_nmbHighNoGdp_uk_out</metric>
+    <metric>mid_0_182_halyTotalAcute_out</metric>
+    <metric>mid_0_182_halyTotalDeath_out</metric>
+    <metric>mid_0_182_halyTotalDeath_uk_out</metric>
+    <metric>mid_0_182_halyTotalLong_out</metric>
+    <metric>mid_0_182_halyTotalTotal_out</metric>
+    <metric>mid_0_182_halyTotalTotal_uk_out</metric>
+    <metric>mid_0_182_totStage2_out</metric>
+    <metric>mid_0_182_totStage3_out</metric>
+    <metric>mid_0_182_totStage4_out</metric>
+    <metric>mid_0_182_totStage5_out</metric>
+    <metric>mid_0_182_totInfect_out</metric>
+    <metric>mid_0_182_totSympt_out</metric>
+    <metric>mid_0_182_totHosp_out</metric>
+    <metric>mid_0_182_totIcu_out</metric>
+    <metric>mid_0_182_totDeath_out</metric>
+    <metric>mid_0_182_totHospTime_out</metric>
+    <metric>mid_0_182_totIcuTime_out</metric>
+    <metric>mid_0_182_hospDaysAbove500_out</metric>
+    <metric>mid_0_182_hospDaysAbove750_out</metric>
+    <metric>mid_0_182_hospDaysAbove1000_out</metric>
+    <metric>mid_0_182_hospDaysAbove1250_out</metric>
+    <metric>mid_0_182_hospDaysAbove1500_out</metric>
+    <metric>mid_0_182_hospDaysAbove1750_out</metric>
+    <metric>mid_0_182_hospDaysAbove2000_out</metric>
+    <metric>mid_0_182_prevInfect0_out</metric>
+    <metric>mid_0_182_prevInfect1_out</metric>
+    <metric>mid_0_182_prevInfect2_out</metric>
+    <metric>mid_0_182_prevInfect3_out</metric>
+    <metric>mid_0_182_prevInfect4_out</metric>
+    <metric>mid_0_182_prevInfect5_out</metric>
+    <metric>mid_0_182_prevInfect6_out</metric>
+    <metric>mid_0_182_prevInfect7_out</metric>
+    <metric>mid_0_182_prevInfect8_out</metric>
+    <metric>mid_0_364_costDeathAverted_out</metric>
+    <metric>mid_0_364_costDeathAverted_uk_out</metric>
+    <metric>mid_0_364_costAcute_out</metric>
+    <metric>mid_0_364_costLong_out</metric>
+    <metric>mid_0_364_costTesting_out</metric>
+    <metric>mid_0_364_costVaccine_out</metric>
+    <metric>mid_0_364_costVacDeliver_out</metric>
+    <metric>mid_0_364_costVaccineFixed_out</metric>
+    <metric>mid_0_364_costMask_out</metric>
+    <metric>mid_0_364_costMaskFixed_out</metric>
+    <metric>mid_0_364_costGdp_out</metric>
+    <metric>mid_0_364_costTotalHealth_out</metric>
+    <metric>mid_0_364_costTotalHealth_uk_out</metric>
+    <metric>mid_0_364_costTotalTotal_out</metric>
+    <metric>mid_0_364_costTotalTotal_uk_out</metric>
+    <metric>mid_0_364_nmbLow_out</metric>
+    <metric>mid_0_364_nmbMed_out</metric>
+    <metric>mid_0_364_nmbHigh_out</metric>
+    <metric>mid_0_364_nmbLow_uk_out</metric>
+    <metric>mid_0_364_nmbMed_uk_out</metric>
+    <metric>mid_0_364_nmbHigh_uk_out</metric>
+    <metric>mid_0_364_nmbLowNoGdp_out</metric>
+    <metric>mid_0_364_nmbMedNoGdp_out</metric>
+    <metric>mid_0_364_nmbHighNoGdp_out</metric>
+    <metric>mid_0_364_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_0_364_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_0_364_nmbHighNoGdp_uk_out</metric>
+    <metric>mid_0_364_halyTotalAcute_out</metric>
+    <metric>mid_0_364_halyTotalDeath_out</metric>
+    <metric>mid_0_364_halyTotalDeath_uk_out</metric>
+    <metric>mid_0_364_halyTotalLong_out</metric>
+    <metric>mid_0_364_halyTotalTotal_out</metric>
+    <metric>mid_0_364_halyTotalTotal_uk_out</metric>
+    <metric>mid_0_364_totStage2_out</metric>
+    <metric>mid_0_364_totStage3_out</metric>
+    <metric>mid_0_364_totStage4_out</metric>
+    <metric>mid_0_364_totStage5_out</metric>
+    <metric>mid_0_364_totInfect_out</metric>
+    <metric>mid_0_364_totSympt_out</metric>
+    <metric>mid_0_364_totHosp_out</metric>
+    <metric>mid_0_364_totIcu_out</metric>
+    <metric>mid_0_364_totDeath_out</metric>
+    <metric>mid_0_364_totHospTime_out</metric>
+    <metric>mid_0_364_totIcuTime_out</metric>
+    <metric>mid_0_364_hospDaysAbove500_out</metric>
+    <metric>mid_0_364_hospDaysAbove750_out</metric>
+    <metric>mid_0_364_hospDaysAbove1000_out</metric>
+    <metric>mid_0_364_hospDaysAbove1250_out</metric>
+    <metric>mid_0_364_hospDaysAbove1500_out</metric>
+    <metric>mid_0_364_hospDaysAbove1750_out</metric>
+    <metric>mid_0_364_hospDaysAbove2000_out</metric>
+    <metric>mid_0_364_prevInfect0_out</metric>
+    <metric>mid_0_364_prevInfect1_out</metric>
+    <metric>mid_0_364_prevInfect2_out</metric>
+    <metric>mid_0_364_prevInfect3_out</metric>
+    <metric>mid_0_364_prevInfect4_out</metric>
+    <metric>mid_0_364_prevInfect5_out</metric>
+    <metric>mid_0_364_prevInfect6_out</metric>
+    <metric>mid_0_364_prevInfect7_out</metric>
+    <metric>mid_0_364_prevInfect8_out</metric>
+    <metric>mid_182_364_costDeathAverted_out</metric>
+    <metric>mid_182_364_costDeathAverted_uk_out</metric>
+    <metric>mid_182_364_costAcute_out</metric>
+    <metric>mid_182_364_costLong_out</metric>
+    <metric>mid_182_364_costTesting_out</metric>
+    <metric>mid_182_364_costVaccine_out</metric>
+    <metric>mid_182_364_costVacDeliver_out</metric>
+    <metric>mid_182_364_costVaccineFixed_out</metric>
+    <metric>mid_182_364_costMask_out</metric>
+    <metric>mid_182_364_costMaskFixed_out</metric>
+    <metric>mid_182_364_costGdp_out</metric>
+    <metric>mid_182_364_costTotalHealth_out</metric>
+    <metric>mid_182_364_costTotalHealth_uk_out</metric>
+    <metric>mid_182_364_costTotalTotal_out</metric>
+    <metric>mid_182_364_costTotalTotal_uk_out</metric>
+    <metric>mid_182_364_nmbLow_out</metric>
+    <metric>mid_182_364_nmbMed_out</metric>
+    <metric>mid_182_364_nmbHigh_out</metric>
+    <metric>mid_182_364_nmbLow_uk_out</metric>
+    <metric>mid_182_364_nmbMed_uk_out</metric>
+    <metric>mid_182_364_nmbHigh_uk_out</metric>
+    <metric>mid_182_364_nmbLowNoGdp_out</metric>
+    <metric>mid_182_364_nmbMedNoGdp_out</metric>
+    <metric>mid_182_364_nmbHighNoGdp_out</metric>
+    <metric>mid_182_364_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_182_364_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_182_364_nmbHighNoGdp_uk_out</metric>
+    <metric>mid_182_364_halyTotalAcute_out</metric>
+    <metric>mid_182_364_halyTotalDeath_out</metric>
+    <metric>mid_182_364_halyTotalDeath_uk_out</metric>
+    <metric>mid_182_364_halyTotalLong_out</metric>
+    <metric>mid_182_364_halyTotalTotal_out</metric>
+    <metric>mid_182_364_halyTotalTotal_uk_out</metric>
+    <metric>mid_182_364_totStage2_out</metric>
+    <metric>mid_182_364_totStage3_out</metric>
+    <metric>mid_182_364_totStage4_out</metric>
+    <metric>mid_182_364_totStage5_out</metric>
+    <metric>mid_182_364_totInfect_out</metric>
+    <metric>mid_182_364_totSympt_out</metric>
+    <metric>mid_182_364_totHosp_out</metric>
+    <metric>mid_182_364_totIcu_out</metric>
+    <metric>mid_182_364_totDeath_out</metric>
+    <metric>mid_182_364_totHospTime_out</metric>
+    <metric>mid_182_364_totIcuTime_out</metric>
+    <metric>mid_182_364_hospDaysAbove500_out</metric>
+    <metric>mid_182_364_hospDaysAbove750_out</metric>
+    <metric>mid_182_364_hospDaysAbove1000_out</metric>
+    <metric>mid_182_364_hospDaysAbove1250_out</metric>
+    <metric>mid_182_364_hospDaysAbove1500_out</metric>
+    <metric>mid_182_364_hospDaysAbove1750_out</metric>
+    <metric>mid_182_364_hospDaysAbove2000_out</metric>
+    <metric>mid_182_364_prevInfect0_out</metric>
+    <metric>mid_182_364_prevInfect1_out</metric>
+    <metric>mid_182_364_prevInfect2_out</metric>
+    <metric>mid_182_364_prevInfect3_out</metric>
+    <metric>mid_182_364_prevInfect4_out</metric>
+    <metric>mid_182_364_prevInfect5_out</metric>
+    <metric>mid_182_364_prevInfect6_out</metric>
+    <metric>mid_182_364_prevInfect7_out</metric>
+    <metric>mid_182_364_prevInfect8_out</metric>
+    <metric>mid_182_546_costDeathAverted_out</metric>
+    <metric>mid_182_546_costDeathAverted_uk_out</metric>
+    <metric>mid_182_546_costAcute_out</metric>
+    <metric>mid_182_546_costLong_out</metric>
+    <metric>mid_182_546_costTesting_out</metric>
+    <metric>mid_182_546_costVaccine_out</metric>
+    <metric>mid_182_546_costVacDeliver_out</metric>
+    <metric>mid_182_546_costVaccineFixed_out</metric>
+    <metric>mid_182_546_costMask_out</metric>
+    <metric>mid_182_546_costMaskFixed_out</metric>
+    <metric>mid_182_546_costGdp_out</metric>
+    <metric>mid_182_546_costTotalHealth_out</metric>
+    <metric>mid_182_546_costTotalHealth_uk_out</metric>
+    <metric>mid_182_546_costTotalTotal_out</metric>
+    <metric>mid_182_546_costTotalTotal_uk_out</metric>
+    <metric>mid_182_546_nmbLow_out</metric>
+    <metric>mid_182_546_nmbMed_out</metric>
+    <metric>mid_182_546_nmbHigh_out</metric>
+    <metric>mid_182_546_nmbLow_uk_out</metric>
+    <metric>mid_182_546_nmbMed_uk_out</metric>
+    <metric>mid_182_546_nmbHigh_uk_out</metric>
+    <metric>mid_182_546_nmbLowNoGdp_out</metric>
+    <metric>mid_182_546_nmbMedNoGdp_out</metric>
+    <metric>mid_182_546_nmbHighNoGdp_out</metric>
+    <metric>mid_182_546_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_182_546_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_182_546_nmbHighNoGdp_uk_out</metric>
+    <metric>mid_182_546_halyTotalAcute_out</metric>
+    <metric>mid_182_546_halyTotalDeath_out</metric>
+    <metric>mid_182_546_halyTotalDeath_uk_out</metric>
+    <metric>mid_182_546_halyTotalLong_out</metric>
+    <metric>mid_182_546_halyTotalTotal_out</metric>
+    <metric>mid_182_546_halyTotalTotal_uk_out</metric>
+    <metric>mid_182_546_totStage2_out</metric>
+    <metric>mid_182_546_totStage3_out</metric>
+    <metric>mid_182_546_totStage4_out</metric>
+    <metric>mid_182_546_totStage5_out</metric>
+    <metric>mid_182_546_totInfect_out</metric>
+    <metric>mid_182_546_totSympt_out</metric>
+    <metric>mid_182_546_totHosp_out</metric>
+    <metric>mid_182_546_totIcu_out</metric>
+    <metric>mid_182_546_totDeath_out</metric>
+    <metric>mid_182_546_totHospTime_out</metric>
+    <metric>mid_182_546_totIcuTime_out</metric>
+    <metric>mid_182_546_hospDaysAbove500_out</metric>
+    <metric>mid_182_546_hospDaysAbove750_out</metric>
+    <metric>mid_182_546_hospDaysAbove1000_out</metric>
+    <metric>mid_182_546_hospDaysAbove1250_out</metric>
+    <metric>mid_182_546_hospDaysAbove1500_out</metric>
+    <metric>mid_182_546_hospDaysAbove1750_out</metric>
+    <metric>mid_182_546_hospDaysAbove2000_out</metric>
+    <metric>mid_182_546_prevInfect0_out</metric>
+    <metric>mid_182_546_prevInfect1_out</metric>
+    <metric>mid_182_546_prevInfect2_out</metric>
+    <metric>mid_182_546_prevInfect3_out</metric>
+    <metric>mid_182_546_prevInfect4_out</metric>
+    <metric>mid_182_546_prevInfect5_out</metric>
+    <metric>mid_182_546_prevInfect6_out</metric>
+    <metric>mid_182_546_prevInfect7_out</metric>
+    <metric>mid_182_546_prevInfect8_out</metric>
+    <metric>mid_364_546_costDeathAverted_out</metric>
+    <metric>mid_364_546_costDeathAverted_uk_out</metric>
+    <metric>mid_364_546_costAcute_out</metric>
+    <metric>mid_364_546_costLong_out</metric>
+    <metric>mid_364_546_costTesting_out</metric>
+    <metric>mid_364_546_costVaccine_out</metric>
+    <metric>mid_364_546_costVacDeliver_out</metric>
+    <metric>mid_364_546_costVaccineFixed_out</metric>
+    <metric>mid_364_546_costMask_out</metric>
+    <metric>mid_364_546_costMaskFixed_out</metric>
+    <metric>mid_364_546_costGdp_out</metric>
+    <metric>mid_364_546_costTotalHealth_out</metric>
+    <metric>mid_364_546_costTotalHealth_uk_out</metric>
+    <metric>mid_364_546_costTotalTotal_out</metric>
+    <metric>mid_364_546_costTotalTotal_uk_out</metric>
+    <metric>mid_364_546_nmbLow_out</metric>
+    <metric>mid_364_546_nmbMed_out</metric>
+    <metric>mid_364_546_nmbHigh_out</metric>
+    <metric>mid_364_546_nmbLow_uk_out</metric>
+    <metric>mid_364_546_nmbMed_uk_out</metric>
+    <metric>mid_364_546_nmbHigh_uk_out</metric>
+    <metric>mid_364_546_nmbLowNoGdp_out</metric>
+    <metric>mid_364_546_nmbMedNoGdp_out</metric>
+    <metric>mid_364_546_nmbHighNoGdp_out</metric>
+    <metric>mid_364_546_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_364_546_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_364_546_nmbHighNoGdp_uk_out</metric>
+    <metric>mid_364_546_halyTotalAcute_out</metric>
+    <metric>mid_364_546_halyTotalDeath_out</metric>
+    <metric>mid_364_546_halyTotalDeath_uk_out</metric>
+    <metric>mid_364_546_halyTotalLong_out</metric>
+    <metric>mid_364_546_halyTotalTotal_out</metric>
+    <metric>mid_364_546_halyTotalTotal_uk_out</metric>
+    <metric>mid_364_546_totStage2_out</metric>
+    <metric>mid_364_546_totStage3_out</metric>
+    <metric>mid_364_546_totStage4_out</metric>
+    <metric>mid_364_546_totStage5_out</metric>
+    <metric>mid_364_546_totInfect_out</metric>
+    <metric>mid_364_546_totSympt_out</metric>
+    <metric>mid_364_546_totHosp_out</metric>
+    <metric>mid_364_546_totIcu_out</metric>
+    <metric>mid_364_546_totDeath_out</metric>
+    <metric>mid_364_546_totHospTime_out</metric>
+    <metric>mid_364_546_totIcuTime_out</metric>
+    <metric>mid_364_546_hospDaysAbove500_out</metric>
+    <metric>mid_364_546_hospDaysAbove750_out</metric>
+    <metric>mid_364_546_hospDaysAbove1000_out</metric>
+    <metric>mid_364_546_hospDaysAbove1250_out</metric>
+    <metric>mid_364_546_hospDaysAbove1500_out</metric>
+    <metric>mid_364_546_hospDaysAbove1750_out</metric>
+    <metric>mid_364_546_hospDaysAbove2000_out</metric>
+    <metric>mid_364_546_prevInfect0_out</metric>
+    <metric>mid_364_546_prevInfect1_out</metric>
+    <metric>mid_364_546_prevInfect2_out</metric>
+    <metric>mid_364_546_prevInfect3_out</metric>
+    <metric>mid_364_546_prevInfect4_out</metric>
+    <metric>mid_364_546_prevInfect5_out</metric>
+    <metric>mid_364_546_prevInfect6_out</metric>
+    <metric>mid_364_546_prevInfect7_out</metric>
+    <metric>mid_364_546_prevInfect8_out</metric>
+    <metric>mid_0_60_costDeathAverted_out</metric>
+    <metric>mid_0_60_costDeathAverted_uk_out</metric>
+    <metric>mid_0_60_costAcute_out</metric>
+    <metric>mid_0_60_costLong_out</metric>
+    <metric>mid_0_60_costTesting_out</metric>
+    <metric>mid_0_60_costVaccine_out</metric>
+    <metric>mid_0_60_costVacDeliver_out</metric>
+    <metric>mid_0_60_costVaccineFixed_out</metric>
+    <metric>mid_0_60_costMask_out</metric>
+    <metric>mid_0_60_costMaskFixed_out</metric>
+    <metric>mid_0_60_costGdp_out</metric>
+    <metric>mid_0_60_costTotalHealth_out</metric>
+    <metric>mid_0_60_costTotalHealth_uk_out</metric>
+    <metric>mid_0_60_costTotalTotal_out</metric>
+    <metric>mid_0_60_costTotalTotal_uk_out</metric>
+    <metric>mid_0_60_nmbLow_out</metric>
+    <metric>mid_0_60_nmbMed_out</metric>
+    <metric>mid_0_60_nmbHigh_out</metric>
+    <metric>mid_0_60_nmbLow_uk_out</metric>
+    <metric>mid_0_60_nmbMed_uk_out</metric>
+    <metric>mid_0_60_nmbHigh_uk_out</metric>
+    <metric>mid_0_60_nmbLowNoGdp_out</metric>
+    <metric>mid_0_60_nmbMedNoGdp_out</metric>
+    <metric>mid_0_60_nmbHighNoGdp_out</metric>
+    <metric>mid_0_60_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_0_60_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_0_60_nmbHighNoGdp_uk_out</metric>
+    <metric>mid_0_60_halyTotalAcute_out</metric>
+    <metric>mid_0_60_halyTotalDeath_out</metric>
+    <metric>mid_0_60_halyTotalDeath_uk_out</metric>
+    <metric>mid_0_60_halyTotalLong_out</metric>
+    <metric>mid_0_60_halyTotalTotal_out</metric>
+    <metric>mid_0_60_halyTotalTotal_uk_out</metric>
+    <metric>mid_0_60_totStage2_out</metric>
+    <metric>mid_0_60_totStage3_out</metric>
+    <metric>mid_0_60_totStage4_out</metric>
+    <metric>mid_0_60_totStage5_out</metric>
+    <metric>mid_0_60_totInfect_out</metric>
+    <metric>mid_0_60_totSympt_out</metric>
+    <metric>mid_0_60_totHosp_out</metric>
+    <metric>mid_0_60_totIcu_out</metric>
+    <metric>mid_0_60_totDeath_out</metric>
+    <metric>mid_0_60_totHospTime_out</metric>
+    <metric>mid_0_60_totIcuTime_out</metric>
+    <metric>mid_0_60_hospDaysAbove500_out</metric>
+    <metric>mid_0_60_hospDaysAbove750_out</metric>
+    <metric>mid_0_60_hospDaysAbove1000_out</metric>
+    <metric>mid_0_60_hospDaysAbove1250_out</metric>
+    <metric>mid_0_60_hospDaysAbove1500_out</metric>
+    <metric>mid_0_60_hospDaysAbove1750_out</metric>
+    <metric>mid_0_60_hospDaysAbove2000_out</metric>
+    <metric>mid_0_60_prevInfect0_out</metric>
+    <metric>mid_0_60_prevInfect1_out</metric>
+    <metric>mid_0_60_prevInfect2_out</metric>
+    <metric>mid_0_60_prevInfect3_out</metric>
+    <metric>mid_0_60_prevInfect4_out</metric>
+    <metric>mid_0_60_prevInfect5_out</metric>
+    <metric>mid_0_60_prevInfect6_out</metric>
+    <metric>mid_0_60_prevInfect7_out</metric>
+    <metric>mid_0_60_prevInfect8_out</metric>
+    <metric>mid_60_182_costDeathAverted_out</metric>
+    <metric>mid_60_182_costDeathAverted_uk_out</metric>
+    <metric>mid_60_182_costAcute_out</metric>
+    <metric>mid_60_182_costLong_out</metric>
+    <metric>mid_60_182_costTesting_out</metric>
+    <metric>mid_60_182_costVaccine_out</metric>
+    <metric>mid_60_182_costVacDeliver_out</metric>
+    <metric>mid_60_182_costVaccineFixed_out</metric>
+    <metric>mid_60_182_costMask_out</metric>
+    <metric>mid_60_182_costMaskFixed_out</metric>
+    <metric>mid_60_182_costGdp_out</metric>
+    <metric>mid_60_182_costTotalHealth_out</metric>
+    <metric>mid_60_182_costTotalHealth_uk_out</metric>
+    <metric>mid_60_182_costTotalTotal_out</metric>
+    <metric>mid_60_182_costTotalTotal_uk_out</metric>
+    <metric>mid_60_182_nmbLow_out</metric>
+    <metric>mid_60_182_nmbMed_out</metric>
+    <metric>mid_60_182_nmbHigh_out</metric>
+    <metric>mid_60_182_nmbLow_uk_out</metric>
+    <metric>mid_60_182_nmbMed_uk_out</metric>
+    <metric>mid_60_182_nmbHigh_uk_out</metric>
+    <metric>mid_60_182_nmbLowNoGdp_out</metric>
+    <metric>mid_60_182_nmbMedNoGdp_out</metric>
+    <metric>mid_60_182_nmbHighNoGdp_out</metric>
+    <metric>mid_60_182_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_60_182_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_60_182_nmbHighNoGdp_uk_out</metric>
+    <metric>mid_60_182_halyTotalAcute_out</metric>
+    <metric>mid_60_182_halyTotalDeath_out</metric>
+    <metric>mid_60_182_halyTotalDeath_uk_out</metric>
+    <metric>mid_60_182_halyTotalLong_out</metric>
+    <metric>mid_60_182_halyTotalTotal_out</metric>
+    <metric>mid_60_182_halyTotalTotal_uk_out</metric>
+    <metric>mid_60_182_totStage2_out</metric>
+    <metric>mid_60_182_totStage3_out</metric>
+    <metric>mid_60_182_totStage4_out</metric>
+    <metric>mid_60_182_totStage5_out</metric>
+    <metric>mid_60_182_totInfect_out</metric>
+    <metric>mid_60_182_totSympt_out</metric>
+    <metric>mid_60_182_totHosp_out</metric>
+    <metric>mid_60_182_totIcu_out</metric>
+    <metric>mid_60_182_totDeath_out</metric>
+    <metric>mid_60_182_totHospTime_out</metric>
+    <metric>mid_60_182_totIcuTime_out</metric>
+    <metric>mid_60_182_hospDaysAbove500_out</metric>
+    <metric>mid_60_182_hospDaysAbove750_out</metric>
+    <metric>mid_60_182_hospDaysAbove1000_out</metric>
+    <metric>mid_60_182_hospDaysAbove1250_out</metric>
+    <metric>mid_60_182_hospDaysAbove1500_out</metric>
+    <metric>mid_60_182_hospDaysAbove1750_out</metric>
+    <metric>mid_60_182_hospDaysAbove2000_out</metric>
+    <metric>mid_60_182_prevInfect0_out</metric>
+    <metric>mid_60_182_prevInfect1_out</metric>
+    <metric>mid_60_182_prevInfect2_out</metric>
+    <metric>mid_60_182_prevInfect3_out</metric>
+    <metric>mid_60_182_prevInfect4_out</metric>
+    <metric>mid_60_182_prevInfect5_out</metric>
+    <metric>mid_60_182_prevInfect6_out</metric>
+    <metric>mid_60_182_prevInfect7_out</metric>
+    <metric>mid_60_182_prevInfect8_out</metric>
+    <metric>mid_0_91_costDeathAverted_out</metric>
+    <metric>mid_0_91_costDeathAverted_uk_out</metric>
+    <metric>mid_0_91_costAcute_out</metric>
+    <metric>mid_0_91_costLong_out</metric>
+    <metric>mid_0_91_costTesting_out</metric>
+    <metric>mid_0_91_costVaccine_out</metric>
+    <metric>mid_0_91_costVacDeliver_out</metric>
+    <metric>mid_0_91_costVaccineFixed_out</metric>
+    <metric>mid_0_91_costMask_out</metric>
+    <metric>mid_0_91_costMaskFixed_out</metric>
+    <metric>mid_0_91_costGdp_out</metric>
+    <metric>mid_0_91_costTotalHealth_out</metric>
+    <metric>mid_0_91_costTotalHealth_uk_out</metric>
+    <metric>mid_0_91_costTotalTotal_out</metric>
+    <metric>mid_0_91_costTotalTotal_uk_out</metric>
+    <metric>mid_0_91_nmbLow_out</metric>
+    <metric>mid_0_91_nmbMed_out</metric>
+    <metric>mid_0_91_nmbHigh_out</metric>
+    <metric>mid_0_91_nmbLow_uk_out</metric>
+    <metric>mid_0_91_nmbMed_uk_out</metric>
+    <metric>mid_0_91_nmbHigh_uk_out</metric>
+    <metric>mid_0_91_nmbLowNoGdp_out</metric>
+    <metric>mid_0_91_nmbMedNoGdp_out</metric>
+    <metric>mid_0_91_nmbHighNoGdp_out</metric>
+    <metric>mid_0_91_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_0_91_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_0_91_nmbHighNoGdp_uk_out</metric>
+    <metric>mid_0_91_halyTotalAcute_out</metric>
+    <metric>mid_0_91_halyTotalDeath_out</metric>
+    <metric>mid_0_91_halyTotalDeath_uk_out</metric>
+    <metric>mid_0_91_halyTotalLong_out</metric>
+    <metric>mid_0_91_halyTotalTotal_out</metric>
+    <metric>mid_0_91_halyTotalTotal_uk_out</metric>
+    <metric>mid_0_91_totStage2_out</metric>
+    <metric>mid_0_91_totStage3_out</metric>
+    <metric>mid_0_91_totStage4_out</metric>
+    <metric>mid_0_91_totStage5_out</metric>
+    <metric>mid_0_91_totInfect_out</metric>
+    <metric>mid_0_91_totSympt_out</metric>
+    <metric>mid_0_91_totHosp_out</metric>
+    <metric>mid_0_91_totIcu_out</metric>
+    <metric>mid_0_91_totDeath_out</metric>
+    <metric>mid_0_91_totHospTime_out</metric>
+    <metric>mid_0_91_totIcuTime_out</metric>
+    <metric>mid_0_91_hospDaysAbove500_out</metric>
+    <metric>mid_0_91_hospDaysAbove750_out</metric>
+    <metric>mid_0_91_hospDaysAbove1000_out</metric>
+    <metric>mid_0_91_hospDaysAbove1250_out</metric>
+    <metric>mid_0_91_hospDaysAbove1500_out</metric>
+    <metric>mid_0_91_hospDaysAbove1750_out</metric>
+    <metric>mid_0_91_hospDaysAbove2000_out</metric>
+    <metric>mid_0_91_prevInfect0_out</metric>
+    <metric>mid_0_91_prevInfect1_out</metric>
+    <metric>mid_0_91_prevInfect2_out</metric>
+    <metric>mid_0_91_prevInfect3_out</metric>
+    <metric>mid_0_91_prevInfect4_out</metric>
+    <metric>mid_0_91_prevInfect5_out</metric>
+    <metric>mid_0_91_prevInfect6_out</metric>
+    <metric>mid_0_91_prevInfect7_out</metric>
+    <metric>mid_0_91_prevInfect8_out</metric>
+    <metric>mid_91_182_costDeathAverted_out</metric>
+    <metric>mid_91_182_costDeathAverted_uk_out</metric>
+    <metric>mid_91_182_costAcute_out</metric>
+    <metric>mid_91_182_costLong_out</metric>
+    <metric>mid_91_182_costTesting_out</metric>
+    <metric>mid_91_182_costVaccine_out</metric>
+    <metric>mid_91_182_costVacDeliver_out</metric>
+    <metric>mid_91_182_costVaccineFixed_out</metric>
+    <metric>mid_91_182_costMask_out</metric>
+    <metric>mid_91_182_costMaskFixed_out</metric>
+    <metric>mid_91_182_costGdp_out</metric>
+    <metric>mid_91_182_costTotalHealth_out</metric>
+    <metric>mid_91_182_costTotalHealth_uk_out</metric>
+    <metric>mid_91_182_costTotalTotal_out</metric>
+    <metric>mid_91_182_costTotalTotal_uk_out</metric>
+    <metric>mid_91_182_nmbLow_out</metric>
+    <metric>mid_91_182_nmbMed_out</metric>
+    <metric>mid_91_182_nmbHigh_out</metric>
+    <metric>mid_91_182_nmbLow_uk_out</metric>
+    <metric>mid_91_182_nmbMed_uk_out</metric>
+    <metric>mid_91_182_nmbHigh_uk_out</metric>
+    <metric>mid_91_182_nmbLowNoGdp_out</metric>
+    <metric>mid_91_182_nmbMedNoGdp_out</metric>
+    <metric>mid_91_182_nmbHighNoGdp_out</metric>
+    <metric>mid_91_182_nmbLowNoGdp_uk_out</metric>
+    <metric>mid_91_182_nmbMedNoGdp_uk_out</metric>
+    <metric>mid_91_182_nmbHighNoGdp_uk_out</metric>
+    <metric>mid_91_182_halyTotalAcute_out</metric>
+    <metric>mid_91_182_halyTotalDeath_out</metric>
+    <metric>mid_91_182_halyTotalDeath_uk_out</metric>
+    <metric>mid_91_182_halyTotalLong_out</metric>
+    <metric>mid_91_182_halyTotalTotal_out</metric>
+    <metric>mid_91_182_halyTotalTotal_uk_out</metric>
+    <metric>mid_91_182_totStage2_out</metric>
+    <metric>mid_91_182_totStage3_out</metric>
+    <metric>mid_91_182_totStage4_out</metric>
+    <metric>mid_91_182_totStage5_out</metric>
+    <metric>mid_91_182_totInfect_out</metric>
+    <metric>mid_91_182_totSympt_out</metric>
+    <metric>mid_91_182_totHosp_out</metric>
+    <metric>mid_91_182_totIcu_out</metric>
+    <metric>mid_91_182_totDeath_out</metric>
+    <metric>mid_91_182_totHospTime_out</metric>
+    <metric>mid_91_182_totIcuTime_out</metric>
+    <metric>mid_91_182_hospDaysAbove500_out</metric>
+    <metric>mid_91_182_hospDaysAbove750_out</metric>
+    <metric>mid_91_182_hospDaysAbove1000_out</metric>
+    <metric>mid_91_182_hospDaysAbove1250_out</metric>
+    <metric>mid_91_182_hospDaysAbove1500_out</metric>
+    <metric>mid_91_182_hospDaysAbove1750_out</metric>
+    <metric>mid_91_182_hospDaysAbove2000_out</metric>
+    <metric>mid_91_182_prevInfect0_out</metric>
+    <metric>mid_91_182_prevInfect1_out</metric>
+    <metric>mid_91_182_prevInfect2_out</metric>
+    <metric>mid_91_182_prevInfect3_out</metric>
+    <metric>mid_91_182_prevInfect4_out</metric>
+    <metric>mid_91_182_prevInfect5_out</metric>
+    <metric>mid_91_182_prevInfect6_out</metric>
+    <metric>mid_91_182_prevInfect7_out</metric>
+    <metric>mid_91_182_prevInfect8_out</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>

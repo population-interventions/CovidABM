@@ -68,7 +68,7 @@ def ProcessAbmChunk(
 		 + ['{}Array_listOut'.format(name) for name in gl.metricListRaw.keys()]
 		 + ['{}_listOut'.format(name) for name in gl.timefullMetrics.keys()]
 		 + ['{}_listOut'.format(name) for name in gl.cohortMetricList]
-		 + ['{}_out'.format(name) for name in gl.singleMetricList]
+		 + ['{}_out'.format(name) for name in gl.FullSingleMetricList()]
 	]
 	
 	cohorts = len(chunk.iloc[0].age_listOut.split(' '))
@@ -100,8 +100,8 @@ def ProcessAbmChunk(
 	chunk = chunk.drop(secondaryData, axis=1)
 	chunk = util.DoIndexRename(chunk, indexRename)
 	
-	dfSingle = chunk[['{}_out'.format(metric) for metric in gl.singleMetricList]]
-	dfSingle = dfSingle.rename({'{}_out'.format(metric) : metric for metric in gl.singleMetricList}, axis=1)
+	dfSingle = chunk[['{}_out'.format(metric) for metric in gl.FullSingleMetricList()]]
+	dfSingle = dfSingle.rename({'{}_out'.format(metric) : metric for metric in gl.FullSingleMetricList()}, axis=1)
 	util.OutputToFile(dfSingle, '{}/{}_{}'.format(singleDir, 'single', arrayIndex), head=False) 
 	
 		

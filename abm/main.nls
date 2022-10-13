@@ -143,9 +143,7 @@ to go
   checkStartThreshold
   set days (ticks - start_day)
   
-  if (days = 182 or days = 364) [
-    CalculateMidCosts
-  ]
+  CalculateMidCosts
   
   if (days = End_Day) [
     ;print (word "stop")
