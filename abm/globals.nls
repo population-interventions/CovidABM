@@ -2,6 +2,19 @@
 
 extensions [ rngs profiler csv table array matrix ]
 
+patches-own [
+  destination ;; indicator of whether this location is a place that people might gather
+  destRadiusCache ;; Cache for destinations within particular radii. A table indexed by radius.
+  houseIndex ;; indicator that the patch is a house.
+  lastInfectionUpdate ;; Update indicator for stale simulantCount data
+  infectionList ;; List of infectivities of simulants on the patch
+  infectionCulprit ;; List of agents that cause infection. Only used of track_R is enabled.
+  lastUtilTime ;; Last tick that the patch was occupied
+  lastHouseGatherTime ;; Last tick that a house gathered here.
+  houseGatherIndex ;; Last house that gathered here. -1 indicates more than one house.
+  patchScale ;; Scale of infective simulant
+]
+
 globals [
   anxietyFactor
   InfectionChange
@@ -628,15 +641,3 @@ globals [
   temp_3
 ]
 
-patches-own [
-  destination ;; indicator of whether this location is a place that people might gather
-  destRadiusCache ;; Cache for destinations within particular radii. A table indexed by radius.
-  houseIndex ;; indicator that the patch is a house.
-  lastInfectionUpdate ;; Update indicator for stale simulantCount data
-  infectionList ;; List of infectivities of simulants on the patch
-  infectionCulprit ;; List of agents that cause infection. Only used of track_R is enabled.
-  lastUtilTime ;; Last tick that the patch was occupied
-  lastHouseGatherTime ;; Last tick that a house gathered here.
-  houseGatherIndex ;; Last house that gathered here. -1 indicates more than one house.
-  patchScale ;; Scale of infective simulant
-]
