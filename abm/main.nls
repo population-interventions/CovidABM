@@ -143,7 +143,7 @@ to go
   checkStartThreshold
   set days (ticks - start_day)
   
-  if (days = Mid_Day) [
+  if (days = 182 or days = 364) [
     CalculateMidCosts
   ]
   

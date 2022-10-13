@@ -2768,8 +2768,8 @@ SLIDER
 943
 824
 976
-mid_report_day
-mid_report_day
+midreport_day
+midreport_day
 0
 100
 64.0
@@ -5389,7 +5389,7 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="max_stage">
       <value value="3"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="mid_report_day">
+    <enumeratedValueSet variable="midreport_day">
       <value value="42"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="min_stage">
@@ -6044,7 +6044,7 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="max_stage">
       <value value="3"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="mid_report_day">
+    <enumeratedValueSet variable="midreport_day">
       <value value="42"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="min_stage">
@@ -6472,7 +6472,7 @@ NetLogo 6.2.0
     <enumeratedValueSet variable="max_stage">
       <value value="3"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="mid_report_day">
+    <enumeratedValueSet variable="midreport_day">
       <value value="42"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="min_stage">

@@ -185,7 +185,7 @@ paramValues_mainTest = {**defaultParams, **{
 	'input_dose_rate_table' : '"input/nsw/dose_rate_laxman2.csv"',
 	'end_day' : 140,
 	'vac_restrict_ease_day' : 77,
-	'mid_report_day' : 42,
+	'midreport_day' : 42,
 }}
 
 paramValues_calibrate = {**defaultParams, **{
@@ -210,7 +210,7 @@ paramValues_calibrate = {**defaultParams, **{
 	'input_dose_rate_table' : '"input/nsw/dose_rate_covid_live.csv"',
 	'end_day' : 42,
 	'vac_restrict_ease_day' : 77,
-	'mid_report_day' : 42,
+	'midreport_day' : 42,
 }}
 
 paramValues_rCalcSmall = {**defaultParams, **{

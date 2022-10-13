@@ -58,7 +58,7 @@
 ["mask_wearing" 15.0]
 ["maskpolicy" true]
 ["max_stage" 3.0]
-["mid_report_day" 42.0]
+["midreport_day" 42.0]
 ["min_stage" 0.0]
 ["minmaskwearing" 0.0]
 ["override_asympt_table" false]
