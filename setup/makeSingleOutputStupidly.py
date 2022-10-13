@@ -73,7 +73,7 @@ def MakeCostsMidFunction(contents, singleList, variables):
 	check = '  if'
 	for num in ends:
 		if len(check) > 5:
-			check = check + ' and'
+			check = check + ' or'
 		check = check + ' days = {}'.format(num)
 	check = check + ' [\n'
 	contents.append(check)
