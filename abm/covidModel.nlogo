@@ -36,11 +36,11 @@ __includes[
 GRAPHICS-WINDOW
 408
 63
-920
-576
+897
+553
 -1
 -1
-3.9703
+3.8
 1
 10
 1
@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-11.74
+11.78
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.05650000000000001
+0.05550000000000001
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.3045
+0.3115
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.3915
+0.4005
 0.01
 1
 NIL
@@ -566,7 +566,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.739
+0.733
 0.01
 1
 NIL
@@ -1120,7 +1120,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.87
+0.89
 0.01
 1
 NIL
@@ -2887,7 +2887,7 @@ INPUTBOX
 2527
 527
 input_variant
-input/vic/variant_r0_6_8_large.csv
+input/vic/variant_r0_6_8_large_new.csv
 1
 0
 String
@@ -3720,7 +3720,7 @@ SWITCH
 1628
 379
 1760
-413
+412
 traceContacts
 traceContacts
 1
@@ -3731,7 +3731,7 @@ SLIDER
 932
 477
 1039
-511
+510
 test_moveMult
 test_moveMult
 0
@@ -3746,7 +3746,7 @@ SLIDER
 925
 520
 1037
-554
+553
 test_spreadMult
 test_spreadMult
 0

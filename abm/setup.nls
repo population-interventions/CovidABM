@@ -263,21 +263,7 @@ to createSimulants
       
       set report_case_draw random-float 1
       set accept_isolation_draw random-float 1
-      
-      ifelse random-float 1 < _sympt_iso_prop
-      [
-        ifelse self_iso_at_peak
-        [
-          set symtomatic_present_day floor (ownIncubationPeriod + pre_present_iso + random-float 1)
-        ]
-        [
-          set symtomatic_present_day round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
-        ]
-        set symtomatic_present_day round (sympt_present_min + (rngs:rnd-beta presentInitSeedID sympt_present_a sympt_present_b) * (sympt_present_max - sympt_present_min))
-      ]
-      [
-        set symtomatic_present_day -1
-      ]
+      set sympt_simul_presents (random-float 1 < _sympt_iso_prop)
       
       set requireICU 0
       set requireICU_draw random-float 1

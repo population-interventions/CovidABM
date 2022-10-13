@@ -33,9 +33,9 @@ simuls-own [
   visit_chance_multiplier
   
   ownIllnessPeriod ;; unique illness period associated with the individual
-  ownIncubationPeriod ;; unique incubation period for the person
+  ownPrePeakPeriod ;; unique incubation period for the person
   ownIllnessPeriod_raw ;; without vaccination
-  ownIncubationPeriod_raw ;; without vaccination
+  ownPrePeakPeriod_raw ;; without vaccination
   personalVirulence ;; the infectivity of the person
   nonInfectivePeriod
   Asymptomatic_Trans
@@ -47,7 +47,7 @@ simuls-own [
   knownContactTime ;; Time at which a contact was known, to prevent double tracing on the traced step
   asymptomaticFlag ;; indicator identifying whether this simulant is asymptomatic
   hospFlag ;; indicator identifying whether this simulant is to be hospitalised (increases isolation)
-  symtomatic_present_day ;; When the simulant self-presents (if at all)
+  sympt_simul_presents ;; When the simulant self-presents (if at all)
   symtomatic_present_day ;; Store for the above for all simulants
   report_case_draw ;; Draw for whether the case successfully reaches the reported counts. Note that the case still isolates regardless of whether it is reported, this is just for policy.
   accept_isolation_draw ;; Draw for accepting isolation. Use this to simulate ineffective tracking.
