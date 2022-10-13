@@ -92,13 +92,11 @@ def MakeCostsMidFunction(contents, singleList, variables):
 				contents.append('    set mid_{}_{}_{} {}\n'.format(start, end, var, var))
 			else:
 				contents.append('    set mid_{}_{}_{} {} - mid_{}_{}_{}\n'.format(start, end, var, var, 0, start, var))
-		contents.append('  ]\n'.format(end))
+		contents.append('  ]\n')
 
 
 def EditCostsOutput(modelDir, singleList, variables):
 	modelFile = open('{}/costs.nls'.format(modelDir), 'r+')
-	foundPart = False
-	
 	contents = []
 	while True:
 		line = modelFile.readline()
