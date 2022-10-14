@@ -57,7 +57,7 @@
         "0.67"
     ],
     "gather_location_count": [
-        "200.0"
+        "150.0"
     ],
     "complacency_bound": [
         "1.0"
@@ -381,7 +381,7 @@
         "\"_60\""
     ],
     "input_variant": [
-        "\"input/vic/variant.csv\""
+        "\"input/vic/vic/variant_revised.csv\""
     ],
     "input_draws": [
         "\"input/vic\""

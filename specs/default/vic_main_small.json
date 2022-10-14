@@ -384,7 +384,7 @@
         "\"_60\""
     ],
     "input_variant": [
-        "\"input/vic/variant.csv\""
+        "\"input/vic/vic/variant_revised.csv\""
     ],
     "input_draws": [
         "\"input/vic\""

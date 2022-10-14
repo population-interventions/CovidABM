@@ -17,7 +17,7 @@
 		"end_day" : 60,
 		"stages_cont" : true,
 		"param_policy" : "StageFixed",
-		"input_variant" : "input/vic/variant_r0_6_8_large.csv"
+		"input_variant" : "input/vic/vic/variant_revised.csv"
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {

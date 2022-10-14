@@ -504,9 +504,11 @@ globals [
   prevInfect7_out
   prevInfect8_out
 
-
-
-
+  totInfecterTime_out
+  generationTime_out
+  reffInfecters_out
+  reffInfectees_out
+  reff_out
 
   sen_vacInfectReduct_out
   sen_vacWaneInfect_out
@@ -640,6 +642,11 @@ globals [
   mid_0_182_prevInfect6_out
   mid_0_182_prevInfect7_out
   mid_0_182_prevInfect8_out
+  mid_0_182_totInfecterTime_out
+  mid_0_182_generationTime_out
+  mid_0_182_reffInfecters_out
+  mid_0_182_reffInfectees_out
+  mid_0_182_reff_out
 
   mid_0_364_costDeathAverted_out
   mid_0_364_costDeathAverted_uk_out
@@ -701,6 +708,11 @@ globals [
   mid_0_364_prevInfect6_out
   mid_0_364_prevInfect7_out
   mid_0_364_prevInfect8_out
+  mid_0_364_totInfecterTime_out
+  mid_0_364_generationTime_out
+  mid_0_364_reffInfecters_out
+  mid_0_364_reffInfectees_out
+  mid_0_364_reff_out
 
   mid_182_364_costDeathAverted_out
   mid_182_364_costDeathAverted_uk_out
@@ -762,6 +774,11 @@ globals [
   mid_182_364_prevInfect6_out
   mid_182_364_prevInfect7_out
   mid_182_364_prevInfect8_out
+  mid_182_364_totInfecterTime_out
+  mid_182_364_generationTime_out
+  mid_182_364_reffInfecters_out
+  mid_182_364_reffInfectees_out
+  mid_182_364_reff_out
 
   mid_182_546_costDeathAverted_out
   mid_182_546_costDeathAverted_uk_out
@@ -823,6 +840,11 @@ globals [
   mid_182_546_prevInfect6_out
   mid_182_546_prevInfect7_out
   mid_182_546_prevInfect8_out
+  mid_182_546_totInfecterTime_out
+  mid_182_546_generationTime_out
+  mid_182_546_reffInfecters_out
+  mid_182_546_reffInfectees_out
+  mid_182_546_reff_out
 
   mid_364_546_costDeathAverted_out
   mid_364_546_costDeathAverted_uk_out
@@ -884,6 +906,11 @@ globals [
   mid_364_546_prevInfect6_out
   mid_364_546_prevInfect7_out
   mid_364_546_prevInfect8_out
+  mid_364_546_totInfecterTime_out
+  mid_364_546_generationTime_out
+  mid_364_546_reffInfecters_out
+  mid_364_546_reffInfectees_out
+  mid_364_546_reff_out
 
   mid_0_60_costDeathAverted_out
   mid_0_60_costDeathAverted_uk_out
@@ -945,6 +972,11 @@ globals [
   mid_0_60_prevInfect6_out
   mid_0_60_prevInfect7_out
   mid_0_60_prevInfect8_out
+  mid_0_60_totInfecterTime_out
+  mid_0_60_generationTime_out
+  mid_0_60_reffInfecters_out
+  mid_0_60_reffInfectees_out
+  mid_0_60_reff_out
 
   mid_60_182_costDeathAverted_out
   mid_60_182_costDeathAverted_uk_out
@@ -1006,6 +1038,11 @@ globals [
   mid_60_182_prevInfect6_out
   mid_60_182_prevInfect7_out
   mid_60_182_prevInfect8_out
+  mid_60_182_totInfecterTime_out
+  mid_60_182_generationTime_out
+  mid_60_182_reffInfecters_out
+  mid_60_182_reffInfectees_out
+  mid_60_182_reff_out
 
   mid_0_91_costDeathAverted_out
   mid_0_91_costDeathAverted_uk_out
@@ -1067,6 +1104,11 @@ globals [
   mid_0_91_prevInfect6_out
   mid_0_91_prevInfect7_out
   mid_0_91_prevInfect8_out
+  mid_0_91_totInfecterTime_out
+  mid_0_91_generationTime_out
+  mid_0_91_reffInfecters_out
+  mid_0_91_reffInfectees_out
+  mid_0_91_reff_out
 
   mid_91_182_costDeathAverted_out
   mid_91_182_costDeathAverted_uk_out
@@ -1128,5 +1170,10 @@ globals [
   mid_91_182_prevInfect6_out
   mid_91_182_prevInfect7_out
   mid_91_182_prevInfect8_out
+  mid_91_182_totInfecterTime_out
+  mid_91_182_generationTime_out
+  mid_91_182_reffInfecters_out
+  mid_91_182_reffInfectees_out
+  mid_91_182_reff_out
 
 ]

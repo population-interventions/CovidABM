@@ -6,16 +6,9 @@
 	"threads" : 1,
 	"indexParams" : {
 		"trans_override" : [
-			0.01,
 			0.05,
-			0.1,
-			0.15,
-			0.2,
-			0.3,
-			0.4,
-			0.5,
-			0.6,
-			0.7
+			0.25,
+			0.5
 		]
 	},
 	"paramOverrides" : {
@@ -24,7 +17,6 @@
 		"track_R" : true,
 		"param_policy" : "StageFixed",
 		"init_stage" : 0,
-		"gather_location_count" : 140,
 		"input_population_table" : "input/vic/pop_r0",
 		"input_draw_static" : "input/vic/draw_static_none.csv"
 	},
@@ -37,18 +29,11 @@
 			"metric" : "initial_infection_R",
 			"positiveSlope" : true,
 			"targets" : [
-				6,
-				7,
 				8,
 				9,
-				10,
-				11,
-				12,
-				13,
-				14,
-				15
+				10
 			],
-			"repetionLimit" : 4
+			"repetionLimit" : 6
 		}
 	}
 }

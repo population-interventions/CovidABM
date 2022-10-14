@@ -1105,7 +1105,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 350
-140.0
+120.0
 5
 1
 NIL
@@ -2887,7 +2887,7 @@ INPUTBOX
 2527
 527
 input_variant
-input/vic/variant_r0_6_8_large_new.csv
+input/vic/variant_revised.csv
 1
 0
 String
@@ -2988,7 +2988,7 @@ trans_override
 trans_override
 0
 0.999
-0.0
+0.44
 0.01
 1
 NIL
@@ -3750,6 +3750,54 @@ MONITOR
 NIL
 infectivityMult
 3
+1
+11
+
+SLIDER
+3344
+405
+3517
+438
+init_reff_calc_time
+init_reff_calc_time
+0
+100
+15.0
+1
+1
+NIL
+HORIZONTAL
+
+MONITOR
+804
+260
+929
+305
+NIL
+totInfecterTime_out
+17
+1
+11
+
+MONITOR
+809
+317
+934
+362
+NIL
+totInfect_out
+17
+1
+11
+
+MONITOR
+808
+379
+1028
+424
+NIL
+totInfecterTime_out / totInfect_out
+17
 1
 11
 
@@ -5741,6 +5789,11 @@ NetLogo 6.2.0
     <metric>prevInfect6_out</metric>
     <metric>prevInfect7_out</metric>
     <metric>prevInfect8_out</metric>
+    <metric>totInfecterTime_out</metric>
+    <metric>generationTime_out</metric>
+    <metric>reffInfecters_out</metric>
+    <metric>reffInfectees_out</metric>
+    <metric>reff_out</metric>
     <metric>sen_vacInfectReduct_out</metric>
     <metric>sen_vacWaneInfect_out</metric>
     <metric>sen_vacWaneHosp_out</metric>
@@ -5838,6 +5891,11 @@ NetLogo 6.2.0
     <metric>mid_0_182_prevInfect6_out</metric>
     <metric>mid_0_182_prevInfect7_out</metric>
     <metric>mid_0_182_prevInfect8_out</metric>
+    <metric>mid_0_182_totInfecterTime_out</metric>
+    <metric>mid_0_182_generationTime_out</metric>
+    <metric>mid_0_182_reffInfecters_out</metric>
+    <metric>mid_0_182_reffInfectees_out</metric>
+    <metric>mid_0_182_reff_out</metric>
     <metric>mid_0_364_costDeathAverted_out</metric>
     <metric>mid_0_364_costDeathAverted_uk_out</metric>
     <metric>mid_0_364_costAcute_out</metric>
@@ -5898,6 +5956,11 @@ NetLogo 6.2.0
     <metric>mid_0_364_prevInfect6_out</metric>
     <metric>mid_0_364_prevInfect7_out</metric>
     <metric>mid_0_364_prevInfect8_out</metric>
+    <metric>mid_0_364_totInfecterTime_out</metric>
+    <metric>mid_0_364_generationTime_out</metric>
+    <metric>mid_0_364_reffInfecters_out</metric>
+    <metric>mid_0_364_reffInfectees_out</metric>
+    <metric>mid_0_364_reff_out</metric>
     <metric>mid_182_364_costDeathAverted_out</metric>
     <metric>mid_182_364_costDeathAverted_uk_out</metric>
     <metric>mid_182_364_costAcute_out</metric>
@@ -5958,6 +6021,11 @@ NetLogo 6.2.0
     <metric>mid_182_364_prevInfect6_out</metric>
     <metric>mid_182_364_prevInfect7_out</metric>
     <metric>mid_182_364_prevInfect8_out</metric>
+    <metric>mid_182_364_totInfecterTime_out</metric>
+    <metric>mid_182_364_generationTime_out</metric>
+    <metric>mid_182_364_reffInfecters_out</metric>
+    <metric>mid_182_364_reffInfectees_out</metric>
+    <metric>mid_182_364_reff_out</metric>
     <metric>mid_182_546_costDeathAverted_out</metric>
     <metric>mid_182_546_costDeathAverted_uk_out</metric>
     <metric>mid_182_546_costAcute_out</metric>
@@ -6018,6 +6086,11 @@ NetLogo 6.2.0
     <metric>mid_182_546_prevInfect6_out</metric>
     <metric>mid_182_546_prevInfect7_out</metric>
     <metric>mid_182_546_prevInfect8_out</metric>
+    <metric>mid_182_546_totInfecterTime_out</metric>
+    <metric>mid_182_546_generationTime_out</metric>
+    <metric>mid_182_546_reffInfecters_out</metric>
+    <metric>mid_182_546_reffInfectees_out</metric>
+    <metric>mid_182_546_reff_out</metric>
     <metric>mid_364_546_costDeathAverted_out</metric>
     <metric>mid_364_546_costDeathAverted_uk_out</metric>
     <metric>mid_364_546_costAcute_out</metric>
@@ -6078,6 +6151,11 @@ NetLogo 6.2.0
     <metric>mid_364_546_prevInfect6_out</metric>
     <metric>mid_364_546_prevInfect7_out</metric>
     <metric>mid_364_546_prevInfect8_out</metric>
+    <metric>mid_364_546_totInfecterTime_out</metric>
+    <metric>mid_364_546_generationTime_out</metric>
+    <metric>mid_364_546_reffInfecters_out</metric>
+    <metric>mid_364_546_reffInfectees_out</metric>
+    <metric>mid_364_546_reff_out</metric>
     <metric>mid_0_60_costDeathAverted_out</metric>
     <metric>mid_0_60_costDeathAverted_uk_out</metric>
     <metric>mid_0_60_costAcute_out</metric>
@@ -6138,6 +6216,11 @@ NetLogo 6.2.0
     <metric>mid_0_60_prevInfect6_out</metric>
     <metric>mid_0_60_prevInfect7_out</metric>
     <metric>mid_0_60_prevInfect8_out</metric>
+    <metric>mid_0_60_totInfecterTime_out</metric>
+    <metric>mid_0_60_generationTime_out</metric>
+    <metric>mid_0_60_reffInfecters_out</metric>
+    <metric>mid_0_60_reffInfectees_out</metric>
+    <metric>mid_0_60_reff_out</metric>
     <metric>mid_60_182_costDeathAverted_out</metric>
     <metric>mid_60_182_costDeathAverted_uk_out</metric>
     <metric>mid_60_182_costAcute_out</metric>
@@ -6198,6 +6281,11 @@ NetLogo 6.2.0
     <metric>mid_60_182_prevInfect6_out</metric>
     <metric>mid_60_182_prevInfect7_out</metric>
     <metric>mid_60_182_prevInfect8_out</metric>
+    <metric>mid_60_182_totInfecterTime_out</metric>
+    <metric>mid_60_182_generationTime_out</metric>
+    <metric>mid_60_182_reffInfecters_out</metric>
+    <metric>mid_60_182_reffInfectees_out</metric>
+    <metric>mid_60_182_reff_out</metric>
     <metric>mid_0_91_costDeathAverted_out</metric>
     <metric>mid_0_91_costDeathAverted_uk_out</metric>
     <metric>mid_0_91_costAcute_out</metric>
@@ -6258,6 +6346,11 @@ NetLogo 6.2.0
     <metric>mid_0_91_prevInfect6_out</metric>
     <metric>mid_0_91_prevInfect7_out</metric>
     <metric>mid_0_91_prevInfect8_out</metric>
+    <metric>mid_0_91_totInfecterTime_out</metric>
+    <metric>mid_0_91_generationTime_out</metric>
+    <metric>mid_0_91_reffInfecters_out</metric>
+    <metric>mid_0_91_reffInfectees_out</metric>
+    <metric>mid_0_91_reff_out</metric>
     <metric>mid_91_182_costDeathAverted_out</metric>
     <metric>mid_91_182_costDeathAverted_uk_out</metric>
     <metric>mid_91_182_costAcute_out</metric>
@@ -6318,6 +6411,11 @@ NetLogo 6.2.0
     <metric>mid_91_182_prevInfect6_out</metric>
     <metric>mid_91_182_prevInfect7_out</metric>
     <metric>mid_91_182_prevInfect8_out</metric>
+    <metric>mid_91_182_totInfecterTime_out</metric>
+    <metric>mid_91_182_generationTime_out</metric>
+    <metric>mid_91_182_reffInfecters_out</metric>
+    <metric>mid_91_182_reffInfectees_out</metric>
+    <metric>mid_91_182_reff_out</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>

@@ -484,6 +484,11 @@ to CalculateMidCosts
     set mid_0_182_prevInfect6_out prevInfect6_out
     set mid_0_182_prevInfect7_out prevInfect7_out
     set mid_0_182_prevInfect8_out prevInfect8_out
+    set mid_0_182_totInfecterTime_out totInfecterTime_out
+    ifelse mid_0_182_totInfect_out > 0 [set mid_0_182_generationTime_out mid_0_182_totInfecterTime_out / mid_0_182_totInfect_out ] [ set mid_0_182_generationTime_out 0 ]
+    set mid_0_182_reffInfecters_out reffInfecters_out
+    set mid_0_182_reffInfectees_out reffInfectees_out
+    ifelse mid_0_182_reffInfecters_out > 0 [set mid_0_182_reff_out mid_0_182_reffInfectees_out / mid_0_182_reffInfecters_out ] [ set mid_0_182_reff_out 0 ]
   ]
   if days = 364 [
     set mid_0_364_costDeathAverted_out costDeathAverted_out
@@ -546,6 +551,11 @@ to CalculateMidCosts
     set mid_0_364_prevInfect6_out prevInfect6_out
     set mid_0_364_prevInfect7_out prevInfect7_out
     set mid_0_364_prevInfect8_out prevInfect8_out
+    set mid_0_364_totInfecterTime_out totInfecterTime_out
+    ifelse mid_0_364_totInfect_out > 0 [set mid_0_364_generationTime_out mid_0_364_totInfecterTime_out / mid_0_364_totInfect_out ] [ set mid_0_364_generationTime_out 0 ]
+    set mid_0_364_reffInfecters_out reffInfecters_out
+    set mid_0_364_reffInfectees_out reffInfectees_out
+    ifelse mid_0_364_reffInfecters_out > 0 [set mid_0_364_reff_out mid_0_364_reffInfectees_out / mid_0_364_reffInfecters_out ] [ set mid_0_364_reff_out 0 ]
   ]
   if days = 364 [
     set mid_182_364_costDeathAverted_out costDeathAverted_out - mid_0_182_costDeathAverted_out
@@ -608,6 +618,11 @@ to CalculateMidCosts
     set mid_182_364_prevInfect6_out prevInfect6_out - mid_0_182_prevInfect6_out
     set mid_182_364_prevInfect7_out prevInfect7_out - mid_0_182_prevInfect7_out
     set mid_182_364_prevInfect8_out prevInfect8_out - mid_0_182_prevInfect8_out
+    set mid_182_364_totInfecterTime_out totInfecterTime_out - mid_0_182_totInfecterTime_out
+    ifelse mid_182_364_totInfect_out > 0 [set mid_182_364_generationTime_out mid_182_364_totInfecterTime_out / mid_182_364_totInfect_out ] [ set mid_182_364_generationTime_out 0 ]
+    set mid_182_364_reffInfecters_out reffInfecters_out - mid_0_182_reffInfecters_out
+    set mid_182_364_reffInfectees_out reffInfectees_out - mid_0_182_reffInfectees_out
+    ifelse mid_182_364_reffInfecters_out > 0 [set mid_182_364_reff_out mid_182_364_reffInfectees_out / mid_182_364_reffInfecters_out ] [ set mid_182_364_reff_out 0 ]
   ]
   if days = 546 [
     set mid_182_546_costDeathAverted_out costDeathAverted_out - mid_0_182_costDeathAverted_out
@@ -670,6 +685,11 @@ to CalculateMidCosts
     set mid_182_546_prevInfect6_out prevInfect6_out - mid_0_182_prevInfect6_out
     set mid_182_546_prevInfect7_out prevInfect7_out - mid_0_182_prevInfect7_out
     set mid_182_546_prevInfect8_out prevInfect8_out - mid_0_182_prevInfect8_out
+    set mid_182_546_totInfecterTime_out totInfecterTime_out - mid_0_182_totInfecterTime_out
+    ifelse mid_182_546_totInfect_out > 0 [set mid_182_546_generationTime_out mid_182_546_totInfecterTime_out / mid_182_546_totInfect_out ] [ set mid_182_546_generationTime_out 0 ]
+    set mid_182_546_reffInfecters_out reffInfecters_out - mid_0_182_reffInfecters_out
+    set mid_182_546_reffInfectees_out reffInfectees_out - mid_0_182_reffInfectees_out
+    ifelse mid_182_546_reffInfecters_out > 0 [set mid_182_546_reff_out mid_182_546_reffInfectees_out / mid_182_546_reffInfecters_out ] [ set mid_182_546_reff_out 0 ]
   ]
   if days = 546 [
     set mid_364_546_costDeathAverted_out costDeathAverted_out - mid_0_364_costDeathAverted_out
@@ -732,6 +752,11 @@ to CalculateMidCosts
     set mid_364_546_prevInfect6_out prevInfect6_out - mid_0_364_prevInfect6_out
     set mid_364_546_prevInfect7_out prevInfect7_out - mid_0_364_prevInfect7_out
     set mid_364_546_prevInfect8_out prevInfect8_out - mid_0_364_prevInfect8_out
+    set mid_364_546_totInfecterTime_out totInfecterTime_out - mid_0_364_totInfecterTime_out
+    ifelse mid_364_546_totInfect_out > 0 [set mid_364_546_generationTime_out mid_364_546_totInfecterTime_out / mid_364_546_totInfect_out ] [ set mid_364_546_generationTime_out 0 ]
+    set mid_364_546_reffInfecters_out reffInfecters_out - mid_0_364_reffInfecters_out
+    set mid_364_546_reffInfectees_out reffInfectees_out - mid_0_364_reffInfectees_out
+    ifelse mid_364_546_reffInfecters_out > 0 [set mid_364_546_reff_out mid_364_546_reffInfectees_out / mid_364_546_reffInfecters_out ] [ set mid_364_546_reff_out 0 ]
   ]
   if days = 60 [
     set mid_0_60_costDeathAverted_out costDeathAverted_out
@@ -794,6 +819,11 @@ to CalculateMidCosts
     set mid_0_60_prevInfect6_out prevInfect6_out
     set mid_0_60_prevInfect7_out prevInfect7_out
     set mid_0_60_prevInfect8_out prevInfect8_out
+    set mid_0_60_totInfecterTime_out totInfecterTime_out
+    ifelse mid_0_60_totInfect_out > 0 [set mid_0_60_generationTime_out mid_0_60_totInfecterTime_out / mid_0_60_totInfect_out ] [ set mid_0_60_generationTime_out 0 ]
+    set mid_0_60_reffInfecters_out reffInfecters_out
+    set mid_0_60_reffInfectees_out reffInfectees_out
+    ifelse mid_0_60_reffInfecters_out > 0 [set mid_0_60_reff_out mid_0_60_reffInfectees_out / mid_0_60_reffInfecters_out ] [ set mid_0_60_reff_out 0 ]
   ]
   if days = 182 [
     set mid_60_182_costDeathAverted_out costDeathAverted_out - mid_0_60_costDeathAverted_out
@@ -856,6 +886,11 @@ to CalculateMidCosts
     set mid_60_182_prevInfect6_out prevInfect6_out - mid_0_60_prevInfect6_out
     set mid_60_182_prevInfect7_out prevInfect7_out - mid_0_60_prevInfect7_out
     set mid_60_182_prevInfect8_out prevInfect8_out - mid_0_60_prevInfect8_out
+    set mid_60_182_totInfecterTime_out totInfecterTime_out - mid_0_60_totInfecterTime_out
+    ifelse mid_60_182_totInfect_out > 0 [set mid_60_182_generationTime_out mid_60_182_totInfecterTime_out / mid_60_182_totInfect_out ] [ set mid_60_182_generationTime_out 0 ]
+    set mid_60_182_reffInfecters_out reffInfecters_out - mid_0_60_reffInfecters_out
+    set mid_60_182_reffInfectees_out reffInfectees_out - mid_0_60_reffInfectees_out
+    ifelse mid_60_182_reffInfecters_out > 0 [set mid_60_182_reff_out mid_60_182_reffInfectees_out / mid_60_182_reffInfecters_out ] [ set mid_60_182_reff_out 0 ]
   ]
   if days = 91 [
     set mid_0_91_costDeathAverted_out costDeathAverted_out
@@ -918,6 +953,11 @@ to CalculateMidCosts
     set mid_0_91_prevInfect6_out prevInfect6_out
     set mid_0_91_prevInfect7_out prevInfect7_out
     set mid_0_91_prevInfect8_out prevInfect8_out
+    set mid_0_91_totInfecterTime_out totInfecterTime_out
+    ifelse mid_0_91_totInfect_out > 0 [set mid_0_91_generationTime_out mid_0_91_totInfecterTime_out / mid_0_91_totInfect_out ] [ set mid_0_91_generationTime_out 0 ]
+    set mid_0_91_reffInfecters_out reffInfecters_out
+    set mid_0_91_reffInfectees_out reffInfectees_out
+    ifelse mid_0_91_reffInfecters_out > 0 [set mid_0_91_reff_out mid_0_91_reffInfectees_out / mid_0_91_reffInfecters_out ] [ set mid_0_91_reff_out 0 ]
   ]
   if days = 182 [
     set mid_91_182_costDeathAverted_out costDeathAverted_out - mid_0_91_costDeathAverted_out
@@ -980,5 +1020,10 @@ to CalculateMidCosts
     set mid_91_182_prevInfect6_out prevInfect6_out - mid_0_91_prevInfect6_out
     set mid_91_182_prevInfect7_out prevInfect7_out - mid_0_91_prevInfect7_out
     set mid_91_182_prevInfect8_out prevInfect8_out - mid_0_91_prevInfect8_out
+    set mid_91_182_totInfecterTime_out totInfecterTime_out - mid_0_91_totInfecterTime_out
+    ifelse mid_91_182_totInfect_out > 0 [set mid_91_182_generationTime_out mid_91_182_totInfecterTime_out / mid_91_182_totInfect_out ] [ set mid_91_182_generationTime_out 0 ]
+    set mid_91_182_reffInfecters_out reffInfecters_out - mid_0_91_reffInfecters_out
+    set mid_91_182_reffInfectees_out reffInfectees_out - mid_0_91_reffInfectees_out
+    ifelse mid_91_182_reffInfecters_out > 0 [set mid_91_182_reff_out mid_91_182_reffInfectees_out / mid_91_182_reffInfecters_out ] [ set mid_91_182_reff_out 0 ]
   ]
 end

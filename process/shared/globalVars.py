@@ -72,6 +72,13 @@ timefullMetrics = {
 	}
 }
 
+# Outputs that are one culmulator divided by another.
+# The cumulators should appear before the avearge in the list.
+singleAverages = {
+	'generationTime' : ['totInfecterTime', 'totInfect'],
+	'reff' : ['reffInfectees', 'reffInfecters'],
+}
+
 singleList = [
 	[0, 182],
 	[0, 364],
@@ -145,6 +152,11 @@ singleMetricList = [
 	'prevInfect6',
 	'prevInfect7',
 	'prevInfect8',
+	'totInfecterTime',
+	'generationTime',
+	'reffInfecters',
+	'reffInfectees',
+	'reff',
 ]
 
 senMetricList = [

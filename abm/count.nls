@@ -411,4 +411,19 @@ to CalculateEndCounts
   set prevInfect2_out prevInfect2_out / totInfect_out
   set prevInfect1_out prevInfect1_out / totInfect_out
   set prevInfect0_out prevInfect0_out / totInfect_out
+  
+  ifelse totInfect_out > 0
+  [
+    set generationTime_out totInfecterTime_out / totInfect_out
+  ]
+  [
+    set generationTime_out 0
+  ]
+  ifelse reffInfecters_out > 0
+  [
+    set reff_out reffInfectees_out / reffInfecters_out
+  ]
+  [
+    set reff_out 0
+  ]
 end

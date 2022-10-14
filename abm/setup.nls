@@ -546,6 +546,12 @@ to setGlobals
   set infectedTrackSum           0
   set infectedTrackAverage       0
   
+  set totInfecterTime_out 0
+  set generationTime_out  0
+  set reffInfecters_out   0
+  set reffInfectees_out   0
+  set reff_out            0
+  
   set new_case_real 0
   set new_case_real_counter 0
   
