@@ -384,7 +384,7 @@
         "\"_60\""
     ],
     "input_variant": [
-        "\"input/vic/vic/variant_revised.csv\""
+        "\"input/vic/variant_revised.csv\""
     ],
     "input_draws": [
         "\"input/vic\""
@@ -490,9 +490,6 @@
     ],
     "input_vac_extra": [
         "\"input/vic/vaccine_extra_params.csv\""
-    ],
-    "mid_day": [
-        "364.0"
     ],
     "maskWearMod": [
         "0.0"

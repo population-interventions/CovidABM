@@ -2,21 +2,22 @@
 	"netlogoFile" : "covidModel",
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_main",
-	"handlerName" : "stage_auto_handler",
+	"handlerName" : "stage_auto_low_r0_handler",
 	"postInputDir" : "vic",
 	"threads" : 2,
 	"indexParams" : {
 		"init_stage" : [
-			1.5,
-			2,
-			2.5
+			0,
+			0.001,
+			1
 		]
 	},
 	"paramOverrides" : {
 		"vaccine_enabled" : true,
 		"end_day" : 60,
 		"stages_cont" : true,
-		"param_policy" : "StageFixed"
+		"param_policy" : "StageFixed",
+		"input_variant" : "input/vic/variant_revised.csv"
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {
@@ -35,7 +36,7 @@
 				1200000,
 				1500000
 			],
-			"repetionLimit" : 3
+			"repetionLimit" : 6
 		},
 		"processMain" : {
 			"params" : {

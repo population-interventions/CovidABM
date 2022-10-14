@@ -17,7 +17,7 @@
 		"end_day" : 60,
 		"stages_cont" : true,
 		"param_policy" : "StageFixed",
-		"input_variant" : "input/vic/vic/variant_revised.csv"
+		"input_variant" : "input/vic/variant_revised.csv"
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {
@@ -36,7 +36,7 @@
 				1200000,
 				1500000
 			],
-			"repetionLimit" : 4
+			"repetionLimit" : 6
 		},
 		"processMain" : {
 			"params" : {

@@ -381,7 +381,7 @@
         "\"_60\""
     ],
     "input_variant": [
-        "\"input/vic/vic/variant_revised.csv\""
+        "\"input/vic/variant_revised.csv\""
     ],
     "input_draws": [
         "\"input/vic\""
@@ -488,9 +488,6 @@
     "input_vac_extra": [
         "\"input/vic/vaccine_extra_params.csv\""
     ],
-    "mid_day": [
-        "364.0"
-    ],
     "maskwearmod": [
         "0.0"
     ],
@@ -514,5 +511,17 @@
     ],
     "filepop": [
         "2500.0"
+    ],
+    "tracecontacts": [
+        "false"
+    ],
+    "test_movemult": [
+        "1.0"
+    ],
+    "test_spreadmult": [
+        "1.0"
+    ],
+    "init_reff_calc_time": [
+        "15.0"
     ]
 }
