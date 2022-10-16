@@ -36,11 +36,11 @@ __includes[
 GRAPHICS-WINDOW
 408
 63
-799
-455
+826
+482
 -1
 -1
-3.8
+4.03
 1
 10
 1
@@ -51,9 +51,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-100
+80
 0
-100
+80
 1
 1
 1
@@ -1105,7 +1105,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 350
-120.0
+90.0
 5
 1
 NIL
@@ -2694,7 +2694,7 @@ init_metric_threshold
 init_metric_threshold
 -1000
 30000
-17000.0
+10000.0
 1000
 1
 NIL
@@ -2912,7 +2912,7 @@ draw_index
 draw_index
 0
 2000
-542.0
+568.0
 1
 1
 NIL
@@ -3769,10 +3769,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-804
-260
-929
-305
+857
+263
+982
+308
 NIL
 totInfecterTime_out
 17
@@ -3780,10 +3780,10 @@ totInfecterTime_out
 11
 
 MONITOR
-809
-317
-934
-362
+862
+320
+987
+365
 NIL
 totInfect_out
 17
@@ -3791,10 +3791,10 @@ totInfect_out
 11
 
 MONITOR
-808
-379
-1028
-424
+860
+383
+1033
+428
 NIL
 totInfecterTime_out / totInfect_out
 17

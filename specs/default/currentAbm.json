@@ -57,7 +57,7 @@
         "0.67"
     ],
     "gather_location_count": [
-        "120.0"
+        "90.0"
     ],
     "complacency_bound": [
         "0.89"
@@ -345,7 +345,7 @@
         "false"
     ],
     "init_metric_threshold": [
-        "17000.0"
+        "10000.0"
     ],
     "init_stage": [
         "0.89"
