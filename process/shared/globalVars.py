@@ -204,5 +204,5 @@ def FullSingleMetricList():
 	retList = singleMetricList + senMetricList
 	for singleRange in singleList:
 		for var in singleMetricList:
-			retList.append('mid_{}_{}_{}</metric>\n'.format(singleRange[0], singleRange[1], var))
+			retList.append('mid_{}_{}_{}'.format(singleRange[0], singleRange[1], var))
 	return retList
