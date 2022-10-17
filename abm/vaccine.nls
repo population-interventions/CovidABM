@@ -162,10 +162,10 @@ to vaccine_setupTopupTarget
   foreach table:keys popDivisionTable [ index -> 
     let cohortData table:get popDivisionTable index
     let cohortSimuls simuls with [cohortIndex = index]
-    print (word "Cohort index " index)
-    print count cohortSimuls with [currentVaccine = (word (table:get cohortData "doseName_2") cohortVacSuffix)]
-    print count cohortSimuls with [currentVaccine = (word (table:get cohortData "doseName_3") cohortVacSuffix)]
-    print count cohortSimuls with [currentVaccine = 0]
+    ;print (word "Cohort index " index)
+    ;print count cohortSimuls with [currentVaccine = (word (table:get cohortData "doseName_2") cohortVacSuffix)]
+    ;print count cohortSimuls with [currentVaccine = (word (table:get cohortData "doseName_3") cohortVacSuffix)]
+    ;print count cohortSimuls with [currentVaccine = 0]
     
   ]
 end
