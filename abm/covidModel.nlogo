@@ -2894,7 +2894,7 @@ draw_index
 draw_index
 0
 2000
-568.0
+442.0
 1
 1
 NIL

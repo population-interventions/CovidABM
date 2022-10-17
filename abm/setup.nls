@@ -228,6 +228,9 @@ to createSimulants
       set traceAttempts 0
       set caseReportTime 0
       
+      set topupVaccineDay 0
+      set topupVaccineType 0
+      
       set infectedContactList table:make
       set hasKnownContact false
       

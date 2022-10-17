@@ -157,16 +157,35 @@ to setup_vaccineData
   setup_vaccineSchedule
 end
 
-to vaccine_setupTopupTarget
+to setupTopupTarget [targetSimuls vacType vacWanted]
+  if vacWanted > 0 [
+    print (word vacType ", " (count targetSimuls) ", " vacWanted)
+    
+  ]
+end
 
+to vaccine_setupTopupTarget
+  
   foreach table:keys popDivisionTable [ index -> 
     let cohortData table:get popDivisionTable index
     let cohortSimuls simuls with [cohortIndex = index]
-    ;print (word "Cohort index " index)
-    ;print count cohortSimuls with [currentVaccine = (word (table:get cohortData "doseName_2") cohortVacSuffix)]
-    ;print count cohortSimuls with [currentVaccine = (word (table:get cohortData "doseName_3") cohortVacSuffix)]
-    ;print count cohortSimuls with [currentVaccine = 0]
     
+    let has1 cohortSimuls with [currentVaccine = 0]
+    let has2 cohortSimuls with [currentVaccine = (word (table:get cohortData "doseName_2") cohortVacSuffix)]
+    let has3 cohortSimuls with [currentVaccine = (word (table:get cohortData "doseName_3") cohortVacSuffix)]
+    
+    let want2 (table:get cohortData "target_2")
+    let want3 (table:get cohortData "target_3")
+    let want4 (table:get cohortData "target_4")
+    
+    let need2 floor ((want2 * count cohortSimuls) - (count has2 + count has3) + random-float 1)
+    let need3 floor ((want3 * count cohortSimuls) - (count has3) + random-float 1)
+    let need4 floor ((want4 * count cohortSimuls) + random-float 1)
+    ;print (word (count cohortSimuls) ", has: " (count has1) ", " (count has2) ", " (count has3) ", wand: " (count cohortSimuls * want2) ", " (count cohortSimuls * want3) ", " (count cohortSimuls * want4))
+    
+    setupTopupTarget has1 "cur_2" need2
+    setupTopupTarget has2 "cur_3" need3
+    setupTopupTarget has3 "cur_3" need4
   ]
 end
 

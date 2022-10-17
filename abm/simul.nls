@@ -82,6 +82,9 @@ simuls-own [
   vaccBranchFrom2
   vaccReceptive
   
+  topupVaccineDay
+  topupVaccineType
+  
   incursionVaccine
   incursionVaccineDay
   vaccinePriority ;; Number that determines whether simulant will recieve a vaccination. Compared to uptake.
