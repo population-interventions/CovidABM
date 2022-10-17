@@ -57,6 +57,9 @@ to loadPopDivisionTable
     set index index + 1    table:put cohortData "doseCount_3" item index x
     set index index + 1    table:put cohortData "doseDays_3" item index x
     set index index + 1    table:put cohortData "doseName_3" item index x
+    set index index + 1    table:put cohortData "target_2" item index x
+    set index index + 1    table:put cohortData "target_3" item index x
+    set index index + 1    table:put cohortData "target_4" item index x
     
     table:put cohortData "succeptOr" ((table:get cohortData "succeptOr") * random-normal 1 0.15)
     table:put popDivisionTable i cohortData
@@ -388,6 +391,7 @@ end
 to setupInitialVaccination
   if _vaccine_enabled [
     setupInitialVaccination_micromangedMethod
+	vaccine_setupTopupTarget
   ]
 end
 

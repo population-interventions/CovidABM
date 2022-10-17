@@ -36,8 +36,8 @@ __includes[
 GRAPHICS-WINDOW
 408
 63
-846
-502
+758
+414
 -1
 -1
 4.5
@@ -1961,7 +1961,7 @@ INPUTBOX
 2728
 713
 input_population_table
-input/vic/pop_vac60
+input/vic/pop
 1
 0
 String
