@@ -36,11 +36,11 @@ __includes[
 GRAPHICS-WINDOW
 408
 63
-826
-482
+846
+502
 -1
 -1
-4.03
+4.5
 1
 10
 1
@@ -51,9 +51,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-80
+75
 0
-80
+75
 1
 1
 1
@@ -538,24 +538,6 @@ false
 "" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [ ownIllnessPeriod ] of simuls "
-
-PLOT
-2442
-42
-2682
-167
-Dist_Incubation_Pd
-NIL
-NIL
-0.0
-15.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 1 -16777216 true "" "histogram [ ownIncubationPeriod ] of simuls"
 
 SLIDER
 1627
@@ -1105,7 +1087,7 @@ Gather_Location_Count
 Gather_Location_Count
 0
 350
-90.0
+80.0
 5
 1
 NIL

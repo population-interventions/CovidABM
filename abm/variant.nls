@@ -24,6 +24,9 @@ to simul_updateVariantParams
   set personalVirulence rngs:rnd-beta moveInitSeedID (table:get varData "trans_a" / hetro_mult) (table:get varData "trans_b" / hetro_mult)
   ;print (word "rawBat " ownIllnessPeriod_raw ", rawIll " ownIllnessPeriod_raw ", rawV " personalVirulence)
   
+  ;show (word "timenow " 0 ", symptTime " symptTime ", symptToPeak " symptToPeak ", peakToEnd " peakToEnd ", nonInfectToPeak " nonInfectToPeak)
+  ;show (word "timenow " 0 ", nonInfect " nonInfectivePeriod ", prePeak " ownPrePeakPeriod_raw ", ownIllnessPeriod " ownIllnessPeriod_raw)
+  
   ifelse sympt_simul_presents
   [
     set symtomatic_present_day symptTime
@@ -154,11 +157,12 @@ to simul_updatepersonalvirulence
       ]
     )
     ;print (word self ", timenow " timenow ", cur " currentVirulence ", per " personalVirulence)
-  ]
     ;if vaccinated = 1 [
     ;  show (word "cine " vaccinated ",time " timenow ",VIR " (currentVirulence / personalVirulence) ",unscale " currentVirulence)
     ;]
     ;set currentVirulence 0
-    ;show (word "timenow " timenow ", personalVirulence " personalVirulence ", ownPrePeakPeriod " ownPrePeakPeriod ", ownIllnessPeriod " ownIllnessPeriod)
-    ;show (word "timenow " timenow ", currentVirulenceProp " (currentVirulence / personalVirulence))
+    ;if personalVirulence > 0 [
+    ;  show (word "timenow " timenow ", currentVirulenceProp " (currentVirulence / personalVirulence))
+    ;]
+  ]
 end
