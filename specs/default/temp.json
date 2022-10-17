@@ -57,7 +57,7 @@
         "0.67"
     ],
     "gather_location_count": [
-        "90.0"
+        "80.0"
     ],
     "complacency_bound": [
         "0.89"
@@ -189,7 +189,7 @@
         "0.5"
     ],
     "input_population_table": [
-        "\"input/vic/pop_vac60\""
+        "\"input/vic/pop\""
     ],
     "compound_input": [
         "\"None\""
