@@ -390,7 +390,7 @@
         "1392.0"
     ],
     "input_vaccine_schedule": [
-        "\"input/vic/rollout_cur_then_target.csv\""
+        "\"input/vic/rollout_none.csv\""
     ],
     "param_force_vaccine": [
         "\"Disabled\""
@@ -526,5 +526,8 @@
     ],
     "vap_topup_days": [
         "91.0"
+    ],
+    "mask_int_start": [
+        "152.0"
     ]
 }

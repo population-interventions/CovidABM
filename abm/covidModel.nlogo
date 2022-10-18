@@ -36,11 +36,11 @@ __includes[
 GRAPHICS-WINDOW
 408
 63
-881
-537
+784
+440
 -1
 -1
-4.87
+4.84211
 1
 10
 1
@@ -361,10 +361,10 @@ infectionchange
 11
 
 INPUTBOX
-263
-200
-376
-264
+288
+201
+378
+261
 initial_cases
 200000.0
 1
@@ -2798,10 +2798,10 @@ input/vic/vaccine_params
 String
 
 INPUTBOX
-265
-265
-374
-325
+186
+202
+284
+262
 init_cases_region
 -1.0
 1
@@ -2902,9 +2902,9 @@ HORIZONTAL
 
 INPUTBOX
 14
-260
-257
-320
+268
+332
+328
 input_vaccine_schedule
 input/vic/rollout_target_later_30_high.csv
 1
@@ -3798,6 +3798,21 @@ vap_topup_days
 NIL
 HORIZONTAL
 
+SLIDER
+3569
+22
+3742
+55
+mask_int_start
+mask_int_start
+0
+300
+152.0
+1
+1
+NIL
+HORIZONTAL
+
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -4196,7 +4211,6 @@ x
 false
 0
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
-Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
 NetLogo 6.2.0
 @#$#@#$#@

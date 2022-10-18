@@ -4,7 +4,7 @@
 ;; this section for Tony
 
 to do_stages_tony
-  ifelse  stage = -1 or stage_test_index >= 0
+  ifelse stage = -1 or stage_test_index >= 0
   [
     do_stages_test
   ]
@@ -55,8 +55,10 @@ to do_stages_tony
     ]
     
     ;; Mask proportions
-    ifelse stage >= 3 and policy_mask_n95
+    let maskWearOr 1
+    ifelse stage >= 3 and policy_mask_n95 and days >= mask_int_start
     [
+      set maskWearOr 2
       set mask_wearing_n95_a0       0.2
       set mask_wearing_n95_a10      mask_n95_prop_draw
       set mask_wearing_n95_a20      mask_n95_prop_draw
@@ -67,6 +69,7 @@ to do_stages_tony
       set mask_wearing_surgical_a60 1
     ]
     [
+      set maskWearOr 1
       set mask_wearing_n95_a0       0.2
       set mask_wearing_n95_a10      0.2
       set mask_wearing_n95_a20      0.2
@@ -277,6 +280,10 @@ to do_stages_tony
     ;; Set lower mask wearing for younger age groups
     set mask_wearing_a10        mask_wearing_a20 * 2 / 3
     set mask_wearing_a0         mask_wearing_a10 * 2 / 3
+    
+    set mask_wearing_a0 ApplyOrToPr mask_wearing_a0 maskWearOr
+    set mask_wearing_a10 ApplyOrToPr mask_wearing_a10 maskWearOr
+    set mask_wearing_a20 ApplyOrToPr mask_wearing_a20 maskWearOr
     
     ;; Compound parameters that boost kids.
     if days >= 0 [

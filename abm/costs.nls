@@ -379,11 +379,22 @@ to CalculateEndCosts
   )
 
   ;; Fixed vaccination cost
-  (ifelse input_vaccine_schedule = "input/vic/rollout_current.csv" or input_vaccine_schedule = "input/vic/rollout_current_60.csv" or input_vaccine_schedule = "input/vic/rollout_multi_only.csv" or input_vaccine_schedule = "input/vic/rollout_multi_only_60.csv" or input_vaccine_schedule = "input/vic/rollout_target_only.csv" or input_vaccine_schedule = "input/vic/rollout_target_only_60.csv"
+  (ifelse 
+    input_vaccine_schedule = "input/vic/rollout_dec_only_30_high.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_dec_only_60_high.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_dec_only_30_low.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_dec_only_60_low.csv"
     [
-      set costVaccineFixed_out costUI_vacFixed * 9
+      set costVaccineFixed_out costUI_vacFixed * 3
     ]
-    input_vaccine_schedule = "input/vic/rollout_cur_then_multi.csv" or input_vaccine_schedule = "input/vic/rollout_cur_then_multi_60.csv" or input_vaccine_schedule = "input/vic/rollout_cur_then_target.csv" or input_vaccine_schedule = "input/vic/rollout_cur_then_target_60.csv"
+    input_vaccine_schedule = "input/vic/rollout_target_later_30_high.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_multi_later_30_high.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_target_later_60_high.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_multi_later_60_high.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_target_later_30_low.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_multi_later_30_low.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_target_later_60_low.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_multi_later_60_low.csv"
     [
       set costVaccineFixed_out costUI_vacFixed * 6
     ]
