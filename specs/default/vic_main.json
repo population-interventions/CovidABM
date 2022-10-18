@@ -523,5 +523,8 @@
     ],
     "init_reff_calc_time": [
         "15.0"
+    ],
+    "vap_topup_days": [
+        "91.0"
     ]
 }

@@ -36,11 +36,11 @@ __includes[
 GRAPHICS-WINDOW
 408
 63
-757
-413
+856
+512
 -1
 -1
-4.49
+4.61
 1
 10
 1
@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-9.78
+9.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.03788
+0.034
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.5046
+0.53
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.6066
+0.63
 0.01
 1
 NIL
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.5582
+0.51
 0.01
 1
 NIL
@@ -677,7 +677,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.145656
+0.1428
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.4184
+8.12
 1
 1
 NIL
@@ -3698,7 +3698,7 @@ SLIDER
 3742
 647
 3896
-681
+680
 test_moveMult
 test_moveMult
 0
@@ -3713,7 +3713,7 @@ SLIDER
 3734
 689
 3909
-723
+722
 test_spreadMult
 test_spreadMult
 0
@@ -3751,10 +3751,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-857
-263
-982
-308
+893
+259
+1018
+304
 NIL
 totInfecterTime_out
 17
@@ -3762,10 +3762,10 @@ totInfecterTime_out
 11
 
 MONITOR
-862
-320
-987
-365
+898
+315
+1023
+360
 NIL
 totInfect_out
 17
@@ -3773,15 +3773,30 @@ totInfect_out
 11
 
 MONITOR
-860
-383
-1033
-428
+895
+379
+1034
+424
 NIL
 totInfecterTime_out / totInfect_out
 17
 1
 11
+
+SLIDER
+2750
+397
+2950
+431
+vap_topup_days
+vap_topup_days
+0
+100
+91.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

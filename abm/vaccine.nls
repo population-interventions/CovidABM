@@ -124,7 +124,6 @@ to setup_vaccineData
       set index index + 1    table:put vacTable "waneRateOut"  (item index rawData)
       set index index + 1    let baseParamName                 (item index rawData)
       
-      
       let name table:get vacTable "name"
       if (name = "target" or name = "multi" or name = "target_60" or name = "nulti_60" or name = "target_70" or name = "multi_70") [
         table:put vacTable "waneRate" (param_wane_mult * table:get vacTable "waneRate")
@@ -157,14 +156,34 @@ to setup_vaccineData
   setup_vaccineSchedule
 end
 
-to setupTopupTarget [targetSimuls vacType vacWanted]
+to setupTopupTarget [targetSimuls vacType vacWanted becomeReceptive]
+  ;print (word vacType ", " (count targetSimuls) ", " vacWanted)
   if vacWanted > 0 [
-    ;print (word vacType ", " (count targetSimuls) ", " vacWanted)
-    
+    if vacWanted > (count targetSimuls) [
+     set vacWanted (count targetSimuls) 
+    ]
+    ask n-of vacWanted targetSimuls [
+      set topupVaccineDay random vap_topup_days
+      set topupVaccineType vacType
+      if becomeReceptive [
+       set vaccReceptive true 
+      ]
+      
+      ; Add to vaccine time
+      ifelse table:has-key? vaccineTopupDayMap topupVaccineDay 
+      [
+        table:put vaccineTopupDayMap topupVaccineDay (lput self (table:get vaccineTopupDayMap topupVaccineDay))
+      ]
+      [
+        table:put vaccineTopupDayMap topupVaccineDay (list self)
+      ]
+      ;print topupVaccineDay
+    ]
   ]
 end
 
 to vaccine_setupTopupTarget
+  set vaccineTopupDayMap table:make
   
   foreach table:keys popDivisionTable [ index -> 
     let cohortData table:get popDivisionTable index
@@ -183,9 +202,9 @@ to vaccine_setupTopupTarget
     let need4 floor ((want4 * count cohortSimuls) + random-float 1)
     ;print (word (count cohortSimuls) ", has: " (count has1) ", " (count has2) ", " (count has3) ", wand: " (count cohortSimuls * want2) ", " (count cohortSimuls * want3) ", " (count cohortSimuls * want4))
     
-    setupTopupTarget has1 "cur_2" need2
-    setupTopupTarget has2 "cur_3" need3
-    setupTopupTarget has3 "cur_3" need4
+    setupTopupTarget has1 "cur_2" need2 false
+    setupTopupTarget has2 "cur_3" need3 true
+    setupTopupTarget has3 "cur_3" need4 true
   ]
 end
 
@@ -220,10 +239,10 @@ to-report vaccine_getWanedParameter [paramName variant vac day prevVac prevDay]
 end
 
 to simul_applyVaccine [vaccinateType]
-  if 1 - _param_vac_uptake_mult * cohortVacUptake > random-float 1 [
-    ;; Each vaccine sees some receptive people decide this is their last shot
-    set vaccReceptive false
-  ]
+  ;if 1 - _param_vac_uptake_mult * cohortVacUptake > random-float 1 [
+  ;  ;; Each vaccine sees some receptive people decide this is their last shot
+  ;  set vaccReceptive false
+  ;]
   
   set prevVaccineDay vaccineDay
   set prevVaccine currentVaccine
@@ -275,8 +294,19 @@ to vaccine_updateSchedule
   ]
 end
 
+to vaccine_updateTopup 
+  if table:has-key? vaccineTopupDayMap days [
+    foreach table:get vaccineTopupDayMap days [ x ->
+      ask x [
+        simul_applyVaccine topupVaccineType
+      ]
+    ]
+  ]
+end
+
 to vaccine_update
   if _vaccine_enabled and days >= 0 [
+    vaccine_updateTopup
     vaccine_updateSchedule
     
     foreach table:keys vaccineBranchAvailible [ branch ->

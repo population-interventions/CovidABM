@@ -338,6 +338,7 @@ globals [
   vaccineBranchAvailible
   vaccineBranchVaccType
   vaccineBranchQueue
+  vaccineTopupDayMap
 
   variantNames
   variantData
