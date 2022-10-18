@@ -2,7 +2,7 @@
 	"netlogoFile" : "covidModel",
 	"defaultParamFile" : "vic_main",
 	"copyExperimentMetrics" : "vic_main",
-	"handlerName" : "stage_auto",
+	"handlerName" : "stage_auto_handler",
 	"postInputDir" : "vic",
 	"threads" : 2,
 	"indexParams" : {

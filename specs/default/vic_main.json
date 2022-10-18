@@ -414,10 +414,10 @@
         "\"input/vic/vaccine/draw_\""
     ],
     "policy_mask_n95": [
-        "false"
+        "true"
     ],
     "incur_day": [
-        "320.0"
+        "91.0"
     ],
     "incur_replace_chance": [
         "0.02"
@@ -465,7 +465,7 @@
         "0.33"
     ],
     "init_infectivitymult": [
-        "0.4"
+        "1.0"
     ],
     "recover_prop": [
         "0.56"

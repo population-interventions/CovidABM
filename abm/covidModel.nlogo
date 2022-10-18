@@ -36,11 +36,11 @@ __includes[
 GRAPHICS-WINDOW
 408
 63
-758
-414
+757
+413
 -1
 -1
-4.5
+4.49
 1
 10
 1
@@ -152,17 +152,17 @@ Span
 Span
 0
 30
-11.78
+9.78
 1
 1
 NIL
 HORIZONTAL
 
 PLOT
-3238
-860
-3633
-1035
+3237
+879
+3632
+1054
 Susceptible, Infected and Recovered - 000's
 Days from March 10th
 Numbers of people
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.05550000000000001
+0.03788
 0.01
 1
 NIL
@@ -266,10 +266,10 @@ caseFatalityRate * 100
 11
 
 PLOT
-3529
-362
-3757
-492
+3575
+363
+3803
+493
 Case Fatality Rate %
 NIL
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.3115
+0.5046
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.4005
+0.6066
 0.01
 1
 NIL
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.733
+0.5582
 0.01
 1
 NIL
@@ -632,10 +632,10 @@ EWInfections / Population
 11
 
 MONITOR
-3514
-503
-3647
-548
+3560
+504
+3693
+549
 Student Infections %
 studentInfections / Population
 1
@@ -677,7 +677,7 @@ Visit_Frequency
 Visit_Frequency
 0
 1
-0.1428
+0.145656
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+8.4184
 1
 1
 NIL
@@ -1102,7 +1102,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.89
+1.0
 0.01
 1
 NIL
@@ -1224,10 +1224,10 @@ floor (policymetric7 / 7)
 11
 
 PLOT
-3492
-193
-3765
-313
+3570
+188
+3843
+308
 OverseasIncursions
 NIL
 NIL
@@ -2084,7 +2084,7 @@ prepeak_vir_boost
 prepeak_vir_boost
 0
 1
-0.1
+0.0
 0.05
 1
 NIL
@@ -2691,7 +2691,7 @@ init_stage
 init_stage
 0
 5
-0.89
+2.0
 0.01
 1
 NIL
@@ -2728,7 +2728,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-53497.90694
+84554.58245
 1
 1
 NIL
@@ -2894,7 +2894,7 @@ draw_index
 draw_index
 0
 2000
-442.0
+863.0
 1
 1
 NIL
@@ -2970,7 +2970,7 @@ trans_override
 trans_override
 0
 0.999
-0.44
+0.0
 0.01
 1
 NIL
@@ -3695,30 +3695,30 @@ traceContacts
 -1000
 
 SLIDER
-932
-477
-1039
-510
+3742
+647
+3896
+681
 test_moveMult
 test_moveMult
 0
 2
-0.8
+1.0
 0.1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-925
-520
-1037
-553
+3734
+689
+3909
+723
 test_spreadMult
 test_spreadMult
 0
 2
-0.2
+1.0
 0.1
 1
 NIL
