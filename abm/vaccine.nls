@@ -159,7 +159,7 @@ end
 
 to setupTopupTarget [targetSimuls vacType vacWanted]
   if vacWanted > 0 [
-    print (word vacType ", " (count targetSimuls) ", " vacWanted)
+    ;print (word vacType ", " (count targetSimuls) ", " vacWanted)
     
   ]
 end
