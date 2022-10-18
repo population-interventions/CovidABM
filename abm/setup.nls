@@ -332,9 +332,7 @@ to setupInitialVaccination_micromangedMethod
       ]
       ifelse in_vaccineDay >= 0
       [
-        if _param_vac_uptake_mult * cohortVacUptake > random-float 1 [
-          set vaccReceptive true ; Only the most vaccinated are receptive to recieving another vaccine
-        ]
+        set vaccReceptive true
         set vaccineDay -1 * in_vaccineDay
         set currentVaccine (word (item 6 row) cohortVacSuffix)
         if in_prevVaccineDay >= 0 [
@@ -344,10 +342,6 @@ to setupInitialVaccination_micromangedMethod
       ]
       [
         if in_prevVaccineDay >= 0 [
-          if _param_vac_uptake_mult * cohortVacUptakeDose2 > random-float 1 [ 
-            set vaccReceptive true ; A member of a cohort may continue on to further vaccination after only dose 2
-            set vaccBranch vaccBranchFrom2
-          ]
           set vaccineDay -1 * in_prevVaccineDay
           set currentVaccine (word (item 5 row) cohortVacSuffix)
         ] 

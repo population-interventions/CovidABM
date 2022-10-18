@@ -36,11 +36,11 @@ __includes[
 GRAPHICS-WINDOW
 408
 63
-856
-512
+881
+537
 -1
 -1
-4.61
+4.87
 1
 10
 1
@@ -2906,7 +2906,7 @@ INPUTBOX
 257
 320
 input_vaccine_schedule
-input/vic/rollout_target_only.csv
+input/vic/rollout_target_later_30_high.csv
 1
 0
 String
@@ -3641,11 +3641,11 @@ HORIZONTAL
 CHOOSER
 133
 556
-256
+272
 601
 compoundVaccine
 compoundVaccine
-"none" "noVac" "CG" "OT" "OT_25" "OT_50"
+"none"
 0
 
 CHOOSER
@@ -3787,7 +3787,7 @@ SLIDER
 2750
 397
 2950
-431
+430
 vap_topup_days
 vap_topup_days
 0

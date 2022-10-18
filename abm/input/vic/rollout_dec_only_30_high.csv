@@ -1,0 +1,3 @@
+day,duration,branch,vaccine,uptake
+182,91,vac30,target,0.5
+182,91,vac60,target,0.75

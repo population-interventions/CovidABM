@@ -42,10 +42,6 @@ end
 
 to-report params_getPopTable
   let paramValue input_population_table
-  if is-number? (position "_60" input_vaccine_schedule) [
-    set paramValue "input/vic/pop_vac60"
-  ]
-  
   let fileName (word paramValue data_suffix)
   if data_suffix_2 != "None" [
     set fileName (word fileName data_suffix_2)
@@ -194,32 +190,8 @@ to params_setDrawValues
   )
   
   ;; Vaccine combinations
-  (ifelse compoundVaccine = "noVac"
-    [
-      set input_vaccine_schedule "input/vic/rollout_none.csv"
-      set param_wane_mult 1
-    ]
-    compoundVaccine = "CG"
-    [
-      set input_vaccine_schedule "input/vic/rollout_current.csv"
-      set param_wane_mult 1
-    ]
-    compoundVaccine = "OT"
-    [
-      set input_vaccine_schedule "input/vic/rollout_target_only.csv"
-      set param_wane_mult 1
-    ]
-    compoundVaccine = "OT_50"
-    [
-      set input_vaccine_schedule "input/vic/rollout_target_only.csv"
-      set param_wane_mult 0.5
-    ]
-    compoundVaccine = "OT_25"
-    [
-      set input_vaccine_schedule "input/vic/rollout_target_only.csv"
-      set param_wane_mult 0.25
-    ]
-  )
+  ;(ifelse compoundVaccine = "noVac"
+  ;)
   
   param_updateRecoverImmune
   set infectivityMult init_infectivityMult

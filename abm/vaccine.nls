@@ -282,8 +282,16 @@ to vaccine_updateSchedule
     let vaccDays (item 1 data)
     let branch (item 2 data)
     let vaccineType (item 3 data)
+    let branchUptake (item 4 data)
     
     let wantVaccine simuls with [vaccBranch = branch and vaccReceptive = true]
+    if branchUptake < 1 [
+     let wantCount floor ((count wantVaccine) * branchUptake + random-float 1)
+      if wantCount > (count wantVaccine) [
+        set wantCount (count wantVaccine)
+      ]
+      set wantVaccine n-of wantCount wantVaccine
+    ]
     
     table:put vaccineBranchDoseRate branch (count wantVaccine) / vaccDays
     table:put vaccineBranchAvailible branch 0

@@ -7,16 +7,18 @@
 	"indexParams" : {
 		"input_vaccine_schedule" : [
 			"input/vic/rollout_none.csv",
-			"input/vic/rollout_current.csv",
-			"input/vic/rollout_cur_then_target.csv",
-			"input/vic/rollout_target_only.csv",
-			"input/vic/rollout_cur_then_multi.csv",
-			"input/vic/rollout_multi_only.csv",
-			"input/vic/rollout_current_60.csv",
-			"input/vic/rollout_cur_then_target_60.csv",
-			"input/vic/rollout_target_only_60.csv",
-			"input/vic/rollout_cur_then_multi_60.csv",
-			"input/vic/rollout_multi_only_60.csv"
+			"input/vic/rollout_dec_only_30_high.csv",
+			"input/vic/rollout_target_later_30_high.csv",
+			"input/vic/rollout_multi_later_30_high.csv",
+			"input/vic/rollout_dec_only_60_high.csv",
+			"input/vic/rollout_target_later_60_high.csv",
+			"input/vic/rollout_multi_later_60_high.csv",
+			"input/vic/rollout_dec_only_30_low.csv",
+			"input/vic/rollout_target_later_30_low.csv",
+			"input/vic/rollout_multi_later_30_low.csv",
+			"input/vic/rollout_dec_only_60_low.csv",
+			"input/vic/rollout_target_later_60_low.csv",
+			"input/vic/rollout_multi_later_60_low.csv",
 		],
 		"incur_name_part_1" : [
 			"omlike",
@@ -515,17 +517,20 @@
 				"input_vaccine_schedule" : {
 					"name" : "Vaccine schedule",
 					"values" : {
-						"input/vic/rollout_cur_then_target.csv"    : "CG then OT",
-						"input/vic/rollout_target_only.csv"        : "OT",
-						"input/vic/rollout_cur_then_multi.csv"     : "CG then MV",
-						"input/vic/rollout_multi_only.csv"         : "MV",
-						"input/vic/rollout_current.csv"            : "CG",
-						"input/vic/rollout_cur_then_target_60.csv" : "CG then OT 60+",
-						"input/vic/rollout_target_only_60.csv"     : "OT 60+",
-						"input/vic/rollout_cur_then_multi_60.csv"  : "CG then MV 60+",
-						"input/vic/rollout_multi_only_60.csv"      : "MV 60+",
-						"input/vic/rollout_current_60.csv"         : "CG 60+",
-						"input/vic/rollout_none.csv"               : "None"
+					
+						"input/vic/rollout_none.csv"                  : "None",
+						"input/vic/rollout_dec_only_30_high.csv"      : "Dec only 30+ high uptake",
+						"input/vic/rollout_target_later_30_high.csv"  : "OT later 30+ high uptake",
+						"input/vic/rollout_multi_later_30_high.csv"   : "MV later 30+ high uptake",
+						"input/vic/rollout_dec_only_60_high.csv"      : "Dec only 60+ high uptake",
+						"input/vic/rollout_target_later_60_high.csv"  : "OT later 60+ high uptake",
+						"input/vic/rollout_multi_later_60_high.csv"   : "MV later 60+ high uptake",
+						"input/vic/rollout_dec_only_30_low.csv"       : "Dec only 30+ low uptake",
+						"input/vic/rollout_target_later_30_low.csv"   : "OT later 30+ low uptake",
+						"input/vic/rollout_multi_later_30_low.csv"    : "MV later 30+ low uptake",
+						"input/vic/rollout_dec_only_60_low.csv"       : "Dec only 60+ low uptake",
+						"input/vic/rollout_target_later_60_low.csv"   : "OT later 60+ low uptake",
+						"input/vic/rollout_multi_later_60_low.csv"    : "MV later 60+ low uptake"
 					}
 				},
 				"incur_name_part_1" : {
