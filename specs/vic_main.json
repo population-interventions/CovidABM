@@ -84,22 +84,6 @@
 						"firstMeanOn" : ["Variant"],
 						"thenDescribeOn" : ["draw_index"],
 						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
-					},
-					"earlyIncur_meanOnDraw_thenDescribeOnScenario" : {
-						"filterOutIndex" : {
-							"Incursion day" : [273, 364]
-						},
-						"firstMeanOn" : ["draw_index"],
-						"thenDescribeOn" : ["Variant"],
-						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
-					},
-					"earlyIncur_meanOnScenario_thenDescribeOnDraw" : {
-						"filterOutIndex" : {
-							"Incursion day" : [273, 364]
-						},
-						"firstMeanOn" : ["Variant"],
-						"thenDescribeOn" : ["draw_index"],
-						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					}
 				},
 				"optimality" : {
@@ -137,24 +121,6 @@
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal",
 						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Variant"]
-					},
-					"earlyIncur_healthSystem_70k_ranking" : {
-						"rankingValue" : 70000,
-						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalHealth",
-						"filterOutIndex" : {
-							"Incursion day" : [273, 364]
-						},
-						"identifyIndex" : ["Variant"]
-					},
-					"earlyIncur_healthSystemAndGdp_70k_ranking" : {
-						"rankingValue" : 70000,
-						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalTotal",
-						"filterOutIndex" : {
-							"Incursion day" : [273, 364]
-						},
 						"identifyIndex" : ["Variant"]
 					},
 					"healthSystem_uk_70k_ranking" : {
