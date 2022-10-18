@@ -18,7 +18,7 @@
 			"input/vic/rollout_multi_later_30_low.csv",
 			"input/vic/rollout_dec_only_60_low.csv",
 			"input/vic/rollout_target_later_60_low.csv",
-			"input/vic/rollout_multi_later_60_low.csv",
+			"input/vic/rollout_multi_later_60_low.csv"
 		],
 		"input_incursion_table" : [
 			"input/vic/incur_omlike_high_escape_high_vir.csv",
