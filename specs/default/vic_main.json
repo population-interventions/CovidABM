@@ -345,7 +345,7 @@
         "false"
     ],
     "init_metric_threshold": [
-        "10000.0"
+        "20000.0"
     ],
     "init_stage": [
         "2.0"
@@ -414,7 +414,7 @@
         "\"input/vic/vaccine/draw_\""
     ],
     "policy_mask_n95": [
-        "true"
+        "false"
     ],
     "incur_day": [
         "91.0"
@@ -427,9 +427,6 @@
     ],
     "input_matchup_uncertainty": [
         "\"input/vic/vaccine_params_or_uncertainty.csv\""
-    ],
-    "high_incur_virulence": [
-        "true"
     ],
     "in_prevac_count": [
         "1000.0"
@@ -529,5 +526,8 @@
     ],
     "mask_int_start": [
         "152.0"
+    ],
+    "policy_more_mask": [
+        "false"
     ]
 }

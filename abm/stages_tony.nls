@@ -56,28 +56,21 @@ to do_stages_tony
     
     ;; Mask proportions
     let maskWearOr 1
-    ifelse stage >= 3 and policy_mask_n95 and days >= mask_int_start
-    [
-      set maskWearOr 2
-      set mask_wearing_n95_a0       0.2
+    set mask_wearing_n95_a0       0.2
+    set mask_wearing_n95_a10      0.2
+    set mask_wearing_n95_a20      0.2
+    set mask_wearing_n95_a60      0.2
+    set mask_wearing_surgical_a0  1
+    set mask_wearing_surgical_a10 1
+    set mask_wearing_surgical_a20 1
+    set mask_wearing_surgical_a60 1
+    if stage >= 3 and policy_mask_n95 and days >= mask_int_start [
       set mask_wearing_n95_a10      mask_n95_prop_draw
       set mask_wearing_n95_a20      mask_n95_prop_draw
       set mask_wearing_n95_a60      mask_n95_prop_draw
-      set mask_wearing_surgical_a0  1
-      set mask_wearing_surgical_a10 1
-      set mask_wearing_surgical_a20 1
-      set mask_wearing_surgical_a60 1
     ]
-    [
-      set maskWearOr 1
-      set mask_wearing_n95_a0       0.2
-      set mask_wearing_n95_a10      0.2
-      set mask_wearing_n95_a20      0.2
-      set mask_wearing_n95_a60      0.2
-      set mask_wearing_surgical_a0  1
-      set mask_wearing_surgical_a10 1
-      set mask_wearing_surgical_a20 1
-      set mask_wearing_surgical_a60 1
+    if stage >= 3 and policy_more_mask and days >= mask_int_start [
+      set maskWearOr 2
     ]
     
     if stage = 1 [

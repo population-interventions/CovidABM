@@ -117,7 +117,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
 
   ;; Acute haly outcome.
   let halyAcute 0
-  (ifelse variant = "base" or not high_incur_virulence
+  (ifelse  not isHighVirulence variant
     [ ;; Low virulence
       set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000350087671
     ]
@@ -134,7 +134,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
 
   ;; Long covid haly outcome.
   let halyLong 0
-  (ifelse variant = "base" or not high_incur_virulence
+  (ifelse  not isHighVirulence variant
     [ ;; High virulence
       (ifelse not hasVaccine
         [ ;; No vaccine
@@ -275,7 +275,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
     if age < 20 [
       set ageMult 0.2
     ]
-    (ifelse variant = "base" or not high_incur_virulence
+    (ifelse not isHighVirulence variant
       [ ;; High virulence
         ifelse hasVaccine
         [

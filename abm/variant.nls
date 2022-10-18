@@ -84,6 +84,7 @@ to setup_variantData
     set index index + 1    let hospLengthMult    (item index x)
     set index index + 1    let init_variant      (item index x)
     set index index + 1    let recoverVac        (item index x)
+    set index index + 1    let highVirulence     (item index x)
     set index index + 1    let correlateKey      (item index x)
     
     if trans_override > 0 [
@@ -123,6 +124,7 @@ to setup_variantData
 	
     table:put data "init_variant" init_variant
     table:put data "recoverVac" recoverVac
+    table:put data "highVirulence" highVirulence
     table:put data "hospLengthMult" hospLengthMult
     
     table:put variantData name data
@@ -130,6 +132,11 @@ to setup_variantData
   ]
   ;print (word "variantNames " variantNames)
   ;print (word "variantData " variantData)
+end
+
+to-report isHighVirulence [variant]
+  let data table:get variantData variant
+  report ((word table:get data "highVirulence") = 1)
 end
 
 to-report getVariantRecoverVaccine [variant]

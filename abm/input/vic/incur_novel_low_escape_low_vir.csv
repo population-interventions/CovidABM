@@ -1,0 +1,4 @@
+days,unVaccArrive,unVaccRisk,vaccArrive,vaccRisk,vaccineType,variant,varReplaceChance,present_a,present_b
+30,0,0,0,0,0,base,0,1,1
+182,0,0,0,0,0,omlike_escape,0.01,1,1
+0,0,0,0,0,0,novel,0.01,1,1

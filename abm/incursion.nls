@@ -9,7 +9,7 @@ to setup_incursionData
     ]
     input_incursion_table = "none"
     [
-      ;; Implement simple incursion parameters
+      ;; Implement simple incursion parameters for 2^n variable
       set incursionTable table:make
       let varName (word incur_name_part_1 incur_name_part_2 incur_name_part_3)
       table:put incursionTable 0 (list incur_day 0 0 0 0 0 base_name 0 1 1)

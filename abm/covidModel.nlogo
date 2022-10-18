@@ -34,13 +34,13 @@ __includes[
 ]
 @#$#@#$#@
 GRAPHICS-WINDOW
-408
-63
-784
-440
+404
+62
+878
+537
 -1
 -1
-4.84211
+4.882
 1
 10
 1
@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-9.0
+12.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.034
+0.05
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.53
+0.35
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.63
+0.45
 0.01
 1
 NIL
@@ -361,10 +361,10 @@ infectionchange
 11
 
 INPUTBOX
-288
-201
-378
-261
+287
+197
+377
+257
 initial_cases
 200000.0
 1
@@ -372,10 +372,10 @@ initial_cases
 Number
 
 INPUTBOX
-228
-375
-335
-437
+229
+390
+336
+452
 total_population
 6649066.0
 1
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.51
+0.7
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.12
+8.8
 1
 1
 NIL
@@ -959,14 +959,14 @@ Stage Policy Settings
 1
 
 CHOOSER
-8
-457
-203
-502
+13
+463
+208
+508
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-23
+3
 
 MONITOR
 1473
@@ -1656,10 +1656,10 @@ extraScaleFactor
 11
 
 SLIDER
-228
-335
-377
-368
+404
+543
+553
+576
 initial_primary_prop
 initial_primary_prop
 0
@@ -2127,10 +2127,10 @@ self_iso_at_peak
 -1000
 
 SWITCH
-1748
-557
-1867
-590
+3739
+592
+3858
+625
 print_phase
 print_phase
 1
@@ -2138,10 +2138,10 @@ print_phase
 -1000
 
 SWITCH
-1748
-517
-1866
-550
+3739
+552
+3857
+585
 print_vac
 print_vac
 1
@@ -2164,10 +2164,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-214
-150
-382
-195
+215
+148
+383
+193
 sensitivity
 sensitivity
 "None" "HouseResample+" "HouseResample-" "HouseResampleUp+" "HouseResampleUp-" "NoInfect_1" "NoInfect_2" "UniformContact_054" "UniformContact_033" "ReduceVacTrans_050" "TraceLow" "TraceHigh" "Asmpyt_66" "RAT_33" "RAT_15" "AllPF" "GatherVent_33" "GatherVent_80" "BoostMask_25" "StageMax_3b" "StageMax_3" "LetItRip" "LetItRipStage1" "LetItRipStage2" "ScaleBoost_20" "ScaleSet_70" "SetVacArea50" "SetVacArea65" "NoRecoverImmune" "DistMult_2" "PresentPropMult_050" "IsoTransmit_05" "IsoTransmit_1" "PPM_050_Stage3" "PPM_050_Stage3b" "TestVic" "OverrideAsympt"
@@ -2545,12 +2545,12 @@ reducedStageFour
 -1000
 
 INPUTBOX
-2630
-589
-2733
-649
+14
+327
+342
+387
 input_incursion_table
-none
+input/vic/incur_omlike_low_escape_high_vir.csv
 1
 0
 String
@@ -2676,7 +2676,7 @@ init_metric_threshold
 init_metric_threshold
 -1000
 30000
-10000.0
+20000.0
 1000
 1
 NIL
@@ -2798,10 +2798,10 @@ input/vic/vaccine_params
 String
 
 INPUTBOX
-186
-202
-284
-262
+184
+198
+282
+258
 init_cases_region
 -1.0
 1
@@ -2894,19 +2894,19 @@ draw_index
 draw_index
 0
 2000
-863.0
+706.0
 1
 1
 NIL
 HORIZONTAL
 
 INPUTBOX
-14
-268
-332
-328
+17
+263
+335
+323
 input_vaccine_schedule
-input/vic/rollout_target_later_30_high.csv
+input/vic/rollout_target_later_60_low.csv
 1
 0
 String
@@ -3040,21 +3040,21 @@ input/vic/vaccine/draw_
 String
 
 SWITCH
-12
-375
-182
-408
+17
+389
+187
+422
 policy_mask_n95
 policy_mask_n95
-0
+1
 1
 -1000
 
 SLIDER
-12
-415
-185
-448
+3367
+203
+3540
+236
 incur_day
 incur_day
 0
@@ -3105,17 +3105,6 @@ input/vic/vaccine_params_or_uncertainty.csv
 1
 0
 String
-
-SWITCH
-14
-334
-179
-367
-high_incur_virulence
-high_incur_virulence
-1
-1
--1000
 
 SLIDER
 3058
@@ -3812,6 +3801,17 @@ mask_int_start
 1
 NIL
 HORIZONTAL
+
+SWITCH
+18
+425
+187
+459
+policy_more_mask
+policy_more_mask
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
