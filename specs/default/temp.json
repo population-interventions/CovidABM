@@ -321,13 +321,13 @@
         "false"
     ],
     "input_incursion_table": [
-        "\"input/vic/incur_omlike_low_escape_high_vir.csv\""
+        "\"input/vic/incur_novel_high_escape_high_vir.csv\""
     ],
     "param_override_ve_area": [
         "-1.0"
     ],
     "scale_up_threshold": [
-        "300.0"
+        "290.0"
     ],
     "scale_down_threshold": [
         "260.0"
@@ -351,7 +351,7 @@
         "2.0"
     ],
     "sim_seed": [
-        "84554.58245"
+        "15121.85701"
     ],
     "midreport_day": [
         "64.0"
@@ -387,10 +387,10 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "706.0"
+        "206.0"
     ],
     "input_vaccine_schedule": [
-        "\"input/vic/rollout_target_later_60_low.csv\""
+        "\"input/vic/rollout_target_later_30_high.csv\""
     ],
     "param_force_vaccine": [
         "\"Disabled\""

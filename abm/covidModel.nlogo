@@ -36,11 +36,11 @@ __includes[
 GRAPHICS-WINDOW
 404
 62
-879
-539
+874
+533
 -1
 -1
-4.9
+6.08
 1
 10
 1
@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-12.0
+9.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.05
+0.034
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.35
+0.53
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.45
+0.63
 0.01
 1
 NIL
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.7
+0.51
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+8.12
 1
 1
 NIL
@@ -3066,14 +3066,14 @@ NIL
 HORIZONTAL
 
 SLIDER
-424
-870
-599
-903
+1233
+317
+1466
+350
 incur_replace_chance
 incur_replace_chance
-0
-0.2
+-0.01
+1
 0.02
 0.01
 1
@@ -3740,10 +3740,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1643
-739
-1762
-784
+1478
+363
+1597
+408
 Generation Time
 totInfecterTime_out / totInfect_out
 3
@@ -3796,7 +3796,7 @@ PLOT
 97
 1379
 296
-Infected Simul Percentage
+Infected Simuls
 NIL
 NIL
 0.0
@@ -3807,9 +3807,9 @@ true
 false
 "" ""
 PENS
-"Base" 1.0 0 -2674135 true "" "plot 100 * (count simuls with [color = red and infectVariant = \"base\"]) / Population "
-"Josh" 1.0 0 -13840069 true "" "plot 100 * (count simuls with [color = red and infectVariant = \"omlike_escape\"]) / Population"
-"Incur" 1.0 0 -13345367 true "" "plot 100 * (count simuls with [color = red and infectVariant = item 6 table:get incursionTable 2]) / Population "
+"Base" 1.0 0 -2674135 true "" "plot (count simuls with [color = red and infectVariant = \"base\"])"
+"Josh" 1.0 0 -13840069 true "" "plot (count simuls with [color = red and infectVariant = \"omlike_escape\"])"
+"Incur" 1.0 0 -13345367 true "" "plot (count simuls with [color = red and infectVariant = item 6 table:get incursionTable 2])"
 
 PLOT
 1399
@@ -3830,6 +3830,17 @@ PENS
 "Base" 1.0 0 -2674135 true "" "plot 100 * (count simuls with [recoverVariant = \"base\"]) / Population"
 "Josh" 1.0 0 -13840069 true "" "plot 100 * (count simuls with [recoverVariant = \"omlike_escape\"]) / Population"
 "Incur" 1.0 0 -13345367 true "" "plot 100 * (count simuls with [recoverVariant = item 6 table:get incursionTable 2]) / Population"
+
+MONITOR
+1479
+414
+1594
+459
+Early Reff
+reffInfectees_out / reffInfecters_out
+3
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?

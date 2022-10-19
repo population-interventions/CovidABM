@@ -12,6 +12,7 @@ cur_3_70,cur
 target_70,target
 multi_70,multi
 base_post,recover
+base65_post,recover
 omlike_post,recover
 novel_post,recover
 omlike_high_post,recover
@@ -21,6 +22,7 @@ novel_escape_post,recover
 omlike_escape_high_post,recover
 novel_escape_high_post,recover
 base_post_60,recover
+base45_post_60,recover
 omlike_post_60,recover
 novel_post_60,recover
 omlike_high_post_60,recover
@@ -30,6 +32,7 @@ novel_escape_post_60,recover
 omlike_escape_high_post_60,recover
 novel_escape_high_post_60,recover
 base_post_70,recover
+base45_post_70,recover
 omlike_post_70,recover
 novel_post_70,recover
 omlike_high_post_70,recover

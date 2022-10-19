@@ -16,8 +16,8 @@ to costs_setup
   let newVacCostUI random-normal 1 0.1
   set costUI_vacOverhead (random-normal 1 0.1) + (random-normal 1 0.1) + (random-normal 30 3)
   set costUI_vacCur      (random-normal 35 3.5)
-  set costUI_vacTarget   newVacCostUI * 44
-  set costUI_vacMulti    newVacCostUI * 52.5
+  set costUI_vacTarget   newVacCostUI * 35
+  set costUI_vacMulti    newVacCostUI * 35 * 1.5
   set costUI_vacFixed    (random-normal 615000 (615000 * 0.2))
 
   set costUI_gdp 0.1 + 0.4 * (rngs:rnd-beta defaultStream 1 1)

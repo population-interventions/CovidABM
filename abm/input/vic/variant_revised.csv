@@ -1,5 +1,6 @@
 name,trans_min,trans_max,trans_std,asympt_trans_mean,asympt_trans_std,sympt_time_mean,sympt_time_std,sympt_to_peak_mean,sympt_to_peak_std,peak_to_end_mean,peak_to_end_std,non_infect_to_peak_mean,non_infect_to_peak_std,hospLengthMult,init_variant,recoverVac,highVirulence,correlateKey
 base,0.419072387,0.607214835,0.12,-0.545,0.27,3.485,1.1953,3.7486,2.0499,2.9989,1.8278,1.8691,1.202,1,1,base_post,0,1
+base45,0.419072387,0.607214835,0.12,-0.545,0.27,3.485,1.1953,3.7486,2.0499,2.9989,1.8278,1.8691,1.202,1,1,base45_post,0,1
 omlike,0.419072387,0.607214835,0.12,-0.545,0.27,3.485,1.1953,3.7486,2.0499,2.9989,1.8278,1.8691,1.202,1,0,omlike_post,0,1
 novel,0.419072387,0.607214835,0.12,-0.545,0.27,3.485,1.1953,3.7486,2.0499,2.9989,1.8278,1.8691,1.202,1,0,novel_post,0,1
 omlike_high,0.419072387,0.607214835,0.12,-0.545,0.27,3.485,1.1953,3.7486,2.0499,2.9989,1.8278,1.8691,1.202,1,0,omlike_high_post,1,1
