@@ -60,6 +60,9 @@ to incursion_update
           set global_incursionVaccType item 5 phaseData
           set global_incursionVariant item 6 phaseData
           set global_incursionReplaceChance item 7 phaseData
+          if incur_replace_chance >= 0 [
+           set global_incursionReplaceChance incur_replace_chance
+          ]
         ]
       ]
     ]
