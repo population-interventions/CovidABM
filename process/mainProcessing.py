@@ -72,9 +72,6 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 	if 'singleProcessing' in conf:
 		singleProcess.DoSingleProcess(conf['singleProcessing'], workingDir, heatmapStructure, measureCols_raw, onHpc)
 	
-	if 'tornado' in conf:
-		singleProcess.MakeTornadoPlots(conf['tornado'], workingDir, measureCols_raw, onHpc)
-	
 	if 'singleHeatmaps' in conf:
 		singleProcess.MakeSingleHeatmaps(conf['singleHeatmaps'], workingDir, heatmapStructure, measureCols_raw)
 		
@@ -87,4 +84,7 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 
 	if 'splitTableIndexName' in modelData:
 		DoProcessingForReport(workingDir, postInputDir, measureCols, table5Rows, modelData['splitTableIndexName'], months=24)
+	
+	if 'tornado' in conf:
+		singleProcess.MakeTornadoPlots(conf['tornado'], workingDir, measureCols_raw, onHpc)
 

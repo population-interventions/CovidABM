@@ -66,14 +66,14 @@
 				"senList" : ["totHosp", "totInfect", "totDeath", "totStage3", "totStage4", "sen_vacInfectReduct", "sen_vacWaneInfect", "sen_vacWaneHosp", "sen_recoverInfectReduct", "sen_recoverWane", "sen_maskEff", "sen_asymptTransmit", "sen_isoProp", "sen_ifr", "sen_icu", "sen_hosp", "sen_sympt", "sen_hospTime", "sen_icuTime", "sen_vacCur", "sen_vacTarget", "sen_vacMulti", "sen_vacPromote", "sen_vacOverhead", "sen_maskPerson", "sen_maskStorage", "sen_maskPromote", "sen_vacUptake", "sen_transmissDraw", "sen_isoComply", "sen_halyAcute", "sen_halyLong", "sen_halyDeath", "sen_costGdp", "sen_costTest", "sen_costLong", "sen_costDeath", "sen_costDoctor", "sen_costParacetamol", "sen_costVisitEr", "sen_costHospBed", "sen_costIcuBed"]
 			},
 			"singleHeatmaps" : {
-				"prefixList" : ["mid_"],
+				"prefixList" : ["mid_182_546_"],
 				"metrics" : ["totStage2", "totStage3", "totStage4", "totStage5", "hospDaysAbove750", "hospDaysAbove1500", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
 				"identifyIndex" : {
 					"scenAgg" : ["Variant"]
 				}
 			},
 			"singleProcessing" : {
-				"prefixList" : ["mid_"],
+				"prefixList" : ["mid_182_546_"],
 				"aggregates" : {
 					"meanOnDraw_thenDescribeOnScenario" : {
 						"firstMeanOn" : ["draw_index"],
@@ -248,55 +248,16 @@
 							"nmb_median", "nmbGdp_median", "deathRank", "hospRank_750", "hospRank_1500", "hospRank"
 						]
 					},
-					"oneYearEarlyIncur" : {
-						"index" : ["Stage policy", "Mask stockpile", "Mask wearing", "Vaccine schedule"],
-						"metricCols" : {
-							"nmb" : ["mid_optimal/earlyIncur_healthSystem_70k_ranking", "rank"],
-							"nmbGdp" : ["mid_optimal/earlyIncur_healthSystemAndGdp_70k_ranking", "rank"],
-							"nmb_median" : ["mid_optimal/earlyIncur_healthSystem_70k_ranking", "p_50"],
-							"nmbGdp_median" : ["mid_optimal/earlyIncur_healthSystemAndGdp_70k_ranking", "p_50"],
-							"hospAbove750" : ["single/earlyIncur_meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove750"],
-							"hospAbove1500" : ["single/earlyIncur_meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove1500"],
-							"deaths" : ["single/earlyIncur_meanOnDraw_thenDescribeOnScenario_50", "totDeath"]
-						},
-						"deriveRanks" : {
-							"deathRank" : {
-								"value" : "deaths",
-								"ascending" : true
-							},
-							"hospRank_750" : {
-								"value" : "hospAbove750",
-								"ascending" : true
-							},
-							"hospRank_1500" : {
-								"value" : "hospAbove1500",
-								"ascending" : true
-							},
-							"hospRank" : {
-								"average" : ["hospRank_750", "hospRank_1500"],
-								"ascending" : true
-							},
-							"aggRanks" : {
-								"average" : ["nmb", "nmbGdp", "deathRank", "hospRank"],
-								"ascending" : true
-							}
-						},
-						"sortBy" : "aggRanks",
-						"orderCols" : [
-							"nmb", "nmbGdp", "hospAbove750", "hospAbove1500", "deaths", "aggRanks",
-							"nmb_median", "nmbGdp_median", "deathRank", "hospRank_750", "hospRank_1500", "hospRank"
-						]
-					},
 					"oneYearAllIncur" : {
 						"index" : ["Stage policy", "Mask stockpile", "Mask wearing", "Vaccine schedule"],
 						"metricCols" : {
-							"nmb" : ["mid_optimal/healthSystem_70k_ranking", "rank"],
-							"nmbGdp" : ["mid_optimal/healthSystemAndGdp_70k_ranking", "rank"],
-							"nmb_median" : ["mid_optimal/healthSystem_70k_ranking", "p_50"],
-							"nmbGdp_median" : ["mid_optimal/healthSystemAndGdp_70k_ranking", "p_50"],
-							"hospAbove750" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove750"],
-							"hospAbove1500" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove1500"],
-							"deaths" : ["single/meanOnDraw_thenDescribeOnScenario_50", "totDeath"]
+							"nmb" : ["mid_182_546_optimal/healthSystem_70k_ranking", "rank"],
+							"nmbGdp" : ["mid_182_546_optimal/healthSystemAndGdp_70k_ranking", "rank"],
+							"nmb_median" : ["mid_182_546_optimal/healthSystem_70k_ranking", "p_50"],
+							"nmbGdp_median" : ["mid_182_546_optimal/healthSystemAndGdp_70k_ranking", "p_50"],
+							"hospAbove750" : ["single/meanOnDraw_thenDescribeOnScenario_50", "mid_182_546_hospDaysAbove750"],
+							"hospAbove1500" : ["single/meanOnDraw_thenDescribeOnScenario_50", "mid_182_546_hospDaysAbove1500"],
+							"deaths" : ["single/meanOnDraw_thenDescribeOnScenario_50", "mid_182_546_totDeath"]
 						},
 						"deriveRanks" : {
 							"deathRank" : {
