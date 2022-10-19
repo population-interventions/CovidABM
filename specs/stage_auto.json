@@ -4,7 +4,7 @@
 	"copyExperimentMetrics" : "vic_main",
 	"handlerName" : "stage_auto_handler",
 	"postInputDir" : "vic",
-	"threads" : 2,
+	"threads" : 4,
 	"indexParams" : {
 		"init_stage" : [
 			1.1,

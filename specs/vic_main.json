@@ -497,11 +497,11 @@
 						"input/vic/incur_omlike_high_escape_high_vir.csv" : "Omlike high escape high vir",
 						"input/vic/incur_omlike_high_escape_low_vir.csv"  : "Omlike high escape low vir",
 						"input/vic/incur_novel_high_escape_high_vir.csv"  : "Novel high escape high vir",
-						"input/vic/incur_novel_high_escape_low_vir.csv"   : "Novel high escape high vir",
+						"input/vic/incur_novel_high_escape_low_vir.csv"   : "Novel high escape low vir",
 						"input/vic/incur_omlike_low_escape_high_vir.csv"  : "Omlike low escape high vir",
-						"input/vic/incur_omlike_low_escape_low_vir.csv"   : "Omlike low escape high vir",
+						"input/vic/incur_omlike_low_escape_low_vir.csv"   : "Omlike low escape low vir",
 						"input/vic/incur_novel_low_escape_high_vir.csv"   : "Novel low escape high vir",
-						"input/vic/incur_novel_low_escape_low_vir.csv"    : "Novel low escape high vir"
+						"input/vic/incur_novel_low_escape_low_vir.csv"    : "Novel low escape low vir"
 					}
 				},
 				"policy_mask_n95" : {
