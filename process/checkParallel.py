@@ -7,6 +7,7 @@ import process.shared.modelData as md
 
 def DoParallelCheck(runIndex, modelName, runs, pernode):
 	modelData = md.LoadModelData(modelName)
+	print('Parallel check', runIndex, modelName, runs, pernode)
 	
 	if 'postSeries' in modelData:
 		if 'processMain' in modelData['postSeries']:
