@@ -21,6 +21,7 @@
 			"input/vic/rollout_multi_later_60_low.csv"
 		],
 		"input_incursion_table" : [
+			"input/vic/incur_base45_only.csv",
 			"input/vic/incur_omlike_high_escape_high_vir.csv",
 			"input/vic/incur_omlike_high_escape_low_vir.csv",
 			"input/vic/incur_novel_high_escape_high_vir.csv",
@@ -455,6 +456,7 @@
 				"input_incursion_table" : {
 					"name" : "Variant",
 					"values" : {
+						"input/vic/incur_base45_only.csv"                 : "Om45 only",
 						"input/vic/incur_omlike_high_escape_high_vir.csv" : "Omlike high escape high vir",
 						"input/vic/incur_omlike_high_escape_low_vir.csv"  : "Omlike high escape low vir",
 						"input/vic/incur_novel_high_escape_high_vir.csv"  : "Novel high escape high vir",
