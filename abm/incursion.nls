@@ -75,7 +75,6 @@ to incursion_update
             simul_setNewInfection global_incursionVariant 0 1
             set contact_events 0
             set contributeToR true
-            simul_updateVariantParams
             
             set infectedContactList table:make
             set traceAttempts 0

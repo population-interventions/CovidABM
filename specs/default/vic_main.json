@@ -156,7 +156,7 @@
         "0.93"
     ],
     "init_timenow_limit": [
-        "0.0"
+        "0.86"
     ],
     "policy_pipeline": [
         "\"None\""
@@ -186,7 +186,7 @@
         "-1.0"
     ],
     "init_trace_prop": [
-        "0.5"
+        "0.2"
     ],
     "input_population_table": [
         "\"input/vic/pop\""
@@ -195,7 +195,7 @@
         "\"None\""
     ],
     "param_vac_uptake_mult": [
-        "0.8"
+        "0.65"
     ],
     "compound_essential": [
         "\"Extreme\""
@@ -213,7 +213,7 @@
         "false"
     ],
     "prepeak_vir_boost": [
-        "0.1"
+        "0.0"
     ],
     "data_suffix": [
         "\".csv\""
@@ -345,7 +345,7 @@
         "false"
     ],
     "init_metric_threshold": [
-        "20000.0"
+        "18000.0"
     ],
     "init_stage": [
         "2.0"
@@ -387,7 +387,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "206.0"
+        "245.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_none.csv\""
@@ -532,5 +532,8 @@
     ],
     "policy_phase_days": [
         "91.0"
+    ],
+    "start_day_abort": [
+        "100.0"
     ]
 }

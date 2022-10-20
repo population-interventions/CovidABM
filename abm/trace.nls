@@ -45,22 +45,21 @@ to simul_fixInfectedContactList
 end
 
 to simul_applyTrace
-  if traceContacts [
-    set caseReportTime ticks + Case_Reporting_Delay
-    set caseReportTime ticks + Case_Reporting_Delay
-    set tracked 1
-    set IDTime timenow
-    
-    if trace_calibration > 0 [
-      if first_trace_occurred = -1 [
-        set first_trace_occurred ticks
-      ]
-      set cumulative_tracked_all cumulative_tracked_all + extraScaleFactor * (Scale_Factor ^ myScale)
-      if (noticeOwnInfection = 1 and timenow >= symtomatic_present_day) [
-        set cumulative_tracked_notice cumulative_tracked_notice + extraScaleFactor * (Scale_Factor ^ myScale)
-      ]
+  set caseReportTime ticks + Case_Reporting_Delay
+  set tracked 1
+  set IDTime timenow
+  
+  if trace_calibration > 0 [
+    if first_trace_occurred = -1 [
+      set first_trace_occurred ticks
     ]
-    
+    set cumulative_tracked_all cumulative_tracked_all + extraScaleFactor * (Scale_Factor ^ myScale)
+    if (noticeOwnInfection = 1 and timenow >= symtomatic_present_day) [
+      set cumulative_tracked_notice cumulative_tracked_notice + extraScaleFactor * (Scale_Factor ^ myScale)
+    ]
+  ]
+  
+  if traceContacts [
     simul_setContactsKnown
     set global_trace_again true
   ]

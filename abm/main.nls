@@ -152,4 +152,8 @@ to go
     set casesinperiod7_final casesinperiod7
     Stop 
   ]
+  
+  if start_day > start_day_abort [
+    Stop 
+  ]
 end

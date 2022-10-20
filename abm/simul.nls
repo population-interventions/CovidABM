@@ -287,10 +287,17 @@ to simul_stealRecover
   ]
 end
 
-to simul_setNewInfection [variant startDay recoverEffProp]
+to simul_setNewInfection [variant startDayProp recoverEffProp]
   set color red
-  set timenow startDay
   set infectVariant variant
+  simul_updateVariantParams
+  ifelse startDayProp > 0
+  [
+    set timenow floor (startDayProp * ownIllnessPeriod_raw + random-float 1)
+  ]
+  [
+    set timenow 0
+  ]
   
   let symptProp (LnOddsToPr (GetVariantSymptomaticLnOdds agerange variant)) * 
                 (vaccine_getWanedParameter "reduceSympt" variant currentVaccine vaccineDay prevVaccine prevVaccineDay) * 
@@ -493,7 +500,6 @@ to simul_infect
                 simul_setNewInfection patchVariant 0 recoverEffProp
                 set contact_events 0
                 set contributeToR true
-                simul_updateVariantParams
                 
                 set infectedContactList table:make
                 set traceAttempts 0

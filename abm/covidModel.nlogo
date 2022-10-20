@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-12.0
+9.3
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.05
+0.03560000000000001
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.35
+0.512
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.45
+0.612
 0.01
 1
 NIL
@@ -366,7 +366,7 @@ INPUTBOX
 377
 257
 initial_cases
-200000.0
+250000.0
 1
 0
 Number
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.7
+0.529
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+8.188
 1
 1
 NIL
@@ -966,7 +966,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "Fix2_1_LooseSupress" "Fix2_1_BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-5
+25
 
 MONITOR
 1473
@@ -1813,9 +1813,9 @@ SLIDER
 init_timenow_limit
 init_timenow_limit
 0
-26
-0.0
 1
+0.86
+0.02
 1
 NIL
 HORIZONTAL
@@ -1949,7 +1949,7 @@ init_trace_prop
 init_trace_prop
 0
 1
-0.5
+0.2
 0.05
 1
 NIL
@@ -2149,10 +2149,10 @@ print_vac
 -1000
 
 SLIDER
-1257
-990
-1459
-1023
+1238
+992
+1440
+1025
 house_init_group
 house_init_group
 0
@@ -2676,7 +2676,7 @@ init_metric_threshold
 init_metric_threshold
 -1000
 30000
-20000.0
+18000.0
 1000
 1
 NIL
@@ -2691,7 +2691,7 @@ init_stage
 init_stage
 0
 5
-2.0
+1.9
 0.01
 1
 NIL
@@ -2728,7 +2728,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-15121.85701
+82339.52762
 1
 1
 NIL
@@ -2856,7 +2856,7 @@ MONITOR
 12
 709
 190
-767
+766
 NIL
 recoverCount
 0
@@ -2894,7 +2894,7 @@ draw_index
 draw_index
 0
 2000
-206.0
+245.0
 1
 1
 NIL
@@ -3274,7 +3274,7 @@ start_day_min
 start_day_min
 0
 100
-18.0
+25.0
 1
 1
 NIL
@@ -3846,12 +3846,27 @@ SLIDER
 202
 613
 375
-647
+646
 policy_phase_days
 policy_phase_days
 0
 100
 91.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+1043
+58
+1216
+91
+start_day_abort
+start_day_abort
+0
+200
+100.0
 1
 1
 NIL

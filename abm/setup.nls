@@ -741,12 +741,11 @@ to setup
   
   ask n-of ( initial_primary / popPerSimul ) potentialInitCases [
     set myScale scalePhase
-    simul_setNewInfection getRandomInitVariant (random (floor min (list init_timenow_limit ownIllnessPeriod))) 1
+    simul_setNewInfection getRandomInitVariant (init_timenow_limit * random-float 1) 1
     set isInitialInfection true
     set contributeToR false
     set infectedContactList table:make
     set hasKnownContact false
-    simul_updateVariantParams
     
     if trace_calibration > 0 [
       set cali_timenow timenow
@@ -776,7 +775,7 @@ to setup
     let nearSimuls (other simuls in-radius 2 with [ color = red ])
     if init_secondry_infect > popPerSimul and any? nearSimuls [
       set myScale scalePhase
-      simul_setNewInfection getRandomInitVariant (random (floor min (list init_timenow_limit ownIllnessPeriod))) 1
+      simul_setNewInfection getRandomInitVariant (init_timenow_limit * random-float 1) 1
       set isInitialInfection true
       set contributeToR false
       set infectedContactList table:make
@@ -792,7 +791,6 @@ to setup
       if random-float 1 < _init_trace_prop [
        simul_applyTrace 
       ]
-      simul_updateVariantParams
       
       set init_secondry_infect init_secondry_infect - popPerSimul
       

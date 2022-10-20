@@ -7,8 +7,8 @@
 	"indexParams" : {
 		"trans_override" : [
 			0.05,
-			0.25,
-			0.5
+			0.35,
+			0.8
 		]
 	},
 	"paramOverrides" : {
@@ -18,7 +18,8 @@
 		"param_policy" : "StageFixed",
 		"init_stage" : 0,
 		"input_population_table" : "input/vic/pop_r0",
-		"input_draw_static" : "input/vic/draw_static_none.csv"
+		"input_draw_static" : "input/vic/draw_static_none.csv",
+		"init_timenow_limit" : 0
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {
