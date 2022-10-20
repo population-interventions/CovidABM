@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-9.3
+10.96
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.03560000000000001
+0.07600000000000001
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.512
+0.16799999999999998
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.612
+0.216
 0.01
 1
 NIL
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.529
+0.856
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.188
+8.8
 1
 1
 NIL
@@ -1102,7 +1102,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-1.0
+0.48
 0.01
 1
 NIL
@@ -2691,7 +2691,7 @@ init_stage
 init_stage
 0
 5
-1.9
+0.48
 0.01
 1
 NIL
@@ -3808,7 +3808,7 @@ false
 "" ""
 PENS
 "Base" 1.0 0 -2674135 true "" "plot (count simuls with [color = red and infectVariant = \"base\"])"
-"Josh" 1.0 0 -13840069 true "" "plot (count simuls with [color = red and infectVariant = \"omlike_escape\"])"
+"Josh" 1.0 0 -13840069 true "" "plot (count simuls with [color = red and infectVariant = \"base45\"])"
 "Incur" 1.0 0 -13345367 true "" "plot (count simuls with [color = red and infectVariant = item 6 table:get incursionTable 2])"
 
 PLOT
@@ -3828,7 +3828,7 @@ false
 "" ""
 PENS
 "Base" 1.0 0 -2674135 true "" "plot 100 * (count simuls with [recoverVariant = \"base\"]) / Population"
-"Josh" 1.0 0 -13840069 true "" "plot 100 * (count simuls with [recoverVariant = \"omlike_escape\"]) / Population"
+"Josh" 1.0 0 -13840069 true "" "plot 100 * (count simuls with [recoverVariant = \"base45\"]) / Population"
 "Incur" 1.0 0 -13345367 true "" "plot 100 * (count simuls with [recoverVariant = item 6 table:get incursionTable 2]) / Population"
 
 MONITOR
