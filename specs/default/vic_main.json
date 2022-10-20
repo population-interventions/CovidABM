@@ -51,7 +51,7 @@
         "true"
     ],
     "param_policy": [
-        "\"BarelySupress\""
+        "\"Fix2_1_LooseSupress\""
     ],
     "asymptom_trace_mult": [
         "0.67"
@@ -321,7 +321,7 @@
         "false"
     ],
     "input_incursion_table": [
-        "\"none\""
+        "\"input/vic/incur_novel_high_escape_high_vir.csv\""
     ],
     "param_override_ve_area": [
         "-1.0"
@@ -351,7 +351,7 @@
         "2.0"
     ],
     "sim_seed": [
-        "57235.97273"
+        "15121.85701"
     ],
     "midreport_day": [
         "64.0"
@@ -387,7 +387,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "1392.0"
+        "206.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_none.csv\""
@@ -432,7 +432,7 @@
         "1000.0"
     ],
     "in_vaccine_count": [
-        "1000.0"
+        "100.0"
     ],
     "base_name": [
         "\"base\""
@@ -450,7 +450,7 @@
         "0.0"
     ],
     "start_day_min": [
-        "20.0"
+        "25.0"
     ],
     "stages_cont": [
         "true"
@@ -529,5 +529,8 @@
     ],
     "policy_more_mask": [
         "false"
+    ],
+    "policy_phase_days": [
+        "91.0"
     ]
 }
