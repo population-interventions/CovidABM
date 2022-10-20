@@ -388,7 +388,7 @@ end
 to setupInitialVaccination
   if _vaccine_enabled [
     setupInitialVaccination_micromangedMethod
-	vaccine_setupTopupTarget
+    vaccine_setupTopupTarget
   ]
 end
 

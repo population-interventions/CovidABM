@@ -355,6 +355,7 @@ globals [
   halyUI_death
 
   costUI_rat
+  testCountUI
   costUI_long
   costUI_death
 
@@ -511,6 +512,15 @@ globals [
   reffInfectees_out
   reff_out
 
+  halyTotalDeath_alt_out
+  halyTotalTotal_alt_out
+  nmbLowNoGdp_alt_out
+  nmbMedNoGdp_alt_out
+  nmbHighNoGdp_alt_out
+  nmbLow_alt_out
+  nmbMed_alt_out
+  nmbHigh_alt_out
+
   sen_vacInfectReduct_out
   sen_vacWaneInfect_out
   sen_vacWaneHosp_out
@@ -548,6 +558,7 @@ globals [
   sen_costVisitEr_out
   sen_costHospBed_out
   sen_costIcuBed_out
+  sen_countTest_out
 
   R_measure_time
   stop_simulation
@@ -648,6 +659,14 @@ globals [
   mid_0_182_reffInfecters_out
   mid_0_182_reffInfectees_out
   mid_0_182_reff_out
+  mid_0_182_halyTotalDeath_alt_out
+  mid_0_182_halyTotalTotal_alt_out
+  mid_0_182_nmbLowNoGdp_alt_out
+  mid_0_182_nmbMedNoGdp_alt_out
+  mid_0_182_nmbHighNoGdp_alt_out
+  mid_0_182_nmbLow_alt_out
+  mid_0_182_nmbMed_alt_out
+  mid_0_182_nmbHigh_alt_out
 
   mid_0_364_costDeathAverted_out
   mid_0_364_costDeathAverted_uk_out
@@ -714,6 +733,14 @@ globals [
   mid_0_364_reffInfecters_out
   mid_0_364_reffInfectees_out
   mid_0_364_reff_out
+  mid_0_364_halyTotalDeath_alt_out
+  mid_0_364_halyTotalTotal_alt_out
+  mid_0_364_nmbLowNoGdp_alt_out
+  mid_0_364_nmbMedNoGdp_alt_out
+  mid_0_364_nmbHighNoGdp_alt_out
+  mid_0_364_nmbLow_alt_out
+  mid_0_364_nmbMed_alt_out
+  mid_0_364_nmbHigh_alt_out
 
   mid_182_364_costDeathAverted_out
   mid_182_364_costDeathAverted_uk_out
@@ -780,6 +807,14 @@ globals [
   mid_182_364_reffInfecters_out
   mid_182_364_reffInfectees_out
   mid_182_364_reff_out
+  mid_182_364_halyTotalDeath_alt_out
+  mid_182_364_halyTotalTotal_alt_out
+  mid_182_364_nmbLowNoGdp_alt_out
+  mid_182_364_nmbMedNoGdp_alt_out
+  mid_182_364_nmbHighNoGdp_alt_out
+  mid_182_364_nmbLow_alt_out
+  mid_182_364_nmbMed_alt_out
+  mid_182_364_nmbHigh_alt_out
 
   mid_182_546_costDeathAverted_out
   mid_182_546_costDeathAverted_uk_out
@@ -846,6 +881,14 @@ globals [
   mid_182_546_reffInfecters_out
   mid_182_546_reffInfectees_out
   mid_182_546_reff_out
+  mid_182_546_halyTotalDeath_alt_out
+  mid_182_546_halyTotalTotal_alt_out
+  mid_182_546_nmbLowNoGdp_alt_out
+  mid_182_546_nmbMedNoGdp_alt_out
+  mid_182_546_nmbHighNoGdp_alt_out
+  mid_182_546_nmbLow_alt_out
+  mid_182_546_nmbMed_alt_out
+  mid_182_546_nmbHigh_alt_out
 
   mid_364_546_costDeathAverted_out
   mid_364_546_costDeathAverted_uk_out
@@ -912,6 +955,14 @@ globals [
   mid_364_546_reffInfecters_out
   mid_364_546_reffInfectees_out
   mid_364_546_reff_out
+  mid_364_546_halyTotalDeath_alt_out
+  mid_364_546_halyTotalTotal_alt_out
+  mid_364_546_nmbLowNoGdp_alt_out
+  mid_364_546_nmbMedNoGdp_alt_out
+  mid_364_546_nmbHighNoGdp_alt_out
+  mid_364_546_nmbLow_alt_out
+  mid_364_546_nmbMed_alt_out
+  mid_364_546_nmbHigh_alt_out
 
   mid_0_60_costDeathAverted_out
   mid_0_60_costDeathAverted_uk_out
@@ -978,6 +1029,14 @@ globals [
   mid_0_60_reffInfecters_out
   mid_0_60_reffInfectees_out
   mid_0_60_reff_out
+  mid_0_60_halyTotalDeath_alt_out
+  mid_0_60_halyTotalTotal_alt_out
+  mid_0_60_nmbLowNoGdp_alt_out
+  mid_0_60_nmbMedNoGdp_alt_out
+  mid_0_60_nmbHighNoGdp_alt_out
+  mid_0_60_nmbLow_alt_out
+  mid_0_60_nmbMed_alt_out
+  mid_0_60_nmbHigh_alt_out
 
   mid_60_182_costDeathAverted_out
   mid_60_182_costDeathAverted_uk_out
@@ -1044,6 +1103,14 @@ globals [
   mid_60_182_reffInfecters_out
   mid_60_182_reffInfectees_out
   mid_60_182_reff_out
+  mid_60_182_halyTotalDeath_alt_out
+  mid_60_182_halyTotalTotal_alt_out
+  mid_60_182_nmbLowNoGdp_alt_out
+  mid_60_182_nmbMedNoGdp_alt_out
+  mid_60_182_nmbHighNoGdp_alt_out
+  mid_60_182_nmbLow_alt_out
+  mid_60_182_nmbMed_alt_out
+  mid_60_182_nmbHigh_alt_out
 
   mid_0_91_costDeathAverted_out
   mid_0_91_costDeathAverted_uk_out
@@ -1110,6 +1177,14 @@ globals [
   mid_0_91_reffInfecters_out
   mid_0_91_reffInfectees_out
   mid_0_91_reff_out
+  mid_0_91_halyTotalDeath_alt_out
+  mid_0_91_halyTotalTotal_alt_out
+  mid_0_91_nmbLowNoGdp_alt_out
+  mid_0_91_nmbMedNoGdp_alt_out
+  mid_0_91_nmbHighNoGdp_alt_out
+  mid_0_91_nmbLow_alt_out
+  mid_0_91_nmbMed_alt_out
+  mid_0_91_nmbHigh_alt_out
 
   mid_91_182_costDeathAverted_out
   mid_91_182_costDeathAverted_uk_out
@@ -1176,5 +1251,13 @@ globals [
   mid_91_182_reffInfecters_out
   mid_91_182_reffInfectees_out
   mid_91_182_reff_out
+  mid_91_182_halyTotalDeath_alt_out
+  mid_91_182_halyTotalTotal_alt_out
+  mid_91_182_nmbLowNoGdp_alt_out
+  mid_91_182_nmbMedNoGdp_alt_out
+  mid_91_182_nmbHighNoGdp_alt_out
+  mid_91_182_nmbLow_alt_out
+  mid_91_182_nmbMed_alt_out
+  mid_91_182_nmbHigh_alt_out
 
 ]

@@ -115,13 +115,13 @@ to setup_variantData
     
     table:put data "symptToPeakA" sympt_to_peak_mean * sympt_to_peak_mean / (sympt_to_peak_std * sympt_to_peak_std)
     table:put data "symptToPeakL" sympt_to_peak_mean / (sympt_to_peak_std * sympt_to_peak_std)
-	
+    
     table:put data "peakToEndA" peak_to_end_mean * peak_to_end_mean / (peak_to_end_std * peak_to_end_std)
     table:put data "peakToEndL" peak_to_end_mean / (peak_to_end_std * peak_to_end_std)
-	
+    
     table:put data "nonInfectToPeakA" non_infect_to_peak_mean * non_infect_to_peak_mean / (non_infect_to_peak_std * non_infect_to_peak_std)
     table:put data "nonInfectToPeakL" non_infect_to_peak_mean / (non_infect_to_peak_std * non_infect_to_peak_std)
-	
+    
     table:put data "init_variant" init_variant
     table:put data "recoverVac" recoverVac
     table:put data "highVirulence" highVirulence

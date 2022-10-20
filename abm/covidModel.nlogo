@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-9.0
+12.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.034
+0.05
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.53
+0.35
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.63
+0.45
 0.01
 1
 NIL
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.51
+0.7
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.12
+8.8
 1
 1
 NIL
@@ -965,8 +965,8 @@ CHOOSER
 508
 param_policy
 param_policy
-"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-3
+"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "Fix2_1_LooseSupress" "Fix2_1_BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
+5
 
 MONITOR
 1473
@@ -1967,10 +1967,10 @@ input/vic/pop
 String
 
 CHOOSER
-204
-737
-351
-782
+205
+743
+352
+788
 compound_input
 compound_input
 "None" "baseline"
@@ -2683,10 +2683,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-1048
-317
-1221
-350
+1643
+513
+1816
+546
 init_stage
 init_stage
 0
@@ -2855,8 +2855,8 @@ String
 MONITOR
 12
 709
-200
-766
+190
+767
 NIL
 recoverCount
 0
@@ -3638,20 +3638,20 @@ compoundVaccine
 0
 
 CHOOSER
-209
-610
-348
-655
+210
+650
+349
+695
 compoundMask
 compoundMask
 "none" "NoMask" "20Mask" "25Mask" "35Mask" "50Mask" "75Mask" "75N95" "AllN95"
 0
 
 CHOOSER
-209
-664
-348
-709
+208
+697
+347
+742
 compoundMaskOld
 compoundMaskOld
 "none" "NoMask" "20Mask" "25Mask" "35Mask" "50Mask" "75Mask" "75N95" "AllN95"
@@ -3841,6 +3841,21 @@ reffInfectees_out / reffInfecters_out
 3
 1
 11
+
+SLIDER
+202
+613
+375
+647
+policy_phase_days
+policy_phase_days
+0
+100
+91.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -5834,6 +5849,14 @@ NetLogo 6.2.0
     <metric>reffInfecters_out</metric>
     <metric>reffInfectees_out</metric>
     <metric>reff_out</metric>
+    <metric>halyTotalDeath_alt_out</metric>
+    <metric>halyTotalTotal_alt_out</metric>
+    <metric>nmbLowNoGdp_alt_out</metric>
+    <metric>nmbMedNoGdp_alt_out</metric>
+    <metric>nmbHighNoGdp_alt_out</metric>
+    <metric>nmbLow_alt_out</metric>
+    <metric>nmbMed_alt_out</metric>
+    <metric>nmbHigh_alt_out</metric>
     <metric>sen_vacInfectReduct_out</metric>
     <metric>sen_vacWaneInfect_out</metric>
     <metric>sen_vacWaneHosp_out</metric>
@@ -5871,6 +5894,7 @@ NetLogo 6.2.0
     <metric>sen_costVisitEr_out</metric>
     <metric>sen_costHospBed_out</metric>
     <metric>sen_costIcuBed_out</metric>
+    <metric>sen_countTest_out</metric>
     <metric>mid_0_182_costDeathAverted_out</metric>
     <metric>mid_0_182_costDeathAverted_uk_out</metric>
     <metric>mid_0_182_costAcute_out</metric>
@@ -5936,6 +5960,14 @@ NetLogo 6.2.0
     <metric>mid_0_182_reffInfecters_out</metric>
     <metric>mid_0_182_reffInfectees_out</metric>
     <metric>mid_0_182_reff_out</metric>
+    <metric>mid_0_182_halyTotalDeath_alt_out</metric>
+    <metric>mid_0_182_halyTotalTotal_alt_out</metric>
+    <metric>mid_0_182_nmbLowNoGdp_alt_out</metric>
+    <metric>mid_0_182_nmbMedNoGdp_alt_out</metric>
+    <metric>mid_0_182_nmbHighNoGdp_alt_out</metric>
+    <metric>mid_0_182_nmbLow_alt_out</metric>
+    <metric>mid_0_182_nmbMed_alt_out</metric>
+    <metric>mid_0_182_nmbHigh_alt_out</metric>
     <metric>mid_0_364_costDeathAverted_out</metric>
     <metric>mid_0_364_costDeathAverted_uk_out</metric>
     <metric>mid_0_364_costAcute_out</metric>
@@ -6001,6 +6033,14 @@ NetLogo 6.2.0
     <metric>mid_0_364_reffInfecters_out</metric>
     <metric>mid_0_364_reffInfectees_out</metric>
     <metric>mid_0_364_reff_out</metric>
+    <metric>mid_0_364_halyTotalDeath_alt_out</metric>
+    <metric>mid_0_364_halyTotalTotal_alt_out</metric>
+    <metric>mid_0_364_nmbLowNoGdp_alt_out</metric>
+    <metric>mid_0_364_nmbMedNoGdp_alt_out</metric>
+    <metric>mid_0_364_nmbHighNoGdp_alt_out</metric>
+    <metric>mid_0_364_nmbLow_alt_out</metric>
+    <metric>mid_0_364_nmbMed_alt_out</metric>
+    <metric>mid_0_364_nmbHigh_alt_out</metric>
     <metric>mid_182_364_costDeathAverted_out</metric>
     <metric>mid_182_364_costDeathAverted_uk_out</metric>
     <metric>mid_182_364_costAcute_out</metric>
@@ -6066,6 +6106,14 @@ NetLogo 6.2.0
     <metric>mid_182_364_reffInfecters_out</metric>
     <metric>mid_182_364_reffInfectees_out</metric>
     <metric>mid_182_364_reff_out</metric>
+    <metric>mid_182_364_halyTotalDeath_alt_out</metric>
+    <metric>mid_182_364_halyTotalTotal_alt_out</metric>
+    <metric>mid_182_364_nmbLowNoGdp_alt_out</metric>
+    <metric>mid_182_364_nmbMedNoGdp_alt_out</metric>
+    <metric>mid_182_364_nmbHighNoGdp_alt_out</metric>
+    <metric>mid_182_364_nmbLow_alt_out</metric>
+    <metric>mid_182_364_nmbMed_alt_out</metric>
+    <metric>mid_182_364_nmbHigh_alt_out</metric>
     <metric>mid_182_546_costDeathAverted_out</metric>
     <metric>mid_182_546_costDeathAverted_uk_out</metric>
     <metric>mid_182_546_costAcute_out</metric>
@@ -6131,6 +6179,14 @@ NetLogo 6.2.0
     <metric>mid_182_546_reffInfecters_out</metric>
     <metric>mid_182_546_reffInfectees_out</metric>
     <metric>mid_182_546_reff_out</metric>
+    <metric>mid_182_546_halyTotalDeath_alt_out</metric>
+    <metric>mid_182_546_halyTotalTotal_alt_out</metric>
+    <metric>mid_182_546_nmbLowNoGdp_alt_out</metric>
+    <metric>mid_182_546_nmbMedNoGdp_alt_out</metric>
+    <metric>mid_182_546_nmbHighNoGdp_alt_out</metric>
+    <metric>mid_182_546_nmbLow_alt_out</metric>
+    <metric>mid_182_546_nmbMed_alt_out</metric>
+    <metric>mid_182_546_nmbHigh_alt_out</metric>
     <metric>mid_364_546_costDeathAverted_out</metric>
     <metric>mid_364_546_costDeathAverted_uk_out</metric>
     <metric>mid_364_546_costAcute_out</metric>
@@ -6196,6 +6252,14 @@ NetLogo 6.2.0
     <metric>mid_364_546_reffInfecters_out</metric>
     <metric>mid_364_546_reffInfectees_out</metric>
     <metric>mid_364_546_reff_out</metric>
+    <metric>mid_364_546_halyTotalDeath_alt_out</metric>
+    <metric>mid_364_546_halyTotalTotal_alt_out</metric>
+    <metric>mid_364_546_nmbLowNoGdp_alt_out</metric>
+    <metric>mid_364_546_nmbMedNoGdp_alt_out</metric>
+    <metric>mid_364_546_nmbHighNoGdp_alt_out</metric>
+    <metric>mid_364_546_nmbLow_alt_out</metric>
+    <metric>mid_364_546_nmbMed_alt_out</metric>
+    <metric>mid_364_546_nmbHigh_alt_out</metric>
     <metric>mid_0_60_costDeathAverted_out</metric>
     <metric>mid_0_60_costDeathAverted_uk_out</metric>
     <metric>mid_0_60_costAcute_out</metric>
@@ -6261,6 +6325,14 @@ NetLogo 6.2.0
     <metric>mid_0_60_reffInfecters_out</metric>
     <metric>mid_0_60_reffInfectees_out</metric>
     <metric>mid_0_60_reff_out</metric>
+    <metric>mid_0_60_halyTotalDeath_alt_out</metric>
+    <metric>mid_0_60_halyTotalTotal_alt_out</metric>
+    <metric>mid_0_60_nmbLowNoGdp_alt_out</metric>
+    <metric>mid_0_60_nmbMedNoGdp_alt_out</metric>
+    <metric>mid_0_60_nmbHighNoGdp_alt_out</metric>
+    <metric>mid_0_60_nmbLow_alt_out</metric>
+    <metric>mid_0_60_nmbMed_alt_out</metric>
+    <metric>mid_0_60_nmbHigh_alt_out</metric>
     <metric>mid_60_182_costDeathAverted_out</metric>
     <metric>mid_60_182_costDeathAverted_uk_out</metric>
     <metric>mid_60_182_costAcute_out</metric>
@@ -6326,6 +6398,14 @@ NetLogo 6.2.0
     <metric>mid_60_182_reffInfecters_out</metric>
     <metric>mid_60_182_reffInfectees_out</metric>
     <metric>mid_60_182_reff_out</metric>
+    <metric>mid_60_182_halyTotalDeath_alt_out</metric>
+    <metric>mid_60_182_halyTotalTotal_alt_out</metric>
+    <metric>mid_60_182_nmbLowNoGdp_alt_out</metric>
+    <metric>mid_60_182_nmbMedNoGdp_alt_out</metric>
+    <metric>mid_60_182_nmbHighNoGdp_alt_out</metric>
+    <metric>mid_60_182_nmbLow_alt_out</metric>
+    <metric>mid_60_182_nmbMed_alt_out</metric>
+    <metric>mid_60_182_nmbHigh_alt_out</metric>
     <metric>mid_0_91_costDeathAverted_out</metric>
     <metric>mid_0_91_costDeathAverted_uk_out</metric>
     <metric>mid_0_91_costAcute_out</metric>
@@ -6391,6 +6471,14 @@ NetLogo 6.2.0
     <metric>mid_0_91_reffInfecters_out</metric>
     <metric>mid_0_91_reffInfectees_out</metric>
     <metric>mid_0_91_reff_out</metric>
+    <metric>mid_0_91_halyTotalDeath_alt_out</metric>
+    <metric>mid_0_91_halyTotalTotal_alt_out</metric>
+    <metric>mid_0_91_nmbLowNoGdp_alt_out</metric>
+    <metric>mid_0_91_nmbMedNoGdp_alt_out</metric>
+    <metric>mid_0_91_nmbHighNoGdp_alt_out</metric>
+    <metric>mid_0_91_nmbLow_alt_out</metric>
+    <metric>mid_0_91_nmbMed_alt_out</metric>
+    <metric>mid_0_91_nmbHigh_alt_out</metric>
     <metric>mid_91_182_costDeathAverted_out</metric>
     <metric>mid_91_182_costDeathAverted_uk_out</metric>
     <metric>mid_91_182_costAcute_out</metric>
@@ -6456,6 +6544,14 @@ NetLogo 6.2.0
     <metric>mid_91_182_reffInfecters_out</metric>
     <metric>mid_91_182_reffInfectees_out</metric>
     <metric>mid_91_182_reff_out</metric>
+    <metric>mid_91_182_halyTotalDeath_alt_out</metric>
+    <metric>mid_91_182_halyTotalTotal_alt_out</metric>
+    <metric>mid_91_182_nmbLowNoGdp_alt_out</metric>
+    <metric>mid_91_182_nmbMedNoGdp_alt_out</metric>
+    <metric>mid_91_182_nmbHighNoGdp_alt_out</metric>
+    <metric>mid_91_182_nmbLow_alt_out</metric>
+    <metric>mid_91_182_nmbMed_alt_out</metric>
+    <metric>mid_91_182_nmbHigh_alt_out</metric>
     <enumeratedValueSet variable="draw_index">
       <value value="0"/>
       <value value="1"/>

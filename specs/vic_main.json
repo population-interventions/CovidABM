@@ -40,8 +40,8 @@
 			true
 		],
 		"param_policy" : [
-			"LooseSupress",
-			"BarelySupress"
+			"Fix2_1_LooseSupress",
+			"Fix2_1_BarelySupress"
 		]
 	},
 	"paramOverrides" : {
@@ -484,8 +484,8 @@
 				"param_policy" : {
 					"name" : "Stage policy",
 					"values" : {
-						"BarelySupress" : "BarelySupress",
-						"LooseSupress" : "LooseSupress"
+						"BarelySupress" : "Fix2_1_BarelySupress",
+						"LooseSupress" : "Fix2_1_LooseSupress"
 					}
 				}
 			}

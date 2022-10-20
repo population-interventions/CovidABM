@@ -23,6 +23,7 @@ to costs_setup
   set costUI_gdp 0.1 + 0.4 * (rngs:rnd-beta defaultStream 1 1)
 
   set costUI_rat random-normal 1 0.1
+  set testCountUI random-normal 1 0.2
   set costUI_long random-normal 1 0.3
   set costUI_death random-normal 0 0.01
 
@@ -46,6 +47,7 @@ to costs_setup
 
   set sen_costGdp_out         costUI_gdp
   set sen_costTest_out        costUI_rat
+  set sen_countTest_out       testCountUI
   set sen_costLong_out        costUI_long
   set sen_costDeath_out       costUI_death
   set sen_costDoctor_out      costUI_doctor
@@ -91,6 +93,15 @@ to costs_setup
   set halyTotalLong_out       0
   set halyTotalTotal_out      0
   set halyTotalTotal_uk_out   0
+
+  set halyTotalDeath_alt_out  0
+  set halyTotalTotal_alt_out  0
+  set nmbLowNoGdp_alt_out     0
+  set nmbMedNoGdp_alt_out     0
+  set nmbHighNoGdp_alt_out    0
+  set nmbLow_alt_out          0
+  set nmbMed_alt_out          0
+  set nmbHigh_alt_out         0
 
   set totStage2_out   0
   set totStage3_out   0
@@ -255,9 +266,24 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
 
   set halyTotalDeath_uk_out halyTotalDeath_uk_out + halyDeath_uk
 
+  ;; Death haly outcome.
+  let halyDeath_alt 0
+  if age = 5  [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+  if age = 15 [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+  if age = 25 [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+  if age = 35 [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+  if age = 45 [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+  if age = 55 [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+  if age = 65 [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+  if age = 75 [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+  if age = 85 [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+  if age = 95 [set halyDeath_alt halyDeath_alt + deathPpl * (12.34 * (1 + 1.234 * halyUI_death))]
+
+  set halyTotalDeath_alt_out halyTotalDeath_alt_out + halyDeath_alt
+
   ;; Testing cost
   let costTesting 0
-  set costTesting costTesting + infectPpl * (0.83 * (42.5 * costUI_rat) + 3.33 * (7.60 * costUI_rat))
+  set costTesting costTesting + infectPpl * (0.83 * testCountUI * (42.5 * costUI_rat) + 3.33 * testCountUI * (7.60 * costUI_rat))
   set costTesting_out costTesting_out + costTesting
 
   ;; Acute health expenditure
@@ -379,21 +405,21 @@ to CalculateEndCosts
   )
 
   ;; Fixed vaccination cost
-  (ifelse 
-    input_vaccine_schedule = "input/vic/rollout_dec_only_30_high.csv" or 
-    input_vaccine_schedule = "input/vic/rollout_dec_only_60_high.csv" or 
-    input_vaccine_schedule = "input/vic/rollout_dec_only_30_low.csv" or 
+  (ifelse
+    input_vaccine_schedule = "input/vic/rollout_dec_only_30_high.csv" or
+    input_vaccine_schedule = "input/vic/rollout_dec_only_60_high.csv" or
+    input_vaccine_schedule = "input/vic/rollout_dec_only_30_low.csv" or
     input_vaccine_schedule = "input/vic/rollout_dec_only_60_low.csv"
     [
       set costVaccineFixed_out costUI_vacFixed * 3
     ]
-    input_vaccine_schedule = "input/vic/rollout_target_later_30_high.csv" or 
-    input_vaccine_schedule = "input/vic/rollout_multi_later_30_high.csv" or 
-    input_vaccine_schedule = "input/vic/rollout_target_later_60_high.csv" or 
-    input_vaccine_schedule = "input/vic/rollout_multi_later_60_high.csv" or 
-    input_vaccine_schedule = "input/vic/rollout_target_later_30_low.csv" or 
-    input_vaccine_schedule = "input/vic/rollout_multi_later_30_low.csv" or 
-    input_vaccine_schedule = "input/vic/rollout_target_later_60_low.csv" or 
+    input_vaccine_schedule = "input/vic/rollout_target_later_30_high.csv" or
+    input_vaccine_schedule = "input/vic/rollout_multi_later_30_high.csv" or
+    input_vaccine_schedule = "input/vic/rollout_target_later_60_high.csv" or
+    input_vaccine_schedule = "input/vic/rollout_multi_later_60_high.csv" or
+    input_vaccine_schedule = "input/vic/rollout_target_later_30_low.csv" or
+    input_vaccine_schedule = "input/vic/rollout_multi_later_30_low.csv" or
+    input_vaccine_schedule = "input/vic/rollout_target_later_60_low.csv" or
     input_vaccine_schedule = "input/vic/rollout_multi_later_60_low.csv"
     [
       set costVaccineFixed_out costUI_vacFixed * 6
@@ -406,22 +432,29 @@ to CalculateEndCosts
   ;; Output aggregate costs costs
   set halyTotalTotal_out     halyTotalAcute_out + halyTotalDeath_out + halyTotalLong_out
   set halyTotalTotal_uk_out  halyTotalAcute_out + halyTotalDeath_uk_out + halyTotalLong_out
+  set halyTotalTotal_alt_out halyTotalAcute_out + halyTotalTotal_alt_out + halyTotalLong_out
   set costTotalHealth_out    costDeathAverted_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
   set costTotalHealth_uk_out costDeathAverted_uk_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
 
-  set nmbLowNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 35000
-  set nmbMedNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 70000
-  set nmbHighNoGdp_out     -1 * costTotalHealth_out - halyTotalTotal_out * 140000
-  set nmbLowNoGdp_uk_out   -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 35000
-  set nmbMedNoGdp_uk_out   -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 70000
-  set nmbHighNoGdp_uk_out  -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 140000
+  set nmbLowNoGdp_out       -1 * costTotalHealth_out - halyTotalTotal_out * 35000
+  set nmbMedNoGdp_out       -1 * costTotalHealth_out - halyTotalTotal_out * 70000
+  set nmbHighNoGdp_out      -1 * costTotalHealth_out - halyTotalTotal_out * 140000
+  set nmbLowNoGdp_uk_out    -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 35000
+  set nmbMedNoGdp_uk_out    -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 70000
+  set nmbHighNoGdp_uk_out   -1 * costTotalHealth_uk_out - halyTotalTotal_uk_out * 140000
+  set nmbLowNoGdp_alt_out   -1 * costTotalHealth_out - halyTotalTotal_alt_out * 35000
+  set nmbMedNoGdp_alt_out   -1 * costTotalHealth_out - halyTotalTotal_alt_out * 70000
+  set nmbHighNoGdp_alt_out  -1 * costTotalHealth_out - halyTotalTotal_alt_out * 140000
 
-  set nmbLow_out           nmbLowNoGdp_out  - costGdp_out
-  set nmbMed_out           nmbMedNoGdp_out  - costGdp_out
-  set nmbHigh_out          nmbHighNoGdp_out - costGdp_out
-  set nmbLow_uk_out        nmbLowNoGdp_uk_out  - costGdp_out
-  set nmbMed_uk_out        nmbMedNoGdp_uk_out  - costGdp_out
-  set nmbHigh_uk_out       nmbHighNoGdp_uk_out - costGdp_out
+  set nmbLow_out            nmbLowNoGdp_out  - costGdp_out
+  set nmbMed_out            nmbMedNoGdp_out  - costGdp_out
+  set nmbHigh_out           nmbHighNoGdp_out - costGdp_out
+  set nmbLow_uk_out         nmbLowNoGdp_uk_out  - costGdp_out
+  set nmbMed_uk_out         nmbMedNoGdp_uk_out  - costGdp_out
+  set nmbHigh_uk_out        nmbHighNoGdp_uk_out - costGdp_out
+  set nmbLow_alt_out        nmbLowNoGdp_alt_out  - costGdp_out
+  set nmbMed_alt_out        nmbMedNoGdp_alt_out  - costGdp_out
+  set nmbHigh_alt_out       nmbHighNoGdp_alt_out - costGdp_out
 
   set costTotalTotal_out    costTotalHealth_out + costGdp_out
   set costTotalTotal_uk_out costTotalHealth_uk_out + costGdp_out
@@ -500,6 +533,14 @@ to CalculateMidCosts
     set mid_0_182_reffInfecters_out reffInfecters_out
     set mid_0_182_reffInfectees_out reffInfectees_out
     ifelse mid_0_182_reffInfecters_out > 0 [set mid_0_182_reff_out mid_0_182_reffInfectees_out / mid_0_182_reffInfecters_out ] [ set mid_0_182_reff_out 0 ]
+    set mid_0_182_halyTotalDeath_alt_out halyTotalDeath_alt_out
+    set mid_0_182_halyTotalTotal_alt_out halyTotalTotal_alt_out
+    set mid_0_182_nmbLowNoGdp_alt_out nmbLowNoGdp_alt_out
+    set mid_0_182_nmbMedNoGdp_alt_out nmbMedNoGdp_alt_out
+    set mid_0_182_nmbHighNoGdp_alt_out nmbHighNoGdp_alt_out
+    set mid_0_182_nmbLow_alt_out nmbLow_alt_out
+    set mid_0_182_nmbMed_alt_out nmbMed_alt_out
+    set mid_0_182_nmbHigh_alt_out nmbHigh_alt_out
   ]
   if days = 364 [
     set mid_0_364_costDeathAverted_out costDeathAverted_out
@@ -567,6 +608,14 @@ to CalculateMidCosts
     set mid_0_364_reffInfecters_out reffInfecters_out
     set mid_0_364_reffInfectees_out reffInfectees_out
     ifelse mid_0_364_reffInfecters_out > 0 [set mid_0_364_reff_out mid_0_364_reffInfectees_out / mid_0_364_reffInfecters_out ] [ set mid_0_364_reff_out 0 ]
+    set mid_0_364_halyTotalDeath_alt_out halyTotalDeath_alt_out
+    set mid_0_364_halyTotalTotal_alt_out halyTotalTotal_alt_out
+    set mid_0_364_nmbLowNoGdp_alt_out nmbLowNoGdp_alt_out
+    set mid_0_364_nmbMedNoGdp_alt_out nmbMedNoGdp_alt_out
+    set mid_0_364_nmbHighNoGdp_alt_out nmbHighNoGdp_alt_out
+    set mid_0_364_nmbLow_alt_out nmbLow_alt_out
+    set mid_0_364_nmbMed_alt_out nmbMed_alt_out
+    set mid_0_364_nmbHigh_alt_out nmbHigh_alt_out
   ]
   if days = 364 [
     set mid_182_364_costDeathAverted_out costDeathAverted_out - mid_0_182_costDeathAverted_out
@@ -634,6 +683,14 @@ to CalculateMidCosts
     set mid_182_364_reffInfecters_out reffInfecters_out - mid_0_182_reffInfecters_out
     set mid_182_364_reffInfectees_out reffInfectees_out - mid_0_182_reffInfectees_out
     ifelse mid_182_364_reffInfecters_out > 0 [set mid_182_364_reff_out mid_182_364_reffInfectees_out / mid_182_364_reffInfecters_out ] [ set mid_182_364_reff_out 0 ]
+    set mid_182_364_halyTotalDeath_alt_out halyTotalDeath_alt_out - mid_0_182_halyTotalDeath_alt_out
+    set mid_182_364_halyTotalTotal_alt_out halyTotalTotal_alt_out - mid_0_182_halyTotalTotal_alt_out
+    set mid_182_364_nmbLowNoGdp_alt_out nmbLowNoGdp_alt_out - mid_0_182_nmbLowNoGdp_alt_out
+    set mid_182_364_nmbMedNoGdp_alt_out nmbMedNoGdp_alt_out - mid_0_182_nmbMedNoGdp_alt_out
+    set mid_182_364_nmbHighNoGdp_alt_out nmbHighNoGdp_alt_out - mid_0_182_nmbHighNoGdp_alt_out
+    set mid_182_364_nmbLow_alt_out nmbLow_alt_out - mid_0_182_nmbLow_alt_out
+    set mid_182_364_nmbMed_alt_out nmbMed_alt_out - mid_0_182_nmbMed_alt_out
+    set mid_182_364_nmbHigh_alt_out nmbHigh_alt_out - mid_0_182_nmbHigh_alt_out
   ]
   if days = 546 [
     set mid_182_546_costDeathAverted_out costDeathAverted_out - mid_0_182_costDeathAverted_out
@@ -701,6 +758,14 @@ to CalculateMidCosts
     set mid_182_546_reffInfecters_out reffInfecters_out - mid_0_182_reffInfecters_out
     set mid_182_546_reffInfectees_out reffInfectees_out - mid_0_182_reffInfectees_out
     ifelse mid_182_546_reffInfecters_out > 0 [set mid_182_546_reff_out mid_182_546_reffInfectees_out / mid_182_546_reffInfecters_out ] [ set mid_182_546_reff_out 0 ]
+    set mid_182_546_halyTotalDeath_alt_out halyTotalDeath_alt_out - mid_0_182_halyTotalDeath_alt_out
+    set mid_182_546_halyTotalTotal_alt_out halyTotalTotal_alt_out - mid_0_182_halyTotalTotal_alt_out
+    set mid_182_546_nmbLowNoGdp_alt_out nmbLowNoGdp_alt_out - mid_0_182_nmbLowNoGdp_alt_out
+    set mid_182_546_nmbMedNoGdp_alt_out nmbMedNoGdp_alt_out - mid_0_182_nmbMedNoGdp_alt_out
+    set mid_182_546_nmbHighNoGdp_alt_out nmbHighNoGdp_alt_out - mid_0_182_nmbHighNoGdp_alt_out
+    set mid_182_546_nmbLow_alt_out nmbLow_alt_out - mid_0_182_nmbLow_alt_out
+    set mid_182_546_nmbMed_alt_out nmbMed_alt_out - mid_0_182_nmbMed_alt_out
+    set mid_182_546_nmbHigh_alt_out nmbHigh_alt_out - mid_0_182_nmbHigh_alt_out
   ]
   if days = 546 [
     set mid_364_546_costDeathAverted_out costDeathAverted_out - mid_0_364_costDeathAverted_out
@@ -768,6 +833,14 @@ to CalculateMidCosts
     set mid_364_546_reffInfecters_out reffInfecters_out - mid_0_364_reffInfecters_out
     set mid_364_546_reffInfectees_out reffInfectees_out - mid_0_364_reffInfectees_out
     ifelse mid_364_546_reffInfecters_out > 0 [set mid_364_546_reff_out mid_364_546_reffInfectees_out / mid_364_546_reffInfecters_out ] [ set mid_364_546_reff_out 0 ]
+    set mid_364_546_halyTotalDeath_alt_out halyTotalDeath_alt_out - mid_0_364_halyTotalDeath_alt_out
+    set mid_364_546_halyTotalTotal_alt_out halyTotalTotal_alt_out - mid_0_364_halyTotalTotal_alt_out
+    set mid_364_546_nmbLowNoGdp_alt_out nmbLowNoGdp_alt_out - mid_0_364_nmbLowNoGdp_alt_out
+    set mid_364_546_nmbMedNoGdp_alt_out nmbMedNoGdp_alt_out - mid_0_364_nmbMedNoGdp_alt_out
+    set mid_364_546_nmbHighNoGdp_alt_out nmbHighNoGdp_alt_out - mid_0_364_nmbHighNoGdp_alt_out
+    set mid_364_546_nmbLow_alt_out nmbLow_alt_out - mid_0_364_nmbLow_alt_out
+    set mid_364_546_nmbMed_alt_out nmbMed_alt_out - mid_0_364_nmbMed_alt_out
+    set mid_364_546_nmbHigh_alt_out nmbHigh_alt_out - mid_0_364_nmbHigh_alt_out
   ]
   if days = 60 [
     set mid_0_60_costDeathAverted_out costDeathAverted_out
@@ -835,6 +908,14 @@ to CalculateMidCosts
     set mid_0_60_reffInfecters_out reffInfecters_out
     set mid_0_60_reffInfectees_out reffInfectees_out
     ifelse mid_0_60_reffInfecters_out > 0 [set mid_0_60_reff_out mid_0_60_reffInfectees_out / mid_0_60_reffInfecters_out ] [ set mid_0_60_reff_out 0 ]
+    set mid_0_60_halyTotalDeath_alt_out halyTotalDeath_alt_out
+    set mid_0_60_halyTotalTotal_alt_out halyTotalTotal_alt_out
+    set mid_0_60_nmbLowNoGdp_alt_out nmbLowNoGdp_alt_out
+    set mid_0_60_nmbMedNoGdp_alt_out nmbMedNoGdp_alt_out
+    set mid_0_60_nmbHighNoGdp_alt_out nmbHighNoGdp_alt_out
+    set mid_0_60_nmbLow_alt_out nmbLow_alt_out
+    set mid_0_60_nmbMed_alt_out nmbMed_alt_out
+    set mid_0_60_nmbHigh_alt_out nmbHigh_alt_out
   ]
   if days = 182 [
     set mid_60_182_costDeathAverted_out costDeathAverted_out - mid_0_60_costDeathAverted_out
@@ -902,6 +983,14 @@ to CalculateMidCosts
     set mid_60_182_reffInfecters_out reffInfecters_out - mid_0_60_reffInfecters_out
     set mid_60_182_reffInfectees_out reffInfectees_out - mid_0_60_reffInfectees_out
     ifelse mid_60_182_reffInfecters_out > 0 [set mid_60_182_reff_out mid_60_182_reffInfectees_out / mid_60_182_reffInfecters_out ] [ set mid_60_182_reff_out 0 ]
+    set mid_60_182_halyTotalDeath_alt_out halyTotalDeath_alt_out - mid_0_60_halyTotalDeath_alt_out
+    set mid_60_182_halyTotalTotal_alt_out halyTotalTotal_alt_out - mid_0_60_halyTotalTotal_alt_out
+    set mid_60_182_nmbLowNoGdp_alt_out nmbLowNoGdp_alt_out - mid_0_60_nmbLowNoGdp_alt_out
+    set mid_60_182_nmbMedNoGdp_alt_out nmbMedNoGdp_alt_out - mid_0_60_nmbMedNoGdp_alt_out
+    set mid_60_182_nmbHighNoGdp_alt_out nmbHighNoGdp_alt_out - mid_0_60_nmbHighNoGdp_alt_out
+    set mid_60_182_nmbLow_alt_out nmbLow_alt_out - mid_0_60_nmbLow_alt_out
+    set mid_60_182_nmbMed_alt_out nmbMed_alt_out - mid_0_60_nmbMed_alt_out
+    set mid_60_182_nmbHigh_alt_out nmbHigh_alt_out - mid_0_60_nmbHigh_alt_out
   ]
   if days = 91 [
     set mid_0_91_costDeathAverted_out costDeathAverted_out
@@ -969,6 +1058,14 @@ to CalculateMidCosts
     set mid_0_91_reffInfecters_out reffInfecters_out
     set mid_0_91_reffInfectees_out reffInfectees_out
     ifelse mid_0_91_reffInfecters_out > 0 [set mid_0_91_reff_out mid_0_91_reffInfectees_out / mid_0_91_reffInfecters_out ] [ set mid_0_91_reff_out 0 ]
+    set mid_0_91_halyTotalDeath_alt_out halyTotalDeath_alt_out
+    set mid_0_91_halyTotalTotal_alt_out halyTotalTotal_alt_out
+    set mid_0_91_nmbLowNoGdp_alt_out nmbLowNoGdp_alt_out
+    set mid_0_91_nmbMedNoGdp_alt_out nmbMedNoGdp_alt_out
+    set mid_0_91_nmbHighNoGdp_alt_out nmbHighNoGdp_alt_out
+    set mid_0_91_nmbLow_alt_out nmbLow_alt_out
+    set mid_0_91_nmbMed_alt_out nmbMed_alt_out
+    set mid_0_91_nmbHigh_alt_out nmbHigh_alt_out
   ]
   if days = 182 [
     set mid_91_182_costDeathAverted_out costDeathAverted_out - mid_0_91_costDeathAverted_out
@@ -1036,5 +1133,13 @@ to CalculateMidCosts
     set mid_91_182_reffInfecters_out reffInfecters_out - mid_0_91_reffInfecters_out
     set mid_91_182_reffInfectees_out reffInfectees_out - mid_0_91_reffInfectees_out
     ifelse mid_91_182_reffInfecters_out > 0 [set mid_91_182_reff_out mid_91_182_reffInfectees_out / mid_91_182_reffInfecters_out ] [ set mid_91_182_reff_out 0 ]
+    set mid_91_182_halyTotalDeath_alt_out halyTotalDeath_alt_out - mid_0_91_halyTotalDeath_alt_out
+    set mid_91_182_halyTotalTotal_alt_out halyTotalTotal_alt_out - mid_0_91_halyTotalTotal_alt_out
+    set mid_91_182_nmbLowNoGdp_alt_out nmbLowNoGdp_alt_out - mid_0_91_nmbLowNoGdp_alt_out
+    set mid_91_182_nmbMedNoGdp_alt_out nmbMedNoGdp_alt_out - mid_0_91_nmbMedNoGdp_alt_out
+    set mid_91_182_nmbHighNoGdp_alt_out nmbHighNoGdp_alt_out - mid_0_91_nmbHighNoGdp_alt_out
+    set mid_91_182_nmbLow_alt_out nmbLow_alt_out - mid_0_91_nmbLow_alt_out
+    set mid_91_182_nmbMed_alt_out nmbMed_alt_out - mid_0_91_nmbMed_alt_out
+    set mid_91_182_nmbHigh_alt_out nmbHigh_alt_out - mid_0_91_nmbHigh_alt_out
   ]
 end

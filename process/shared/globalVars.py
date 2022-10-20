@@ -157,6 +157,16 @@ singleMetricList = [
 	'reffInfecters',
 	'reffInfectees',
 	'reff',
+	
+	'halyTotalDeath_alt',
+	'halyTotalTotal_alt',
+	'nmbLowNoGdp_alt',
+	'nmbMedNoGdp_alt',
+	'nmbHighNoGdp_alt',
+	'nmbLow_alt',
+	'nmbMed_alt',
+	'nmbHigh_alt_out',
+
 ]
 
 senMetricList = [
@@ -197,6 +207,7 @@ senMetricList = [
 	'sen_costVisitEr',
 	'sen_costHospBed',
 	'sen_costIcuBed',
+	'sen_countTest',
 ]
 stages = [1, 2, 3, 4, 5]
 

@@ -501,26 +501,26 @@ to simul_infect
                 
                 let culpritSimul table:get localInfectionCulprit x
                 let culpritTracked false
-				let culpritTimenow 0
+                let culpritTimenow 0
                 let thisSimul self
                 table:put infectedContactList table:length infectedContactList culpritSimul
                 ask culpritSimul [
                   set culpritTracked tracked
-				  set culpritTimenow timenow
+                  set culpritTimenow timenow
                   table:put infectedContactList table:length infectedContactList thisSimul
                 ]
                 set hasKnownContact (culpritTracked = 1)
                 
-				if _init_metric_threshold < 0 [
-				  if days < init_reff_calc_time [
-				    set reffInfecters_out reffInfecters_out + popPerSimul
-				  ]
-				  if days - culpritTimenow < init_reff_calc_time [
-				    set reffInfectees_out reffInfectees_out + popPerSimul
-				  ]
-				  set totInfecterTime_out totInfecterTime_out + popPerSimul * culpritTimenow
-				]
-				
+                if _init_metric_threshold < 0 [
+                  if days < init_reff_calc_time [
+                    set reffInfecters_out reffInfecters_out + popPerSimul
+                  ]
+                  if days - culpritTimenow < init_reff_calc_time [
+                    set reffInfectees_out reffInfectees_out + popPerSimul
+                  ]
+                  set totInfecterTime_out totInfecterTime_out + popPerSimul * culpritTimenow
+                ]
+                
                 set isolating 0
                 set infectionsToday_acc infectionsToday_acc + popPerSimul
                 set new_case_real_counter new_case_real_counter + popPerSimul

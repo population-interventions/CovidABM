@@ -149,10 +149,10 @@ to COVIDPolicyTriggers
       if param_policy = "TightSupress" [
         policy_tight_supress
       ]
-      if param_policy = "LooseSupress" [
+      if param_policy = "LooseSupress" or (param_policy = "Fix2_1_LooseSupress" and days >= 2 * policy_phase_days) [
         policy_loose_supress
       ]
-      if param_policy = "BarelySupress" [
+      if param_policy = "BarelySupress" or (param_policy = "Fix2_1_BarelySupress" and days >= 2 * policy_phase_days) [
         policy_barely_supress
       ]
       if param_policy = "TightSupress_No_4" [
@@ -180,8 +180,18 @@ to COVIDPolicyTriggers
         ]
       ]
     ]
+    
     if policy_switch = "pak" [
       COVIDPolicyTriggers_pak
+    ]
+    if ((param_policy = "Fix2_1_LooseSupress" or param_policy = "Fix2_1_BarelySupress") and days < 2 * policy_phase_days) [
+      ifelse days < policy_phase_days
+      [
+        set stage 2
+      ]
+      [
+        set stage 1
+      ]
     ]
     if param_policy = "Stage2infect" [
       policy_infect 2

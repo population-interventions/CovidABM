@@ -147,7 +147,7 @@ to go
   
   if (days = End_Day) [
     ;print (word "stop")
-	CalculateEndCounts
+    CalculateEndCounts
     CalculateEndCosts
     set casesinperiod7_final casesinperiod7
     Stop 
