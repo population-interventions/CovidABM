@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-10.96
+11.5
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.07600000000000001
+0.047
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.16799999999999998
+0.38
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.216
+0.48
 0.01
 1
 NIL
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.856
+0.67
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+8.7
 1
 1
 NIL
@@ -966,7 +966,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "Fix2_1_LooseSupress" "Fix2_1_BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-25
+5
 
 MONITOR
 1473
@@ -1102,7 +1102,7 @@ Complacency_Bound
 Complacency_Bound
 0
 1
-0.48
+1.0
 0.01
 1
 NIL
@@ -2691,7 +2691,7 @@ init_stage
 init_stage
 0
 5
-0.48
+2.0
 0.01
 1
 NIL
@@ -3137,10 +3137,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1694
-449
-1817
-494
+1484
+455
+1607
+500
 NIL
 policymetric7
 17
@@ -3221,7 +3221,7 @@ NIL
 3.0
 10.0
 0.0
-0.1
+0.03
 true
 false
 "" ""
@@ -3740,10 +3740,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1478
-363
-1597
-408
+1495
+342
+1614
+387
 Generation Time
 totInfecterTime_out / totInfect_out
 3
@@ -3832,10 +3832,10 @@ PENS
 "Incur" 1.0 0 -13345367 true "" "plot 100 * (count simuls with [recoverVariant = item 6 table:get incursionTable 2]) / Population"
 
 MONITOR
-1479
-414
-1594
-459
+1497
+393
+1612
+438
 Early Reff
 reffInfectees_out / reffInfecters_out
 3

@@ -15,13 +15,19 @@
 		"vaccine_enabled" : [
 			false,
 			true
+		],
+		"input_population_table" : [
+			"input/vic/pop_r0",
+			"input/vic/pop"
 		]
 	},
 	"paramOverrides" : {
 		"first_case_calibrate" : true,
+		"vaccine_enabled" : false,
 		"track_R" : true,
 		"param_policy" : "StageFixed",
-		"input_draw_static" : "input/vic/draw_static_none.csv"
+		"input_draw_static" : "input/vic/draw_static_none.csv",
+		"init_timenow_limit" : 0
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {

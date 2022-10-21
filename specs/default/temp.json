@@ -3,16 +3,16 @@
         "5000.0"
     ],
     "span": [
-        "10.96"
+        "11.5"
     ],
     "superspreaders": [
-        "0.07600000000000001"
+        "0.047"
     ],
     "proportion_people_avoid": [
-        "0.16799999999999998"
+        "0.38"
     ],
     "proportion_time_avoid": [
-        "0.216"
+        "0.48"
     ],
     "initial_cases": [
         "250000.0"
@@ -21,7 +21,7 @@
         "6649066.0"
     ],
     "essential_workers": [
-        "0.856"
+        "0.67"
     ],
     "ess_w_risk_reduction": [
         "0.0"
@@ -42,7 +42,7 @@
         "0.1428"
     ],
     "visit_radius": [
-        "8.8"
+        "8.7"
     ],
     "mask_efficacy_mult": [
         "1.0"
@@ -51,7 +51,7 @@
         "true"
     ],
     "param_policy": [
-        "\"StageFixed\""
+        "\"Fix2_1_LooseSupress\""
     ],
     "asymptom_trace_mult": [
         "0.67"
@@ -60,7 +60,7 @@
         "80.0"
     ],
     "complacency_bound": [
-        "0.48"
+        "1.0"
     ],
     "profile_on": [
         "false"
@@ -348,7 +348,7 @@
         "18000.0"
     ],
     "init_stage": [
-        "0.48"
+        "2.0"
     ],
     "sim_seed": [
         "82339.52762"
