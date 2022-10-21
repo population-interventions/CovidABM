@@ -1,7 +1,7 @@
 {
 	"netlogoFile" : "covidModel",
 	"defaultParamFile" : "vic_main",
-	"copyExperimentMetrics" : "vic_main",
+	"copyExperimentMetrics" : "vic_rcalc",
 	"threads" : 2,
 	"indexParams" : {
 		"init_stage" : [
@@ -23,7 +23,6 @@
 	},
 	"paramOverrides" : {
 		"first_case_calibrate" : true,
-		"vaccine_enabled" : false,
 		"track_R" : true,
 		"param_policy" : "StageFixed",
 		"input_draw_static" : "input/vic/draw_static_none.csv",
