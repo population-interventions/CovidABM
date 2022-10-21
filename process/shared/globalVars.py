@@ -165,7 +165,7 @@ singleMetricList = [
 	'nmbHighNoGdp_alt',
 	'nmbLow_alt',
 	'nmbMed_alt',
-	'nmbHigh_alt_out',
+	'nmbHigh_alt',
 
 ]
 
