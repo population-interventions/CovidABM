@@ -166,7 +166,6 @@ singleMetricList = [
 	'nmbLow_alt',
 	'nmbMed_alt',
 	'nmbHigh_alt',
-
 ]
 
 senMetricList = [

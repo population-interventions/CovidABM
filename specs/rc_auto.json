@@ -6,9 +6,9 @@
 	"threads" : 1,
 	"indexParams" : {
 		"trans_override" : [
-			0.05,
-			0.35,
-			0.8
+			0.24,
+			0.33,
+			0.42
 		]
 	},
 	"paramOverrides" : {
@@ -34,7 +34,7 @@
 				9,
 				10
 			],
-			"repetionLimit" : 6
+			"repetionLimit" : 5
 		}
 	}
 }
