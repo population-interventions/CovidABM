@@ -122,7 +122,7 @@ to do_stages_tony
       set superspreaders          0.022
       set mask_wearing_a20        0.4
       set Visit_Radius            6
-      set schoolsOpen true
+      set schoolsOpen false
     ]
     
     if stage = 5 [
