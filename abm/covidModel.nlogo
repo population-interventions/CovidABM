@@ -2691,7 +2691,7 @@ init_stage
 init_stage
 0
 5
-2.0
+2.3
 0.01
 1
 NIL
@@ -3866,7 +3866,7 @@ start_day_abort
 start_day_abort
 0
 200
-100.0
+200.0
 1
 1
 NIL
