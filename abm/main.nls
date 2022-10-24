@@ -152,9 +152,4 @@ to go
     set casesinperiod7_final casesinperiod7
     Stop 
   ]
-  
-  if start_day > start_day_abort [
-    print (word "start_day_abort draw_index " draw_index)
-    Stop 
-  ]
 end

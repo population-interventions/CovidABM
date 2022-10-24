@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-11.5
+14.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.047
+0.06
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.38
+0.15
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.48
+0.3
 0.01
 1
 NIL
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.67
+0.8
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.7
+8.8
 1
 1
 NIL
@@ -2691,7 +2691,7 @@ init_stage
 init_stage
 0
 5
-2.3
+2.0
 0.01
 1
 NIL
@@ -2728,7 +2728,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-82339.52762
+41677.3291
 1
 1
 NIL
@@ -2894,7 +2894,7 @@ draw_index
 draw_index
 0
 2000
-245.0
+460.0
 1
 1
 NIL

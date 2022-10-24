@@ -321,7 +321,7 @@
         "false"
     ],
     "input_incursion_table": [
-        "\"input/vic/incur_novel_high_escape_high_vir.csv\""
+        "\"input/vic/incur_base45_only.csv\""
     ],
     "param_override_ve_area": [
         "-1.0"

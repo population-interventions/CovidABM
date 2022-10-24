@@ -36,7 +36,7 @@ to setup_incursionData
   set global_incursionVaccArrivals 0
   set global_incursionVaccRisk 0
   set global_incursionVaccType 0
-  set global_incursionVariant 0
+  set global_incursionVariant base_name
   set global_incursionReplaceChance 0
 end
 
@@ -61,14 +61,14 @@ to incursion_update
           set global_incursionVariant item 6 phaseData
           set global_incursionReplaceChance item 7 phaseData
           if incur_replace_chance >= 0 [
-           set global_incursionReplaceChance incur_replace_chance
+            set global_incursionReplaceChance incur_replace_chance
           ]
         ]
       ]
     ]
     
     let peoplePerSimul scaledPopulation * extraScaleFactor / Population
-    if days > 0 and global_incursionVariant != 0 [
+    if (days > 0 or start_day > start_day_abort * 0.2) and global_incursionVariant != 0 [
       if peoplePerSimul <= 1 [
         if rngs:rnd-beta incursionsSeedID 1 1 < 0.2 [
           ask n-of 1 simuls with [color != red and color != black] [
