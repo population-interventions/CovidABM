@@ -420,7 +420,7 @@
         "91.0"
     ],
     "incur_replace_chance": [
-        "0.02"
+        "0.2"
     ],
     "param_vac_uptake_std": [
         "0.1"
