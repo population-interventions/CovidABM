@@ -7,9 +7,9 @@
 	"threads" : 3,
 	"indexParams" : {
 		"init_stage" : [
-			1.5,
-			2.35,
-			3.2
+			1.7,
+			2.5,
+			3
 		]
 	},
 	"paramOverrides" : {
