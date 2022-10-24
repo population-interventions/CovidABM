@@ -2728,7 +2728,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-41677.3291
+39624.34262
 1
 1
 NIL
@@ -2894,7 +2894,7 @@ draw_index
 draw_index
 0
 2000
-460.0
+275.0
 1
 1
 NIL
@@ -3074,7 +3074,7 @@ incur_replace_chance
 incur_replace_chance
 -0.01
 1
-0.02
+0.2
 0.01
 1
 NIL
@@ -3230,10 +3230,10 @@ PENS
 "pen-1" 1.0 0 -16777216 true "" "plot 0.0125"
 
 PLOT
-1042
+1044
 483
-1466
-620
+1471
+613
 New infections
 NIL
 NIL
@@ -3792,10 +3792,10 @@ policy_more_mask
 -1000
 
 PLOT
-1045
-97
-1379
-296
+1040
+118
+1415
+310
 Infected Simuls
 NIL
 NIL
@@ -3812,10 +3812,10 @@ PENS
 "Incur" 1.0 0 -13345367 true "" "plot (count simuls with [color = red and infectVariant = item 6 table:get incursionTable 2])"
 
 PLOT
-1399
-100
-1766
-294
+1430
+115
+1827
+304
 Recovered Percentage
 NIL
 NIL

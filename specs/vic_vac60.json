@@ -60,7 +60,7 @@
 				
 				"outputTraces" : false,
 				"describeHeatmaps" : false,
-				"indexGrouping" : 4
+				"indexGrouping" : 1
 			},
 			"tornado" : {
 				"metrics" : ["totStage3", "nmbMed", "nmbMedNoGdp", "totInfect", "totHosp", "totDeath"],
