@@ -9,7 +9,7 @@
         "0.06"
     ],
     "proportion_people_avoid": [
-        "0.15"
+        "0.2"
     ],
     "proportion_time_avoid": [
         "0.3"
@@ -321,7 +321,7 @@
         "false"
     ],
     "input_incursion_table": [
-        "\"input/vic/incur_novel_high_escape_high_vir.csv\""
+        "\"input/vic/incur_base45_only.csv\""
     ],
     "param_override_ve_area": [
         "-1.0"
@@ -351,7 +351,7 @@
         "2.0"
     ],
     "sim_seed": [
-        "39624.34262"
+        "1223.793919"
     ],
     "midreport_day": [
         "64.0"
@@ -387,7 +387,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "275.0"
+        "9.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_target_later_30_high.csv\""
