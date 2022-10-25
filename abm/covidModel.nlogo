@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.15
+0.2
 0.01
 1
 NIL
@@ -2550,7 +2550,7 @@ INPUTBOX
 342
 387
 input_incursion_table
-input/vic/incur_novel_high_escape_high_vir.csv
+input/vic/incur_base45_only.csv
 1
 0
 String
@@ -2728,7 +2728,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-39624.34262
+1223.793919
 1
 1
 NIL
@@ -2894,7 +2894,7 @@ draw_index
 draw_index
 0
 2000
-275.0
+9.0
 1
 1
 NIL
