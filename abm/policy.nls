@@ -190,7 +190,8 @@ to COVIDPolicyTriggers
         set stage 2
       ]
       [
-        set stage 2 - 2 / 3 * (days - policy_phase_days) / policy_phase_days
+        set stage 1.5
+        ;;set stage 2 - 2 / 3 * (days - policy_phase_days) / policy_phase_days
       ]
     ]
     if param_policy = "Stage2infect" [
