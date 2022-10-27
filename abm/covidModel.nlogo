@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-11.739
+14.0
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.049
+0.06
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.357
+0.2
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.457
+0.3
 0.01
 1
 NIL
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.678
+0.8
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.67
+8.8
 1
 1
 NIL
@@ -966,7 +966,7 @@ CHOOSER
 param_policy
 param_policy
 "AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "Fix2_1_LooseSupress" "Fix2_1_BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-5
+6
 
 MONITOR
 1473
@@ -1333,10 +1333,10 @@ policyTriggerScale
 11
 
 MONITOR
-1699
-399
-1802
-444
+1714
+372
+1817
+417
 slopeAverage %
 slopeAverage * 100
 3
@@ -2054,10 +2054,10 @@ casesReportedToday
 11
 
 MONITOR
-1699
-353
-1808
-398
+1714
+325
+1823
+370
 NIL
 initial_infection_R
 17
@@ -2728,7 +2728,7 @@ SIM_SEED
 SIM_SEED
 -1
 10000000
-1223.793919
+26066.76358
 1
 1
 NIL
@@ -2894,7 +2894,7 @@ draw_index
 draw_index
 0
 2000
-9.0
+108.0
 1
 1
 NIL
@@ -3871,6 +3871,28 @@ start_day_abort
 1
 NIL
 HORIZONTAL
+
+MONITOR
+1640
+419
+1759
+464
+NIL
+totDeath_out
+1
+1
+11
+
+MONITOR
+1640
+467
+1749
+512
+NIL
+totHospTime_out
+1
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
