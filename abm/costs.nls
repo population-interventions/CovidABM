@@ -391,12 +391,16 @@ end
 
 to CalculateEndCosts
   ;; Calculate mask costs
-  (ifelse policy_mask_n95
+  (ifelse policy_mask_n95 or policy_more_mask
     [
       let totalMaskTime stage3time + stage4time + stage5time
       let restocks ceiling (totalMaskTime / 28)
       set costMask_out (restocks * costUI_maskPerRound * (count simuls with [agerange > 10]) * total_population / population) + totalMaskTime * costUI_maskDailyAds
       set costMaskFixed_out costUI_maskFixed
+      if policy_mask_n95 and policy_more_mask [
+        set costMask_out 2 * costMask_out
+        set costMaskFixed_out 2 * costMaskFixed_out
+      ]
     ]
     [
       set costMask_out 0
