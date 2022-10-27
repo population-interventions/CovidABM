@@ -136,7 +136,7 @@ end
 
 to-report isHighVirulence [variant]
   let data table:get variantData variant
-  report ((word table:get data "highVirulence") = 1)
+  report (table:get data "highVirulence" = 1)
 end
 
 to-report getVariantRecoverVaccine [variant]

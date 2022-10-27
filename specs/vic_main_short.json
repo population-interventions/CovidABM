@@ -6,10 +6,12 @@
 	"threads" : 4,
 	"indexParams" : {
 		"input_vaccine_schedule" : [
-			"input/vic/rollout_none.csv"
+			"input/vic/rollout_target_later_60_high.csv"
 		],
 		"input_incursion_table" : [
-			"input/vic/incur_base45_only.csv"
+			"input/vic/incur_novel_high_escape_high_vir.csv",
+			"input/vic/incur_novel_high_escape_low_vir.csv",
+			"input/vic/incur_omlike_high_escape_low_vir.csv"
 		],
 		"policy_mask_n95" : [
 			false
@@ -24,7 +26,7 @@
 	"paramOverrides" : {
 		"input_population_table" : "input/vic/pop",
 		"first_case_calibrate" : false,
-		"end_day" : 120
+		"end_day" : 546
 	},
 	"runIndexer" : "draw_index",
 	"postSeries" : {
