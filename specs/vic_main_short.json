@@ -10,14 +10,15 @@
 		],
 		"input_incursion_table" : [
 			"input/vic/incur_novel_high_escape_high_vir.csv",
-			"input/vic/incur_novel_high_escape_low_vir.csv",
-			"input/vic/incur_omlike_high_escape_low_vir.csv"
+			"input/vic/incur_omlike_high_escape_high_vir.csv"
 		],
 		"policy_mask_n95" : [
-			false
+			false,
+			true
 		],
 		"policy_more_mask" : [
-			false
+			false,
+			true
 		],
 		"param_policy" : [
 			"Fix2_1_BarelySupress"
