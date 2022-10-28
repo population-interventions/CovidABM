@@ -48,11 +48,10 @@ def AppendParallels(
 
 
 def DoSpartanAggregate(
-		dataDir, rawDataDir, measureCols, runIndexer, arraySize=400,
+		dataDir, rawDataDir, measureCols, runIndexer, indexList=range(1, 101),
 		skip=False, processCohort=True, processStages=True,
 		indexGrouping=False, doAverage=False, outputTraces=False,
 		allowDaily=False):
-	indexList = range(1, arraySize + 1)
 	if skip:
 		indexList = util.ListRemove(indexList, skip)
 	

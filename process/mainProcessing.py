@@ -53,16 +53,23 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 	workingDir = '{}/process'.format(modelData['scratchDir'])
 	postInputDir = modelData['postInputDir']
 
-	arraySize = len(util.GetFiles('{}/single'.format(postDataDir)))
+	singles = util.GetFiles('{}/single'.format(postDataDir))
+	arraySize = len(singles)
 	if arraySize == 0:
-		arraySize = len(util.GetFiles('{}/post_parallel/single'.format(modelData['scratchDir'])))
+		singles = util.GetFiles('{}/post_parallel/single'.format(modelData['scratchDir']))
+		arraySize = len(singles)
 		singleOnly = True
+		indexList = [int(x[str.find(x, 'post_parallel/single_') + 21:]) for x in singles]
+	else:
+		indexList = [int(x[str.find(x, 'single/single_') + 14:]) for x in singles]
+	fullArray = [x + 1 for x in range(arraySize)]
 	
-	print('arraySize', arraySize)
+	print('Raw Index', indexList)
+	print('Missing Element', util.ListRemove(fullArray, indexList, lenient=True))
 	if aggregateProcessing and not singleOnly:
 		DoSpartanAggregate(
 			workingDir, postDataDir, measureCols, runIndexer,
-			arraySize=arraySize, processCohort=processCohort,
+			indexList=indexList, processCohort=processCohort,
 			processStages=processStages, indexGrouping=indexGrouping,
 			doAverage=doAverage, outputTraces=outputTraces, allowDaily=allowDaily)
 	
