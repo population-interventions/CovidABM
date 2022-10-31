@@ -422,10 +422,14 @@ def ToHeatmap(df, structure):
 	
 	df['_sort_row'] = ''
 	for value in structure['sort_rows']:
-		df['_sort_row'] = df['_sort_row'] + df[value[0]].replace(value[1]).astype(str)
+		if value[0] in df.columns:
+			repDict = {x : str(i).zfill(2) for i, x in enumerate(value[1])}
+			df['_sort_row'] = df['_sort_row'] + df[value[0]].replace(repDict).astype(str)
 	df['_sort_col'] = ''
 	for value in structure['sort_cols']:
-		df['_sort_col'] = df['_sort_col'] + df[value[0]].replace(value[1]).astype(str)
+		if value[0] in df.columns:
+			repDict = {x : str(i).zfill(2) for i, x in enumerate(value[1])}
+			df['_sort_col'] = df['_sort_col'] + df[value[0]].replace(repDict).astype(str)
 	
 	df = df.set_index(['_sort_row', '_sort_col'] + structure['index_rows'] + structure['index_cols'])
 	df = df.unstack(['_sort_col'] + structure['index_cols'])

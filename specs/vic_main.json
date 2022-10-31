@@ -540,13 +540,34 @@
 				]
 			},
 			"heatmapStructure" : {
-				"index_rows" : ["Stage policy", "Variant"],
-				"index_cols" : ["Mask stockpile", "Mask wearing", "Vaccine schedule"],
+				"index_rows" : ["Variant", "Mask stockpile", "Mask wearing"],
+				"index_cols" : ["Stage policy", "Vaccine schedule"],
 				"base_value" : {
 				},
 				"sort_rows" : [
-				], 
+					["Variant", [
+							"Om45 only",
+							"Omlike low escape low vir", "Novel low escape low vir",
+							"Omlike high escape low vir", "Novel high escape low vir",
+							"Omlike low escape high vir", "Novel low escape high vir",
+							"Omlike high escape high vir", "Novel high escape high vir"
+						]
+					],
+					["Mask stockpile", ["Stockpile N95", "No Stockpile"]],
+					["Mask wearing", ["Increased", "No Change"]]
+				],
 				"sort_cols" : [
+					["Stage policy", ["Fix2_1_LooseSupress", "Fix2_1_BarelySupress"]],
+					["Vaccine schedule", [
+							"MV later 30+ low uptake", "MV later 30+ high uptake",
+							"MV later 60+ high uptake", "MV later 60+ low uptake",
+							"OT later 30+ high uptake", "OT later 30+ low uptake",
+							"OT later 60+ high uptake", "OT later 60+ low uptake",
+							"Dec only 30+ high uptake", "Dec only 30+ low uptake",
+							"Dec only 60+ high uptake", "Dec only 60+ low uptake",
+							"None"
+						]
+					]
 				]
 			},
 			"splitTableIndexName" : "Vaccine schedule",

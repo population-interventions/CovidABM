@@ -26,7 +26,7 @@ table5Rows = [
 	[False, False],
 ]
 
-def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
+def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=False):
 	conf = modelData['postSeries']['processMain']
 	runIndexer = modelData['runIndexer']
 	params = conf['params']
@@ -76,12 +76,15 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly):
 	#if not onHpc:
 	#	singleProcess.FixSingle(workingDir, measureCols_raw)
 
-	if 'singleProcessing' in conf:
+	if (not heatmapOnly) and 'singleProcessing' in conf:
 		singleProcess.DoSingleProcess(conf['singleProcessing'], workingDir, heatmapStructure, measureCols_raw, onHpc)
 	
 	if 'singleHeatmaps' in conf:
 		singleProcess.MakeSingleHeatmaps(conf['singleHeatmaps'], workingDir, heatmapStructure, measureCols_raw)
-		
+
+	if heatmapOnly:
+		return
+	
 	if processCohort and 'cohortHeatmaps' in conf and not singleOnly:
 		for period in conf['cohortHeatmaps']['heatPeriods']:
 			print('Period', period[0], period[1] - 1)
