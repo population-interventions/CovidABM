@@ -6,42 +6,19 @@
 	"threads" : 4,
 	"indexParams" : {
 		"input_vaccine_schedule" : [
-			"input/vic/rollout_none.csv",
-			"input/vic/rollout_dec_only_30_high.csv",
-			"input/vic/rollout_target_later_30_high.csv",
-			"input/vic/rollout_multi_later_30_high.csv",
-			"input/vic/rollout_dec_only_60_high.csv",
-			"input/vic/rollout_target_later_60_high.csv",
-			"input/vic/rollout_multi_later_60_high.csv",
-			"input/vic/rollout_dec_only_30_low.csv",
-			"input/vic/rollout_target_later_30_low.csv",
-			"input/vic/rollout_multi_later_30_low.csv",
-			"input/vic/rollout_dec_only_60_low.csv",
-			"input/vic/rollout_target_later_60_low.csv",
-			"input/vic/rollout_multi_later_60_low.csv"
+			"input/vic/rollout_multi_later_60_high.csv"
 		],
 		"input_incursion_table" : [
-			"input/vic/incur_base45_only.csv",
-			"input/vic/incur_omlike_high_escape_high_vir.csv",
-			"input/vic/incur_omlike_high_escape_low_vir.csv",
-			"input/vic/incur_novel_high_escape_high_vir.csv",
-			"input/vic/incur_novel_high_escape_low_vir.csv",
-			"input/vic/incur_omlike_low_escape_high_vir.csv",
-			"input/vic/incur_omlike_low_escape_low_vir.csv",
-			"input/vic/incur_novel_low_escape_high_vir.csv",
-			"input/vic/incur_novel_low_escape_low_vir.csv"
+			"input/vic/incur_novel_high_escape_high_vir.csv"
 		],
 		"policy_mask_n95" : [
-			false,
 			true
 		],
 		"policy_more_mask" : [
-			false,
 			true
 		],
 		"param_policy" : [
-			"Fix2_1_LooseSupress",
-			"Fix2_1_BarelySupress"
+			"Fix2_1_LooseSupress"
 		]
 	},
 	"paramOverrides" : {

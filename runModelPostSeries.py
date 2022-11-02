@@ -15,7 +15,7 @@ singleOnly = False #not onHpc
 
 if 'postSeries' in modelData:
 	if 'processMain' in modelData['postSeries']:
-		mainProcessing.RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=True)
+		mainProcessing.RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=False)
 	if 'rcalc' in modelData['postSeries']:
 		rcalc.ProcessResults(modelData)
 	if 'targetOptimise' in modelData['postSeries']:
