@@ -1,4 +1,4 @@
-The code below is subject to the default copyright laws for a GitHub
+This repository is subject to the default copyright laws for a GitHub
 repository. Namely, we retain all rights to the source code and no
 one may reproduce, distribute, or create derivative works from our
 work – without our approval. If you wish to use our code, or
