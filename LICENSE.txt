@@ -1,1 +1,6 @@
-The code below is subject to the default copyright laws for a GitHub repository. Namely, we retain all rights to the source code and no one may reproduce, distribute, or create derivative works from our work – without our approval.  If you wish to use our code, or derivatives of the code, in your academic or commercial work, please email population-interventions@unimelb.edu.au to discuss further.
+The code below is subject to the default copyright laws for a GitHub
+repository. Namely, we retain all rights to the source code and no
+one may reproduce, distribute, or create derivative works from our
+work – without our approval. If you wish to use our code, or
+derivatives of the code, in your academic or commercial work, please
+email population-interventions@unimelb.edu.au to discuss further.
