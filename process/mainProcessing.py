@@ -64,6 +64,7 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=False
 		indexList = [int(x[str.find(x, 'single/single_') + 14:]) for x in singles]
 	fullArray = [x + 1 for x in range(arraySize)]
 	
+		
 	print('Raw Index', indexList)
 	print('Missing Element', util.ListRemove(fullArray, indexList, lenient=True))
 	if aggregateProcessing and not singleOnly:
@@ -72,10 +73,11 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=False
 			indexList=indexList, processCohort=processCohort,
 			processStages=processStages, indexGrouping=indexGrouping,
 			doAverage=doAverage, outputTraces=outputTraces, allowDaily=allowDaily)
-	
+
+	# Fix single issue
 	#if not onHpc:
 	#	singleProcess.FixSingle(workingDir, measureCols_raw)
-
+		
 	if (not heatmapOnly) and 'singleProcessing' in conf:
 		singleProcess.DoSingleProcess(conf['singleProcessing'], workingDir, heatmapStructure, measureCols_raw, onHpc)
 	

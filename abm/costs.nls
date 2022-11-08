@@ -391,22 +391,19 @@ end
 
 to CalculateEndCosts
   ;; Calculate mask costs
-  (ifelse policy_mask_n95 or policy_more_mask
-    [
-      let totalMaskTime stage3time + stage4time + stage5time
-      let restocks ceiling (totalMaskTime / 28)
-      set costMask_out (restocks * costUI_maskPerRound * (count simuls with [agerange > 10]) * total_population / population) + totalMaskTime * costUI_maskDailyAds
-      set costMaskFixed_out costUI_maskFixed
-      if policy_mask_n95 and policy_more_mask [
-        set costMask_out 2 * costMask_out
-        set costMaskFixed_out 2 * costMaskFixed_out
-      ]
+  set costMask_out 0
+  set costMaskFixed_out 0
+  if policy_mask_n95 or policy_more_mask [
+    let totalMaskTime stage3time + stage4time + stage5time
+    let restocks ceiling (totalMaskTime / 28)
+    if policy_mask_n95 [
+      set costMask_out costMask_out + (restocks * costUI_maskPerRound * (count simuls with [agerange > 10]) * total_population / population) + totalMaskTime * costUI_maskDailyAds
+      set costMaskFixed_out costMaskFixed_out + costUI_maskFixed
     ]
-    [
-      set costMask_out 0
-      set costMaskFixed_out 0
+    if policy_more_mask [
+      set costMask_out costMask_out + totalMaskTime * costUI_maskDailyAds
     ]
-  )
+  ]
 
   ;; Fixed vaccination cost
   (ifelse
@@ -629,9 +626,9 @@ to CalculateMidCosts
     set mid_182_364_costTesting_out costTesting_out - mid_0_182_costTesting_out
     set mid_182_364_costVaccine_out costVaccine_out - mid_0_182_costVaccine_out
     set mid_182_364_costVacDeliver_out costVacDeliver_out - mid_0_182_costVacDeliver_out
-    set mid_182_364_costVaccineFixed_out costVaccineFixed_out - mid_0_182_costVaccineFixed_out
+    set mid_182_364_costVaccineFixed_out costVaccineFixed_out
     set mid_182_364_costMask_out costMask_out - mid_0_182_costMask_out
-    set mid_182_364_costMaskFixed_out costMaskFixed_out - mid_0_182_costMaskFixed_out
+    set mid_182_364_costMaskFixed_out costMaskFixed_out
     set mid_182_364_costGdp_out costGdp_out - mid_0_182_costGdp_out
     set mid_182_364_costTotalHealth_out costTotalHealth_out - mid_0_182_costTotalHealth_out
     set mid_182_364_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_182_costTotalHealth_uk_out
@@ -704,9 +701,9 @@ to CalculateMidCosts
     set mid_182_546_costTesting_out costTesting_out - mid_0_182_costTesting_out
     set mid_182_546_costVaccine_out costVaccine_out - mid_0_182_costVaccine_out
     set mid_182_546_costVacDeliver_out costVacDeliver_out - mid_0_182_costVacDeliver_out
-    set mid_182_546_costVaccineFixed_out costVaccineFixed_out - mid_0_182_costVaccineFixed_out
+    set mid_182_546_costVaccineFixed_out costVaccineFixed_out
     set mid_182_546_costMask_out costMask_out - mid_0_182_costMask_out
-    set mid_182_546_costMaskFixed_out costMaskFixed_out - mid_0_182_costMaskFixed_out
+    set mid_182_546_costMaskFixed_out costMaskFixed_out
     set mid_182_546_costGdp_out costGdp_out - mid_0_182_costGdp_out
     set mid_182_546_costTotalHealth_out costTotalHealth_out - mid_0_182_costTotalHealth_out
     set mid_182_546_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_182_costTotalHealth_uk_out
@@ -779,9 +776,9 @@ to CalculateMidCosts
     set mid_364_546_costTesting_out costTesting_out - mid_0_364_costTesting_out
     set mid_364_546_costVaccine_out costVaccine_out - mid_0_364_costVaccine_out
     set mid_364_546_costVacDeliver_out costVacDeliver_out - mid_0_364_costVacDeliver_out
-    set mid_364_546_costVaccineFixed_out costVaccineFixed_out - mid_0_364_costVaccineFixed_out
+    set mid_364_546_costVaccineFixed_out costVaccineFixed_out
     set mid_364_546_costMask_out costMask_out - mid_0_364_costMask_out
-    set mid_364_546_costMaskFixed_out costMaskFixed_out - mid_0_364_costMaskFixed_out
+    set mid_364_546_costMaskFixed_out costMaskFixed_out
     set mid_364_546_costGdp_out costGdp_out - mid_0_364_costGdp_out
     set mid_364_546_costTotalHealth_out costTotalHealth_out - mid_0_364_costTotalHealth_out
     set mid_364_546_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_364_costTotalHealth_uk_out
@@ -929,9 +926,9 @@ to CalculateMidCosts
     set mid_60_182_costTesting_out costTesting_out - mid_0_60_costTesting_out
     set mid_60_182_costVaccine_out costVaccine_out - mid_0_60_costVaccine_out
     set mid_60_182_costVacDeliver_out costVacDeliver_out - mid_0_60_costVacDeliver_out
-    set mid_60_182_costVaccineFixed_out costVaccineFixed_out - mid_0_60_costVaccineFixed_out
+    set mid_60_182_costVaccineFixed_out costVaccineFixed_out
     set mid_60_182_costMask_out costMask_out - mid_0_60_costMask_out
-    set mid_60_182_costMaskFixed_out costMaskFixed_out - mid_0_60_costMaskFixed_out
+    set mid_60_182_costMaskFixed_out costMaskFixed_out
     set mid_60_182_costGdp_out costGdp_out - mid_0_60_costGdp_out
     set mid_60_182_costTotalHealth_out costTotalHealth_out - mid_0_60_costTotalHealth_out
     set mid_60_182_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_60_costTotalHealth_uk_out
@@ -1079,9 +1076,9 @@ to CalculateMidCosts
     set mid_91_182_costTesting_out costTesting_out - mid_0_91_costTesting_out
     set mid_91_182_costVaccine_out costVaccine_out - mid_0_91_costVaccine_out
     set mid_91_182_costVacDeliver_out costVacDeliver_out - mid_0_91_costVacDeliver_out
-    set mid_91_182_costVaccineFixed_out costVaccineFixed_out - mid_0_91_costVaccineFixed_out
+    set mid_91_182_costVaccineFixed_out costVaccineFixed_out
     set mid_91_182_costMask_out costMask_out - mid_0_91_costMask_out
-    set mid_91_182_costMaskFixed_out costMaskFixed_out - mid_0_91_costMaskFixed_out
+    set mid_91_182_costMaskFixed_out costMaskFixed_out
     set mid_91_182_costGdp_out costGdp_out - mid_0_91_costGdp_out
     set mid_91_182_costTotalHealth_out costTotalHealth_out - mid_0_91_costTotalHealth_out
     set mid_91_182_costTotalHealth_uk_out costTotalHealth_uk_out - mid_0_91_costTotalHealth_uk_out

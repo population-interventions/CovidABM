@@ -410,6 +410,40 @@ def FilterOutIndexVal(df, indexDict):
 	return df
 		
 
+def GetMultiIndexFilter(df, targetIndex):
+	filterIndex = False
+	for key, value in targetIndex.items():
+		keyValues = df.index.get_level_values(key)
+		if type(value) is dict:
+			if 'lower' in value:
+				if 'upper' in value:
+					minExisting = max(keyValues.min(), value['lower'])
+					maxExisting = min(keyValues.max(), value['upper'] - 1)
+					newFilter = ((keyValues >= minExisting) & (keyValues <= maxExisting))
+				else:
+					minExisting = max(keyValues.min(), value['lower'])
+					newFilter = (keyValues >= minExisting)
+			elif 'upper' in value:
+				maxExisting = min(keyValues.max(), value['upper'] - 1)
+				newFilter = (keyValues <= maxExisting)
+			elif 'names' in value:
+				keyValues = newFilter
+				newFilter = False
+				for indexVal in value['names']:
+					if newFilter is False:
+						newFilter = (keyValues == indexVal)
+					else:
+						newFilter = (newFilter | (keyValues == indexVal))
+		else:
+			newFilter = (keyValues == value)
+		
+		if filterIndex is False:
+			filterIndex = newFilter
+		else:
+			filterIndex = (filterIndex & newFilter)
+	return filterIndex
+
+
 def IdentifyIndex(df, identifyIndex, quantile=False):
 	if quantile is not False:
 		return df.groupby(ListRemove(list(df.index.names), identifyIndex)).quantile(quantile)

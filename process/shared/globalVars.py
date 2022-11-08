@@ -79,6 +79,11 @@ singleAverages = {
 	'reff' : ['reffInfectees', 'reffInfecters'],
 }
 
+singleMetricNoDiff = [
+	'costVaccineFixed',
+	'costMaskFixed',
+]
+
 singleList = [
 	[0, 182],
 	[0, 364],

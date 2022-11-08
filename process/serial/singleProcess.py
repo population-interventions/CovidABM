@@ -2,10 +2,12 @@
 import pandas as pd
 import numpy as np
 import random
+import tqdm
 import math
 
 import process.serial.tornadoPlot as tornadoPlot
 import process.shared.utilities as util
+import process.shared.globalVars as gl
 
 FUDGE_APPEND = ''
 
@@ -212,8 +214,6 @@ def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 			print('DoSingleProcess', 'optimality', prefix)
 			for name, aggData in conf['optimality'].items():
 				DoOptimality(df, name, prefix, aggData, heatStruct, subfolder)
-		
-	
 	
 	if 'rankmaps' in conf:
 		for name, data in conf['rankmaps'].items():
@@ -283,11 +283,7 @@ def MakeSingleHeatmaps(conf, subfolder, heatStruct, measureCols_raw, describe=Fa
 						identifyIndex=idList, describe=describe)
 
 
-def FixSingle(subfolder, measureCols_raw):
-	df = pd.read_csv(
-		subfolder + '/single/single_broken{}.csv'.format(FUDGE_APPEND),
-		index_col=list(range(len(measureCols_raw) + 1)))
-	
+def SingleFixVaccineNames(df):
 	#print(df)
 	#print(df['costVaccineFixed'])
 	indexOrder = list(df.index.names)
@@ -303,4 +299,52 @@ def FixSingle(subfolder, measureCols_raw):
 	df = df.reorder_levels(indexOrder).sort_index()
 	#print(df)
 	#print(df['costVaccineFixed'])
+	return df
+
+
+def SingleFixMask(df):
+	filterIncrease = util.GetMultiIndexFilter(df, {'Mask wearing' : 'Increased', 'Mask stockpile' : 'No Stockpile'})
+	filterBothInt = util.GetMultiIndexFilter(df, {'Mask wearing' : 'Increased', 'Mask stockpile' : 'Stockpile N95'})
+	filterIncAny = util.GetMultiIndexFilter(df, {'Mask wearing' : 'Increased'})
+	costMaskFixed_otherCols = ['mid_{}_{}_costMaskFixed'.format(x[0], x[1]) for x in gl.singleList]
+	costMask_cols = ['mid_{}_{}_costMask'.format(x[0], x[1]) for x in gl.singleList] + ['costMask']
+	
+	print(df['mid_182_546_costMask'])
+	print(df['mid_182_546_costMaskFixed'])
+	
+	# Remove the mask costs for increased no stockpile
+	df.loc[filterIncrease, 'costMaskFixed'] = 0
+	df.loc[filterIncrease, costMask_cols] = 0
+	
+	# Remove the extra mask costs for increased with stockpile
+	df.loc[filterBothInt, 'costMaskFixed'] = df.loc[filterBothInt, 'costMaskFixed'] * 0.5
+	df.loc[filterBothInt, costMask_cols] = df.loc[filterBothInt, costMask_cols] * 0.5
+	
+	# Copy the correct costMaskFixed to mid_ columns
+	for col in costMaskFixed_otherCols:
+		df[col] = df['costMaskFixed']
+	
+	maskPromote = df.loc[filterIncAny, 'sen_maskPromote']
+	# Recalculate and add the increased wearing daily advertising cost
+	for time in tqdm.tqdm(['mid_{}_{}_'.format(x[0], x[1]) for x in gl.singleList] + ['']):
+		lockdownTime = df.loc[filterIncAny, ['{}totStage{}'.format(time, s) for s in [3, 4, 5]]].sum(axis=1)
+		adCost = maskPromote * lockdownTime
+		df.loc[filterIncAny, time + 'costMask'] = df.loc[filterIncAny, time + 'costMask'] + adCost
+		
+		# also copy over fixed vaccine costs
+		df[time + 'costVaccineFixed'] = df['costVaccineFixed']
+	
+	print(df['mid_182_546_costMask'])
+	print(df['mid_182_546_costMaskFixed'])
+	
+	return df
+
+
+def FixSingle(subfolder, measureCols_raw):
+	print('FixSingle')
+	df = pd.read_csv(
+		subfolder + '/single/single_broken{}.csv'.format(FUDGE_APPEND),
+		index_col=list(range(len(measureCols_raw) + 1)))
+	
+	df = SingleFixMask(df)
 	util.OutputToFile(df, subfolder + '/single/single{}'.format(FUDGE_APPEND))
