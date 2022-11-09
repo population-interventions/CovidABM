@@ -408,7 +408,7 @@ def FilterOutIndexVal(df, indexDict):
 			filterIndex = ((thisFilter == val) & filterIndex)
 	df = df[(~filterIndex)]
 	return df
-		
+
 
 def GetMultiIndexFilter(df, targetIndex):
 	filterIndex = False
@@ -448,6 +448,34 @@ def IdentifyIndex(df, identifyIndex, quantile=False):
 	if quantile is not False:
 		return df.groupby(ListRemove(list(df.index.names), identifyIndex)).quantile(quantile)
 	return df.groupby(ListRemove(list(df.index.names), identifyIndex)).mean()
+
+
+def Opt(conf, keyList, default=False):
+	# Load an optional parameter (or path of parameters) from a dict, with a default if it is not found.
+	if type(keyList) is list and len(keyList) <= 1:
+		keyList = keyList[0]
+	
+	if type(keyList) is not list:
+		if keyList in conf:
+			return conf[keyList]
+		else:
+			return default
+	
+	if keyList[0] not in conf:
+		return default
+	
+	return Opt(conf[keyList[0]], keyList[1:], default)
+
+
+def LoadJson(filePath):
+	with open('{}.json'.format(filePath)) as json_file:
+		try:
+			return json.load(json_file)
+		except ValueError as err:
+			print("=== Model Specs Json Error ===")
+			print("File: 'model_specs/{}.json'".format(modelFileName))
+			print(err)
+			return False
 
 
 def ToHeatmap(df, structure):

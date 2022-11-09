@@ -68,12 +68,18 @@
 			},
 			"singleHeatmaps" : {
 				"prefixList" : ["mid_0_182_", "mid_182_546_"],
-				"metrics" : ["totStage2", "totStage3", "totStage4", "totStage5", "hospDaysAbove750", "hospDaysAbove1500", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
+				"metrics" : [
+					"totStage2", "totStage3", "totStage4", "totStage5",
+					"hospDaysAbove750", "hospDaysAbove1500",
+					"nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk",
+					"totInfect", "totHosp", "totDeath",
+					"costTotalHealth", "halyTotalTotal"],
 				"identifyIndex" : {
 					"scenAgg" : ["Variant"]
 				}
 			},
 			"singleProcessing" : {
+				"rerun_drawAve" : true,
 				"prefixList" : ["mid_0_182_", "mid_182_546_"],
 				"aggregates" : {
 					"meanOnDraw_thenDescribeOnScenario" : {

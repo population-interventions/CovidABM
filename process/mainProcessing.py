@@ -75,7 +75,7 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=False
 			doAverage=doAverage, outputTraces=outputTraces, allowDaily=allowDaily)
 
 	# Fix single issue
-	#if not onHpc:
+	#if (not heatmapOnly) and not onHpc:
 	#	singleProcess.FixSingle(workingDir, measureCols_raw)
 		
 	if (not heatmapOnly) and 'singleProcessing' in conf:

@@ -192,6 +192,7 @@ def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
 	print('DoSingleProcess', 'aggregates')
 
 	if 'rerun_drawAve' in conf:
+		print('rerun_drawAve')
 		df = pd.read_csv(
 			subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
 			index_col=list(range(len(measureCols_raw) + 1)))
@@ -262,6 +263,7 @@ def MakeTornadoPlots(tornadoConf, subfolder, measureCols_raw, onHpc, percentile=
 
 
 def MakeSingleHeatmaps(conf, subfolder, heatStruct, measureCols_raw, describe=False):
+	print('MakeSingleHeatmaps')
 	df = pd.read_csv(
 		subfolder + '/single/single{}.csv'.format(FUDGE_APPEND),
 		index_col=list(range(len(measureCols_raw) + 1)))
@@ -327,7 +329,7 @@ def SingleFixMask(df):
 	maskPromote = df.loc[filterIncAny, 'sen_maskPromote']
 	# Recalculate and add the increased wearing daily advertising cost
 	for time in tqdm.tqdm(['mid_{}_{}_'.format(x[0], x[1]) for x in gl.singleList] + ['']):
-		lockdownTime = df.loc[filterIncAny, ['{}totStage{}'.format(time, s) for s in [3, 4, 5]]].sum(axis=1)
+		lockdownTime = df.loc[filterIncAny, '{}totStage3'.format(time)]
 		adCost = maskPromote * lockdownTime
 		df.loc[filterIncAny, time + 'costMask'] = df.loc[filterIncAny, time + 'costMask'] + adCost
 		
