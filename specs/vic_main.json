@@ -73,6 +73,7 @@
 					"hospDaysAbove750", "hospDaysAbove1500",
 					"nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk",
 					"totInfect", "totHosp", "totDeath",
+					"costTotalTotal", "costGdp",
 					"costTotalHealth", "halyTotalTotal"],
 				"identifyIndex" : {
 					"scenAgg" : ["Variant"]
@@ -524,8 +525,8 @@
 							"nmbGdp" : ["mid_182_546_optimal/healthSystemAndGdp_35k_ranking", "rank"],
 							"nmb_median" : ["mid_182_546_optimal/healthSystem_35k_ranking", "p_50"],
 							"nmbGdp_median" : ["mid_182_546_optimal/healthSystemAndGdp_35k_ranking", "p_50"],
-							"hospAbove750" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove750"],
-							"hospAbove1500" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove1500"],
+							"hospAbove750" : ["single/meanOnDraw_thenDescribeOnScenario_50", "mid_182_546_hospDaysAbove750"],
+							"hospAbove1500" : ["single/meanOnDraw_thenDescribeOnScenario_50", "mid_182_546_hospDaysAbove1500"],
 							"deaths" : ["single/meanOnDraw_thenDescribeOnScenario_50", "totDeath"]
 						},
 						"deriveRanks" : {
@@ -602,8 +603,8 @@
 							"nmbGdp" : ["mid_182_546_optimal/healthSystemAndGdp_140k_ranking", "rank"],
 							"nmb_median" : ["mid_182_546_optimal/healthSystem_140k_ranking", "p_50"],
 							"nmbGdp_median" : ["mid_182_546_optimal/healthSystemAndGdp_140k_ranking", "p_50"],
-							"hospAbove750" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove750"],
-							"hospAbove1500" : ["single/meanOnDraw_thenDescribeOnScenario_50", "hospDaysAbove1500"],
+							"hospAbove750" : ["single/meanOnDraw_thenDescribeOnScenario_50", "mid_182_546_hospDaysAbove750"],
+							"hospAbove1500" : ["single/meanOnDraw_thenDescribeOnScenario_50", "mid_182_546_hospDaysAbove1500"],
 							"deaths" : ["single/meanOnDraw_thenDescribeOnScenario_50", "totDeath"]
 						},
 						"deriveRanks" : {

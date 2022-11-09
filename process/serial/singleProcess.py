@@ -184,7 +184,7 @@ def MakeRankmap(outputName, subfolder, conf):
 		df = df.sort_values(conf['sortBy'])
 	if 'orderCols' in conf:
 		df = df[conf['orderCols']]
-	util.OutputToFile(df, '{}/rankmaps/{}'.format(subfolder, outputName))	
+	util.OutputToFile(df, '{}/rankmaps/{}'.format(subfolder, outputName))
 
 
 def DoSingleProcess(conf, subfolder, heatStruct, measureCols_raw, onHpc):
@@ -314,6 +314,21 @@ def SingleFixMask(df):
 	print(df['mid_182_546_costMask'])
 	print(df['mid_182_546_costMaskFixed'])
 	
+	downstreamCols = [
+		'costTotalHealth', 'costTotalTotal',
+		'nmbLow', 'nmbMed', 'nmbHigh',
+		'nmbLowNoGdp', 'nmbMedNoGdp', 'nmbHighNoGdp',
+		'nmbLow_uk', 'nmbMed_uk', 'nmbHigh_uk',
+		'nmbLowNoGdp_uk', 'nmbMedNoGdp_uk', 'nmbHighNoGdp_uk',
+		'nmbLowNoGdp_alt', 'nmbMedNoGdp_alt', 'nmbHighNoGdp_alt',
+		'nmbLow_alt', 'nmbMed_alt', 'nmbHigh_alt',
+	]
+	
+	# Subtract fiddled costs from downstream columns
+	for time in tqdm.tqdm(['mid_{}_{}_'.format(x[0], x[1]) for x in gl.singleList] + ['']):
+		for col in downstreamCols:
+			df[time + col] = df[time + col] - df[time + 'costMask'] - df[time + 'costMaskFixed']  - df[time + 'costVaccineFixed']
+	
 	# Remove the mask costs for increased no stockpile
 	df.loc[filterIncrease, 'costMaskFixed'] = 0
 	df.loc[filterIncrease, costMask_cols] = 0
@@ -336,6 +351,11 @@ def SingleFixMask(df):
 		# also copy over fixed vaccine costs
 		df[time + 'costVaccineFixed'] = df['costVaccineFixed']
 	
+	# Add corrected costs back to downstream columns
+	for time in tqdm.tqdm(['mid_{}_{}_'.format(x[0], x[1]) for x in gl.singleList] + ['']):
+		for col in downstreamCols:
+			df[time + col] = df[time + col] + df[time + 'costMask'] + df[time + 'costMaskFixed'] + df[time + 'costVaccineFixed']
+			
 	print(df['mid_182_546_costMask'])
 	print(df['mid_182_546_costMaskFixed'])
 	
