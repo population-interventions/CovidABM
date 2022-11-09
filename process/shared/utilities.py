@@ -472,8 +472,8 @@ def LoadJson(filePath):
 		try:
 			return json.load(json_file)
 		except ValueError as err:
-			print("=== Model Specs Json Error ===")
-			print("File: 'model_specs/{}.json'".format(modelFileName))
+			print("=== Json Error ===")
+			print("File: '{}.json'".format(filePath))
 			print(err)
 			return False
 
