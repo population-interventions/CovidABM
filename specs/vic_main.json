@@ -74,6 +74,7 @@
 					"nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk",
 					"totInfect", "totHosp", "totDeath",
 					"costTotalTotal", "costGdp",
+					"costLong", "halyTotalLong",
 					"costTotalHealth", "halyTotalTotal"],
 				"identifyIndex" : {
 					"scenAgg" : ["Variant"]

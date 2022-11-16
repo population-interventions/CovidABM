@@ -965,8 +965,8 @@ CHOOSER
 508
 param_policy
 param_policy
-"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "Fix2_1_LooseSupress" "Fix2_1_BarelySupress" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-6
+"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "Fix2_1_LooseSupress" "Fix2_1_BarelySupress" "Fix2_1_Stage2" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
+7
 
 MONITOR
 1473

@@ -128,7 +128,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
 
   ;; Acute haly outcome.
   let halyAcute 0
-  (ifelse  not isHighVirulence variant
+  (ifelse not isHighVirulence variant
     [ ;; Low virulence
       set halyAcute halyAcute + (symptPpl - hospPpl) * 0.000350087671
     ]
@@ -145,7 +145,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
 
   ;; Long covid haly outcome.
   let halyLong 0
-  (ifelse  not isHighVirulence variant
+  (ifelse isHighVirulence variant
     [ ;; High virulence
       (ifelse not hasVaccine
         [ ;; No vaccine
@@ -301,7 +301,7 @@ to ApplyInfectionCost [age variant infectPpl symptPpl hospPpl icuPpl deathPpl ho
     if age < 20 [
       set ageMult 0.2
     ]
-    (ifelse not isHighVirulence variant
+    (ifelse isHighVirulence variant
       [ ;; High virulence
         ifelse hasVaccine
         [
@@ -395,8 +395,8 @@ to CalculateEndCosts
   set costMaskFixed_out 0
   if policy_mask_n95 or policy_more_mask [
     let totalMaskTime stage3time + stage4time + stage5time
-    let restocks ceiling (totalMaskTime / 28)
     if policy_mask_n95 [
+      let restocks ceiling (totalMaskTime / 28)
       set costMask_out costMask_out + (restocks * costUI_maskPerRound * (count simuls with [agerange > 10]) * total_population / population) + totalMaskTime * costUI_maskDailyAds
       set costMaskFixed_out costMaskFixed_out + costUI_maskFixed
     ]
@@ -433,7 +433,7 @@ to CalculateEndCosts
   ;; Output aggregate costs costs
   set halyTotalTotal_out     halyTotalAcute_out + halyTotalDeath_out + halyTotalLong_out
   set halyTotalTotal_uk_out  halyTotalAcute_out + halyTotalDeath_uk_out + halyTotalLong_out
-  set halyTotalTotal_alt_out halyTotalAcute_out + halyTotalTotal_alt_out + halyTotalLong_out
+  set halyTotalTotal_alt_out halyTotalAcute_out + halyTotalDeath_alt_out + halyTotalLong_out
   set costTotalHealth_out    costDeathAverted_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
   set costTotalHealth_uk_out costDeathAverted_uk_out + costLong_out + costAcute_out + costTesting_out + costVaccine_out + costVacDeliver_out + costVaccineFixed_out + costMask_out + costMaskFixed_out
 

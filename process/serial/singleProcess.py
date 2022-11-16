@@ -359,6 +359,18 @@ def SingleFixMask(df):
 	print(df['mid_182_546_costMask'])
 	print(df['mid_182_546_costMaskFixed'])
 	
+	# Fix healthTotalTotal_alt
+	for time in tqdm.tqdm(['mid_{}_{}_'.format(x[0], x[1]) for x in gl.singleList] + ['']):
+		df[time + 'halyTotalTotal_alt'] = df[time + 'halyTotalAcute'] + df[time + 'halyTotalDeath_alt'] + df[time + 'halyTotalLong']
+		
+		df[time + 'nmbLowNoGdp_alt']  = (df[time + 'costTotalHealth']  + 35000 * df[time + 'halyTotalTotal_alt']) * -1
+		df[time + 'nmbMedNoGdp_alt']  = (df[time + 'costTotalHealth']  + 70000 * df[time + 'halyTotalTotal_alt']) * -1
+		df[time + 'nmbHighNoGdp_alt'] = (df[time + 'costTotalHealth'] + 140000 * df[time + 'halyTotalTotal_alt']) * -1
+		
+		df[time + 'nmbLow_alt']  = df[time + 'nmbLowNoGdp_alt']  + df[time + 'costGdp']
+		df[time + 'nmbMed_alt']  = df[time + 'nmbMedNoGdp_alt']  + df[time + 'costGdp']
+		df[time + 'nmbHigh_alt'] = df[time + 'nmbHighNoGdp_alt'] + df[time + 'costGdp']
+	
 	return df
 
 
