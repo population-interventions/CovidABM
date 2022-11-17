@@ -51,7 +51,7 @@
         "true"
     ],
     "param_policy": [
-        "\"Fix2_1_LooseSupress\""
+        "\"Fix2_1_Stage2\""
     ],
     "asymptom_trace_mult": [
         "0.67"
@@ -351,7 +351,7 @@
         "2.0"
     ],
     "sim_seed": [
-        "1223.793919"
+        "26066.76358"
     ],
     "midreport_day": [
         "64.0"
@@ -387,7 +387,7 @@
         "\"input/vic\""
     ],
     "draw_index": [
-        "9.0"
+        "108.0"
     ],
     "input_vaccine_schedule": [
         "\"input/vic/rollout_target_later_30_high.csv\""

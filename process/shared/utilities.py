@@ -513,7 +513,8 @@ def PreAddList(pre, myList):
 def MakeDescribedHeatmapSet(
 		subfolder, df, heatStruct, prefixName,
 		describe=False, identifyIndex=False,
-		describeList=[x*0.01 for x in range(1, 100)]):
+		describeList=[x*0.01 for x in range(1, 100)],
+		extraDir='extra/'):
 	print('Output heatmap {}'.format(prefixName))
 	percentList = [0.05, 0.25, 0.5, 0.75, 0.95]
 	percMap = {
@@ -555,7 +556,7 @@ def MakeDescribedHeatmapSet(
 	
 	name =  prefixName + '_mean'
 	#dfHeat = dfHeat.drop_duplicates()
-	OutputToFile(dfHeat, subfolder + name, head=False)
+	OutputToFile(dfHeat, subfolder + extraDir + name, head=False)
 	
 	for pc in percentList:
 		#dfHeat = df.loc[pc, :]
@@ -564,5 +565,8 @@ def MakeDescribedHeatmapSet(
 		name =  prefixName + '_' + percMap.get(pc)
 		#print('Output heatmap {}'.format(name))
 		#dfHeat = dfHeat.drop_duplicates()
-		OutputToFile(dfHeat, subfolder + name, head=False)
+		if pc == 0.5:
+			OutputToFile(dfHeat, subfolder + name, head=False)
+		else:
+			OutputToFile(dfHeat, subfolder + extraDir + name, head=False)
 	

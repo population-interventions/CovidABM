@@ -11,11 +11,11 @@ pernode = sys.argv[3] if len(sys.argv) > 3 else 5
 
 modelData = md.LoadModelData(modelName)
 
-singleOnly = False #not onHpc
+singleOnly = True #not onHpc
 
 if 'postSeries' in modelData:
 	if 'processMain' in modelData['postSeries']:
-		mainProcessing.RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=False, fixSingle=False)
+		mainProcessing.RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=True, fixSingle=False)
 	if 'rcalc' in modelData['postSeries']:
 		rcalc.ProcessResults(modelData)
 	if 'targetOptimise' in modelData['postSeries']:
