@@ -96,7 +96,6 @@
 				}
 			},
 			"singleProcessing" : {
-				"rerun_drawAve" : true,
 				"prefixList" : ["mid_0_182_", "mid_182_546_"],
 				"aggregates" : {
 					"meanOnDraw_thenDescribeOnScenario" : {

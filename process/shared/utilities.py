@@ -556,7 +556,7 @@ def MakeDescribedHeatmapSet(
 	
 	name =  prefixName + '_mean'
 	#dfHeat = dfHeat.drop_duplicates()
-	OutputToFile(dfHeat, subfolder + extraDir + name, head=False)
+	OutputToFile(dfHeat, subfolder + name, head=False)
 	
 	for pc in percentList:
 		#dfHeat = df.loc[pc, :]
