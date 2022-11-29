@@ -64,15 +64,30 @@
 					"totStage2", "totStage3", "totStage4", "totStage5",
 					"hospDaysAbove750", "hospDaysAbove1500",
 					"nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk",
-					"totInfect", "totHosp", "totDeath",
-					"costTotalTotal", "costGdp",
-					"costTotalHealth", "halyTotalTotal"],
+					"totInfect", "totSympt", "totHosp", "totIcu", "totDeath",
+					"totHospTime", "totIcuTime",
+					"costDeathAverted",
+					"costAcute",
+					"costLong",
+					"costTesting",
+					"costVaccine",
+					"costVacDeliver",
+					"costVaccineFixed",
+					"costMask",
+					"costMaskFixed",
+					"costGdp",
+					"costTotalHealth",
+					"costTotalTotal",
+					"halyTotalAcute",
+					"halyTotalDeath",
+					"halyTotalLong",
+					"halyTotalTotal"
+				],
 				"identifyIndex" : {
 					"scenAgg" : ["Variant"]
 				}
 			},
 			"singleProcessing" : {
-				"rerun_drawAve" : true,
 				"prefixList" : ["mid_0_182_", "mid_182_546_"],
 				"aggregates" : {
 					"meanOnDraw_thenDescribeOnScenario" : {
