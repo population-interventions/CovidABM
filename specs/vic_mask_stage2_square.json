@@ -711,34 +711,6 @@
 						"input/vic/rollout_multi_later_60_low.csv"    : "MV later 60+ low uptake"
 					}
 				},
-				"input_incursion_table" : {
-					"name" : "Variant",
-					"values" : {
-						"input/vic/incur_base45_only.csv"                 : "Om45 only",
-						"input/vic/incur_omlike_high_escape_high_vir.csv" : "Omlike high escape high vir",
-						"input/vic/incur_omlike_high_escape_low_vir.csv"  : "Omlike high escape low vir",
-						"input/vic/incur_novel_high_escape_high_vir.csv"  : "Novel high escape high vir",
-						"input/vic/incur_novel_high_escape_low_vir.csv"   : "Novel high escape low vir",
-						"input/vic/incur_omlike_low_escape_high_vir.csv"  : "Omlike low escape high vir",
-						"input/vic/incur_omlike_low_escape_low_vir.csv"   : "Omlike low escape low vir",
-						"input/vic/incur_novel_low_escape_high_vir.csv"   : "Novel low escape high vir",
-						"input/vic/incur_novel_low_escape_low_vir.csv"    : "Novel low escape low vir"
-					}
-				},
-				"policy_mask_n95" : {
-					"name" : "Mask stockpile",
-					"values" : {
-						"False" : "No Stockpile",
-						"True"  : "Stockpile N95"
-					}
-				},
-				"policy_more_mask" : {
-					"name" : "Mask wearing",
-					"values" : {
-						"False" : "No Change",
-						"True"  : "Increased"
-					}
-				},
 				"param_policy" : {
 					"name" : "Stage policy",
 					"values" : {
