@@ -82,21 +82,16 @@
 					"halyTotalDeath",
 					"halyTotalLong",
 					"halyTotalTotal"
-				],
-				"identifyIndex" : {
-					"scenAgg" : ["Variant"]
-				}
+				]
 			},
 			"singleProcessing" : {
 				"prefixList" : ["mid_0_182_", "mid_182_546_"],
 				"aggregates" : {
 					"meanOnDraw_thenDescribeOnScenario" : {
 						"firstMeanOn" : ["draw_index"],
-						"thenDescribeOn" : ["Variant"],
 						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					},
 					"meanOnScenario_thenDescribeOnDraw" : {
-						"firstMeanOn" : ["Variant"],
 						"thenDescribeOn" : ["draw_index"],
 						"percentiles" : [0.95, 0.75, 0.5, 0.25, 0.05]
 					}
@@ -105,150 +100,126 @@
 					"healthSystem_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth"
 					},
 					"healthSystemAndGdp_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal"
 					},
 					"healthSystem_uk_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth_uk"
 					},
 					"healthSystemAndGdp_uk_35k_ranking" : {
 						"rankingValue" : 35000,
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal_uk"
 					},
 					
 					"healthSystem_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth"
 					},
 					"healthSystemAndGdp_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal"
 					},
 					"healthSystem_uk_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth_uk"
 					},
 					"healthSystemAndGdp_uk_70k_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal_uk"
 					},
 					"healthSystem_alt_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal_alt",
-						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth"
 					},
 					"healthSystemAndGdp_alt_ranking" : {
 						"rankingValue" : 70000,
 						"halyCol" : "halyTotalTotal_alt",
-						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal"
 					},
 					
 					"healthSystem_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth"
 					},
 					"healthSystemAndGdp_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal"
 					},
 					"healthSystem_uk_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth_uk"
 					},
 					"healthSystemAndGdp_uk_140k_ranking" : {
 						"rankingValue" : 140000,
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal_uk"
 					},
 					
 					"healthSystem_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalHealth",
-						"stackIndex" : ["Variant"]
+						"costCol" : "costTotalHealth"
 					},
 					"healthSystemAndGdp_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalTotal",
-						"stackIndex" : ["Variant"]
+						"costCol" : "costTotalTotal"
 					},
 					"healthSystem_uk_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalHealth_uk",
-						"stackIndex" : ["Variant"]
+						"costCol" : "costTotalHealth_uk"
 					},
 					"healthSystemAndGdp_uk_70k_heatmap" : {
 						"heatmapValue" : 70000,
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalTotal_uk",
-						"stackIndex" : ["Variant"]
+						"costCol" : "costTotalTotal_uk"
 					},
 					
 					"healthSystem" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth"
 					},
 					"healthSystemAndGdp" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal",
-						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal"
 					},
 					"healthSystem_uk" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalHealth_uk",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth_uk"
 					},
 					"healthSystemAndGdp_uk" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_uk",
-						"costCol" : "costTotalTotal_uk",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal_uk"
 					},
 					"healthSystem_alt" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_alt",
-						"costCol" : "costTotalHealth",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalHealth"
 					},
 					"healthSystemAndGdp_alt" : {
 						"values" : [10000, 250000, 2500],
 						"halyCol" : "halyTotalTotal_alt",
-						"costCol" : "costTotalTotal",
-						"identifyIndex" : ["Variant"]
+						"costCol" : "costTotalTotal"
 					}
 				},
 				"rankmaps" : {
@@ -660,24 +631,24 @@
 				]
 			},
 			"heatmapStructure" : {
-				"index_rows" : ["Variant", "Mask stockpile", "Mask wearing"],
-				"index_cols" : ["Stage policy", "Vaccine schedule"],
+				"index_rows" : ["Stage policy", "compoundMask"],
+				"index_cols" : ["Vaccine schedule", "compoundMaskOld"],
 				"base_value" : {
 				},
 				"sort_rows" : [
-					["Variant", [
-							"Om45 only",
-							"Omlike low escape low vir", "Novel low escape low vir",
-							"Omlike high escape low vir", "Novel high escape low vir",
-							"Omlike low escape high vir", "Novel low escape high vir",
-							"Omlike high escape high vir", "Novel high escape high vir"
+					["Stage policy", ["Fix2_1_LooseSupress", "Fix2_1_BarelySupress"]],
+					["compoundMask", [
+							"NoMask",
+							"20Mask",
+							"35Mask",
+							"50Mask",
+							"75Mask",
+							"75N95",
+							"AllN95"
 						]
-					],
-					["Mask stockpile", ["Stockpile N95", "No Stockpile"]],
-					["Mask wearing", ["Increased", "No Change"]]
+					]
 				],
 				"sort_cols" : [
-					["Stage policy", ["Fix2_1_LooseSupress", "Fix2_1_BarelySupress"]],
 					["Vaccine schedule", [
 							"MV later 30+ high uptake", "MV later 30+ low uptake",
 							"MV later 60+ high uptake", "MV later 60+ low uptake",
@@ -686,6 +657,16 @@
 							"Dec only 30+ high uptake", "Dec only 30+ low uptake",
 							"Dec only 60+ high uptake", "Dec only 60+ low uptake",
 							"None"
+						]
+					],
+					["compoundMaskOld", [
+							"NoMask",
+							"20Mask",
+							"35Mask",
+							"50Mask",
+							"75Mask",
+							"75N95",
+							"AllN95"
 						]
 					]
 				]

@@ -120,13 +120,6 @@ def StringToFile(path, string):
 	with open(path, 'w') as outfile:
 		outfile.write(string)
 
-
-def LoadJsonFile(path):
-	path = path + '.json'
-	with open(path) as json_file:
-		jsonData = json.load(json_file)
-	return jsonData
-
 	
 def WriteJsonFile(path, data, pretty=True):
 	path = path + '.json'

@@ -114,8 +114,9 @@ def CalculateOptimalityRanking(df, costPerHaly, identifyIndex=False, stackIndex=
 def DoAggregate(df, name, conf, subfolder):
 	if 'filterOutIndex' in conf:
 		df = util.FilterOutIndexVal(df, conf['filterOutIndex'])
-	df = df.groupby(util.ListRemove(list(df.index.names), conf['firstMeanOn'])).mean()
-	df = df.unstack(util.ListRemove(list(df.index.names), conf['thenDescribeOn']))
+	df = df.groupby(util.ListRemove(list(df.index.names), util.Opt(conf, 'firstMeanOn', []))).mean()
+	if 'thenDescribeOn' in conf:
+		df = df.unstack(util.ListRemove(list(df.index.names), conf['thenDescribeOn']))
 	util.OutputToFile(df, '{}/single/{}_sourceRows'.format(subfolder, name))
 	remainingIndex = util.ListRemove(list(df.columns.names), None)
 	df = df.describe(percentiles=conf['percentiles']).stack(remainingIndex)

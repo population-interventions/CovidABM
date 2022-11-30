@@ -7,7 +7,7 @@ import process.shared.utilities as util
 
 def LoadRawModelDataFile(specFile):
 	if os.path.exists('specs/{}.json'.format(specFile)):
-		return util.LoadJsonFile('specs/{}'.format(specFile))
+		return util.LoadJson('specs/{}'.format(specFile))
 	return util.LoadJsonFile('../scratch/specs/{}'.format(specFile))
 
 
