@@ -152,7 +152,7 @@ Span
 Span
 0
 30
-14.0
+12.780000000000001
 1
 1
 NIL
@@ -237,7 +237,7 @@ superspreaders
 superspreaders
 0
 1
-0.06
+0.0535
 0.01
 1
 NIL
@@ -292,7 +292,7 @@ Proportion_People_Avoid
 Proportion_People_Avoid
 0
 1
-0.2
+0.28
 0.01
 1
 NIL
@@ -307,7 +307,7 @@ Proportion_Time_Avoid
 Proportion_Time_Avoid
 0
 1
-0.3
+0.38
 0.01
 1
 NIL
@@ -548,7 +548,7 @@ Essential_Workers
 Essential_Workers
 0
 1
-0.8
+0.73
 0.01
 1
 NIL
@@ -692,7 +692,7 @@ Visit_Radius
 Visit_Radius
 0
 16
-8.8
+8.715
 1
 1
 NIL
@@ -965,8 +965,8 @@ CHOOSER
 508
 param_policy
 param_policy
-"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "Fix2_1_LooseSupress" "Fix2_1_BarelySupress" "Fix2_1_Stage2" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
-7
+"AggressElim" "ModerateElim" "TightSupress" "LooseSupress" "BarelySupress" "Fix2_1_LooseSupress" "Fix2_1_BarelySupress" "Fix2_1_Stage2" "Fix2_1_Stage15" "TightSupress_No_5" "LooseSupress_No_5" "Stage2infect" "None" "Stage1" "Stage1b" "Stage2" "Stage2b" "Stage3" "Stage3b" "Stage4" "StageCal_None" "StageCal_Test" "StageCal_1" "StageCal_2" "StageCal_3" "StageCal_4" "StageCal_5" "StageFixed" "continuous"
+8
 
 MONITOR
 1473
@@ -3893,6 +3893,17 @@ totHospTime_out
 1
 1
 11
+
+SWITCH
+420
+877
+614
+911
+param_mask_redraw
+param_mask_redraw
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?

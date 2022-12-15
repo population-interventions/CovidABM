@@ -31,6 +31,9 @@ to setup_mask
 end
 
 to-report simul_getWantWearMask
+  if param_mask_redraw [
+    set wearsMask_draw random-float 1
+  ]
   (ifelse agerange = 5
     [
       report wearsMask_draw < ApplyOrToPr mask_wearing_a0 avoidOr

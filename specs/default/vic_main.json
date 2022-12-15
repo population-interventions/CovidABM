@@ -535,5 +535,8 @@
     ],
     "start_day_abort": [
         "200.0"
+    ],
+    "param_mask_redraw": [
+        "false"
     ]
 }

@@ -42,7 +42,7 @@ def LoadModelDatWithExperimentInput(specFile, runCount):
 	overrideParams[modelData['runIndexer']] = list(range(runCount))
 	overrideParams = nl.ToNetlogoType(overrideParams)
 	
-	defaultParams = util.LoadJsonFile('specs/default/{}'.format(modelData['defaultParamFile']))
+	defaultParams = util.LoadJson('specs/default/{}'.format(modelData['defaultParamFile']))
 	
 	modelData['modelParams'] = util.ApplyDefaultToDict(overrideParams, defaultParams)
 	modelData['netlogoFileName'] = 'abm/{}.nlogo'.format(modelData['netlogoFile'])
