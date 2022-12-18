@@ -26,7 +26,7 @@ import process.shared.globalVars as gl
 def AppendParallels(
 		dataDir, rawDataDir, outDir, indexSize, outputSubdir, prefix,
 		runIndexer, indexList, fileNames, header=1, indexGrouping=False,
-		doAverage=False, numberKeys=True):
+		doAverage=False, doFullDescribe=False, numberKeys=True):
 	for file in fileNames:
 		if prefix:
 			thisPrefix = prefix + '_'
@@ -43,7 +43,8 @@ def AppendParallels(
 			header=header,
 			head=False,
 			indexGrouping=indexGrouping,
-			doAverage=doAverage
+			doAverage=doAverage,
+			doFullDescribe=doFullDescribe
 		)
 
 
@@ -51,7 +52,7 @@ def DoSpartanAggregate(
 		dataDir, rawDataDir, measureCols, runIndexer, indexList=range(1, 101),
 		skip=False, processCohort=True, processStages=True,
 		indexGrouping=False, doAverage=False, outputTraces=False,
-		allowDaily=False):
+		allowDaily=False, doTimefullDescribe=False):
 	if skip:
 		indexList = util.ListRemove(indexList, skip)
 	
@@ -93,7 +94,8 @@ def DoSpartanAggregate(
 
 	AppendParallels(
 		dataDir, rawDataDir, '/timefull/', len(measureCols) + 3, '/cohort/', False,
-		runIndexer, indexList, processCount, indexGrouping=indexGrouping, doAverage=doAverage)
+		runIndexer, indexList, processCount, indexGrouping=indexGrouping, doAverage=doAverage,
+		doFullDescribe=doTimefullDescribe)
 
 	if processCohort:
 		# Larger index because cohort data contains age

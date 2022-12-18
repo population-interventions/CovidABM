@@ -34,6 +34,7 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=False
 	processStages = params['processStages']
 	processCohort = params['processCohort']
 	indexGrouping = params['indexGrouping']
+	doTimefullDescribe = util.Opt(params, 'doTimefullDescribe', False)
 	
 	aggregateProcessing = 'aggregateProcessing' in params and params['aggregateProcessing']
 	doAverage = 'doAverage' in params and params['doAverage']
@@ -72,7 +73,8 @@ def RunSeriesPost(modelData, runs, pernode, onHpc, singleOnly, heatmapOnly=False
 			workingDir, postDataDir, measureCols, runIndexer,
 			indexList=indexList, processCohort=processCohort,
 			processStages=processStages, indexGrouping=indexGrouping,
-			doAverage=doAverage, outputTraces=outputTraces, allowDaily=allowDaily)
+			doAverage=doAverage, outputTraces=outputTraces,
+			allowDaily=allowDaily, doTimefullDescribe=doTimefullDescribe)
 
 	# Fix single issue
 	if (not heatmapOnly) and not onHpc and fixSingle:

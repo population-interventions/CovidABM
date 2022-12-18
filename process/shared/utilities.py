@@ -20,6 +20,16 @@ import subprocess
 fileCreated = {}
 HEAD_MODE = True
 
+percMap = {
+	0: 'percentile_000',
+	0.05: 'percentile_005',
+	0.95 : 'percentile_095',
+	0.25 : 'percentile_025',
+	0.75 : 'percentile_075',
+	0.5 : 'percentile_050',
+	1 : 'percentile_100',
+}
+
 def UniqueLevelValueList(df, level, axis=0):
 	if axis == 0:
 		return list(set(df.index.get_level_values(level)))
@@ -311,7 +321,7 @@ def AggregateDuplicateIndex(df):
 
 def AppendFiles(
 		outputName, fileList, runIndexer, indexSize=1, header=1, doTqdm=False,
-		head=False, indexGrouping=False, doAverage=False, numberKeys=True):
+		head=False, indexGrouping=False, doAverage=False, doFullDescribe=False, numberKeys=True):
 	first = True
 	for fileName in (tqdm.tqdm(fileList) if doTqdm else fileList):
 		if first:
@@ -345,9 +355,16 @@ def AppendFiles(
 	
 	OutputToFile(df, outputName, head=head)
 	
+	groupbyLevels = ListRemove(list(range(indexSize - 1)), 0)
 	if doAverage:
-		dfAve = df.groupby(level=ListRemove(list(range(indexSize - 1)), 0), axis=0).mean()
+		dfAve = df.groupby(level=groupbyLevels, axis=0).mean()
 		OutputToFile(dfAve, outputName + '_drawAve', head=head)
+	
+	if doFullDescribe:
+		for percentile in [0, 0.05, 0.25, 0.5, 0.75, 0.95, 1]:
+			OutputToFile(
+				df.groupby(level=groupbyLevels, axis=0).quantile(percentile),
+				'{}_{}'.format(outputName, percMap[percentile]), head=head)
 
 
 def ListRemove(myList, element, lenient=False):
@@ -510,13 +527,6 @@ def MakeDescribedHeatmapSet(
 		extraDir='extra/'):
 	print('Output heatmap {}'.format(prefixName))
 	percentList = [0.05, 0.25, 0.5, 0.75, 0.95]
-	percMap = {
-		0.05: 'percentile_005',
-		0.95 : 'percentile_095',
-		0.25 : 'percentile_025',
-		0.75 : 'percentile_075',
-		0.5 : 'percentile_050',
-	}
 	df = df.sort_index()
 	
 	if identifyIndex is not False:

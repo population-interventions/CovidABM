@@ -5,7 +5,7 @@ import process.targetOptimise as targetOptimise
 import process.mainProcessing as mainProcessing
 
 onHpc = len(sys.argv) > 1
-modelName = sys.argv[1] if len(sys.argv) > 1 else 'vic_mask_stage2_square'
+modelName = sys.argv[1] if len(sys.argv) > 1 else 'vic_mask_stage15_square'
 runs = sys.argv[2] if len(sys.argv) > 2 else 10
 pernode = sys.argv[3] if len(sys.argv) > 3 else 5
 

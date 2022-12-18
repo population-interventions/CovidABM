@@ -53,7 +53,8 @@
 				
 				"outputTraces" : false,
 				"describeHeatmaps" : false,
-				"indexGrouping" : 1
+				"indexGrouping" : 1,
+				"doTimefullDescribe" : true
 			},
 			"tornado" : {
 				"metrics" : ["totStage3", "totStage4", "hospDaysAbove750", "hospDaysAbove1500", "nmbMed", "nmbMedNoGdp", "nmbMed_uk", "nmbMedNoGdp_uk", "totInfect", "totHosp", "totDeath"],
